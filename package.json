@@ -1,0 +1,28 @@
+{
+  "name": "javascript-baseball-precourse",
+  "version": "1.0.0",
+  "description": "우아한테크코스 프리코스 숫자 야구 게임 미션",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "8.7.0"
+  },
+  "scripts": {
+    "test": "cypress run --browser chrome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woowacourse/javascript-baseball-precourse.git"
+  },
+  "keywords": [],
+  "author": "woowacourse",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/woowacourse/javascript-baseball-precourse/issues"
+  },
+  "homepage": "https://github.com/woowacourse/javascript-baseball-precourse#readme",
+  "engineStrict": true,
+  "engines": {
+    "npm": ">=6.0.0",
+    "node": ">=14.0.0"
+  }
+}
