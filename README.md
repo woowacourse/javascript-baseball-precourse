@@ -16,7 +16,7 @@
 
 ## 💻 프로그래밍 실행 결과
 
-![baseball_result](https://user-images.githubusercontent.com/72922397/100055098-a8e42d00-2e66-11eb-8231-244fc27ed458.jpg)
+![baseball_result](https://user-images.githubusercontent.com/72922397/100057500-ecd93100-2e6a-11eb-871f-025686f472ff.jpg)
 
 <br>
 
