@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kr">
   <head>
     <meta charset="UTF-8" />
     <title>숫자 야구 게임</title>
   </head>
   <body>
-    <h1>⚾ 숫자 야구 게임</h1>
-    <p>
-      <strong>1~9까지의 수</strong>를 중복없이 <strong>3개</strong>를
-      작성해주세요. <br />
-      올바른 예) 139 <br />
-      틀린 예) 122
-    </p>
-    <input type="text" id="user-input" />
-    <button id="submit">확인</button>
-    <h3>📄 결과</h3>
-    <div id="hint"></div>
+    <div id="app">
+      <h1>⚾ 숫자 야구 게임</h1>
+      <p>
+        <strong>1~9까지의 수</strong>를 중복없이 <strong>3개</strong>를
+        작성해주세요. <br />
+        올바른 예) 139 <br />
+        틀린 예) 122
+      </p>
+      <input type="text" id="user-input" />
+      <button id="submit">확인</button>
+      <h3>📄 결과</h3>
+      <div id="result"></div>
+    </div>
     <script type="module" src="src/index.js"></script>
   </body>
 </html>
