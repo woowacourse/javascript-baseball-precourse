@@ -24,7 +24,7 @@
 
 - `play`(컴퓨터의 랜덤 값, 유저의 입력 값) 함수 또는 메서드를 만들어 게임을 진행한다.
 - `play`함수는 `String`으로 결과값을 return 한다.
-- 아래의 function 또는 class 형태를 활용한다.
+- `index.js`에서 아래의 function 또는 class 형태를 활용한다.
 
 ```javascript
 export default function BaseballGame() {
@@ -42,7 +42,7 @@ export default class BaseballGame {
 // 예시
 play(123, 456); // '나씽'
 play(123, 345); // '1볼'
-play(123, 423); // '2볼'
+play(123, 432); // '2볼'
 play(123, 312); // '3볼'
 play(123, 145); // '1스트라이크'
 play(123, 134); // '1스트라이크1볼'
