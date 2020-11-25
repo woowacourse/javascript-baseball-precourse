@@ -1,14 +1,19 @@
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    let _resultArea = document.querySelector('#result');
+    
+    let [ball, strike] = CountBallStrike(computerInputNumbers, userInputNumbers);
+
+    return resultMessage;
   };
+
+  let _resultArea = document.querySelector('#result');
   StartGame();
 }
  
 function StartGame() {
-  let result = document.querySelector('#result');
-  if (result.value !== '')
-    result.value = '';
+  if (_resultArea.value !== '')
+    _resultArea.value = '';
   
   let answer = [];
   let candidate = [];
@@ -18,7 +23,7 @@ function StartGame() {
     let picked = candidate.splice(Math.floor(Math.random() * (9 - i)), 1)[0];
     answer.push(picked);
   }
-  CountBallStrike(answer, GetInput());
+  play(answer, GetInput());
 }
 
 function GetInput() {
@@ -49,21 +54,15 @@ function CheckInputValidity(number) {
 }
 
 function CountBallStrike(answer, user_value) {
-	let ball = 0;
-	let strike = 0;
-	for (let i = 0; i <= 2; i++) {
-	  if (answer[i] === user_value[i])
-		  strike++;
-	  else if (user_value.indexOf(answer[i]) !== -1)
-		  ball++;
+  let ball = 0;
+  let strike = 0;
+  for (let i = 0; i <= 2; i++) {
+    if (answer[i] === user_value[i])
+      strike++;
+    else if (user_value.indexOf(answer[i]) !== -1)
+      ball++;
   }
-  DisplayResult(strike, ball);
+  return [ball, strike];
 }
-
-function DisplayResult(strike, ball) {
-  
-}
-  
-
 
 new BaseballGame();
