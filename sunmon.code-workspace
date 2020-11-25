@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
+		"liveServer.settings.CustomBrowser": "microsoft-edge"
 
 	}
 }
