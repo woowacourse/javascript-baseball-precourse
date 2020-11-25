@@ -4,6 +4,17 @@ export default function BaseballGame() {
   };
 }
 
+const check = (computerInput,userInput) =>{
+  let result = userInput.reduce((result,val)=> {
+    if(result) return result;
+    if(val)
+  },false);
+  for(let i= 0; i< userInput.length;i++){
+    if()
+  }
+  return result;
+}
+
 const isExist = (aNumber, numbers) => {
   let result = false;
   for (let i = 0; i < numbers.length; i++) {
