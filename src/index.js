@@ -1,13 +1,13 @@
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
+export default class BaseballGame {
+  play(computerInputNumbers, userInputNumbers) {
+    return printGameResult(computerInputNumbers, userInputNumbers);
+  }
 }
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
+const getRandomNumber = () => {
+  const randomNumber = Math.floor(Math.random() * 9 + 1);
+
+  return randomNumber;
+};
 
 new BaseballGame();
