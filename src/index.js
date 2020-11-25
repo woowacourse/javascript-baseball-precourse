@@ -1,6 +1,38 @@
 export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+const play = function (computerInputNumbers, userInputNumbers) {
+    let resultString = ""
+
+    const computerNumberArray = parseNumber(computerInputNumbers)
+    const userNumberArray = parseNumber(userInputNumbers)
+
+    let strikeCount = 0
+    let ballCount = 0
+
+    for (let i = 0; i < 3; i++){
+      if (computerNumberArray[i] === userNumberArray[i])
+        strikeCount++
+      else if (computerNumberArray.indexOf(userNumberArray[i]) !== -1)
+        ballCount++
+    }
+
+    if (ballCount > 0) {
+      resultString += `${ballCount}볼`
+    }
+
+    if (strikeCount > 0) {
+      resultString += ballCount > 0 ? ` ${strikeCount}스트라이크` : `${strikeCount}스트라이크`
+    }
+
+    if (ballCount === 0 && strikeCount === 0) {
+      resultString += '낫싱'
+    }
+
+    if (strikeCount === 3) {
+      resultString = '정답을 맞추셨습니다!' + '<br/>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button>'
+    }
+
+    // console.log({ ballCount, strikeCount })
+    return resultString;
   };
 }
 
