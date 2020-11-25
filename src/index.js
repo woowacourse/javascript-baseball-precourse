@@ -10,11 +10,13 @@ export default class BaseballGame {
     return "결과 값 String";
   }
   createRandomNumber() {
+    let result = ''
     const numbers = Array.from({ length: 9 }, (_, i) => i + 1)
-    while (this.randomNumber.length < 3) {
+    while (result.length < 3) {
       const selectedNumber = numbers.splice(Math.floor(Math.random() * numbers.length), 1)
-      this.randomNumber += selectedNumber[0].toString()
+      result += selectedNumber[0].toString()
     }
+    return result
   }
   clickEventListener() {
     const submitButton = document.getElementById("submit")
