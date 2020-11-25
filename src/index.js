@@ -1,13 +1,13 @@
-export default function BaseballGame() {
-  this.randomNumber = makeRandomNumber();
+const randomNumber = makeRandomNumber();
 
-  console.log(this.randomNumber);
+export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
-    // console.log(computerInputNumbers, userInputNumbers);
+    console.log(computerInputNumbers, userInputNumbers);
     return "결과 값 String";
   };
 }
 
+//랜덤 숫자 생성
 function makeRandomNumber() {
   const candidates = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   let randomNumber = [];
@@ -23,11 +23,14 @@ function makeRandomNumber() {
   return randomNumber;
 }
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
-
 let game = new BaseballGame();
-// game.play(123, 22);
+// 버튼 클릭 시 이벤트 리스너 함수 실행
+const button = document.getElementById("submit");
+const input = document.getElementById("user-input");
+
+button.addEventListener("click", function onSubmitHandler(event) {
+  event.preventDefault();
+
+  let inputValue = input.value;
+  game.play(randomNumber, inputValue);
+});
