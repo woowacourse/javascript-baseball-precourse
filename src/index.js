@@ -9,9 +9,7 @@ export default function BaseballGame() {
   this.done = false;
 }
 
-// Math.floor(Math.random() * 9 + 1);
-
-let CurrentBaseballGame = new BaseballGame();
+// 여기부터는 user input 유효성 검사
 
 const getAllIndexsByValue = (array, value) => {
   let result = [];
@@ -41,6 +39,7 @@ const checkUserInput = (value) => {
   return { isValid: true, errorMessage: "Perfect" };
 };
 
+// 여기부터는 computer input 만드는 내용
 const isAlreadyExist = (numbers, aNumber) => {
   if (numbers === []) return false;
   let result = false;
@@ -65,6 +64,10 @@ const getComputerInput = () => {
 
   return result.join("");
 };
+
+// 아래부터는 html에 대한 내용(인가, 암튼 아직 진행중임)
+
+let CurrentBaseballGame = new BaseballGame();
 submitButton.onclick = () => {
   const resultOfCheck = checkUserInput(userInput.value);
   if (!resultOfCheck.isValid) {
