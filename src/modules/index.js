@@ -1,4 +1,3 @@
-import BaseballGame from "./BaseballGame"
+import BaseballGame from './BaseballGame';
 
-
-export { BaseballGame } 
+export { BaseballGame };
