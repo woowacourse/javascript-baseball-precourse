@@ -12,7 +12,10 @@ first commit
 7. 게임 재시작: 게임을 종료한 후 게임을 다시 시작할 수 있다
 8. 게임 재시작: id가 `game-restart-button`인 버튼을 클릭함
 
+## 실행법
 
+1. npm run serve
+2. live server (vscode extension)
 
 ## 주의
 기능 요구사항, 프로그래밍 요구사항, 과제 진행 요구사항 세 가지를 지킬 것
