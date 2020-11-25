@@ -1,5 +1,5 @@
 import { BaseballGame } from './modules';
-
+import { text } from './fixtrue';
 const game = new BaseballGame();
 
 function getDeduplicateCount(userInputNumbers) {
@@ -13,17 +13,17 @@ function numIsSubmited(e) {
 
     if (userInputNumbers.length !== 3) {
       game.resetInputNumbers();
-      throw '3자리 수를 입력해주세요!';
+      throw text.warningfor3digit;
     }
 
     if (userInputNumbers.indexOf('0') !== -1) {
       game.resetInputNumbers();
-      throw '0을 포함하지 않는 숫자를 입력해주세요!';
+      throw text.warningforZero;
     }
 
     if (deduplicateCount !== 3) {
       game.resetInputNumbers();
-      throw '각 자리의 수가 중복되지 않는 수를 입력해주세요!';
+      throw text.waringforduplicate;
     }
 
     game.cleanResult();

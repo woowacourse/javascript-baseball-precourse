@@ -1,3 +1,5 @@
+import { text } from '../../fixtrue';
+
 export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = this.getRandom();
@@ -54,19 +56,19 @@ export default class BaseballGame {
       let responseString = '';
 
       if (ball) {
-        responseString += `${ball}볼`;
+        responseString += `${ball}${text.ball}`;
       }
 
       if (strike) {
-        responseString += ` ${strike}스트라이크`;
+        responseString += ` ${strike}${text.strike}`;
       }
 
       if (ball === 0 && strike === 0) {
-        responseString = '낫싱';
+        responseString = text.nothing;
       }
 
       if (strike === 3) {
-        responseString = '🎉정답을 맞추셨습니다!🎉';
+        responseString = text.correct;
       }
 
       return responseString;
@@ -113,16 +115,16 @@ export default class BaseballGame {
       response_p.innerHTML = string;
       result_div.appendChild(response_p);
 
-      if (string === '🎉정답을 맞추셨습니다!🎉') {
+      if (string === text.correct) {
         const restart_div = document.createElement('div');
         restart_div.id = 'restart';
 
         let restart_p = document.createElement('p');
-        restart_p.innerHTML = '게임을 새로 시작하시겠습니까?';
+        restart_p.innerHTML = text.askRestart;
         restart_div.appendChild(restart_p);
 
         const restart_button = document.createElement('button');
-        restart_button.innerHTML = '게임 재시작';
+        restart_button.innerHTML = text.restart;
         restart_button.id = 'game-restart-button';
         restart_button.addEventListener('click', this.restart.bind(this));
         restart_div.appendChild(restart_button);
