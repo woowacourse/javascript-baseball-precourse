@@ -54,6 +54,7 @@ const printResult = (str) => {
         textElement.innerHTML = "<div><span>🎉</span> <strong>정답을 맞추셨습니다!</strong> <span>🎉</span></div>";
         restartText.innerText = "게임을 새로 시작하시겠습니까?";
         restartBtn.innerText = "게임 재시작";
+        restartBtn.onclick = restart;
         resultContainer.appendChild(textElement);
         resultContainer.appendChild(restartText);
         resultContainer.appendChild(restartBtn);
@@ -64,10 +65,15 @@ const printResult = (str) => {
 
 }
 
+const clearResultArea = () => {
+    const resultContainer = document.getElementById("result");
+    resultContainer.textContent = '';
+}
+
 const getUserInput = () => {
     const userInput = document.getElementById("user-input").value;
     const res = new BaseballGame().play(userInput, getTargetNumber(TARGET_NUMBER));
-
+    clearResultArea();
     printResult(res);
 }
 
@@ -78,13 +84,13 @@ export default function BaseballGame() {
 }
 
 const restart = () => {
-
+    saveTargetNumber(getNonDuplicatedNumber());
+    clearResultArea();
 }
 
 const init = () => {
-    saveTargetNumber("");
     const btn = document.getElementById('submit');
-    saveTargetNumber(getNonDuplicatedNumber());
+    restart();
     btn.onclick = getUserInput;
 }
 
