@@ -51,6 +51,13 @@ export default function BaseballGame() {
       restartButton.addEventListener("click", handleRestart)
     }
   }
+
+  const handleRestart = function () {
+    document.getElementById('user-input').value = ""
+    computerInputNumbers = computingNumber()
+    resultElement.innerHTML = ""
+  }
+  
   
   let computerInputNumbers = computingNumber()
   const resultElement = document.getElementById('result')
