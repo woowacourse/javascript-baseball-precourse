@@ -16,7 +16,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var game = new _modules__WEBPACK_IMPORTED_MODULE_0__.BaseballGame();
 
-function numIsSubmited(e) {}
+function numIsSubmited(e) {
+  var num = document.getElementById("user-input").value;
+}
 
 var submitNumButton = document.getElementById("submit");
 submitNumButton.addEventListener("click", numIsSubmited);
