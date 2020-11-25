@@ -11,9 +11,9 @@ export default function BaseballGame() {
     compareInput(result, computerInputNumbers, userInputNumbers);
     console.log(computerInputNumbers, userInputNumbers, result);
     if (result.out === 3) return "낫싱";
-    return `${result.ball !== 0 ? "" : result.ball}볼 ${
-      result.strike !== 0 ? "" : result.strike
-    }스트라이크`;
+    if (result.strike === 0) return `${result.ball}볼`;
+    if (result.ball === 0) return `${result.strike}스트라이크`;
+    return `${result.ball}볼 ${result.strike}스트라이크`;
   };
 
   const compareInput = (result, answer, userInput) => {
