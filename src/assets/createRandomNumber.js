@@ -1,5 +1,4 @@
-//난수 생성 함수
-import {checkValidNumber} from './common';
+import {checkValidNumber} from './checkValidNumber';
 
 export default () => {
     let randomNum = '';
