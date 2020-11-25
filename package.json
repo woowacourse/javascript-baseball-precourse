@@ -1,0 +1,27 @@
+{
+  "name": "javascript-baseball-precourse",
+  "version": "1.0.0",
+  "description": "우아한 테크코스 1주차 미션",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sunmon/javascript-baseball-precourse.git"
+  },
+  "author": "Sunmon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sunmon/javascript-baseball-precourse/issues"
+  },
+  "homepage": "https://github.com/Sunmon/javascript-baseball-precourse#readme",
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.2.0"
+  }
+}
