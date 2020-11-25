@@ -14,12 +14,12 @@ export default class BaseballGame {
 
       let cnt = 0;
       while (cnt < 3) {
-        let num = Math.floor(Math.random() * (maxVal - minVal + 1) + minVal);
-        if (table[num]) {
+        let number = Math.floor(Math.random() * (maxVal - minVal + 1) + minVal);
+        if (table[number]) {
           continue;
         } else {
-          table[num] = true;
-          random += num;
+          table[number] = true;
+          random += number;
           cnt++;
         }
       }
@@ -87,8 +87,18 @@ export default class BaseballGame {
     }
   }
 
+  resetInputNumbers() {
+    try {
+      const userInput = document.getElementById('user-input');
+      userInput.value = '';
+    } catch (error) {
+      alert(error);
+    }
+  }
+
   restart() {
     try {
+      this.resetInputNumbers();
       this.cleanResult();
       this.computerInputNumbers = this.getRandom();
     } catch (error) {

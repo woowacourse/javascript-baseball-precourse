@@ -26,14 +26,17 @@ function numIsSubmited(e) {
     var deduplicateCount = getDeduplicateCount(userInputNumbers);
 
     if (userInputNumbers.length !== 3) {
+      game.resetInputNumbers();
       throw '3자리 수를 입력해주세요!';
     }
 
     if (userInputNumbers.indexOf('0') !== -1) {
+      game.resetInputNumbers();
       throw '0을 포함하지 않는 숫자를 입력해주세요!';
     }
 
     if (deduplicateCount !== 3) {
+      game.resetInputNumbers();
       throw '각 자리의 수가 중복되지 않는 수를 입력해주세요!';
     }
 
@@ -103,13 +106,13 @@ var BaseballGame = /*#__PURE__*/function () {
         var cnt = 0;
 
         while (cnt < 3) {
-          var num = Math.floor(Math.random() * (maxVal - minVal + 1) + minVal);
+          var number = Math.floor(Math.random() * (maxVal - minVal + 1) + minVal);
 
-          if (table[num]) {
+          if (table[number]) {
             continue;
           } else {
-            table[num] = true;
-            random += num;
+            table[number] = true;
+            random += number;
             cnt++;
           }
         }
@@ -185,9 +188,20 @@ var BaseballGame = /*#__PURE__*/function () {
       }
     }
   }, {
+    key: "resetInputNumbers",
+    value: function resetInputNumbers() {
+      try {
+        var userInput = document.getElementById('user-input');
+        userInput.value = '';
+      } catch (error) {
+        alert(error);
+      }
+    }
+  }, {
     key: "restart",
     value: function restart() {
       try {
+        this.resetInputNumbers();
         this.cleanResult();
         this.computerInputNumbers = this.getRandom();
       } catch (error) {
