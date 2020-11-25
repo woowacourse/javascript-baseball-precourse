@@ -39,7 +39,7 @@ export default class BaseballGame {
       for (let i = 0; i < 3; i++) {
         if (computerInputNumbers[i] === userInputNumbers[i]) {
           strike++;
-        } else if (computerInputNumbers.indexOf(userInputNumbers[i]) !== -1) {
+        } else if (computerInputNumbers.includes(userInputNumbers[i])) {
           ball++;
         }
       }

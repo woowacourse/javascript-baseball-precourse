@@ -16,7 +16,7 @@ function numIsSubmited(e) {
       throw text.warningfor3digit;
     }
 
-    if (userInputNumbers.indexOf('0') !== -1) {
+    if (userInputNumbers.includes('0')) {
       game.resetInputNumbers();
       throw text.warningforZero;
     }
