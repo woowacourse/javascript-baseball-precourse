@@ -55,7 +55,8 @@ export default function BaseballGame() {
 
   const submitUserInput = (answer) => {
     if (isInputRight()) {
-      return this.play(answer, userInput.value);
+      const resultText = this.play(answer, userInput.value);
+      showResultOnScreen(resultText);
     }
   };
 
@@ -69,6 +70,11 @@ export default function BaseballGame() {
     if (value.length !== 3) return alert("3자리의 숫자를 입력해주세요.");
 
     return true;
+  };
+
+  const showResultOnScreen = (resultText) => {
+    const resultDiv = document.body.querySelector("#result");
+    resultDiv.innerText = resultText;
   };
 
   const gameStart = () => {
