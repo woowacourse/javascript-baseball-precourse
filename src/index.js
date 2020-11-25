@@ -1,6 +1,3 @@
-const userInput = document.getElementById("user-input");
-const submitButton = document.getElementById("submit");
-
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     console.log(computerInputNumbers, userInputNumbers);
@@ -11,6 +8,34 @@ export default function BaseballGame() {
     this.done = booleanInput;
   };
 }
+
+// 여기부터는 computer input 만드는 내용
+const isAlreadyExist = (numbers, aNumber) => {
+  if (numbers === []) return false;
+  let result = false;
+
+  numbers.forEach((val) => {
+    if (val === aNumber) result = true;
+  });
+  return result;
+};
+
+const generateOneRandomNumber = () => Math.floor(Math.random() * 9 + 1);
+const generateUniqueRandomNumber = (existingNumber) => {
+  let result = generateOneRandomNumber();
+  while (isAlreadyExist(existingNumber, result)) {
+    result = generateOneRandomNumber();
+  }
+  return result;
+};
+const getComputerInput = () => {
+  const firstNumber = generateUniqueRandomNumber([]);
+  const secondNumber = generateUniqueRandomNumber([firstNumber]);
+  const thirdNumber = generateUniqueRandomNumber([firstNumber, secondNumber]);
+  const result =
+    firstNumber.toString() + secondNumber.toString() + thirdNumber.toString();
+  return result;
+};
 
 // 여기부터는 user input 유효성 검사
 
@@ -39,45 +64,27 @@ const checkUserInput = (value) => {
       };
     }
   }
-  return { isValid: true, errorMessage: "Perfect" };
+  return { isValid: true, errorMessage: "" };
 };
 
-// 여기부터는 computer input 만드는 내용
-const isAlreadyExist = (numbers, aNumber) => {
-  if (numbers === []) return false;
-  let result = false;
+// 여기부터는 random value, user input 비교해서 최종 결과값 반환하는 내용
 
-  numbers.forEach((val) => {
-    if (val === aNumber) result = true;
-  });
-  return result;
+const checkInputs = (computerInput, userInput) => {
+  for (let i = 0; i < userInput.length; i++) {}
 };
-
-const generateOneRandomNumber = () => Math.floor(Math.random() * 9 + 1);
-const generateRandomNumbers = (existingNumber) => {
-  let result = generateOneRandomNumber();
-  while (isAlreadyExist(existingNumber, result)) {
-    result = generateOneRandomNumber();
-  }
-  return result;
-};
-const getComputerInput = () => {
-  const firstNumber = generateRandomNumbers([]);
-  const secondNumber = generateRandomNumbers([firstNumber]);
-  const thirdNumber = generateRandomNumbers([firstNumber, secondNumber]);
-  const result = [firstNumber, secondNumber, thirdNumber];
-  return result.join("");
-};
-
-// 아래부터는 html에 대한 내용(인가, 암튼 아직 진행중임)
-
+// <button id="game-restart-button"></button>
+// 여기부터는 html에 대한 내용(인가, 암튼 아직 진행중임)
+let RandomNumber = getComputerInput();
 let CurrentBaseballGame = new BaseballGame();
+let userInput = document.getElementById("user-input");
+let submitButton = document.getElementById("submit");
+
 submitButton.onclick = () => {
   const resultOfCheck = checkUserInput(userInput.value);
   if (!resultOfCheck.isValid) {
     alert(resultOfCheck.errorMessage);
     return;
   }
-  CurrentBaseballGame.play(getComputerInput(), userInput.value);
+  CurrentBaseballGame.play(RandomNumber, userInput.value);
   // CurrentBaseballGame.setDone(true);
 };
