@@ -50,9 +50,9 @@ export default function BaseballGame() {
     return randomNumber;
   };
 
-  const submitUserInput = () => {
+  const submitUserInput = (answer) => {
     if (isInputRight()) {
-      return this.play(makeOnAnswer(), userInput.value);
+      return this.play(answer, userInput.value);
     }
   };
 
@@ -68,7 +68,13 @@ export default function BaseballGame() {
     return true;
   };
 
-  submitButton.addEventListener("click", submitUserInput);
+  const gameStart = () => {
+    const answer = makeOnAnswer();
+    const boundSubmitUserInput = submitUserInput.bind(null, answer);
+    submitButton.addEventListener("click", boundSubmitUserInput);
+  };
+
+  gameStart();
 }
 
 new BaseballGame();
