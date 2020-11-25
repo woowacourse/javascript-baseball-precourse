@@ -87,3 +87,16 @@ play(123, 124); // '2스트라이크'
 - event
   - [이벤트](https://ko.javascript.info/introduction-browser-events)
   - [이벤트 위임](https://ko.javascript.info/event-delegation)
+
+## 구현할 기능 목록
+- event handler function:
+  - numIsSubmit function : 숫자 입력 후 제출 이벤트
+  - replaybuttonIsClicked : 게임 재시작 버튼 클릭 이벤트
+- BaseballGame Class
+  - sampleNum(숫자 랜덤뽑기) function : 1에서 9까지 서로 다른 임의의 수로 이루어진 3개의 숫자를 랜덤 샘플링 
+  - init function : sampleNum()한 값을 리턴
+  - judge(판별) function : 유저가 입력한 값, 랜덤으로 뽑힌 값을 받아 스트라이크/볼/정답 bool값 리턴
+  - render function : 스트라이크/볼/정답 bool값에 따라 dom 조작
+  - play(게임 시작) function : judge(), render()
+  - renderintialState function : 초기 상태로 dom 되돌리기
+  - replay(게임 다시시작) function : init(), renderInitialState()
