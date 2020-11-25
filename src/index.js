@@ -18,16 +18,17 @@ export default class BaseballGame {
   }
   clickEventListener() {
     const submitButton = document.getElementById("submit")
-    submitButton.addEventListener('click', () => {
-      const userInput = document.getElementById("user-input")
-      const inputValue = userInput.value
-      const validation = this.validate(inputValue)
-      if (!validation) {
-        alert("잘못된 값을 입력했습니다.")
-        userInput.value = ''
-        return
-      }
-    })
+    submitButton.addEventListener('click', this.submitClickEvent.bind(this))
+  }
+  submitClickEvent() {
+    const userInput = document.getElementById("user-input")
+    const inputValue = userInput.value
+    const validation = this.validate(inputValue)
+    if (!validation) {
+      alert("잘못된 값을 입력했습니다.")
+      userInput.value = ''
+      return
+    }
   }
   validate(value) {
     if (!value) return false
