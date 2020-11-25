@@ -1,6 +1,3 @@
-const TARGET_NUMBER = "targetNumber";
-const IS_SUCCESSED = "3스트라이크";
-
 const getNonDuplicatedNumber = () => {
     const flag = new Array(10).fill(0);
     let target = "";
@@ -16,11 +13,11 @@ const getNonDuplicatedNumber = () => {
 }
 
 const saveTargetNumber = (num) => {
-    localStorage.setItem(TARGET_NUMBER, num);
+    localStorage.setItem("targetNumber", num);
 }
 
 const getTargetNumber = () => {
-    return localStorage.getItem(TARGET_NUMBER);
+    return localStorage.getItem("targetNumber");
 }
 
 const compareNums = (target, input) => {
@@ -48,7 +45,7 @@ const compareNums = (target, input) => {
 const printResult = (str) => {
     const resultContainer = document.getElementById("result");
     const textElement = document.createElement("p");
-    if (str === IS_SUCCESSED) {
+    if (str === "3스트라이크") {
         const restartText = document.createElement("span");
         const restartBtn = document.createElement("button");
         textElement.innerHTML = "<div><span>🎉</span> <strong>정답을 맞추셨습니다!</strong> <span>🎉</span></div>";
@@ -76,9 +73,11 @@ const checkValidInput = (userInput) => {
     if (userInput.length !== 3) {
         alert("길이가 3인 숫자를 입력해주세요. 🙏");
         res = false;
+        clearInput();
     } else if ([...(new Set(userInput))].length !== 3) {
         alert("중복되지 않은 3자리의 숫자를 입력해주세요. 🙏");
         res = false;
+        clearInput();
     }
     return res;
 }
@@ -88,7 +87,7 @@ const getUserInput = () => {
     if (!checkValidInput(userInput)) {
         return;
     }
-    const res = new BaseballGame().play(userInput, getTargetNumber(TARGET_NUMBER));
+    const res = new BaseballGame().play(userInput, getTargetNumber("targetNumber"));
     clearResultArea();
     printResult(res);
 }
@@ -99,8 +98,12 @@ export default function BaseballGame() {
     };
 }
 
-const restart = () => {
+const clearInput = () => {
     document.getElementById("user-input").value = '';
+}
+
+const restart = () => {
+    clearInput();
     saveTargetNumber(getNonDuplicatedNumber());
     clearResultArea();
 }
