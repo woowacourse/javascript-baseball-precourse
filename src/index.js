@@ -5,9 +5,19 @@
 // }
 
 export default class BaseballGame {
-  randomNumber = ''
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    if (computerInputNumbers === userInputNumbers) {
+      return `🎉 <strong>정답을 맞추셨습니다!</strong>🎉<br />게임을 새로 시작하시겠습니까?`
+    }
+    const score = {}
+    for (let i = 0; i < userInputNumbers.length; i++) {
+      const index = computerInputNumbers.indexOf(userInputNumbers[i])
+      if (index > -1) {
+        const key = i === index ? "strike" : "ball"
+        score[key] = (score[key] || 0) + 1
+      }
+    }
+    return this.convertScoreToResultStr(score)
   }
   createRandomNumber() {
     let result = ''
@@ -31,6 +41,7 @@ export default class BaseballGame {
       userInput.value = ''
       return
     }
+    this.changeResultContent(this.play(this.randomNumber, inputValue))
   }
   validate(value) {
     if (!value) return false
@@ -42,6 +53,18 @@ export default class BaseballGame {
       hash[value[i]] = 1
     }
     return true
+  }
+  convertScoreToResultStr(score) {
+    const scoreEntries = Object.entries(score)
+    if (scoreEntries.length === 0) return '낫싱'
+    return scoreEntries
+      .sort((a, b) => a[0] === 'ball' ? -1 : 1)
+      .map(el => el[1] + (el[0] === 'ball' ? "볼" : "스트라이크"))
+      .join(" ")
+  }
+  changeResultContent(newContent) {
+    const resultEl = document.getElementById("result")
+    resultEl.innerHTML = newContent
   }
 }
 new BaseballGame();
