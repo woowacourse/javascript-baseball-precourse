@@ -2,10 +2,22 @@ import { BaseballGame } from "./modules"
 
 const game = new BaseballGame();
 
+function getDeduplicateCount(userInputNumbers) {
+  return Array.from(new Set(userInputNumbers)).length
+}
+
 function numIsSubmited(e) {
   try {
-    game.cleanResult()
     const userInputNumbers = document.getElementById("user-input").value
+    const deduplicateCount = getDeduplicateCount(userInputNumbers)
+    if (userInputNumbers.length !== 3) {
+      throw "3자리 수를 입력해주세요!"
+    }
+
+    if (deduplicateCount !== 3) {
+      throw "각 자리의 수가 중복되지 않는 수를 입력해주세요!"
+    }
+    game.cleanResult()
     const responseString = game.play(game.computerInputNumbers, userInputNumbers)
     game.renderResult(responseString)
   } catch (error) {

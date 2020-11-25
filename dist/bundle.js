@@ -16,10 +16,24 @@ __webpack_require__.r(__webpack_exports__);
 
 var game = new _modules__WEBPACK_IMPORTED_MODULE_0__.BaseballGame();
 
+function getDeduplicateCount(userInputNumbers) {
+  return Array.from(new Set(userInputNumbers)).length;
+}
+
 function numIsSubmited(e) {
   try {
-    game.cleanResult();
     var userInputNumbers = document.getElementById("user-input").value;
+    var deduplicateCount = getDeduplicateCount(userInputNumbers);
+
+    if (userInputNumbers.length !== 3) {
+      throw "3자리 수를 입력해주세요!";
+    }
+
+    if (deduplicateCount !== 3) {
+      throw "각 자리의 수가 중복되지 않는 수를 입력해주세요!";
+    }
+
+    game.cleanResult();
     var responseString = game.play(game.computerInputNumbers, userInputNumbers);
     game.renderResult(responseString);
   } catch (error) {

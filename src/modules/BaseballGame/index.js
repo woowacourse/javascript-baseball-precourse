@@ -5,8 +5,8 @@ export default class BaseballGame {
 
   getRandom() {
     try {
-      const minVal = 1
-      const maxVal = 9
+      const minVal = 1;
+      const maxVal = 9;
       let random = ''
       let table;
       (table = []).length = 10
@@ -34,8 +34,8 @@ export default class BaseballGame {
 
   judge(computerInputNumbers, userInputNumbers) {
     try {
-      let strike = 0
-      let ball = 0
+      let strike = 0;
+      let ball = 0;
       for (let i = 0; i < 3; i++) {
         if (computerInputNumbers[i] === userInputNumbers[i]) {
           strike++
@@ -51,8 +51,6 @@ export default class BaseballGame {
     }
 
   }
-
-
 
   play(computerInputNumbers, userInputNumbers) {
     try {
