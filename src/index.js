@@ -36,18 +36,25 @@ const alertWrongCase = (text, ipt) => {
 const testValue = (ipt) => {
   const val = ipt.value;
   const parsedVal = parseInt(val, 10);
+  const splitedValArr = val.split("");
+  const checkDuplicate = new Set(splitedValArr).size;
+
   if (isNaN(parsedVal)) {
     alertWrongCase("숫자를 입력해주세요!", ipt);
   } else if (val.length !== 3) {
     alertWrongCase("세자리 숫자를 입력해주세요!", ipt);
   } else if (val.indexOf(0) !== -1) {
     alertWrongCase("0은 예측숫자에 포함할 수 없습니다!", ipt);
+  } else if (checkDuplicate !== 3) {
+    alertWrongCase("중복없는 3자리수를 입력해주세요!", ipt);
+  } else {
+    return parsedVal;
   }
 };
 
 const handleSubmit = () => {
   const userInput = document.getElementById("user-input");
-  testValue(userInput);
+  const userNum = testValue(userInput);
 };
 
 export default function BaseballGame() {
