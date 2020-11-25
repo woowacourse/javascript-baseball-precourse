@@ -33,8 +33,17 @@ const alertWrongCase = (text, ipt) => {
   ipt.focus();
 };
 
+const testValue = (ipt) => {
+  const parsedVal = parseInt(ipt.value, 10);
+
+  if (isNaN(parsedVal)) {
+    alertWrongCase("숫자를 입력해주세요!", ipt);
+  }
+};
+
 const handleSubmit = () => {
   const userInput = document.getElementById("user-input");
+  testValue(userInput);
 };
 
 export default function BaseballGame() {
