@@ -1,7 +1,7 @@
 export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
+    this.play = function (computerInputNumbers, userInputNumbers) {
+        // return "결과 값 String";
+    };
 }
 
 // export default class BaseballGame {
