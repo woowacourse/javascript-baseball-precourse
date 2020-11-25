@@ -34,10 +34,12 @@ const alertWrongCase = (text, ipt) => {
 };
 
 const testValue = (ipt) => {
-  const parsedVal = parseInt(ipt.value, 10);
-
+  const val = ipt.value;
+  const parsedVal = parseInt(val, 10);
   if (isNaN(parsedVal)) {
     alertWrongCase("숫자를 입력해주세요!", ipt);
+  } else if (val.length !== 3) {
+    alertWrongCase("세자리 숫자를 입력해주세요!", ipt);
   }
 };
 
