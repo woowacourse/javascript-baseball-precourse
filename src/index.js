@@ -1,6 +1,13 @@
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
+import { BaseballGame } from "./modules"
+
+const game = new BaseballGame();
+
+
+
+function numIsSubmited(e) {
+
+
 }
-new BaseballGame();
+
+const submitNumButton = document.getElementById("submit")
+submitNumButton.addEventListener("click", numIsSubmited)
