@@ -27,10 +27,25 @@ const generateThreeDigit = () => {
   return parsedNum;
 };
 
+const alertWrongCase = (text, ipt) => {
+  alert(text);
+  ipt.value = "";
+  ipt.focus();
+};
+
+const handleSubmit = () => {
+  const userInput = document.getElementById("user-input");
+};
+
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     return "결과 값 String";
   };
+
+  const btn = document.getElementById("submit");
+  if (btn) {
+    btn.addEventListener("click", handleSubmit);
+  }
 }
 
 new BaseballGame();
