@@ -20,6 +20,7 @@
 
   - 컴퓨터가 1 ~ 9까지의 서로 다른 임의의 수 3개를 선택하는 함수를 만든다.(게임 플레이어가 맞춰야 할 숫자) - makeOnAnswer
     - 이 때, 서로 다른 수를 뽑기 위해 임의로 1 ~ 9까지의 배열을 만든 뒤 splice, push하는 방법으로 진행한다.
+    - 1 ~ 9까지의 수 중에 3개를 뽑기 위한 함수를 만든다. - selectRandomNumber
     
   - 사용자의 입력을 받는 input의 값을 받기 위해 button에 addEventListener "click"을 추가한다.
     - 이 때, 예외처리 함수를 만들어 관리한다. - isInputRight
