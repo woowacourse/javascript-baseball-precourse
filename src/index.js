@@ -1,9 +1,5 @@
-export default function BaseballGame() {
-    this.play = function(computerInputNumbers, userInputNumbers) {
-        return "결과 값 String";
-    };
-}
-
+const TARGET_NUMBER = "targetNumber";
+const IS_SUCCESSED = "isSuccessed";
 
 const getNonDuplicatedNumber = () => {
     const flag = new Array(10).fill(0);
@@ -17,6 +13,22 @@ const getNonDuplicatedNumber = () => {
         target += num;
     }
     return target;
+}
+
+const saveTargetNumber = (num) => {
+    localStorage.setItem(TARGET_NUMBER, num);
+}
+
+const getTargetNumber = () => {
+    return localStorage.getItem(TARGET_NUMBER);
+}
+
+const saveIsSuccesed = (flag) => {
+    localStorage.setItem(IS_SUCCESSED, flag);
+}
+
+const getIsSuccesed = () => {
+    return localStorage.getItem(IS_SUCCESSED);
 }
 
 const compareNums = (target, input) => {
@@ -41,10 +53,28 @@ const compareNums = (target, input) => {
     return res;
 }
 
+const getUserInput = () => {
+    const userInput = document.getElementById("user-input").value;
+    const res = new BaseballGame().play(userInput, getTargetNumber(TARGET_NUMBER));
+
+    if (res === "3스트라이크") {
+        saveIsSuccesed(true);
+    }
+
+}
+
+export default function BaseballGame() {
+    this.play = function(computerInputNumbers, userInputNumbers) {
+        return compareNums(computerInputNumbers, userInputNumbers);
+    };
+}
+
 const init = () => {
-    const game = new BaseballGame();
-    console.log(getNonDuplicatedNumber());
-    console.log(compareNums("123", "132"))
+    saveTargetNumber("");
+    saveIsSuccesed(false);
+    const btn = document.getElementById('submit');
+    // saveTargetNumber(getNonDuplicatedNumber());
+    btn.onclick = getUserInput;
 }
 
 init();
