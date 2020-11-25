@@ -48,7 +48,8 @@ const printResult = (str) => {
     if (str === "3스트라이크") {
         const restartText = document.createElement("span");
         const restartBtn = document.createElement("button");
-        textElement.innerHTML = "<div><span>🎉</span> <strong>정답을 맞추셨습니다!</strong> <span>🎉</span></div>";
+        const succesMessageHTML = "<div><span>🎉</span> <strong>정답을 맞추셨습니다!</strong> <span>🎉</span></div>";
+        textElement.innerHTML = succesMessageHTML;
         restartText.innerText = "게임을 새로 시작하시겠습니까?";
         restartBtn.innerText = "게임 재시작";
         restartBtn.setAttribute("id", "game-restart-button");
@@ -76,7 +77,6 @@ const checkValidInput = (userInput) => {
         clearInput();
     } else if ([...(new Set(userInput))].length !== 3) {
         alert("중복되지 않은 3자리의 숫자를 입력해주세요. 🙏");
-        res = false;
         clearInput();
     }
     return res;
@@ -84,11 +84,11 @@ const checkValidInput = (userInput) => {
 
 const getUserInput = () => {
     const userInput = document.getElementById("user-input").value;
+    clearResultArea();
     if (!checkValidInput(userInput)) {
         return;
     }
     const res = new BaseballGame().play(userInput, getTargetNumber("targetNumber"));
-    clearResultArea();
     printResult(res);
 }
 
@@ -109,9 +109,17 @@ const restart = () => {
 }
 
 const init = () => {
-    const btn = document.getElementById('submit');
+    const btnElem = document.getElementById('submit');
+    const inputElem = document.getElementById('user-input');
     restart();
-    btn.onclick = getUserInput;
+    inputElem.addEventListener("keyup", e => {
+        if (e.keyCode === 13) {
+            getUserInput();
+        }
+    });
+    btnElem.addEventListener("click", () => {
+        getUserInput();
+    });
 }
 
 init();
