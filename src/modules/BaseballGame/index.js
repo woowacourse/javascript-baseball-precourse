@@ -18,7 +18,6 @@ export default class BaseballGame {
   judge(computerInputNumbers, userInputNumbers) {
     let strike = 0
     let ball = 0
-    let isAnswer = false
     for (let i = 0; i < 3; i++) {
       if (computerInputNumbers[i] === userInputNumbers[i]) {
         strike++
@@ -47,15 +46,36 @@ export default class BaseballGame {
       }
 
       if (strike === 3) {
-        responseString = '정답을 맞추셨습니다!'
+        responseString = '🎉정답을 맞추셨습니다!🎉'
       }
 
       return responseString;
     } catch (error) {
       console.log(error)
     }
+  }
+  renderString(string) {
+    const result_div = document.getElementById('result')
+    const response_p = document.createElement('p')
+    response_p.innerHTML = string
+    result_div.appendChild(response_p)
+
+    if (string === '🎉정답을 맞추셨습니다!🎉') {
+      const replay_div = document.createElement('div')
+      replay_div.id = 'replay'
+
+      let replay_p = document.createElement('p')
+      replay_p.innerHTML = '게임을 새로 시작하시겠습니까?'
+      replay_div.appendChild(replay_p)
+
+      const replay_button = document.createElement('button')
+      replay_button.innerHTML = '게임 재시작'
+      replay_button.id = 'replay-button'
+      replay_div.appendChild(replay_button)
+
+      result_div.appendChild(replay_div)
+    }
 
 
   }
-
 }

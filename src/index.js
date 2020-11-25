@@ -7,7 +7,8 @@ console.log(game.computerInputNumbers)
 
 function numIsSubmited(e) {
   const userInputNumbers = document.getElementById("user-input").value
-  console.log(game.play(game.computerInputNumbers, userInputNumbers))
+  const responseString = game.play(game.computerInputNumbers, userInputNumbers)
+  game.renderString(responseString)
 
 }
 

@@ -19,7 +19,8 @@ console.log(game.computerInputNumbers);
 
 function numIsSubmited(e) {
   var userInputNumbers = document.getElementById("user-input").value;
-  console.log(game.play(game.computerInputNumbers, userInputNumbers));
+  var responseString = game.play(game.computerInputNumbers, userInputNumbers);
+  game.renderString(responseString);
 }
 
 var submitNumButton = document.getElementById("submit");
@@ -85,7 +86,6 @@ var BaseballGame = /*#__PURE__*/function () {
     value: function judge(computerInputNumbers, userInputNumbers) {
       var strike = 0;
       var ball = 0;
-      var isAnswer = false;
 
       for (var i = 0; i < 3; i++) {
         if (computerInputNumbers[i] === userInputNumbers[i]) {
@@ -121,12 +121,33 @@ var BaseballGame = /*#__PURE__*/function () {
         }
 
         if (strike === 3) {
-          responseString = '정답을 맞추셨습니다!';
+          responseString = '🎉정답을 맞추셨습니다!🎉';
         }
 
         return responseString;
       } catch (error) {
         console.log(error);
+      }
+    }
+  }, {
+    key: "renderString",
+    value: function renderString(string) {
+      var result_div = document.getElementById('result');
+      var response_p = document.createElement('p');
+      response_p.innerHTML = string;
+      result_div.appendChild(response_p);
+
+      if (string === '🎉정답을 맞추셨습니다!🎉') {
+        var replay_div = document.createElement('div');
+        replay_div.id = 'replay';
+        var replay_p = document.createElement('p');
+        replay_p.innerHTML = '게임을 새로 시작하시겠습니까?';
+        replay_div.appendChild(replay_p);
+        var replay_button = document.createElement('button');
+        replay_button.innerHTML = '게임 재시작';
+        replay_button.id = 'replay-button';
+        replay_div.appendChild(replay_button);
+        result_div.appendChild(replay_div);
       }
     }
   }]);

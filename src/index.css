@@ -1,0 +1,9 @@
+#replay {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#replay-button {
+  height: 25px;
+}
