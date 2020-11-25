@@ -1,5 +1,5 @@
 export default function BaseballGame() {
-const play = function (computerInputNumbers, userInputNumbers) {
+  const play = function (computerInputNumbers, userInputNumbers) {
     let resultString = ""
 
     const computerNumberArray = parseNumber(computerInputNumbers)
@@ -34,6 +34,29 @@ const play = function (computerInputNumbers, userInputNumbers) {
     // console.log({ ballCount, strikeCount })
     return resultString;
   };
+
+  const handleClick = function () {
+    const value = document.getElementById('user-input').value
+    const userInputNumbers = parseInt(value, 10)
+
+    if (typeof userInputNumbers !== 'number' || !checkInput(userInputNumbers) || userInputNumbers.toString() !== value) {
+      alert('Wrong type of input!')
+      return
+    }
+
+    const resultString = play(computerInputNumbers, userInputNumbers)
+    resultElement.innerHTML = resultString
+    if (computerInputNumbers === userInputNumbers) {
+      const restartButton = document.getElementById('game-restart-button')
+      restartButton.addEventListener("click", handleRestart)
+    }
+  }
+  
+  let computerInputNumbers = computingNumber()
+  const resultElement = document.getElementById('result')
+  const submitButton = document.getElementById('submit')
+
+  submitButton.addEventListener("click", handleClick)
 }
 
 const getRandomNumber = function () {
