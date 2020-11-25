@@ -7,6 +7,9 @@ export default function BaseballGame() {
     // if (isExist(userInputNumbers, numbers)) return "결과 값 String";
   };
   this.done = false;
+  this.setDone = function (booleanInput) {
+    this.done = booleanInput;
+  };
 }
 
 // 여기부터는 user input 유효성 검사
@@ -76,4 +79,5 @@ submitButton.onclick = () => {
     return;
   }
   CurrentBaseballGame.play(getComputerInput(), userInput.value);
+  // CurrentBaseballGame.setDone(true);
 };
