@@ -3,7 +3,27 @@ export default function BaseballGame() {
   const userInput = document.body.querySelector("#user-input");
 
   this.play = function (computerInputNumbers, userInputNumbers) {
+    const result = {
+      strike: 0,
+      ball: 0,
+      out: 0,
+    };
+    compareInput(result, computerInputNumbers, userInputNumbers);
+    console.log(computerInputNumbers, userInputNumbers, result);
     return "결과 값 String";
+  };
+
+  const compareInput = (result, answer, userInput) => {
+    for (let userIndex = 0; userIndex < 3; userIndex++) {
+      const answerNumberIndex = answer.indexOf(userInput[userIndex]);
+      answerNumberIndex >= 0
+        ? answerNumberIndex === userIndex
+          ? result.strike++
+          : result.ball++
+        : result.out++;
+    }
+
+    return result;
   };
 
   const makeOnAnswer = () => {
