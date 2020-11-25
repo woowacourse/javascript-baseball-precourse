@@ -23,3 +23,6 @@ function makeComuputerNumber() {
     }
     return computerNumber;
 }
+
+const computerNumber = makeComuputerNumber();
+console.log(computerNumber);
