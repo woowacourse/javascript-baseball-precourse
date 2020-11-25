@@ -54,6 +54,16 @@ export default class BaseballGame {
       console.log(error)
     }
   }
+
+  cleanResult() {
+    const result_div = document.getElementById('result')
+
+    while (result_div.hasChildNodes()) {
+      result_div.removeChild(result_div.firstChild)
+    }
+
+  }
+
   renderResult(string) {
     const result_div = document.getElementById('result')
     const response_p = document.createElement('p')
@@ -71,10 +81,13 @@ export default class BaseballGame {
       const replay_button = document.createElement('button')
       replay_button.innerHTML = '게임 재시작'
       replay_button.id = 'replay-button'
+      replay_button.addEventListener('click', this.cleanResult)
       replay_div.appendChild(replay_button)
 
       result_div.appendChild(replay_div)
     }
+
+
 
 
 

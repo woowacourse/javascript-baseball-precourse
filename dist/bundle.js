@@ -20,7 +20,7 @@ console.log(game.computerInputNumbers);
 function numIsSubmited(e) {
   var userInputNumbers = document.getElementById("user-input").value;
   var responseString = game.play(game.computerInputNumbers, userInputNumbers);
-  game.renderString(responseString);
+  game.renderResult(responseString);
 }
 
 var submitNumButton = document.getElementById("submit");
@@ -130,8 +130,17 @@ var BaseballGame = /*#__PURE__*/function () {
       }
     }
   }, {
-    key: "renderString",
-    value: function renderString(string) {
+    key: "cleanResult",
+    value: function cleanResult() {
+      var result_div = document.getElementById('result');
+
+      while (result_div.hasChildNodes()) {
+        result_div.removeChild(result_div.firstChild);
+      }
+    }
+  }, {
+    key: "renderResult",
+    value: function renderResult(string) {
       var result_div = document.getElementById('result');
       var response_p = document.createElement('p');
       response_p.innerHTML = string;
@@ -146,6 +155,7 @@ var BaseballGame = /*#__PURE__*/function () {
         var replay_button = document.createElement('button');
         replay_button.innerHTML = '게임 재시작';
         replay_button.id = 'replay-button';
+        replay_button.addEventListener('click', this.cleanResult);
         replay_div.appendChild(replay_button);
         result_div.appendChild(replay_div);
       }
@@ -186,6 +196,7 @@ __webpack_require__.r(__webpack_exports__);
   \**************************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: __webpack_require__, module */
+/*! CommonJS bailout: module.exports is used directly at 15:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -221,6 +232,7 @@ if (window && !window.EventSource){
   \***************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: top-level-this-exports */
+/*! CommonJS bailout: this is used directly at 621:3-7 */
 /***/ (function() {
 
 /*
