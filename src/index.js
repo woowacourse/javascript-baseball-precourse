@@ -12,6 +12,8 @@ export default function BaseballGame() {
 
 new BaseballGame();
 
+const userInput = document.querySelector("#user-input");
+
 function makeComuputerNumber() {
     const computerNumArr = Array(9)
         .fill(0)
@@ -26,3 +28,17 @@ function makeComuputerNumber() {
 
 const computerNumber = makeComuputerNumber();
 console.log(computerNumber);
+
+function validateInput(userInputValue) {
+    console.log(userInputValue);
+    console.log(Number(userInputValue));
+    const numberLength = userInput.value.length;
+    if (numberLength > 3 || numberLength < 0) {
+        alert("다시 입력하세요.");
+    } else if (userInputValue.split("").includes("0")) {
+        alert("다시 입력하세요.");
+    }
+    // else if (userInputValue !== Number(userInputValue)) {
+    //     alert("다시 입력하세요.");
+    // }
+}
