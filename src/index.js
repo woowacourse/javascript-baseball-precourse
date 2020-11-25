@@ -17,6 +17,7 @@ const button = document.querySelector("#submit");
 const result = document.querySelector("#result");
 const reStartDiv = document.createElement("div");
 const reStartButton = document.createElement("button");
+let stopFlag = false;
 
 function makeComuputerNumber() {
     const computerNumArr = Array(9)
@@ -33,22 +34,38 @@ function makeComuputerNumber() {
 const computerNumber = makeComuputerNumber();
 console.log(computerNumber);
 
-function validateInput(userInputValue) {
-    console.log(userInputValue);
-    console.log(Number(userInputValue));
-    const numberLength = userInput.value.length;
+function validateInput() {
+    const userInputValue = userInput.value;
+    const numberLength = userInputValue.length;
     if (numberLength > 3 || numberLength < 0) {
         alert("다시 입력하세요.");
+        stopFlag = true;
     } else if (userInputValue.split("").includes("0")) {
         alert("다시 입력하세요.");
+        stopFlag = true;
+    } else if (
+        userInputValue[0] === userInputValue[1] ||
+        userInputValue[0] === userInputValue[2] ||
+        userInputValue[1] === userInputValue[2]
+    ) {
+        alert("다시 입력하세요.");
+        stopFlag = true;
     }
-    // else if (userInputValue !== Number(userInputValue)) {
-    //     alert("다시 입력하세요.");
-    // }
 }
 
+function reStart() {
+    console.log("hi");
+}
+
+reStartButton.addEventListener("click", reStart);
+
 button.addEventListener("click", function () {
-    validateNumber(userInput.value);
+    validateInput(userInput.value);
+    if (stopFlag) {
+        userInput.value = "";
+        userInput.focus();
+        return;
+    }
     const userNumber = userInput.value.split("");
     let strike = 0;
     let ball = 0;
@@ -75,4 +92,5 @@ button.addEventListener("click", function () {
         result.textContent = "낫싱";
     }
     userInput.value = "";
+    userInput.focus();
 });
