@@ -11,7 +11,7 @@
 - `getAllIndexsByValue` - 배열과 값을 인수로 받아서 배열에서 인수로 받은 값을 가지는 모든 인덱스를 배열에 담아 반환하는 함수
 - `setDone` - BaseballGame함수(인지 생성자인지 햇갈리네요)의 메소드로 3스트라이크가 나오면 BaseballGame 안에 있는 done를 true로 바꿔주는 함수
 - `checkUserInput` - 인풋의 유효성을 검사하여 오류가 있을 경우 isValid,errorMessage라는 key를 가진 객체를 반환하는 함수로, 확인 버튼을 누르면 실행됨.
-- `getFianlResult` - 최종 결과값을 출력하는 함수
+- `getFinalResult` - 최종 결과값을 출력하는 함수
 - `formatResult` - 볼, 스트라이크 개수를 인수로 받아서 최종 결과값을 출력하기 위한 문자열로 포맷하여 반환하는 함수
 - `getBall` - 볼의 개수를 구하여 반환하는 함수
 - `getStrike` - 스트라이크의 개수를 구하여 반환하는 함수
