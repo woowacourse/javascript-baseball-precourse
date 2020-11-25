@@ -22,15 +22,19 @@ function getDeduplicateCount(userInputNumbers) {
 
 function numIsSubmited(e) {
   try {
-    var userInputNumbers = document.getElementById("user-input").value;
+    var userInputNumbers = document.getElementById('user-input').value;
     var deduplicateCount = getDeduplicateCount(userInputNumbers);
 
     if (userInputNumbers.length !== 3) {
-      throw "3자리 수를 입력해주세요!";
+      throw '3자리 수를 입력해주세요!';
+    }
+
+    if (userInputNumbers.indexOf('0') !== -1) {
+      throw '0을 포함하지 않는 숫자를 입력해주세요!';
     }
 
     if (deduplicateCount !== 3) {
-      throw "각 자리의 수가 중복되지 않는 수를 입력해주세요!";
+      throw '각 자리의 수가 중복되지 않는 수를 입력해주세요!';
     }
 
     game.cleanResult();
@@ -41,8 +45,8 @@ function numIsSubmited(e) {
   }
 }
 
-var submitNumButton = document.getElementById("submit");
-submitNumButton.addEventListener("click", numIsSubmited);
+var submitNumButton = document.getElementById('submit');
+submitNumButton.addEventListener('click', numIsSubmited);
 
 /***/ }),
 
@@ -99,7 +103,6 @@ var BaseballGame = /*#__PURE__*/function () {
         var cnt = 0;
 
         while (cnt < 3) {
-          console.log(cnt);
           var num = Math.floor(Math.random() * (maxVal - minVal + 1) + minVal);
 
           if (table[num]) {
@@ -111,7 +114,6 @@ var BaseballGame = /*#__PURE__*/function () {
           }
         }
 
-        console.log(random);
         return random;
       } catch (error) {
         alert(error);
@@ -166,7 +168,7 @@ var BaseballGame = /*#__PURE__*/function () {
 
         return responseString;
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     }
   }, {

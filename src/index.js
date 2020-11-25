@@ -14,6 +14,10 @@ function numIsSubmited(e) {
       throw '3자리 수를 입력해주세요!';
     }
 
+    if (userInputNumbers.indexOf('0') !== -1) {
+      throw '0을 포함하지 않는 숫자를 입력해주세요!';
+    }
+
     if (deduplicateCount !== 3) {
       throw '각 자리의 수가 중복되지 않는 수를 입력해주세요!';
     }
