@@ -14,6 +14,9 @@ new BaseballGame();
 
 const userInput = document.querySelector("#user-input");
 const button = document.querySelector("#submit");
+const result = document.querySelector("#result");
+const reStartDiv = document.createElement("div");
+const reStartButton = document.createElement("button");
 
 function makeComuputerNumber() {
     const computerNumArr = Array(9)
@@ -56,4 +59,20 @@ button.addEventListener("click", function () {
             ball += 1;
         }
     }
+    if (strike === 3) {
+        result.textContent = "정답을 맞추셨습니다!";
+        reStartDiv.textContent = "게임을 새로 시작하시겠습니까?";
+        reStartButton.textContent = "재실행";
+        result.appendChild(reStartDiv);
+        reStartDiv.appendChild(reStartButton);
+    } else if (ball && strike) {
+        result.textContent = `${ball}볼 ${strike}스트라이크`;
+    } else if (ball) {
+        result.textContent = `${ball}볼`;
+    } else if (strike) {
+        result.textContent = `${strike}스트라이크`;
+    } else {
+        result.textContent = "낫싱";
+    }
+    userInput.value = "";
 });
