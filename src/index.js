@@ -20,8 +20,7 @@ const getTargetNumber = () => {
     return localStorage.getItem("targetNumber");
 }
 
-const compareNums = (target, input) => {
-    let res = "낫싱";
+const getCnt = (target, input) => {
     let [strikeCnt, ballCnt] = [0, 0];
     for (let i = 0; i < input.length; i++) {
         if (input[i] === target[i]) { // 자리수와 현재 값이 같으면
@@ -30,6 +29,13 @@ const compareNums = (target, input) => {
             ballCnt++;
         }
     }
+    return [strikeCnt, ballCnt];
+}
+
+const compareNums = (target, input) => {
+    let res = "낫싱";
+    let [strikeCnt, ballCnt] = getCnt(target, input);
+
     if (!(strikeCnt === 0 && ballCnt === 0)) {
         if (strikeCnt === 0) {
             res = `${ballCnt}볼`;
@@ -77,6 +83,7 @@ const checkValidInput = (userInput) => {
         clearInput();
     } else if ([...(new Set(userInput))].length !== 3) {
         alert("중복되지 않은 3자리의 숫자를 입력해주세요. 🙏");
+        res = false;
         clearInput();
     }
     return res;
@@ -84,12 +91,12 @@ const checkValidInput = (userInput) => {
 
 const getUserInput = () => {
     const userInput = document.getElementById("user-input").value;
+    const game = new BaseballGame();
     clearResultArea();
-    if (!checkValidInput(userInput)) {
-        return;
+    if (checkValidInput(userInput)) {
+        const res = game.play(userInput, getTargetNumber("targetNumber"));
+        printResult(res);
     }
-    const res = new BaseballGame().play(userInput, getTargetNumber("targetNumber"));
-    printResult(res);
 }
 
 export default function BaseballGame() {
