@@ -18,6 +18,17 @@ function GetInput() {
 }
 
 function CheckInputValidity(number) {
+  if (number.indexOf("0") !== -1)
+    return 1;
+  if (number.length !== 3)
+    return 1;
+  
+  for (let i = 0; i <= 2; i++) {
+    if (!(number[i] >= 1 && number[i] <= 9))
+      return 1;
+    if (number.split(number[i]).length - 1 !== 1)
+      return 1
+  }
 }
   
 
