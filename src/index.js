@@ -1,5 +1,5 @@
 const TARGET_NUMBER = "targetNumber";
-const IS_SUCCESSED = "isSuccessed";
+const IS_SUCCESSED = "3스트라이크";
 
 const getNonDuplicatedNumber = () => {
     const flag = new Array(10).fill(0);
@@ -45,14 +45,30 @@ const compareNums = (target, input) => {
     return res;
 }
 
+const printResult = (str) => {
+    const resultContainer = document.getElementById("result");
+    const textElement = document.createElement("p");
+    if (str === IS_SUCCESSED) {
+        const restartText = document.createElement("span");
+        const restartBtn = document.createElement("button");
+        textElement.innerHTML = "<div><span>🎉</span> <strong>정답을 맞추셨습니다!</strong> <span>🎉</span></div>";
+        restartText.innerText = "게임을 새로 시작하시겠습니까?";
+        restartBtn.innerText = "게임 재시작";
+        resultContainer.appendChild(textElement);
+        resultContainer.appendChild(restartText);
+        resultContainer.appendChild(restartBtn);
+    } else {
+        textElement.innerText = str;
+        resultContainer.appendChild(textElement);
+    }
+
+}
+
 const getUserInput = () => {
     const userInput = document.getElementById("user-input").value;
     const res = new BaseballGame().play(userInput, getTargetNumber(TARGET_NUMBER));
 
-    if (res === "3스트라이크") {
-
-    }
-
+    printResult(res);
 }
 
 export default function BaseballGame() {
@@ -61,10 +77,14 @@ export default function BaseballGame() {
     };
 }
 
+const restart = () => {
+
+}
+
 const init = () => {
     saveTargetNumber("");
     const btn = document.getElementById('submit');
-    // saveTargetNumber(getNonDuplicatedNumber());
+    saveTargetNumber(getNonDuplicatedNumber());
     btn.onclick = getUserInput;
 }
 
