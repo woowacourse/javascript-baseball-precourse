@@ -19,7 +19,7 @@ console.log(game.computerInputNumbers);
 
 function numIsSubmited(e) {
   var userInputNumbers = document.getElementById("user-input").value;
-  game.play(game.computerInputNumbers, userInputNumbers);
+  console.log(game.play(game.computerInputNumbers, userInputNumbers));
 }
 
 var submitNumButton = document.getElementById("submit");
@@ -90,27 +90,44 @@ var BaseballGame = /*#__PURE__*/function () {
       for (var i = 0; i < 3; i++) {
         if (computerInputNumbers[i] === userInputNumbers[i]) {
           strike++;
-        } else {
+        } else if (computerInputNumbers.indexOf(userInputNumbers[i]) !== -1) {
           ball++;
         }
       }
 
-      if (strike === 3) {
-        isAnswer = true;
-      }
-
-      return [strike, ball, isAnswer];
+      return [strike, ball];
     }
   }, {
     key: "play",
     value: function play(computerInputNumbers, userInputNumbers) {
-      var _this$judge = this.judge(computerInputNumbers, userInputNumbers),
-          _this$judge2 = _slicedToArray(_this$judge, 3),
-          strike = _this$judge2[0],
-          ball = _this$judge2[1],
-          isAnswer = _this$judge2[2];
+      try {
+        var _this$judge = this.judge(computerInputNumbers, userInputNumbers),
+            _this$judge2 = _slicedToArray(_this$judge, 2),
+            strike = _this$judge2[0],
+            ball = _this$judge2[1];
 
-      return "결과 값 String";
+        var responseString = '';
+
+        if (ball) {
+          responseString += "".concat(ball, "\uBCFC");
+        }
+
+        if (strike) {
+          responseString += " ".concat(strike, "\uC2A4\uD2B8\uB77C\uC774\uD06C");
+        }
+
+        if (ball === 0 && strike === 0) {
+          responseString = '낫싱';
+        }
+
+        if (strike === 3) {
+          responseString = '정답을 맞추셨습니다!';
+        }
+
+        return responseString;
+      } catch (error) {
+        console.log(error);
+      }
     }
   }]);
 

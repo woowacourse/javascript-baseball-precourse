@@ -22,25 +22,39 @@ export default class BaseballGame {
     for (let i = 0; i < 3; i++) {
       if (computerInputNumbers[i] === userInputNumbers[i]) {
         strike++
-      } else {
+      } else if (computerInputNumbers.indexOf(userInputNumbers[i]) !== -1) {
         ball++
       }
     }
-
-    if (strike === 3) {
-      isAnswer = true
-    }
-
-    return [strike, ball, isAnswer]
-
+    return [strike, ball]
   }
 
-
-
   play(computerInputNumbers, userInputNumbers) {
+    try {
+      const [strike, ball] = this.judge(computerInputNumbers, userInputNumbers)
+      let responseString = ''
 
-    const [strike, ball, isAnswer] = this.judge(computerInputNumbers, userInputNumbers)
-    return "결과 값 String";
+      if (ball) {
+        responseString += `${ball}볼`
+      }
+
+      if (strike) {
+        responseString += ` ${strike}스트라이크`
+      }
+
+      if (ball === 0 && strike === 0) {
+        responseString = '낫싱'
+      }
+
+      if (strike === 3) {
+        responseString = '정답을 맞추셨습니다!'
+      }
+
+      return responseString;
+    } catch (error) {
+      console.log(error)
+    }
+
 
   }
 
