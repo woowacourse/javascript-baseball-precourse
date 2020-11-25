@@ -28,4 +28,15 @@ const computingNumber = function () {
   return number
 }
 
+const parseNumber = function (number) {
+  const numberArray = []
+  for (let i = 0; i < 3; i++){
+    const partNumber = Math.floor(number / Math.pow(10, i)) % 10
+    if (numberArray.indexOf(partNumber) === -1)
+      numberArray.push(partNumber)
+  }
+
+  return numberArray
+}
+
 new BaseballGame();
