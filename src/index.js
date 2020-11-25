@@ -16,5 +16,11 @@ export default class BaseballGame {
       this.randomNumber += selectedNumber[0].toString()
     }
   }
+  clickEventListener() {
+    const submitButton = document.getElementById("submit")
+    submitButton.addEventListener('click', () => {
+      const inputValue = document.getElementById("user-input").value
+    })
+  }
 }
 new BaseballGame();
