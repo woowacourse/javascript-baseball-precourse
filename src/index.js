@@ -11,3 +11,15 @@ export default function BaseballGame() {
 // }
 
 new BaseballGame();
+
+function makeComuputerNumber() {
+    const computerNumArr = Array(9)
+        .fill(0)
+        .map((v, i) => (v = i + 1));
+    const computerNumber = [];
+    for (let i = 0; i < 3; i++) {
+        const choiceNumber = Math.floor(Math.random() * (9 - i));
+        computerNumber.push(computerNumArr.splice(choiceNumber, 1)[0]);
+    }
+    return computerNumber;
+}
