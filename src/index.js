@@ -49,19 +49,20 @@ const isAlreadyExist = (numbers, aNumber) => {
   });
   return result;
 };
-const generateRandomNumber = (existingNumber) => {
-  let result = Math.floor(Math.random() * 9 + 1);
+
+const generateOneRandomNumber = () => Math.floor(Math.random() * 9 + 1);
+const generateRandomNumbers = (existingNumber) => {
+  let result = generateOneRandomNumber();
   while (isAlreadyExist(existingNumber, result)) {
-    result = Math.floor(Math.random() * 9 + 1);
+    result = generateOneRandomNumber();
   }
   return result;
 };
 const getComputerInput = () => {
-  const firstNumber = generateRandomNumber([]);
-  const secondNumber = generateRandomNumber([firstNumber]);
-  const thirdNumber = generateRandomNumber([firstNumber, secondNumber]);
+  const firstNumber = generateRandomNumbers([]);
+  const secondNumber = generateRandomNumbers([firstNumber]);
+  const thirdNumber = generateRandomNumbers([firstNumber, secondNumber]);
   const result = [firstNumber, secondNumber, thirdNumber];
-
   return result.join("");
 };
 
