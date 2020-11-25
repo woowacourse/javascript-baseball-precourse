@@ -13,6 +13,7 @@ export default function BaseballGame() {
 new BaseballGame();
 
 const userInput = document.querySelector("#user-input");
+const button = document.querySelector("#submit");
 
 function makeComuputerNumber() {
     const computerNumArr = Array(9)
@@ -42,3 +43,17 @@ function validateInput(userInputValue) {
     //     alert("다시 입력하세요.");
     // }
 }
+
+button.addEventListener("click", function () {
+    validateNumber(userInput.value);
+    const userNumber = userInput.value.split("");
+    let strike = 0;
+    let ball = 0;
+    for (let i = 0; i < userNumber.length; i++) {
+        if (Number(userNumber[i]) === computerNumber[i]) {
+            strike += 1;
+        } else if (computerNumber.includes(Number(userNumber[i]))) {
+            ball += 1;
+        }
+    }
+});
