@@ -4,30 +4,52 @@ export default class BaseballGame {
   }
 
   getRandom() {
-    const minVal = 1
-    const maxVal = 9
-    let random = ''
+    try {
+      const minVal = 1
+      const maxVal = 9
+      let random = ''
+      let table;
+      (table = []).length = 10
+      table.fill(false)
 
-    for (let i = 0; i < 3; i++) {
-      random += Math.floor((Math.random() * (maxVal - minVal + 1)) + minVal)
+      let cnt = 0
+      while (cnt < 3) {
+        console.log(cnt)
+        let num = Math.floor((Math.random() * (maxVal - minVal + 1)) + minVal)
+        if (table[num]) {
+          continue
+        } else {
+          table[num] = true
+          random += num
+          cnt++
+        }
+      }
+      console.log(random)
+      return random
+
+    } catch (error) {
+      alert(error)
     }
-
-    console.log(random)
-
-    return random
   }
 
   judge(computerInputNumbers, userInputNumbers) {
-    let strike = 0
-    let ball = 0
-    for (let i = 0; i < 3; i++) {
-      if (computerInputNumbers[i] === userInputNumbers[i]) {
-        strike++
-      } else if (computerInputNumbers.indexOf(userInputNumbers[i]) !== -1) {
-        ball++
+    try {
+      let strike = 0
+      let ball = 0
+      for (let i = 0; i < 3; i++) {
+        if (computerInputNumbers[i] === userInputNumbers[i]) {
+          strike++
+        } else if (computerInputNumbers.indexOf(userInputNumbers[i]) !== -1) {
+          ball++
+        }
       }
+
+      return [strike, ball]
+
+    } catch (error) {
+      alert(error)
     }
-    return [strike, ball]
+
   }
 
 
@@ -60,42 +82,51 @@ export default class BaseballGame {
   }
 
   cleanResult() {
-    const result_div = document.getElementById('result')
+    try {
+      const result_div = document.getElementById('result')
 
-    while (result_div.hasChildNodes()) {
-      result_div.removeChild(result_div.firstChild)
+      while (result_div.hasChildNodes()) {
+        result_div.removeChild(result_div.firstChild)
+      }
+    } catch (error) {
+      alert(error)
     }
-
   }
 
   restart() {
-    this.cleanResult()
-    this.computerInputNumbers = this.getRandom()
-  }
-
-  renderResult(string) {
-    const result_div = document.getElementById('result')
-    const response_p = document.createElement('p')
-    response_p.innerHTML = string
-    result_div.appendChild(response_p)
-
-    if (string === '🎉정답을 맞추셨습니다!🎉') {
-      const replay_div = document.createElement('div')
-      replay_div.id = 'replay'
-
-      let replay_p = document.createElement('p')
-      replay_p.innerHTML = '게임을 새로 시작하시겠습니까?'
-      replay_div.appendChild(replay_p)
-
-      const replay_button = document.createElement('button')
-      replay_button.innerHTML = '게임 재시작'
-      replay_button.id = 'replay-button'
-      replay_button.addEventListener('click', this.restart.bind(this))
-      replay_div.appendChild(replay_button)
-
-      result_div.appendChild(replay_div)
+    try {
+      this.cleanResult()
+      this.computerInputNumbers = this.getRandom()
+    } catch (error) {
+      alert(error)
     }
   }
 
+  renderResult(string) {
+    try {
+      const result_div = document.getElementById('result')
+      const response_p = document.createElement('p')
+      response_p.innerHTML = string
+      result_div.appendChild(response_p)
 
+      if (string === '🎉정답을 맞추셨습니다!🎉') {
+        const replay_div = document.createElement('div')
+        replay_div.id = 'replay'
+
+        let replay_p = document.createElement('p')
+        replay_p.innerHTML = '게임을 새로 시작하시겠습니까?'
+        replay_div.appendChild(replay_p)
+
+        const replay_button = document.createElement('button')
+        replay_button.innerHTML = '게임 재시작'
+        replay_button.id = 'replay-button'
+        replay_button.addEventListener('click', this.restart.bind(this))
+        replay_div.appendChild(replay_button)
+
+        result_div.appendChild(replay_div)
+      }
+    } catch (error) {
+      alert(error)
+    }
+  }
 }

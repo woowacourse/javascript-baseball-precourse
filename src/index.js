@@ -2,9 +2,6 @@ import { BaseballGame } from "./modules"
 
 const game = new BaseballGame();
 
-console.log(game.computerInputNumbers)
-
-
 function numIsSubmited(e) {
   try {
     game.cleanResult()
@@ -16,6 +13,5 @@ function numIsSubmited(e) {
   }
 
 }
-
 const submitNumButton = document.getElementById("submit")
 submitNumButton.addEventListener("click", numIsSubmited)
