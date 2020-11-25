@@ -54,7 +54,7 @@ export default class BaseballGame {
       console.log(error)
     }
   }
-  renderString(string) {
+  renderResult(string) {
     const result_div = document.getElementById('result')
     const response_p = document.createElement('p')
     response_p.innerHTML = string
@@ -75,6 +75,8 @@ export default class BaseballGame {
 
       result_div.appendChild(replay_div)
     }
+
+
 
 
   }
