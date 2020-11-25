@@ -14,7 +14,6 @@ export default class BaseballGame {
 
       let cnt = 0;
       while (cnt < 3) {
-        console.log(cnt);
         let num = Math.floor(Math.random() * (maxVal - minVal + 1) + minVal);
         if (table[num]) {
           continue;
@@ -24,7 +23,7 @@ export default class BaseballGame {
           cnt++;
         }
       }
-      console.log(random);
+
       return random;
     } catch (error) {
       alert(error);
@@ -72,7 +71,7 @@ export default class BaseballGame {
 
       return responseString;
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   }
 
