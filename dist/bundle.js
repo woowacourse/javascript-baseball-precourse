@@ -15,6 +15,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules */ "./src/modules/index.js");
 
 var game = new _modules__WEBPACK_IMPORTED_MODULE_0__.BaseballGame();
+console.log(game.random);
 
 function numIsSubmited(e) {
   var num = document.getElementById("user-input").value;
@@ -49,11 +50,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var BaseballGame = /*#__PURE__*/function () {
   function BaseballGame() {
     _classCallCheck(this, BaseballGame);
+
+    this.random = this.getRandom();
   }
 
   _createClass(BaseballGame, [{
+    key: "getRandom",
+    value: function getRandom() {
+      var minVal = 1;
+      var maxVal = 9;
+      var random = '';
+
+      for (var i = 0; i < 3; i++) {
+        random += Math.floor(Math.random() * (maxVal - minVal + 1) + minVal);
+      }
+
+      return random;
+    }
+  }, {
     key: "play",
     value: function play(computerInputNumbers, userInputNumbers) {
+      console.log("sex");
       return "결과 값 String";
     }
   }]);
