@@ -4,9 +4,10 @@
 - [x] 두 3자리의 문자열을 비교하여 볼/스트라이크/낫띵 출력하는 함수 만들기
 - [x] 웹 페이지에서 입력한 숫자 받아오는 기능 구현하기
 - [x] 타겟 넘버를 localStorage에 save/read 하는 함수
-- [x] 현재 정답을 맞춘상태인지 확인할 수 있는 변수인 isSuccessed를 localStorage에 save/read 하는 함수
+- [x] <del>현재 정답을 맞춘상태인지 확인할 수 있는 변수인 isSuccessed를 localStorage에 save/read 하는 함수</del>
 - [ ] localStorage에 save/read할때 미리볼 수 없도록 암호화하는 기능 구현
 - [ ] 받은 사용자의 입력으로 숫자 야구 결과값을 결과 요소 하단에 출력하기
 - [ ] 3스트라이크일 때 isSuccessed를 true로 변경하여 저장
 - [ ] 3스트라이크일 때 성공 문구 노출시키기
 - [ ] 게임 재시작 버튼 눌렀을 때 localStorage 변수들 초기화
+- [ ] 사용자가 잘못된 입력값을 작성한 경우 alert 팝업 후 재입력 할 수 있게 하는 기능

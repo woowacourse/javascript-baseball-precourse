@@ -23,14 +23,6 @@ const getTargetNumber = () => {
     return localStorage.getItem(TARGET_NUMBER);
 }
 
-const saveIsSuccesed = (flag) => {
-    localStorage.setItem(IS_SUCCESSED, flag);
-}
-
-const getIsSuccesed = () => {
-    return localStorage.getItem(IS_SUCCESSED);
-}
-
 const compareNums = (target, input) => {
     let res = "낫싱";
     let [strikeCnt, ballCnt] = [0, 0];
@@ -58,7 +50,7 @@ const getUserInput = () => {
     const res = new BaseballGame().play(userInput, getTargetNumber(TARGET_NUMBER));
 
     if (res === "3스트라이크") {
-        saveIsSuccesed(true);
+
     }
 
 }
@@ -71,7 +63,6 @@ export default function BaseballGame() {
 
 const init = () => {
     saveTargetNumber("");
-    saveIsSuccesed(false);
     const btn = document.getElementById('submit');
     // saveTargetNumber(getNonDuplicatedNumber());
     btn.onclick = getUserInput;
