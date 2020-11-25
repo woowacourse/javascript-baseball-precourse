@@ -16,4 +16,10 @@ const isExist = (aNumber, numbers) => {
   return result;
 };
 
+const userInput = document.getElementById("user-input");
+const submitButton = document.getElementById("submit");
+submitButton.onclick = () => {
+  console.log(userInput.value);
+};
+
 new BaseballGame();
