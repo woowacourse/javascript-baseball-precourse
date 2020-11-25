@@ -10,4 +10,21 @@ const getRandomNumber = () => {
   return randomNumber;
 };
 
+const getComputerInputNumbers = () => {
+  const PITCH_COUNT = 3;
+  let computerInputNumbers = [];
+  let pitch = 0;
+  let randomNumber;
+
+  while (pitch < PITCH_COUNT) {
+    randomNumber = getRandomNumber();
+    if (!computerInputNumbers.includes(randomNumber)) {
+      computerInputNumbers.push(randomNumber);
+      pitch++;
+    }
+  }
+
+  return computerInputNumbers;
+};
+
 new BaseballGame();
