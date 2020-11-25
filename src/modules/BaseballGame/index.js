@@ -15,8 +15,31 @@ export default class BaseballGame {
     return random
   }
 
+  judge(computerInputNumbers, userInputNumbers) {
+    let strike = 0
+    let ball = 0
+    let isAnswer = false
+    for (let i = 0; i < 3; i++) {
+      if (computerInputNumbers[i] === userInputNumbers[i]) {
+        strike++
+      } else {
+        ball++
+      }
+    }
+
+    if (strike === 3) {
+      isAnswer = true
+    }
+
+    return [strike, ball, isAnswer]
+
+  }
+
+
+
   play(computerInputNumbers, userInputNumbers) {
-    console.log()
+
+    const [strike, ball, isAnswer] = this.judge(computerInputNumbers, userInputNumbers)
     return "결과 값 String";
 
   }
