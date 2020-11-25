@@ -2,8 +2,7 @@ export default function BaseballGame() {
   const baseballWrapper = document.body.querySelector("#app");
   const submitButton = baseballWrapper.querySelector("#submit");
   const userInput = baseballWrapper.querySelector("#user-input");
-  let boundSubmitUserInput = null;
-  let answer = null;
+  let boundSubmitUserInput = null; // addEventListener을 제거하기 위해 bind
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     const result = {
@@ -36,7 +35,7 @@ export default function BaseballGame() {
     const ALL_NUMBERS = 9;
     const numberArray = Array(ALL_NUMBERS)
       .fill()
-      .map((v, i) => i + 1);
+      .map((v, number) => number + 1);
     let answer = "";
 
     for (let i = 1; i <= 3; i++) {
@@ -59,7 +58,8 @@ export default function BaseballGame() {
   const submitUserInput = (answer) => {
     if (isInputRight()) {
       const resultText = this.play(answer, userInput.value);
-      showResultOnScreen(resultText);
+
+      return showResultOnScreen(resultText);
     }
   };
 
@@ -85,15 +85,10 @@ export default function BaseballGame() {
   };
 
   const gameStart = () => {
-    const resultDiv = baseballWrapper.querySelector("#result");
-    while (resultDiv.firstChild) {
-      resultDiv.removeChild(resultDiv.firstChild);
-    }
+    const answer = makeOnAnswer();
+    boundSubmitUserInput = submitUserInput.bind(null, answer);
 
-    userInput.value = "";
-    answer = makeOnAnswer();
-    boundSubmitUserInput = submitUserInput.bind(null, makeOnAnswer());
-    submitButton.addEventListener("click", boundSubmitUserInput);
+    return submitButton.addEventListener("click", boundSubmitUserInput);
   };
 
   const gameFinish = () => {
@@ -113,7 +108,18 @@ export default function BaseballGame() {
     reStartButton.innerText = "게임 재시작";
     restartDiv.appendChild(reStartButton);
 
-    return reStartButton.addEventListener("click", gameStart, { once: true });
+    return reStartButton.addEventListener("click", gameReStart, { once: true });
+  };
+
+  const gameReStart = () => {
+    const resultDiv = baseballWrapper.querySelector("#result");
+    while (resultDiv.firstChild) {
+      resultDiv.removeChild(resultDiv.firstChild);
+    }
+
+    userInput.value = "";
+
+    return gameStart();
   };
 
   gameStart();
