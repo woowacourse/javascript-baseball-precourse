@@ -1,3 +1,4 @@
+//난수 생성 함수
 import {checkValidNumber} from './common';
 
 export default () => {
