@@ -48,5 +48,22 @@ function CheckInputValidity(number) {
   }
 }
 
+function CountBallStrike(answer, user_value) {
+	let ball = 0;
+	let strike = 0;
+	for (let i = 0; i <= 2; i++) {
+	  if (answer[i] === user_value[i])
+		  strike++;
+	  else if (user_value.indexOf(answer[i]) !== -1)
+		  ball++;
+  }
+  DisplayResult(strike, ball);
+}
+
+function DisplayResult(strike, ball) {
+  
+}
+  
+
 
 new BaseballGame();
