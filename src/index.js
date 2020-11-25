@@ -5,6 +5,14 @@
 // }
 
 export default class BaseballGame {
+  constructor() {
+    this.randomNumber = ""
+    this.playNewGame()
+  }
+  playNewGame() {
+    this.randomNumber = this.createRandomNumber()
+    this.clickEventListener()
+  }
   play(computerInputNumbers, userInputNumbers) {
     if (computerInputNumbers === userInputNumbers) {
       return `🎉 <strong>정답을 맞추셨습니다!</strong>🎉<br />게임을 새로 시작하시겠습니까?`
