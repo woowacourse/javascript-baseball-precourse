@@ -4,16 +4,7 @@ export default function BaseballGame() {
   };
 }
 
-const check = (computerInput,userInput) =>{
-  let result = userInput.reduce((result,val)=> {
-    if(result) return result;
-    if(val)
-  },false);
-  for(let i= 0; i< userInput.length;i++){
-    if()
-  }
-  return result;
-}
+// Math.floor(Math.random() * 9 + 1);
 
 const isExist = (aNumber, numbers) => {
   let result = false;
@@ -24,11 +15,5 @@ const isExist = (aNumber, numbers) => {
   }
   return result;
 };
-
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
 
 new BaseballGame();
