@@ -54,6 +54,7 @@ const printResult = (str) => {
         textElement.innerHTML = "<div><span>🎉</span> <strong>정답을 맞추셨습니다!</strong> <span>🎉</span></div>";
         restartText.innerText = "게임을 새로 시작하시겠습니까?";
         restartBtn.innerText = "게임 재시작";
+        restartBtn.setAttribute("id", "game-restart-button");
         restartBtn.onclick = restart;
         resultContainer.appendChild(textElement);
         resultContainer.appendChild(restartText);
@@ -70,8 +71,23 @@ const clearResultArea = () => {
     resultContainer.textContent = '';
 }
 
+const checkValidInput = (userInput) => {
+    let res = true;
+    if (userInput.length !== 3) {
+        alert("길이가 3인 숫자를 입력해주세요. 🙏");
+        res = false;
+    } else if ([...(new Set(userInput))].length !== 3) {
+        alert("중복되지 않은 3자리의 숫자를 입력해주세요. 🙏");
+        res = false;
+    }
+    return res;
+}
+
 const getUserInput = () => {
     const userInput = document.getElementById("user-input").value;
+    if (!checkValidInput(userInput)) {
+        return;
+    }
     const res = new BaseballGame().play(userInput, getTargetNumber(TARGET_NUMBER));
     clearResultArea();
     printResult(res);
@@ -84,6 +100,7 @@ export default function BaseballGame() {
 }
 
 const restart = () => {
+    document.getElementById("user-input").value = '';
     saveTargetNumber(getNonDuplicatedNumber());
     clearResultArea();
 }
