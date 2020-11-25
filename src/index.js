@@ -1,13 +1,11 @@
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
+export default class BaseballGame {
+  static play(computerInputNumbers, userInputNumbers) {
+    return '결과 값 String';
+  }
+
+  static getUserInput() {
+    return document.querySelector('#user-input').value;
+  }
 }
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
-
-new BaseballGame();
+const game = new BaseballGame();
