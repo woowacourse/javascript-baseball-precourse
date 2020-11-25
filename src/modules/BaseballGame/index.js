@@ -12,6 +12,8 @@ export default class BaseballGame {
       random += Math.floor((Math.random() * (maxVal - minVal + 1)) + minVal)
     }
 
+    console.log(random)
+
     return random
   }
 
@@ -27,6 +29,8 @@ export default class BaseballGame {
     }
     return [strike, ball]
   }
+
+
 
   play(computerInputNumbers, userInputNumbers) {
     try {
@@ -64,6 +68,11 @@ export default class BaseballGame {
 
   }
 
+  restart() {
+    this.cleanResult()
+    this.computerInputNumbers = this.getRandom()
+  }
+
   renderResult(string) {
     const result_div = document.getElementById('result')
     const response_p = document.createElement('p')
@@ -81,16 +90,12 @@ export default class BaseballGame {
       const replay_button = document.createElement('button')
       replay_button.innerHTML = '게임 재시작'
       replay_button.id = 'replay-button'
-      replay_button.addEventListener('click', this.cleanResult)
+      replay_button.addEventListener('click', this.restart.bind(this))
       replay_div.appendChild(replay_button)
 
       result_div.appendChild(replay_div)
     }
-
-
-
-
-
-
   }
+
+
 }

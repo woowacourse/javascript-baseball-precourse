@@ -6,13 +6,16 @@ console.log(game.computerInputNumbers)
 
 
 function numIsSubmited(e) {
-  const userInputNumbers = document.getElementById("user-input").value
-  const responseString = game.play(game.computerInputNumbers, userInputNumbers)
-  game.renderResult(responseString)
+  try {
+    game.cleanResult()
+    const userInputNumbers = document.getElementById("user-input").value
+    const responseString = game.play(game.computerInputNumbers, userInputNumbers)
+    game.renderResult(responseString)
+  } catch (error) {
+    alert(error)
+  }
+
 }
-
-
-
 
 const submitNumButton = document.getElementById("submit")
 submitNumButton.addEventListener("click", numIsSubmited)

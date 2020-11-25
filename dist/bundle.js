@@ -18,9 +18,14 @@ var game = new _modules__WEBPACK_IMPORTED_MODULE_0__.BaseballGame();
 console.log(game.computerInputNumbers);
 
 function numIsSubmited(e) {
-  var userInputNumbers = document.getElementById("user-input").value;
-  var responseString = game.play(game.computerInputNumbers, userInputNumbers);
-  game.renderResult(responseString);
+  try {
+    game.cleanResult();
+    var userInputNumbers = document.getElementById("user-input").value;
+    var responseString = game.play(game.computerInputNumbers, userInputNumbers);
+    game.renderResult(responseString);
+  } catch (error) {
+    alert(error);
+  }
 }
 
 var submitNumButton = document.getElementById("submit");
@@ -79,6 +84,7 @@ var BaseballGame = /*#__PURE__*/function () {
         random += Math.floor(Math.random() * (maxVal - minVal + 1) + minVal);
       }
 
+      console.log(random);
       return random;
     }
   }, {
@@ -139,6 +145,12 @@ var BaseballGame = /*#__PURE__*/function () {
       }
     }
   }, {
+    key: "restart",
+    value: function restart() {
+      this.cleanResult();
+      this.computerInputNumbers = this.getRandom();
+    }
+  }, {
     key: "renderResult",
     value: function renderResult(string) {
       var result_div = document.getElementById('result');
@@ -155,7 +167,7 @@ var BaseballGame = /*#__PURE__*/function () {
         var replay_button = document.createElement('button');
         replay_button.innerHTML = '게임 재시작';
         replay_button.id = 'replay-button';
-        replay_button.addEventListener('click', this.cleanResult);
+        replay_button.addEventListener('click', this.restart.bind(this));
         replay_div.appendChild(replay_button);
         result_div.appendChild(replay_div);
       }
@@ -196,7 +208,6 @@ __webpack_require__.r(__webpack_exports__);
   \**************************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: __webpack_require__, module */
-/*! CommonJS bailout: module.exports is used directly at 15:0-14 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 /*
@@ -232,7 +243,6 @@ if (window && !window.EventSource){
   \***************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: top-level-this-exports */
-/*! CommonJS bailout: this is used directly at 621:3-7 */
 /***/ (function() {
 
 /*
