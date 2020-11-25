@@ -2,7 +2,15 @@ export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     return "결과 값 String";
   };
-  GetInput();
+  StartGame();
+}
+ 
+function StartGame() {
+  let result = document.querySelector('#result');
+  if (result.value !== '')
+    result.value = '';
+  
+
 }
 
 function GetInput() {
@@ -15,6 +23,7 @@ function GetInput() {
       alert("1~9까지의 중복되지 않는 세자리 숫자를 입력해주세요");
     input.value = '';
   })
+  return (user_value);
 }
 
 function CheckInputValidity(number) {
@@ -30,8 +39,6 @@ function CheckInputValidity(number) {
       return 1
   }
 }
-  
-
 
 
 new BaseballGame();
