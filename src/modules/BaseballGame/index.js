@@ -110,20 +110,20 @@ export default class BaseballGame {
       result_div.appendChild(response_p)
 
       if (string === '🎉정답을 맞추셨습니다!🎉') {
-        const replay_div = document.createElement('div')
-        replay_div.id = 'replay'
+        const restart_div = document.createElement('div')
+        restart_div.id = 'restart'
 
-        let replay_p = document.createElement('p')
-        replay_p.innerHTML = '게임을 새로 시작하시겠습니까?'
-        replay_div.appendChild(replay_p)
+        let restart_p = document.createElement('p')
+        restart_p.innerHTML = '게임을 새로 시작하시겠습니까?'
+        restart_div.appendChild(restart_p)
 
-        const replay_button = document.createElement('button')
-        replay_button.innerHTML = '게임 재시작'
-        replay_button.id = 'replay-button'
-        replay_button.addEventListener('click', this.restart.bind(this))
-        replay_div.appendChild(replay_button)
+        const restart_button = document.createElement('button')
+        restart_button.innerHTML = '게임 재시작'
+        restart_button.id = 'game-restart-button'
+        restart_button.addEventListener('click', this.restart.bind(this))
+        restart_div.appendChild(restart_button)
 
-        result_div.appendChild(replay_div)
+        result_div.appendChild(restart_div)
       }
     } catch (error) {
       alert(error)
