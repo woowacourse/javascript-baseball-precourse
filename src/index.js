@@ -39,4 +39,15 @@ const parseNumber = function (number) {
   return numberArray
 }
 
+const checkInput = function (number) {
+  if (number < 123 || number > 987) return false
+
+  const numberArray = parseNumber(number)
+  if (numberArray.length === 3 && numberArray.indexOf(0) === -1) {
+    return true;
+  }
+
+  return false;
+}
+
 new BaseballGame();
