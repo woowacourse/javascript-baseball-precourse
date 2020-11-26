@@ -36,9 +36,10 @@ export default function BaseballGame() {
   };
 
   this.isComposedOfDifferentNumber = numbers => {
-    const first = String(numbers)[0];
-    const second = String(numbers)[1];
-    const third = String(numbers)[2];
+    const stringNumbers = String(numbers);
+    const first = stringNumbers[0];
+    const second = stringNumbers[1];
+    const third = stringNumbers[2];
     if (first !== second && second !== third && third !== first) {
       return true;
     }
@@ -58,9 +59,9 @@ export default function BaseballGame() {
   };
 
   this.countStrikes = (computerInputNumbers, userInputNumbers) => {
-    let count = 0;
     const stringComputerInputNumbers = String(computerInputNumbers);
     const stringUserInputNumbers = String(userInputNumbers);
+    let count = 0;
     for (let i = 0; i < 3; i++) {
       if (stringComputerInputNumbers[i] === stringUserInputNumbers[i]) {
         count += 1;
