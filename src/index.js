@@ -1,5 +1,4 @@
 export default class BaseballGame {
-  // 컴퓨터 입력 값 가져오기
   getComputerNumber() {
     let computerInputNumbers = '';
 
@@ -14,7 +13,6 @@ export default class BaseballGame {
     return computerInputNumbers;
   }
 
-  // 중복 검사 함수
   isDuplicate(text1, text2) {
     let resultData = false;
 
@@ -26,7 +24,6 @@ export default class BaseballGame {
     return resultData;
   }
 
-  // 유저가 입력한 수를 가져오기
   getUserNumber() {
     const userInput = document.querySelector('#user-input');
     const userInputNumber = this.isUserNumberRight(userInput, userInput.value);
@@ -37,26 +34,22 @@ export default class BaseballGame {
   isUserNumberRight(userInput, text) {
     let returnValue = null;
 
-    if (text.length !== 3) {
-      userInput.value = '';
-      alert('3개의 숫자를 입력해주세요');
-    } else if (isNaN(text) === true) {
-      userInput.value = '';
-      alert('숫자를 입력해주세요');
-    } else if (
-      this.isDuplicate(text[0], text[1]) === false ||
-      this.isDuplicate(text.slice(0, 2), text[2]) === false
+    if (
+      text.length === 3 &&
+      isNaN(text) === false &&
+      this.isDuplicate(text[0], text[1]) === true &&
+      this.isDuplicate(text.slice(0, 2), text[2]) === true
     ) {
       userInput.value = '';
-      alert('중복없이 입력해주세요');
-    } else {
       returnValue = text;
+    } else {
+      userInput.value = '';
+      alert('다시 입력해주세요');
     }
 
     return returnValue;
   }
 
-  // 값 비교하기
   compareNumber(computerInputNumbers, userInputNumbers) {
     if (userInputNumbers === null) {
       console.log('다시 입력해주세요');
