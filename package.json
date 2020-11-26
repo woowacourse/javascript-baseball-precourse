@@ -1,0 +1,19 @@
+{
+  "name": "js-baseball",
+  "version": "1.0.0",
+  "description": "## 🎯 기능 요구사항",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jho2301/javascript-baseball-precourse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jho2301/javascript-baseball-precourse/issues"
+  },
+  "homepage": "https://github.com/jho2301/javascript-baseball-precourse#readme"
+}
