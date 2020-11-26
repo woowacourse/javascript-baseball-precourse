@@ -10,4 +10,20 @@ export default function BaseballGame() {
 //   }
 // }
 
+function randomNumberMaker(randomNumberLength) {
+  const maxNum = 9
+  const minNum = 1
+  let randomNumberArray = [];
+
+  while (randomNumberArray.length < randomNumberLength) {
+    let randomNumber = Math.floor(Math.random() * (maxNum - minNum + 1) + minNum);
+
+    if (!randomNumberArray.includes(randomNumber)) {
+      randomNumberArray.push(randomNumber)
+    }
+  }
+
+  return randomNumberArray;
+}
+
 new BaseballGame();
