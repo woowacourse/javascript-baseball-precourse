@@ -34,6 +34,10 @@ export default class BaseballGame {
     this._computerInputNumbers = random;
   }
 
+  getComputerInputNumbers() {
+    return this._computerInputNumbers;
+  }
+
   judge(computerInputNumbers, userInputNumbers) {
     let strike = 0;
     let ball = 0;
