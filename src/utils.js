@@ -10,6 +10,15 @@ export default function Utils() {
     return numbers.join('');
   };
 
+  this.isNumber = (n) => {
+    if (
+      n.charCodeAt(0) < '1'.charCodeAt(0) ||
+      n.charCodeAt(0) > '9'.charCodeAt(0)
+    )
+      return true;
+    return false;
+  };
+
   this.createBtn = (id, textContent) => {
     let button = document.createElement('button');
     button.id = id;
