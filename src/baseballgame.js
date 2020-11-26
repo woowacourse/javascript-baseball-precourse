@@ -41,6 +41,7 @@ export default class BaseballGame {
 
   renderStrikeCount(strike, result) {
     const strikeCount = document.createElement("span");
+    const answerSection = document.createElement("div");
     const answer = document.createElement("strong");
     const restartMessage = document.createElement("span");
     const restartButton = document.createElement("button");
@@ -53,11 +54,13 @@ export default class BaseballGame {
       result.appendChild(strikeCount);
     } else {
       answer.innerText = "💯 정답을 맞추셨습니다! 💯";
-      answer.id = "answer";
-      result.appendChild(answer);
+      answerSection.appendChild(answer);
+      answerSection.id = "answer";
+      result.appendChild(answerSection);
       restartMessage.innerText = "게임을 새로 시작하시겠습니까?";
       result.appendChild(restartMessage);
       restartButton.innerText = "게임 재시작";
+      restartButton.id = "game-restart-button";
       restartButton.addEventListener("click", () => location.reload());
       result.appendChild(restartButton);
     }
