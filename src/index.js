@@ -1,34 +1,5 @@
 import Utils from './utils.js';
 
-const game = new BaseballGame(3);
-let computerInputNumbers = '';
-
-const userInputElem = document.querySelector('#user-input');
-const resultElem = document.querySelector('#result');
-const playBtn = document.querySelector('#submit');
-
-userInputElem.addEventListener('click', clearForm);
-playBtn.addEventListener('click', showGameResult);
-
-function clearForm(e) {
-  userInputElem.value = '';
-}
-
-function showGameResult(e) {
-  e.preventDefault();
-  game.initialize(resultElem);
-
-  computerInputNumbers = game.getComputerInputnumbers(computerInputNumbers);
-  const userInputNumbers = game.getUserInputnumbers();
-
-  const errno = game.isError(userInputNumbers);
-  if (errno) {
-    return game.alertErrorMessage(errno, userInputElem);
-  }
-  const gameResult = game.play(computerInputNumbers, userInputNumbers);
-  resultElem.insertAdjacentHTML('afterbegin', gameResult);
-}
-
 export default function BaseballGame(N) {
   const util = new Utils();
 
@@ -164,4 +135,32 @@ export default function BaseballGame(N) {
     resultElem.append(restartElem);
     console.log(`⚾ADMIN: You Win!💛💛💛`);
   };
+}
+
+const userInputElem = document.querySelector('#user-input');
+const resultElem = document.querySelector('#result');
+const playBtn = document.querySelector('#submit');
+const game = new BaseballGame(3);
+let computerInputNumbers = '';
+
+userInputElem.addEventListener('click', clearForm);
+playBtn.addEventListener('click', showGameResult);
+
+function clearForm(e) {
+  userInputElem.value = '';
+}
+
+function showGameResult(e) {
+  e.preventDefault();
+  game.initialize(resultElem);
+
+  computerInputNumbers = game.getComputerInputnumbers(computerInputNumbers);
+  const userInputNumbers = game.getUserInputnumbers();
+
+  const errno = game.isError(userInputNumbers);
+  if (errno) {
+    return game.alertErrorMessage(errno, userInputElem);
+  }
+  const gameResult = game.play(computerInputNumbers, userInputNumbers);
+  resultElem.insertAdjacentHTML('afterbegin', gameResult);
 }
