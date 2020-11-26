@@ -1,16 +1,19 @@
 export default class BaseballGame {
   constructor() {
-    this.computerInputNumbers = this.getComputerInputNumbers();
+    this.computerInputNumber = this.getComputerInputNumbers();
   }
 
-  play(computerInputNumbers, userInputNumbers) {
-    return printGameResult(computerInputNumbers, userInputNumbers);
+  play(userInputNumber, computerInputNumbers = this.computerInputNumber) {
+    const userInputNumbers = this.parseUserInput(userInputNumber);
+    return `${computerInputNumbers}, ${userInputNumbers}`;
   }
 
-  getRandomNumber() {
-    const randomNumber = Math.floor(Math.random() * 9 + 1);
+  parseUserInput(userInputNumberAsString) {
+    const userInputNumbers = userInputNumberAsString
+      .split("")
+      .map((numberAsString) => parseInt(numberAsString, 10));
 
-    return randomNumber;
+    return userInputNumbers;
   }
 
   getComputerInputNumbers() {
@@ -29,9 +32,22 @@ export default class BaseballGame {
 
     return computerInputNumbers;
   }
+
+  getRandomNumber() {
+    const randomNumber = Math.floor(Math.random() * 9 + 1);
+
+    return randomNumber;
+  }
 }
 
-const game = new BaseballGame();
-console.log(game);
+const startGame = new BaseballGame();
 
-// Event Handler
+const userSubmitButton = document.getElementById("submit");
+const userInputNumber = document.getElementById("user-input");
+
+userSubmitButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  console.log(startGame.play(userInputNumber.value));
+});
+
+console.log(startGame);
