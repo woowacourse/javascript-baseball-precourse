@@ -60,24 +60,24 @@ export default class BaseballGame {
   }
 
   // returns true if the input value is suitable
-  isSuitableInputValue(value) {
-    if(!value || isNaN(value) || value.length !== 3 || this.hasDuplicatedNumber(value) || this.hasZero(value)) {
+  isSuitableInputValue(val) {
+    if(!val || isNaN(val) || val.length !== 3 || this.hasDuplicatedNumber(val) || this.hasZero(val)) {
       return false;
     }
     return true;
   }
 
   // returns true if the input value has zero in it
-  hasZero(value) {
-    if(value.includes('0')) {
+  hasZero(val) {
+    if(val.includes('0')) {
       return true;
     }
     return false;
   }
 
   // returns true if the input value has duplicated numbers in it
-  hasDuplicatedNumber(value) {
-    const valueArray = value.split('');
+  hasDuplicatedNumber(val) {
+    const valueArray = val.split('');
 
     for(let i = 0; i < valueArray.length; i++) {
       if(valueArray.indexOf(valueArray[i]) !== i) {
@@ -89,18 +89,18 @@ export default class BaseballGame {
   }
 
   // print the result on the screen
-  printOnScreen(value) {
-    let tempHtml = "";
+  printOnScreen(val) {
+    let tempHTML = "";
     if(this.strikes === 3) {
-      tempHtml += `<p><b>🎉정답을 맞추셨습니다!🎉</b></p>
+      tempHTML += `<p><b>🎉정답을 맞추셨습니다!🎉</b></p>
                    <p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button></p>`;
 
       this.userInput.disabled = true;
     } else {
-      tempHtml += `<p>${value}</p>`;
+      tempHTML += `<p>${val}</p>`;
     }
 
-    this.resultDiv.innerHTML = tempHtml;
+    this.resultDiv.innerHTML = tempHTML;
   }
 
   // reset balls and strikes
