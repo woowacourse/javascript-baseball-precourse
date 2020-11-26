@@ -1,35 +1,9 @@
 export default function BaseballGame() {
   const baseballWrapper = document.body.querySelector("#app");
-  const submitButton = baseballWrapper.querySelector("#submit");
   const userInput = baseballWrapper.querySelector("#user-input");
 
-  let boundSubmitUserInput = null; // addEventListener을 제거하기 위해 bind
   let strike = 0;
   let ball = 0;
-
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    initValue();
-    compareInput(computerInputNumbers, userInputNumbers);
-
-    if (!strike && !ball) return "낫싱";
-    if (!strike) return `${ball}볼`;
-    if (!ball) return `${strike}스트라이크`;
-    return `${ball}볼 ${strike}스트라이크`;
-  };
-
-  const initValue = () => {
-    strike = 0;
-    ball = 0;
-  };
-
-  const compareInput = (answer, userInput) => {
-    for (let userIndex = 0; userIndex < 3; userIndex++) {
-      const answerNumberIndex = answer.indexOf(userInput[userIndex]);
-      if (answerNumberIndex >= 0) {
-        answerNumberIndex === userIndex ? strike++ : ball++;
-      }
-    }
-  };
 
   const makeOnAnswer = () => {
     const MAX_NUMBER = 9;
@@ -55,50 +29,18 @@ export default function BaseballGame() {
     return randomNumber;
   };
 
-  const submitUserInput = (answer) => {
-    if (isInputRight()) {
-      const resultText = this.play(answer, userInput.value);
+  const initValue = () => {
+    strike = 0;
+    ball = 0;
+  };
 
-      return showResultOnScreen(resultText);
+  const compareInput = (answer, userInput) => {
+    for (let userIndex = 0; userIndex < 3; userIndex++) {
+      const answerNumberIndex = answer.indexOf(userInput[userIndex]);
+      if (answerNumberIndex >= 0) {
+        answerNumberIndex === userIndex ? strike++ : ball++;
+      }
     }
-  };
-
-  const isInputRight = () => {
-    const { value } = userInput;
-
-    if (value.match(/[^1-9]/g)) return alert("숫자가 아닙니다.");
-    if (value.length !== new Set(value).size) {
-      return alert("숫자가 중복됩니다.");
-    }
-    if (value.length !== 3) return alert("3자리의 숫자를 입력해주세요.");
-
-    return true;
-  };
-
-  const showResultOnScreen = (resultText) => {
-    const resultDiv = baseballWrapper.querySelector("#result");
-    resultDiv.innerText = resultText;
-
-    if (resultDiv.innerText === "3스트라이크") {
-      return gameFinish();
-    }
-  };
-
-  const gameStart = () => {
-    const answer = makeOnAnswer();
-    boundSubmitUserInput = submitUserInput.bind(null, answer);
-
-    return submitButton.addEventListener("click", boundSubmitUserInput);
-  };
-
-  const gameFinish = () => {
-    const resultDiv = baseballWrapper.querySelector("#result");
-
-    submitButton.removeEventListener("click", boundSubmitUserInput);
-    resultDiv.innerHTML = `<h3>정답을 맞추셨습니다!</h3> 
-    <div id=restart-text>게임을 새로 시작하시겠습니까? </div>`;
-
-    return reStartButton();
   };
 
   const reStartButton = () => {
@@ -119,10 +61,28 @@ export default function BaseballGame() {
 
     userInput.value = "";
 
-    return gameStart();
+    return (this.answer = makeOnAnswer());
   };
 
-  gameStart();
-}
+  this.answer = makeOnAnswer();
 
-new BaseballGame();
+  this.play = function (computerInputNumbers, userInputNumbers) {
+    console.log(computerInputNumbers);
+    initValue();
+    compareInput(computerInputNumbers, userInputNumbers);
+
+    if (!strike && !ball) return "낫싱";
+    if (!strike) return `${ball}볼`;
+    if (!ball) return `${strike}스트라이크`;
+    return `${ball}볼 ${strike}스트라이크`;
+  };
+
+  this.gameFinish = () => {
+    const resultDiv = baseballWrapper.querySelector("#result");
+
+    resultDiv.innerHTML = `<h3>정답을 맞추셨습니다!</h3> 
+    <div id=restart-text>게임을 새로 시작하시겠습니까? </div>`;
+
+    return reStartButton();
+  };
+}
