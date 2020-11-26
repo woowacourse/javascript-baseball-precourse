@@ -11,7 +11,10 @@ export default class BaseballGame {
     this.clickEventListener()
   }
   playNewGame() {
-    document.getElementById("result").innerHTML = null
+    const userInput = document.getElementById("user-input")
+    userInput.value = ""
+    const resultEl = document.getElementById("result")
+    resultEl.innerHTML = null
     const restartContainer = document.getElementById("restart-container")
     restartContainer.style.display = "none"
     this.randomNumber = this.createRandomNumber()
