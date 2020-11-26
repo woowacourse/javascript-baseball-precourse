@@ -8,7 +8,12 @@ export default class BaseballGame {
 
     this.userSubmitButton.addEventListener('click', () => {
       let userInputNumbers = this.parseUserInput(this.userInputNumber.value);
-
+      
+      // 사용자 입력에 오류가 있을 겨우 반환 숫자 배열이 없음으로 play 메소드를 실행하지 않음
+      if (userInputNumbers.length === 0) {
+        return;
+      }
+      
       console.log(this.play(this.computerInputNumber, userInputNumbers));
     });
   }
@@ -22,7 +27,7 @@ export default class BaseballGame {
     } else if (this.isNothing(computerInputNumbers, userInputNumbers)) {
       gameResult = '나싱';
     } else if (this.isSomeNumberSame(computerInputNumbers, userInputNumbers)) {
-      gamerResult = this.getGameResultString(computerInputNumbers, userInputNumbers);
+      gameResult = this.getGameResultString(computerInputNumbers, userInputNumbers);
     }
 
     return gameResult;
@@ -69,13 +74,14 @@ export default class BaseballGame {
   getGameResultString(computerInputNumbers, userInputNumbers) {
     const ballCountResult = this.getBallCount(computerInputNumbers, userInputNumbers);
     const strikeCountResult = this.getStrikeCount(computerInputNumbers, userInputNumbers);
+    let totalCountResultString;
 
-    if (ballCountResult && strikeCountResult) {
-      const totalCountResultString = `${ballCountResult}볼 ${strikeCountResult}스트라이크`;
-    } else if (ballCountResult) {
-      const totalCountResultString = `${ballCountResult}볼`;
-    } else if (strikeCountResult) {
-      const totalCountResultString = `${strikeCountResult}스트라이크`;
+    if (ballCountResult > 0 && strikeCountResult > 0) {
+       totalCountResultString = `${ballCountResult}볼 ${strikeCountResult}스트라이크`;
+    } else if (ballCountResult > 0 && strikeCountResult === 0) {
+      totalCountResultString = `${ballCountResult}볼`;
+    } else if (ballCountResult === 0 && strikeCountResult > 0) {
+      totalCountResultString = `${strikeCountResult}스트라이크`;
     }
 
     return totalCountResultString;
@@ -90,7 +96,7 @@ export default class BaseballGame {
           ballCount++;
         }
     }
-    
+
     return ballCount;
   }
 
@@ -121,7 +127,7 @@ export default class BaseballGame {
     if (this.isWrongNumberLength(userInputNumbers) || 
     this.isNotNumberType(userInputNumbers) || 
     this.isNumberOverlap(userInputNumbers) || 
-    this.isContainZero(userInputNumbers)) {
+    this.isIncludeZero(userInputNumbers)) {
 
       return true;
     }
@@ -154,14 +160,12 @@ export default class BaseballGame {
     }
   }
 
-  isContainZero(userInputNumbers) {
-    userInputNumbers.forEach((number) => {
-      if (number === 0) {
-        console.log('Zero error');
+  isIncludeZero(userInputNumbers) {
+    if (userInputNumbers.includes(0)) {
+      console.log('Zero contain error');
 
-        return true;
-      }
-    });
+      return true;
+    }
   }
 
   getComputerInputNumbers() {
