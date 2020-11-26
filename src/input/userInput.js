@@ -4,7 +4,7 @@ function userInputHandler() {
   const $userInput = document.querySelector('#user-input');
   const userInputNumbers = $userInput.value.split('').map((x) => Number(x));
 
-  return console.log(checkValidInput(userInputNumbers));
+  return checkValidInput(userInputNumbers);
 }
 
 export default function triggerUserInput() {
