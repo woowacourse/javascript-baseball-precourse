@@ -1,8 +1,10 @@
+import TryButton from './TryButton.js';
 import { generateTargetNumbers } from '../utils/generateTargetNumbers.js';
 
 class BaseballGame {
   constructor($target) {
     this.$target = $target;
+    this.tryButton = new TryButton(document.querySelector('#submit'));
 
     this.answer = generateTargetNumbers();
   }
