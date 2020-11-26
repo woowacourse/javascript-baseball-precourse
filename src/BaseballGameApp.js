@@ -54,7 +54,35 @@ export default class BaseballGameApp {
 			: this.#createNewChallenge();
 	}
 
-	#createNewChallenge() {}
+	#createNewChallenge() {
+		const line = document.createElement("hr");
+		const resultHead = document.createElement("h3");
+		resultHead.innerText = "📄 결과";
 
-	#createNewGameBtn() {}
+		this.#input = document.createElement("input");
+		this.#input.type = "text";
+		this.#btn = document.createElement("button");
+		this.#btn.innerText = "확인";
+		this.#btn.addEventListener("click", this.#handleSubmit.bind(this));
+		this.#result = document.createElement("div");
+
+		[line, this.#input, this.#btn, resultHead, this.#result].forEach((v) =>
+			this.#app.appendChild(v)
+		);
+	}
+
+	#createNewGameBtn() {
+		const line = document.createElement("hr");
+		const p = document.createElement("p");
+		const btn = document.createElement("button");
+		p.innerText = "게임을 다시 시작할까요?";
+		btn.innerText = "재시작";
+		btn.addEventListener("click", (e) => {
+			this.#game = new BaseballGame();
+			this.#createNewChallenge();
+			e.target.disabled = true;
+		});
+
+		[line, p, btn].forEach((v) => this.#app.appendChild(v));
+	}
 }
