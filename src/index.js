@@ -135,9 +135,10 @@ export default function BaseballGame() {
     const compareResult = this.play(comNum, userNum);
 
     paintText(compareResult, hint);
-
+    userInput.focus();
     if (compareResult === "3스트라이크") {
       paintRestart(hint, handleRestart);
+      userInput.value = "";
     }
   };
 
