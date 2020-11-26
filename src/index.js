@@ -10,9 +10,6 @@ const formatResult = (ball, strike) => {
     strike === 0 ? "" : strike + "스트라이크"
   }`;
 };
-const changeHTML = (value, location) => {
-  location.innerHTML = value;
-};
 
 const clearAll = () => {
   setRandomNumber();
@@ -29,10 +26,11 @@ const done = () => {
   userInput.onkeyup = (e) => {
     e.target.value = "done";
   };
-  changeHTML(
-    `게임을 새로 시작하시겠습니까? <button id="game-restart-button">재시작</button>`,
-    resultDiv
+
+  resultDiv.innerHTML(
+    `게임을 새로 시작하시겠습니까? <button id="game-restart-button">재시작</button>`
   );
+
   const restartButton = document.getElementById("game-restart-button");
   restartButton.onclick = () => {
     clearAll();
@@ -45,7 +43,7 @@ const getFinalResult = (computerInput, userInput) => {
   if (result === "done") {
     done();
   } else {
-    changeHTML(result, resultDiv);
+    resultDiv.innerHTML(result);
   }
   return result;
 };
