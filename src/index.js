@@ -27,12 +27,14 @@ const generateThreeDigit = () => {
   return parsedNum;
 };
 
+// * 잘못된 케이스 alert & 내용을비우고 focuse해주기
 const alertWrongCase = (text, ipt) => {
   alert(text);
   ipt.value = "";
   ipt.focus();
 };
 
+// * 들어온 값 테스트
 const testValue = (ipt) => {
   const val = ipt.value;
   const parsedVal = parseInt(val, 10);
@@ -52,17 +54,19 @@ const testValue = (ipt) => {
   }
 };
 
-const handleSubmit = () => {
-  const userInput = document.getElementById("user-input");
-  const userNum = testValue(userInput);
-};
-
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     return "결과 값 String";
   };
 
   const btn = document.getElementById("submit");
+  const userInput = document.getElementById("user-input");
+
+  // * 확인 버튼을 눌렀을 때
+  const handleSubmit = () => {
+    const userNum = testValue(userInput);
+  };
+
   if (btn) {
     btn.addEventListener("click", handleSubmit);
   }
