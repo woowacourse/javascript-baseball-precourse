@@ -6,89 +6,115 @@
 
 export default class BaseballGame {
   constructor() {
-    this.randomNumber = ""
-    this.playNewGame()
-    this.clickEventListener()
+    this.randomNumber = "";
+    this.playNewGame();
+    this.clickEventListener();
   }
+
+  createRandomNumber() {
+    let result = "";
+    const numbers = Array.from({ length: 9 }, (_, i) => i + 1);
+    while (result.length < 3) {
+      const selectedNumber = numbers.splice(Math.floor(Math.random() * numbers.length), 1);
+      result += selectedNumber[0].toString();
+    }
+
+    return result;
+  }
+
+  changeRestartContainerDisplay(value) {
+    const restartContainer = document.getElementById("restart-container");
+    restartContainer.style.display = value;
+  }
+
   playNewGame() {
-    const userInput = document.getElementById("user-input")
-    userInput.value = ""
-    const resultEl = document.getElementById("result")
-    resultEl.innerHTML = null
-    const restartContainer = document.getElementById("restart-container")
-    restartContainer.style.display = "none"
-    this.randomNumber = this.createRandomNumber()
+    const userInput = document.getElementById("user-input");
+    userInput.value = "";
+    this.changeResultContent(null)
+    this.changeRestartContainerDisplay("none");
+    this.randomNumber = this.createRandomNumber();
   }
+
+  convertToString(value) {
+    return typeof value === "number" ? value.toString() : value;
+  }
+
+  convertScoreToResultStr(score) {
+    const scoreEntries = Object.entries(score);
+    if (scoreEntries.length === 0) {
+      return "낫싱";
+    }
+
+    return scoreEntries
+      .sort((a, b) => a[0] === "ball" ? -1 : 1)
+      .map(el => el[1] + (el[0] === "ball" ? "볼" : "스트라이크"))
+      .join(" ");
+  }
+
+  correct() {
+    this.changeRestartContainerDisplay("block");
+
+    return `<strong>🎉 정답을 맞추셨습니다!🎉</strong>`;
+  }
+
   play(computerInputNumbers, userInputNumbers) {
     if (computerInputNumbers === userInputNumbers) {
-      const restartContainer = document.getElementById("restart-container")
-      restartContainer.style.display = "block"
-      return `<strong>🎉 정답을 맞추셨습니다!🎉</strong>`
+      return this.correct();
     }
-    computerInputNumbers = this.convertToString(computerInputNumbers)
-    userInputNumbers = this.convertToString(userInputNumbers)
-    const score = {}
-    for (let i = 0; i < userInputNumbers.length; i++) {
-      const index = computerInputNumbers.indexOf(userInputNumbers[i])
+    computerInputNumbers = this.convertToString(computerInputNumbers);
+    userInputNumbers = this.convertToString(userInputNumbers);
+    const score = {};
+    let i;
+    for (i = 0; i < userInputNumbers.length; i++) {
+      const index = computerInputNumbers.indexOf(userInputNumbers[i]);
       if (index > -1) {
-        const key = i === index ? "strike" : "ball"
-        score[key] = (score[key] || 0) + 1
+        const key = i === index ? "strike" : "ball";
+        score[key] = (score[key] || 0) + 1;
       }
     }
-    return this.convertScoreToResultStr(score)
+
+    return this.convertScoreToResultStr(score);
   }
-  createRandomNumber() {
-    let result = ''
-    const numbers = Array.from({ length: 9 }, (_, i) => i + 1)
-    while (result.length < 3) {
-      const selectedNumber = numbers.splice(Math.floor(Math.random() * numbers.length), 1)
-      result += selectedNumber[0].toString()
-    }
-    return result
-  }
-  clickEventListener() {
-    const submitButton = document.getElementById("submit")
-    submitButton.addEventListener('click', this.submitClickEvent.bind(this))
-    const restartButton = document.getElementById("game-restart-button")
-    restartButton.addEventListener("click", this.playNewGame.bind(this))
-  }
-  submitClickEvent() {
-    const userInput = document.getElementById("user-input")
-    const inputValue = userInput.value
-    const validation = this.validate(inputValue)
-    if (!validation) {
-      alert("잘못된 값을 입력했습니다.")
-      userInput.value = ''
-      return
-    }
-    this.changeResultContent(this.play(this.randomNumber, inputValue))
-  }
-  validate(value) {
-    if (!value) return false
-    if (value.length !== 3) return false
-    if (value.match(/[^1-9]/)) return false
-    const hash = {}
-    for (let i = 0; i < value.length; i++) {
-      if (hash[value[i]]) return false
-      hash[value[i]] = 1
-    }
-    return true
-  }
-  convertScoreToResultStr(score) {
-    const scoreEntries = Object.entries(score)
-    if (scoreEntries.length === 0) return '낫싱'
-    return scoreEntries
-      .sort((a, b) => a[0] === 'ball' ? -1 : 1)
-      .map(el => el[1] + (el[0] === 'ball' ? "볼" : "스트라이크"))
-      .join(" ")
-  }
+
   changeResultContent(newContent) {
-    const resultEl = document.getElementById("result")
-    resultEl.innerHTML = newContent
+    const resultEl = document.getElementById("result");
+    resultEl.innerHTML = newContent;
   }
-  convertToString(value) {
-    if (typeof value === "number") return value.toString()
-    return value
+  
+  validate(value) {
+    if (!value || value.length !== 3 || value.match(/[^1-9]/)) {
+      return false;
+    }
+    const hash = {};
+    let i;
+    for (i = 0; i < value.length; i++) {
+      if (hash[value[i]]) {
+        return false;
+      }
+      hash[value[i]] = 1;
+    }
+
+    return true;
+  }
+
+  submitClickEvent() {
+    const userInput = document.getElementById("user-input");
+    const {value: inputValue} = userInput;
+    const validation = this.validate(inputValue);
+    if (!validation) {
+      alert("잘못된 값을 입력했습니다.");
+      userInput.value = "";
+      
+      return;
+    }
+    this.changeResultContent(this.play(this.randomNumber, inputValue));
+  }
+
+  clickEventListener() {
+    const submitButton = document.getElementById("submit");
+    submitButton.addEventListener("click", () => this.submitClickEvent());
+    const restartButton = document.getElementById("game-restart-button");
+    restartButton.addEventListener("click", () => this.playNewGame());
   }
 }
 new BaseballGame();
