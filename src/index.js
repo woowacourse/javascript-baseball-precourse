@@ -37,6 +37,7 @@ export default function BaseballGame() {
   const userInput = gameTurn.querySelector('input');
   const userInputLog = gameTurn.querySelector('#user-input');
   const userInputButton = gameTurn.querySelector('#submit');
+  const resultMessage = gameTurn.querySelector('#result');
 
   const clearThisGameTurn = () => {
     console.log('finished');
@@ -46,10 +47,15 @@ export default function BaseballGame() {
     console.log('add restart button and ask');
   }
 
+  const printMessage = message => {
+    const resultMessageElement = document.createElement('p');
+    resultMessageElement.innerText = message;
+    resultMessage.appendChild(resultMessageElement);
+  }
+
   const getResultOfSuccess = () => {
     const correctAnswerMessage = "🎉정답을 맞추셨습니다!🎉";
-    console.log(correctAnswerMessage);
-
+    printMessage(correctAnswerMessage);
     
     //clear all childs of this game turn
     clearThisGameTurn();
@@ -67,8 +73,7 @@ export default function BaseballGame() {
     if (result.ok) return getResultOfSuccess();
 
     const failMessage = getWrongAnswerMessage(result);
-    console.log(gameTurn.childNodes);
-    console.log(failMessage);
+    printMessage(failMessage);
 
     //add another input set child of this game turn
     addAnotherInputForm();
