@@ -2,38 +2,38 @@ export default function BaseballGame() {
   const baseballWrapper = document.body.querySelector("#app");
   const submitButton = baseballWrapper.querySelector("#submit");
   const userInput = baseballWrapper.querySelector("#user-input");
+
   let boundSubmitUserInput = null; // addEventListener을 제거하기 위해 bind
+  let strike = 0;
+  let ball = 0;
 
   this.play = function (computerInputNumbers, userInputNumbers) {
-    const result = {
-      strike: 0,
-      ball: 0,
-      out: 0,
-    };
-    compareInput(result, computerInputNumbers, userInputNumbers);
+    initValue();
+    compareInput(computerInputNumbers, userInputNumbers);
 
-    if (result.out === 3) return "낫싱";
-    if (result.strike === 0) return `${result.ball}볼`;
-    if (result.ball === 0) return `${result.strike}스트라이크`;
-    return `${result.ball}볼 ${result.strike}스트라이크`;
+    if (!strike && !ball) return "낫싱";
+    if (!strike) return `${ball}볼`;
+    if (!ball) return `${strike}스트라이크`;
+    return `${ball}볼 ${strike}스트라이크`;
   };
 
-  const compareInput = (result, answer, userInput) => {
+  const initValue = () => {
+    strike = 0;
+    ball = 0;
+  };
+
+  const compareInput = (answer, userInput) => {
     for (let userIndex = 0; userIndex < 3; userIndex++) {
       const answerNumberIndex = answer.indexOf(userInput[userIndex]);
-      answerNumberIndex >= 0
-        ? answerNumberIndex === userIndex
-          ? result.strike++
-          : result.ball++
-        : result.out++;
+      if (answerNumberIndex >= 0) {
+        answerNumberIndex === userIndex ? strike++ : ball++;
+      }
     }
-
-    return result;
   };
 
   const makeOnAnswer = () => {
-    const ALL_NUMBERS = 9;
-    const numberArray = Array(ALL_NUMBERS)
+    const MAX_NUMBER = 9;
+    const numberArray = Array(MAX_NUMBER)
       .fill()
       .map((v, number) => number + 1);
     let answer = "";
