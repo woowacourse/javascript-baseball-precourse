@@ -13,8 +13,7 @@
 - `checkUserInput` - 인풋의 유효성을 검사하여 오류가 있을 경우 isValid,errorMessage라는 key를 가진 객체를 반환하는 함수로, 확인 버튼을 누르면 실행됨.
 - `getFinalResult` - 최종 결과값을 출력하는 함수
 - `formatResult` - 볼, 스트라이크 개수를 인수로 받아서 최종 결과값을 출력하기 위한 문자열로 포맷하여 반환하는 함수
-- `getBall` - 볼의 개수를 구하여 반환하는 함수
-- `getStrike` - 스트라이크의 개수를 구하여 반환하는 함수
+- `getBallAndStrike` - 볼과 스트라이크의 개수를 반환하는 함수
 - `RandomNumber` - 유저가 결과를 맞출 때 까지 유지되는 3글자랜덤숫자로 된 문자열
 - `clearAll` - 다시시작하기 위한 환경을 만들어주는 함수
 - `changeHTML` - HTML을 바꾸는 함수
