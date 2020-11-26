@@ -2,7 +2,7 @@ import checkValidInput from './checkInput.js';
 
 function userInputHandler() {
   const $userInput = document.querySelector('#user-input');
-  const userInputNumbers = $userInput.value.split('');
+  const userInputNumbers = $userInput.value.split('').map((x) => Number(x));
 
   return console.log(checkValidInput(userInputNumbers));
 }
