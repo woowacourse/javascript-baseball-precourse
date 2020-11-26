@@ -21,6 +21,24 @@ export default class BaseballGame {
     const inputValue = document.querySelector('#user-input').value;
     const userInputNumbers = inputValue.split('').map(number => +number);
     console.log(userInputNumbers);
+    this.printOnScreen(this.play(this.computerNumber, userInputNumbers));
+    this.resetBallsAndStrikes();
+  }
+
+  printOnScreen(str) {
+    const resultScreen = document.querySelector('#result');
+
+    let tempHtml = "";
+    if(this.strikes === 3) {
+      tempHtml += `<p><b>🎉정답을 맞추셨습니다!🎉</b></p>
+      <p>게임을 새로 시작하시겠습니까? <button id="restart">게임 재시작</button></p>`;
+
+      document.querySelector('#user-input').disabled = true;
+    } else {
+      tempHtml += `<p>${str}</p>`;
+    }
+
+    resultScreen.innerHTML = tempHtml;
   }
 
   resetBallsAndStrikes() {
