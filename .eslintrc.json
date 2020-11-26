@@ -11,7 +11,8 @@
     },
     "rules": {
         "no-continue" : "off",
-        "no-plusplus" : "off"
+        "no-plusplus" : "off",
+        "no-underscore-dangle": "off"
     },
     "parser": "babel-eslint"
 }
