@@ -28,32 +28,35 @@ export default class BaseballGame {
       this.getComputerNumber();
       this.resetBallsAndStrikes();
 
-      // user input settings
-      this.userInput.disabled = false;
-      this.userInput.value = "";
-      this.userInput.focus();
-
+      this.setTextInput();
+      
       // result div setting
       this.resultDiv.innerHTML = "";
     }
   }
-
+  
   clickSubmit() {
     const inputValue = this.userInput.value;
-
+    
     // test the user input suitability
     if(!this.isSuitableInputValue(inputValue)) {
       alert('올바른 값을 입력해주세요.');
-      this.userInput.value = "";
-      this.userInput.focus();
+      this.setTextInput();
       return;
     }
-
+    
     // change user input string into an array of numbers
     const userInputNumbers = inputValue.split('').map(number => +number);
-
+    
     this.printOnScreen(this.play(this.computerNumber, userInputNumbers));
     this.resetBallsAndStrikes();
+  }
+  
+  // reset and focus on text input
+  setTextInput() {
+    this.userInput.disabled = false;
+    this.userInput.value = "";
+    this.userInput.focus();
   }
 
   // returns true if the input value is suitable
