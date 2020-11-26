@@ -1,5 +1,5 @@
-const correacAnswerMessage = "🎉정답을 맞추셨습니다!🎉";
-const wrongAnswerMessage = (strike, ball) => (!strike && !ball) ? '낫싱' : ((ball && `${ball}볼`) + (strike && `${strike}스트라이크`));
+const correctAnswerMessage = "🎉정답을 맞추셨습니다!🎉";
+const getWrongAnswerMessage = ({strike, ball}) => (!strike && !ball) ? '낫싱' : ((ball ? `${ball}볼 ` : '') + (strike ? `${strike}스트라이크` : ''));
 
 const checkValidNumber = inputs => {
   if(/[^1-9]+/g.test(inputs)) return {ok: false, msg: '1-9의 각 다른 숫자 3개를 공백 없이 입력하세요'};
@@ -38,28 +38,32 @@ export default function BaseballGame() {
   const userInputButton = document.getElementById('submit');
 
   this.play = function (computerInputNumbers, userInputNumbers) {
-    console.log(computerInputNumbers, userInputNumbers);
-    console.log(compareAnswersAndgetResult(computerInputNumbers, userInputNumbers));
-    return "결과 값 String";
+    const result = compareAnswersAndgetResult(computerInputNumbers, userInputNumbers);
+    return result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
   };
 
-  const startGame = () => {
-    const correctAnswer = createRandomNumber();
+  const playGame = (computerInputNumbers, userInputNumbers) => {
+    console.log(compareAnswersAndgetResult(computerInputNumbers, userInputNumbers));
+    const resultMessage = this.play(computerInputNumbers, userInputNumbers);
+    console.log(resultMessage);
+  }
 
-    console.log('hello world! correctAnswer is ', correctAnswer);
-
-    //handling user input event
-    //if user's value is valid, start game. else give alert message
+  const getUserInput = computerInputNumbers => {
     userInput.addEventListener('change', e => userInputLog.textContent = e.target.value);
     userInputButton.addEventListener('click', () => {
       const checkUserInput = checkValidNumber(userInputLog.textContent);
       if(!checkUserInput.ok) return alert(checkUserInput.msg);
-      else return this.play(correctAnswer, userInputLog.textContent);
+      else return playGame(computerInputNumbers, userInputLog.textContent);
     });
-
   }
 
-  //for restart, the init func should be made
+  const startGame = () => {
+    const computerInputNumbers = createRandomNumber();
+    console.log('hello world! correctAnswer is ', computerInputNumbers);
+    getUserInput(computerInputNumbers);
+
+  }
+  
   startGame();
 }
 
