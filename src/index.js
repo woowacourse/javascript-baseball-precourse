@@ -41,6 +41,18 @@ export default function BaseballGame() {
     }
   };
 
+  this.countStrikes = function (computerInputNumbers, userInputNumbers) {
+    let count = 0;
+    const stringComputerInputNumbers = String(computerInputNumbers);
+    const stringUserInputNumbers = String(userInputNumbers);
+    for (let i = 0; i < 3; i++) {
+      if (stringComputerInputNumbers[i] === stringUserInputNumbers[i]) {
+        count += 1;
+      }
+    }
+    return count;
+  };
+
   this.handleClickSubmitButton = function () {
     const userInputNumbers = Number(userInput.value);
     const notification = this.makeNotificationMessage(userInputNumbers);
