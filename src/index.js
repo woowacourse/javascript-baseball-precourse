@@ -1,4 +1,4 @@
-import userInput from "./user-input.js";
+import userInput, { isValidUserInput } from "./user-input.js";
 
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
@@ -25,7 +25,7 @@ function randomNumberMaker(randomNumberLength) {
 }
 
 document.getElementById('submit').addEventListener("click", () => {
-  userInput();
+  isValidUserInput(userInput());
 })
 
 new BaseballGame();
