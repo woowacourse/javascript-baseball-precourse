@@ -156,8 +156,9 @@ export default function BaseballGame(N) {
       e.preventDefault();
       computerInputNumbers = '';
       resultElem.innerHTML = '';
-      userInputElem.value = '';
       restartElem.remove();
+      userInputElem.value = '';
+      userInputElem.focus();
     });
     this.initialize(resultElem);
     resultElem.append(restartElem);
