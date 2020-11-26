@@ -70,15 +70,4 @@ export default class BaseballGame {
 
     return responseString;
   }
-
-  resetInputNumbers() {
-    const userInput = document.getElementById('user-input');
-    userInput.value = '';
-  }
-
-  restart() {
-    this.resetInputNumbers();
-    this.cleanResult();
-    this.computerInputNumbers = this.RandomComputerInputNumbers();
-  }
 }
