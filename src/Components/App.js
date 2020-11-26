@@ -1,7 +1,10 @@
+import { generateTargetNumbers } from '../utils/generateTargetNumbers.js';
+
 class BaseballGame {
   constructor($target) {
     this.$target = $target;
-    console.log(this);
+
+    this.answer = generateTargetNumbers();
   }
 
   play(computerInputNumbers, userInputNumbers) {
