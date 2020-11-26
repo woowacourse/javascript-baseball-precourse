@@ -29,6 +29,27 @@ export default function BaseballGame() {
 
     return computerInputNumbers;
   };
+
+  this.checkValidInputValue = (value) => {
+    const isNumber = isNaN(+value) ? false : true;
+    const isThreeDigits = value.length === 3 ? true : false;
+
+    if (!isNumber || !isThreeDigits) {
+      return false;
+    }
+
+    const inputNumbers = value.split("");
+    const hasZero = inputNumbers.includes("0");
+    const uniqueNumberSet = [...new Set(value)];
+    const isDifferentNumbers =
+      uniqueNumberSet.length === this.MAX_DIGITS ? true : false;
+
+    if (hasZero || !isDifferentNumbers) {
+      return false;
+    }
+
+    return true;
+  };
 }
 
 new BaseballGame();
