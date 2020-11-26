@@ -14,13 +14,12 @@ const createRandomNumber = () => {
 
 export default function BaseballGame() {
   const userInput = document.querySelector('input');
-  const userInputValue = document.getElementById('user-input');
+  const userInputLog = document.getElementById('user-input');
   const userInputButton = document.getElementById('submit');
 
-  let isFinished = false;
+  let userInputValue = null, isFinished = false;
 
-  userInput.addEventListener('change', e => userInputValue.textContent = e.target.value);
-  userInputButton.addEventListener('click', () => console.log('submit', userInputValue.textContent));
+
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     return "결과 값 String";
@@ -31,7 +30,12 @@ export default function BaseballGame() {
     console.log('hello world! answer is ', answer);
     isFinished = false;
 
-    
+    userInput.addEventListener('change', e => userInputLog.textContent = e.target.value);
+    userInputButton.addEventListener('click', () => {
+      const checkUserInput = checkValidNumber(userInputLog.textContent);
+      if(!checkUserInput.ok) return alert(checkUserInput.msg);
+      else return console.log(userInputValue = userInputLog.textContent);
+    });
 
 
   }

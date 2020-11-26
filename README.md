@@ -42,3 +42,5 @@
 - npm i http-server -g 설치 후 npx http-server -p 포트번호 로 실행해서 해결
 - 참고 링크
 https://velog.io/@takeknowledge/%EB%A1%9C%EC%BB%AC%EC%97%90%EC%84%9C-CORS-policy-%EA%B4%80%EB%A0%A8-%EC%97%90%EB%9F%AC%EA%B0%80-%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0-3gk4gyhreu
+
+- 다른 방법 => index.html 우클릭 후 open with live server 해보기
