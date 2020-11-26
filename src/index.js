@@ -42,6 +42,7 @@ export default class BaseballGame {
     if(!this.isSuitableInputValue(inputValue)) {
       alert('올바른 값을 입력해주세요.');
       this.setTextInput();
+      
       return;
     }
     
@@ -64,6 +65,7 @@ export default class BaseballGame {
     if(!val || isNaN(val) || val.length !== 3 || this.hasDuplicatedNumber(val) || this.hasZero(val)) {
       return false;
     }
+
     return true;
   }
 
@@ -72,6 +74,7 @@ export default class BaseballGame {
     if(val.includes('0')) {
       return true;
     }
+
     return false;
   }
 
@@ -125,15 +128,18 @@ export default class BaseballGame {
 
   // get the result string based on the ball count and strike count
   getReturnString() {
+    let returnString;
     if(this.balls && this.strikes) {
-      return `${this.balls}볼 ${this.strikes}스트라이크`;
+      returnString = `${this.balls}볼 ${this.strikes}스트라이크`;
     } else if(!this.balls && this.strikes) {
-      return `${this.strikes}스트라이크`;
+      returnString = `${this.strikes}스트라이크`;
     } else if(this.balls && !this.strikes) {
-      return `${this.balls}볼`;
+      returnString = `${this.balls}볼`;
     } else {
-      return "낫싱";
+      returnString = "낫싱";
     }
+
+    return returnString;
   }
 
   // compare the numbers and returns the result
@@ -149,6 +155,7 @@ export default class BaseballGame {
     });
 
     const result = this.getReturnString();
+
     return result;
   }
 }
