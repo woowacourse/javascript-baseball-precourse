@@ -22,9 +22,9 @@ const generateThreeDigit = () => {
     }
   }
 
-  const parsedNum = parseInt(numArr.join(""), 10);
+  const threeDigitNum = numArr.join("");
 
-  return parsedNum;
+  return threeDigitNum;
 };
 
 // * 잘못된 케이스 alert & 내용을비우고 focuse해주기
@@ -50,7 +50,7 @@ const testValue = (ipt) => {
   } else if (checkDuplicate !== 3) {
     alertWrongCase("중복없는 3자리수를 입력해주세요!", ipt);
   } else {
-    return parsedVal;
+    return val;
   }
 };
 
@@ -79,7 +79,7 @@ export default function BaseballGame() {
   const handleSubmit = () => {
     const userNum = testValue(userInput);
 
-    this.play(comNum, userNum);
+    const result = this.play(comNum, userNum);
   };
 
   if (btn) {
