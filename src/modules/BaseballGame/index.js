@@ -2,7 +2,7 @@ import { text } from '../../fixtrue';
 
 export default class BaseballGame {
   constructor() {
-    this.computerInputNumbers = null;
+    this._computerInputNumbers = null;
   }
 
   RandomComputerInputNumbers() {
@@ -25,7 +25,7 @@ export default class BaseballGame {
       }
     }
 
-    return random;
+    this._computerInputNumbers = random;
   }
 
   judge(computerInputNumbers, userInputNumbers) {
