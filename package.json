@@ -18,6 +18,7 @@
   "homepage": "https://github.com/jho2301/javascript-baseball-precourse#readme",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^7.14.0"
+    "eslint": "^7.14.0",
+    "prettier": "^2.2.0"
   }
 }
