@@ -1,3 +1,8 @@
+function alertInvalidInput() {
+  alert('잘못 된 입력입니다! 올바른 예)139');
+  return false;
+}
+
 function checkValidLength(userInputNumbers) {
   if (userInputNumbers.length === 3) {
     return true;
@@ -22,13 +27,13 @@ function checkDuplicate(userInputNumbers) {
 
 export default function checkValidInput(userInputNumbers) {
   if (!checkValidLength(userInputNumbers)) {
-    return false;
+    return alertInvalidInput();
   }
   if (!checkDuplicate(userInputNumbers)) {
-    return false;
+    return alertInvalidInput();
   }
   if (!userInputNumbers.every(checkValidScope)) {
-    return false;
+    return alertInvalidInput();
   }
 
   return userInputNumbers;
