@@ -1,3 +1,3 @@
-import BaseballGame from "./App.js";
+import BaseballGame from './Components/App.js';
 
-new BaseballGame();
+new BaseballGame(document.querySelector('#app'));
