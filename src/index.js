@@ -39,6 +39,10 @@ export default class BaseballGame {
     }
     return answer;
   }
+
+  static showResult() {
+    document.querySelector('#result').textContent = BaseballGame.play(123, 321);
+  }
 }
 
 const game = new BaseballGame();
@@ -46,5 +50,8 @@ const game = new BaseballGame();
 // 메소드 테스트용 실행함수
 const testMethods = () => {
   console.log(`generateAnswer: ${BaseballGame.generateAnswer()}`);
+  document
+    .querySelector('#submit')
+    .addEventListener('click', BaseballGame.showResult);
 };
 testMethods();
