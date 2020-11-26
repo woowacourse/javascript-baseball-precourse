@@ -1,3 +1,5 @@
+const printCorrectAnswerForTest = computerInputNumbers => console.log('hello world! correctAnswer is ', computerInputNumbers);
+
 const checkValidNumber = inputs => {
   if(/[^1-9]+/g.test(inputs)) return {ok: false, msg: '1-9의 각 다른 숫자 3개를 공백 없이 입력하세요'};
   if(inputs.length !== 3) return {ok: false, msg: '숫자는 3개만 입력가능합니다.'};
@@ -29,25 +31,32 @@ const compareAnswersAndgetResult = (computerInputNumbers, userInputNumbers) => {
   }
 }
 
-const printResult = result => {
-  const correctAnswerMessage = "🎉정답을 맞추셨습니다!🎉";
-  const getWrongAnswerMessage = ({strike, ball}) => (!strike && !ball) ? '낫싱' : ((ball ? `${ball}볼 ` : '') + (strike ? `${strike}스트라이크` : ''));
-  const resultMessage = result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
-  console.log(resultMessage);
-
-  //dom manipulation
-
-  return resultMessage;
-}
-
 export default function BaseballGame() {
-  const userInput = document.querySelector('input');
-  const userInputLog = document.getElementById('user-input');
-  const userInputButton = document.getElementById('submit');
+  const gameTurn = document.getElementById('app');
+  const userInput = gameTurn.querySelector('input');
+  const userInputLog = gameTurn.querySelector('#user-input');
+  const userInputButton = gameTurn.querySelector('#submit');
+
+  const getResultOfSuccess = () => {
+    const correctAnswerMessage = "🎉정답을 맞추셨습니다!🎉";
+    console.log(correctAnswerMessage);
+
+    //add restart button and ask
+  }
+
+  const getResult = result => {
+    const getWrongAnswerMessage = ({strike, ball}) => (!strike && !ball) ? '낫싱' : ((ball ? `${ball}볼 ` : '') + (strike ? `${strike}스트라이크` : ''));
+    if(result.ok) return getResultOfSuccess();
+
+    const failMessage = getWrongAnswerMessage(result);
+    console.log(failMessage);
+
+    //add another input set of this turn
+  }
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     const result = compareAnswersAndgetResult(computerInputNumbers, userInputNumbers);
-    return printResult(result);
+    return getResult(result);
   };
 
   const getUserInput = computerInputNumbers => {
@@ -57,7 +66,7 @@ export default function BaseballGame() {
 
   const startGame = () => {
     const computerInputNumbers = createRandomNumber();
-    console.log('hello world! correctAnswer is ', computerInputNumbers);
+    printCorrectAnswerForTest(computerInputNumbers);
 
     //정답이 나올때까지....
     getUserInput(computerInputNumbers);
