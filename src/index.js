@@ -60,6 +60,24 @@ const compareNum = (comNum, userNum) => {
   let strike = 0;
   let ball = 0;
 
+  for (let count = 0; count < comNum.length; count++) {
+    if (comNum[count] === userNum[count]) {
+      strike++;
+    } else if (comNum.indexOf(userNum[count]) !== -1) {
+      ball++;
+    }
+  }
+
+  if (ball && strike) {
+    returnString = `${ball}볼 ${strike}스트라이크`;
+  } else if (ball) {
+    returnString = `${ball}볼`;
+  } else if (strike) {
+    returnString = `${strike}스트라이크`;
+  } else {
+    returnString = "낫싱";
+  }
+
   return returnString;
 };
 
