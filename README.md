@@ -2,29 +2,29 @@
 
 ## 구현해야 할 기능 목록
 
-  - 컴퓨터가 1 ~ 9까지의 서로 다른 임의의 수 3개를 선택하는 함수를 만든다.(게임 플레이어가 맞춰야 할 숫자) - makeOnAnswer
-    - 이 때, 서로 다른 수를 뽑기 위해 임의로 1 ~ 9까지의 배열을 만든 뒤 splice, push하는 방법으로 진행한다.
-    - 1 ~ 9까지의 수 중에 3개를 뽑기 위한 함수를 만든다. - selectRandomNumber
+  - [v] 컴퓨터가 1 ~ 9까지의 서로 다른 임의의 수 3개를 선택하는 함수를 만든다.(게임 플레이어가 맞춰야 할 숫자) __makeOnAnswer__
+    - [v] 이 때, 서로 다른 수를 뽑기 위해 임의로 1 ~ 9까지의 배열을 만든 뒤 splice, push하는 방법으로 진행한다.
+    - [v] 1 ~ 9까지의 수 중에 3개를 뽑기 위한 함수를 만든다.  __selectRandomNumber__
     
-  - 사용자의 입력을 받는 input의 값을 받기 위해 button에 addEventListener "click"을 추가한다.
-    - 이 때, 예외처리 함수를 만들어 관리한다. - isInputRight
+  - [v] 사용자의 입력을 받는 input의 값을 받기 위해 button에 addEventListener "click"을 추가한다.
+    - [v] 이 때, 예외처리 함수를 만들어 관리한다. __isInputRight__
     - 예외처리) 
-    - 숫자가 아닌 다른 값이 있는 경우 => 정규표현식 이용
-    - 중복되는 숫자를 입력한 경우 => new Set 이용
-    - 3자리 미만의 숫자를 입력한 경우 => length 이용
-    - 3자리 이상의 숫자를 입력한 경우 => length 이용
+      - [v] 숫자가 아닌 다른 값이 있는 경우 => 정규표현식 이용
+      - [v] 중복되는 숫자를 입력한 경우 => new Set 이용
+      - [v] 3자리 미만의 숫자를 입력한 경우 => length 이용
+      - [v] 3자리 이상의 숫자를 입력한 경우 => length 이용
     
-  - 사용자 입력에 이상이 없으면 게임을 시작한다. - 주어진 play 메소드를 통해
-  - play 메소드에 결과값을 보여주는 strike, ball, out 변수를 객체로 추가한다.(실행될 때마다 초기화할 수 있도록)
-  - play 메소드가 실행될 때마다 게임 플레이어의 숫자와 컴퓨터의 숫자를 비교하여 strike, ball, out에 추가할 수 있는 함수를 만든다. - compareInput
-  - play 메소드의 return 값을 템플릿 문자열로 바꾸어 ball, strike, out을 출력할 수 있도록 한다.
-  - return된 값을 html의 결과 div에 append할 수 있도록 한다.
+  - [v] 사용자 입력에 이상이 없으면 게임을 시작한다. - 주어진 play 메소드를 통해
+  - play 메소드가 실행될 때마다 값이 초기화 될 수 있도록 함수를 만든다. __initValue__
+  - [v] play 메소드가 실행될 때마다 게임 플레이어가 입력한 숫자와 컴퓨터의 정답 숫자를 비교하여 strike, ball에 추가할 수 있는 함수를 만든다. __compareInput__
+  - [v] play 메소드의 return 값을 템플릿 문자열로 바꾸어 ball, strike를 출력할 수 있도록 한 뒤 화면에 결과를 띄워주는 함수를 만든다. __showResultOnScreen__
+  - [v] return된 값을 html의 결과 div에 append할 수 있도록 한다.
   
-  - 정답을 맞추면(3S) 결과 div에 정답을 맞추었다는 메시지를 띄워주는 함수를 만든다. - gameFinish
+  - [v] 정답을 맞추면(3S) 결과 div에 정답을 맞추었다는 메시지를 띄워주는 함수를 만든다. __gameFinish__
   
-  - 다시 시작할 수 있는 함수를 만든다 - reStartGame
-  
-  <br/>
+  - [v] 다시 시작할 수 있는 함수를 만든다 - __reStartGame__
+ 
+---
 
 ## 🎯 기능 요구사항
 
