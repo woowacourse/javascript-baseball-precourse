@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/jho2301/javascript-baseball-precourse/issues"
   },
-  "homepage": "https://github.com/jho2301/javascript-baseball-precourse#readme"
+  "homepage": "https://github.com/jho2301/javascript-baseball-precourse#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.14.0"
+  }
 }
