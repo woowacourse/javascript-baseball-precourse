@@ -87,12 +87,23 @@ const getBallAndStrike = (computerInput, userInput) => {
   );
 };
 
-const getFinalResult = (computerInput, userInput) => {
-  const { ball, strike } = getBallAndStrike(computerInput, userInput);
+const formatResult = (ball, strike) => {
+  if (ball === 0 && strike === 0) return "낫싱";
+  if (strike === 3) return "done";
+  const tap = ball > 0 && strike > 0 ? " " : "";
+  return `${ball === 0 ? "" : ball + "볼"}${tap}${
+    strike === 0 ? "" : strike + "스트라이크"
+  }`;
 };
 
-const checkInputs = (computerInput, userInput) => {
-  for (let i = 0; i < userInput.length; i++) {}
+const clearAll = () => {};
+const getFinalResult = (computerInput, userInput) => {
+  const { ball, strike } = getBallAndStrike(computerInput, userInput);
+  const result = formatResult(ball, strike);
+  if (result === "done") {
+    return clearAll();
+  }
+  return result;
 };
 
 // <button id="game-restart-button"></button>
