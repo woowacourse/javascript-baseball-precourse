@@ -81,6 +81,10 @@ const compareNum = (comNum, userNum) => {
   return returnString;
 };
 
+const paintText = (text, target) => {
+  target.innerText = text;
+};
+
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     const resultString = compareNum(computerInputNumbers, userInputNumbers);
@@ -90,6 +94,7 @@ export default function BaseballGame() {
 
   const btn = document.getElementById("submit");
   const userInput = document.getElementById("user-input");
+  const hint = document.getElementById("result");
 
   let comNum = generateThreeDigit();
 
@@ -97,7 +102,8 @@ export default function BaseballGame() {
   const handleSubmit = () => {
     const userNum = testValue(userInput);
 
-    const result = this.play(comNum, userNum);
+    const compareResult = this.play(comNum, userNum);
+    paintText(compareResult, hint);
   };
 
   if (btn) {
