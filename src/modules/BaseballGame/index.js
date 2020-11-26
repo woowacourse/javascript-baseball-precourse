@@ -13,12 +13,13 @@ export default class BaseballGame {
   RandomComputerInputNumbers() {
     const minVal = 1;
     const maxVal = 9;
-    let random = '';
     let table;
+    let random = '';
+    let cnt = 0;
+
     (table = []).length = 10;
     table.fill(false);
 
-    let cnt = 0;
     while (cnt < 3) {
       let number = Math.floor(Math.random() * (maxVal - minVal + 1) + minVal);
       if (table[number]) {
