@@ -53,6 +53,19 @@ export default function BaseballGame() {
     return count;
   };
 
+  this.countBalls = function (computerInputNumbers, userInputNumbers) {
+    let count = 0;
+    const stringComputerInputNumbers = String(computerInputNumbers);
+    const stringUserInputNumbers = String(userInputNumbers);
+    for (let i = 0; i < 3; i++) {
+      const pos = stringComputerInputNumbers.indexOf(stringUserInputNumbers[i]);
+      if (pos !== i && pos !== -1) {
+        count += 1;
+      }
+    }
+    return count;
+  };
+
   this.handleClickSubmitButton = function () {
     const userInputNumbers = Number(userInput.value);
     const notification = this.makeNotificationMessage(userInputNumbers);
