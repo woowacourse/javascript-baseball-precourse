@@ -8,13 +8,13 @@ export default class BaseballGame {
   constructor() {
     this.randomNumber = ""
     this.playNewGame()
+    this.clickEventListener()
   }
   playNewGame() {
     document.getElementById("result").innerHTML = null
     const restartContainer = document.getElementById("restart-container")
     restartContainer.style.display = "none"
     this.randomNumber = this.createRandomNumber()
-    this.clickEventListener()
   }
   play(computerInputNumbers, userInputNumbers) {
     if (computerInputNumbers === userInputNumbers) {
