@@ -89,6 +89,15 @@ export default function BaseballGame() {
     return count;
   };
 
+  this.addRestart = function () {
+    const restartSpan = document.createElement('span');
+    const restartButton = document.createElement('button');
+    restartSpan.innerText = '게임을 새로 시작하시겠습니까? ';
+    restartButton.innerText = '게임 재시작';
+    result.appendChild(restartSpan);
+    result.appendChild(restartButton);
+  };
+
   this.initComputerInputNumbers = this.makeRandomNumbers();
 
   this.handleClickSubmitButton = function () {
@@ -103,6 +112,9 @@ export default function BaseballGame() {
     }
     const results = this.play(this.initComputerInputNumbers, userInputNumbers);
     result.innerHTML = results;
+    if (this.status === 'END') {
+      this.addRestart();
+    }
   }.bind(this);
 
   submitButton.addEventListener('click', this.handleClickSubmitButton);
