@@ -5,7 +5,7 @@ export default function BaseballGame() {
 
   this.status = 'PLAYING';
 
-  this.play = function (computerInputNumbers, userInputNumbers) {
+  this.play = (computerInputNumbers, userInputNumbers) => {
     if (computerInputNumbers === userInputNumbers) {
       this.status = 'END';
       return '<h4>🎉정답을 맞추셨습니다!🎉</h4>';
@@ -14,32 +14,28 @@ export default function BaseballGame() {
     const strikes = this.countStrikes(computerInputNumbers, userInputNumbers);
     if (balls && !strikes) {
       return `<h5>${balls}볼</h5>`;
-    }
-    if (!balls && strikes) {
+    } else if (!balls && strikes) {
       return `<h5>${strikes}스트라이크</h5>`;
-    }
-    if (balls && strikes) {
+    } else if (balls && strikes) {
       return `<h5>${balls}볼 ${strikes}스트라이크</h5>`;
-    }
-    if (!balls && !strikes) {
+    } else if (!balls && !strikes) {
       return `<h5>낫싱</h5>`;
     }
   };
 
-  this.makeRandomNumbers = function () {
+  this.makeRandomNumbers = () => {
     while (true) {
       const first = Math.floor(Math.random() * 9 + 1);
       const second = Math.floor(Math.random() * 9 + 1);
       const third = Math.floor(Math.random() * 9 + 1);
       const numbers = first * 100 + second * 10 + third;
       if (this.isComposedOfDifferentNumber(numbers)) {
-        console.log(numbers);
         return numbers;
       }
     }
   };
 
-  this.isComposedOfDifferentNumber = function (numbers) {
+  this.isComposedOfDifferentNumber = numbers => {
     const first = String(numbers)[0];
     const second = String(numbers)[1];
     const third = String(numbers)[2];
@@ -49,22 +45,19 @@ export default function BaseballGame() {
     return false;
   };
 
-  this.makeNotificationMessage = function (userInputNumbers) {
+  this.makeNotificationMessage = userInputNumbers => {
     if (typeof userInputNumbers !== 'number' || isNaN(userInputNumbers)) {
       return '숫자만 입력 가능합니다.';
-    }
-    if (userInputNumbers < 100 || 999 < userInputNumbers) {
+    } else if (userInputNumbers < 100 || 999 < userInputNumbers) {
       return '세자리 수만 입력 가능합니다.';
-    }
-    if (String(userInputNumbers).includes('0')) {
+    } else if (String(userInputNumbers).includes('0')) {
       return '1에서 9까지의 수만 입력 가능합니다';
-    }
-    if (!this.isComposedOfDifferentNumber(userInputNumbers)) {
+    } else if (!this.isComposedOfDifferentNumber(userInputNumbers)) {
       return '서로 다른 숫자로 구성된 수만 입력 가능합니다.';
     }
   };
 
-  this.countStrikes = function (computerInputNumbers, userInputNumbers) {
+  this.countStrikes = (computerInputNumbers, userInputNumbers) => {
     let count = 0;
     const stringComputerInputNumbers = String(computerInputNumbers);
     const stringUserInputNumbers = String(userInputNumbers);
@@ -76,10 +69,10 @@ export default function BaseballGame() {
     return count;
   };
 
-  this.countBalls = function (computerInputNumbers, userInputNumbers) {
-    let count = 0;
+  this.countBalls = (computerInputNumbers, userInputNumbers) => {
     const stringComputerInputNumbers = String(computerInputNumbers);
     const stringUserInputNumbers = String(userInputNumbers);
+    let count = 0;
     for (let i = 0; i < 3; i++) {
       const pos = stringComputerInputNumbers.indexOf(stringUserInputNumbers[i]);
       if (pos !== i && pos !== -1) {
@@ -89,7 +82,7 @@ export default function BaseballGame() {
     return count;
   };
 
-  this.addRestart = function () {
+  this.addRestart = () => {
     const restartSpan = document.createElement('span');
     const restartButton = document.createElement('button');
     restartSpan.innerText = '게임을 새로 시작하시겠습니까? ';
@@ -101,7 +94,7 @@ export default function BaseballGame() {
 
   this.initComputerInputNumbers = this.makeRandomNumbers();
 
-  this.handleClickSubmitButton = function () {
+  this.handleClickSubmitButton = () => {
     if (this.status === 'END') {
       return;
     }
@@ -116,9 +109,9 @@ export default function BaseballGame() {
     if (this.status === 'END') {
       this.addRestart();
     }
-  }.bind(this);
+  };
 
-  this.handleClickRestart = function (e) {
+  this.handleClickRestart = e => {
     if (e.target.tagName !== 'BUTTON') {
       return;
     }
@@ -126,7 +119,7 @@ export default function BaseballGame() {
     userInput.value = '';
     this.initComputerInputNumbers = this.makeRandomNumbers();
     this.status = 'PLAYING';
-  }.bind(this);
+  };
 
   submitButton.addEventListener('click', this.handleClickSubmitButton);
   result.addEventListener('click', this.handleClickRestart);
