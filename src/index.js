@@ -5,32 +5,47 @@
 // }
 
 export default class BaseballGame {
-  static userInput = document.getElementById('user-input');
-
   constructor() {
     this.computerNumber = [];
     this.balls = 0;
     this.strikes = 0;
 
+    this.userInput = document.getElementById('user-input');
+    this.submitBtn = document.getElementById('submit');
+    this.resultDiv = document.getElementById('result');
+    
     this.getComputerNumber();
 
-    BaseballGame.userInput.focus();
+    this.userInput.focus();
+    this.submitBtn.addEventListener('click', this.clickSubmit.bind(this));
+    this.resultDiv.addEventListener('click', this.clickRestartBtn.bind(this));
+  }
 
-    const submitBtn = document.getElementById('submit');
-    submitBtn.addEventListener('click', this.clickSubmit.bind(this));
+  clickRestartBtn(e) {
+    if(e.target.id && e.target.id === 'restart') {
+      this.getComputerNumber();
+      this.resetBallsAndStrikes();
+
+      this.userInput.disabled = false;
+      this.userInput.value = "";
+      this.userInput.focus();
+      
+      this.resultDiv.innerHTML = "";
+    }
   }
 
   clickSubmit() {
-    const inputValue = document.getElementById('user-input').value;
+    const inputValue = this.userInput.value;
 
     // test the user input suitability
     if(!this.isSuitableInputValue(inputValue)) {
       alert('올바른 값을 입력해주세요.');
+      this.userInput.value = "";
+      this.userInput.focus();
       return;
     }
 
     const userInputNumbers = inputValue.split('').map(number => +number);
-    console.log(userInputNumbers);
     this.printOnScreen(this.play(this.computerNumber, userInputNumbers));
     this.resetBallsAndStrikes();
   }
@@ -66,19 +81,17 @@ export default class BaseballGame {
 
   printOnScreen(value) {
     // print the result on the screen
-    const resultScreen = document.getElementById('result');
-
     let tempHtml = "";
     if(this.strikes === 3) {
       tempHtml += `<p><b>🎉정답을 맞추셨습니다!🎉</b></p>
       <p>게임을 새로 시작하시겠습니까? <button id="restart">게임 재시작</button></p>`;
 
-      document.getElementById('user-input').disabled = true;
+      this.userInput.disabled = true;
     } else {
       tempHtml += `<p>${value}</p>`;
     }
 
-    resultScreen.innerHTML = tempHtml;
+    this.resultDiv.innerHTML = tempHtml;
   }
 
   resetBallsAndStrikes() {
@@ -99,7 +112,6 @@ export default class BaseballGame {
         index++;
       }
     }
-    console.log(this.computerNumber);
   }
 
   getReturnString() {
