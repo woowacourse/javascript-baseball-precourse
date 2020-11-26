@@ -4,11 +4,14 @@
 //   };
 // }
 
-import makeAnswer from './makeAnswer.js';
+import userInput from './utils/userInput.js';
+import makeAnswer from './utils/makeAnswer.js';
 
 export default function BaseballGame() {
-  const answer = makeAnswer();
-  console.log(answer);
+  const computerInputNumbers = makeAnswer();
+  const userInputNumbers = userInput();
+  console.log('computer : ', computerInputNumbers);
+  console.log('user : ', userInputNumbers);
 }
 
 BaseballGame();
