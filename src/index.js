@@ -7,6 +7,7 @@ const checkValidNumber = inputs => {
   return {ok: true, msg: '올바른 입력입니다!'};
 }
 
+//function to execute baseball game
 const createRandomNumber = () => {
   let randomNum = String(Math.floor(Math.random()*999 + 1));
   return checkValidNumber(randomNum).ok ? randomNum : createRandomNumber();
@@ -37,25 +38,45 @@ export default function BaseballGame() {
   const userInputLog = gameTurn.querySelector('#user-input');
   const userInputButton = gameTurn.querySelector('#submit');
 
+  const clearThisGameTurn = () => {
+    console.log('finished');
+  }
+
+  const addRestartButtonAndAsk = () => {
+    console.log('add restart button and ask');
+  }
+
   const getResultOfSuccess = () => {
     const correctAnswerMessage = "🎉정답을 맞추셨습니다!🎉";
     console.log(correctAnswerMessage);
 
+    
+    //clear all childs of this game turn
+    clearThisGameTurn();
+
     //add restart button and ask
+    addRestartButtonAndAsk();
+  }
+
+  const addAnotherInputForm = () => {
+    console.log('try again!');
   }
 
   const getResult = result => {
     const getWrongAnswerMessage = ({strike, ball}) => (!strike && !ball) ? '낫싱' : ((ball ? `${ball}볼 ` : '') + (strike ? `${strike}스트라이크` : ''));
-    if(result.ok) return getResultOfSuccess();
+    if (result.ok) return getResultOfSuccess();
 
     const failMessage = getWrongAnswerMessage(result);
+    console.log(gameTurn.childNodes);
     console.log(failMessage);
 
-    //add another input set of this turn
+    //add another input set child of this game turn
+    addAnotherInputForm();
   }
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     const result = compareAnswersAndgetResult(computerInputNumbers, userInputNumbers);
+    
     return getResult(result);
   };
 
