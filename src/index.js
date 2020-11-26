@@ -18,6 +18,7 @@ const result = document.querySelector("#result");
 const reStartDiv = document.createElement("div");
 const reStartButton = document.createElement("button");
 let stopFlag = false;
+let skipFlag = false;
 
 function makeComuputerNumber() {
     const computerNumArr = Array(9)
@@ -30,7 +31,7 @@ function makeComuputerNumber() {
     }
     return computerNumber;
 }
-const computerNumber = makeComuputerNumber();
+let computerNumber = makeComuputerNumber();
 console.log(computerNumber);
 
 function validateInput() {
@@ -44,12 +45,14 @@ function validateInput() {
     if (numberLength > 3 || numberLength < 0) {
         alert("다시 입력하세요.");
         stopFlag = true;
+        result.textContent = "";
     } else if (
         userInputValue.split("").includes("0") ||
         userInputValue.split("").includes("e")
     ) {
         alert("다시 입력하세요.");
         stopFlag = true;
+        result.textContent = "";
     } else if (
         userInputValue[0] === userInputValue[1] ||
         userInputValue[0] === userInputValue[2] ||
@@ -57,40 +60,41 @@ function validateInput() {
     ) {
         alert("다시 입력하세요.");
         stopFlag = true;
+        result.textContent = "";
     } else if (isText.length !== 3) {
         alert("다시 입력하세요.");
         stopFlag = true;
+        result.textContent = "";
     }
 }
 function showResult(strike, ball) {
-    if (strike === 3) {
-        result.textContent = "정답을 맞추셨습니다!";
-        reStartDiv.textContent = "게임을 새로 시작하시겠습니까?";
-        reStartButton.textContent = "재실행";
-        result.appendChild(reStartDiv);
-        reStartDiv.appendChild(reStartButton);
-    } else if (ball && strike) {
-        result.textContent = `${ball}볼 ${strike}스트라이크`;
-    } else if (ball) {
-        result.textContent = `${ball}볼`;
-    } else if (strike) {
-        result.textContent = `${strike}스트라이크`;
-    } else {
-        result.textContent = "낫싱";
+    if (!skipFlag) {
+        if (strike === 3) {
+            result.textContent = "정답을 맞추셨습니다!";
+            reStartDiv.textContent = "게임을 새로 시작하시겠습니까?";
+            reStartButton.textContent = "재실행";
+            result.appendChild(reStartDiv);
+            reStartDiv.appendChild(reStartButton);
+        } else if (ball && strike) {
+            result.textContent = `${ball}볼 ${strike}스트라이크`;
+        } else if (ball) {
+            result.textContent = `${ball}볼`;
+        } else if (strike) {
+            result.textContent = `${strike}스트라이크`;
+        } else {
+            result.textContent = "낫싱";
+        }
     }
 }
 
-function reStart() {
-    const computerNumber = makeComuputerNumber();
-    compareNumber();
-    console.log(computerNumber);
-}
-
 function compareNumber() {
-    validateInput(userInput.value);
+    if (!skipFlag) {
+        validateInput(userInput.value);
+    }
     if (stopFlag) {
         userInput.value = "";
         userInput.focus();
+        stopFlag = false;
         return;
     }
     const userNumber = userInput.value.split("");
@@ -104,8 +108,16 @@ function compareNumber() {
         }
     }
     showResult(strike, ball);
+    skipFlag = false;
     userInput.value = "";
     userInput.focus();
+}
+function reStart() {
+    computerNumber = makeComuputerNumber();
+    console.log(computerNumber);
+    skipFlag = true;
+    result.textContent = "";
+    compareNumber();
 }
 
 reStartButton.addEventListener("click", reStart);
