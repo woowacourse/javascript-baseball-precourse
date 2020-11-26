@@ -1,9 +1,10 @@
-const randomNumber = makeRandomNumber();
+let randomNumber = makeRandomNumber();
+const body = document.body;
 const result = document.getElementById("result");
 
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
-    // console.log(computerInputNumbers, userInputNumbers);
+    console.log(computerInputNumbers, userInputNumbers);
 
     //컴퓨터, 사용자 숫자 비교
     let strike = 0;
@@ -20,7 +21,20 @@ export default function BaseballGame() {
     //결과창
     if (strike === 3) {
       result.innerText = "🎉 정답을 맞추셨습니다! 🎉";
-      //게임 재시작 문구, 버튼 추가해야함
+
+      //게임 재시작
+      const restart = document.createElement("div");
+      const restartBtn = document.createElement("button");
+
+      result.append(restart);
+
+      restart.innerText = "게임을 새로 시작하시겠습니까?";
+      restartBtn.innerHTML = "게임 재시작";
+      restart.append(restartBtn);
+
+      console.log(result);
+
+      restartBtn.addEventListener("click", restartHandler);
     } else if (strike + ball === 0) {
       result.innerText = "낫싱";
       input.focus();
@@ -118,4 +132,11 @@ const isDigit = function (inputArr) {
       return true;
     }
   }
+};
+
+const restartHandler = function (event) {
+  randomNumber = makeRandomNumber();
+  input.value = "";
+  input.focus();
+  result.innerHTML = "";
 };
