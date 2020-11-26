@@ -85,6 +85,13 @@ const paintText = (text, target) => {
   target.innerText = text;
 };
 
+const paintRestart = (target) => {
+  target.innerHTML = `
+    <div>🎉 <strong>정답을 맞추셨습니다!</strong> 🎉</div>
+    <div>게임을 새로 시작하시겠습니까? <button>게임 재시작</button> </div>
+  `;
+};
+
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     const resultString = compareNum(computerInputNumbers, userInputNumbers);
@@ -104,6 +111,9 @@ export default function BaseballGame() {
 
     const compareResult = this.play(comNum, userNum);
     paintText(compareResult, hint);
+    if (compareResult === "3스트라이크") {
+      paintRestart(hint);
+    }
   };
 
   if (btn) {
