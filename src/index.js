@@ -1,6 +1,3 @@
-const correctAnswerMessage = "🎉정답을 맞추셨습니다!🎉";
-const getWrongAnswerMessage = ({strike, ball}) => (!strike && !ball) ? '낫싱' : ((ball ? `${ball}볼 ` : '') + (strike ? `${strike}스트라이크` : ''));
-
 const checkValidNumber = inputs => {
   if(/[^1-9]+/g.test(inputs)) return {ok: false, msg: '1-9의 각 다른 숫자 3개를 공백 없이 입력하세요'};
   if(inputs.length !== 3) return {ok: false, msg: '숫자는 3개만 입력가능합니다.'};
@@ -32,6 +29,17 @@ const compareAnswersAndgetResult = (computerInputNumbers, userInputNumbers) => {
   }
 }
 
+const printResult = result => {
+  const correctAnswerMessage = "🎉정답을 맞추셨습니다!🎉";
+  const getWrongAnswerMessage = ({strike, ball}) => (!strike && !ball) ? '낫싱' : ((ball ? `${ball}볼 ` : '') + (strike ? `${strike}스트라이크` : ''));
+  const resultMessage = result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
+  console.log(resultMessage);
+
+  //dom manipulation
+
+  return resultMessage;
+}
+
 export default function BaseballGame() {
   const userInput = document.querySelector('input');
   const userInputLog = document.getElementById('user-input');
@@ -39,25 +47,20 @@ export default function BaseballGame() {
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     const result = compareAnswersAndgetResult(computerInputNumbers, userInputNumbers);
-    return result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
+    return printResult(result);
   };
-
-  const playGame = (computerInputNumbers, userInputNumbers) => {
-    console.log(compareAnswersAndgetResult(computerInputNumbers, userInputNumbers));
-    const resultMessage = this.play(computerInputNumbers, userInputNumbers);
-    console.log(resultMessage);
-  }
 
   const getUserInput = computerInputNumbers => {
     userInput.addEventListener('change', e => userInputLog.textContent = e.target.value);
-    userInputButton.addEventListener('click', () => checkValidNumber(userInputLog.textContent).ok ? playGame(computerInputNumbers, userInputLog.textContent) : alert(checkUserInput.msg));
+    userInputButton.addEventListener('click', () => checkValidNumber(userInputLog.textContent).ok ? this.play(computerInputNumbers, userInputLog.textContent) : alert(checkValidNumber(userInputLog.textContent).msg));
   }
 
   const startGame = () => {
     const computerInputNumbers = createRandomNumber();
     console.log('hello world! correctAnswer is ', computerInputNumbers);
-    getUserInput(computerInputNumbers);
 
+    //정답이 나올때까지....
+    getUserInput(computerInputNumbers);
   }
   
   startGame();
