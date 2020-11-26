@@ -94,6 +94,7 @@ export default function BaseballGame() {
     const restartButton = document.createElement('button');
     restartSpan.innerText = '게임을 새로 시작하시겠습니까? ';
     restartButton.innerText = '게임 재시작';
+    restartButton.setAttribute('id', 'game-restart-button');
     result.appendChild(restartSpan);
     result.appendChild(restartButton);
   };
@@ -117,7 +118,18 @@ export default function BaseballGame() {
     }
   }.bind(this);
 
+  this.handleClickRestart = function (e) {
+    if (e.target.tagName !== 'BUTTON') {
+      return;
+    }
+    result.innerHTML = null;
+    userInput.value = '';
+    this.initComputerInputNumbers = this.makeRandomNumbers();
+    this.status = 'PLAYING';
+  }.bind(this);
+
   submitButton.addEventListener('click', this.handleClickSubmitButton);
+  result.addEventListener('click', this.handleClickRestart);
 }
 
 new BaseballGame();
