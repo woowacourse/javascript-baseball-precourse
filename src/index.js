@@ -49,7 +49,7 @@ function renderResult(string) {
   }
 }
 
-function handleNumSubmit(e) {
+function handleUserInputSubmit(e) {
   const userInputNumbers = document.getElementById('user-input').value;
   const deduplicateCount = getDeduplicateCount(userInputNumbers);
   const regex = /^[0-9]*$/;
@@ -78,4 +78,4 @@ function handleNumSubmit(e) {
 }
 
 const submitNumButton = document.getElementById('submit');
-submitNumButton.addEventListener('click', handleNumSubmit);
+submitNumButton.addEventListener('click', handleUserInputSubmit);
