@@ -100,6 +100,7 @@ play(123, 124); // '2스트라이크'
 - BaseballClass
   - init : class 생성시 초기화 함수 (구현)
   - RandomComputerInputNumbers : 3자리 난수 뽑는 함수, _computerInputNumbers setter (구현)
+  - getComputerInputNumbers : _computerInputNumbers getter (구현)
   - judge : 컴퓨터 입력 값, 사용자의 입력 값을 받아 일치 여부 판단하여 스트라이크 개수, 볼 개수 반환(구현)
   - play : 컴퓨터 입력 값, 사용자의 입력 값을 받아 스트라이크, 볼, 낫싱, 정답 관련 String 반환(구현)
   - restart : 게임 재시작 함수 (구현)
