@@ -26,6 +26,24 @@
  
 ---
 
+#### 구현한 후의 의문점
+
+  - 생성자 함수에 있는 play 메소드를 사용하라고 한 이유가 있을 것 같다.
+  - 생성자 함수를 export default한 이유가 있을 것 같다. 
+  --> 최대한 생성자 함수를 활용해보자!
+  
+### 생성자 함수 활용
+  - baseball.js 파일을 만들어 필요한 함수를 옮긴다.
+    - BaseballGame을 import한 뒤 game 변수에 인스턴스로 만든다.
+    - 게임을 실행할 때 필요한 button.addEventListener을 옮긴다.
+    - 버튼이 클릭될 때(input이 전달될 때)마다 실행되는 __submitUserInput__ 함수를 옮긴다.
+    - __submitUserInput__ 함수 안에 input이 올바른지 확인해주는 __isInputRight__ 함수를 옮긴다.
+    - input이 올바르면 game.play(game.answer, userInput.value)를 통해 __game.play__ 메소드를 실행한다.
+    - 실행이 끝난 후 결과 값을 화면에 띄워주는 메소드인 __game.showResultOnScreen__ 을 실행한다.
+    - 결과가 나온다.
+
+---
+
 ## 🎯 기능 요구사항
 
 - 기본적으로 1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 맞추는 게임이다.
