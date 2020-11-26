@@ -4,16 +4,16 @@ export default class Util {
   isValidNumbers(numbers) {
     if (numbers.length !== 3) {
       return false;
-    } else if (!this.checkNumbers(numbers)) {
+    } else if (!this.isNumbers(numbers)) {
       return false;
-    } else if (this.checkOverlap(numbers)) {
+    } else if (this.isOverlaped(parseInt(numbers))) {
       return false;
     } else {
       return true;
     }
   }
 
-  checkNumbers(numbers) {
+  isNumbers(numbers) {
     for (let i = 0; i < numbers.length; i++) {
       if (!(numbers[i] >= "1" && numbers[i] <= "9")) {
         return false;
@@ -22,13 +22,10 @@ export default class Util {
     return true;
   }
 
-  checkOverlap(numbers) {
+  isOverlaped(numbers) {
     let number;
     let hash = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    if (typeof numbers === "string") {
-      numbers = parseInt(numbers);
-    }
     while (numbers != 0) {
       number = numbers % 10;
       hash[number]++;

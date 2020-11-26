@@ -3,10 +3,8 @@ import BaseballGame from "./baseballgame.js";
 
 const form = document.querySelector("#form");
 const userInput = document.querySelector("#user-input");
-const submitButton = document.querySelector("#submit");
 const computerInputNumbers = createRandomNumbers();
 const result = document.querySelector("#result");
-let userInputNumbers = null;
 
 function createRandomNumbers() {
   let result = 0;
@@ -15,7 +13,7 @@ function createRandomNumbers() {
     let randomNumber = Math.floor(Math.random() * 10);
 
     result = result * 10 + randomNumber;
-    if (randomNumber === 0 || Util.prototype.checkOverlap(result)) {
+    if (randomNumber === 0 || Util.prototype.isOverlaped(result)) {
       result = createRandomNumbers();
       return result;
     }
@@ -25,7 +23,8 @@ function createRandomNumbers() {
 
 function runBaseballGame(event) {
   event.preventDefault();
-  userInputNumbers = userInput.value;
+  const userInputNumbers = userInput.value;
+
   userInput.value = "";
   if (!Util.prototype.isValidNumbers(userInputNumbers)) {
     alert("잘못된 입력값입니다. 다시 입력해주세요 :)");

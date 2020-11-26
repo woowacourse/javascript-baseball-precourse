@@ -49,7 +49,7 @@ export default class BaseballGame {
     if (strike === 0) {
       return;
     }
-    if (strike < 3) {
+    if (strike < DIGITS) {
       strikeCount.innerText = `${strike}스트라이크`;
       result.appendChild(strikeCount);
     } else {
