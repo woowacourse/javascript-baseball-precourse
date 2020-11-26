@@ -1,6 +1,30 @@
 export default function BaseballGame() {
   this.MAX_DIGITS = 3;
 
+  this.getGameResult = (computerInputNumbers, userInputNumbers) => {
+    const gameResult = {
+      ball: 0,
+      strike: 0,
+    };
+
+    for (let i = 0; i < this.MAX_DIGITS; i++) {
+      const computerInputNumber = +computerInputNumbers[i];
+      const userInputNumber = +userInputNumbers[i];
+
+      if (computerInputNumber === userInputNumber) {
+        gameResult.strike++;
+        continue;
+      }
+
+      const computerInputNumbersArray = computerInputNumbers.split("");
+      if (computerInputNumbersArray.includes(`${userInputNumber}`)) {
+        gameResult.ball++;
+      }
+    }
+
+    return gameResult;
+  };
+
   this.play = function (computerInputNumbers, userInputNumbers) {
     return "결과 값 String";
   };
