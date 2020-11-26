@@ -1,5 +1,8 @@
 const printCorrectAnswerForTest = computerInputNumbers => console.log('hello world! correctAnswer is ', computerInputNumbers);
 
+const correctAnswerMessage = "🎉정답을 맞추셨습니다!🎉";
+const getWrongAnswerMessage = ({strike, ball}) => (!strike && !ball) ? '낫싱' : ((ball ? `${ball}볼 ` : '') + (strike ? `${strike}스트라이크` : ''));
+
 const checkValidNumber = inputs => {
   if(/[^1-9]+/g.test(inputs)) return {ok: false, msg: '1-9의 각 다른 숫자 3개를 공백 없이 입력하세요'};
   if(inputs.length !== 3) return {ok: false, msg: '숫자는 3개만 입력가능합니다.'};
@@ -38,29 +41,10 @@ export default function BaseballGame() {
   const userInputButton = gameTurn.querySelector('#submit');
   const resultMessage = gameTurn.querySelector('#result');
 
-  const clearThisGameTurn = () => {
-    console.log('finished');
-  }
-
-  const addRestartButtonAndAsk = () => {
-    console.log('add restart button and ask');
-  }
-
   const printMessage = message => {
     const resultMessageElement = document.createElement('p');
     resultMessageElement.innerText = message;
     resultMessage.appendChild(resultMessageElement);
-  }
-
-  const getResultOfSuccess = () => {
-    const correctAnswerMessage = "🎉정답을 맞추셨습니다!🎉";
-    printMessage(correctAnswerMessage);
-    
-    //clear all childs of this game turn
-    clearThisGameTurn();
-
-    //add restart button and ask
-    addRestartButtonAndAsk();
   }
 
   const createNewInputForm = () => {
@@ -78,14 +62,8 @@ export default function BaseballGame() {
   }
 
   const getResult = result => {
-    const getWrongAnswerMessage = ({strike, ball}) => (!strike && !ball) ? '낫싱' : ((ball ? `${ball}볼 ` : '') + (strike ? `${strike}스트라이크` : ''));
-    if (result.ok) return getResultOfSuccess();
-
-    const failMessage = getWrongAnswerMessage(result);
-    printMessage(failMessage);
-
-    //add another input set child of this game turn
-    addAnotherInputForm();
+    const resultMessage = result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
+    printMessage(resultMessage);
   }
 
   this.play = function (computerInputNumbers, userInputNumbers) {
@@ -110,4 +88,4 @@ export default function BaseballGame() {
   startGame();
 }
 
-new BaseballGame();
+new BaseballGame(); //this 특성 잘 활용해서 다시 리팩토링하기! 전에 구현했던 큐 보고 복습하기
