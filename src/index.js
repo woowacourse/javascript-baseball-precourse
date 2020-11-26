@@ -1,28 +1,36 @@
-import Util from "./util.js";
+import Util, { DIGITS } from "./util.js";
+import BaseballGame from "./baseballgame.js";
 
-export default class BaseballGame {
-  DIGITS = 3;
+const form = document.querySelector("#form");
+const userInput = document.querySelector("#user-input");
+const submitButton = document.querySelector("#submit");
+const computerInputNumbers = createRandomNumbers();
+let userInputNumbers = null;
 
-  form = document.querySelector("#form");
-  userInput = document.querySelector("#user-input");
-  submitButton = document.querySelector("#submit");
-  computerInputNumbers = this.createRandomNumbers();
+function createRandomNumbers() {
+  let result = 0;
 
-  createRandomNumbers() {
-    let result = 0;
+  for (let i = 0; i < DIGITS; i++) {
+    let randomNumber = Math.floor(Math.random() * 10);
 
-    for (let i = 0; i < this.DIGITS; i++) {
-      let randomNumber = Math.floor(Math.random() * 10);
-
-      if (
-        randomNumber === 0 ||
-        Util.prototype.checkOverlap(result, randomNumber)
-      ) {
-        result = this.createRandomNumbers();
-        return result;
-      }
-      result = result * 10 + randomNumber;
+    result = result * 10 + randomNumber;
+    if (randomNumber === 0 || Util.prototype.checkOverlap(result)) {
+      result = createRandomNumbers();
+      return result;
     }
-    return result;
   }
+  return result.toString();
 }
+
+function runBaseballGame(event) {
+  event.preventDefault();
+  userInputNumbers = userInput.value;
+  userInput.value = "";
+  if (!Util.prototype.isValidNumbers(userInputNumbers)) {
+    alert("잘못된 입력값입니다. 다시 입력해주세요 :)");
+    return;
+  }
+  BaseballGame.prototype.play(computerInputNumbers, userInputNumbers);
+}
+
+form.addEventListener("submit", runBaseballGame);
