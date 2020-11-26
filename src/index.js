@@ -1,15 +1,11 @@
-// export default function BaseballGame() {
-//   this.play = function (computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   };
-// }
-
 export default class BaseballGame {
   constructor() {
+    // game variables
     this.computerNumber = [];
     this.balls = 0;
     this.strikes = 0;
 
+    // DOM elements
     this.userInput = document.getElementById('user-input');
     this.submitBtn = document.getElementById('submit');
     this.resultDiv = document.getElementById('result');
@@ -18,18 +14,26 @@ export default class BaseballGame {
 
     this.userInput.focus();
     this.submitBtn.addEventListener('click', this.clickSubmit.bind(this));
+    this.userInput.addEventListener('keydown', e => {
+      if(e.key === "Enter") {
+        this.clickSubmit.bind(this)();
+      }
+    });
     this.resultDiv.addEventListener('click', this.clickRestartBtn.bind(this));
   }
 
   clickRestartBtn(e) {
-    if(e.target.id && e.target.id === 'restart') {
+    if(e.target.id && e.target.id === 'game-restart-button') {
+      // get new random number & reset ball counts and strike counts
       this.getComputerNumber();
       this.resetBallsAndStrikes();
 
+      // user input settings
       this.userInput.disabled = false;
       this.userInput.value = "";
       this.userInput.focus();
-      
+
+      // result div setting
       this.resultDiv.innerHTML = "";
     }
   }
@@ -45,29 +49,31 @@ export default class BaseballGame {
       return;
     }
 
+    // change user input string into an array of numbers
     const userInputNumbers = inputValue.split('').map(number => +number);
+
     this.printOnScreen(this.play(this.computerNumber, userInputNumbers));
     this.resetBallsAndStrikes();
   }
 
+  // returns true if the input value is suitable
   isSuitableInputValue(value) {
-    // returns true if the input value is suitable
     if(!value || isNaN(value) || value.length !== 3 || this.hasDuplicatedNumber(value) || this.hasZero(value)) {
       return false;
     }
     return true;
   }
 
+  // returns true if the input value has zero in it
   hasZero(value) {
-    // returns true if the input value has zero in it
     if(value.includes('0')) {
       return true;
     }
     return false;
   }
 
+  // returns true if the input value has duplicated numbers in it
   hasDuplicatedNumber(value) {
-    // returns true if the input value has duplicated numbers in it
     const valueArray = value.split('');
 
     for(let i = 0; i < valueArray.length; i++) {
@@ -79,12 +85,12 @@ export default class BaseballGame {
     return false;
   }
 
+  // print the result on the screen
   printOnScreen(value) {
-    // print the result on the screen
     let tempHtml = "";
     if(this.strikes === 3) {
       tempHtml += `<p><b>🎉정답을 맞추셨습니다!🎉</b></p>
-      <p>게임을 새로 시작하시겠습니까? <button id="restart">게임 재시작</button></p>`;
+                   <p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button></p>`;
 
       this.userInput.disabled = true;
     } else {
@@ -94,14 +100,14 @@ export default class BaseballGame {
     this.resultDiv.innerHTML = tempHtml;
   }
 
+  // reset balls and strikes
   resetBallsAndStrikes() {
-    // reset balls and strikes after submit the input
     this.balls = 0;
     this.strikes = 0;
   }
 
+  // get computer's random number
   getComputerNumber() {
-    // get computer's random number
     let index = 0;
     
     while(index < 3) {
@@ -114,8 +120,8 @@ export default class BaseballGame {
     }
   }
 
+  // get the result string based on the ball count and strike count
   getReturnString() {
-    // get the result string based on the ball count and strike count
     if(this.balls && this.strikes) {
       return `${this.balls}볼 ${this.strikes}스트라이크`;
     } else if(!this.balls && this.strikes) {
@@ -127,9 +133,8 @@ export default class BaseballGame {
     }
   }
 
+  // compare the numbers and returns the result
   play(computerInputNumbers, userInputNumbers) {
-    // compare the numbers and returns the result
-
     computerInputNumbers.forEach((number, idx) => {
       const indexOfNumber = userInputNumbers.indexOf(number);
       if(indexOfNumber === -1) {
