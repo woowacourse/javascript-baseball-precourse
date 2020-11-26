@@ -81,15 +81,26 @@ const compareNum = (comNum, userNum) => {
   return returnString;
 };
 
+// * 힌트 출력
 const paintText = (text, target) => {
   target.innerText = text;
 };
 
-const paintRestart = (target) => {
+// * 정답문구 출력
+const paintRestart = (target, handleRestart) => {
+  const div = document.createElement("div");
+  const restartBtn = document.createElement("button");
+
+  restartBtn.addEventListener("click", handleRestart);
+
+  div.innerText = "게임을 새로 시작하시겠습니까?";
+  restartBtn.innerText = "게임재시작";
   target.innerHTML = `
     <div>🎉 <strong>정답을 맞추셨습니다!</strong> 🎉</div>
-    <div>게임을 새로 시작하시겠습니까? <button>게임 재시작</button> </div>
   `;
+
+  div.appendChild(restartBtn);
+  target.appendChild(div);
 };
 
 export default function BaseballGame() {
@@ -105,6 +116,14 @@ export default function BaseballGame() {
 
   let comNum = generateThreeDigit();
 
+  // * 재시작 버튼을 눌렀을 때
+  const handleRestart = () => {
+    userInput.value = "";
+    paintText("", hint);
+    userInput.focus();
+    comNum = generateThreeDigit();
+  };
+
   // * 확인 버튼을 눌렀을 때
   const handleSubmit = () => {
     const userNum = testValue(userInput);
@@ -112,7 +131,7 @@ export default function BaseballGame() {
     const compareResult = this.play(comNum, userNum);
     paintText(compareResult, hint);
     if (compareResult === "3스트라이크") {
-      paintRestart(hint);
+      paintRestart(hint, handleRestart);
     }
   };
 
