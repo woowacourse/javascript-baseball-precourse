@@ -9,6 +9,18 @@ export default class BaseballGame {
     this.computerNumber = [];
     this.balls = 0;
     this.strikes = 0;
+
+    this.getComputerNumber();
+
+    const submitBtn = document.querySelector('#submit');
+    submitBtn.addEventListener('click', this.clickSubmit.bind(this));
+  }
+
+  clickSubmit() {
+    // 유저의 입력값 검사
+    const inputValue = document.querySelector('#user-input').value;
+    const userInputNumbers = inputValue.split('').map(number => +number);
+    console.log(userInputNumbers);
   }
 
   resetBallsAndStrikes() {
@@ -54,7 +66,8 @@ export default class BaseballGame {
     });
 
     const result = this.getReturnString();
-    this.resetBallsAndStrikes();
     return result;
   }
 }
+
+new BaseballGame();
