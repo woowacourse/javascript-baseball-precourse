@@ -1,10 +1,61 @@
 import Util, { DIGITS } from "./util.js";
-import BaseballGame from "./baseballgame.js";
 
 const form = document.querySelector("#form");
 const userInput = document.querySelector("#user-input");
 const computerInputNumbers = createRandomNumbers();
 const result = document.querySelector("#result");
+
+export default class BaseballGame {
+  correctAnswer = false;
+
+  play(computerInputNumbers, userInputNumbers) {
+    let strike = 0;
+    let ball = 0;
+    let responseMessage = "";
+
+    for (let i = 0; i < DIGITS; i++) {
+      let compare = computerInputNumbers[i];
+
+      if (compare === userInputNumbers[i]) {
+        strike++;
+      } else if (userInputNumbers.includes(compare)) {
+        ball++;
+      }
+    }
+    if (strike === 3) {
+      this.correctAnswer = true;
+      return "💯 정답을 맞추셨습니다! 💯";
+    }
+    responseMessage =
+      ball > 0 ? responseMessage + `${ball}볼 ` : responseMessage;
+    responseMessage =
+      strike > 0 ? responseMessage + `${strike}스트라이크` : responseMessage;
+    return responseMessage;
+  }
+
+  renderResult(computerInputNumbers, userInputNumbers) {
+    const answerSection = document.createElement("div");
+    const answer = document.createElement("div");
+    const restartMessage = document.createElement("span");
+    const restartButton = document.createElement("button");
+
+    result.innerText = "";
+    answer.innerText = this.play(computerInputNumbers, userInputNumbers);
+    if (!this.correctAnswer) {
+      result.appendChild(answer);
+      return;
+    }
+    answerSection.appendChild(answer);
+    answerSection.id = "answer";
+    result.appendChild(answerSection);
+    restartMessage.innerText = "게임을 새로 시작하시겠습니까?";
+    result.appendChild(restartMessage);
+    restartButton.innerText = "게임 재시작";
+    restartButton.id = "game-restart-button";
+    restartButton.addEventListener("click", () => location.reload());
+    result.appendChild(restartButton);
+  }
+}
 
 function createRandomNumbers() {
   let result = 0;
@@ -24,6 +75,7 @@ function createRandomNumbers() {
 function runBaseballGame(event) {
   event.preventDefault();
   const userInputNumbers = userInput.value;
+  let baseballGame = new BaseballGame();
 
   userInput.value = "";
   if (!Util.prototype.isValidNumbers(userInputNumbers)) {
@@ -34,8 +86,7 @@ function runBaseballGame(event) {
     alert("이미 정답을 맞히셨습니다!");
     return;
   }
-  BaseballGame.prototype.play(computerInputNumbers, userInputNumbers);
+  baseballGame.renderResult(computerInputNumbers, userInputNumbers);
 }
 
-console.log(computerInputNumbers);
 form.addEventListener("submit", runBaseballGame);
