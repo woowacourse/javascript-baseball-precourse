@@ -74,7 +74,10 @@ function handleNumSubmit(e) {
   }
 
   cleanResult();
-  const responseString = game.play(game.computerInputNumbers, userInputNumbers);
+  const responseString = game.play(
+    game._computerInputNumbers,
+    userInputNumbers,
+  );
   renderResult(responseString);
 }
 const submitNumButton = document.getElementById('submit');

@@ -3,6 +3,11 @@ import { text } from '../../fixtrue';
 export default class BaseballGame {
   constructor() {
     this._computerInputNumbers = null;
+    this.init();
+  }
+
+  init() {
+    this.RandomComputerInputNumbers();
   }
 
   RandomComputerInputNumbers() {
