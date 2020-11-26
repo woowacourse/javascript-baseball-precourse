@@ -1,0 +1,29 @@
+{
+  "name": "javascript-baseball-precourse",
+  "version": "1.0.0",
+  "description": "우아한테크코스 프리코스 미션1 숫자 야구 게임",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "http-server ./ -p 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bigsaigon333/javascript-baseball-precourse.git"
+  },
+  "keywords": [
+    "우테코",
+    "우아한테크코스",
+    "프리코스",
+    "프리코스 미션1",
+    "숫자 야구 게임"
+  ],
+  "author": "Danny Kim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bigsaigon333/javascript-baseball-precourse/issues"
+  },
+  "homepage": "https://github.com/bigsaigon333/javascript-baseball-precourse#readme",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
+}
