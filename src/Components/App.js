@@ -1,4 +1,5 @@
 import { generateTargetNumbers } from '../utils/generateTargetNumbers.js';
+import { isValidInputData } from '../utils/validations.js';
 
 class BaseballGame {
   constructor($target) {
@@ -23,12 +24,23 @@ class BaseballGame {
   onClick({ target }) {
     if (target.id !== 'submit') return;
 
+    if (!isValidInputData(this.userInput.value)) {
+      alert('다시 입력해주세요 !');
+      this.userInput.value = '';
+      return;
+    }
+
     console.log(this.userInput.value);
   }
 
   onKeyDown({ target, key }) {
     if (key !== 'Enter') return;
 
+    if (!isValidInputData(target.value)) {
+      alert('다시 입력해주세요 !');
+      target.value = '';
+      return;
+    }
     console.log(target.value);
   }
 }
