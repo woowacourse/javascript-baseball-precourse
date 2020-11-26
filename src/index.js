@@ -33,9 +33,9 @@ export default class BaseballGame {
   }
 
   static generateAnswer() {
-    let answer = Math.floor(Math.random() * 1000).toString();
-    while (!this.isValidAnswer(answer)) {
-      answer = Math.floor(Math.random() * 1000).toString();
+    let answer = Math.floor(Math.random() * 1000);
+    while (!this.isValidAnswer(answer.toString())) {
+      answer = Math.floor(Math.random() * 1000);
     }
     return answer;
   }
