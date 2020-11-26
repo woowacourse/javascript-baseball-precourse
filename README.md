@@ -27,7 +27,15 @@
 
 - `Math.floor()` , `Math.random()`, `indexOf()` 를 사용하여 로또 번호 뽑기와 같은 방식으로 구현하였다.
 
-**유저 입력 값 받기(getInputNumber)**
+**유저 입력 값 받기(getInputNumber)** ✅
+
+- `document.getElementById()` 와  `addEventListener()` 를 사용하여 유저의 입력 값을 가져온다.
+
+- 유저가 값을 입력하면 `isNaN()`,  `userInput.length !== 3`, `isDuplication()` 세 가지 검증을 진행한다. 
+
+  (값이 숫자가 아닐 경우에는 `input` 을 `''` 로 초기화시키지만, 숫자일 경우 실수로 입력된 경우를 고려하여 초기화하지 않기로 하였다.)
+
+- 하나의 함수에서 구현하기에는 가독성이 좋지않아서 **`isDuplication()` 기능(중복 숫자 검사)**을 추가로 구현하였다.
 
 **게임 진행(play)**
 
