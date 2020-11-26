@@ -56,7 +56,7 @@ export default class BaseballGame {
   
   // reset and focus on text input
   setTextInput() {
-    this.userInput.disabled = false;
+    this.userInput.readOnly = false;
     this.userInput.value = "";
     this.userInput.focus();
   }
@@ -100,7 +100,7 @@ export default class BaseballGame {
       tempHTML += `<p><b>🎉정답을 맞추셨습니다!🎉</b></p>
                    <p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button></p>`;
 
-      this.userInput.disabled = true;
+      this.userInput.readOnly = true;
     } else {
       tempHTML += `<p>${val}</p>`;
     }
