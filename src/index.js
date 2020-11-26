@@ -4,14 +4,19 @@
 //   };
 // }
 
-import userInput from './utils/userInput.js';
+import userInput from './input/userInput.js';
 import makeAnswer from './utils/makeAnswer.js';
 
 export default function BaseballGame() {
   const computerInputNumbers = makeAnswer();
   const userInputNumbers = userInput();
-  console.log('computer : ', computerInputNumbers);
-  console.log('user : ', userInputNumbers);
+
+  this.play = function (computerInputNumbers, userInputNumbers) {
+    console.log('computer : ', computerInputNumbers);
+    console.log('user : ', userInputNumbers);
+  };
+
+  this.play(computerInputNumbers, userInputNumbers);
 }
 
-BaseballGame();
+new BaseballGame();
