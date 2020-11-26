@@ -6,33 +6,76 @@ function getDeduplicateCount(userInputNumbers) {
   return Array.from(new Set(userInputNumbers)).length;
 }
 
-function numIsSubmited(e) {
+function cleanResult() {
+  const result_div = document.getElementById('result');
+
+  while (result_div.hasChildNodes()) {
+    result_div.removeChild(result_div.firstChild);
+  }
+}
+
+function resetInputNumbers() {
+  const userInput = document.getElementById('user-input');
+  userInput.value = '';
+}
+
+function handleReStartClick() {
+  cleanResult();
+  resetInputNumbers();
+  game.RandomComputerInputNumbers();
+}
+
+function renderResult(string) {
+  const result_div = document.getElementById('result');
+  const response_p = document.createElement('p');
+  response_p.innerHTML = string;
+  result_div.appendChild(response_p);
+
+  if (string === text.correct) {
+    const restart_div = document.createElement('div');
+    restart_div.id = 'restart';
+
+    let restart_p = document.createElement('p');
+    restart_p.innerHTML = text.askRestart;
+    restart_div.appendChild(restart_p);
+
+    const restart_button = document.createElement('button');
+    restart_button.innerHTML = text.restart;
+    restart_button.id = 'game-restart-button';
+    restart_button.addEventListener('click', handleReStartClick);
+    restart_div.appendChild(restart_button);
+
+    result_div.appendChild(restart_div);
+  }
+}
+
+function handleNumSubmit(e) {
   const userInputNumbers = document.getElementById('user-input').value;
   const deduplicateCount = getDeduplicateCount(userInputNumbers);
   const regex = /^[0-9]*$/;
   if (!regex.test(userInputNumbers)) {
-    game.resetInputNumbers();
+    resetInputNumbers();
     return alert(text.warningForNotNum);
   }
 
   if (userInputNumbers.length !== 3) {
-    game.resetInputNumbers();
+    resetInputNumbers();
     return alert(text.warningFor3digit);
   }
 
   if (userInputNumbers.includes('0')) {
-    game.resetInputNumbers();
+    resetInputNumbers();
     return alert(text.warningForZero);
   }
 
   if (deduplicateCount !== 3) {
-    game.resetInputNumbers();
+    resetInputNumbers();
     return alert(text.warningForduplicate);
   }
 
-  game.cleanResult();
+  cleanResult();
   const responseString = game.play(game.computerInputNumbers, userInputNumbers);
-  game.renderResult(responseString);
+  renderResult(responseString);
 }
 const submitNumButton = document.getElementById('submit');
-submitNumButton.addEventListener('click', numIsSubmited);
+submitNumButton.addEventListener('click', handleNumSubmit);
