@@ -27,11 +27,15 @@ function handleReStartClick() {
 
 function renderResult(string) {
   const result_div = document.getElementById('result');
+
   const response_p = document.createElement('p');
   response_p.innerHTML = string;
-  result_div.appendChild(response_p);
 
   if (string === text.correct) {
+    const strong = document.createElement('strong');
+    strong.appendChild(response_p);
+    result_div.appendChild(strong);
+
     const restart_div = document.createElement('div');
     restart_div.id = 'restart';
 
@@ -46,6 +50,8 @@ function renderResult(string) {
     restart_div.appendChild(restart_button);
 
     result_div.appendChild(restart_div);
+  } else {
+    result_div.appendChild(response_p);
   }
 }
 
@@ -53,6 +59,7 @@ function handleUserInputSubmit(e) {
   const userInputNumbers = document.getElementById('user-input').value;
   const deduplicateCount = getDeduplicateCount(userInputNumbers);
   const regex = /^[0-9]*$/;
+
   if (!regex.test(userInputNumbers)) {
     resetInputNumbers();
     return alert(text.warningForNotNum);
