@@ -10,12 +10,17 @@ export default class BaseballGame {
     this.playNewGame()
   }
   playNewGame() {
+    document.getElementById("result").innerHTML = null
+    const restartContainer = document.getElementById("restart-container")
+    restartContainer.style.display = "none"
     this.randomNumber = this.createRandomNumber()
     this.clickEventListener()
   }
   play(computerInputNumbers, userInputNumbers) {
     if (computerInputNumbers === userInputNumbers) {
-      return `🎉 <strong>정답을 맞추셨습니다!</strong>🎉<br />게임을 새로 시작하시겠습니까?`
+      const restartContainer = document.getElementById("restart-container")
+      restartContainer.style.display = "block"
+      return `<strong>🎉 정답을 맞추셨습니다!🎉</strong>`
     }
     const score = {}
     for (let i = 0; i < userInputNumbers.length; i++) {
@@ -39,6 +44,8 @@ export default class BaseballGame {
   clickEventListener() {
     const submitButton = document.getElementById("submit")
     submitButton.addEventListener('click', this.submitClickEvent.bind(this))
+    const restartButton = document.getElementById("game-restart-button")
+    restartButton.addEventListener("click", this.playNewGame.bind(this))
   }
   submitClickEvent() {
     const userInput = document.getElementById("user-input")
