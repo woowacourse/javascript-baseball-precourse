@@ -16,5 +16,20 @@ export default class BaseballGameApp {
 		this.#input = this.#app.querySelector("#user-input");
 		this.#btn = this.#app.querySelector("#submit");
 		this.#result = this.#app.querySelector("#result");
+		this.#btn.addEventListener("click", this.#handleSubmit.bind(this));
 	}
+
+	#handleSubmit() {
+		const value = this.#input.value;
+		const challenge = Array.from(value).map((v) => parseInt(v));
+
+		if (!this.#validate(value)) {
+			return alert("올바른 입력이 아닙니다.");
+		}
+		this.#submitPlay(challenge);
+	}
+
+	#validate() {}
+
+	#submitPlay(challenge) {}
 }
