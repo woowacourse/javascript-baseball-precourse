@@ -8,6 +8,7 @@ export default class BaseballGame {
 
     this.userSubmitButton.addEventListener('click', () => {
       let userInputNumbers = this.parseUserInput(this.userInputNumber.value);
+
       console.log(this.play(this.computerInputNumber, userInputNumbers));
     });
   }
@@ -15,6 +16,7 @@ export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
     console.log(computerInputNumbers, userInputNumbers);
     let gameResult;
+
     if (this.isEveryNumberSame(computerInputNumbers, userInputNumbers)) {
       gameResult = '정답';
     } else if (this.isNothing(computerInputNumbers, userInputNumbers)) {
@@ -28,6 +30,7 @@ export default class BaseballGame {
 
   isEveryNumberSame(computerInputNumbers, userInputNumbers) {
     let result = true;
+
     for (let pitch = 0; pitch < this.PITCH_COUNT; pitch++) {
       if (computerInputNumbers[pitch] !== userInputNumbers[pitch]) {
         result = false;
@@ -40,6 +43,7 @@ export default class BaseballGame {
 
   isNothing(computerInputNumbers, userInputNumbers) {
     let result = true;
+
     for (let pitch = 0; pitch < this.PITCH_COUNT; pitch++) {
       if (computerInputNumbers.includes(userInputNumbers[pitch])) {
         result = false;
@@ -52,6 +56,7 @@ export default class BaseballGame {
 
   isSomeNumberSame(computerInputNumbers, userInputNumbers) {
     let result = false;
+
     for (let pitch = 0; pitch < this.PITCH_COUNT; pitch++) {
       if (computerInputNumbers.includes(userInputNumbers[pitch])) {
         result = true;
@@ -62,19 +67,42 @@ export default class BaseballGame {
   }
 
   getGameResultString(computerInputNumbers, userInputNumbers) {
-    const ballCountResult = getBallCount(computerInputNumbers, userInputNumbers);
+    const ballCountResult = this.getBallCount(computerInputNumbers, userInputNumbers);
+    const strikeCountResult = this.getStrikeCount(computerInputNumbers, userInputNumbers);
+
+    if (ballCountResult && strikeCountResult) {
+      const totalCountResultString = `${ballCountResult}볼 ${strikeCountResult}스트라이크`;
+    } else if (ballCountResult) {
+      const totalCountResultString = `${ballCountResult}볼`;
+    } else if (strikeCountResult) {
+      const totalCountResultString = `${strikeCountResult}스트라이크`;
+    }
+
+    return totalCountResultString;
   }
 
   getBallCount(computerInputNumbers, userInputNumbers) {
     let ballCount = 0;
+    
     for (let pitch = 0; pitch < this.PITCH_COUNT; pitch++) {
-      if (computerInputNumbers.includes(userInputNumbers[pitch] && 
-        computerInputNumbers[pitch] !== userInputNumbers[pitch])) {
-          ballCount += 1;
+      if (computerInputNumbers.includes(userInputNumbers[pitch]) && 
+        computerInputNumbers[pitch] !== userInputNumbers[pitch]) {
+          ballCount++;
         }
     }
-
+    
     return ballCount;
+  }
+
+  getStrikeCount(computerInputNumbers, userInputNumbers) {
+    let strikeCount = 0;
+    for (let pitch = 0; pitch < this.PITCH_COUNT; pitch++) {
+      if (computerInputNumbers[pitch] === userInputNumbers[pitch]) {
+        strikeCount++;
+      }
+    }
+
+    return strikeCount;
   }
 
   parseUserInput(userInputNumberAsString) {
