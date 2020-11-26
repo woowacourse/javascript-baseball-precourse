@@ -9,4 +9,11 @@ export default function Utils() {
     }
     return numbers.join('');
   };
+
+  this.createBtn = (id, textContent) => {
+    let button = document.createElement('button');
+    button.id = id;
+    button.textContent = textContent;
+    return button;
+  };
 }
