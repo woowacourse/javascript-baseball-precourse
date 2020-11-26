@@ -4,6 +4,7 @@ export default class BaseballGame {
     this.computerNumber = [];
     this.balls = 0;
     this.strikes = 0;
+    this.emojis = ['🎁', '⚽', '⚾', '😀', '😁', '😺', '👽', '🧐', '🙉', '🐼', '👍', '👌', '🤲'];
 
     // DOM elements
     this.userInput = document.getElementById('user-input');
@@ -129,18 +130,23 @@ export default class BaseballGame {
 
   // get the result string based on the ball count and strike count
   getReturnString() {
-    let returnString;
+    let returnString = "";
     if (this.balls && this.strikes) {
-      returnString = `${this.balls}볼 ${this.strikes}스트라이크`;
+      returnString += `${this.balls}볼 ${this.strikes}스트라이크`;
     } else if (!this.balls && this.strikes) {
-      returnString = `${this.strikes}스트라이크`;
+      returnString += `${this.strikes}스트라이크`;
     } else if (this.balls && !this.strikes) {
-      returnString = `${this.balls}볼`;
+      returnString += `${this.balls}볼`;
     } else {
-      returnString = "낫싱";
+      returnString += "낫싱";
     }
+    returnString += this.getRandomEmoji();
 
     return returnString;
+  }
+
+  getRandomEmoji() {
+    return this.emojis[Math.floor(Math.random() * this.emojis.length)];
   }
 
   // compare the numbers and returns the result
