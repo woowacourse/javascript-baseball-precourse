@@ -9,20 +9,25 @@ function getDeduplicateCount(userInputNumbers) {
 function numIsSubmited(e) {
   const userInputNumbers = document.getElementById('user-input').value;
   const deduplicateCount = getDeduplicateCount(userInputNumbers);
+  const regex = /^[0-9]*$/;
+  if (!regex.test(userInputNumbers)) {
+    game.resetInputNumbers();
+    return alert(text.warningForNotNum);
+  }
 
   if (userInputNumbers.length !== 3) {
     game.resetInputNumbers();
-    return alert(text.warningfor3digit);
+    return alert(text.warningFor3digit);
   }
 
   if (userInputNumbers.includes('0')) {
     game.resetInputNumbers();
-    return alert(text.warningforZero);
+    return alert(text.warningForZero);
   }
 
   if (deduplicateCount !== 3) {
     game.resetInputNumbers();
-    return alert(text.waringforduplicate);
+    return alert(text.warningForduplicate);
   }
 
   game.cleanResult();
