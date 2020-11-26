@@ -7,34 +7,27 @@ function getDeduplicateCount(userInputNumbers) {
 }
 
 function numIsSubmited(e) {
-  try {
-    const userInputNumbers = document.getElementById('user-input').value;
-    const deduplicateCount = getDeduplicateCount(userInputNumbers);
+  const userInputNumbers = document.getElementById('user-input').value;
+  const deduplicateCount = getDeduplicateCount(userInputNumbers);
 
-    if (userInputNumbers.length !== 3) {
-      game.resetInputNumbers();
-      throw text.warningfor3digit;
-    }
-
-    if (userInputNumbers.includes('0')) {
-      game.resetInputNumbers();
-      throw text.warningforZero;
-    }
-
-    if (deduplicateCount !== 3) {
-      game.resetInputNumbers();
-      throw text.waringforduplicate;
-    }
-
-    game.cleanResult();
-    const responseString = game.play(
-      game.computerInputNumbers,
-      userInputNumbers,
-    );
-    game.renderResult(responseString);
-  } catch (error) {
-    alert(error);
+  if (userInputNumbers.length !== 3) {
+    game.resetInputNumbers();
+    return alert(text.warningfor3digit);
   }
+
+  if (userInputNumbers.includes('0')) {
+    game.resetInputNumbers();
+    return alert(text.warningforZero);
+  }
+
+  if (deduplicateCount !== 3) {
+    game.resetInputNumbers();
+    return alert(text.waringforduplicate);
+  }
+
+  game.cleanResult();
+  const responseString = game.play(game.computerInputNumbers, userInputNumbers);
+  game.renderResult(responseString);
 }
 const submitNumButton = document.getElementById('submit');
 submitNumButton.addEventListener('click', numIsSubmited);
