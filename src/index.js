@@ -22,6 +22,8 @@ export default class BaseballGame {
       restartContainer.style.display = "block"
       return `<strong>🎉 정답을 맞추셨습니다!🎉</strong>`
     }
+    computerInputNumbers = this.convertToString(computerInputNumbers)
+    userInputNumbers = this.convertToString(userInputNumbers)
     const score = {}
     for (let i = 0; i < userInputNumbers.length; i++) {
       const index = computerInputNumbers.indexOf(userInputNumbers[i])
@@ -80,6 +82,10 @@ export default class BaseballGame {
   changeResultContent(newContent) {
     const resultEl = document.getElementById("result")
     resultEl.innerHTML = newContent
+  }
+  convertToString(value) {
+    if (typeof value === "number") return value.toString()
+    return value
   }
 }
 new BaseballGame();
