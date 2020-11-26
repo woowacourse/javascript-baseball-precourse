@@ -54,17 +54,32 @@ const testValue = (ipt) => {
   }
 };
 
+// * 컴퓨터와 유저의 값 비교
+const compareNum = (comNum, userNum) => {
+  let returnString = "";
+  let strike = 0;
+  let ball = 0;
+
+  return returnString;
+};
+
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    const resultString = compareNum(computerInputNumbers, userInputNumbers);
+
+    return resultString;
   };
 
   const btn = document.getElementById("submit");
   const userInput = document.getElementById("user-input");
 
+  let comNum = generateThreeDigit();
+
   // * 확인 버튼을 눌렀을 때
   const handleSubmit = () => {
     const userNum = testValue(userInput);
+
+    this.play(comNum, userNum);
   };
 
   if (btn) {
