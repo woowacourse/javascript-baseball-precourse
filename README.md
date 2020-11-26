@@ -15,7 +15,7 @@
       - [v] 3자리 이상의 숫자를 입력한 경우 => length 이용
     
   - [v] 사용자 입력에 이상이 없으면 게임을 시작한다. - 주어진 play 메소드를 통해
-  - play 메소드가 실행될 때마다 값이 초기화 될 수 있도록 함수를 만든다. __initValue__
+  - [v] play 메소드가 실행될 때마다 값이 초기화 될 수 있도록 함수를 만든다. __initValue__
   - [v] play 메소드가 실행될 때마다 게임 플레이어가 입력한 숫자와 컴퓨터의 정답 숫자를 비교하여 strike, ball에 추가할 수 있는 함수를 만든다. __compareInput__
   - [v] play 메소드의 return 값을 템플릿 문자열로 바꾸어 ball, strike를 출력할 수 있도록 한 뒤 화면에 결과를 띄워주는 함수를 만든다. __showResultOnScreen__
   - [v] return된 값을 html의 결과 div에 append할 수 있도록 한다.
