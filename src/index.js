@@ -5,6 +5,7 @@ const form = document.querySelector("#form");
 const userInput = document.querySelector("#user-input");
 const submitButton = document.querySelector("#submit");
 const computerInputNumbers = createRandomNumbers();
+const result = document.querySelector("#result");
 let userInputNumbers = null;
 
 function createRandomNumbers() {
@@ -30,7 +31,12 @@ function runBaseballGame(event) {
     alert("잘못된 입력값입니다. 다시 입력해주세요 :)");
     return;
   }
+  if (result.firstChild !== null && result.firstChild.id === "answer") {
+    alert("이미 정답을 맞히셨습니다!");
+    return;
+  }
   BaseballGame.prototype.play(computerInputNumbers, userInputNumbers);
 }
 
+console.log(computerInputNumbers);
 form.addEventListener("submit", runBaseballGame);
