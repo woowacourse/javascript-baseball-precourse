@@ -34,8 +34,7 @@ const compareAnswersAndgetResult = (computerInputNumbers, userInputNumbers) => {
 
 export default function BaseballGame() {
   const gameTurn = document.getElementById('app');
-  const userInput = gameTurn.querySelector('input');
-  const userInputLog = gameTurn.querySelector('#user-input');
+  const userInput = gameTurn.querySelector('#user-input');
   const userInputButton = gameTurn.querySelector('#submit');
   const resultMessage = gameTurn.querySelector('#result');
 
@@ -64,8 +63,18 @@ export default function BaseballGame() {
     addRestartButtonAndAsk();
   }
 
+  const createNewInputForm = () => {
+    const newInputElement = userInput.cloneNode(true);
+    const newInputButton = userInputButton.cloneNode(true);
+    const newResultMessage = resultMessage.cloneNode(false);
+
+    gameTurn.append(newInputElement, newInputButton, newResultMessage);
+  }
+
+  //new input form set
   const addAnotherInputForm = () => {
     console.log('try again!');
+    createNewInputForm();
   }
 
   const getResult = result => {
@@ -85,9 +94,9 @@ export default function BaseballGame() {
     return getResult(result);
   };
 
-  const getUserInput = computerInputNumbers => {
-    userInput.addEventListener('change', e => userInputLog.textContent = e.target.value);
-    userInputButton.addEventListener('click', () => checkValidNumber(userInputLog.textContent).ok ? this.play(computerInputNumbers, userInputLog.textContent) : alert(checkValidNumber(userInputLog.textContent).msg));
+  const getUserFirstInput = computerInputNumbers => {
+    userInput.addEventListener('change', e => userInput.textContent = e.target.value);
+    userInputButton.addEventListener('click', () => checkValidNumber(userInput.textContent).ok ? this.play(computerInputNumbers, userInput.textContent) : alert(checkValidNumber(userInput.textContent).msg));
   }
 
   const startGame = () => {
@@ -95,7 +104,7 @@ export default function BaseballGame() {
     printCorrectAnswerForTest(computerInputNumbers);
 
     //정답이 나올때까지....
-    getUserInput(computerInputNumbers);
+    getUserFirstInput(computerInputNumbers);
   }
   
   startGame();
