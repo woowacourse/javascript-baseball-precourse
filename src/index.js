@@ -1,13 +1,13 @@
 export default class BaseballGame {
   constructor() {
     this.PITCH_COUNT = 3;
+
     this.computerInputNumber = this.getComputerInputNumbers();
     this.userSubmitButton = document.getElementById('submit');
     this.userInputNumber = document.getElementById('user-input');
 
-    this.userSubmitButton.addEventListener('click', (event) => {
+    this.userSubmitButton.addEventListener('click', () => {
       let userInputNumbers = this.parseUserInput(this.userInputNumber.value);
-      event.preventDefault();
       console.log(this.play(this.computerInputNumber, userInputNumbers));
     });
   }
@@ -20,7 +20,7 @@ export default class BaseballGame {
     } else if (this.isNothing(computerInputNumbers, userInputNumbers)) {
       gameResult = '나싱';
     } else if (this.isSomeNumberSame(computerInputNumbers, userInputNumbers)) {
-      gamerResult = getGameResultString(computerInputNumbers, userInputNumbers);
+      gamerResult = this.getGameResultString(computerInputNumbers, userInputNumbers);
     }
 
     return gameResult;
@@ -59,6 +59,22 @@ export default class BaseballGame {
     }
 
     return true;
+  }
+
+  getGameResultString(computerInputNumbers, userInputNumbers) {
+    const ballCountResult = getBallCount(computerInputNumbers, userInputNumbers);
+  }
+
+  getBallCount(computerInputNumbers, userInputNumbers) {
+    let ballCount = 0;
+    for (let pitch = 0; pitch < this.PITCH_COUNT; pitch++) {
+      if (computerInputNumbers.includes(userInputNumbers[pitch] && 
+        computerInputNumbers[pitch] !== userInputNumbers[pitch])) {
+          ballCount += 1;
+        }
+    }
+
+    return ballCount;
   }
 
   parseUserInput(userInputNumberAsString) {
