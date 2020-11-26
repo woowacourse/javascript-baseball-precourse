@@ -89,18 +89,24 @@ const paintText = (text, target) => {
 // * 정답문구 출력
 const paintRestart = (target, handleRestart) => {
   const div = document.createElement("div");
-  const restartBtn = document.createElement("button");
+  const btn = document.createElement("button");
 
-  restartBtn.addEventListener("click", handleRestart);
+  btn.setAttribute("id", "game-restart-button");
 
   div.innerText = "게임을 새로 시작하시겠습니까?";
-  restartBtn.innerText = "게임재시작";
+  btn.innerText = "게임재시작";
   target.innerHTML = `
-    <div>🎉 <strong>정답을 맞추셨습니다!</strong> 🎉</div>
-  `;
+  <div>🎉 <strong>정답을 맞추셨습니다!</strong> 🎉</div>
+`;
 
-  div.appendChild(restartBtn);
+  div.appendChild(btn);
   target.appendChild(div);
+
+  if (btn) {
+    const restartButton = document.getElementById("game-restart-button");
+
+    restartButton.addEventListener("click", handleRestart);
+  }
 };
 
 export default function BaseballGame() {
