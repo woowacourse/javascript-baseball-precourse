@@ -1,5 +1,5 @@
 export default class BaseballGame {
-  // 컴퓨터 입력 값 가져오기 메소드
+  // 컴퓨터 입력 값 가져오기
   getComputerNumber() {
     let computerInputNumbers = '';
 
@@ -26,22 +26,45 @@ export default class BaseballGame {
     return resultData;
   }
 
-  // 유저가 적은 수를 가져오는 함수 (예외사항 판별 기능 추가 예정)
+  // 유저가 입력한 수를 가져오기
   getUserNumber() {
     const userInput = document.querySelector('#user-input');
-    const userInputNumber = userInput.value;
+    const userInputNumber = this.isUserNumberRight(userInput, userInput.value);
 
     return userInputNumber;
   }
 
-  isUserInputRight() {}
+  isUserNumberRight(userInput, text) {
+    let returnValue = null;
 
-  // 확인 버튼 눌렀을 때 유저 input값 불러온 후 값 비교하는 기능.
-  compareNumber(computerInputNumbers, userInputNumbers) {
-    console.log(computerInputNumbers, userInputNumbers);
+    if (text.length !== 3) {
+      userInput.value = '';
+      alert('3개의 숫자를 입력해주세요');
+    } else if (isNaN(text) === true) {
+      userInput.value = '';
+      alert('숫자를 입력해주세요');
+    } else if (
+      this.isDuplicate(text[0], text[1]) === false ||
+      this.isDuplicate(text.slice(0, 2), text[2]) === false
+    ) {
+      userInput.value = '';
+      alert('중복없이 입력해주세요');
+    } else {
+      returnValue = text;
+    }
+
+    return returnValue;
   }
 
-  // 실행 기능
+  // 값 비교하기
+  compareNumber(computerInputNumbers, userInputNumbers) {
+    if (userInputNumbers === null) {
+      console.log('다시 입력해주세요');
+    } else {
+      console.log(computerInputNumbers, userInputNumbers);
+    }
+  }
+
   play(computerInputNumbers, userInputNumbers) {
     this.compareNumber(computerInputNumbers, userInputNumbers);
 
