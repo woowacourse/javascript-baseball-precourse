@@ -1,6 +1,6 @@
 export default class BaseballGame {
   constructor() {
-    this._computerInputNum = this._generateAnswer();
+    this.initGame();
   }
 
   static play(computerInputNumbers, userInputNumbers) {
@@ -23,7 +23,7 @@ export default class BaseballGame {
     return resultStr;
   }
 
-  isValidAnswer(answer) {
+  static isValidAnswer(answer) {
     return (
       answer.length === 3 &&
       answer[0] !== answer[1] &&
@@ -34,10 +34,14 @@ export default class BaseballGame {
 
   _generateAnswer() {
     let answer = Math.floor(Math.random() * 1000);
-    while (!this.isValidAnswer(answer.toString())) {
+    while (!BaseballGame.isValidAnswer(answer.toString())) {
       answer = Math.floor(Math.random() * 1000);
     }
     return answer;
+  }
+
+  initGame() {
+    this._computerInputNum = this._generateAnswer();
   }
 
   getComputerInputNum() {
@@ -54,13 +58,24 @@ const testMethods = () => {
   const showResult = function (result) {
     document.querySelector('#result').textContent = result;
   };
+  const restartBtn = document.createElement('button');
+  restartBtn.id = 'game-restart-button';
+  restartBtn.textContent = '재시작';
+  restartBtn.addEventListener('click', () => {
+    game.initGame(); // NOTE: () => 가 없으면 에러가 발생함
+    document.querySelector('#user-input').value = '';
+    document.querySelector('#result').textContent = '';
+  });
 
   document.querySelector('#submit').addEventListener('click', () => {
     const userInput = parseInt(getUserInput(), 10);
     const computerInput = game.getComputerInputNum();
-    console.log(computerInput);
     const result = BaseballGame.play(computerInput, userInput);
+    console.log(computerInput)
     showResult(result);
+    if (result === '3스트라이크') {
+      document.querySelector('#result').appendChild(restartBtn);
+    }
   });
 };
 testMethods();
