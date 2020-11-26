@@ -20,7 +20,8 @@ export default class BaseballGame {
   renderResult(ball, strike) {
     const result = document.querySelector("#result");
     const answer = document.createElement("strong");
-    const restart = document.createElement("div");
+    const restart = document.createElement("span");
+    const restartButton = document.createElement("button");
 
     result.innerText = "";
     if (ball === 0 && strike === 0) {
@@ -30,9 +31,12 @@ export default class BaseballGame {
     } else {
       answer.innerText = "💯 정답을 맞추셨습니다! 💯";
       answer.id = "answer";
-      restart.innerText = "게임을 새로 시작하시겠습니까?";
       result.appendChild(answer);
+      restart.innerText = "게임을 새로 시작하시겠습니까?";
       result.appendChild(restart);
+      restartButton.innerText = "게임 재시작";
+      restartButton.addEventListener("click", () => location.reload());
+      result.appendChild(restartButton);
     }
   }
 }
