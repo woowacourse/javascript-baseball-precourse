@@ -50,11 +50,7 @@ export default function BaseballGame() {
 
   const getUserInput = computerInputNumbers => {
     userInput.addEventListener('change', e => userInputLog.textContent = e.target.value);
-    userInputButton.addEventListener('click', () => {
-      const checkUserInput = checkValidNumber(userInputLog.textContent);
-      if(!checkUserInput.ok) return alert(checkUserInput.msg);
-      else return playGame(computerInputNumbers, userInputLog.textContent);
-    });
+    userInputButton.addEventListener('click', () => checkValidNumber(userInputLog.textContent).ok ? playGame(computerInputNumbers, userInputLog.textContent) : alert(checkUserInput.msg));
   }
 
   const startGame = () => {
