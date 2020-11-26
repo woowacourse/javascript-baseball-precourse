@@ -9,24 +9,34 @@ const checkValidNumber = inputs => {
 
 const createRandomNumber = () => {
   let randomNum = String(Math.floor(Math.random()*999 + 1));
-  while(true) {
-    if(checkValidNumber(randomNum).ok) break;
-    randomNum = String(Math.floor(Math.random()*999 + 1));
-  }
-  return randomNum;
+  return checkValidNumber(randomNum).ok ? randomNum : createRandomNumber();
 }
 
 export default function BaseballGame() {
+  const userInput = document.querySelector('input');
+  const userInputValue = document.getElementById('user-input');
+  const userInputButton = document.getElementById('submit');
+
+  let isFinished = false;
+
+  userInput.addEventListener('change', e => userInputValue.textContent = e.target.value);
+  userInputButton.addEventListener('click', () => console.log('submit', userInputValue.textContent));
+
   this.play = function (computerInputNumbers, userInputNumbers) {
     return "결과 값 String";
   };
 
   const startGame = () => {
     const answer = createRandomNumber();
-    console.log('hello world!', answer);
+    console.log('hello world! answer is ', answer);
+    isFinished = false;
+
     
+
+
   }
 
+  //for restart, the init func should be made
   startGame();
 }
 
