@@ -7,7 +7,12 @@ const userInputElem = document.querySelector('#user-input');
 const resultElem = document.querySelector('#result');
 const playBtn = document.querySelector('#submit');
 
+userInputElem.addEventListener('click', clearForm);
 playBtn.addEventListener('click', showGameResult);
+
+function clearForm(e) {
+  userInputElem.value = '';
+}
 
 function showGameResult(e) {
   e.preventDefault();
