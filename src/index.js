@@ -113,7 +113,6 @@ export default function BaseballGame() {
   const btn = document.getElementById("submit");
   const userInput = document.getElementById("user-input");
   const hint = document.getElementById("result");
-
   let comNum = generateThreeDigit();
 
   // * 재시작 버튼을 눌렀을 때
@@ -127,9 +126,10 @@ export default function BaseballGame() {
   // * 확인 버튼을 눌렀을 때
   const handleSubmit = () => {
     const userNum = testValue(userInput);
-
     const compareResult = this.play(comNum, userNum);
+
     paintText(compareResult, hint);
+
     if (compareResult === "3스트라이크") {
       paintRestart(hint, handleRestart);
     }
