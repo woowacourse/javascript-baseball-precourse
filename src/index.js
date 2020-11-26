@@ -15,7 +15,7 @@ export default class BaseballGame {
     this.userInput.focus();
     this.submitBtn.addEventListener('click', this.clickSubmit.bind(this));
     this.userInput.addEventListener('keydown', e => {
-      if(e.key === "Enter") {
+      if (e.key === "Enter") {
         this.clickSubmit.bind(this)();
       }
     });
@@ -23,7 +23,7 @@ export default class BaseballGame {
   }
 
   clickRestartBtn(e) {
-    if(e.target.id && e.target.id === 'game-restart-button') {
+    if (e.target.id && e.target.id === 'game-restart-button') {
       // get new random number & reset ball counts and strike counts
       this.getComputerNumber();
       this.resetBallsAndStrikes();
@@ -39,10 +39,10 @@ export default class BaseballGame {
     const inputValue = this.userInput.value;
     
     // test the user input suitability
-    if(!this.isSuitableInputValue(inputValue)) {
+    if (!this.isSuitableInputValue(inputValue)) {
       alert('올바른 값을 입력해주세요.');
       this.setTextInput();
-      
+
       return;
     }
     
@@ -62,7 +62,7 @@ export default class BaseballGame {
 
   // returns true if the input value is suitable
   isSuitableInputValue(val) {
-    if(!val || isNaN(val) || val.length !== 3 || this.hasDuplicatedNumber(val) || this.hasZero(val)) {
+    if (!val || isNaN(val) || val.length !== 3 || this.hasDuplicatedNumber(val) || this.hasZero(val)) {
       return false;
     }
 
@@ -71,7 +71,7 @@ export default class BaseballGame {
 
   // returns true if the input value has zero in it
   hasZero(val) {
-    if(val.includes('0')) {
+    if (val.includes('0')) {
       return true;
     }
 
@@ -82,8 +82,9 @@ export default class BaseballGame {
   hasDuplicatedNumber(val) {
     const valueArray = val.split('');
 
-    for(let i = 0; i < valueArray.length; i++) {
-      if(valueArray.indexOf(valueArray[i]) !== i) {
+    let i;
+    for (i = 0; i < valueArray.length; i++) {
+      if (valueArray.indexOf(valueArray[i]) !== i) {
         return true;
       }
     }
@@ -94,7 +95,7 @@ export default class BaseballGame {
   // print the result on the screen
   printOnScreen(val) {
     let tempHTML = "";
-    if(this.strikes === 3) {
+    if (this.strikes === 3) {
       tempHTML += `<p><b>🎉정답을 맞추셨습니다!🎉</b></p>
                    <p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button></p>`;
 
@@ -116,10 +117,10 @@ export default class BaseballGame {
   getComputerNumber() {
     let index = 0;
     
-    while(index < 3) {
+    while (index < 3) {
       const randomNumber = Math.floor(Math.random() * 10);
       
-      if(randomNumber !== 0 && this.computerNumber.indexOf(randomNumber) === -1) {
+      if (randomNumber !== 0 && this.computerNumber.indexOf(randomNumber) === -1) {
         this.computerNumber[index] = randomNumber;
         index++;
       }
@@ -129,11 +130,11 @@ export default class BaseballGame {
   // get the result string based on the ball count and strike count
   getReturnString() {
     let returnString;
-    if(this.balls && this.strikes) {
+    if (this.balls && this.strikes) {
       returnString = `${this.balls}볼 ${this.strikes}스트라이크`;
-    } else if(!this.balls && this.strikes) {
+    } else if (!this.balls && this.strikes) {
       returnString = `${this.strikes}스트라이크`;
-    } else if(this.balls && !this.strikes) {
+    } else if (this.balls && !this.strikes) {
       returnString = `${this.balls}볼`;
     } else {
       returnString = "낫싱";
@@ -146,8 +147,8 @@ export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
     computerInputNumbers.forEach((number, idx) => {
       const indexOfNumber = userInputNumbers.indexOf(number);
-      if(indexOfNumber === -1) {
-      } else if(indexOfNumber === idx) {
+      if (indexOfNumber === -1) {
+      } else if (indexOfNumber === idx) {
         this.strikes++;
       } else {
         this.balls++;
