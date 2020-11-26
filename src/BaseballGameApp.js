@@ -29,7 +29,32 @@ export default class BaseballGameApp {
 		this.#submitPlay(challenge);
 	}
 
-	#validate() {}
+	#validate(value) {
+		const parsed = parseInt(value);
 
-	#submitPlay(challenge) {}
+		if (Number.isNaN(parsed)) {
+			return false;
+		}
+		if (parsed < 123 || parsed > 987) {
+			return false;
+		}
+		if (new Set(value).size !== 3) {
+			return false;
+		}
+
+		return true;
+	}
+
+	#submitPlay(challenge) {
+		this.#btn.disabled = true;
+		this.#input.disabled = true;
+		this.#result.innerText = this.#game.play(challenge);
+		this.#result.innerText === "정답"
+			? this.#createNewGameBtn()
+			: this.#createNewChallenge();
+	}
+
+	#createNewChallenge() {}
+
+	#createNewGameBtn() {}
 }
