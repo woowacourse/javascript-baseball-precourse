@@ -71,4 +71,8 @@ export default class BaseballGame {
 
     return responseString;
   }
+
+  restart() {
+    this.init();
+  }
 }

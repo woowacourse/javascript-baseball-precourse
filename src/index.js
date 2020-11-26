@@ -22,7 +22,7 @@ function resetInputNumbers() {
 function handleReStartClick() {
   cleanResult();
   resetInputNumbers();
-  game.RandomComputerInputNumbers();
+  game.restart();
 }
 
 function renderResult(string) {
