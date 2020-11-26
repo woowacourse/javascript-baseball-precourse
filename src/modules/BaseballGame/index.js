@@ -31,13 +31,14 @@ export default class BaseballGame {
   judge(computerInputNumbers, userInputNumbers) {
     let strike = 0;
     let ball = 0;
-    for (let i = 0; i < 3; i++) {
-      if (computerInputNumbers[i] === userInputNumbers[i]) {
+
+    [...computerInputNumbers].forEach((digit, index) => {
+      if (digit === userInputNumbers[index]) {
         strike++;
-      } else if (computerInputNumbers.includes(userInputNumbers[i])) {
+      } else if (userInputNumbers.includes(digit)) {
         ball++;
       }
-    }
+    });
 
     return [strike, ball];
   }
