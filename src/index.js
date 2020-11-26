@@ -132,13 +132,16 @@ export default function BaseballGame() {
   // * 확인 버튼을 눌렀을 때
   const handleSubmit = () => {
     const userNum = testValue(userInput);
-    const compareResult = this.play(comNum, userNum);
 
-    paintText(compareResult, hint);
-    userInput.focus();
-    if (compareResult === "3스트라이크") {
-      paintRestart(hint, handleRestart);
-      userInput.value = "";
+    if (userNum) {
+      const compareResult = this.play(comNum, userNum);
+
+      paintText(compareResult, hint);
+      userInput.focus();
+      if (compareResult === "3스트라이크") {
+        paintRestart(hint, handleRestart);
+        userInput.value = "";
+      }
     }
   };
 
