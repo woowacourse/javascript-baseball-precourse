@@ -1,8 +1,57 @@
+const userInput = document.getElementById("user-input");
+const submitButton = document.getElementById("submit");
+const resultDiv = document.getElementById("result");
+
+const formatResult = (ball, strike) => {
+  if (ball === 0 && strike === 0) return "낫싱";
+  if (strike === 3) return "done";
+  const tap = ball > 0 && strike > 0 ? " " : "";
+  return `${ball === 0 ? "" : ball + "볼"}${tap}${
+    strike === 0 ? "" : strike + "스트라이크"
+  }`;
+};
+const changeHTML = (value, location) => {
+  location.innerHTML = value;
+};
+
+const clearAll = () => {
+  setRandomNumber();
+  setNextgame();
+  userInput.onkeyup = undefined;
+  userInput.onkeydown = undefined;
+  resultDiv.innerHTML = "";
+  userInput.value = "";
+};
+const done = () => {
+  userInput.onkeydown = (e) => {
+    e.target.value = "done";
+  };
+  userInput.onkeyup = (e) => {
+    e.target.value = "done";
+  };
+  changeHTML(
+    `게임을 새로 시작하시겠습니까? <button id="game-restart-button">재시작</button>`,
+    resultDiv
+  );
+  const restartButton = document.getElementById("game-restart-button");
+  restartButton.onclick = () => {
+    clearAll();
+  };
+};
+const getFinalResult = (computerInput, userInput) => {
+  const { ball, strike } = getBallAndStrike(computerInput, userInput);
+
+  const result = formatResult(ball, strike);
+  if (result === "done") {
+    done();
+  } else {
+    changeHTML(result, resultDiv);
+  }
+  return result;
+};
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
-    console.log(computerInputNumbers, userInputNumbers);
-    console.log(getFinalResult(computerInputNumbers, userInputNumbers));
-    // if (isExist(userInputNumbers, numbers)) return "결과 값 String";
+    return getFinalResult(computerInputNumbers, userInputNumbers);
   };
   this.done = false;
   this.setDone = function (booleanInput) {
@@ -18,7 +67,6 @@ const isAlreadyExist = (numbers, aNumber) => {
   });
   return result;
 };
-
 const generateOneRandomNumber = () => Math.floor(Math.random() * 9 + 1);
 const generateUniqueRandomNumber = (existingNumber) => {
   let result = generateOneRandomNumber();
@@ -37,8 +85,6 @@ const getComputerInput = () => {
 };
 let RandomNumber = getComputerInput();
 let CurrentBaseballGame = new BaseballGame();
-let userInput = document.getElementById("user-input");
-let submitButton = document.getElementById("submit");
 
 // 여기부터는 computer input 만드는 내용
 
@@ -88,17 +134,6 @@ const getBallAndStrike = (computerInput, userInput) => {
   );
 };
 
-const formatResult = (ball, strike) => {
-  console.log(ball, strike);
-  if (ball === 0 && strike === 0) return "낫싱";
-  if (strike === 3) return "done";
-  const tap = ball > 0 && strike > 0 ? " " : "";
-
-  return `${ball === 0 ? "" : ball + "볼"}${tap}${
-    strike === 0 ? "" : strike + "스트라이크"
-  }`;
-};
-
 const setRandomNumber = () => {
   RandomNumber = getComputerInput();
 };
@@ -107,28 +142,13 @@ const setNextgame = () => {
   CurrentBaseballGame = new BaseballGame();
 };
 
-const clearAll = () => {
-  setRandomNumber();
-  setNextgame();
-};
-const getFinalResult = (computerInput, userInput) => {
-  const { ball, strike } = getBallAndStrike(computerInput, userInput);
-
-  const result = formatResult(ball, strike);
-  if (result === "done") {
-    clearAll();
-    return;
-  }
-  return result;
-};
-
 // <button id="game-restart-button"></button>
 // 여기부터는 html에 대한 내용(인가, 암튼 아직 진행중임)
 
 submitButton.onclick = () => {
-  const resultOfCheck = checkUserInput(userInput.value);
-  if (!resultOfCheck.isValid) {
-    alert(resultOfCheck.errorMessage);
+  const checkValidify = checkUserInput(userInput.value);
+  if (!checkValidify.isValid) {
+    alert(checkValidify.errorMessage);
     return;
   }
   CurrentBaseballGame.play(RandomNumber, userInput.value);
