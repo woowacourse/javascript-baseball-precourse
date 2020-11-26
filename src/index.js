@@ -1,6 +1,22 @@
 export default class BaseballGame {
   static play(computerInputNumbers, userInputNumbers) {
-    return '결과 값 String';
+    const computerInputStr = computerInputNumbers.toString();
+    const userInputStr = userInputNumbers.toString();
+    let ballCount = 0;
+    let strikeCount = 0;
+
+    for (let i = 0; i < userInputStr.length; i++) {
+      const idx = computerInputStr.indexOf(userInputStr[i]);
+      if (idx < 0) continue;
+      idx === i ? strikeCount++ : ballCount++;
+    }
+
+    let resultStr = '';
+    if (ballCount) resultStr += `${ballCount}볼 `;
+    if (strikeCount) resultStr += `${strikeCount}스트라이크`;
+    if (!resultStr) resultStr = '낫싱';
+
+    return resultStr;
   }
 
   static getUserInput() {
