@@ -56,8 +56,7 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    if (computerInputNumbers === userInputNumbers)
-      return `🎉 정답을 맞추셨습니다 🎉<br>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button>`;
+    if (computerInputNumbers === userInputNumbers) return this.correctAnswer();
 
     let ballCount = 0;
     let strikeCount = 0;
@@ -70,11 +69,12 @@ export default class BaseballGame {
       if (computerInputNumbers.includes(userInputNumbers[i])) ballCount++;
     }
 
-    if (ballCount === 0 && strikeCount === 0) return "낫싱";
-    if (ballCount !== 0 && strikeCount === 0) return `${ballCount}볼`;
-    if (ballCount === 0 && strikeCount !== 0) return `${strikeCount}스트라이크`;
-    return `${ballCount}볼 ${strikeCount}스트라이크`;
+    return this.incorrectAnswer(ballCount, strikeCount);
   }
+
+  correctAnswer() {}
+
+  incorrectAnswer(ballCount, strikeCount) {}
 
   render(resultValue, inputNumbers) {
     const newDiv = document.createElement("div");
