@@ -6,7 +6,7 @@ export default function BaseballGame() {
     const computerInputNumbers = getRandomNumberList();
     const submitButton = document.querySelector("#submit");
 
-    submitButton.addEventListener("click", getUserInput);
+    submitButton.addEventListener("click", getUserInputNumberList);
     // console.log(computerInputNumbers);
   };
 
@@ -19,36 +19,39 @@ export default function BaseballGame() {
     return tmpNumbers.slice(START_INDEX_ZERO, NUMBER_DIGIT);
   };
 
-  const getUserInput = function() {
-    const userInputNumbers = document.querySelector("#user-input").value.split('');
+  const getUserInputNumberList = function() {
+    const userInputList = document.querySelector("#user-input").value.split('');
+    let userInputNumbers = [];
 
-    if (isNotValid(userInputNumbers)) {
+    if (isNotValid(userInputList)) {
       alert("잘못된 입력입니다.\n1~9까지의 수를 중복없이 3개 작성해주세요.");
+    } else {
+      userInputNumbers = userInputList.map(x => +x);
     }
   };
 
-  const isNotValid = function(userInputNumbers) {
-    return !(isNumber(userInputNumbers) && isThreeDigit(userInputNumbers) && isNotDuplicated(userInputNumbers));
+  const isNotValid = function(userInputList) {
+    return !(isNumber(userInputList) && isThreeDigit(userInputList) && isNotDuplicated(userInputList));
   };
 
-  const isNumber = function(userInputNumbers) {
+  const isNumber = function(userInputList) {
     let i;
-    for (i = 0; i < userInputNumbers.length; i++) {
-      if (!('1' <= userInputNumbers[i] && userInputNumbers[i] <= '9')) {
+    for (i = 0; i < userInputList.length; i++) {
+      if (!('1' <= userInputList[i] && userInputList[i] <= '9')) {
         return false;
       }
     }
     return true;
   };
 
-  const isThreeDigit = function(userInputNumbers) {
-    return userInputNumbers.length === NUMBER_DIGIT;
+  const isThreeDigit = function(userInputList) {
+    return userInputList.length === NUMBER_DIGIT;
   };
 
-  const isNotDuplicated = function(userInputNumbers) {
-    const checkingSet = new Set(userInputNumbers);
+  const isNotDuplicated = function(userInputList) {
+    const checkingSet = new Set(userInputList);
 
-    return userInputNumbers.length === checkingSet.size;
+    return userInputList.length === checkingSet.size;
   };
 
   // const play = function (computerInputNumbers, userInputNumbers) {
