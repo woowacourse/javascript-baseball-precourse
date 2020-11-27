@@ -52,6 +52,15 @@ export default function BaseballGame() {
         if (fillterdInput.length !== input.length) return false;
         return true;
     };
+    // * 0이 없는지 확인한다.
+    this.isZeroExits = function (input) {
+        for (var item of input) {
+          if (item === "0") {
+            return true;
+          };
+        };
+        return false;
+    };
 };
 
 
