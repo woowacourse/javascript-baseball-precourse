@@ -11,7 +11,7 @@
 - 위 숫자 야구게임에서 상대방의 역할을 컴퓨터가 한다. 컴퓨터는 1에서 9까지 서로 다른 임의의 수 3개를 선택한다. 게임 플레이어는 컴퓨터가 생각하고 있는 3개의 숫자를 입력하고, 컴퓨터는 입력한 숫자에 대한 결과를 출력한다.
 - 이 같은 과정을 반복해 컴퓨터가 선택한 3개의 숫자를 모두 맞히면 게임이 종료된다.
 - 게임을 종료한 후 게임을 다시 시작할 수 있다.
-- 게임을 종료한 후 id가 `game-restart-button`인 버튼을 클릭함으로써 게임을 다시 시작할 수 있다. 
+- 게임을 종료한 후 id가 `game-restart-button`인 버튼을 클릭함으로써 게임을 다시 시작할 수 있다.
   - `예) <button id="game-restart-button">재시작</button>`
 
 <br>
@@ -31,25 +31,25 @@
 ```javascript
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
+    return "결과 값 String"
+  }
 }
 
 export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    return "결과 값 String"
   }
 }
 
 // 예시
-play(123, 456); // '낫싱'
-play(123, 345); // '1볼'
-play(123, 432); // '2볼'
-play(123, 312); // '3볼'
-play(123, 145); // '1스트라이크'
-play(123, 134); // '1볼 1스트라이크'
-play(123, 132); // '2볼 1스트라이크'
-play(123, 124); // '2스트라이크'
+play(123, 456) // '낫싱'
+play(123, 345) // '1볼'
+play(123, 432) // '2볼'
+play(123, 312) // '3볼'
+play(123, 145) // '1스트라이크'
+play(123, 134) // '1볼 1스트라이크'
+play(123, 132) // '2볼 1스트라이크'
+play(123, 124) // '2스트라이크'
 ```
 
 - 스트라이크와 볼이 같이 있는 경우 볼을 먼저쓰고, 스트라이크를 쓴다.
@@ -87,3 +87,11 @@ play(123, 124); // '2스트라이크'
 - event
   - [이벤트](https://ko.javascript.info/introduction-browser-events)
   - [이벤트 위임](https://ko.javascript.info/event-delegation)
+
+## 기능 목록
+
+- 1부터 9까지 서로 다른 수 3자리를 만드는 함수(makeDiffNumber(length) - length -> 자릿 수)
+- 두 값을 입력 받아 각 자릿수를 비교하는데 같은 자리 같은 숫자면 스트라이크, 같은 자리에는 없지만 숫자가 포함되어 있으면 볼, 스트라이크나 볼이 없으면 낫싱(play(computerInput, userInput))
+- 게임 재시작해주는 콜백 함수(restartGame())
+- 사용자의 입력을 전달 해주는 콜백 함수 (sendBaseBall(userInput))
+- 결과 보여주는 함수 (showResult(str))
