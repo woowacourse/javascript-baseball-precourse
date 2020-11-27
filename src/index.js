@@ -87,6 +87,7 @@ export default class BaseballGame {
         computerInputNumbers,
         userInputNumbers
       );
+
       this.printResult(strike, ball);
     }
 
