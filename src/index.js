@@ -61,6 +61,22 @@ export default function BaseballGame() {
         };
         return false;
     };
+    // * 사용자의 입력이 올바른 입력인지 판별하기
+    this.isInputRight = function (input) {
+        if (!this.isLengthEqualsThree(input)) {
+            return false;
+        };
+        if (!this.isNumber(input)) {
+            return false;
+        };
+        if (!this.isAllDifferent(input)) {
+            return false;
+        };
+        if (this.isZeroExits(input)) {
+            return false;
+        };
+        return true;
+    };
 };
 
 
