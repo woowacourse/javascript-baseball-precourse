@@ -47,20 +47,20 @@ class UserInput {
   }
 
   alertByCase = (input) => {
-    const errorCase = [];
+    const errors = [];
     const inputNumber = Number(input);
-
     if (isNaN(inputNumber)) {
-      errorCase.push(NAN_MESSAGE);
+      errors.push(NAN_MESSAGE);
     } else {
       if (input.length !== 3 || inputNumber < MIN3DIGIT) {
-        errorCase.push(WRONG_NUMBER_MESSAGE);
+        errors.push(WRONG_NUMBER_MESSAGE);
       }
       if (hasDuplicateCharacter(input)) {
-        errorCase.push(DUPLICATE_NUMBER_MESSAGE);
+        errors.push(DUPLICATE_NUMBER_MESSAGE);
       }
-    }
-    alert(`${errorCase.join(', ')}를 입력하셨습니다. 다시 입력해주세요.`);
+		}
+		const ALERT_MESSAGE = `${errors.join(', ')}를 입력했습니다. 재입력해주세요.`;
+    alert(ALERT_MESSAGE);
   };
 
   clearInput = () => {
