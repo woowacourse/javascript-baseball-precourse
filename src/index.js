@@ -28,13 +28,20 @@ export default class BaseballGame {
     return numberList.join("");
   }
 
+  isCorrectNumberOfDigits(input) {
+    if (input[0] === input[1] || input[1] === input[2] || input[0] === input[2])
+      return true;
+    return false;
+  }
+
   isValuedInputNumber(input) {
     const inputNumber = Number(input);
     if (
       Number.isNaN(inputNumber) ||
       input.includes("0") ||
       inputNumber < 123 ||
-      inputNumber > 987
+      inputNumber > 987 ||
+      this.isCorrectNumberOfDigits(input)
     )
       return false;
 
