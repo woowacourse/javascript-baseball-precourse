@@ -1,5 +1,3 @@
-import CheckInput from './checkInput.js';
-
 export default function InitGame() {
 	this.StartGame = function (input) {
     input.focus();

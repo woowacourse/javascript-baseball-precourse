@@ -19,7 +19,7 @@ export default function BaseballGame() {
 		  resultMessage = '낫싱';
   
 	  if (strike === 3)
-		  resultMessage = 1;
+		  resultMessage = 'success';
   
 	  return resultMessage;
   }
@@ -57,7 +57,7 @@ export default function BaseballGame() {
 	}
   
 	const DisplayResult = (resultMessage) => {
-	  if (resultMessage == 1) {
+	  if (resultMessage == 'success') {
       let restartMessage = document.createElement('span');
       let restartButton = document.createElement('button');
     
