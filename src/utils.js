@@ -25,4 +25,13 @@ export default function Utils() {
     button.textContent = textContent;
     return button;
   };
+
+  this.initialize = (elem) => {
+    if (elem.tagName == 'DIV') {
+      return (elem.innerHTML = '');
+    }
+    if (elem.tagName == 'INPUT') {
+      return (elem.value = '');
+    }
+  };
 }
