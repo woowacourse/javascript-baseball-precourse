@@ -23,7 +23,7 @@ export default function BaseballGame() {
     const userInputNumbers = document.querySelector("#user-input").value.split('');
 
     if (isNotValid(userInputNumbers)) {
-      console.log(`user input uncorrect ${userInputNumbers}`);
+      alert("잘못된 입력입니다.\n1~9까지의 수를 중복없이 3개 작성해주세요.");
     }
   };
 
