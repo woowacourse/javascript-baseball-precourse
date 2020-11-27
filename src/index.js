@@ -101,6 +101,23 @@ export default class BaseballGame {
     return answer;
   }
 
+  // 결과 내용 출력 메서드
+  showGameResult(answer) {
+    const resultContainer = document.getElementById("result");
+
+    if (answer !== "3스트라이크") {
+      resultContainer.innerHTML = answer;
+    } else {
+      resultContainer.innerHTML = "<h3>🎉 정답을 맞추셨습니다! 🎉</h3>";
+      resultContainer.innerHTML += "게임을 새로 시작하시겠습니까? ";
+      resultContainer.innerHTML +=
+        "<button id='game-restart-button'>게임 재시작</button>";
+
+      const restartBtn = document.getElementById("game-restart-button");
+      restartBtn.addEventListener("click", baseballGame.resetGame);
+    }
+  }
+
   // 게임 시작 메서드
   startGame(computerInputNumbers) {
     const userInputValue = document.getElementById("user-input").value;
