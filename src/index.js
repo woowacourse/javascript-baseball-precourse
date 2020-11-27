@@ -3,65 +3,28 @@ export default class BaseballGame {
     this.initGame();
   }
 
-  // 입력한 숫자가 지켜야하는 조건
-  static validator = {
+  static _validator = {
     isLen3: input => input.length === 3,
     isNum: input => input == parseInt(input, 10),
     noZero: input => !input.includes(0),
     isUnique: input => new Set(input).size === input.length,
   };
 
-  // validator를 순회하여 오류가 있는 validation 이름을 리턴한다
-  static checkValid(input) {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [name, valid] of Object.entries(BaseballGame.validator)) {
+  // 만족하지 않는 validation의 이름을 리턴한다
+  static checkInvalid(input) {
+    let invalidName = '';
+    for (const [name, valid] of Object.entries(BaseballGame._validator)) {
       if (!valid(input)) {
-        return name;
+        invalidName = name;
+        break;
       }
     }
-    return '';
-  }
 
-  play(computerInputNumbers, userInputNumbers) {
-    const computerInputStr = computerInputNumbers.toString();
-    const userInputStr = userInputNumbers.toString();
-    let ballCount = 0;
-    let strikeCount = 0;
-
-    for (let i = 0; i < userInputStr.length; i++) {
-      const idx = computerInputStr.indexOf(userInputStr[i]);
-      if (idx < 0) continue;
-      // eslint-disable-next-line no-unused-expressions
-      idx === i ? strikeCount++ : ballCount++;
-    }
-
-    let resultStr = '';
-    if (ballCount) resultStr += `${ballCount}볼 `;
-    if (strikeCount) resultStr += `${strikeCount}스트라이크`;
-    if (!resultStr) resultStr = '낫싱';
-    if (strikeCount === 3) {
-      resultStr = '✨🎉정답을 맞추셨습니다!🎉✨';
-      this._gotAnswer = true;
-    }
-
-    return resultStr;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  _generateAnswer() {
-    let answer = 0;
-    while (true) {
-      answer = Math.floor(Math.random() * 1000);
-      if (BaseballGame.checkValid(answer.toString())) continue;
-      break;
-    }
-    return answer;
+    return invalidName;
   }
 
   initGame() {
-    console.log(`initGame: ${this}`);
-    console.log(this);
-    this._computerInputNum = this._generateAnswer();
+    this._computerInputNum = this._generateComputerInput();
     this._gotAnswer = false;
   }
 
@@ -72,11 +35,61 @@ export default class BaseballGame {
   userGotAnswer() {
     return this._gotAnswer;
   }
+
+  play(computerInputNumbers, userInputNumbers) {
+    const computerInputStr = computerInputNumbers.toString();
+    const userInputStr = userInputNumbers.toString();
+    let ballCount = 0;
+    let strikeCount = 0;
+
+    for (let i = 0; i < userInputStr.length; i++) {
+      const idx = computerInputStr.indexOf(userInputStr[i]);
+      if (idx >= 0) {
+        idx === i ? strikeCount++ : ballCount++;
+      }
+    }
+
+    let resultStr = '';
+    if (ballCount) {
+      resultStr += `${ballCount}볼 `;
+    }
+    if (strikeCount) {
+      resultStr += `${strikeCount}스트라이크`;
+    }
+    if (!resultStr) {
+      resultStr = '낫싱';
+    }
+    if (strikeCount === 3) {
+      resultStr = '✨🎉정답을 맞추셨습니다!🎉✨';
+      this._gotAnswer = true;
+    }
+
+    return resultStr;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  _generateComputerInput() {
+    let answer = Math.floor(Math.random() * 1000);
+    while (BaseballGame.checkInvalid(answer.toString())) {
+      answer = Math.floor(Math.random() * 1000);
+    }
+
+    return answer;
+  }
 }
 
+/**
+ * DOM을 조작하는 코드 ******************************
+ */
 const userInputElem = document.querySelector('#user-input');
 const resultElem = document.querySelector('#result');
 const submitBtn = document.querySelector('#submit');
+const errorMessage = new Map([
+  ['isLen3', '3자리 숫자를 입력해주세요'],
+  ['isNum', '숫자만 입력해주세요'],
+  ['noZero', '0을 제외한 숫자만 입력해주세요'],
+  ['isUnique', '중복되지 않는 숫자로 입력해주세요'],
+]);
 
 const handleRestartBtn = function (game) {
   game.initGame();
@@ -97,37 +110,33 @@ const createRestartElem = function (game) {
   return restartPara;
 };
 
-// TODO: baseball은 그냥 게임진행용이고, DOM에서 값을 가져오고 넣는건 따로 분리해야 하지 않을까?
-// 메소드 테스트용 실행함수
-const testMethods = () => {
+const showResult = function (result, resultElem, game) {
+  resultElem.textContent = result;
+  if (game.userGotAnswer()) {
+    const restartElem = createRestartElem(game);
+    resultElem.appendChild(restartElem);
+  }
+};
+
+const handleSubmitBtn = function (game) {
+  const err = BaseballGame.checkInvalid(userInputElem.value);
+  if (err) {
+    alert(errorMessage.get(err));
+    return;
+  }
+
+  const userInput = parseInt(userInputElem.value, 10);
+  const computerInput = game.getComputerInputNum();
+  const result = game.play(computerInput, userInput);
+
+  showResult(result, resultElem, game);
+};
+
+const main = () => {
   const game = new BaseballGame();
-  const restartElem = createRestartElem(game);
-  const showResult = function (result) {
-    resultElem.textContent = result;
-    if (game.userGotAnswer()) {
-      resultElem.appendChild(restartElem);
-    }
-  };
-
   submitBtn.addEventListener('click', () => {
-    // validation 확인후 alert
-    const errorMessage = new Map([
-      ['isLen3', '3자리 숫자를 입력해주세요'],
-      ['isNum', '숫자만 입력해주세요'],
-      ['noZero', '1~9까지의 숫자만 입력해주세요'],
-      ['isUnique', '중복되지 않는 숫자로 입력해주세요'],
-    ]);
-
-    const err = BaseballGame.checkValid(userInputElem.value);
-    if (err) {
-      alert(errorMessage.get(err));
-      return;
-    }
-    const userInput = parseInt(userInputElem.value, 10);
-    const computerInput = game.getComputerInputNum();
-    const result = game.play(computerInput, userInput);
-    console.log(computerInput);
-    showResult(result);
+    handleSubmitBtn(game);
   });
 };
-testMethods();
+
+main();
