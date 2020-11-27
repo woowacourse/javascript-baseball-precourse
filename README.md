@@ -94,3 +94,5 @@ https://velog.io/@takeknowledge/%EB%A1%9C%EC%BB%AC%EC%97%90%EC%84%9C-CORS-policy
 1. 원활한 DOM 조작을 위해 class형태로 변경
 2. 굳이 input form에 change event lister를 쓰지 않고, 
 - react에서는 onchange로 이벤트를 걸면서 useState를 사용했었음
+
+3. window.location.reload() 새로 고침 함수 복습

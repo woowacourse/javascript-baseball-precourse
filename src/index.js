@@ -37,41 +37,71 @@ const compareAnswersAndgetResult = (computerInputNumbers, userInputNumbers) => {
   }
 }
 
-let turn = 0;
-let baseballGames = [];
+const gameTurn = document.getElementById('app');
+const userInput = gameTurn.querySelector('#user-input');
+const userInputButton = gameTurn.querySelector('#submit');
 
 export default class BaseballGame {
-  constructor(turn) {
+  constructor() {
     this.answer = createRandomNumber();
-    this.turn = turn;
+    this.isFinished = false;
+    this.result = null;
   }
 
   printResult(result) {
     const resultMessageElement = result.ok ? document.createElement('strong') : document.createElement('p');
     const message = result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
     
+    this.isFinished = result.ok;
     resultMessageElement.innerText = message;
     document.getElementById('result').appendChild(resultMessageElement);
-
-
   }
 
   play(computerInputNumbers, userInputNumbers) {
     const result = compareAnswersAndgetResult(computerInputNumbers, userInputNumbers);
+    this.result = result;
     return this.printResult(result);
   }
+
+  askRestart () {
+    const askRestartSection = document.createElement("div");
+    const restartButton = document.createElement('button');
+    const restartQuestion = document.createElement('p');
+
+    if(!this.result || !this.result.ok) return;
+    
+    askRestartSection.id = "ask-restart";
+    restartButton.id = "restart-button";
+    restartQuestion.id = "restart-question";
+
+    restartQuestion.innerText = "게임을 새로 시작하시겠습니까?";
+    restartButton.innerText = "restart";
+    restartButton.addEventListener('click', () => window.location.reload());
+
+    askRestartSection.appendChild(restartQuestion);
+    askRestartSection.appendChild(restartButton);
+    
+    document.getElementById('result').appendChild(askRestartSection);
+  }
+
+  
+
+
 }
 
-
-
-const gameTurn = document.getElementById('app');
-const userInput = gameTurn.querySelector('#user-input');
-const userInputButton = gameTurn.querySelector('#submit');
-
-let baseballGame = new BaseballGame(turn);
+let baseballGame = new BaseballGame();
 printCorrectAnswerForTest(baseballGame.answer);
 
-userInputButton.addEventListener('click', () => {
+const playGame = e => {
+  e.preventDefault();
   const checkUserInput = checkValidNumber(userInput.value);
-  checkUserInput.ok ? baseballGame.play(baseballGame.answer, userInput.value) : alert(checkUserInput.msg)
-});
+  if(baseballGame.isFinished) return alert('이미 정답을 맞히셨습니다!');
+
+  checkUserInput.ok ? baseballGame.play(baseballGame.answer, userInput.value) : alert(checkUserInput.msg);
+  console.log(baseballGame.result);
+
+  if(baseballGame.result.ok) baseballGame.askRestart();
+
+}
+
+userInputButton.addEventListener('click', playGame);
