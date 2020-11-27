@@ -42,7 +42,7 @@ export default function BaseballGame() {
     }
   })
 	
-	function CountBallStrike(answer, userValue) {
+	const CountBallStrike = (answer, userValue) => {
 	  let ball = 0;
 	  let strike = 0;
   
@@ -56,7 +56,7 @@ export default function BaseballGame() {
 	  return [ball, strike];
 	}
   
-	function DisplayResult(resultMessage) {
+	const DisplayResult = (resultMessage) => {
 	  if (resultMessage == 1) {
       let restartMessage = document.createElement('span');
       let restartButton = document.createElement('button');
