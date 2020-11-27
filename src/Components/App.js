@@ -1,4 +1,4 @@
-import { generateTargetNumbers } from '../utils/generateTargetNumbers.js';
+import { generateTargetNumbers } from '../utils/gameUtil.js';
 import { isValidInputData } from '../utils/validations.js';
 
 class BaseballGame {
@@ -18,7 +18,7 @@ class BaseballGame {
 
   bindEvents() {
     this.$target.addEventListener('click', this.onClick.bind(this));
-    this.$target.addEventListener('keydown', this.onKeyDown);
+    this.$target.addEventListener('keydown', this.onKeyDown.bind(this));
   }
 
   onClick({ target }) {
@@ -42,6 +42,8 @@ class BaseballGame {
       return;
     }
     console.log(target.value);
+
+    this.play(this.answer, target.value);
   }
 }
 
