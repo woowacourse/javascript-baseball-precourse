@@ -1,4 +1,5 @@
 export default function BaseballGame() {
+  this.computerInputNumbers;
   this.isGameOver = false;
   this.MAX_DIGITS = 3;
 
@@ -10,21 +11,19 @@ export default function BaseballGame() {
   };
 
   this.setComputerInputNumbers = () => {
-    const computerInputNumbers = [];
+    const randomNumbers = [];
 
-    while (computerInputNumbers.length < this.MAX_DIGITS) {
+    while (randomNumbers.length < this.MAX_DIGITS) {
       const randomNumber = this.getRandomNumber();
-      const isExistNumber = computerInputNumbers.includes(randomNumber)
-        ? true
-        : false;
+      const isExistNumber = randomNumbers.includes(randomNumber) ? true : false;
 
       if (isExistNumber) {
         continue;
       }
-      computerInputNumbers.push(randomNumber);
+      randomNumbers.push(randomNumber);
     }
 
-    return computerInputNumbers;
+    this.computerInputNumbers = randomNumbers.join("");
   };
 
   this.resetGame = () => {
