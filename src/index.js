@@ -24,9 +24,35 @@ export default function BaseballGame() {
     }
   };
 }
+
+// 새로운 숫자 만들기
+function makeNewNumber() {
+  let newNumber = [];
+  let i = 0;
+  while (i < 3) {
+    let n = Math.floor(Math.random() * 9) + 1;
+    if (!isInclude(n, newNumber)) {
+      newNumber.push(n);
+      i++;
+    }
+  }
+  console.log("새로운 숫자: ", newNumber.join(""));
+  return newNumber.join("");
+}
+
+// 새로 생성된 숫자가 이미 존재하는지 안하는지 판별
+function isInclude(num, arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr.includes(num)) {
+      return true;
+    }
+    return false;
+  }
+}
+
 const baseballGame = new BaseballGame();
 
-let computerInputNumbers = "123";
+let computerInputNumbers = makeNewNumber();
 let userInputNumbers = "0";
 
 // 사용자 input 받기
@@ -45,7 +71,7 @@ btnInput.onclick = function () {
     const btnRestart = document.getElementById("game-restart-button");
     // 게임 재시작
     btnRestart.onclick = function () {
-      computerInputNumbers = "245"; // computerInputNumber 바꾸기
+      computerInputNumbers = makeNewNumber(); // computerInputNumber 바꾸기
       document.getElementById("user-input").value = ""; // input 초기화
       document.getElementById("result").innerHTML = ""; // result 초기화
     };
