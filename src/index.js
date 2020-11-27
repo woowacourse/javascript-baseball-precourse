@@ -52,6 +52,7 @@ export default function BaseballGame(N) {
 
     alert(getErrorMessage(errno));
     util.initNode(userInputElem);
+    userInputElem.focus();
   };
 
   const getErrorMessage = (errno) => {
@@ -76,7 +77,7 @@ export default function BaseballGame(N) {
     console.log(`⚾LOG: Your Guess Is... ${userInputNumbers}`);
 
     let score = markScore(computerInputNumbers, userInputNumbers);
-    return getGameResult(score);
+    return getGameResultStr(score);
   };
 
   const markScore = (computerInputNumbers, userInputNumbers) => {
@@ -97,7 +98,7 @@ export default function BaseballGame(N) {
     return score;
   };
 
-  const getGameResult = (score) => {
+  const getGameResultStr = (score) => {
     if (score.strike === N) {
       prepareRestartButton();
       return `<h4>🎉정답을 맞추셨습니다!🎉</h4>게임을 새로 시작하시겠습니까? `;
@@ -135,7 +136,7 @@ export default function BaseballGame(N) {
     util.initNode(userInputElem);
   };
 
-  const showGameResult = (e) => {
+  const getReadyAndPlayGame = (e) => {
     e.preventDefault();
     util.initNode(resultElem);
 
@@ -153,7 +154,7 @@ export default function BaseballGame(N) {
   let computerInputNumbers = '';
 
   userInputElem.addEventListener('click', clearForm);
-  playBtn.addEventListener('click', showGameResult);
+  playBtn.addEventListener('click', getReadyAndPlayGame);
 }
 
 new BaseballGame(3);
