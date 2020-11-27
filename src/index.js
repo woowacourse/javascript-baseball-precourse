@@ -79,7 +79,28 @@ export default class BaseballGame {
 
     return ball;
   }
+
+  // 야구게임 수행 메서드 반환
+  play(computerInputNumbers, userInputNumbers) {
+    const strike = this.countStrike(computerInputNumbers, userInputNumbers);
+    const ball = this.countBall(computerInputNumbers, userInputNumbers);
+
+    let answer = "";
+    if (ball === 0 && strike === 0) {
+      answer = "낫싱";
+    }
+
+    if (ball > 0) {
+      answer += `${ball}볼 `;
+    }
+
+    if (strike > 0) {
+      answer += `${strike}스트라이크`;
+    }
+
+    return answer;
+  }
 }
 
 const baseballGame = new BaseballGame();
-console.log(baseballGame.countBall([1, 2, 3], [3, 2, 1]));
+console.log(baseballGame.play([1, 2, 3], [3, 2, 1]));
