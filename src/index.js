@@ -30,10 +30,9 @@ export default class BaseballGame {
   clickRestartBtn(e) {
     const { target: { id }} = e;
     if (id && id === 'game-restart-button') {
-      // get new random number & reset ball counts and strike counts
+      // reset game settings
       this.getComputerNumber();
       this.resetBallsAndStrikes();
-
       this.setTextInput();
       RESULT_DIV.innerHTML = "";
     }
@@ -41,7 +40,6 @@ export default class BaseballGame {
   
   clickSubmit() {
     const inputValue = USER_INPUT.value;
-    
     // test the user input suitability
     if (!this.isSuitableInputValue(inputValue)) {
       alert('올바른 값을 입력해주세요.');
@@ -52,13 +50,12 @@ export default class BaseballGame {
     
     // change user input string into an array of numbers
     const userInputNumbers = inputValue.split('').map(number => +number);
-    
     const resultValue = this.play(this.computerNumber, userInputNumbers)
     this.printOnScreen(resultValue);
     this.resetBallsAndStrikes();
   }
   
-  // reset and focus on text input
+  // reset text input and focus on it
   setTextInput() {
     USER_INPUT.readOnly = false;
     USER_INPUT.value = "";
@@ -87,7 +84,6 @@ export default class BaseballGame {
   // returns true if the input value has duplicated numbers in it
   hasDuplicatedNumber(val) {
     const valueArray = val.split('');
-
     let i;
     for (i = 0; i < valueArray.length; i++) {
       if (valueArray.indexOf(valueArray[i]) !== i) {
@@ -104,12 +100,10 @@ export default class BaseballGame {
     if (this.strikes === THREE_STRIKES) {
       tempHTML += `<p><b>🎉정답을 맞추셨습니다!🎉</b></p>
                    <p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button></p>`;
-
       USER_INPUT.readOnly = true;
     } else {
       tempHTML += `<p>${val}</p>`;
     }
-
     RESULT_DIV.innerHTML = tempHTML;
   }
 
@@ -122,10 +116,8 @@ export default class BaseballGame {
   // get computer's random number
   getComputerNumber() {
     let numberIndex = 0;
-    
     while (numberIndex < 3) {
       const randomNumber = Math.floor(Math.random() * 10);
-      
       if (randomNumber !== INVALID_NUMBER && this.computerNumber.indexOf(randomNumber) === -1) {
         this.computerNumber[numberIndex] = randomNumber;
         numberIndex++;
@@ -165,7 +157,6 @@ export default class BaseballGame {
         this.balls++;
       }
     });
-
     const result = this.getReturnString();
 
     return result;
