@@ -23,65 +23,20 @@ first commit
     - 맞히지 못한 경우 `2.힌트`를 출력한다
 6. 게임 종료: 게임을 종료한 후 게임을 다시 시작할 수 있다
     - 유저가 정답을 맞히면 게임이 종료된다
+    - 게임이 종료되면 확인버튼을 누를 수 없다
     - 게임을 종료한 후 id가 game-restart-button인 버튼을 클릭함으로써 게임을 다시 시작할 수 있다.
 
 ## 실행법
 
-1. npm run serve
-2. live server (vscode extension)
+1. live server (vscode extension) 설치
+2. index.html 우클릭 > Open with LiveServer
 
-## 주의
-기능 요구사항, 프로그래밍 요구사항, 과제 진행 요구사항 세 가지를 지킬 것
+## 실행 화면
+
+![img](https://res.cloudinary.com/dtttkj2mc/image/upload/v1606484086/etc/woowacourse-1-2_xayqnh.png)
 
 ## 참고
 
 - Readme 작성법: <https://dev-hyun.tistory.com/147>
 - commit template: <https://junwoo45.github.io/2020-02-06-commit_template/>
 - eslint & prettier 설정: <https://velog.io/@_jouz_ryul/ESLint-Prettier-Airbnb-Style-Guide%EB%A1%9C-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0>, <https://velog.io/@velopert/eslint-and-prettier-in-react>,<https://velog.io/@kyusung/eslint-config-2>
-
-## 생각해본 것
-
-- html 안에 onclick을 달았다. undefined 에러가 나는 이유를 몰랐다. 세상에.
-- document.querySelector('#user-input').textContent가 아니라 .value다
-- template이 vue나 react에만 있는줄 알았는데 html5에서 지원하는 기능이었다!
-- DOM에 객체를 동적으로 추가하는 방법: 1. createElem (노드로 추가하는 방법) 2. innerHTML(HTML script로 추가하는 방법) 3. insertAdjacentHtml, Elem, Text (HTML script로 추가하는 방법)
-- 이벤트 리스너도 달거니까 createElem써서 다는게 제일 나을듯 (https://www.javascripttutorial.net/javascript-dom/javascript-createelement/)
-- 기능 목록 단위로 commit 추가하는게 어렵네...
-- (고민) DOM에 값 넣는 기능과 게임을 진행하는 기능은 분리해야하지 않을까? => class baseball 분리
-- (고민) 그냥 바벨로 바꿔버리면 server 돌릴 필요 없지 않나?
-- (고민) 내코드 왜이렇게 더럽지. 다른사람들은 어떻게 저렇게 깨끗하지? indent때문인가?
-- (고민) 메소드이름짓기 어려워서 다른사람꺼 차용했다(handle어쩌구)
-- (고민) 다른사람들은 어떻게 저렇게 적은 커밋만으로 완성했지?? 
-- (고민) DOM Event 조절하는 애랑 Game을 진행하는거랑 구분했는데 움 뭔가 같이 놔두는게 낫나
-- (에러) `index.js:44 Uncaught TypeError: this._generateAnswer is not a function
-    at HTMLButtonElement.initGame (index.js:44)`
-    구조: 
-    ```js
-    export default class BaseballGame {
-    constructor() {
-        this.initGame();
-    }
-
-    _generateAnswer() {
-        // 랜덤 숫자 생성후 리턴
-    }
-
-    initGame() {
-        this._computerInputNum = this._generateAnswer() // FIXME: 에러발생!
-    }
-
-    }
-
-    const game = new BaseballGame();
-
-    const testMethods = () => {
-    document.querySelector('#submit').addEventListener('click', () => {
-        const restartBtn = document.createElement('button');
-        restartBtn.id = 'game-restart-button';
-        restartBtn.textContent = '재시작';
-        restartBtn.addEventListener('click', game.initGame);
-        document.querySelector('#result').appendChild(restartBtn);
-    });
-    };
-
-    ```
