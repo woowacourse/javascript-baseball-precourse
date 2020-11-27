@@ -30,7 +30,7 @@ export default class BaseballGame {
   playNewGame() {
     const userInput = document.getElementById("user-input");
     userInput.value = "";
-    this.changeResultContent(null)
+    this.changeResultContent(null);
     this.changeRestartContainerDisplay("none");
     this.randomNumber = this.createRandomNumber();
   }
@@ -110,11 +110,15 @@ export default class BaseballGame {
     this.changeResultContent(this.play(this.randomNumber, inputValue));
   }
 
+  addEventListenerById(id, func) {
+    const buttonEl = document.getElementById(id);
+    buttonEl.addEventListener("click", func);
+  }
+
   clickEventListener() {
-    const submitButton = document.getElementById("submit");
-    submitButton.addEventListener("click", () => this.submitClickEvent());
-    const restartButton = document.getElementById("game-restart-button");
-    restartButton.addEventListener("click", () => this.playNewGame());
+    // bind(this) 사용하지 않기 위해 arrow function 사용
+    this.addEventListenerById("submit", () => this.submitClickEvent());
+    this.addEventListenerById("game-restart-button", () => this.playNewGame());
   }
 }
 new BaseballGame();
