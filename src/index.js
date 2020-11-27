@@ -50,6 +50,19 @@ export default class BaseballGame {
 
     return true;
   }
+
+  // 스트라이크 개수 반환 메서드
+  countStrike(computerInputNumbers, userInputNumbers) {
+    let strike = 0;
+
+    for (let i = 0; i < 3; i++) {
+      if (computerInputNumbers[i] === userInputNumbers[i]) {
+        strike += 1;
+      }
+    }
+
+    return strike;
+  }
 }
 
-new BaseballGame();
+const baseballGame = new BaseballGame();
