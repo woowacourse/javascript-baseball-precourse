@@ -1,4 +1,5 @@
 export default function BaseballGame() {
+  this.isGameOver = false;
   this.MAX_DIGITS = 3;
 
   this.getGameResult = (computerInputNumbers, userInputNumbers) => {
@@ -25,8 +26,26 @@ export default function BaseballGame() {
     return gameResult;
   };
 
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+  this.play = (computerInputNumbers, userInputNumbers) => {
+    const gameResult = this.getGameResult(
+      computerInputNumbers,
+      userInputNumbers
+    );
+    const ball = gameResult.ball;
+    const strike = gameResult.strike;
+    let message = "";
+
+    if (ball === 0 && strike === 0) {
+      message = "낫싱";
+    } else if (strike === this.MAX_DIGITS) {
+      message = "<h4>🎉정답을 맞추셨습니다!🎉</h4>";
+      this.isGameOver = true;
+    } else {
+      message += ball ? `${ball}볼 ` : "";
+      message += strike ? `${strike}스트라이크` : "";
+    }
+
+    return message;
   };
 
   this.getRandomNumber = () => {
