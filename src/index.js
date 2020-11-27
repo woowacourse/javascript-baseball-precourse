@@ -22,13 +22,22 @@ export default class BaseballGame {
   #playResult;
 
   constructor() {
-    this.#answer = getRandomNumber(MIN_DIGIT, MAX_DIGIT, DIGIT_COUNT);
+    this.setAnswer();
     this.#userNumber = new State(INITIAL_STATE_NUMBER);
     this.#playResult = new ComputedState(this.getPlayResult, [
       this.#userNumber,
     ]);
     this.initializeComponents();
   }
+
+  setAnswer = () => {
+    this.#answer = getRandomNumber(MIN_DIGIT, MAX_DIGIT, DIGIT_COUNT);
+  };
+
+  restart = () => {
+    this.setAnswer();
+    this.#userNumber.value = INITIAL_STATE_NUMBER;
+  };
 
   getPlayResult = () => {
     if (this.#userNumber.value === INITIAL_STATE_NUMBER) {
@@ -71,7 +80,6 @@ export default class BaseballGame {
 
   createPlayResult(strikeCount, ballCount) {
     let playResult = '';
-
     if (strikeCount === 3) {
       playResult = VICTORY_MESSAGE;
     }
@@ -94,8 +102,13 @@ export default class BaseballGame {
   initializeComponents() {
     const $inputWrap = document.getElementById('input-wrap');
     const $result = document.getElementById('result');
-    new UserInput($inputWrap, { userNumber: this.#userNumber });
-    new GameResult($result, { playResult: this.#playResult });
+    new UserInput($inputWrap, {
+      userNumber: this.#userNumber,
+    });
+    new GameResult($result, {
+      playResult: this.#playResult,
+      restart: this.restart,
+    });
   }
 }
 

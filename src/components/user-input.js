@@ -4,6 +4,7 @@ import {
   DUPLICATE_NUMBER_MESSAGE,
 } from '../library/constants/alert-message.js';
 import { MIN3DIGIT } from '../library/constants/number.js';
+import { INITIAL_STATE_NUMBER } from '../library/constants/state.js';
 import { hasDuplicateCharacter } from '../library/utils/check.js';
 
 class UserInput {
@@ -15,6 +16,7 @@ class UserInput {
     this.#$target = $target;
     this.#props = props;
     this.#$userInput = $target.querySelector('#user-input');
+    props.userNumber.subscribe(this.render);
     this.initializeEventListener();
   }
 
@@ -58,13 +60,20 @@ class UserInput {
       if (hasDuplicateCharacter(input)) {
         errors.push(DUPLICATE_NUMBER_MESSAGE);
       }
-		}
-		const ALERT_MESSAGE = `${errors.join(', ')}를 입력했습니다. 재입력해주세요.`;
+    }
+    const errorString = errors.join(', ');
+    const ALERT_MESSAGE = `${errorString}를 입력했습니다. 재입력해주세요.`;
     alert(ALERT_MESSAGE);
   };
 
   clearInput = () => {
     this.#$userInput.value = '';
+  };
+
+  render = () => {
+    if (this.#props.userNumber.value === INITIAL_STATE_NUMBER) {
+      this.clearInput();
+    }
   };
 }
 
