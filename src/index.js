@@ -16,19 +16,18 @@ export default class BaseballGame {
     const maxVal = 9;
     let table;
     let random = '';
-    let cnt = 0;
+    let count = 0;
 
-    (table = []).length = 10;
-    table.fill(false);
+    table = Array.from({ length: 10 }).map(() => false);
 
-    while (cnt < 3) {
+    while (count < 3) {
       let number = Math.floor(Math.random() * (maxVal - minVal + 1) + minVal);
       if (table[number]) {
         continue;
       } else {
         table[number] = true;
         random += number;
-        cnt++;
+        count++;
       }
     }
 
@@ -108,7 +107,7 @@ function handleUserInputSubmit() {
     return alert(text.warningForZero);
   }
 
-  if (isInduplicateDigit(userInputNumbers)) {
+  if (isInDuplicateDigit(userInputNumbers)) {
     resetInputNumbers();
     return alert(text.warningForduplicate);
   }
@@ -138,7 +137,7 @@ function isInZero(userInputNumbers) {
   }
 }
 
-function isInduplicateDigit(userInputNumbers) {
+function isInDuplicateDigit(userInputNumbers) {
   const deduplicateCount = Array.from(new Set(userInputNumbers)).length;
   if (deduplicateCount !== 3) {
     return true;
