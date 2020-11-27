@@ -49,36 +49,29 @@ export default class BaseballGame {
   printResult(result) {
     const resultMessageElement = result.ok ? document.createElement('strong') : document.createElement('p');
     const message = result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
+    
     resultMessageElement.innerText = message;
     document.getElementById('result').appendChild(resultMessageElement);
+
+
   }
-
-
 
   play(computerInputNumbers, userInputNumbers) {
     const result = compareAnswersAndgetResult(computerInputNumbers, userInputNumbers);
-    //console.log(result);
     return this.printResult(result);
   }
 }
 
 
-//let baseballGame = new BaseballGame(); 
-const startGame = () => {
-  const gameTurn = document.getElementById('app');
-  const userInput = gameTurn.querySelector('#user-input');
-  const userInputButton = gameTurn.querySelector('#submit');
-  
-  let baseballGame = new BaseballGame(turn);
-  printCorrectAnswerForTest(baseballGame.answer);
 
-  userInput.addEventListener('change', e => userInput.textContent = e.target.value);
-  userInputButton.addEventListener('click', () => {
-    const checkUserInput = checkValidNumber(userInput.textContent);
-    checkUserInput.ok ? baseballGame.play(baseballGame.answer, userInput.textContent) : alert(checkUserInput.msg)
-  });
+const gameTurn = document.getElementById('app');
+const userInput = gameTurn.querySelector('#user-input');
+const userInputButton = gameTurn.querySelector('#submit');
 
+let baseballGame = new BaseballGame(turn);
+printCorrectAnswerForTest(baseballGame.answer);
 
-}
-
-startGame();
+userInputButton.addEventListener('click', () => {
+  const checkUserInput = checkValidNumber(userInput.value);
+  checkUserInput.ok ? baseballGame.play(baseballGame.answer, userInput.value) : alert(checkUserInput.msg)
+});
