@@ -1,0 +1,11 @@
+body {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+#answer {
+  font-weight: 500;
+}
+
+#game-restart-button {
+  margin-left: 10px;
+}
