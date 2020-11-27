@@ -90,7 +90,7 @@ function handleReStartClick() {
 }
 
 function handleUserInputSubmit() {
-  const userInputNumbers = document.getElementById('user-input').value;
+  const userInputNumbers = doc.getElementById('user-input').value;
 
   if (!isNumber(userInputNumbers)) {
     resetInputNumbers();
@@ -145,14 +145,14 @@ function isInDuplicateDigit(userInputNumbers) {
 }
 
 function resetInputNumbers() {
-  const userInput = document.getElementById('user-input');
+  const userInput = doc.getElementById('user-input');
   userInput.value = '';
 }
 
 // DOM Manipulation function
 
 function cleanResult() {
-  const result_div = document.getElementById('result');
+  const result_div = doc.getElementById('result');
 
   while (result_div.hasChildNodes()) {
     result_div.removeChild(result_div.firstChild);
@@ -160,24 +160,24 @@ function cleanResult() {
 }
 
 function renderResult(string) {
-  const result_div = document.getElementById('result');
+  const result_div = doc.getElementById('result');
 
-  const response_p = document.createElement('p');
+  const response_p = doc.createElement('p');
   response_p.innerHTML = string;
 
   if (string === text.correct) {
-    const strong = document.createElement('strong');
+    const strong = doc.createElement('strong');
     strong.appendChild(response_p);
     result_div.appendChild(strong);
 
-    const restart_div = document.createElement('div');
+    const restart_div = doc.createElement('div');
     restart_div.id = 'restart';
 
-    let restart_p = document.createElement('p');
+    let restart_p = doc.createElement('p');
     restart_p.innerHTML = text.askRestart;
     restart_div.appendChild(restart_p);
 
-    const restart_button = document.createElement('button');
+    const restart_button = doc.createElement('button');
     restart_button.innerHTML = text.restart;
     restart_button.id = 'game-restart-button';
     restart_button.addEventListener('click', handleReStartClick);
@@ -188,7 +188,7 @@ function renderResult(string) {
     result_div.appendChild(response_p);
   }
 }
-
+const doc = window.document;
 const game = new BaseballGame();
-const submitNumButton = document.getElementById('submit');
+const submitNumButton = doc.getElementById('submit');
 submitNumButton.addEventListener('click', handleUserInputSubmit);
