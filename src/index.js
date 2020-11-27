@@ -26,6 +26,23 @@ export default function BaseballGame() {
     return gameResult;
   };
 
+  this.printGameResult = (message) => {
+    const resultContainer = document.querySelector("#result");
+    resultContainer.innerHTML = message;
+
+    if (this.isGameOver) {
+      const restartQuestion = document.createElement("p");
+      const restartButton = document.createElement("button");
+
+      restartQuestion.innerText = "게임을 새로 시작하시겠습니까?";
+      restartButton.innerText = "게임 재시작";
+      restartButton.addEventListener("click", this.resetGame);
+
+      restartQuestion.appendChild(restartButton);
+      resultContainer.appendChild(restartQuestion);
+    }
+  };
+
   this.play = (computerInputNumbers, userInputNumbers) => {
     const gameResult = this.getGameResult(
       computerInputNumbers,
