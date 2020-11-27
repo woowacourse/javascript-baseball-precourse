@@ -1,9 +1,10 @@
 export default class BaseballGame {
   constructor() {
     this.initGame();
+    this._gotAnswer = false;
   }
 
-  static play(computerInputNumbers, userInputNumbers) {
+  play(computerInputNumbers, userInputNumbers) {
     const computerInputStr = computerInputNumbers.toString();
     const userInputStr = userInputNumbers.toString();
     let ballCount = 0;
@@ -12,6 +13,7 @@ export default class BaseballGame {
     for (let i = 0; i < userInputStr.length; i++) {
       const idx = computerInputStr.indexOf(userInputStr[i]);
       if (idx < 0) continue;
+      // eslint-disable-next-line no-unused-expressions
       idx === i ? strikeCount++ : ballCount++;
     }
 
@@ -19,6 +21,10 @@ export default class BaseballGame {
     if (ballCount) resultStr += `${ballCount}볼 `;
     if (strikeCount) resultStr += `${strikeCount}스트라이크`;
     if (!resultStr) resultStr = '낫싱';
+    if (strikeCount === 3) {
+      resultStr = '✨🎉정답을 맞추셨습니다!🎉✨';
+      this._gotAnswer = true;
+    }
 
     return resultStr;
   }
@@ -32,6 +38,7 @@ export default class BaseballGame {
     );
   }
 
+  // eslint-disable-next-line class-methods-use-this
   _generateAnswer() {
     let answer = Math.floor(Math.random() * 1000);
     while (!BaseballGame.isValidAnswer(answer.toString())) {
@@ -47,6 +54,10 @@ export default class BaseballGame {
   getComputerInputNum() {
     return this._computerInputNum;
   }
+
+  userGotAnswer() {
+    return this._gotAnswer;
+  }
 }
 
 const game = new BaseballGame();
@@ -55,9 +66,8 @@ const game = new BaseballGame();
 // 메소드 테스트용 실행함수
 const testMethods = () => {
   const getUserInput = () => document.querySelector('#user-input').value;
-  const showResult = function (result) {
-    document.querySelector('#result').textContent = result;
-  };
+  const restartPara = document.createElement('p');
+  restartPara.textContent = '게임을 새로 시작하시겠습니까?';
   const restartBtn = document.createElement('button');
   restartBtn.id = 'game-restart-button';
   restartBtn.textContent = '재시작';
@@ -66,16 +76,21 @@ const testMethods = () => {
     document.querySelector('#user-input').value = '';
     document.querySelector('#result').textContent = '';
   });
+  restartPara.appendChild(restartBtn);
+  const showResult = function (result) {
+    document.querySelector('#result').textContent = result;
+    console.log(game.userGotAnswer());
+    if (game.userGotAnswer()) {
+      document.querySelector('#result').appendChild(restartPara);
+    }
+  };
 
   document.querySelector('#submit').addEventListener('click', () => {
     const userInput = parseInt(getUserInput(), 10);
     const computerInput = game.getComputerInputNum();
-    const result = BaseballGame.play(computerInput, userInput);
-    console.log(computerInput)
+    const result = game.play(computerInput, userInput);
+    console.log(computerInput);
     showResult(result);
-    if (result === '3스트라이크') {
-      document.querySelector('#result').appendChild(restartBtn);
-    }
   });
 };
 testMethods();
