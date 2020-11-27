@@ -1,11 +1,6 @@
-import { makeRandomNumber, checkInput } from "./ballManager.js";
-
-const result = document.getElementById("result");
-const button = document.getElementById("submit");
-const input = document.getElementById("user-input");
-
-let randomNumber = makeRandomNumber();
-let game = new BaseballGame();
+import { makeRandomNumber, verifyInput } from "./ballManager.js";
+import { GAME_SCORE } from "./constants.js";
+import { createElement } from "./utils.js";
 
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
@@ -25,9 +20,9 @@ export default function BaseballGame() {
 
     //결과창
     if (strike === 3) {
-      return "3스트라이크";
+      return GAME_SCORE.threeStrike;
     } else if (strike + ball === 0) {
-      return "낫싱";
+      return GAME_SCORE.nothing;
     } else if ((strike >= 1) & (ball >= 1)) {
       return `${ball}볼 ${strike}스트라이크`;
     } else if ((strike === 0) & (ball >= 1)) {
@@ -39,42 +34,47 @@ export default function BaseballGame() {
   };
 }
 
-//버튼 이벤트 리스너 함수 호출
-button.addEventListener("click", onClickHandler);
+function main() {
+  const result = document.getElementById("result");
+  const button = document.getElementById("submit");
+  const input = document.getElementById("user-input");
+  const restart = createElement("div", "게임을 새로 시작하시겠습니까?");
+  const restartBtn = createElement("button", "게임 재시작");
+  const game = new BaseballGame();
 
-//온클릭핸들러 함수
-const onClickHandler = function (event) {
-  event.preventDefault();
-  let inputValue = [...input.value].map(Number);
+  let randomNumber = makeRandomNumber();
 
-  if (checkInput(input.value)) {
+  //재시작 함수
+  //버튼 이벤트 리스너 함수 호출
+  button.addEventListener("click", onClickHandler);
+
+  //온클릭핸들러
+  function onClickHandler(event) {
+    event.preventDefault();
+    if (verifyInput(input.value) === false) return;
+
+    const inputValue = [...input.value].map(Number);
     const hint = game.play(randomNumber, inputValue);
-
     result.innerText = hint;
     input.focus();
 
-    if (hint === "3스트라이크") {
-      result.innerText = "🎉 정답을 맞추셨습니다! 🎉";
-
-      //다 맞출 경우 게임 재시작
-      const restart = document.createElement("div");
-      const restartBtn = document.createElement("button");
-
-      result.append(restart);
-      restart.innerText = "게임을 새로 시작하시겠습니까?";
-      restartBtn.innerHTML = "게임 재시작";
-      restart.append(restartBtn);
-
-      console.log(result);
-      restartBtn.addEventListener("click", onClickRestartHandler);
+    if (hint === GAME_SCORE.threeStrike) {
+      gameOver();
     }
   }
-};
+  function gameOver() {
+    result.innerText = "🎉 정답을 맞추셨습니다! 🎉";
+    result.append(restart);
+    restart.append(restartBtn);
+    restartBtn.id = "game-restart-button";
+    restartBtn.addEventListener("click", onClickRestartHandler);
+  }
 
-//재시작 함수
-const onClickRestartHandler = function (event) {
-  randomNumber = makeRandomNumber();
-  input.value = "";
-  input.focus();
-  result.innerHTML = "";
-};
+  const onClickRestartHandler = function (event) {
+    randomNumber = makeRandomNumber();
+    input.value = "";
+    input.focus();
+    result.innerHTML = "";
+  };
+}
+main();
