@@ -28,10 +28,26 @@ export default class BaseballGame {
     return numberList.join("");
   }
 
+  isValuedInputNumber(input) {
+    const inputNumber = Number(input);
+    if (
+      Number.isNaN(inputNumber) ||
+      input.includes("0") ||
+      inputNumber < 123 ||
+      inputNumber > 987
+    )
+      return false;
+
+    return true;
+  }
+
   handleSubmit(e) {
     const userInput = document.getElementById("user-input").value.trim();
     document.getElementById("user-input").value = "";
     console.log(userInput);
+
+    if (!this.isValuedInputNumber(userInput))
+      return alert("잘못된 입력값 입니다");
   }
 
   play(computerInputNumbers, userInputNumbers) {
