@@ -62,6 +62,12 @@ function isNumber(userInputNumbers) {
   return response;
 }
 
+function isNot3Digit(userInputNumbers) {
+  if (userInputNumbers.length !== 3) {
+    return true;
+  }
+}
+
 function handleUserInputSubmit() {
   const userInputNumbers = document.getElementById('user-input').value;
   const deduplicateCount = getDeduplicateCount(userInputNumbers);
@@ -71,7 +77,7 @@ function handleUserInputSubmit() {
     return alert(text.warningForNotNum);
   }
 
-  if (userInputNumbers.length !== 3) {
+  if (isNot3Digit(userInputNumbers)) {
     resetInputNumbers();
     return alert(text.warningFor3Digit);
   }
