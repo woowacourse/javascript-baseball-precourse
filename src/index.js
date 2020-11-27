@@ -18,7 +18,7 @@ const createRandomNumber = () => {
   return checkValidNumber(randomNum).ok ? randomNum : createRandomNumber();
 }
 
-const compareAnswersAndgetResult = (computerInputNumbers, userInputNumbers) => {
+const compareAnswersAndGetResult = (computerInputNumbers, userInputNumbers) => {
   if(computerInputNumbers === userInputNumbers) return {ok: true};
   const computerInputNumbersArr = computerInputNumbers.split('');
   const userInputNumbersArr = userInputNumbers.split('');
@@ -90,7 +90,7 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    const result = compareAnswersAndgetResult(computerInputNumbers, userInputNumbers);
+    const result = compareAnswersAndGetResult(computerInputNumbers, userInputNumbers);
     this.result = result;
     return this.printResult(result);
   }
