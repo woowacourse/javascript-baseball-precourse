@@ -3,7 +3,7 @@ export default function Utils() {
     let numbers = [];
     while (numbers.length < N) {
       let r = Math.floor(Math.random() * 9) + 1;
-      if (numbers.indexOf(r) == -1) {
+      if (numbers.indexOf(r) === -1) {
         numbers.push(r);
       }
     }
@@ -26,11 +26,11 @@ export default function Utils() {
     return button;
   };
 
-  this.initialize = (elem) => {
-    if (elem.tagName == 'DIV') {
+  this.initNode = (elem) => {
+    if (elem.tagName === 'DIV') {
       return (elem.innerHTML = '');
     }
-    if (elem.tagName == 'INPUT') {
+    if (elem.tagName === 'INPUT') {
       return (elem.value = '');
     }
   };

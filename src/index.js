@@ -51,23 +51,23 @@ export default function BaseballGame(N) {
     console.log(`⚾LOG: Invalid User Input. 🚨Error Code: ${errno}`);
 
     alert(getErrorMessage(errno));
-    util.initialize(userInputElem);
+    util.initNode(userInputElem);
   };
 
   const getErrorMessage = (errno) => {
-    if (errno == EMPTY) {
+    if (errno === EMPTY) {
       return `\n🚨 안내 🚨\n\n 아무것도 입력되지 않았습니다.\n ${N}자리 숫자를 예상해서 입력해 주세요.`;
     }
-    if (errno == CHAR_INCLUDED) {
+    if (errno === CHAR_INCLUDED) {
       return `\n🚨 안내 🚨\n\n 숫자만 입력해주셔야 합니다.\n 다시 입력해 주세요.`;
     }
-    if (errno == ZERO_INCLUDED) {
+    if (errno === ZERO_INCLUDED) {
       return `\n🚨 안내 🚨\n\n 0을 제외한 1부터 9까지의 숫자만 입력해주셔야 합니다.\n 다시 입력해 주세요.`;
     }
-    if (errno == NOT_N_DIGIT) {
+    if (errno === NOT_N_DIGIT) {
       return `\n🚨 안내 🚨\n\n ${N}자리 숫자로 입력해 주셔야 합니다.\n 다시 입력해 주세요.`;
     }
-    if (errno == REDUNDANT) {
+    if (errno === REDUNDANT) {
       return `\n🚨 안내 🚨\n\n 서로 다른 숫자로 입력해주셔야 합니다.\n 다시 입력해 주세요.`;
     }
   };
@@ -121,23 +121,23 @@ export default function BaseballGame(N) {
     restartElem.addEventListener('click', function restart(e) {
       e.preventDefault();
       computerInputNumbers = '';
-      resultElem.innerHTML = '';
-      restartElem.remove();
-      userInputElem.value = '';
+      util.initNode(resultElem);
+      util.initNode(userInputElem);
       userInputElem.focus();
+      restartElem.remove();
     });
-    util.initialize(resultElem);
+    util.initNode(resultElem);
     resultElem.append(restartElem);
     console.log(`⚾LOG: You Win!💛💛💛`);
   };
 
   const clearForm = (e) => {
-    userInputElem.value = '';
+    util.initNode(userInputElem);
   };
 
   const showGameResult = (e) => {
     e.preventDefault();
-    util.initialize(resultElem);
+    util.initNode(resultElem);
 
     const userInputNumbers = getUserInputnumbers();
     const errno = isErrorInput(userInputNumbers);
