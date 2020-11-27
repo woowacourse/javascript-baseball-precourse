@@ -24,10 +24,9 @@ export default function BaseballGame() {
   document.body.style.fontFamily = 'Arial';
   let _resultArea = document.querySelector('#result');
   let _button = document.querySelector("#submit");
-  let _answer = StartGame();
   let _input = document.querySelector("#user-input");
-  _input.focus();
-
+  let _answer = StartGame();
+  
   _button.addEventListener('click', (e) => {
     e.preventDefault();
     let userValue = GetInput();
@@ -40,6 +39,7 @@ export default function BaseballGame() {
   })
   
 	function StartGame() {
+    _input.focus();
 	  let answer = [];
 	  let candidate = [];
   
@@ -50,6 +50,8 @@ export default function BaseballGame() {
 		let picked = candidate.splice(Math.floor(Math.random() * (9 - i)), 1)[0];
 		answer.push(picked);
     }
+
+    console.log(answer);
     
     return answer;
 	}
@@ -113,7 +115,7 @@ export default function BaseballGame() {
       restartButton.addEventListener('click', (e) => {
         e.preventDefault();
         _resultArea.innerHTML = '';
-        StartGame();
+        _answer = StartGame();
 		  })
 	  } else
 		_resultArea.textContent = resultMessage;
