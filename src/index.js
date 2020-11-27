@@ -51,15 +51,44 @@ export default class BaseballGame {
   }
 
   compareNumber(computerInputNumbers, userInputNumbers) {
-    if (userInputNumbers === null) {
-      console.log('다시 입력해주세요');
+    let strike = 0;
+    let ball = 0;
+
+    for (var i = 0; i < 3; i++) {
+      if (computerInputNumbers.indexOf(userInputNumbers[i]) === i) {
+        strike++;
+      } else if (computerInputNumbers.indexOf(userInputNumbers[i]) > -1) {
+        ball++;
+      }
+    }
+
+    return [strike, ball];
+  }
+
+  printResult(strike, ball) {
+    if (strike === 0 && ball === 0) {
+      console.log('낫싱');
+    } else if (strike === 3) {
+      console.log('정답입니다.');
+    } else if (strike > 0 && ball === 0) {
+      console.log(`${strike} 스트라이크`);
+    } else if (strike === 0 && ball > 0) {
+      console.log(`${ball} 볼`);
     } else {
-      console.log(computerInputNumbers, userInputNumbers);
+      console.log(`${strike} 스트라이크 ${ball} 볼`);
     }
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    this.compareNumber(computerInputNumbers, userInputNumbers);
+    if (userInputNumbers === null) {
+      console.log('다시 입력');
+    } else {
+      const [strike, ball] = this.compareNumber(
+        computerInputNumbers,
+        userInputNumbers
+      );
+      this.printResult(strike, ball);
+    }
 
     return `${computerInputNumbers} ${userInputNumbers}`;
   }
