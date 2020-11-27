@@ -21,15 +21,13 @@ const clearAll = () => {
 };
 const done = () => {
   userInput.onkeydown = (e) => {
-    e.target.value = "done";
+    e.target.value = RandomNumber;
   };
   userInput.onkeyup = (e) => {
-    e.target.value = "done";
+    e.target.value = RandomNumber;
   };
 
-  resultDiv.innerHTML(
-    `게임을 새로 시작하시겠습니까? <button id="game-restart-button">재시작</button>`
-  );
+  resultDiv.innerHTML = `게임을 새로 시작하시겠습니까? <button id="game-restart-button">재시작</button>`;
 
   const restartButton = document.getElementById("game-restart-button");
   restartButton.onclick = () => {
@@ -43,7 +41,7 @@ const getFinalResult = (computerInput, userInput) => {
   if (result === "done") {
     done();
   } else {
-    resultDiv.innerHTML(result);
+    resultDiv.innerHTML = result;
   }
   return result;
 };
