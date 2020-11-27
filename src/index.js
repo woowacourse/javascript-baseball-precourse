@@ -1,18 +1,39 @@
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
-    console.log(computerInputNumbers, userInputNumbers);
-    return "결과 값 String";
+    let numOfStrike = 0;
+    let numOfBall = 0;
+
+    Array.from(userInputNumbers).forEach((num, idx) => {
+      if (computerInputNumbers.includes(num)) {
+        if (computerInputNumbers.indexOf(num) === idx) {
+          numOfStrike++; // 같은 수가 같은 자리이면
+        } else {
+          numOfBall++; //같은 수가  다른 자리면
+        }
+      }
+    });
+
+    if (numOfStrike === 0 && numOfBall === 0) {
+      return "낫싱"; // 같은 수가 0개면
+    } else if (numOfStrike === 0 && numOfBall !== 0) {
+      return `${numOfBall}볼`;
+    } else if (numOfStrike !== 0 && numOfBall === 0) {
+      return `${numOfStrike}스트라이크`;
+    } else {
+      return `${numOfBall}볼 ${numOfStrike}스트라이크`;
+    }
   };
 }
 const baseballGame = new BaseballGame();
 
-const computerInputNumbers = 123;
-let userInputNumbers = 0;
+const computerInputNumbers = "123";
+let userInputNumbers = "0";
 
 // 사용자 input 받기
 const btnInput = document.getElementById("submit");
 
 btnInput.onclick = function () {
   userInputNumbers = document.getElementById("user-input").value;
-  baseballGame.play(computerInputNumbers, Number(userInputNumbers));
+  console.log(baseballGame.play(computerInputNumbers, userInputNumbers));
+  // baseballGame.play(computerInputNumbers, userInputNumbers);
 };
