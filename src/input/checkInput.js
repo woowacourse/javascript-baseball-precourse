@@ -1,5 +1,11 @@
-function alertInvalidInput() {
-  alert('잘못 된 입력입니다! 올바른 예)139');
+function alertInvalidInput(info) {
+  if (info === 'inValidLength') {
+    alert('잘못 된 입력입니다! 숫자는 반드시 3개를 입력해야합니다! 예)139');
+  } else if (info === 'duplicate') {
+    alert('잘못 된 입력입니다! 중복된 숫자는 입력할 수 없습니다! 예)139');
+  } else if (info === 'inValidScope') {
+    alert('잘못 된 입력입니다! 1 ~ 9 사이의 숫자만 입력할 수 있습니다! 예)139');
+  }
   return false;
 }
 
@@ -22,18 +28,17 @@ function checkDuplicate(userInputNumbers) {
     return true;
   }
   return false;
-  //   console.log(userInputNumbers.length);
 }
 
 export default function checkValidInput(userInputNumbers) {
   if (!checkValidLength(userInputNumbers)) {
-    return alertInvalidInput();
+    return alertInvalidInput('inValidLength');
   }
   if (!checkDuplicate(userInputNumbers)) {
-    return alertInvalidInput();
+    return alertInvalidInput('duplicate');
   }
   if (!userInputNumbers.every(checkValidScope)) {
-    return alertInvalidInput();
+    return alertInvalidInput('inValidScope');
   }
 
   return userInputNumbers;
