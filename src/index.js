@@ -1,6 +1,12 @@
 let comNum = getRandNum();
 const BG = new BaseballGame();
 
+console.log(BG.test("123", "213"));
+console.log(BG.test("123", "341"));
+console.log(BG.test("123", "555"));
+console.log(BG.test("123", "123"));
+
+
 
 // functions
 export default function BaseballGame() {
@@ -21,6 +27,22 @@ export default function BaseballGame() {
   this.play = (computerInputNumbers, userInputNumbers) => {
     return "결과 값 String";
   };
+
+  this.test = (a, b) => {
+    return countBalls(a, b);
+  };
+
+  function countBalls(comInput, userInput) {
+    let count = 0;
+
+    for(let i=0; i<3; ++i) {
+      for(let j=1; j<3; ++j) {
+        count += (comInput[i] === userInput[(i+j)%3]);
+      }
+    }
+
+    return count;
+  }
 }
 
 function getRandNum() {
