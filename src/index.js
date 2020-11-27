@@ -5,8 +5,6 @@ export default class BaseballGame {
     this.submit = document.getElementById("submit");
     this.submit.addEventListener("click", this.handleSubmit.bind(this));
     this.isGameEnd = false;
-
-    console.log(this.answerNumbers);
   }
 
   getRandomIntInclusive() {
@@ -46,7 +44,6 @@ export default class BaseballGame {
   handleSubmit(e) {
     const userInput = document.getElementById("user-input").value.trim();
     document.getElementById("user-input").value = "";
-    console.log(userInput);
 
     if (this.isGameEnd) return;
     if (!this.isValuedInputNumber(userInput))
@@ -111,7 +108,6 @@ export default class BaseballGame {
     this.result.innerHTML = "";
     this.answerNumbers = this.getComputerNumbers();
     this.isGameEnd = false;
-    console.log(this.answerNumbers);
   }
 }
 
