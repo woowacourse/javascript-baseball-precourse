@@ -7,6 +7,7 @@ export default function BaseballGame() {
     const submitButton = document.querySelector("#submit");
 
     submitButton.addEventListener("click", getUserInput);
+    // console.log(computerInputNumbers);
   };
 
   const getRandomNumberList = function() {
@@ -19,10 +20,36 @@ export default function BaseballGame() {
   };
 
   const getUserInput = function() {
-    const userInput = document.querySelector("#user-input").value;
+    const userInputNumbers = document.querySelector("#user-input").value.split('');
 
-    console.log(userInput);
-  }
+    if (isNotValid(userInputNumbers)) {
+      console.log(`user input uncorrect ${userInputNumbers}`);
+    }
+  };
+
+  const isNotValid = function(userInputNumbers) {
+    return !(isNumber(userInputNumbers) && isThreeDigit(userInputNumbers) && isNotDuplicated(userInputNumbers));
+  };
+
+  const isNumber = function(userInputNumbers) {
+    let i;
+    for (i = 0; i < userInputNumbers.length; i++) {
+      if (!('1' <= userInputNumbers[i] && userInputNumbers[i] <= '9')) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const isThreeDigit = function(userInputNumbers) {
+    return userInputNumbers.length === NUMBER_DIGIT;
+  };
+
+  const isNotDuplicated = function(userInputNumbers) {
+    const checkingSet = new Set(userInputNumbers);
+
+    return userInputNumbers.length === checkingSet.size;
+  };
 
   // const play = function (computerInputNumbers, userInputNumbers) {
   //   return "결과 값 String";
