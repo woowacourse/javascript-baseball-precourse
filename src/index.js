@@ -1,13 +1,16 @@
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
-}
+import getRandomNumber from './library/utils/getRandomNumber.js';
+import {
+  MIN_DIGIT,
+  MAX_DIGIT,
+  DIGIT_COUNT,
+} from './library/constants/random-number.js';
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
+export default class BaseballGame {
+  #answer;
+
+  constructor() {
+    this.#answer = getRandomNumber(MIN_DIGIT, MAX_DIGIT, DIGIT_COUNT);
+  }
+}
 
 new BaseballGame();
