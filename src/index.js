@@ -66,6 +66,7 @@ export default function BaseballGame() {
     }
 
     if (strike == 3) {
+      document.getElementById("restart").hidden = false
       return "🎉정답을 맞추셨습니다!🎉";
     }
 
@@ -89,7 +90,7 @@ export default function BaseballGame() {
     return result;
   };
 
-  const computerInputNumbers = this.setTargetNumber();
+  let computerInputNumbers = this.setTargetNumber();
   const submitBtn = document.getElementById("submit");
 
   submitBtn.addEventListener("click", () => {
@@ -98,8 +99,9 @@ export default function BaseballGame() {
     if (userInputNumbers) {
       const result = this.play(computerInputNumbers, userInputNumbers);
 
+      document.getElementById("result").innerText = result;
+
       console.log(computerInputNumbers, userInputNumbers);
-      console.log(result);
     }
   });
 }
