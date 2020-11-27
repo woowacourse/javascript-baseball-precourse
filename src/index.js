@@ -60,12 +60,33 @@ export default function BaseballGame() {
     return [ball, strike];
   };
 
+  this.printResult = function (ball, strike) {
+    if (ball == 0 && strike == 0) {
+      return "낫싱";
+    }
+
+    if (strike == 3) {
+      return "🎉정답을 맞추셨습니다!🎉";
+    }
+
+    let result = '';
+
+    if (ball !== 0) {
+      result += `${ball}볼 `;
+    }
+
+    if (strike !== 0) {
+      result += `${strike}스트라이크`;
+    }
+
+    return result;
+  };
+
   this.play = function (computerInputNumbers, userInputNumbers) {
     const [ball, strike] = this.compareNumbers(computerInputNumbers, userInputNumbers);
+    const result = this.printResult(ball,strike);
 
-    console.log(computerInputNumbers, userInputNumbers);
-    console.log(ball, strike);
-    // return "결과 값 String";
+    return result;
   };
 
   const computerInputNumbers = this.setTargetNumber();
@@ -75,7 +96,10 @@ export default function BaseballGame() {
     const userInputNumbers = this.getInputNumber()
 
     if (userInputNumbers) {
-      this.play(computerInputNumbers, userInputNumbers);
+      const result = this.play(computerInputNumbers, userInputNumbers);
+
+      console.log(computerInputNumbers, userInputNumbers);
+      console.log(result);
     }
   });
 }
