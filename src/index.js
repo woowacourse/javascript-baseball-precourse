@@ -25,6 +25,20 @@ export default class BaseballGame {
     }
     return count;
   }
+
+  checkStrike(computerInputNumbers, userInputNumbers) {
+    let count = 0;
+    if (computerInputNumbers[0] === userInputNumbers[0]) {
+      count++;
+    }
+    if (computerInputNumbers[1] === userInputNumbers[1]) {
+      count++;
+    }
+    if (computerInputNumbers[2] === userInputNumbers[2]) {
+      count++;
+    }
+    return count;
+  }
 }
 
 new BaseballGame();
