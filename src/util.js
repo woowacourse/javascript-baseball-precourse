@@ -2,7 +2,7 @@ export const DIGITS = 3;
 
 export default class Util {
   isValidNumbers(numbers) {
-    if (numbers.length !== 3) {
+    if (numbers.length !== DIGITS) {
       return false;
     } else if (!this.isNumbers(numbers)) {
       return false;
