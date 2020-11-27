@@ -1,4 +1,4 @@
-import { NUMBER_LIST, START_INDEX_ZERO, NUMBER_DIGIT, ERROR_MESSAGE, STRIKE_INDEX, BALL_INDEX } from "./constants.js";
+import { NUMBER_LIST, START_INDEX_ZERO, NUMBER_DIGIT, STRIKE_INDEX, BALL_INDEX, ERROR_STRING, ANSWER_STRING, NOTHING_STRING} from "./constants.js";
 
 export default function BaseballGame() {
   
@@ -13,7 +13,7 @@ export default function BaseballGame() {
     const userInputNumbers = getUserInputNumberList();
 
     if (userInputNumbers !== undefined) {
-      play(computerInputNumbers, userInputNumbers);
+      resultElement.innerHTML = play(computerInputNumbers, userInputNumbers);
     }
   };
 
@@ -27,11 +27,11 @@ export default function BaseballGame() {
   };
 
   const getUserInputNumberList = function() {
-    const userInputList = document.querySelector("#user-input").value.split('');
+    const userInputList = document.querySelector('#user-input').value.split('');
     let userInputNumbers = [];
 
     if (isNotValid(userInputList)) {
-      alert(ERROR_MESSAGE);
+      alert(ERROR_STRING);
     } else {
       userInputNumbers = userInputList.map(x => +x);
       return userInputNumbers;
@@ -63,31 +63,45 @@ export default function BaseballGame() {
   };
 
   const play = function (computerInputNumbers, userInputNumbers) {
-    let strikeBallList = [0, 0];
+    let resultString = '';
+    let ballStrikeList = [0, 0];
 
     //
     console.log(computerInputNumbers);
     console.log(userInputNumbers);
 
-    // calculate strike, ball
     let i;
     for (i = 0; i < userInputNumbers.length; i++) {
       if (userInputNumbers[i] === computerInputNumbers[i]) {
-        strikeBallList[STRIKE_INDEX] += 1;
+        ballStrikeList[STRIKE_INDEX] += 1;
       } else if (computerInputNumbers.includes(userInputNumbers[i])) {
-        strikeBallList[BALL_INDEX] += 1;
+        ballStrikeList[BALL_INDEX] += 1;
       }
     }
-    
-    //
-    console.log(`strike = ${strikeBallList[0]}, ball = ${strikeBallList[1]}`);
 
-    return "결과 값 String";
+    if (ballStrikeList[BALL_INDEX] === 0) {
+      if (ballStrikeList[STRIKE_INDEX] === 0) {
+        resultString = NOTHING_STRING;
+      } else if (ballStrikeList[STRIKE_INDEX] === 3) {
+        resultString = ANSWER_STRING;
+          
+      } else {
+        resultString = `${ballStrikeList[STRIKE_INDEX]}스트라이크`;
+      }
+    } else {
+      resultString = `${ballStrikeList[BALL_INDEX]}볼`;
+      if (ballStrikeList[STRIKE_INDEX] !== 0) {
+        resultString += ` ${ballStrikeList[STRIKE_INDEX]}스트라이크`;  
+      }
+    }
+
+    return resultString;
   };
 
   // init();
   const computerInputNumbers = getRandomNumberList();
   const submitButton = document.querySelector("#submit");
+  const resultElement = document.querySelector("#result");
 
   submitButton.addEventListener("click", handleSubmitButton);
 }
