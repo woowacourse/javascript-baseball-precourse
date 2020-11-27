@@ -46,6 +46,12 @@ export default function BaseballGame() {
         };
         return true;
     };
+    // * 서로 모두 다른 숫자인지 확인한다.
+    this.isAllDifferent = function (input) {
+        const fillterdInput = Array.from(new Set(input));
+        if (fillterdInput.length !== input.length) return false;
+        return true;
+    };
 };
 
 
