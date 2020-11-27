@@ -1,18 +1,20 @@
-import { NUMBER_LIST, START_INDEX_ZERO, NUMBER_DIGIT, ERROR_MESSAGE } from "./constants.js";
+import { NUMBER_LIST, START_INDEX_ZERO, NUMBER_DIGIT, ERROR_MESSAGE, STRIKE_INDEX, BALL_INDEX } from "./constants.js";
 
 export default function BaseballGame() {
   
-  const init = function() {
-    const submitButton = document.querySelector("#submit");
+  // const init = function() {
+  //   const computerInputNumbers = getRandomNumberList();
+  //   const submitButton = document.querySelector("#submit");
 
-    submitButton.addEventListener("click", handleSubmitButton);
-  };
+  //   submitButton.addEventListener("click", handleSubmitButton);
+  // };
 
   const handleSubmitButton = function() {
-    const computerInputNumbers = getRandomNumberList();
     const userInputNumbers = getUserInputNumberList();
 
-    play(computerInputNumbers, userInputNumbers);
+    if (userInputNumbers !== undefined) {
+      play(computerInputNumbers, userInputNumbers);
+    }
   };
 
   const getRandomNumberList = function() {
@@ -61,10 +63,38 @@ export default function BaseballGame() {
   };
 
   const play = function (computerInputNumbers, userInputNumbers) {
+    let strikeBallList = [0, 0];
+
+    // console.log(computerInputNumbers);
+    // console.log(userInputNumbers);
+
+    strikeBallList = compareInputNumbers(computerInputNumbers, userInputNumbers);
+    
+    // console.log(`strike = ${strikeBallList[0]}, ball = ${strikeBallList[1]}`);
+
     return "결과 값 String";
   };
 
-  init();
+  const compareInputNumbers = function(computerInputNumbers, userInputNumbers) {
+    let strikeBallList = [0, 0];
+
+    let i;
+    for (i = 0; i < userInputNumbers.length; i++) {
+      if (userInputNumbers[i] === computerInputNumbers[i]) {
+        strikeBallList[STRIKE_INDEX] += 1;
+      } else if (computerInputNumbers.includes(userInputNumbers[i])) {
+        strikeBallList[BALL_INDEX] += 1;
+      }
+    }
+
+    return strikeBallList;
+  };
+
+  // init();
+  const computerInputNumbers = getRandomNumberList();
+  const submitButton = document.querySelector("#submit");
+
+  submitButton.addEventListener("click", handleSubmitButton);
 }
 
 BaseballGame();
