@@ -53,7 +53,8 @@ export default class BaseballGame {
     // change user input string into an array of numbers
     const userInputNumbers = inputValue.split('').map(number => +number);
     
-    this.printOnScreen(this.play(this.computerNumber, userInputNumbers));
+    const resultValue = this.play(this.computerNumber, userInputNumbers)
+    this.printOnScreen(resultValue);
     this.resetBallsAndStrikes();
   }
   
@@ -120,14 +121,14 @@ export default class BaseballGame {
 
   // get computer's random number
   getComputerNumber() {
-    let index = 0;
+    let numberIndex = 0;
     
-    while (index < 3) {
+    while (numberIndex < 3) {
       const randomNumber = Math.floor(Math.random() * 10);
       
       if (randomNumber !== INVALID_NUMBER && this.computerNumber.indexOf(randomNumber) === -1) {
-        this.computerNumber[index] = randomNumber;
-        index++;
+        this.computerNumber[numberIndex] = randomNumber;
+        numberIndex++;
       }
     }
   }
