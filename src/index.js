@@ -118,7 +118,28 @@ export default function BaseballGame() {
     return true;
   };
 
+  this.checkGameResult = () => {
+    const userInput = document.querySelector("#user-input");
+    const userInputNumbers = userInput.value;
+    const isValidInputValue = this.checkValidInputValue(userInputNumbers);
+
+    userInput.value = "";
+
+    if (isValidInputValue) {
+      const resultMessage = this.play(
+        this.computerInputNumbers,
+        userInputNumbers
+      );
+      this.printGameResult(resultMessage);
+    } else {
+      alert("1 ~ 9 사이의 서로 다른 세 자릿수를 입력해주세요.");
+    }
+  };
+
   this.resetGame();
+
+  const submitButton = document.querySelector("#submit");
+  submitButton.addEventListener("click", this.checkGameResult);
 }
 
 new BaseballGame();
