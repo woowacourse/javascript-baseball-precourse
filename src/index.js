@@ -152,40 +152,40 @@ function resetInputNumbers() {
 // DOM Manipulation function
 
 function cleanResult() {
-  const result_div = doc.getElementById('result');
+  const resultDiv = doc.getElementById('result');
 
-  while (result_div.hasChildNodes()) {
-    result_div.removeChild(result_div.firstChild);
+  while (resultDiv.hasChildNodes()) {
+    resultDiv.removeChild(resultDiv.firstChild);
   }
 }
 
 function renderResult(string) {
-  const result_div = doc.getElementById('result');
+  const resultDiv = doc.getElementById('result');
 
-  const response_p = doc.createElement('p');
-  response_p.innerHTML = string;
+  const responseP = doc.createElement('p');
+  responseP.innerHTML = string;
 
   if (string === text.correct) {
     const strong = doc.createElement('strong');
-    strong.appendChild(response_p);
-    result_div.appendChild(strong);
+    strong.appendChild(responseP);
+    resultDiv.appendChild(strong);
 
-    const restart_div = doc.createElement('div');
-    restart_div.id = 'restart';
+    const restartDiv = doc.createElement('div');
+    restartDiv.id = 'restart';
 
-    let restart_p = doc.createElement('p');
-    restart_p.innerHTML = text.askRestart;
-    restart_div.appendChild(restart_p);
+    let restartP = doc.createElement('p');
+    restartP.innerHTML = text.askRestart;
+    restartDiv.appendChild(restartP);
 
-    const restart_button = doc.createElement('button');
-    restart_button.innerHTML = text.restart;
-    restart_button.id = 'game-restart-button';
-    restart_button.addEventListener('click', handleReStartClick);
-    restart_div.appendChild(restart_button);
+    const restartButton = doc.createElement('button');
+    restartButton.innerHTML = text.restart;
+    restartButton.id = 'game-restart-button';
+    restartButton.addEventListener('click', handleReStartClick);
+    restartDiv.appendChild(restartButton);
 
-    result_div.appendChild(restart_div);
+    resultDiv.appendChild(restartDiv);
   } else {
-    result_div.appendChild(response_p);
+    resultDiv.appendChild(responseP);
   }
 }
 const doc = window.document;
