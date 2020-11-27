@@ -72,7 +72,9 @@ export default class BaseballGame {
     return this.incorrectAnswer(ballCount, strikeCount);
   }
 
-  correctAnswer() {}
+  correctAnswer() {
+    return `🎉 정답을 맞추셨습니다 🎉<br>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button>`;
+  }
 
   incorrectAnswer(ballCount, strikeCount) {}
 
