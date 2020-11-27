@@ -63,6 +63,23 @@ export default class BaseballGame {
 
     return strike;
   }
+
+  // 볼 개수 반환 메서드
+  countBall(computerInputNumbers, userInputNumbers) {
+    let ball = 0;
+
+    for (let i = 0; i < 3; i++) {
+      if (
+        userInputNumbers.includes(computerInputNumbers[i]) &&
+        computerInputNumbers[i] !== userInputNumbers[i]
+      ) {
+        ball += 1;
+      }
+    }
+
+    return ball;
+  }
 }
 
 const baseballGame = new BaseballGame();
+console.log(baseballGame.countBall([1, 2, 3], [3, 2, 1]));
