@@ -12,6 +12,13 @@ export default function BaseballGame() {
         };
         return false;
     };
+
+// * 기존에 뽑은 숫자와 동일한 숫자를 뽑았는지 확인
+    this.isInRandomNumbers = function (randomNumbers,oneNumber) {
+        if (randomNumbers.includes(oneNumber)) return true;
+        return false;
+    };
 };
+
 
 let baseballGame = new BaseballGame();
