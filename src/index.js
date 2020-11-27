@@ -91,8 +91,13 @@ const errorMessage = new Map([
   ['isUnique', '중복되지 않는 숫자로 입력해주세요'],
 ]);
 
+const setSubmitDisable = function (state) {
+  submitBtn.disabled = state;
+}
+
 const handleRestartBtn = function (game) {
   game.initGame();
+  setSubmitDisable(false);
   userInputElem.value = '';
   resultElem.textContent = '';
 };
@@ -130,6 +135,7 @@ const handleSubmitBtn = function (game) {
   const result = game.play(computerInput, userInput);
 
   showResult(result, resultElem, game);
+  setSubmitDisable(game.userGotAnswer());
 };
 
 const main = () => {
