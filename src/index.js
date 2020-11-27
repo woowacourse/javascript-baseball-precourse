@@ -26,6 +26,9 @@ export default class BaseballGame {
       this.correctAnswer = true;
       return "💯 정답을 맞추셨습니다! 💯";
     }
+    if (strike === 0 && ball === 0) {
+      return "낫싱";
+    }
     responseMessage =
       ball > 0 ? responseMessage + `${ball}볼 ` : responseMessage;
     responseMessage =
