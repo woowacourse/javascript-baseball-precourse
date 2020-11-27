@@ -1,7 +1,25 @@
 export default class BaseballGame {
   constructor() {
     this.initGame();
-    this._gotAnswer = false;
+  }
+
+  // 입력한 숫자가 지켜야하는 조건
+  static validator = {
+    isLen3: input => input.length === 3,
+    isNum: input => input == parseInt(input, 10),
+    noZero: input => !input.includes(0),
+    isUnique: input => new Set(input).size === input.length,
+  };
+
+  // validator를 순회하여 오류가 있는 validation 이름을 리턴한다
+  static checkValid(input) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [name, valid] of Object.entries(BaseballGame.validator)) {
+      if (!valid(input)) {
+        return name;
+      }
+    }
+    return '';
   }
 
   play(computerInputNumbers, userInputNumbers) {
@@ -29,26 +47,22 @@ export default class BaseballGame {
     return resultStr;
   }
 
-  static isValidAnswer(answer) {
-    return (
-      answer.length === 3 &&
-      answer[0] !== answer[1] &&
-      answer[1] !== answer[2] &&
-      answer[0] !== answer[2]
-    );
-  }
-
   // eslint-disable-next-line class-methods-use-this
   _generateAnswer() {
-    let answer = Math.floor(Math.random() * 1000);
-    while (!BaseballGame.isValidAnswer(answer.toString())) {
+    let answer = 0;
+    while (true) {
       answer = Math.floor(Math.random() * 1000);
+      if (BaseballGame.checkValid(answer.toString())) continue;
+      break;
     }
     return answer;
   }
 
   initGame() {
+    console.log(`initGame: ${this}`);
+    console.log(this);
     this._computerInputNum = this._generateAnswer();
+    this._gotAnswer = false;
   }
 
   getComputerInputNum() {
@@ -60,33 +74,56 @@ export default class BaseballGame {
   }
 }
 
-const game = new BaseballGame();
+const userInputElem = document.querySelector('#user-input');
+const resultElem = document.querySelector('#result');
+const submitBtn = document.querySelector('#submit');
+
+const handleRestartBtn = function (game) {
+  game.initGame();
+  userInputElem.value = '';
+  resultElem.textContent = '';
+};
+
+const createRestartElem = function (game) {
+  const restartPara = document.createElement('p');
+  const restartBtn = document.createElement('button');
+
+  restartPara.textContent = '게임을 새로 시작하시겠습니까?';
+  restartBtn.id = 'game-restart-button';
+  restartBtn.textContent = '재시작';
+  restartBtn.addEventListener('click', () => handleRestartBtn(game));
+  restartPara.appendChild(restartBtn);
+
+  return restartPara;
+};
 
 // TODO: baseball은 그냥 게임진행용이고, DOM에서 값을 가져오고 넣는건 따로 분리해야 하지 않을까?
 // 메소드 테스트용 실행함수
 const testMethods = () => {
-  const getUserInput = () => document.querySelector('#user-input').value;
-  const restartPara = document.createElement('p');
-  restartPara.textContent = '게임을 새로 시작하시겠습니까?';
-  const restartBtn = document.createElement('button');
-  restartBtn.id = 'game-restart-button';
-  restartBtn.textContent = '재시작';
-  restartBtn.addEventListener('click', () => {
-    game.initGame(); // NOTE: () => 가 없으면 에러가 발생함
-    document.querySelector('#user-input').value = '';
-    document.querySelector('#result').textContent = '';
-  });
-  restartPara.appendChild(restartBtn);
+  const game = new BaseballGame();
+  const restartElem = createRestartElem(game);
   const showResult = function (result) {
-    document.querySelector('#result').textContent = result;
-    console.log(game.userGotAnswer());
+    resultElem.textContent = result;
     if (game.userGotAnswer()) {
-      document.querySelector('#result').appendChild(restartPara);
+      resultElem.appendChild(restartElem);
     }
   };
 
-  document.querySelector('#submit').addEventListener('click', () => {
-    const userInput = parseInt(getUserInput(), 10);
+  submitBtn.addEventListener('click', () => {
+    // validation 확인후 alert
+    const errorMessage = new Map([
+      ['isLen3', '3자리 숫자를 입력해주세요'],
+      ['isNum', '숫자만 입력해주세요'],
+      ['noZero', '1~9까지의 숫자만 입력해주세요'],
+      ['isUnique', '중복되지 않는 숫자로 입력해주세요'],
+    ]);
+
+    const err = BaseballGame.checkValid(userInputElem.value);
+    if (err) {
+      alert(errorMessage.get(err));
+      return;
+    }
+    const userInput = parseInt(userInputElem.value, 10);
     const computerInput = game.getComputerInputNum();
     const result = game.play(computerInput, userInput);
     console.log(computerInput);
