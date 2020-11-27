@@ -18,6 +18,20 @@ export default function BaseballGame() {
         if (randomNumbers.includes(oneNumber)) return true;
         return false;
     };
+// * 랜덤으로 서로 다르고 0이 아닌 3자리 숫자 만들기
+    this.makeRandomNumbers = function () {
+        const isMaking = true;
+        let randomNumbers = "";
+        while(isMaking){
+            const oneNumber = this.makeRandomInt();
+            if (this.isNotZero(oneNumber) && !this.isInRandomNumbers(randomNumbers,oneNumber)) {
+                randomNumbers += oneNumber;
+            };
+            if (randomNumbers.length === 3) {
+                return Number(randomNumbers);
+            };
+        };
+    };
 };
 
 
