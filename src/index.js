@@ -77,7 +77,6 @@ export default function BaseballGame() {
         };
         return true;
     };
-
     // * 주어진 index가 strike, ball인지 확인하기
     this.calculateResult = function (index,computerInputNumbers, userInputNumbers) {
         if (String(userInputNumbers)[index] == String(computerInputNumbers)[index])  {
@@ -87,6 +86,28 @@ export default function BaseballGame() {
             return "볼";
         };
         return "아웃";
+    };
+    // * 깔끔하게 스트라이크, 볼, 낫싱을 String으로 출력하기(결과계산하기).
+    this.play = function (computerInputNumbers, userInputNumbers) {
+        let result = {
+            "볼" : 0,
+            "스트라이크" : 0,
+            "아웃" : 0
+        };
+        for (var index = 0 ; index < String(computerInputNumbers).length ; index += 1) {
+            let oneResult = this.calculateResult(index,computerInputNumbers,userInputNumbers);
+            result[oneResult] += 1;
+        };
+        if (result["아웃"] === 3) {
+            return "낫싱";
+        };
+        if (result["스트라이크"] === 0) {
+            return `${result["볼"]}볼`;
+        };
+        if (result["볼"] === 0) {
+            return `${result["스트라이크"]}스트라이크`;
+        };
+        return `${result["볼"]}볼 ${result["스트라이크"]}스트라이크`;
     };
 };
 
