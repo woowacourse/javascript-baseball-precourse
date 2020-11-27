@@ -46,4 +46,24 @@ function checkUserInput(userInput) {
   return (isValidNumber(userInput) && !isDuplicated(userInput));
 }
 
+
+function compareNumbers(computerInputNumbers, userInputNumbers) {
+  const computerNumberArray = String(computerInputNumbers).split("");
+  const userNumberArray = String(userInputNumbers).split("");
+  let strike = 0;
+  let ball = 0;
+
+  userNumberArray.forEach(x => {
+    if (computerNumberArray.indexOf(x) > -1) {
+      if (computerNumberArray.indexOf(x) === userNumberArray.indexOf(x)) {
+        strike += 1;
+      } else {
+        ball += 1;
+      }
+    }
+  })
+
+  return {strike, ball}
+}
+
 new BaseballGame();
