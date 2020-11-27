@@ -46,8 +46,8 @@ export default function BaseballGame() {
 		candidate.push(i);
   
 	  for (let i = 0; i <= 2; i++) {
-		let picked = candidate.splice(Math.floor(Math.random() * (9 - i)), 1)[0];
-		answer.push(picked);
+		  let picked = candidate.splice(Math.floor(Math.random() * (9 - i)), 1)[0];
+		  answer.push(picked);
     }
     
     return answer;
@@ -61,6 +61,7 @@ export default function BaseballGame() {
       return 0;
     } else
       userValue = _input.value;
+
     _input.focus();
     
     return userValue;
@@ -70,13 +71,15 @@ export default function BaseballGame() {
     let isValid = 0;
   
 	  if (number.indexOf("0") !== -1)
-		  isValid = 1;
+      isValid = 1;
+
 	  if (number.length !== 3)
       isValid = 1;
     
 	  for (let i = 0; i <= 2; i++) {
 		  if (!(number[i] >= 1 && number[i] <= 9))
-		    isValid = 1;
+        isValid = 1;
+
 		  if (number.split(number[i]).length - 1 !== 1)
 		    isValid = 1;
     }
@@ -89,10 +92,10 @@ export default function BaseballGame() {
 	  let strike = 0;
   
 	  for (let i = 0; i <= 2; i++) {
-		if (answer[i] === parseInt(userValue[i]))
-		  strike++;
-		else if (userValue.indexOf(answer[i]) !== -1)
-		  ball++;
+		  if (answer[i] === parseInt(userValue[i]))
+		    strike++;
+		  else if (userValue.indexOf(answer[i]) !== -1)
+		    ball++;
     }
   
 	  return [ball, strike];
