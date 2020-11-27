@@ -86,3 +86,9 @@ https://velog.io/@takeknowledge/%EB%A1%9C%EC%BB%AC%EC%97%90%EC%84%9C-CORS-policy
   - DOM 트리를 새로 그리면서 할까?
 
 3. 지나친 모듈화를 지양(디버깅을 위해...) + 생성자, 내부의 this 특성 활용하기
+
+
+<hr/>
+
+## 3차 중간 보고
+1. 원활한 DOM 조작을 위해 class형태로 변경

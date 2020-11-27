@@ -1,8 +1,11 @@
+//test code
 const printCorrectAnswerForTest = computerInputNumbers => console.log('hello world! correctAnswer is ', computerInputNumbers);
 
+//variables
 const correctAnswerMessage = "🎉정답을 맞추셨습니다!🎉";
 const getWrongAnswerMessage = ({strike, ball}) => (!strike && !ball) ? '낫싱' : ((ball ? `${ball}볼 ` : '') + (strike ? `${strike}스트라이크` : ''));
 
+//functions to execute baseball game
 const checkValidNumber = inputs => {
   if(/[^1-9]+/g.test(inputs)) return {ok: false, msg: '1-9의 각 다른 숫자 3개를 공백 없이 입력하세요'};
   if(inputs.length !== 3) return {ok: false, msg: '숫자는 3개만 입력가능합니다.'};
@@ -10,7 +13,6 @@ const checkValidNumber = inputs => {
   return {ok: true, msg: '올바른 입력입니다!'};
 }
 
-//function to execute baseball game
 const createRandomNumber = () => {
   let randomNum = String(Math.floor(Math.random()*999 + 1));
   return checkValidNumber(randomNum).ok ? randomNum : createRandomNumber();
@@ -35,57 +37,48 @@ const compareAnswersAndgetResult = (computerInputNumbers, userInputNumbers) => {
   }
 }
 
-export default function BaseballGame() {
+let turn = 0;
+let baseballGames = [];
+
+export default class BaseballGame {
+  constructor(turn) {
+    this.answer = createRandomNumber();
+    this.turn = turn;
+  }
+
+  printResult(result) {
+    const resultMessageElement = result.ok ? document.createElement('strong') : document.createElement('p');
+    const message = result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
+    resultMessageElement.innerText = message;
+    document.getElementById('result').appendChild(resultMessageElement);
+  }
+
+
+
+  play(computerInputNumbers, userInputNumbers) {
+    const result = compareAnswersAndgetResult(computerInputNumbers, userInputNumbers);
+    //console.log(result);
+    return this.printResult(result);
+  }
+}
+
+
+//let baseballGame = new BaseballGame(); 
+const startGame = () => {
   const gameTurn = document.getElementById('app');
   const userInput = gameTurn.querySelector('#user-input');
   const userInputButton = gameTurn.querySelector('#submit');
-  const resultMessage = gameTurn.querySelector('#result');
-
-  const printMessage = message => {
-    const resultMessageElement = document.createElement('p');
-    resultMessageElement.innerText = message;
-    resultMessage.appendChild(resultMessageElement);
-  }
-
-  const createNewInputForm = () => {
-    const newInputElement = userInput.cloneNode(true);
-    const newInputButton = userInputButton.cloneNode(true);
-    const newResultMessage = resultMessage.cloneNode(false);
-
-    gameTurn.append(newInputElement, newInputButton, newResultMessage);
-  }
-
-  //new input form set
-  const addAnotherInputForm = () => {
-    console.log('try again!');
-    createNewInputForm();
-  }
-
-  const getResult = result => {
-    const resultMessage = result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
-    printMessage(resultMessage);
-  }
-
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    const result = compareAnswersAndgetResult(computerInputNumbers, userInputNumbers);
-    
-    return getResult(result);
-  };
-
-  const getUserFirstInput = computerInputNumbers => {
-    userInput.addEventListener('change', e => userInput.textContent = e.target.value);
-    userInputButton.addEventListener('click', () => checkValidNumber(userInput.textContent).ok ? this.play(computerInputNumbers, userInput.textContent) : alert(checkValidNumber(userInput.textContent).msg));
-  }
-
-  const startGame = () => {
-    const computerInputNumbers = createRandomNumber();
-    printCorrectAnswerForTest(computerInputNumbers);
-
-    //정답이 나올때까지....
-    getUserFirstInput(computerInputNumbers);
-  }
   
-  startGame();
+  let baseballGame = new BaseballGame(turn);
+  printCorrectAnswerForTest(baseballGame.answer);
+
+  userInput.addEventListener('change', e => userInput.textContent = e.target.value);
+  userInputButton.addEventListener('click', () => {
+    const checkUserInput = checkValidNumber(userInput.textContent);
+    checkUserInput.ok ? baseballGame.play(baseballGame.answer, userInput.textContent) : alert(checkUserInput.msg)
+  });
+
+
 }
 
-new BaseballGame(); //this 특성 잘 활용해서 다시 리팩토링하기! 전에 구현했던 큐 보고 복습하기
+startGame();
