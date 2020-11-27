@@ -91,8 +91,9 @@ https://velog.io/@takeknowledge/%EB%A1%9C%EC%BB%AC%EC%97%90%EC%84%9C-CORS-policy
 <hr/>
 
 ## 3차 중간 보고
-1. 원활한 DOM 조작을 위해 class형태로 변경
+1. 원활한 DOM 조작을 위해 class형태로 리팩토링
 2. 굳이 input form에 change event lister를 쓰지 않고, 
 - react에서는 onchange로 이벤트를 걸면서 useState를 사용했었음
 
 3. window.location.reload() 새로 고침 함수 복습
+4. 정답이 나오면 새로고침, 틀리면 user input reset 후 다시 입력 후 이전 결과 지우고 새 결과 출력하게 만듦

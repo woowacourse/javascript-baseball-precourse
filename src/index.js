@@ -40,27 +40,13 @@ const compareAnswersAndgetResult = (computerInputNumbers, userInputNumbers) => {
 const gameTurn = document.getElementById('app');
 const userInput = gameTurn.querySelector('#user-input');
 const userInputButton = gameTurn.querySelector('#submit');
+const resultElement = gameTurn.querySelector('#result')
 
 export default class BaseballGame {
   constructor() {
     this.answer = createRandomNumber();
     this.isFinished = false;
     this.result = null;
-  }
-
-  printResult(result) {
-    const resultMessageElement = result.ok ? document.createElement('strong') : document.createElement('p');
-    const message = result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
-    
-    this.isFinished = result.ok;
-    resultMessageElement.innerText = message;
-    document.getElementById('result').appendChild(resultMessageElement);
-  }
-
-  play(computerInputNumbers, userInputNumbers) {
-    const result = compareAnswersAndgetResult(computerInputNumbers, userInputNumbers);
-    this.result = result;
-    return this.printResult(result);
   }
 
   askRestart () {
@@ -81,12 +67,33 @@ export default class BaseballGame {
     askRestartSection.appendChild(restartQuestion);
     askRestartSection.appendChild(restartButton);
     
-    document.getElementById('result').appendChild(askRestartSection);
+    resultElement.appendChild(askRestartSection);
   }
 
-  
+  resetResultMessage () {
+    const resultElementChildren = resultElement.childNodes;
+    if(this.result && this.result.ok) return;
+    resultElementChildren.forEach(resultElementChild => resultElement.removeChild(resultElementChild));
+  }
 
+  printResult(result) {
+    const resultMessageElement = result.ok ? document.createElement('strong') : document.createElement('p');
+    const message = result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
+    
+    this.resetResultMessage();
+    this.isFinished = result.ok;
+    resultMessageElement.innerText = message;
+    resultElement.appendChild(resultMessageElement);
 
+    if(this.result.ok) this.askRestart();
+    else userInput.value = '';
+  }
+
+  play(computerInputNumbers, userInputNumbers) {
+    const result = compareAnswersAndgetResult(computerInputNumbers, userInputNumbers);
+    this.result = result;
+    return this.printResult(result);
+  }
 }
 
 let baseballGame = new BaseballGame();
@@ -98,10 +105,7 @@ const playGame = e => {
   if(baseballGame.isFinished) return alert('이미 정답을 맞히셨습니다!');
 
   checkUserInput.ok ? baseballGame.play(baseballGame.answer, userInput.value) : alert(checkUserInput.msg);
-  console.log(baseballGame.result);
-
-  if(baseballGame.result.ok) baseballGame.askRestart();
-
+  //console.log(baseballGame.result);
 }
 
 userInputButton.addEventListener('click', playGame);
