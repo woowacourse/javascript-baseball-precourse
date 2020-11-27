@@ -77,6 +77,17 @@ export default function BaseballGame() {
         };
         return true;
     };
+
+    // * 주어진 index가 strike, ball인지 확인하기
+    this.calculateResult = function (index,computerInputNumbers, userInputNumbers) {
+        if (String(userInputNumbers)[index] == String(computerInputNumbers)[index])  {
+            return "스트라이크";
+        };
+        if (String(computerInputNumbers).includes(String(userInputNumbers)[index])) {
+            return "볼";
+        };
+        return "아웃";
+    };
 };
 
 
