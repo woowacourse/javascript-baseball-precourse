@@ -55,19 +55,25 @@ function renderResult(string) {
   }
 }
 
-function handleUserInputSubmit(e) {
+function isNumber(userInputNumbers) {
+  const regex = /^[0-9]*$/;
+  const response = regex.test(userInputNumbers);
+
+  return response;
+}
+
+function handleUserInputSubmit() {
   const userInputNumbers = document.getElementById('user-input').value;
   const deduplicateCount = getDeduplicateCount(userInputNumbers);
-  const regex = /^[0-9]*$/;
 
-  if (!regex.test(userInputNumbers)) {
+  if (!isNumber(userInputNumbers)) {
     resetInputNumbers();
     return alert(text.warningForNotNum);
   }
 
   if (userInputNumbers.length !== 3) {
     resetInputNumbers();
-    return alert(text.warningFor3digit);
+    return alert(text.warningFor3Digit);
   }
 
   if (userInputNumbers.includes('0')) {
