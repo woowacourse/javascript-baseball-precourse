@@ -27,6 +27,14 @@ export default function BaseballGame() {
     return computerInputNumbers;
   };
 
+  this.resetGame = () => {
+    const resultContainer = document.querySelector("#result");
+    resultContainer.innerHTML = "";
+
+    this.setComputerInputNumbers();
+    this.isGameOver = false;
+  };
+
   this.getGameResult = (computerInputNumbers, userInputNumbers) => {
     const gameResult = {
       ball: 0,
@@ -110,6 +118,8 @@ export default function BaseballGame() {
 
     return true;
   };
+
+  this.resetGame();
 }
 
 new BaseballGame();
