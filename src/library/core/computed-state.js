@@ -6,7 +6,7 @@ class ComputedState extends State {
   constructor(computeFunction, dependancies) {
     super(computeFunction());
     this.#computeFunction = computeFunction;
-    dependancies.forEach((dependancy) => dependancy.subscribe(this.handler));
+    dependancies.forEach(dependancy => dependancy.subscribe(this.handler));
   }
 
   handler = () => {

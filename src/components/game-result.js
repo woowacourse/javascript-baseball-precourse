@@ -12,10 +12,10 @@ class GameResult {
   }
 
   initEventListener = () => {
-    this.#$target.addEventListener('click', (event) => this.onClick(event));
+    this.#$target.addEventListener('click', event => this.onClick(event));
   };
 
-  onClick = (event) => {
+  onClick = event => {
     if (event.target.id === 'game-restart-button') {
       this.#props.restart();
     }

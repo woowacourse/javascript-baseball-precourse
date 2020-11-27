@@ -21,7 +21,7 @@ class UserInput {
   }
 
   initializeEventListener() {
-    this.#$target.addEventListener('submit', (event) => this.onSubmit(event));
+    this.#$target.addEventListener('submit', event => this.onSubmit(event));
   }
 
   onSubmit(event) {
@@ -48,7 +48,7 @@ class UserInput {
     );
   }
 
-  alertByCase = (input) => {
+  alertByCase = input => {
     const errors = [];
     const inputNumber = Number(input);
     if (isNaN(inputNumber)) {

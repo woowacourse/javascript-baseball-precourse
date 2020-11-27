@@ -7,14 +7,14 @@ class State {
     this.#renders = new Set();
   }
 
-  subscribe = (render) => {
+  subscribe = render => {
     if (typeof render === 'function') {
       this.#renders.add(render);
     }
   };
 
   renderAll = () => {
-    this.#renders.forEach((render) => render());
+    this.#renders.forEach(render => render());
   };
 
   get value() {

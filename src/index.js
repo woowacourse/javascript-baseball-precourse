@@ -50,7 +50,7 @@ export default class BaseballGame {
   getPlayStatus(answerNumbers, userNumbers) {
     let strikeCount = 0;
     let ballCount = 0;
-    answerNumbers.forEach((answerNumber) => {
+    answerNumbers.forEach(answerNumber => {
       if (userNumbers.includes(answerNumber)) {
         ballCount++;
       }
