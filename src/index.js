@@ -2,10 +2,6 @@ import { BaseballGame } from './modules';
 import { text } from './fixtrue';
 const game = new BaseballGame();
 
-function getDeduplicateCount(userInputNumbers) {
-  return Array.from(new Set(userInputNumbers)).length;
-}
-
 function cleanResult() {
   const result_div = document.getElementById('result');
 
@@ -68,9 +64,21 @@ function isNot3Digit(userInputNumbers) {
   }
 }
 
+function isInZero(userInputNumbers) {
+  if (userInputNumbers.includes('0')) {
+    return true;
+  }
+}
+
+function isInduplicateDigit(userInputNumbers) {
+  const deduplicateCount = Array.from(new Set(userInputNumbers)).length;
+  if (deduplicateCount !== 3) {
+    return true;
+  }
+}
+
 function handleUserInputSubmit() {
   const userInputNumbers = document.getElementById('user-input').value;
-  const deduplicateCount = getDeduplicateCount(userInputNumbers);
 
   if (!isNumber(userInputNumbers)) {
     resetInputNumbers();
@@ -82,12 +90,12 @@ function handleUserInputSubmit() {
     return alert(text.warningFor3Digit);
   }
 
-  if (userInputNumbers.includes('0')) {
+  if (isInZero(userInputNumbers)) {
     resetInputNumbers();
     return alert(text.warningForZero);
   }
 
-  if (deduplicateCount !== 3) {
+  if (isInduplicateDigit(userInputNumbers)) {
     resetInputNumbers();
     return alert(text.warningForduplicate);
   }
