@@ -1,3 +1,5 @@
+import CheckInput from './checkInput.js';
+
 export default function BaseballGame() {
 	this.play = function (computerInputNumbers, userInputNumbers) {
     let [ball, strike] = CountBallStrike(computerInputNumbers, userInputNumbers);
@@ -29,7 +31,8 @@ export default function BaseballGame() {
 
   _button.addEventListener('click', (e) => {
     e.preventDefault();
-    let userValue = GetInput();
+    let InputUtils = new CheckInput();
+    let userValue = InputUtils.GetInput(_input);
 
     if (userValue !== 0) {
       let resultMessage = this.play(_answer, userValue);
@@ -51,40 +54,6 @@ export default function BaseballGame() {
     }
     
     return answer;
-	}
-  
-  function GetInput() {
-    let userValue = '';
-    
-    if (CheckInputValidity(_input.value) === 1) {
-      alert("1~9까지의 중복되지 않는 세자리 숫자를 입력해주세요");
-      return 0;
-    } else
-      userValue = _input.value;
-
-    _input.focus();
-    
-    return userValue;
-  }
-
-	function CheckInputValidity(number) {
-    let isValid = 0;
-  
-	  if (number.indexOf("0") !== -1)
-      isValid = 1;
-
-	  if (number.length !== 3)
-      isValid = 1;
-    
-	  for (let i = 0; i <= 2; i++) {
-		  if (!(number[i] >= 1 && number[i] <= 9))
-        isValid = 1;
-
-		  if (number.split(number[i]).length - 1 !== 1)
-		    isValid = 1;
-    }
-
-	  return isValid;
 	}
 	
 	function CountBallStrike(answer, userValue) {
