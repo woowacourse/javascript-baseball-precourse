@@ -12,6 +12,9 @@
     "no-new": "off",
     "class-methods-use-this": "off",
     "import/extensions": "off",
-    "import/no-named-as-default": "off"
+    "import/no-named-as-default": "off",
+    "no-underscore-dangle": "off",
+    "no-console": "off",
+    "no-alert": "off"
   }
 }
