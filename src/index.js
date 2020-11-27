@@ -42,7 +42,6 @@ export default class BaseballGame {
     const inputValue = USER_INPUT.value;
     // test the user input suitability
     if (!this.isSuitableInputValue(inputValue)) {
-      alert('올바른 값을 입력해주세요.');
       this.setTextInput();
 
       return;
@@ -65,11 +64,25 @@ export default class BaseballGame {
   // returns true if the input value is suitable
   // suitable = not emptystring, not NaN, 3 length, not duplicated, not zero 
   isSuitableInputValue(val) {
-    if (!val || isNaN(val) || val.length !== 3 || this.hasDuplicatedNumber(val) || this.hasZero(val)) {
-      return false;
+    let isSuitable = true;
+    if (!val) {
+      alert('값을 입력해주세요.');
+      isSuitable = false;
+    } else if (isNaN(val)) {
+      alert('숫자를 입력해주세요.');
+      isSuitable = false;
+    } else if (val.length !== 3) {
+      alert('3개의 숫자를 입력해주세요.');
+      isSuitable = false;
+    } else if (this.hasDuplicatedNumber(val)) {
+      alert('중복되는 숫자 없이 입력해주세요.');
+      isSuitable = false;
+    } else if (this.hasZero(val)) {
+      alert('0이 포함되지 않은 숫자를 입력해주세요.');
+      isSuitable = false;
     }
 
-    return true;
+    return isSuitable;
   }
 
   // returns true if the input value has zero in it
