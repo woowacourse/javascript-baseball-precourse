@@ -1,13 +1,18 @@
-import { NUMBER_LIST, START_INDEX_ZERO, NUMBER_DIGIT } from "./constants.js";
+import { NUMBER_LIST, START_INDEX_ZERO, NUMBER_DIGIT, ERROR_MESSAGE } from "./constants.js";
 
 export default function BaseballGame() {
   
   const init = function() {
-    const computerInputNumbers = getRandomNumberList();
     const submitButton = document.querySelector("#submit");
 
-    submitButton.addEventListener("click", getUserInputNumberList);
-    // console.log(computerInputNumbers);
+    submitButton.addEventListener("click", handleSubmitButton);
+  };
+
+  const handleSubmitButton = function() {
+    const computerInputNumbers = getRandomNumberList();
+    const userInputNumbers = getUserInputNumberList();
+
+    play(computerInputNumbers, userInputNumbers);
   };
 
   const getRandomNumberList = function() {
@@ -24,9 +29,10 @@ export default function BaseballGame() {
     let userInputNumbers = [];
 
     if (isNotValid(userInputList)) {
-      alert("잘못된 입력입니다.\n1~9까지의 수를 중복없이 3개 작성해주세요.");
+      alert(ERROR_MESSAGE);
     } else {
       userInputNumbers = userInputList.map(x => +x);
+      return userInputNumbers;
     }
   };
 
@@ -54,9 +60,9 @@ export default function BaseballGame() {
     return userInputList.length === checkingSet.size;
   };
 
-  // const play = function (computerInputNumbers, userInputNumbers) {
-  //   return "결과 값 String";
-  // };
+  const play = function (computerInputNumbers, userInputNumbers) {
+    return "결과 값 String";
+  };
 
   init();
 }
