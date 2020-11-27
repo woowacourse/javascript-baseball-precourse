@@ -2,18 +2,18 @@
 
 ## ✔️ 구현할 기능 목록
 
-- `resetGame`: 게임을 초기화하는 메서드
-- `setComputerInputNumber`: 서로 다른 수로 이루어진 3자리의 수를 만드는 메서드
-  - `getRandomNumber`: 1에서 9까지 랜덤한 숫자를 반환하는 메서드
-  - `isExistNumber`: 랜덤으로 뽑은 숫자가 중복되는지 확인하는 메서드
-- `checkGameResult`: 게임의 결과를 확인하는 메서드
-  - `play`: 게임의 결과를 반환하는 메서드
-    - `isValidValue`: 게임 플레이어가 입력한 숫자가 유효한 값인지 확인하는 메서드
-      - `isNumber`: 게임 플레이어가 입력한 값이 숫자인지 확인하는 메서드
-      - `isThreeDigits`: 게임 플레이어가 입력한 값이 세 자릿수인지 확인하는 메서드
-      - `isDifferentNumbers`: 게임 플레이어가 입력한 값이 서로 다른 숫자인지 확인하는 메서드
-    - `compareInputNumbers`: 컴퓨터가 생각하고 있는 숫자와 게임 플레이어가 입력한 숫자를 비교하는 메서드
-  - `printGameResult`: 게임의 결과를 출력하는 메서드
+- `resetGame()`: 게임을 초기화하는 메서드
+  - `setComputerInputNumbers()`: 서로 다른 수로 이루어진 3자리의 수를 만드는 메서드
+    - `getRandomNumber()`: 1에서 9까지 랜덤한 숫자를 반환하는 메서드
+- `checkGameResult()`: 게임의 결과를 확인하는 메서드
+  - `getGameResult(computerInputNumbers, userInputNumbers)`: 컴퓨터가 생각하고 있는 숫자와 게임 플레이어가 입력한 숫자를 비교한 결과를 반환하는 메서드
+  - `printGameResult(message)`: 게임의 결과를 출력하는 메서드
+  - `play(computerInputNumbers, userInputNumbers)`: 게임의 결과 메시지를 반환하는 메서드
+  - `checkValidInputValue(value)`: 게임 플레이어가 입력한 숫자가 유효한 값인지 확인하는 메서드
+    - `isNumber`: 숫자인지 확인
+    - `isThreeDigits`: 세 자릿수인지 확인
+    - `hasZero`: 0을 포함했는지 확인
+    - `isDifferentNumbers`: 서로 다른 숫자인지 확인
 
 ---
 
