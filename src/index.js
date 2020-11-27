@@ -13,7 +13,7 @@ export default function BaseballGame(N) {
   const ZERO_INCLUDED = 4;
   const CHAR_INCLUDED = 5;
 
-  const getComputerInputnumbers = (numbers) => {
+  const getComputerInputNumbers = (numbers) => {
     if (numbers !== '') {
       return numbers;
     }
@@ -22,8 +22,10 @@ export default function BaseballGame(N) {
     return numbers;
   };
 
-  const getUserInputnumbers = () => {
-    return userInputElem.value;
+  const getUserInputNumbers = () => {
+    let userInputNumbers = userInputElem.value;
+    console.log(`⚾LOG: Your Guess Is... ${userInputNumbers}`);
+    return userInputNumbers;
   };
 
   const isErrorInput = (numbers) => {
@@ -74,8 +76,6 @@ export default function BaseballGame(N) {
   };
 
   const play = (computerInputNumbers, userInputNumbers) => {
-    console.log(`⚾LOG: Your Guess Is... ${userInputNumbers}`);
-
     let score = markScore(computerInputNumbers, userInputNumbers);
     return getGameResultStr(score);
   };
@@ -140,12 +140,12 @@ export default function BaseballGame(N) {
     e.preventDefault();
     util.initNode(resultElem);
 
-    const userInputNumbers = getUserInputnumbers();
+    computerInputNumbers = getComputerInputNumbers(computerInputNumbers);
+    const userInputNumbers = getUserInputNumbers();
     const errno = isErrorInput(userInputNumbers);
     if (errno) {
       return alertErrorMessage(errno, userInputElem);
     }
-    computerInputNumbers = getComputerInputnumbers(computerInputNumbers);
 
     const gameResult = play(computerInputNumbers, userInputNumbers);
     resultElem.insertAdjacentHTML('afterbegin', gameResult);
