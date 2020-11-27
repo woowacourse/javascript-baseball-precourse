@@ -34,6 +34,7 @@ const btnInput = document.getElementById("submit");
 
 btnInput.onclick = function () {
   userInputNumbers = document.getElementById("user-input").value;
-  console.log(baseballGame.play(computerInputNumbers, userInputNumbers));
-  // baseballGame.play(computerInputNumbers, userInputNumbers);
+  const result = baseballGame.play(computerInputNumbers, userInputNumbers);
+  // 결과 출력
+  document.getElementById("result").innerHTML = result;
 };
