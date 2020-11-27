@@ -3,37 +3,30 @@ import Utils from './utils.js';
 export default function BaseballGame(N) {
   const util = new Utils();
 
-  const EMPTY = 1;
-  const NOT_N_DIGIT = 2;
-  const REDUNDANT = 3;
-  const ZERO_INCLUDED = 4;
-  const CHAR_INCLUDED = 5;
+  const userInputElem = document.querySelector('#user-input');
+  const resultElem = document.querySelector('#result');
+  const playBtn = document.querySelector('#submit');
 
-  this.initialize = (elem) => {
-    if (elem.tagName == 'DIV') {
-      return (elem.innerHTML = '');
-    }
-    if (elem.tagName == 'INPUT') {
-      return (elem.value = '');
-    }
-  };
+  const EMPTY = 0;
+  const NOT_N_DIGIT = 1;
+  const REDUNDANT = 2;
+  const ZERO_INCLUDED = 3;
+  const CHAR_INCLUDED = 4;
 
-  this.getComputerInputnumbers = (numbers) => {
+  const getComputerInputnumbers = (numbers) => {
     if (numbers !== '') {
       return numbers;
     }
     numbers = util.generateRandomNumbers(N);
-    console.log(`⚾ADMIN: Sorry For The Spolier! The Answer Is... ${numbers}`);
+    console.log(`⚾LOG: Sorry For The Spolier! The Answer Is... ${numbers}`);
     return numbers;
   };
 
-  this.getUserInputnumbers = () => {
-    const numbers = userInputElem.value;
-    console.log(`⚾ADMIN: Your Guess Is... ${numbers}`);
-    return numbers;
+  const getUserInputnumbers = () => {
+    return userInputElem.value;
   };
 
-  this.isError = (numbers) => {
+  const isErrorInput = (numbers) => {
     if (numbers === '') {
       return EMPTY;
     }
@@ -54,14 +47,14 @@ export default function BaseballGame(N) {
     return false;
   };
 
-  this.alertErrorMessage = (errno) => {
-    console.log(`⚾ADMIN: Invalid User Input. Error Code: ${errno}`);
+  const alertErrorMessage = (errno) => {
+    console.log(`⚾LOG: Invalid User Input. 🚨Error Code: ${errno}`);
 
-    alert(this.getErrorMessage(errno));
-    this.initialize(userInputElem);
+    alert(getErrorMessage(errno));
+    util.initialize(userInputElem);
   };
 
-  this.getErrorMessage = (errno) => {
+  const getErrorMessage = (errno) => {
     if (errno == EMPTY) {
       return `\n🚨 안내 🚨\n\n 아무것도 입력되지 않았습니다.\n ${N}자리 숫자를 예상해서 입력해 주세요.`;
     }
@@ -79,12 +72,14 @@ export default function BaseballGame(N) {
     }
   };
 
-  this.play = (computerInputNumbers, userInputNumbers) => {
-    let score = this.markScore(computerInputNumbers, userInputNumbers);
-    return this.getGameResult(score);
+  const play = (computerInputNumbers, userInputNumbers) => {
+    console.log(`⚾LOG: Your Guess Is... ${userInputNumbers}`);
+
+    let score = markScore(computerInputNumbers, userInputNumbers);
+    return getGameResult(score);
   };
 
-  this.markScore = (computerInputNumbers, userInputNumbers) => {
+  const markScore = (computerInputNumbers, userInputNumbers) => {
     let score = {
       strike: 0,
       ball: 0,
@@ -102,9 +97,9 @@ export default function BaseballGame(N) {
     return score;
   };
 
-  this.getGameResult = (score) => {
+  const getGameResult = (score) => {
     if (score.strike === N) {
-      this.prepareRestartButton();
+      prepareRestartButton();
       return `<h4>🎉정답을 맞추셨습니다!🎉</h4>게임을 새로 시작하시겠습니까? `;
     }
     if (score.strike === 0 && score.ball === 0) {
@@ -120,7 +115,7 @@ export default function BaseballGame(N) {
     return msg;
   };
 
-  this.prepareRestartButton = () => {
+  const prepareRestartButton = () => {
     let restartElem = util.createBtn('game-restart-button', '게임 재시작');
 
     restartElem.addEventListener('click', function restart(e) {
@@ -131,36 +126,34 @@ export default function BaseballGame(N) {
       userInputElem.value = '';
       userInputElem.focus();
     });
-    this.initialize(resultElem);
+    util.initialize(resultElem);
     resultElem.append(restartElem);
-    console.log(`⚾ADMIN: You Win!💛💛💛`);
+    console.log(`⚾LOG: You Win!💛💛💛`);
   };
+
+  const clearForm = (e) => {
+    userInputElem.value = '';
+  };
+
+  const showGameResult = (e) => {
+    e.preventDefault();
+    util.initialize(resultElem);
+
+    const userInputNumbers = getUserInputnumbers();
+    const errno = isErrorInput(userInputNumbers);
+    if (errno) {
+      return alertErrorMessage(errno, userInputElem);
+    }
+    computerInputNumbers = getComputerInputnumbers(computerInputNumbers);
+
+    const gameResult = play(computerInputNumbers, userInputNumbers);
+    resultElem.insertAdjacentHTML('afterbegin', gameResult);
+  };
+
+  let computerInputNumbers = '';
+
+  userInputElem.addEventListener('click', clearForm);
+  playBtn.addEventListener('click', showGameResult);
 }
 
-const userInputElem = document.querySelector('#user-input');
-const resultElem = document.querySelector('#result');
-const playBtn = document.querySelector('#submit');
-const game = new BaseballGame(3);
-let computerInputNumbers = '';
-
-userInputElem.addEventListener('click', clearForm);
-playBtn.addEventListener('click', showGameResult);
-
-function clearForm(e) {
-  userInputElem.value = '';
-}
-
-function showGameResult(e) {
-  e.preventDefault();
-  game.initialize(resultElem);
-
-  computerInputNumbers = game.getComputerInputnumbers(computerInputNumbers);
-  const userInputNumbers = game.getUserInputnumbers();
-
-  const errno = game.isError(userInputNumbers);
-  if (errno) {
-    return game.alertErrorMessage(errno, userInputElem);
-  }
-  const gameResult = game.play(computerInputNumbers, userInputNumbers);
-  resultElem.insertAdjacentHTML('afterbegin', gameResult);
-}
+new BaseballGame(3);
