@@ -39,6 +39,13 @@ export default function BaseballGame() {
         };
         return false;
     };
+// * 모두 숫자인지 확인한다.
+    this.isNumber = function (input) {
+        for (var item of input) {
+            if (isNaN(Number(item))) return false;
+        };
+        return true;
+    };
 };
 
 
