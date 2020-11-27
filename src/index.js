@@ -109,6 +109,13 @@ export default function BaseballGame() {
         };
         return `${result["볼"]}볼 ${result["스트라이크"]}스트라이크`;
     };
+    // * 정답을 맞췄는지 확인하기
+    this.isRight = function (computerInputNumbers, userInputNumbers) {
+        if (this.play(computerInputNumbers,userInputNumbers) === '3스트라이크') {
+            return true;
+        };
+        return false;
+    };
 };
 
 
