@@ -26,7 +26,7 @@ export default function BaseballGame() {
 }
 const baseballGame = new BaseballGame();
 
-const computerInputNumbers = "123";
+let computerInputNumbers = "123";
 let userInputNumbers = "0";
 
 // 사용자 input 받기
@@ -36,5 +36,21 @@ btnInput.onclick = function () {
   userInputNumbers = document.getElementById("user-input").value;
   const result = baseballGame.play(computerInputNumbers, userInputNumbers);
   // 결과 출력
-  document.getElementById("result").innerHTML = result;
+  if (result === "3스트라이크") {
+    // 숫자를 전부 맞힌경우
+    document.getElementById(
+      "result"
+    ).innerHTML = `<div>정답을 맞추셨습니다!</div><div>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button></div>`;
+
+    const btnRestart = document.getElementById("game-restart-button");
+    // 게임 재시작
+    btnRestart.onclick = function () {
+      computerInputNumbers = "245"; // computerInputNumber 바꾸기
+      document.getElementById("user-input").value = ""; // input 초기화
+      document.getElementById("result").innerHTML = ""; // result 초기화
+    };
+  } else {
+    // 숫자를 못 맞힌경우
+    document.getElementById("result").innerHTML = result;
+  }
 };
