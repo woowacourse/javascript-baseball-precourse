@@ -1,9 +1,11 @@
 export default function BaseballGame() {
   this.getRandNum = () => {
     let ret = '';
+    const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    // 중복을 피하기 위해 nums에서 랜덤으로 하나씩 splice하여 가져온다.
     
     for(let i=0; i<3; ++i) {
-      const tmpN = Math.floor(Math.random()*9 + 1);
+      const tmpN = nums.splice(Math.floor(Math.random()*(9-i)), 1)[0];
       ret += tmpN.toString();
     }
 
@@ -33,9 +35,3 @@ export default function BaseballGame() {
 }
 
 let BG = new BaseballGame();
-console.log("123 : " + BG.isValidInput("123"));
-console.log("1234 : " + BG.isValidInput("1234"));
-console.log("120 : " + BG.isValidInput("120"));
-console.log("12j : " + BG.isValidInput("12j"));
-console.log("12 : " + BG.isValidInput("12"));
-console.log("122 : " + BG.isValidInput("122"));
