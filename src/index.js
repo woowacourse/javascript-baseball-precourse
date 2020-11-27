@@ -4,6 +4,7 @@ export default class BaseballGame {
     this.result = document.getElementById("result");
     this.submit = document.getElementById("submit");
     this.submit.addEventListener("click", this.handleSubmit.bind(this));
+    this.isGameEnd = false;
 
     console.log(this.answerNumbers);
   }
@@ -47,6 +48,7 @@ export default class BaseballGame {
     document.getElementById("user-input").value = "";
     console.log(userInput);
 
+    if (this.isGameEnd) return;
     if (!this.isValuedInputNumber(userInput))
       return alert("잘못된 입력값 입니다");
 
@@ -87,6 +89,14 @@ export default class BaseballGame {
         </p>
         `;
     this.result.appendChild(newDiv);
+    this.gameRestartButton();
+  }
+
+  gameRestartButton() {
+    const restartBtn = document.getElementById("game-restart-button");
+    if (restartBtn !== null) {
+      this.isGameEnd = true;
+    }
   }
 }
 
