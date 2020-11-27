@@ -100,7 +100,19 @@ export default class BaseballGame {
 
     return answer;
   }
+
+  // 게임 시작 메서드
+  startGame(computerInputNumbers) {
+    const userInputValue = document.getElementById("user-input").value;
+    const userInputNumbers = Array.from(userInputValue, Number);
+
+    if (this.checkVaild(userInputNumbers)) {
+      const answer = baseballGame.play(computerInputNumbers, userInputNumbers);
+
+      baseballGame.showGameResult(answer);
+    }
+  }
 }
 
 const baseballGame = new BaseballGame();
-console.log(baseballGame.play([1, 2, 3], [3, 2, 1]));
+// baseballGame.startGame([1, 2, 3]);
