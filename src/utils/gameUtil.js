@@ -9,3 +9,14 @@ export const calculateCount = (target, inputs) => {
     ball,
   };
 };
+
+export const getHint = ({ strike, ball }) => {
+  let result = '';
+  const ballCnt = ball ? `${ball}볼` : '';
+  const strikeCnt = strike ? `${strike}스트라이크` : '';
+
+  result = ballCnt + ' ' + strikeCnt;
+  result = result.trim();
+
+  return result ? result : '낫씽';
+};
