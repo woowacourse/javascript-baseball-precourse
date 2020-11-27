@@ -55,10 +55,29 @@ export default class BaseballGame {
 
     if (!this.isValuedInputNumber(userInput))
       return alert("잘못된 입력값 입니다");
+
+    console.log(this.play(this.answerNumbers, userInput));
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    if (computerInputNumbers === userInputNumbers)
+      return `🎉 정답을 맞추셨습니다 🎉<br>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button>`;
+
+    let ballCount = 0;
+    let strikeCount = 0;
+
+    for (let i = 0; i < 3; i++) {
+      if (computerInputNumbers[i] === userInputNumbers[i]) {
+        strikeCount++;
+        continue;
+      }
+      if (computerInputNumbers.includes(userInputNumbers[i])) ballCount++;
+    }
+
+    if (ballCount === 0 && strikeCount === 0) return "낫싱";
+    if (ballCount !== 0 && strikeCount === 0) return `${ballCount}볼`;
+    if (ballCount === 0 && strikeCount !== 0) return `${strikeCount}스트라이크`;
+    return `${ballCount}볼 ${strikeCount}스트라이크`;
   }
 }
 
