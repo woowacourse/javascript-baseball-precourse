@@ -32,6 +32,13 @@ export default function BaseballGame() {
             };
         };
     };
+// *입력의 길이가 3인지 확인한다.
+    this.isLengthEqualsThree = function (input) {
+        if (input.length === 3) {
+            return true;
+        };
+        return false;
+    };
 };
 
 
