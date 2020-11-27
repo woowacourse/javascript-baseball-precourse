@@ -1,3 +1,9 @@
+const USER_INPUT = document.getElementById('user-input');
+const SUBMIT_BTN = document.getElementById('submit');
+const RESULT_DIV = document.getElementById('result');
+const THREE_STRIKES = 3;
+const INVALID_NUMBER = 0;
+
 export default class BaseballGame {
   constructor() {
     // game variables
@@ -5,39 +11,36 @@ export default class BaseballGame {
     this.balls = 0;
     this.strikes = 0;
     this.emojis = ['🎁', '⚽', '⚾', '😀', '😁', '😺', '👽', '🧐', '🙉', '🐼', '👍', '👌', '🤲'];
-
-    // DOM elements
-    this.userInput = document.getElementById('user-input');
-    this.submitBtn = document.getElementById('submit');
-    this.resultDiv = document.getElementById('result');
     
     this.getComputerNumber();
+    this.setEventListeners();
+    USER_INPUT.focus();
+  }
 
-    this.userInput.focus();
-    this.submitBtn.addEventListener('click', this.clickSubmit.bind(this));
-    this.userInput.addEventListener('keydown', e => {
+  setEventListeners() {
+    SUBMIT_BTN.addEventListener('click', this.clickSubmit.bind(this));
+    USER_INPUT.addEventListener('keydown', e => {
       if (e.key === "Enter") {
         this.clickSubmit.bind(this)();
       }
     });
-    this.resultDiv.addEventListener('click', this.clickRestartBtn.bind(this));
+    RESULT_DIV.addEventListener('click', this.clickRestartBtn.bind(this));
   }
 
   clickRestartBtn(e) {
-    if (e.target.id && e.target.id === 'game-restart-button') {
+    const { target: { id }} = e;
+    if (id && id === 'game-restart-button') {
       // get new random number & reset ball counts and strike counts
       this.getComputerNumber();
       this.resetBallsAndStrikes();
 
       this.setTextInput();
-      
-      // result div setting
-      this.resultDiv.innerHTML = "";
+      RESULT_DIV.innerHTML = "";
     }
   }
   
   clickSubmit() {
-    const inputValue = this.userInput.value;
+    const inputValue = USER_INPUT.value;
     
     // test the user input suitability
     if (!this.isSuitableInputValue(inputValue)) {
@@ -56,12 +59,13 @@ export default class BaseballGame {
   
   // reset and focus on text input
   setTextInput() {
-    this.userInput.readOnly = false;
-    this.userInput.value = "";
-    this.userInput.focus();
+    USER_INPUT.readOnly = false;
+    USER_INPUT.value = "";
+    USER_INPUT.focus();
   }
 
   // returns true if the input value is suitable
+  // suitable = not emptystring, not NaN, 3 length, not duplicated, not zero 
   isSuitableInputValue(val) {
     if (!val || isNaN(val) || val.length !== 3 || this.hasDuplicatedNumber(val) || this.hasZero(val)) {
       return false;
@@ -96,16 +100,16 @@ export default class BaseballGame {
   // print the result on the screen
   printOnScreen(val) {
     let tempHTML = "";
-    if (this.strikes === 3) {
+    if (this.strikes === THREE_STRIKES) {
       tempHTML += `<p><b>🎉정답을 맞추셨습니다!🎉</b></p>
                    <p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button></p>`;
 
-      this.userInput.readOnly = true;
+      USER_INPUT.readOnly = true;
     } else {
       tempHTML += `<p>${val}</p>`;
     }
 
-    this.resultDiv.innerHTML = tempHTML;
+    RESULT_DIV.innerHTML = tempHTML;
   }
 
   // reset balls and strikes
@@ -121,7 +125,7 @@ export default class BaseballGame {
     while (index < 3) {
       const randomNumber = Math.floor(Math.random() * 10);
       
-      if (randomNumber !== 0 && this.computerNumber.indexOf(randomNumber) === -1) {
+      if (randomNumber !== INVALID_NUMBER && this.computerNumber.indexOf(randomNumber) === -1) {
         this.computerNumber[index] = randomNumber;
         index++;
       }
