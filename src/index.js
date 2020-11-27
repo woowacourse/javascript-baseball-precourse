@@ -1,4 +1,5 @@
-import userInput, { isValidUserInput } from "./user-input.js";
+
+import gameResult from "./game-count.js";
 
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
@@ -7,25 +8,10 @@ export default function BaseballGame() {
   };
 }
 
-function randomNumberMaker(randomNumberLength) {
-  const maxNum = 9;
-  const minNum = 1;
-  const range = maxNum - minNum + 1;
-  let randomNumberArray = [];
-
-  while (randomNumberArray.length < randomNumberLength) {
-    let randomNumber = Math.floor((Math.random() * range) + minNum);
-
-    if (!randomNumberArray.includes(randomNumber)) {
-      randomNumberArray.push(randomNumber);
-    }
-  }
-
-  return randomNumberArray;
-}
-
 document.getElementById('submit').addEventListener("click", () => {
-  isValidUserInput(userInput());
+  const GAME_RESULT = gameResult()
+
+  document.getElementById('result').innerHTML = GAME_RESULT;
 })
 
 new BaseballGame();
