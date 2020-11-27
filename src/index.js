@@ -1,13 +1,18 @@
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
+    console.log(computerInputNumbers, userInputNumbers);
     return "결과 값 String";
   };
 }
+const baseballGame = new BaseballGame();
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
+const computerInputNumbers = 123;
+let userInputNumbers = 0;
 
-new BaseballGame();
+// 사용자 input 받기
+const btnInput = document.getElementById("submit");
+
+btnInput.onclick = function () {
+  userInputNumbers = document.getElementById("user-input").value;
+  baseballGame.play(computerInputNumbers, Number(userInputNumbers));
+};
