@@ -1,13 +1,9 @@
 export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
-}
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
-
-new BaseballGame();
+// * 랜덤으로 서로 다르고 0이 아닌 3자리 숫자 만들기
+    this.makeRandomInt = function () {
+        const randomNumber = parseInt(Math.random()*10);
+        return randomNumber;
+    };
+};
+let baseballGame = new BaseballGame();
