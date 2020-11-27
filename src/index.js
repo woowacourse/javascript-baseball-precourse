@@ -1,10 +1,12 @@
 export default function BaseballGame() {
+  // 1. 컴퓨터의 랜덤값 생성 기능
+  const arrayLength = 3;
+  let computerInputNumbers = [];
+  
   function createComputerInputNumbers() {
-    const length = 3;
-    let computerInputNumbers = [];
     let i = 0;
 
-    while (i < length) {
+    while (i < arrayLength) {
       const randomNumber = Math.floor(Math.random() * 9 + 1);
       if (notSameNumber(randomNumber)) {
         computerInputNumbers.push(randomNumber);
@@ -19,11 +21,15 @@ export default function BaseballGame() {
     return computerInputNumbers;
   };
 
-  createComputerInputNumbers();
+  // this.play = function (computerInputNumbers, userInputNumbers) {
+  //   return "결과 값 String";
+  // };
 
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+  function init() {
+    createComputerInputNumbers();
   };
+
+  init();
 }
 
 new BaseballGame();
