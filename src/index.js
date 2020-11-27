@@ -1,6 +1,4 @@
 export default function BaseballGame() {
-  let answer = setAnswer();
-
   this.play = function (computerInputNumbers, userInputNumbers) {
     return "결과 값 String";
   };
@@ -29,6 +27,23 @@ function setAnswer() {
     }
   }
   return answer;
+}
+
+function isValidNumber(userInput) {
+  return /[1-9]{3}/.test(userInput)
+}
+
+function isDuplicated(userInput) {
+  const num = userInput.split("");
+  const isDup = num.some(function(x) {
+    return num.indexOf(x) !== num.lastIndexOf(x);
+  });
+
+  return isDup;
+}
+
+function checkUserInput(userInput) {
+  return (isValidNumber(userInput) && !isDuplicated(userInput));
 }
 
 new BaseballGame();
