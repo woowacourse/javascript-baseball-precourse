@@ -6,6 +6,7 @@
   - [x] 1부터 9까지 난수 생성 'getRandomIntInclusive'
   - [x] 서로다른 난수로 이루어진 3자리의 수 생성 'getComputerNumbers'
 - [ ] 사용자(input)로부터 입력값 받기
+  - [x] 입력값 받기 'handleSubmit'
   - [ ] 입력값 유효성 판단
   - [ ] 입력값 중복된 숫자 판단
 - [ ] 유저가 입력값을 상대방(컴퓨터)과 비교하여 String값으로 반환한다.
