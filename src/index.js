@@ -96,7 +96,15 @@ export default class BaseballGame {
     const restartBtn = document.getElementById("game-restart-button");
     if (restartBtn !== null) {
       this.isGameEnd = true;
+      restartBtn.addEventListener("click", this.reset.bind(this));
     }
+  }
+
+  reset(e) {
+    this.result.innerHTML = "";
+    this.answerNumbers = this.getComputerNumbers();
+    this.isGameEnd = false;
+    console.log(this.answerNumbers);
   }
 }
 
