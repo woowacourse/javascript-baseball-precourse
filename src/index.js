@@ -7,11 +7,11 @@ export default function BaseballGame(N) {
   const resultElem = document.querySelector('#result');
   const playBtn = document.querySelector('#submit');
 
-  const EMPTY = 0;
-  const NOT_N_DIGIT = 1;
-  const REDUNDANT = 2;
-  const ZERO_INCLUDED = 3;
-  const CHAR_INCLUDED = 4;
+  const EMPTY = 1;
+  const NOT_N_DIGIT = 2;
+  const REDUNDANT = 3;
+  const ZERO_INCLUDED = 4;
+  const CHAR_INCLUDED = 5;
 
   const getComputerInputnumbers = (numbers) => {
     if (numbers !== '') {
