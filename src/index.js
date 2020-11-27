@@ -65,19 +65,11 @@ export default function BaseballGame() {
   const play = function (computerInputNumbers, userInputNumbers) {
     let strikeBallList = [0, 0];
 
-    // console.log(computerInputNumbers);
-    // console.log(userInputNumbers);
+    //
+    console.log(computerInputNumbers);
+    console.log(userInputNumbers);
 
-    strikeBallList = compareInputNumbers(computerInputNumbers, userInputNumbers);
-    
-    // console.log(`strike = ${strikeBallList[0]}, ball = ${strikeBallList[1]}`);
-
-    return "결과 값 String";
-  };
-
-  const compareInputNumbers = function(computerInputNumbers, userInputNumbers) {
-    let strikeBallList = [0, 0];
-
+    // calculate strike, ball
     let i;
     for (i = 0; i < userInputNumbers.length; i++) {
       if (userInputNumbers[i] === computerInputNumbers[i]) {
@@ -86,8 +78,11 @@ export default function BaseballGame() {
         strikeBallList[BALL_INDEX] += 1;
       }
     }
+    
+    //
+    console.log(`strike = ${strikeBallList[0]}, ball = ${strikeBallList[1]}`);
 
-    return strikeBallList;
+    return "결과 값 String";
   };
 
   // init();
