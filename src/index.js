@@ -1,3 +1,4 @@
+import initGame from './initGame.js';
 import CheckInput from './checkInput.js';
 
 export default function BaseballGame() {
@@ -27,7 +28,8 @@ export default function BaseballGame() {
   let _resultArea = document.querySelector('#result');
   let _button = document.querySelector("#submit");
   let _input = document.querySelector("#user-input");
-  let _answer = StartGame();
+  let _InitUtils = new initGame();
+  let _answer = _InitUtils.StartGame(_input);
 
   _button.addEventListener('click', (e) => {
     e.preventDefault();
@@ -39,22 +41,6 @@ export default function BaseballGame() {
       DisplayResult(resultMessage);
     }
   })
-  
-	function StartGame() {
-    _input.focus();
-	  let answer = [];
-	  let candidate = [];
-  
-	  for (let i = 1; i <= 9; i++)
-		candidate.push(i);
-  
-	  for (let i = 0; i <= 2; i++) {
-		  let picked = candidate.splice(Math.floor(Math.random() * (9 - i)), 1)[0];
-		  answer.push(picked);
-    }
-    
-    return answer;
-	}
 	
 	function CountBallStrike(answer, userValue) {
 	  let ball = 0;
@@ -83,17 +69,12 @@ export default function BaseballGame() {
 
       restartButton.addEventListener('click', (e) => {
         e.preventDefault();
-        RestartGame();
+        _resultArea.innerHTML = '';
+        _InitUtils.RestartGame(_answer, _input);
 		  })
     } 
     else
 		  _resultArea.textContent = resultMessage;
-  }
-
-  function RestartGame() {
-    _resultArea.innerHTML = '';
-    _answer = StartGame();
-    _input.value = '';
   }
 }
 
