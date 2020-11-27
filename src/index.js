@@ -9,6 +9,12 @@ import {
   MAX_DIGIT,
   DIGIT_COUNT,
 } from './library/constants/random-number.js';
+import {
+  VICTORY_MESSAGE,
+  NOTHING_MESSAGE,
+  STRIKE_MESSAGE,
+  BALL_MESSAGE,
+} from './library/constants/playResult.js';
 
 export default class BaseballGame {
   #answer;
@@ -33,32 +39,55 @@ export default class BaseballGame {
   };
 
   getPlayStatus(answerNumbers, userNumbers) {
-    let strikes = 0;
-    let balls = 0;
+    let strikeCount = 0;
+    let ballCount = 0;
     answerNumbers.forEach((answerNumber) => {
       if (userNumbers.includes(answerNumber)) {
-        balls++;
+        ballCount++;
       }
     });
     for (let i = 0; i < answerNumbers.length; i++) {
       if (answerNumbers[i] === userNumbers[i]) {
-        balls--;
-        strikes++;
+        ballCount--;
+        strikeCount++;
       }
     }
-    return [strikes, balls];
+
+    return [strikeCount, ballCount];
   }
 
   play(computerInputNumbers, userInputNumbers) {
     const parsedComputerNumbers = computerInputNumbers.toString().split('');
     const parsedUserNumbers = userInputNumbers.toString().split('');
-    let playResult = '';
-    let strikes = 0;
-    let balls = 0;
-    [strikes, balls] = this.getPlayStatus(
+    let strikeCount = 0;
+    let ballCount = 0;
+    [strikeCount, ballCount] = this.getPlayStatus(
       parsedComputerNumbers,
       parsedUserNumbers,
     );
+
+    return this.createPlayResult(strikeCount, ballCount);
+  }
+
+  createPlayResult(strikeCount, ballCount) {
+    let playResult = '';
+
+    if (strikeCount === 3) {
+      playResult = VICTORY_MESSAGE;
+    }
+    if (strikeCount === 0 && ballCount === 0) {
+      playResult = NOTHING_MESSAGE;
+    }
+    if (ballCount > 0) {
+      playResult = ballCount.toString() + BALL_MESSAGE;
+    }
+    if (ballCount > 0 && strikeCount > 0) {
+      playResult += ' ';
+    }
+    if (strikeCount > 0 && strikeCount < 3) {
+      playResult += strikeCount.toString() + STRIKE_MESSAGE;
+    }
+
     return playResult;
   }
 

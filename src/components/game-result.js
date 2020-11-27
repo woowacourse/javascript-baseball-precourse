@@ -1,3 +1,5 @@
+import { VICTORY_MESSAGE } from '../library/constants/playResult.js';
+
 class GameResult {
   #$target;
   #props;
@@ -10,9 +12,15 @@ class GameResult {
 
   render = () => {
     const result = this.#props.playResult.value;
+    const restartTemplate = `
+      <div>
+        게임을 새로 시작하시겠습니까?
+        <button id="game-restart-button">재시작</button>
+      <div>
+    `;
     this.#$target.innerHTML = result;
-    if (result === '정답') {
-      this.#$target.innerHTML += '재도전?';
+    if (result === VICTORY_MESSAGE) {
+      this.#$target.innerHTML += restartTemplate;
     }
   };
 }
