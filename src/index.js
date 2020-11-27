@@ -46,8 +46,7 @@ function checkUserInput(userInput) {
   return (isValidNumber(userInput) && !isDuplicated(userInput));
 }
 
-
-function compareNumbers(computerInputNumbers, userInputNumbers) {
+function countStrikeAndBall(computerInputNumbers, userInputNumbers) {
   const computerNumberArray = String(computerInputNumbers).split("");
   const userNumberArray = String(userInputNumbers).split("");
   let strike = 0;
@@ -64,6 +63,20 @@ function compareNumbers(computerInputNumbers, userInputNumbers) {
   })
 
   return {strike, ball}
+}
+
+function getResult(strike, ball) {
+  let retString = "";
+
+  if (strike === 3) {
+    retString = "승리했습니다.";
+  } else if (strike || ball) {
+    retString = `${ball ? ball+"볼" : ""}${ball && strike ? " " : ""}${strike ? strike+"스트라이크" : ""}`
+  } else {
+    retString = "낫싱";
+  }
+
+  return retString;
 }
 
 new BaseballGame();
