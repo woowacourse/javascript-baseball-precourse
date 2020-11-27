@@ -1,9 +1,3 @@
-// export default function BaseballGame() {
-//   this.play = function (computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   };
-// }
-
 export default class BaseballGame {
   constructor() {
     this.answerNumbers = this.getComputerNumbers();
@@ -56,7 +50,7 @@ export default class BaseballGame {
     if (!this.isValuedInputNumber(userInput))
       return alert("잘못된 입력값 입니다");
 
-    console.log(this.play(this.answerNumbers, userInput));
+    this.render(this.play(this.answerNumbers, userInput), userInput);
   }
 
   play(computerInputNumbers, userInputNumbers) {
@@ -78,6 +72,21 @@ export default class BaseballGame {
     if (ballCount !== 0 && strikeCount === 0) return `${ballCount}볼`;
     if (ballCount === 0 && strikeCount !== 0) return `${strikeCount}스트라이크`;
     return `${ballCount}볼 ${strikeCount}스트라이크`;
+  }
+
+  render(resultValue, inputNumbers) {
+    const newDiv = document.createElement("div");
+    newDiv.className = "result-box";
+    newDiv.innerHTML = `
+        <hr align=left width=200/>
+        <input type="text" value="${inputNumbers}" />
+        <button id="submit">확인</button>
+        <h3>📄 결과</h3>
+        <p>
+          ${resultValue}
+        </p>
+        `;
+    this.result.appendChild(newDiv);
   }
 }
 
