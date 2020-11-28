@@ -3,14 +3,54 @@
 export default function BaseballGame() {
   let computerInputNumbers = 0;
 
+  const countStrike = function (computerInputNumbers, userInputNumbers) {
+    let strikeCnt = 0;
+    let strComputerNumbers = String(computerInputNumbers);
+    let strUserNumbers = String(userInputNumbers);
+
+    for (let i = 0; i < 3; i++) {
+      if (strComputerNumbers[i] === strUserNumbers[i]) {
+        strikeCnt++;
+      }
+    }
+    return strikeCnt;
+  };
+
+  const countBall = function (computerInputNumbers, userInputNumbers) {
+    let ballCnt = 0;
+    let strComputerNumbers = String(computerInputNumbers);
+    let strUserNumbers = String(userInputNumbers);
+
+    for (let i = 0; i < 3; i++) {
+      if (
+        strComputerNumbers.indexOf(strUserNumbers[i]) !== -1 &&
+        strUserNumbers[i] !== strComputerNumbers[i]
+      ) {
+        ballCnt++;
+      }
+    }
+    return ballCnt;
+  };
+
   const play = function (computerInputNumbers, userInputNumbers) {
     let resultString = "";
-    console.log(computerInputNumbers, userInputNumbers);
+    let strikes = countStrike(computerInputNumbers, userInputNumbers);
+    let balls = countBall(computerInputNumbers, userInputNumbers);
 
     if (computerInputNumbers === userInputNumbers) {
       resultString =
         "<h3>🎉정답을 맞추셨습니다!🎉</h3>" +
         `<br> 게임을 새로 시작하시겠습니까? <button id = "restart-button">게임 재시작</button>`;
+    } else {
+      if (strikes && balls) {
+        resultString = `${balls}볼 ${strikes}스트라이크`;
+      } else if (!strikes && balls) {
+        resultString = `${balls}볼`;
+      } else if (strikes && !balls) {
+        resultString = `${strikes}스트라이크`;
+      } else {
+        resultString = "낫싱";
+      }
     }
 
     return resultString;
@@ -45,7 +85,6 @@ export default function BaseballGame() {
   // 123 ~ 987 사이에 있는 수인지
   const confirmThreeDigits = function (userInput) {
     let set = new Set(userInput);
-    console.log(set);
     if (set.size < 3 || !(userInput >= 123 && userInput <= 987)) {
       alert("세 자리의 중복되지 않는 숫자를 입력해주세요!");
       return false;
@@ -77,7 +116,7 @@ export default function BaseballGame() {
     let userInputNumbers = 0;
 
     if (validateInput(userInput)) {
-      userInputNumbers = parseInt(userInput);
+      userInputNumbers = parseInt(userInput, 10);
       startGame(userInputNumbers);
     }
 
