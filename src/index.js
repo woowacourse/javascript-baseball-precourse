@@ -21,6 +21,7 @@ export default class BaseballGame {
         console.log(`힌트: ${playResult}`);
 
         const isUserFoundAnswer = this.answer === userInputNumbers;
+        this.$userInput.disabled = isUserFoundAnswer;
 
         this.setState([{
           userInput: userInputNumbers, 
@@ -37,6 +38,7 @@ export default class BaseballGame {
     };
 
     const onClickGameRestartButton = () => {
+      this.$userInput.disabled = false;
       this.setState([]);
       this.answer = this.generateAnswer();
       console.log(`컴퓨터의 랜덤값: ${this.answer}`);
