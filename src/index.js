@@ -75,10 +75,21 @@ export default class BaseballGame {
     return ball;
   };
 
+  getStrikeCount = (computerInputNumbers, userInputNumbers) => {
+    let strike = 0;
+    for (let i = 0; i < USER_INPUT_LENGTH; i += 1) {
+      if (computerInputNumbers[i] === userInputNumbers[i]) {
+        strike += 1;
+      }
+    }
+    return strike;
+  }
+
   play = (computerInputNumbers, userInputNumbers) => {
     const ballCount = this.getBallCount(computerInputNumbers, userInputNumbers);
+    const strikeCount = this.getStrikeCount(computerInputNumbers, userInputNumbers);
 
-    console.log(computerInputNumbers, ballCount);
+    console.log(computerInputNumbers, strikeCount, ballCount);
   }
 }
 
