@@ -1,3 +1,4 @@
+import { expect } from '@jest/globals';
 import BaseballGame from '../src/index.js';
 
 describe('유저의 입력값이 서로 다른 3개의 숫자로 이루어져있는지 검증', () => {
@@ -47,4 +48,13 @@ describe('유저의 입력값이 서로 다른 3개의 숫자로 이루어져있
         expect(baseballGame.isValid('123')).toBe(true);
         expect(baseballGame.isValid('397')).toBe(true);
     });
-})
+});
+
+describe('서로 다른 수로 이루어진 3자리의 수(이하 "정답")를 랜덤으로 생성하는 함수가 생성한 정답은', () => {
+    const baseballGame = new BaseballGame();
+    const answer = baseballGame.generateAnswer();
+
+    test('서로 다른 3개의 숫자로 이루어져있다. ', ()=> {
+        expect(baseballGame.isValid(answer)).toBe(true);
+    })
+});
