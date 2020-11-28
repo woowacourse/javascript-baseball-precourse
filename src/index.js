@@ -98,10 +98,7 @@ export default function BaseballGame() {
     return result;
   };
 
-  let computerInputNumbers = this.setTargetNumber();
-  const submitBtn = document.getElementById("submit");
-
-  submitBtn.addEventListener("click", () => {
+  this.start = function () {
     const userInputNumbers = this.getInputNumber()
 
     if (userInputNumbers) {
@@ -110,6 +107,20 @@ export default function BaseballGame() {
       document.getElementById("result").innerText = result;
 
       console.log(computerInputNumbers, userInputNumbers);
+    }
+  };
+
+  const computerInputNumbers = this.setTargetNumber();
+  const submitBtn = document.getElementById("submit");
+  const submitEnter = document.getElementById("user-input");
+
+  submitBtn.addEventListener("click", () => {
+    this.start();
+  });
+
+  submitEnter.addEventListener("keypress", (e) => {
+    if (e.key == "Enter") {
+      this.start();
     }
   });
 }
