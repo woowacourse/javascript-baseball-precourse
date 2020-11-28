@@ -3,6 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <title>숫자 야구 게임</title>
+    <style>
+      .hr-line {
+        text-align: left;
+        margin-left:0;
+        margin-bottom:20px;
+        width:200px;
+        border:none;
+        border:0.5px solid #cfcfcf;
+        border-bottom: 0;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
@@ -13,10 +24,12 @@
         올바른 예) 139 <br />
         틀린 예) 122
       </p>
-      <input type="text" id="user-input" />
-      <button id="submit">확인</button>
-      <h3>📄 결과</h3>
-      <div id="result"></div>
+      <div id="input-container-1">
+        <input type="text" id="user-input-1" />
+        <button id="submit-1" data-index="1">확인</button>
+        <h3>📄 결과</h3>
+        <div id="result-1"></div>
+      </div>
     </div>
     <script type="module" src="src/index.js"></script>
   </body>
