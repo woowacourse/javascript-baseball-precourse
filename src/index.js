@@ -97,6 +97,16 @@ export default class BaseballGame {
     `;
   }
 
+  renderGameResult = (strike, ball) => {
+    let resultText = '';
+
+    if (strike === 0 && ball === 0) {
+      resultText = '낫띵';
+    }
+
+    this.$result.innerHTML = `<p>${resultText}</p>`;
+  }
+
   play = (computerInputNumbers, userInputNumbers) => {
     const ballCount = this.getBallCount(computerInputNumbers, userInputNumbers);
     const strikeCount = this.getStrikeCount(computerInputNumbers, userInputNumbers);
@@ -104,7 +114,8 @@ export default class BaseballGame {
     if (this.isCorrect(strikeCount)) {
       this.renderCorrectMessage();
     } else {
-      console.log(computerInputNumbers, strikeCount, ballCount);
+      console.log(this.computerInputNumbers);
+      this.renderGameResult(strikeCount, ballCount);
     }
   }
 }
