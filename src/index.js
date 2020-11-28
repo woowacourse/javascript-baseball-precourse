@@ -7,7 +7,7 @@ export default function BaseballGame() {
   const _button = document.querySelector("#submit");
   const _input = document.querySelector("#user-input");
   const _privateInitUtils = new initGame();
-  let _answer = _privateInitUtils.GenerateAnswer(_input);
+  let _answer = _privateInitUtils.GenerateAnswer(_resultArea, _input);
 
 	this.play = function (computerInputNumbers, userInputNumbers) {
     let [ball, strike] = CountBallStrike(computerInputNumbers, userInputNumbers);
