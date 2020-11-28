@@ -2,9 +2,7 @@ export default function BaseballGame() {
   const submit = document.getElementById("submit");
   const userInput = document.getElementById("user-input");
   
-  
   this.play = function (computerInputNumbers, userInputNumbers) {
-    console.log("playing...");
     return "결과 값 String";
   };
 
@@ -21,7 +19,7 @@ export default function BaseballGame() {
     return computerNumbers;
   };
 
-  this.showError = function(userInputNumber) {
+  this.checkInputError = function(userInputNumber) {
     if(userInputNumber.length != 3) { 
       alert("3개의 숫자를 작성해주세요!");
       return ;
@@ -31,18 +29,20 @@ export default function BaseballGame() {
     } else if( userInputNumber.includes(0) ){
       alert("1-9까지의 숫자만 입력해주세요!");
       return ;
+    } else if( isNaN( Number(userInputNumber) ) ){
+      alert("숫자만 적어주세요!");
+      return ;
     }
   };
 
   this.getUserInput = function() {
     let userInputNumber = userInput.value;
-    this.showError(userInputNumber);
+    this.checkInputError(userInputNumber);
     this.play(computerInputNumbers, userInputNumber);
   };
 
   submit.addEventListener('click',() => this.getUserInput());
   const computerInputNumbers = this.getComputerInputNumbers();
-
 }
 
 function isDuplication(numbers) {
