@@ -1,7 +1,7 @@
 export default class HandleInput {
   constructor() {
-    const IS_VALID = 1;
-    const IS_NOT_VALID = 0;
+    this.IS_VALID = 1;
+    this.IS_NOT_VALID = 0;
   }
   
   GetInput(input) {
@@ -20,10 +20,9 @@ export default class HandleInput {
     const isNumber = this.IsNumber(number);
     const noOverlap = this.NoOverlap(number);
     const isThreeDigits = this.IsThreeDigits(number);
-    
-    console.log('notZero', notZero);
+
     if (notZero * isNumber * noOverlap * isThreeDigits === 0)
-      CreateErrorMessage(notZero, isNumber, noOverlap, isThreeDigits);
+      this.CreateErrorMessage(notZero, isNumber, noOverlap, isThreeDigits);
 
     return this.IS_VALID;
   }
@@ -64,18 +63,19 @@ export default class HandleInput {
     let errorMessage = '';
 
     if (notZero === this.IS_NOT_VALID)
-      errorMessage += '0이 아닌';
+      errorMessage += '0이 아닌 ';
     
     if (isNumber === this.IS_NOT_VALID)
-      errorMessage += '1~9까지의';
+      errorMessage += '1~9까지의 ';
     
     if (noOverlap === this.IS_NOT_VALID)
-      errorMessage += '중복되지 않는';
+      errorMessage += '중복되지 않는 ';
     
     if (isThreeDigits === this.IS_NOT_VALID)
-      errorMessage += '세 개의';
+      errorMessage += '세 개의 ';
     
-    errorMessage += ' 숫자를 입력해주세요';
+    errorMessage += '숫자를 입력해주세요';
+    console.log(errorMessage);
     this.AlertErrorMessage(errorMessage);
   }
 
@@ -85,7 +85,6 @@ export default class HandleInput {
     let userValue = '';
 
     if (this.CheckInputValidity(input.value) === 1) {
-      alert("1~9까지의 중복되지 않는 세자리 숫자를 입력해주세요");
       input.placeholer = input.value;
       input.value = '';
       input.focus();
