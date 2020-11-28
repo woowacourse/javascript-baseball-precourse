@@ -62,6 +62,7 @@ export default class BaseballGame {
 
     restartQuestion.innerText = "게임을 새로 시작하시겠습니까?";
     restartButton.innerText = "restart";
+
     restartButton.addEventListener('click', () => window.location.reload());
 
     askRestartSection.appendChild(restartQuestion);
@@ -102,6 +103,7 @@ printCorrectAnswerForTest(baseballGame.answer);
 const playGame = e => {
   e.preventDefault();
   const checkUserInput = checkValidNumber(userInput.value);
+  userInput.focus();
   if(baseballGame.isFinished) return alert('이미 정답을 맞히셨습니다!');
 
   checkUserInput.ok ? baseballGame.play(baseballGame.answer, userInput.value) : alert(checkUserInput.msg);
@@ -109,3 +111,6 @@ const playGame = e => {
 }
 
 userInputButton.addEventListener('click', playGame);
+userInput.addEventListener('keydown', e => {
+  if(e.key === 'Enter') return baseballGame.isFinished ? window.location.reload() : playGame(e);
+})
