@@ -25,6 +25,7 @@ export const compareAnswersAndGetResult = (computerInputNumbers, userInputNumber
     }
 
     return {
+        ok: false,
         ball,
         strike
     }

@@ -110,5 +110,7 @@ https://velog.io/@takeknowledge/%EB%A1%9C%EC%BB%AC%EC%97%90%EC%84%9C-CORS-policy
 ## Day 4 - 파일 분할 완료
 1. keydown type event listener를 추가 후 Enter키 눌렀을 때도 게임이 실행되게 만듦
 2. 외부 파일 import 에러는 경로를 /src/lib/파일명.js로 바꾸니 해결됨, 원활히 리팩토링 가능해짐
+3. 정답 시 이전 오답 기록 나오는 오류 수정
+4. 추가 기능으로 시도 횟수와 이전 기록들 출력하는거 구현
 
 <hr/>
