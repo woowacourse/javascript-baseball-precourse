@@ -142,6 +142,11 @@ export default function BaseballGame() {
         checkButton.disabled = false;
         return this.randomNumber = this.makeRandomNumbers();
     };
+    // * 다시하기 버튼에 restart 이벤트 리스너 추가하기
+     this.addEventToRestartButton = function () {
+         const button = document.querySelector("#restart-button");
+         button.addEventListener("click", () => this.restart());
+     };
 };
 
 
