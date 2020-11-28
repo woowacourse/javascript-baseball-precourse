@@ -1,12 +1,12 @@
-import handleInit from './handleInit.js';
-import CheckInput from './checkInput.js';
+import HandleInit from './handleInit.js';
+import HandleInput from './handleInput.js';
 
 export default function BaseballGame() {
   document.body.style.fontFamily = 'Arial';
   const _resultArea = document.querySelector('#result');
   const _button = document.querySelector("#submit");
   const _input = document.querySelector("#user-input");
-  const _privateInitUtils = new handleInit();
+  const _privateInitUtils = new HandleInit();
   let _answer = _privateInitUtils.InitGame(_resultArea, _input);
 
   _button.addEventListener('click', () => {
@@ -19,7 +19,7 @@ export default function BaseballGame() {
   })
 
   const PlayIfValid = () => {
-    const InputUtils = new CheckInput();
+    const InputUtils = new HandleInput();
     let userValue = InputUtils.GetInput(_input);
 
     if (userValue !== 'notValid') {
