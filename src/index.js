@@ -124,6 +124,24 @@ export default function BaseballGame() {
         child.appendChild(newChild);
         newChild.innerHTML = " 🎉 정답을 맞추셨습니다! 🎉 ";
     };
+    // * 다시하기 버튼 생성하기.
+    this.addNewGameHTML = function () {
+        const parent = document.querySelector('#result')
+        const newChild = '<div id = "restart-div"></br><span id= "restart-span">게임을 새로 시작하시겠습니까?</span>  <button id="restart-button">게임 재시작</button></div>'
+        parent.innerHTML += newChild
+    };
+    // * restart함수 만들기
+    this.restart = function () {
+        const parent = document.querySelector("#result");
+        const restartDiv = document.querySelector('#restart-div');
+        const input = document.querySelector("#user-input");
+        const checkButton = document.querySelector("#submit");
+        parent.removeChild(restartDiv);
+        parent.innerHTML = "";
+        input.value =  "";
+        checkButton.disabled = false;
+        return this.randomNumber = this.makeRandomNumbers();
+    };
 };
 
 
