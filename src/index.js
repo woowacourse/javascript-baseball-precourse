@@ -87,12 +87,22 @@ export default class BaseballGame {
 
   isCorrect = (strikeCount) => strikeCount === USER_INPUT_LENGTH;
 
+  renderCorrectMessage = () => {
+    this.$result.innerHTML = `
+      <p>🎉 <strong>정답을 맞추셨습니다!</strong> 🎉</p>
+      <p>
+        게임을 새로 시작하시겠습니까?
+        <button id="game-restart-button">게임 재시작</button>
+      </p>
+    `;
+  }
+
   play = (computerInputNumbers, userInputNumbers) => {
     const ballCount = this.getBallCount(computerInputNumbers, userInputNumbers);
     const strikeCount = this.getStrikeCount(computerInputNumbers, userInputNumbers);
 
     if (this.isCorrect(strikeCount)) {
-      console.log('정답입니다!');
+      this.renderCorrectMessage();
     } else {
       console.log(computerInputNumbers, strikeCount, ballCount);
     }
