@@ -38,9 +38,37 @@ export default function BaseballGame() {
 
   // 3. 컴퓨터의 랜덤값과 유저의 입력값 비교 기능
   this.play = function (computerInputNumbers, userInputNumbers) {
-    console.log(computerInputNumbers, userInputNumbers)
+    let result = document.querySelector("#result");
+    let ballNumbers = 0;
+    let strikeNumbers = 0;
+    let i = 0;
+
+    for (i; i < arrayLength; i++) {
+      const userInputNumber = userInputNumbers[i];
+      const userNumberIndex = userInputNumbers.indexOf(userInputNumber);
+      const computerNumberIndex = computerInputNumbers.indexOf(userInputNumber);
+
+      if (computerInputNumbers.includes(userInputNumber) && userNumberIndex === computerNumberIndex) {
+        strikeNumbers++;
+      } else if ((computerInputNumbers.includes(userInputNumber) && userNumberIndex !== computerNumberIndex)) {
+        ballNumbers++;
+      }
+    }
+
+    if (ballNumbers === 0 && strikeNumbers === 0) {
+      result.innerText = "낫싱";
+    } else if (ballNumbers === 0 && strikeNumbers === 3) {
+      result.innerText = "🎉정답을 맞추셨습니다! 🎉" + '\n' + "게임을 다시 시작하시겠습니까?";
+    } else if (ballNumbers && strikeNumbers === 0) {
+      result.innerText = `${ballNumbers}볼`;
+    } else if (ballNumbers === 0 && strikeNumbers) {
+      result.innerText = `${strikeNumbers}스트라이크`;
+    } else if (ballNumbers && strikeNumbers) {
+      result.innerText = `${ballNumbers}볼 ${strikeNumbers}스트라이크`;
+    }
+
     return result;
-  };
+  }
 
   // init()
   this.init = function() {
