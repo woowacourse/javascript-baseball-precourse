@@ -1,16 +1,16 @@
 export default function BaseballGame() {
   this.setTargetNumber = function () {
-    const TargetNumber = [];
+    const targetNumber = [];
 
-    while (TargetNumber.length < 3) {
+    while (targetNumber.length < 3) {
       let randomNumber = Math.floor(Math.random() * 9) + 1;
 
-      if (TargetNumber.indexOf(randomNumber) == -1) {
-        TargetNumber.push(randomNumber);
+      if (targetNumber.indexOf(randomNumber) == -1) {
+        targetNumber.push(randomNumber);
       }
     }
 
-    return TargetNumber;
+    return targetNumber;
   };
 
   this.isZero = function (userInput) {
@@ -49,6 +49,18 @@ export default function BaseballGame() {
 
       return inputNumber;
     }
+  };
+
+  this.formatArray = function (computerInputNumbers, userInputNumbers) {
+    if ((typeof computerInputNumbers) !== 'object') {
+      computerInputNumbers = String(computerInputNumbers).split('');
+    }
+
+    if ((typeof userInputNumbers) !== 'object') {
+      userInputNumbers = String(userInputNumbers).split('');
+    }
+
+    return [computerInputNumbers, userInputNumbers];
   };
 
   this.compareNumbers = function (computerInputNumbers, userInputNumbers) {
@@ -92,6 +104,8 @@ export default function BaseballGame() {
   };
 
   this.play = function (computerInputNumbers, userInputNumbers) {
+    [computerInputNumbers, userInputNumbers] = this.formatArray(computerInputNumbers, userInputNumbers);
+
     const [ball, strike] = this.compareNumbers(computerInputNumbers, userInputNumbers);
     const result = this.printResult(ball,strike);
 
