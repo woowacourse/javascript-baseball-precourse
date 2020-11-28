@@ -2,6 +2,3 @@ node_modules
 debug.log
 보고서.md
 REQUIREMENT.md
-
-## src 폴더는 나중에 보고 모듈화하기
-src/

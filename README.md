@@ -1,6 +1,15 @@
 # README by Seongwon Kim
 - origin https://github.com/woowacourse/javascript-baseball-precourse
 
+## File Directory
+- index.js => 메인 함수
+- /src/lib
+<ul>
+  <li>gameFunctions.js -> 게임 실행 관련 함수들 정리(랜덤넘버 생성, 입력 검사, 게임 로직)</li>
+  <li>messages.js -> 정답 메시지, 오답 힌트 메시지 출력</li>
+  <li>test.js -> 테스트 코드(정답 콘솔창에만 출력)</li>
+</ul>
+
 ## 구현해야 할 기능들
 1. 1~9 사이의 서로 "다른" 난수 3개를 생성해서 3자리의 수 생성(0포함 X)
 2. 클래스 모듈에서 생성된 난수 불러오기
@@ -30,7 +39,7 @@
 1. 일단 함수형이 익숙하니 함수형으로 시도
 2. 기본적으로 요구하는 사항부터 먼저 구현할 것 (indent 3 넘어가지 말기)
 3. 기본 기능이 완료되면 1차 리팩토링 진행하기
-4. 추가 기능들 생각해보기 ex) 성적표 출력, 몇 번만에 정답을 맞혔는지?, css 등
+4. 추가 기능들 생각해보기 ex) 정답 시도 횟수
 
 <br>
 <hr/>
@@ -43,11 +52,11 @@
 - 참고 링크
 https://velog.io/@takeknowledge/%EB%A1%9C%EC%BB%AC%EC%97%90%EC%84%9C-CORS-policy-%EA%B4%80%EB%A0%A8-%EC%97%90%EB%9F%AC%EA%B0%80-%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0-3gk4gyhreu
 
-- 다른 방법 => index.html 우클릭 후 open with live server 해보기
+- 다른 방법 => index.html 우클릭 후 open with live server 해보기(기존에 live server extension 설치됨)
 
 <hr/>
 
-## 중간 보고 -> 기본 기능 구현 완료까지..
+## Day 1 -> 기본 기능 구현 완료까지..
 ### 개발 과정
 1. 처음에 습관적으로 파일 분할을 했다가 문제가 생겨서 로직이 복잡해짐
 - 해결 방법 : 우선 하나의 파일에 병합 후 기능부터 동작하게 한다. 구동 안되면 끝.
@@ -65,14 +74,14 @@ https://velog.io/@takeknowledge/%EB%A1%9C%EC%BB%AC%EC%97%90%EC%84%9C-CORS-policy
 - 구현 가능한 범위부터 해결하고 잘 동작할 때 추가적인 학습을 진행해서 업데이트 할 것
 
 ### 다음 구현할 사항
-1. 결과물을 브라우저 화면에 출력하기
-2. 재시작 기능 만들기
-3. 리팩토링
+1. 결과물을 브라우저 화면에 출력하기 (완료)
+2. 재시작 기능 만들기 (완료)
+3. 리팩토링 (완료)
 4. 추가기능 구현
 
 <hr/>
 
-## 2차 중간 보고 -> DOM 복습하면서...
+## Day 2 -> DOM 복습하면서...
 1. 게임 결과까지는 출력 됨.
 - 정답 맞을 경우 바로 출력.
 - 틀린 경우 밑에 새로운 메시지만 더해짐.
@@ -90,10 +99,16 @@ https://velog.io/@takeknowledge/%EB%A1%9C%EC%BB%AC%EC%97%90%EC%84%9C-CORS-policy
 
 <hr/>
 
-## 3차 중간 보고
+## Day 3 - 요구사항 구현 완료!
 1. 원활한 DOM 조작을 위해 class형태로 리팩토링
 2. 굳이 input form에 change event lister를 쓰지 않고, 
 - react에서는 onchange로 이벤트를 걸면서 useState를 사용했었음
 
 3. window.location.reload() 새로 고침 함수 복습
 4. 정답이 나오면 새로고침, 틀리면 user input reset 후 다시 입력 후 이전 결과 지우고 새 결과 출력하게 만듦
+
+## Day 4 - 파일 분할 완료
+1. keydown type event listener를 추가 후 Enter키 눌렀을 때도 게임이 실행되게 만듦
+2. 외부 파일 import 에러는 경로를 /src/lib/파일명.js로 바꾸니 해결됨, 원활히 리팩토링 가능해짐
+
+<hr/>
