@@ -36,6 +36,11 @@ export default function BaseballGame() {
     }
   };
 
+
+  this.gameRestart = function() {
+    console.log("to be continued")
+  };
+  
   // 3. 컴퓨터의 랜덤값과 유저의 입력값 비교 기능
   this.play = function (computerInputNumbers, userInputNumbers) {
     let result = document.querySelector("#result");
@@ -55,10 +60,10 @@ export default function BaseballGame() {
       }
     }
 
-    if (ballNumbers === 0 && strikeNumbers === 0) {
+    if (ballNumbers === 0 && strikeNumbers === 3) {
+      this.gameRestart();
+    } else if (ballNumbers === 0 && strikeNumbers === 0) {
       result.innerText = "낫싱";
-    } else if (ballNumbers === 0 && strikeNumbers === 3) {
-      result.innerText = "🎉정답을 맞추셨습니다! 🎉" + '\n' + "게임을 다시 시작하시겠습니까?";
     } else if (ballNumbers && strikeNumbers === 0) {
       result.innerText = `${ballNumbers}볼`;
     } else if (ballNumbers === 0 && strikeNumbers) {
@@ -68,7 +73,7 @@ export default function BaseballGame() {
     }
 
     return result;
-  }
+  };
 
   // init()
   this.init = function() {
