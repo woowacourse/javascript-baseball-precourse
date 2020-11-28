@@ -1,4 +1,5 @@
 export default function BaseballGame() {
+  const resultContainer = document.querySelector("#result");
   this.computerInputNumbers;
   this.isGameOver = false;
   this.MAX_DIGITS = 3;
@@ -27,9 +28,7 @@ export default function BaseballGame() {
   };
 
   this.resetGame = () => {
-    const resultContainer = document.querySelector("#result");
     resultContainer.innerHTML = "";
-
     this.setComputerInputNumbers();
     this.isGameOver = false;
   };
@@ -58,8 +57,7 @@ export default function BaseballGame() {
     return gameResult;
   };
 
-  this.printGameResult = (message) => {
-    const resultContainer = document.querySelector("#result");
+  this.printGameResult = message => {
     resultContainer.innerHTML = message;
 
     if (this.isGameOver) {
@@ -68,6 +66,7 @@ export default function BaseballGame() {
 
       restartQuestion.innerText = "게임을 새로 시작하시겠습니까?";
       restartButton.innerText = "게임 재시작";
+      restartButton.setAttribute("id", "game-restart-button");
       restartButton.addEventListener("click", this.resetGame);
 
       restartQuestion.appendChild(restartButton);
@@ -76,12 +75,10 @@ export default function BaseballGame() {
   };
 
   this.play = (computerInputNumbers, userInputNumbers) => {
-    const gameResult = this.getGameResult(
+    const { ball, strike } = this.getGameResult(
       computerInputNumbers,
       userInputNumbers
     );
-    const ball = gameResult.ball;
-    const strike = gameResult.strike;
     let message = "";
 
     if (ball === 0 && strike === 0) {
@@ -97,9 +94,9 @@ export default function BaseballGame() {
     return message;
   };
 
-  this.checkValidInputValue = (value) => {
+  this.checkValidInputValue = value => {
     const isNumber = isNaN(+value) ? false : true;
-    const isThreeDigits = value.length === 3 ? true : false;
+    const isThreeDigits = value.length === this.MAX_DIGITS ? true : false;
 
     if (!isNumber || !isThreeDigits) {
       return false;
@@ -123,8 +120,6 @@ export default function BaseballGame() {
     const userInputNumbers = userInput.value;
     const isValidInputValue = this.checkValidInputValue(userInputNumbers);
 
-    userInput.value = "";
-
     if (isValidInputValue) {
       const resultMessage = this.play(
         this.computerInputNumbers,
@@ -132,8 +127,10 @@ export default function BaseballGame() {
       );
       this.printGameResult(resultMessage);
     } else {
-      alert("1 ~ 9 사이의 서로 다른 세 자릿수를 입력해주세요.");
+      alert("1 ~ 9 사이의 서로 다른 세 자릿수를 입력해주세요. 예) 123");
     }
+
+    userInput.value = "";
   };
 
   this.resetGame();
