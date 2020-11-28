@@ -51,4 +51,8 @@ export default function HandleResult() {
 
     return answer;
   }
+
+  this.IsWrong = function (resultArea, resultMessage) {
+    resultArea.textContent = resultMessage;
+  }
 }
