@@ -4,7 +4,16 @@ export default function BaseballGame() {
   let computerInputNumbers = 0;
 
   const play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    let resultString = "";
+    console.log(computerInputNumbers, userInputNumbers);
+
+    if (computerInputNumbers === userInputNumbers) {
+      resultString =
+        "<h3>🎉정답을 맞추셨습니다!🎉</h3>" +
+        `<br> 게임을 새로 시작하시겠습니까? <button id = "restart-button">게임 재시작</button>`;
+    }
+
+    return resultString;
   };
 
   const getComputerNumber = function () {
@@ -23,8 +32,14 @@ export default function BaseballGame() {
     return;
   };
 
-  const startGame = function () {
-    getComputerNumber();
+  const startGame = function (userInputNumbers) {
+    let resultString = play(computerInputNumbers, userInputNumbers);
+    showResult(resultString);
+  };
+
+  const showResult = function (resultString) {
+    const resultContainer = document.getElementById("result");
+    resultContainer.innerHTML = resultString;
   };
 
   // 123 ~ 987 사이에 있는 수인지
@@ -63,13 +78,13 @@ export default function BaseballGame() {
 
     if (validateInput(userInput)) {
       userInputNumbers = parseInt(userInput);
-      play(computerInputNumbers, userInputNumbers);
+      startGame(userInputNumbers);
     }
 
     return;
   };
 
-  startGame();
+  getComputerNumber();
   const submitButton = document.getElementById("submit");
   if (submitButton) {
     submitButton.addEventListener("click", getUserInput);
