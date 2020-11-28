@@ -123,6 +123,14 @@ export default class BaseballGame {
     }
   }
 
+  // 확인 버튼 클릭 handle 메서드
+  handleClick() {
+    const submitBtn = document.getElementById("submit");
+    submitBtn.addEventListener("click", () =>
+      this.startGame(this.computerInputNumbers)
+    );
+  }
+
   // 게임 시작 메서드
   startGame(computerInputNumbers) {
     const userInputContainer = document.getElementById("user-input");
