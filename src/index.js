@@ -69,7 +69,7 @@ export default function BaseballGame() {
 
       restartButton.addEventListener('click', (e) => {
         e.preventDefault();
-        _privateInitUtils.RestartGame(_resultArea, _answer, _input);
+        _answer = _privateInitUtils.RestartGame(_resultArea, _answer, _input);
 		  })
     } 
     else

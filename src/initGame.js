@@ -12,6 +12,7 @@ export default function InitGame() {
 		  answer.push(picked);
     }
 
+    console.log(answer);
     return answer;
 	}
 
@@ -21,5 +22,7 @@ export default function InitGame() {
     resultArea.innerHTML = '';
     answer = StartGameBind(input);
     input.value = '';
+
+    return answer;
   }
 }
