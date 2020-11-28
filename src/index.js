@@ -1,4 +1,4 @@
-import { validateUserInput } from "./validate.js";
+import { DIGITS, validateUserInput } from "./validate.js";
 export default class BaseballGame {
   constructor() {
     this.isEnded = false; //종료 플래그
@@ -16,7 +16,7 @@ export default class BaseballGame {
   //* 랜덤 값 생성 메서드
   generateRandomNumbers() {
     let randomNumbers = "";
-    while (randomNumbers.length != 3) {
+    while (randomNumbers.length != DIGITS) {
       const number = String(Math.floor(Math.random() * 9) + 1);
       if (!randomNumbers.includes(number)) randomNumbers += number;
     }
@@ -35,7 +35,7 @@ export default class BaseballGame {
   compareNumbers(computerInputNumbers, userInputNumbers) {
     let strikeCount = 0;
     let ballCount = 0;
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < DIGITS; i++) {
       if (computerInputNumbers[i] === userInputNumbers[i]) strikeCount++;
       else if (computerInputNumbers.includes(userInputNumbers[i])) ballCount++;
     }
@@ -44,7 +44,7 @@ export default class BaseballGame {
 
   //* 비교값에 따른 종료플래그 반환 메서드
   checkIsEnded(strikeCount) {
-    if (strikeCount === 3) this.isEnded = true;
+    if (strikeCount === DIGITS) this.isEnded = true;
     return this.isEnded;
   }
 

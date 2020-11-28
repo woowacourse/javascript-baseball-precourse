@@ -1,5 +1,6 @@
+const DIGITS = 3;
 const validateInputDigit = function (input) {
-  return input.length === 3;
+  return input.length === DIGITS;
 };
 const validateInputUnique = function (input) {
   let isValid = true;
@@ -19,7 +20,7 @@ const validateInputNumber = function (input) {
   return isValid;
 };
 
-export const validateUserInput = function (input) {
+const validateUserInput = function (input) {
   const isValid =
     validateInputDigit(input) &&
     validateInputUnique(input) &&
@@ -27,3 +28,4 @@ export const validateUserInput = function (input) {
   if (!isValid) alert("입력값이 잘못되었습니다. 다시 입력해주세요 :)");
   return isValid;
 };
+export { DIGITS, validateUserInput };
