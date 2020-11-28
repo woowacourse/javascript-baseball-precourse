@@ -85,11 +85,17 @@ export default class BaseballGame {
     return strike;
   }
 
+  isCorrect = (strikeCount) => strikeCount === USER_INPUT_LENGTH;
+
   play = (computerInputNumbers, userInputNumbers) => {
     const ballCount = this.getBallCount(computerInputNumbers, userInputNumbers);
     const strikeCount = this.getStrikeCount(computerInputNumbers, userInputNumbers);
 
-    console.log(computerInputNumbers, strikeCount, ballCount);
+    if (this.isCorrect(strikeCount)) {
+      console.log('정답입니다!');
+    } else {
+      console.log(computerInputNumbers, strikeCount, ballCount);
+    }
   }
 }
 
