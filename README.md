@@ -91,11 +91,11 @@ play(123, 124) // '2스트라이크'
 ## 기능 목록
 
 - 1부터 9까지 서로 다른 수 3자리를 만드는 함수(makeDiffNumber(length) - length -> 자릿 수)
-- 최솟값 최댓값을 받아 랜덤한 수를 만들어주는 함수(makeRadomValue(min, max))
+- 최솟값 최댓값을 받아 랜덤한 수를 만들어주는 함수(makeRadomValue(max, min))
 - 두 값을 입력 받아 각 자릿수를 비교하는데 같은 자리 같은 숫자면 스트라이크, 같은 자리에는 없지만 숫자가 포함되어 있으면 볼, 스트라이크나 볼이 없으면 낫싱(play(computerInput, userInput))
 - 게임 재시작해주는 콜백 함수(restartGame())
 - 사용자의 입력을 전달 해주는 콜백 함수 (sendBaseBall(userInput))
 - 입력 값을 검증해주는 함수(validateInput(userInput))
-- 잘못 입력된 경우 alert을 통해 메시지를 보여주는 함수(showErrorAlert())
+- 잘못 입력된 경우 alert을 통해 메시지를 보여주는 함수(showErrorAlert(str))
 - input Element의 값을 초기화 하고 focus 주는 함수(initValueAndFoucsIn(el) - element 전달)
 - 결과 보여주는 함수 (showResult(str))
