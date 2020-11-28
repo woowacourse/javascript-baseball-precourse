@@ -5,7 +5,10 @@ export default class BaseballGame {
   }
 
   init = () => {
+    this.isEnded = false;
     this.computerInputNumbers = this.generateRandomNumbers();
+    const submitButton = document.getElementById("submit");
+    submitButton.onclick = this.start;
   };
 
   generateRandomNumbers() {
@@ -84,7 +87,4 @@ export default class BaseballGame {
   };
 }
 
-//DOM Elements
 const game = new BaseballGame();
-const submitButton = document.getElementById("submit");
-submitButton.onclick = game.start;
