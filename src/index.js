@@ -5,6 +5,7 @@ export default class BaseballGame {
     this.answer = this.generateAnswer();
     console.log(`컴퓨터의 랜덤값: ${this.answer}`);
 
+    this.$app = document.querySelector("#app");
     this.$userInput = document.querySelector("#user-input");
     this.$submitButton = document.querySelector("#submit");
     this.$result = document.querySelector("#result");
@@ -41,6 +42,16 @@ export default class BaseballGame {
     this.$submitButton.addEventListener("click", onClick);
     this.$userInput.addEventListener("keydown", onKeydown);
 
+    this.$app.addEventListener("click", (e) => {
+      if (e.target.id === "game-restart-button") {
+        this.setState([]);
+        this.answer = this.generateAnswer();
+        console.log(`컴퓨터의 랜덤값: ${this.answer}`);
+
+        this.$userInput.focus();
+      };
+    });
+
     this.render();
   }
 
@@ -50,7 +61,22 @@ export default class BaseballGame {
   }
 
   render() {
-    this.$result.innerHTML = this.roundData.map(({userInput, playResult}, index, arr) => {
+    this.$result.innerHTML = "";
+
+    if (this.roundData.some(({userInput}) => userInput === this.answer)) {
+      this.$result.innerHTML = `
+        <div>
+          <strong>🎉 정답을 맞추셨습니다! 🎉</strong>
+        </div>
+        <div>
+          <span>게임을 새로 시작하시겠습니까?</span>
+          <button id="game-restart-button">게임 재시작</button>
+        </div>
+        <br>
+      `;
+    };
+
+    this.$result.innerHTML += this.roundData.map(({userInput, playResult}, index, arr) => {
       return `
       <div class="result__row-container">
         <div>
