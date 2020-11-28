@@ -1,5 +1,29 @@
 export default class BaseballGame {
 
+  generateAnswer() {
+    const getRandomNumber = () => {
+      const MIN = 1;
+      const MAX = 9;
+
+      return Math.floor(Math.random() * (MAX - MIN + 1) + MIN, 0);
+    }
+
+    const randomNumbers = [];
+    const NUMBER_DIGITS = 3;
+
+    while (randomNumbers.length < NUMBER_DIGITS) {
+      const randomNumber = getRandomNumber();
+
+      if (!randomNumbers.includes(randomNumber)) {
+        randomNumbers.push(randomNumber);
+      }
+    }
+
+    const _answer = randomNumbers.join("");
+
+    return _answer;
+  }
+
   isValid(userInputNumbers) {
     const NUMBER_DIGITS = "123456789";
     let _isValid = null;
