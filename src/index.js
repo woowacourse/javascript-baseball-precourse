@@ -1,6 +1,7 @@
 export default class BaseballGame {
 
   constructor() {
+    this.roundData = [];
     this.answer = this.generateAnswer();
     console.log(`컴퓨터의 랜덤값: ${this.answer}`);
 
@@ -18,12 +19,17 @@ export default class BaseballGame {
         const playResult = this.play(this.answer, userInputNumbers);
         console.log(`힌트: ${playResult}`);
 
+        this.setState([{
+          userInput: userInputNumbers, 
+          playResult
+        },
+        ...this.roundData]);
       } else {
         alert(`'${userInput}'은(는) 유효한 입력값이 아닙니다. 다시 입력해주세요.`);
-        this.$userInput.value = "";
-        this.$userInput.focus();
-      }
+      };
 
+      this.$userInput.value = "";
+      this.$userInput.focus();
     };
 
     const onKeydown = (e) => {
@@ -34,6 +40,27 @@ export default class BaseballGame {
 
     this.$submitButton.addEventListener("click", onClick);
     this.$userInput.addEventListener("keydown", onKeydown);
+
+    this.render();
+  }
+
+  setState(nextRoundData) {
+    this.roundData = nextRoundData;
+    this.render();
+  }
+
+  render() {
+    this.$result.innerHTML = this.roundData.map(({userInput, playResult}, index, arr) => {
+      return `
+      <div class="result__row-container">
+        <div>
+          <strong>${arr.length - index}라운드: ${userInput}</strong>
+        </div>
+        <div class="result__play-result">${playResult}</div>
+        <hr>
+      </div>
+      `;
+    }).join("");
   }
 
   generateAnswer() {
