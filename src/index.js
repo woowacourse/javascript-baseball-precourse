@@ -1,6 +1,7 @@
 const NUMBER_LENGTH = 3;
 const userInputEl = document.querySelector('#user-input');
 const submitEl = document.querySelector('#submit');
+const resultEl = document.querySelector('#result');
 
 export default class BaseballGame {
   constructor() {
@@ -13,7 +14,10 @@ export default class BaseballGame {
     const clickSubmitEl = () => {
       const userInputNumbers = this.getUserInput();
       if (userInputNumbers) {
-        this.play(this.computerNumbers, userInputNumbers);
+        const result = this.play(this.computerNumbers, userInputNumbers);
+        const resultTextEl = document.createElement('p');
+        resultTextEl.append(result);
+        resultEl.appendChild(resultTextEl)
       }
     }
 
@@ -93,7 +97,22 @@ export default class BaseballGame {
       }
     }
 
-    return '결과 값 String';
+    let resultString = '';
+
+    if (ballCount) {
+      resultString += `${ballCount}볼 `;
+    }
+    if (strikeCount) {
+      resultString += `${strikeCount}스트라이크`;
+    }
+    if (ballCount <= 0 && strikeCount <= 0) {
+      resultString = '낫싱';
+    }
+    if (strikeCount === NUMBER_LENGTH) {
+      resultString = '🎉 정답을 맞추셨습니다! 🎉'
+    }
+
+    return resultString;
   }
 }
 
