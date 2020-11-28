@@ -87,7 +87,8 @@ export default class BaseballGame {
     const userInput = document.body.querySelector("#user-input");
     const { value } = userInput;
 
-    if (value.match(/[^1-9]/g)) return alert("숫자가 아닙니다.");
+    if (value.match(/0/)) return alert("1~9까지의 숫자만 입력해주세요.");
+    if (value.match(/\D/)) return alert("숫자가 아닙니다.");
     if (value.length !== new Set(value).size) {
       return alert("숫자가 중복됩니다.");
     }
