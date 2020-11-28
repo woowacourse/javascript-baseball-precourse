@@ -13,11 +13,11 @@ export default class BaseballGame {
 
   makeOnAnswer() {
     const maxNumberArray = this.createMaxNumberLengthArray();
-    let answer = "";
+    let answer = '';
     for (let i = 1; i <= 3; i++) {
       const selectedNumber = maxNumberArray.splice(
         this.selectRandomNumber(maxNumberArray.length),
-        1
+        1,
       );
       answer += selectedNumber;
     }
@@ -50,7 +50,7 @@ export default class BaseballGame {
   }
 
   gameFinish() {
-    const resultDiv = document.body.querySelector("#result");
+    const resultDiv = document.body.querySelector('#result');
 
     resultDiv.innerHTML = `<h3>🎉정답을 맞추셨습니다!🎉</h3> 
     <div id=restart-text>게임을 새로 시작하시겠습니까? </div>`;
@@ -60,39 +60,42 @@ export default class BaseballGame {
   }
 
   reStartButton() {
-    const restartDiv = document.body.querySelector("#restart-text");
-    const reStartButton = document.createElement("button");
-    reStartButton.id = "game-restart-button";
-    reStartButton.innerText = "게임 재시작";
+    const restartDiv = document.body.querySelector('#restart-text');
+    const reStartButton = document.createElement('button');
+    reStartButton.id = 'game-restart-button';
+    reStartButton.innerText = '게임 재시작';
     restartDiv.appendChild(reStartButton);
 
-    return reStartButton.addEventListener("click", this.gameReStart.bind(this));
+    return reStartButton.addEventListener('click', this.gameReStart.bind(this));
   }
 
   gameReStart() {
-    const userInput = document.body.querySelector("#user-input");
-    const resultDiv = document.body.querySelector("#result");
+    const userInput = document.body.querySelector('#user-input');
+    const resultDiv = document.body.querySelector('#result');
 
     while (resultDiv.firstChild) {
       resultDiv.removeChild(resultDiv.firstChild);
     }
 
-    userInput.value = "";
+    userInput.value = '';
     this.runningGame = true;
 
     return (this.answer = this.makeOnAnswer());
   }
 
-  isInputRight() {
-    const userInput = document.body.querySelector("#user-input");
-    const { value } = userInput;
-
-    if (value.match(/0/)) return alert("1~9까지의 숫자만 입력해주세요.");
-    if (value.match(/\D/)) return alert("숫자가 아닙니다.");
-    if (value.length !== new Set(value).size) {
-      return alert("숫자가 중복됩니다.");
+  isInputRight(value) {
+    if (value.match(/0/)) {
+      return alert('1~9까지의 숫자만 입력해주세요.');
     }
-    if (value.length !== 3) return alert("3자리의 숫자를 입력해주세요.");
+    if (value.match(/\D/)) {
+      return alert('숫자가 아닙니다.');
+    }
+    if (value.length !== new Set(value).size) {
+      return alert('숫자가 중복됩니다.');
+    }
+    if (value.length !== 3) {
+      return alert('3자리의 숫자를 입력해주세요.');
+    }
 
     return true;
   }
@@ -101,14 +104,14 @@ export default class BaseballGame {
     this.initValue();
     this.compareInput(computerInputNumbers, userInputNumbers);
 
-    if (!this.strike && !this.ball) return "낫싱";
+    if (!this.strike && !this.ball) return '낫싱';
     if (!this.strike) return `${this.ball}볼`;
     if (!this.ball) return `${this.strike}스트라이크`;
     return `${this.ball}볼 ${this.strike}스트라이크`;
   }
 
   showResultOnScreen(resultText) {
-    const resultDiv = document.body.querySelector("#result");
+    const resultDiv = document.body.querySelector('#result');
     resultDiv.innerText = resultText;
 
     if (this.strike === 3) {
