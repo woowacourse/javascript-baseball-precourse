@@ -145,6 +145,19 @@ export default class BaseballGame {
 
     this.handleClick(computerInputNumbers);
   }
+
+  // 게임 재시작 메서드
+  resetGame() {
+    this.computerInputNumbers = this.generateRandomNumber();
+
+    const resultContainer = document.getElementById("result");
+    const userInputContainer = document.getElementById("user-input");
+
+    resultContainer.innerHTML = "";
+    userInputContainer.value = "";
+
+    this.handleClick();
+  }
 }
 
 new BaseballGame();
