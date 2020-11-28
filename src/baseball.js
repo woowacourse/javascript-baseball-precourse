@@ -6,13 +6,13 @@ const userInput = baseballWrapper.querySelector("#user-input");
 const game = new BaseballGame();
 
 const submitUserInput = () => {
-  const { isInputRight, play, showResultOnScreen, runningGame, answer } = game;
+  const { runningGame, answer } = game;
 
   if (!runningGame) return alert("게임을 재시작해주세요.");
-  if (isInputRight()) {
-    const resultText = play(answer, userInput.value);
+  if (game.isInputRight()) {
+    const resultText = game.play(answer, userInput.value);
 
-    return showResultOnScreen(resultText);
+    return game.showResultOnScreen(resultText);
   }
 };
 

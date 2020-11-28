@@ -1,11 +1,17 @@
-export default function BaseballGame() {
-  const baseballWrapper = document.body.querySelector("#app");
-  const userInput = baseballWrapper.querySelector("#user-input");
+export default class BaseballGame {
+  constructor() {
+    this.strike = 0;
+    this.ball = 0;
+    this.runningGame = true;
+    this.answer = this.makeOnAnswer();
+  }
 
-  let strike = 0;
-  let ball = 0;
+  initValue() {
+    this.strike = 0;
+    this.ball = 0;
+  }
 
-  const makeOnAnswer = () => {
+  makeOnAnswer() {
     const MAX_NUMBER = 9;
     const numberArray = Array(MAX_NUMBER)
       .fill()
@@ -14,57 +20,54 @@ export default function BaseballGame() {
 
     for (let i = 1; i <= 3; i++) {
       const selectedNumber = numberArray.splice(
-        selectRandomNumber(numberArray.length),
+        this.selectRandomNumber(numberArray.length),
         1
       );
       answer += selectedNumber;
     }
 
     return answer;
-  };
+  }
 
-  const selectRandomNumber = (length) => {
+  selectRandomNumber(length) {
     const randomNumber = Math.floor(Math.random() * length);
 
     return randomNumber;
-  };
+  }
 
-  const initValue = () => {
-    strike = 0;
-    ball = 0;
-  };
-
-  const compareInput = (answer, userInput) => {
+  compareInput(answer, userInput) {
     for (let userIndex = 0; userIndex < 3; userIndex++) {
       const answerNumberIndex = answer.indexOf(userInput[userIndex]);
       if (answerNumberIndex >= 0) {
-        answerNumberIndex === userIndex ? strike++ : ball++;
+        answerNumberIndex === userIndex ? this.strike++ : this.ball++;
       }
     }
-  };
+  }
 
-  const gameFinish = () => {
-    const resultDiv = baseballWrapper.querySelector("#result");
+  gameFinish() {
+    const resultDiv = document.body.querySelector("#result");
 
     resultDiv.innerHTML = `<h3>🎉정답을 맞추셨습니다!🎉</h3> 
     <div id=restart-text>게임을 새로 시작하시겠습니까? </div>`;
     this.runningGame = false;
 
-    return reStartButton();
-  };
+    return this.reStartButton();
+  }
 
-  const reStartButton = () => {
-    const restartDiv = baseballWrapper.querySelector("#restart-text");
+  reStartButton() {
+    const restartDiv = document.body.querySelector("#restart-text");
     const reStartButton = document.createElement("button");
     reStartButton.id = "game-restart-button";
     reStartButton.innerText = "게임 재시작";
     restartDiv.appendChild(reStartButton);
 
-    return reStartButton.addEventListener("click", gameReStart, { once: true });
-  };
+    return reStartButton.addEventListener("click", this.gameReStart.bind(this));
+  }
 
-  const gameReStart = () => {
-    const resultDiv = baseballWrapper.querySelector("#result");
+  gameReStart() {
+    const userInput = document.body.querySelector("#user-input");
+    const resultDiv = document.body.querySelector("#result");
+
     while (resultDiv.firstChild) {
       resultDiv.removeChild(resultDiv.firstChild);
     }
@@ -72,14 +75,11 @@ export default function BaseballGame() {
     userInput.value = "";
     this.runningGame = true;
 
-    return (this.answer = makeOnAnswer());
-  };
+    return (this.answer = this.makeOnAnswer());
+  }
 
-  this.runningGame = true;
-
-  this.answer = makeOnAnswer();
-
-  this.isInputRight = () => {
+  isInputRight() {
+    const userInput = document.body.querySelector("#user-input");
     const { value } = userInput;
 
     if (value.match(/[^1-9]/g)) return alert("숫자가 아닙니다.");
@@ -89,24 +89,24 @@ export default function BaseballGame() {
     if (value.length !== 3) return alert("3자리의 숫자를 입력해주세요.");
 
     return true;
-  };
+  }
 
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    initValue();
-    compareInput(computerInputNumbers, userInputNumbers);
+  play(computerInputNumbers, userInputNumbers) {
+    this.initValue();
+    this.compareInput(computerInputNumbers, userInputNumbers);
 
-    if (!strike && !ball) return "낫싱";
-    if (!strike) return `${ball}볼`;
-    if (!ball) return `${strike}스트라이크`;
-    return `${ball}볼 ${strike}스트라이크`;
-  };
+    if (!this.strike && !this.ball) return "낫싱";
+    if (!this.strike) return `${this.ball}볼`;
+    if (!this.ball) return `${this.strike}스트라이크`;
+    return `${this.ball}볼 ${this.strike}스트라이크`;
+  }
 
-  this.showResultOnScreen = (resultText) => {
-    const resultDiv = baseballWrapper.querySelector("#result");
+  showResultOnScreen(resultText) {
+    const resultDiv = document.body.querySelector("#result");
     resultDiv.innerText = resultText;
 
-    if (strike === 3) {
-      return gameFinish();
+    if (this.strike === 3) {
+      return this.gameFinish();
     }
-  };
+  }
 }
