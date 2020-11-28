@@ -2,9 +2,9 @@ let comNum = getRandNum();
 const BG = new BaseballGame();
 
 console.log(BG.test("123", "213"));
-console.log(BG.test("123", "341"));
-console.log(BG.test("123", "555"));
 console.log(BG.test("123", "123"));
+console.log(BG.test("123", "555"));
+console.log(BG.test("123", "124"));
 
 
 
@@ -29,7 +29,7 @@ export default function BaseballGame() {
   };
 
   this.test = (a, b) => {
-    return countBalls(a, b);
+    return countStrikes(a, b);
   };
 
   function countBalls(comInput, userInput) {
@@ -39,6 +39,16 @@ export default function BaseballGame() {
       for(let j=1; j<3; ++j) {
         count += (comInput[i] === userInput[(i+j)%3]);
       }
+    }
+
+    return count;
+  }
+
+  function countStrikes(comInput, userInput) {
+    let count = 0;
+
+    for(let i=0; i<3; ++i) {
+      count += (comInput[i] === userInput[i]);
     }
 
     return count;
