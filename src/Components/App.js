@@ -18,6 +18,8 @@ class BaseballGame {
       ball: 0,
     };
 
+    console.log(this.state.answer);
+
     this.bindEvents();
     this.render('');
   }
@@ -29,13 +31,30 @@ class BaseballGame {
     return this.state.strike === 3 ? '정답입니다' : getHint(this.state);
   }
 
+  restart() {
+    this.userInput.value = '';
+    this.state = {
+      answer: generateTargetNumbers(),
+      strike: 0,
+      ball: 0,
+    };
+
+    this.render('');
+  }
+
   bindEvents() {
     this.$target.addEventListener('click', this.onClick.bind(this));
     this.$target.addEventListener('keydown', this.onKeyDown.bind(this));
   }
 
   onClick({ target }) {
-    if (target.id !== 'submit') return;
+    if (target.id !== 'game-restart-button' && target.id !== 'submit') return;
+
+    // 정답 로직
+    if (target.id === 'game-restart-button') {
+      this.restart();
+      return;
+    }
 
     if (!isValidInputData(this.userInput.value)) {
       alert('다시 입력해주세요 !');
@@ -73,7 +92,7 @@ class BaseballGame {
   render(message) {
     this.resultView.innerHTML =
       this.state.strike === 3
-        ? `<span>${message}<button id="game-restart-button">재시작</button></span>`
+        ? `<span>${message}</span><button id="game-restart-button">재시작</button>`
         : `<span>${message}</span>`;
   }
 }
