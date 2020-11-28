@@ -27,11 +27,16 @@ class BaseballGame {
     userInputNumbers = Array.from(userInputNumbers).map((num) => parseInt(num));
     this.setSate(calculateCount(computerInputNumbers, userInputNumbers));
 
+    if (this.state.strike === GAME.THREE) {
+      this.tryButton.disabled = true;
+    }
     return getHint(this.state);
   }
 
   restart() {
     this.userInput.value = '';
+    this.tryButton.disabled = false;
+
     this.state = {
       answer: generateTargetNumbers(),
       strike: 0,
