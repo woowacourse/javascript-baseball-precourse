@@ -55,9 +55,9 @@ export default function BaseballGame() {
     // * 0이 없는지 확인한다.
     this.isZeroExits = function (input) {
         for (var item of input) {
-          if (item === "0") {
-            return true;
-          };
+            if (item === "0") {
+                return true;
+            };
         };
         return false;
     };
@@ -120,15 +120,15 @@ export default function BaseballGame() {
     this.addCorrectHTML = function () {
         const child = document.querySelector('#result');
         const newChild = document.createElement('Strong');
-        child.innerHTML = ""
+        child.innerHTML = "";
         child.appendChild(newChild);
         newChild.innerHTML = " 🎉 정답을 맞추셨습니다! 🎉 ";
     };
     // * 다시하기 버튼 생성하기.
     this.addNewGameHTML = function () {
         const parent = document.querySelector('#result')
-        const newChild = '<div id = "restart-div"></br><span id= "restart-span">게임을 새로 시작하시겠습니까?</span>  <button id="restart-button">게임 재시작</button></div>'
-        parent.innerHTML += newChild
+        const newChild = '<div id = "restart-div"></br><span id= "restart-span">게임을 새로 시작하시겠습니까?</span>  <button id="restart-button">게임 재시작</button></div>';
+        parent.innerHTML += newChild;
     };
     // * restart함수 만들기
     this.restart = function () {
@@ -151,13 +151,13 @@ export default function BaseballGame() {
      this.showResult = function (result) {
          const resultDiv = document.querySelector("#result");
          resultDiv.innerHTML = result;
-      };
+     };
 
     // * 확인버튼에 게임을 진행할 수 있도록 이벤트리스너 추가하기
      this.startGame = function () {
          const input = document.querySelector("#user-input");
          const checkButton = document.querySelector("#submit");
-         this.randomNumber = this.makeRandomNumbers()
+         this.randomNumber = this.makeRandomNumbers();
          checkButton.addEventListener("click", () => {
              if (!this.isInputRight(input.value)) {
                  return alert("3자리 서로다른 숫자를 입력해주세요(0제외)");
