@@ -1,3 +1,5 @@
+const USER_INPUT_LENGTH = 3;
+
 export default class BaseballGame {
   constructor() {
     this.$result = document.getElementById('result');
@@ -30,7 +32,7 @@ export default class BaseballGame {
     const userInputNumbers = this.$userInput.value;
 
     if (this.isPossible(userInputNumbers)) {
-      console.log('game start');
+      this.play(this.computerInputNumbers, userInputNumbers);
     } else {
       this.randerErrorMessage('잘못된 입력입니다. 다시 입력해주세요');
     }
@@ -60,8 +62,23 @@ export default class BaseballGame {
     this.$userInput.focus();
   }
 
+  getBallCount = (computerInputNumbers, userInputNumbers) => {
+    let ball = 0;
+    for (let i = 0; i < USER_INPUT_LENGTH; i += 1) {
+      if (computerInputNumbers[i] === userInputNumbers[i]) {
+        continue;
+      }
+      if (computerInputNumbers.includes(userInputNumbers[i])) {
+        ball += 1;
+      }
+    }
+    return ball;
+  };
+
   play = (computerInputNumbers, userInputNumbers) => {
-    return '결과 값 String';
+    const ballCount = this.getBallCount(computerInputNumbers, userInputNumbers);
+
+    console.log(computerInputNumbers, ballCount);
   }
 }
 
