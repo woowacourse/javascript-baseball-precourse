@@ -1,4 +1,6 @@
 export default function BaseballGame() {
+  this.computerInputNumbers;
+
   const inputText = document.querySelector('#user-input');
   const submitButton = document.querySelector('#submit');
   submitButton.addEventListener('click', () =>
@@ -15,6 +17,12 @@ export default function BaseballGame() {
       pickedNumbers.push(picked);
     }
     return pickedNumbers;
+  };
+
+  // 생성된 랜덤 숫자 세팅
+  this.setComputerNum = () => {
+    const a = this.getRandomNumber();
+    this.computerInputNumbers = a.join('');
   };
 
   // 중복 값이 있는지 확인
@@ -38,6 +46,13 @@ export default function BaseballGame() {
       alert('입력 값이 규칙에 맞지 않습니다. 다시 입력해주세요.');
       inputText.value = '';
       inputText.focus();
+    } else {
+      // 세팅된 숫자가 있으면 진행 없으면 세팅
+      if (this.computerInputNumbers) {
+        console.log(this.computerInputNumbers);
+      } else {
+        this.setComputerNum();
+      }
     }
   };
 
