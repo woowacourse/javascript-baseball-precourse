@@ -57,7 +57,7 @@
 
 - button(id=game-restart-button) click 이벤트
   - 화면 초기화
-  - 새로운 BaseballGame객체 생성
+  - comNum을 새로운 3자리 랜덤 값으로 
 
 <br>
 
