@@ -19,20 +19,21 @@ export default class BaseballGame {
       }
     }
 
-    const _answer = randomNumbers.join("");
+    const _answer = Number(randomNumbers.join(""));
 
     return _answer;
   }
 
-  isValid(userInputNumbers) {
-    const NUMBER_DIGITS = "123456789";
+  isValid(userInputString) {
+    const AVAILABLE_DIGITS = "123456789";
+    const NUMBER_DIGITS = 3;
     let _isValid = null;
 
-    if (userInputNumbers.length !== 3) {
+    if (userInputString.length !== NUMBER_DIGITS) {
       _isValid = false;
-    } else if (!this.isContainingGivenCharacters(userInputNumbers, NUMBER_DIGITS)) {
+    } else if (!this.isContainingGivenCharacters(userInputString, AVAILABLE_DIGITS)) {
       _isValid = false;
-    } else if (!this.hasDifferentNumbers(userInputNumbers)) {
+    } else if (!this.hasDifferentNumbers(userInputString)) {
       _isValid = false;
     } else {
       _isValid = true;
