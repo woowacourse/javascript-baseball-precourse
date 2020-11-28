@@ -48,6 +48,29 @@ export default class BaseballGame {
     showRecordsSection.appendChild(tryCount);
     showRecordsSection.appendChild(showRecordsList);
     resultElement.appendChild(showRecordsSection);
+    resultElement.removeChild(document.getElementById('ask-show-records'));
+  }
+
+  _askShowRecords() {
+    const askShowRecordsSection = document.createElement("div");
+    const showRecordsButton = document.createElement('button');
+    const askShowRecordsPlaceholder = document.createElement('p');
+
+    if(!this.result || !this.result.ok) return;
+
+    askShowRecordsSection.id = 'ask-show-records';
+    showRecordsButton.id = "show-records-button";
+    askShowRecordsPlaceholder.id = "ask-show-records-placeholder";
+
+    askShowRecordsPlaceholder.innerText = "기록 보기";
+    showRecordsButton.innerText = "show records";
+
+    showRecordsButton.addEventListener('click', () => this._showRecords());
+
+    askShowRecordsSection.appendChild(askShowRecordsPlaceholder);
+    askShowRecordsSection.appendChild(showRecordsButton);
+
+    resultElement.appendChild(askShowRecordsSection);
   }
 
   _askRestart() {
@@ -55,38 +78,21 @@ export default class BaseballGame {
     const restartButton = document.createElement('button');
     const askRestartPlaceholder = document.createElement('p');
 
-    const askShowRecordsSection = document.createElement("div");
-    const showRecordsButton = document.createElement('button');
-    const askShowRecordsPlaceholder = document.createElement('p');
-    
-
     if(!this.result || !this.result.ok) return;
     
     askRestartSection.id = "ask-restart";
     restartButton.id = "restart-button";
     askRestartPlaceholder.id = "ask-restart-placeholder";
 
-    askShowRecordsSection.id = 'ask-show-records';
-    showRecordsButton.id = "show-records-button";
-    askShowRecordsPlaceholder.id = "ask-show-records-placeholder";
-
     askRestartPlaceholder.innerText = "게임을 새로 시작하시겠습니까?";
     restartButton.innerText = "restart";
 
-    askShowRecordsPlaceholder.innerText = "기록 보기";
-    showRecordsButton.innerText = "show records";
-
     restartButton.addEventListener('click', () => window.location.reload());
-    showRecordsButton.addEventListener('click', () => this._showRecords());
 
     askRestartSection.appendChild(askRestartPlaceholder);
     askRestartSection.appendChild(restartButton);
-
-    askRestartSection.appendChild(askShowRecordsPlaceholder);
-    askRestartSection.appendChild(showRecordsButton);
     
     resultElement.appendChild(askRestartSection);
-    resultElement.appendChild(askShowRecordsSection);
   }
 
   _resetResultMessage() {
@@ -103,7 +109,10 @@ export default class BaseballGame {
     resultMessageElement.innerText = message;
     resultElement.appendChild(resultMessageElement);
 
-    if(this.result.ok) this._askRestart();
+    if (this.result.ok) {
+      this._askRestart();
+      this._askShowRecords();
+    }
     else userInput.value = '';
   }
 
