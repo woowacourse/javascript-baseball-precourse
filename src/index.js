@@ -126,27 +126,25 @@ export default class BaseballGame {
   // 확인 버튼 클릭 handle 메서드
   handleClick() {
     const submitBtn = document.getElementById("submit");
-    submitBtn.addEventListener("click", () =>
-      this.startGame(this.computerInputNumbers)
-    );
+    submitBtn.addEventListener("click", () => this.startGame());
   }
 
   // 게임 시작 메서드
-  startGame(computerInputNumbers) {
+  startGame() {
     const userInputContainer = document.getElementById("user-input");
     const userInputValue = userInputContainer.value;
     const userInputNumbers = Array.from(userInputValue, Number);
 
     if (this.checkVaild(userInputNumbers)) {
-      const answer = this.play(computerInputNumbers, userInputNumbers);
+      const answer = this.play(this.computerInputNumbers, userInputNumbers);
 
       this.showGameResult(answer);
     }
 
-    this.handleClick(computerInputNumbers);
+    this.handleClick();
   }
 
-  // 게임 재시작 메서드
+  // 게임 초기화 메서드
   resetGame() {
     this.computerInputNumbers = this.generateRandomNumber();
 
