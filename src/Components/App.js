@@ -1,4 +1,8 @@
-import { generateTargetNumbers } from '../utils/gameUtil.js';
+import {
+  generateTargetNumbers,
+  calculateCount,
+  getHint,
+} from '../utils/gameUtil.js';
 import { isValidInputData } from '../utils/validations.js';
 
 class BaseballGame {
@@ -8,12 +12,15 @@ class BaseballGame {
     this.tryButton = document.querySelector('#submit');
 
     this.answer = generateTargetNumbers();
-
+    console.log(this.answer);
     this.bindEvents();
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    return '결과 값 String';
+    userInputNumbers = Array.from(userInputNumbers).map((num) => parseInt(num));
+    const countInfo = calculateCount(computerInputNumbers, userInputNumbers);
+
+    return countInfo.strike === 3 ? '정답입니다' : getHint(countInfo);
   }
 
   bindEvents() {
@@ -30,7 +37,7 @@ class BaseballGame {
       return;
     }
 
-    console.log(this.userInput.value);
+    console.log(this.play(this.answer, this.userInput.value));
   }
 
   onKeyDown({ target, key }) {
@@ -41,9 +48,8 @@ class BaseballGame {
       target.value = '';
       return;
     }
-    console.log(target.value);
 
-    this.play(this.answer, target.value);
+    console.log(this.play(this.answer, target.value));
   }
 }
 
