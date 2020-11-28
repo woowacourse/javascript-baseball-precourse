@@ -7,7 +7,7 @@ export default function BaseballGame() {
   const _button = document.querySelector("#submit");
   const _input = document.querySelector("#user-input");
   const _privateInitUtils = new initGame();
-  let _answer = _privateInitUtils.StartGame(_input);
+  let _answer = _privateInitUtils.GenerateAnswer(_input);
 
 	this.play = function (computerInputNumbers, userInputNumbers) {
     let [ball, strike] = CountBallStrike(computerInputNumbers, userInputNumbers);
@@ -32,15 +32,15 @@ export default function BaseballGame() {
   }
 
   _button.addEventListener('click', () => {
-    PlayGame();
+    PlayIfValid();
   })
 
   _input.addEventListener('keypress', (e) => {
     if (e.keyCode === 13)
-      PlayGame();
+      PlayIfValid();
   })
 
-  const PlayGame = () => {
+  const PlayIfValid = () => {
     const InputUtils = new CheckInput();
     let userValue = InputUtils.GetInput(_input);
 
@@ -69,7 +69,7 @@ export default function BaseballGame() {
       let restartMessage = document.createElement('span');
       let restartButton = document.createElement('button');
 
-      restartMessage.textContent = '게임을 새로 시작하시겠습니까? ';
+      restartMessage.textContent = '게임을 새로 시작하시겠습니까?';
       restartButton.textContent = '게임 재시작';
       _resultArea.innerHTML = `<h4>🎉<strong> 정답을 맞추셨습니다! </strong>🎉</h4>`;
       _resultArea.appendChild(restartMessage);
@@ -83,5 +83,5 @@ export default function BaseballGame() {
 		  _resultArea.textContent = resultMessage;
   }
 }
-
+ 
 new BaseballGame();

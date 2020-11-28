@@ -1,5 +1,5 @@
 export default function InitGame() {
-	this.StartGame = function (input) {
+	this.GenerateAnswer = function (input) {
     input.focus();
 	  let answer = [];
 	  let candidate = [];
@@ -16,11 +16,11 @@ export default function InitGame() {
     return answer;
 	}
 
-  const StartGameBind = this.StartGame.bind();
+  const GenerateAnswerBind = this.GenerateAnswer.bind();
 
   this.RestartGame = function (resultArea, answer, input) {
     resultArea.innerHTML = '';
-    answer = StartGameBind(input);
+    answer = GenerateAnswerBind(input);
     input.value = '';
     input.placeholder = '';
 
