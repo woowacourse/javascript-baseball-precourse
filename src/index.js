@@ -1,4 +1,10 @@
 export default function BaseballGame() {
+  const submitBtn = document.getElementById('submit');
+
+  submitBtn.addEventListener('click', () => {
+    const userInputNumbers = document.getElementById('user-input').value;
+  });
+
   const genRandomNum = () => {
     let originalNums = [];
     let num = "";
@@ -13,8 +19,9 @@ export default function BaseballGame() {
       originalNums.splice(randomIdx, 1);
     }
     
+    console.log(num);
     return num;   
-  }
+  } 
 }
 
 new BaseballGame();
