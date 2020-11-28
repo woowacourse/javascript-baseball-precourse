@@ -15,8 +15,12 @@ const hasDuplicatedNumbers = (num) => {
   return new Set(num).size !== num.length;
 };
 
+const hasZero = (num) => {
+  return num.indexOf("0") !== -1;
+};
+
 const isValidNumbers = (num) => {
-  return !hasDuplicatedNumbers(num);
+  return !hasDuplicatedNumbers(num) && !hasZero(num);
 };
 
 export default function BaseballGame() {
