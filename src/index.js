@@ -31,17 +31,16 @@ export default function BaseballGame() {
 	  return resultMessage;
   }
 
-  _button.addEventListener('click', (e) => {
-    PlayGame(e);
+  _button.addEventListener('click', () => {
+    PlayGame();
   })
 
   _input.addEventListener('keypress', (e) => {
     if (e.keyCode === 13)
-      PlayGame(e);
+      PlayGame();
   })
 
-  const PlayGame = (e) => {
-    // e.preventDefault();
+  const PlayGame = () => {
     const InputUtils = new CheckInput();
     let userValue = InputUtils.GetInput(_input);
 
@@ -76,8 +75,7 @@ export default function BaseballGame() {
       _resultArea.appendChild(restartMessage);
       _resultArea.appendChild(restartButton);
 
-      restartButton.addEventListener('click', (e) => {
-        e.preventDefault();
+      restartButton.addEventListener('click', () => {
         _answer = _privateInitUtils.RestartGame(_resultArea, _answer, _input);
 		  })
     } 
