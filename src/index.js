@@ -46,13 +46,14 @@ export default function BaseballGame() {
     return false;
   };
 
-  this.makeNotificationMessage = userInputNumbers => {
-    if (typeof userInputNumbers !== 'number' || isNaN(userInputNumbers)) {
+  this.makeNotificationMessage = userInputValue => {
+    const userInputNumbers = Number(userInputValue);
+    if (userInputValue.includes('0')) {
+      return '1에서 9까지의 수만 입력 가능합니다';
+    } else if (isNaN(userInputNumbers)) {
       return '숫자만 입력 가능합니다.';
     } else if (userInputNumbers < 100 || 999 < userInputNumbers) {
       return '세자리 수만 입력 가능합니다.';
-    } else if (String(userInputNumbers).includes('0')) {
-      return '1에서 9까지의 수만 입력 가능합니다';
     } else if (!this.isComposedOfDifferentNumber(userInputNumbers)) {
       return '서로 다른 숫자로 구성된 수만 입력 가능합니다.';
     }
@@ -99,12 +100,13 @@ export default function BaseballGame() {
     if (this.status === 'END') {
       return;
     }
-    const userInputNumbers = Number(userInput.value);
-    const notification = this.makeNotificationMessage(userInputNumbers);
+    const userInputValue = userInput.value;
+    const notification = this.makeNotificationMessage(userInputValue);
     if (notification) {
       alert(notification);
       return;
     }
+    const userInputNumbers = Number(userInputValue);
     const results = this.play(this.initComputerInputNumbers, userInputNumbers);
     result.innerHTML = results;
     if (this.status === 'END') {
