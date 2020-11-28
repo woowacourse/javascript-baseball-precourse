@@ -94,4 +94,7 @@ play(123, 124) // '2스트라이크'
 - 두 값을 입력 받아 각 자릿수를 비교하는데 같은 자리 같은 숫자면 스트라이크, 같은 자리에는 없지만 숫자가 포함되어 있으면 볼, 스트라이크나 볼이 없으면 낫싱(play(computerInput, userInput))
 - 게임 재시작해주는 콜백 함수(restartGame())
 - 사용자의 입력을 전달 해주는 콜백 함수 (sendBaseBall(userInput))
+- 입력 값을 검증해주는 함수(validateInput(userInput))
+- 잘못 입력된 경우 alert을 통해 메시지를 보여주는 함수(showErrorAlert())
+- input Element의 값을 초기화 하고 focus 주는 함수(initValueAndFoucsIn(el) - element 전달)
 - 결과 보여주는 함수 (showResult(str))
