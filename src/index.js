@@ -1,6 +1,7 @@
 export default function BaseballGame() {
   const play = (computerInputNumbers, userInputNumbers) => {
-    compareNumbers(computerInputNumbers, userInputNumbers);
+    const returnString = compareNumbers(computerInputNumbers, userInputNumbers);
+    return returnString;
   }
 
   const genRandomNum = () => {
@@ -21,20 +22,22 @@ export default function BaseballGame() {
     return num;   
   } 
 
-  const clearInput = () => {
-    document.getElementById('user-input').value = "";
-  }
-
   const computerInput = genRandomNum();
   const submitBtn = document.getElementById('submit');
+  const resultArea = document.getElementById('result');
 
   submitBtn.addEventListener('click', () => {
     const userInput = document.getElementById('user-input').value;
     const isUserInputValid = validateInput(userInput);
     if (isUserInputValid) {
-      play(computerInput, userInput);
+      const returnString = play(computerInput, userInput);
+      resultArea.innerHTML = returnString;
     }
   });
+
+  const clearInput = () => {
+    document.getElementById('user-input').value = "";
+  }
 
   const validateInput = (userInputNumbers) => {
     if (isNaN(parseInt(userInputNumbers))) {
@@ -53,7 +56,7 @@ export default function BaseballGame() {
     let strike = 0; 
 
     if (computerInputNumbers === userInputNumbers) {
-      console.log("정답입니다!");
+      return '정답입니다!';
     } else if (computerInputNumbers.includes(userInputNumbers[0])) {
       for (let i=0; i<3; i++) {
         if (userInputNumbers[i] === computerInputNumbers[i]) {
@@ -63,7 +66,15 @@ export default function BaseballGame() {
         }
       }
     } else {
-      console.log("낫싱");
+      return '낫싱';
+    }
+
+    if (ball > 0 && strike === 0) {
+      return `${ball}볼`;
+    } else if (strike > 0 && ball === 0) {
+      return `${strike}스트라이크`;
+    } else if (ball > 0 && strike > 0) {
+      return `${ball}볼 ${strike}스트라이크`;
     }
   }
 }
