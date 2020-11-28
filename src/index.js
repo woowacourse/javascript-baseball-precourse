@@ -80,13 +80,12 @@ export default function BaseballGame() {
     return [ball, strike];
   };
 
-  this.printResult = function (ball, strike) {
+  this.checkResult = function (ball, strike) {
     if (ball == 0 && strike == 0) {
       return "낫싱";
     }
 
     if (strike == 3) {
-      document.getElementById("restart").hidden = false;
       return "🎉정답을 맞추셨습니다!🎉";
     }
 
@@ -107,9 +106,17 @@ export default function BaseballGame() {
     [computerInputNumbers, userInputNumbers] = this.formatArray(computerInputNumbers, userInputNumbers);
 
     const [ball, strike] = this.compareNumbers(computerInputNumbers, userInputNumbers);
-    const result = this.printResult(ball,strike);
+    const result = this.checkResult(ball,strike);
 
     return result;
+  };
+
+  this.printResult = function (result) {
+    document.getElementById("result").innerText = result;
+    
+    if (result.includes("정답")) {
+      document.getElementById("restart").hidden = false;
+    }
   };
 
   this.start = function () {
@@ -118,9 +125,7 @@ export default function BaseballGame() {
     if (userInputNumbers) {
       const result = this.play(computerInputNumbers, userInputNumbers);
 
-      document.getElementById("result").innerText = result;
-
-      console.log(computerInputNumbers, userInputNumbers);
+      this.printResult(result);
     }
   };
 

@@ -39,7 +39,7 @@
 
 **게임 진행(play - 프로그래밍 요구사항)** ✅
 
-- `compareNumbers()` 와 `printResult()` 를 사용하여 "결과 값 String"을 `return` 한다.
+- `compareNumbers()` 와 `chechResult()` 를 사용하여 "결과 값 String"을 `return` 한다.
 
 **컴퓨터 랜덤 값과 유저 입력 값 비교(compareNumbers)** ✅
 
@@ -49,13 +49,19 @@
 
 - 처음에는 이중 for문으로 구현하였는데, depth가 깊어져서 수정하였다.
 
-**결과 출력(printResult)** ✅
+**결과 확인(~~printResult~~ checkResult)** ✅
 
 - 조건문을 사용하여 볼과 스트라이크의 값에 따라 네 가지로 분기하였다.
 
   (볼과 스트라이크 모두 0이면 "낫싱" 출력, 스트라이크가 3이면 "🎉정답을 맞추셨습니다!🎉" 출력, 볼이 0이 아니면 "${ball}볼", 스트라이크가 0이 아니면 "${strike}스트라이크" 추가하여 출력 )
   
-- 이때 정답을 맞추면  `<div id="restart">` 태그의 `hidden` 을 `false` 로 바꿔준다.
+- ~~이때 정답을 맞추면  `<div id="restart">` 태그의 `hidden` 을 `false` 로 바꿔준다.~~
+
+**결과 출력(printResult)** ✅
+
+- 기존의 `printResult()` 를  `checkResult()` 로 바꾸고,  결과만 출력하는 기능을 새로 만들었다.
+
+- **게임 진행**에서 `formatArray()` 기능을 만들어 준 이유는 `play()` 가 "컴퓨터의 랜덤 값, 유저의 입력 값"을 받으면 "결과 값 String" 을 반환하는 독립적인 기능으로 만들기 위해서였다. 그래서 `checkResult()` 에 포함되어 있는 `<div id="restart">` 부분도 분리시키기로 하였다.
 
 **게임 재시작(restart)** ✅
 
@@ -76,4 +82,3 @@
 **게임 진행(play - 프로그래밍 요구사항)**
 
 - 프로그래밍 요구사항을 보면 `play()` 예시의 입력 값이 숫자이다. `compareNumbers()` 에서 사용하는 입력 값은 `Array` 이므로, 입력 값이 숫자가 들어오면 `Array` 로 바꿔주는 기능 구현하기. 🔧
-
