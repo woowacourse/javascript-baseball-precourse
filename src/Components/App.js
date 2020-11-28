@@ -4,13 +4,14 @@ import {
   getHint,
 } from '../utils/gameUtil.js';
 import { isValidInputData } from '../utils/validations.js';
+import { ID, GAME, MESSAGE, KEY } from '../utils/constants.js';
 
 class BaseballGame {
   constructor($target) {
     this.$target = $target;
-    this.userInput = document.querySelector('#user-input');
-    this.tryButton = document.querySelector('#submit');
-    this.resultView = document.querySelector('#result');
+    this.userInput = document.getElementById(ID.USER_INPUT);
+    this.tryButton = document.getElementById(ID.SUBMIT_BUTTON);
+    this.resultView = document.getElementById(ID.RESULT_VIEW);
 
     this.state = {
       answer: generateTargetNumbers(),
@@ -28,7 +29,9 @@ class BaseballGame {
     userInputNumbers = Array.from(userInputNumbers).map((num) => parseInt(num));
     this.setSate(calculateCount(computerInputNumbers, userInputNumbers));
 
-    return this.state.strike === 3 ? '정답입니다' : getHint(this.state);
+    return this.state.strike === GAME.THREE
+      ? MESSAGE.SUCCESS
+      : getHint(this.state);
   }
 
   restart() {
@@ -48,16 +51,17 @@ class BaseballGame {
   }
 
   onClick({ target }) {
-    if (target.id !== 'game-restart-button' && target.id !== 'submit') return;
+    if (target.id !== ID.RESTART_BUTTON && target.id !== ID.SUBMIT_BUTTON)
+      return;
 
     // 정답 로직
-    if (target.id === 'game-restart-button') {
+    if (target.id === ID.RESTART_BUTTON) {
       this.restart();
       return;
     }
 
     if (!isValidInputData(this.userInput.value)) {
-      alert('다시 입력해주세요 !');
+      alert(MESSAGE.INPUT_ERROR);
       this.userInput.value = '';
       return;
     }
@@ -67,10 +71,10 @@ class BaseballGame {
   }
 
   onKeyDown({ target, key }) {
-    if (key !== 'Enter') return;
+    if (key !== KEY.ENTER) return;
 
     if (!isValidInputData(target.value)) {
-      alert('다시 입력해주세요 !');
+      alert(MESSAGE.INPUT_ERROR);
       target.value = '';
       return;
     }
@@ -91,7 +95,7 @@ class BaseballGame {
 
   render(message) {
     this.resultView.innerHTML =
-      this.state.strike === 3
+      this.state.strike === GAME.THREE
         ? `<span>${message}</span><button id="game-restart-button">재시작</button>`
         : `<span>${message}</span>`;
   }

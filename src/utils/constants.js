@@ -3,7 +3,7 @@ export const ID = {
   USER_INPUT: 'user-input',
   SUBMIT_BUTTON: 'submit',
   RESULT_VIEW: 'result',
-  RESTART_BUTTON: 'game-restart-button'
+  RESTART_BUTTON: 'game-restart-button',
 };
 
 export const GAME = {
@@ -18,9 +18,9 @@ export const MESSAGE = {
   INPUT_ERROR: '숫자를 다시 입력해주세요 ✍',
   BALL: '볼',
   STRIKE: '스트라이크',
-  NOTHING: '낫싱'
+  NOTHING: '낫싱',
 };
 
 export const KEY = {
-  ENTER = 'Enter'
-}
+  ENTER: 'Enter',
+};
