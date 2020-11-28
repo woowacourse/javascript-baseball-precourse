@@ -1,26 +1,11 @@
-import { expect } from '@jest/globals';
+import { expect, jest, test } from '@jest/globals';
 import BaseballGame from '../src/index.js';
+
+jest.spyOn(document, "querySelector").mockReturnValue(document.documentElement);
 
 describe('유저의 입력값이 서로 다른 3개의 숫자로 이루어져있는지 검증', () => {
     const baseballGame = new BaseballGame();
 
-    // test('유저의 입력값은 문자열 타입이여야 한다.', () => {        
-    //     expect(baseballGame.isValid()).toBe(false);
-    //     expect(baseballGame.isValid(true)).toBe(false);
-    //     expect(baseballGame.isValid({})).toBe(false);
-    //     expect(baseballGame.isValid({dummy: 354})).toBe(false);
-    //     expect(baseballGame.isValid([])).toBe(false);
-    //     expect(baseballGame.isValid(['24'])).toBe(false);
-    //     expect(baseballGame.isValid('')).toBe(false);
-    //     expect(baseballGame.isValid(undefined)).toBe(false);
-    //     expect(baseballGame.isValid(null)).toBe(false);
-    // });
-
-
-    // test('유저의 입력값은 1개만 주어져야 한다.', () => {
-    //     expect(baseballGame.isValid(1,2,3)).toBe(false);
-    //     expect(baseballGame.isValid('1','af','xd')).toBe(false);
-    // });
 
     test('유저의 입력값은 3개의 문자로 구성되어 있어야 한다.', () => {
         expect(baseballGame.isValid('abce')).toBe(false);

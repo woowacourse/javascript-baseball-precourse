@@ -183,4 +183,4 @@ export default class BaseballGame {
   };
 }
 
-new BaseballGame();
+document.addEventListener("DOMContentLoaded", () => new BaseballGame());
