@@ -13,6 +13,8 @@ export default function BaseballGame(N) {
   const ZERO_INCLUDED = 4;
   const CHAR_INCLUDED = 5;
 
+  N = N === undefined ? 3 : N;
+
   const getComputerInputNumbers = (numbers) => {
     if (numbers !== '') {
       return numbers;
@@ -162,4 +164,4 @@ export default function BaseballGame(N) {
   playBtn.addEventListener('click', getReadyAndPlayGame);
 }
 
-new BaseballGame(3);
+new BaseballGame();
