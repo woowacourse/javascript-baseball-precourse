@@ -13,9 +13,18 @@ export default function BaseballGame() {
     const userInputNumbers = getUserInputNumberList();
 
     if (userInputNumbers !== undefined) {
+      const resultElement = document.querySelector("#result");
       resultElement.innerHTML = play(computerInputNumbers, userInputNumbers);
     }
+    const restartElement = document.querySelector("#game-restart-button");
+    if (restartElement !== null) {
+      restartElement.addEventListener("click", handleRestartButton);
+    }
   };
+
+  const handleRestartButton = function() {
+    location.reload();
+  }
 
   const getRandomNumberList = function() {
     let tmpNumbers = NUMBER_LIST;
@@ -84,7 +93,6 @@ export default function BaseballGame() {
         resultString = NOTHING_STRING;
       } else if (ballStrikeList[STRIKE_INDEX] === 3) {
         resultString = ANSWER_STRING;
-          
       } else {
         resultString = `${ballStrikeList[STRIKE_INDEX]}스트라이크`;
       }
@@ -100,10 +108,9 @@ export default function BaseballGame() {
 
   // init();
   const computerInputNumbers = getRandomNumberList();
-  const submitButton = document.querySelector("#submit");
-  const resultElement = document.querySelector("#result");
+  const submitElement = document.querySelector("#submit");
 
-  submitButton.addEventListener("click", handleSubmitButton);
+  submitElement.addEventListener("click", handleSubmitButton);
 }
 
 BaseballGame();
