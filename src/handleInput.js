@@ -18,11 +18,11 @@ export default class HandleInput {
   CheckInputValidity(number) {
     const notZero = this.NotZero(number);
     const isNumber = this.IsNumber(number);
-    const noOverap = this.NoOverap(number);
+    const noOverlap = this.NoOverap(number);
     const isThreeDigits = this.IsThreeDigits(number);
 
     if (notZero * isNumber * noOverap * isThreeDigits === 0)
-      CreateErrorMessage(notZero, isNumber, noOverap, isThreeDigits);
+      CreateErrorMessage(notZero, isNumber, noOverlap, isThreeDigits);
 
     return this.IS_VALID;
   }
@@ -43,7 +43,7 @@ export default class HandleInput {
     return this.IS_VALID;
   }
 
-  NoOverap(number) {
+  NoOverlap(number) {
     for (let i = 0; i <= 2; i++) {
 		  if (number.split(number[i]).length - 1 !== 1)
         return this.IS_NOT_VALID;
@@ -57,6 +57,25 @@ export default class HandleInput {
       return this.IS_NOT_VALID;
 
     return this.IS_VALID;
+  }
+
+  CreateErrorMessage(notZero, isNumber, noOverlap, isThreeDigits) {
+    let errorMessage = '';
+
+    if (notZero === this.IS_NOT_VALID)
+      errorMessage += '0이 아닌';
+    
+    if (isNumber === this.IS_NOT_VALID)
+      errorMessage += '1~9까지의';
+    
+    if (noOverlap === this.IS_NOT_VALID)
+      errorMessage += '중복되지 않는';
+    
+    if (isThreeDigits === this.IS_NOT_VALID)
+      errorMessage += '세 개의';
+    
+    errorMessage += ' 숫자를 입력해주세요';
+    AlertErrorMessage(errorMessage);
   }
 
   GetInput(input) {
