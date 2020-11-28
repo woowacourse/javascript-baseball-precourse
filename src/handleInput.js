@@ -18,10 +18,11 @@ export default class HandleInput {
   CheckInputValidity(number) {
     const notZero = this.NotZero(number);
     const isNumber = this.IsNumber(number);
-    const noOverlap = this.NoOverap(number);
+    const noOverlap = this.NoOverlap(number);
     const isThreeDigits = this.IsThreeDigits(number);
-
-    if (notZero * isNumber * noOverap * isThreeDigits === 0)
+    
+    console.log('notZero', notZero);
+    if (notZero * isNumber * noOverlap * isThreeDigits === 0)
       CreateErrorMessage(notZero, isNumber, noOverlap, isThreeDigits);
 
     return this.IS_VALID;
@@ -75,8 +76,10 @@ export default class HandleInput {
       errorMessage += '세 개의';
     
     errorMessage += ' 숫자를 입력해주세요';
-    AlertErrorMessage(errorMessage);
+    this.AlertErrorMessage(errorMessage);
   }
+
+  AlertErrorMessage = (errorMessage => alert(errorMessage));
 
   GetInput(input) {
     let userValue = '';
