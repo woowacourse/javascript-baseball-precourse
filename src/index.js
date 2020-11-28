@@ -101,6 +101,16 @@ export default class BaseballGame {
     return resultText;
   }
 
+  reStart(value) {
+    if (value === true) {
+      const restartBtn = document.querySelector('#game-restart-button');
+
+      restartBtn.addEventListener('click', () => {
+        window.location.reload();
+      });
+    }
+  }
+
   resultToHTML(text) {
     const resultHTML = document.querySelector('#result');
     let buttonOn = false;
@@ -114,7 +124,7 @@ export default class BaseballGame {
       resultHTML.innerHTML = text;
     }
 
-    return buttonOn;
+    this.reStart(buttonOn);
   }
 }
 
