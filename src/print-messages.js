@@ -16,8 +16,11 @@ export default function printMessage(ballCount, strikeCount) {
   } else if (ballCount === 0 && strikeCount === 0) {
     RETURN_MESSAGE = RETURN_MESSAGE.concat("낫싱");
 
-  }
+  } 
   
   document.getElementById('result').innerHTML = RETURN_MESSAGE;
 }
   
+export function clearResult() {
+  document.getElementById('result').innerHTML = '';
+}
