@@ -1,5 +1,22 @@
 # ⚾ 미션 - 숫자 야구 게임
 
+## ✔️ 구현할 기능 목록
+
+- `resetGame()`: 게임을 초기화하는 메서드
+  - `setComputerInputNumbers()`: 서로 다른 수로 이루어진 3자리의 수를 만드는 메서드
+    - `getRandomNumber()`: 1에서 9까지 랜덤한 숫자를 반환하는 메서드
+- `checkGameResult()`: 게임의 결과를 확인하는 메서드
+  - `getGameResult(computerInputNumbers, userInputNumbers)`: 컴퓨터가 생각하고 있는 숫자와 게임 플레이어가 입력한 숫자를 비교한 결과를 반환하는 메서드
+  - `printGameResult(message)`: 게임의 결과를 출력하는 메서드
+  - `play(computerInputNumbers, userInputNumbers)`: 게임의 결과 메시지를 반환하는 메서드
+  - `checkValidInputValue(value)`: 게임 플레이어가 입력한 숫자가 유효한 값인지 확인하는 메서드
+    - `isNumber`: 숫자인지 확인
+    - `isThreeDigits`: 세 자릿수인지 확인
+    - `hasZero`: 0을 포함했는지 확인
+    - `isDifferentNumbers`: 서로 다른 숫자인지 확인
+
+---
+
 ## 🎯 기능 요구사항
 
 - 기본적으로 1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 맞추는 게임이다.
@@ -11,7 +28,7 @@
 - 위 숫자 야구게임에서 상대방의 역할을 컴퓨터가 한다. 컴퓨터는 1에서 9까지 서로 다른 임의의 수 3개를 선택한다. 게임 플레이어는 컴퓨터가 생각하고 있는 3개의 숫자를 입력하고, 컴퓨터는 입력한 숫자에 대한 결과를 출력한다.
 - 이 같은 과정을 반복해 컴퓨터가 선택한 3개의 숫자를 모두 맞히면 게임이 종료된다.
 - 게임을 종료한 후 게임을 다시 시작할 수 있다.
-- 게임을 종료한 후 id가 `game-restart-button`인 버튼을 클릭함으로써 게임을 다시 시작할 수 있다. 
+- 게임을 종료한 후 id가 `game-restart-button`인 버튼을 클릭함으로써 게임을 다시 시작할 수 있다.
   - `예) <button id="game-restart-button">재시작</button>`
 
 <br>
