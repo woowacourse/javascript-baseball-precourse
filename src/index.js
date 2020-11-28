@@ -26,6 +26,13 @@ const addNewInput = (e) => {
   `;
 };
 
+const endGame = (e) => {
+  e.target.closest('#app').innerHTML += `
+    <h4>🎉정답을 맞추셨습니다!🎉</h4>
+    <span>게임을 새로 시작하시겠습니까?</span>
+    <button id="game-restart-button" data-restart>게임 재시작</button>
+  `;
+}
 
 const BG = new BaseballGame();
 const app = document.getElementById('app');
@@ -33,4 +40,4 @@ const app = document.getElementById('app');
 window.idx = 1;
 
 // test code
-app.addEventListener('click', addNewInput);
+app.addEventListener('click', endGame);
