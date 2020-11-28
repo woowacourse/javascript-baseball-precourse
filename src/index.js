@@ -23,15 +23,19 @@ export default class BaseballGame {
 
   constructor() {
     this.setAnswer();
-    this.#userNumber = new State(INITIAL_STATE_NUMBER);
-    this.#playResult = new ComputedState(this.getPlayResult, [
-      this.#userNumber,
-    ]);
+    this.initializeStates();
     this.initializeComponents();
   }
 
   setAnswer = () => {
     this.#answer = getRandomNumber(MIN_DIGIT, MAX_DIGIT, DIGIT_COUNT);
+  };
+
+  initializeStates = () => {
+    this.#userNumber = new State(INITIAL_STATE_NUMBER);
+    this.#playResult = new ComputedState(this.getPlayResult, [
+      this.#userNumber,
+    ]);
   };
 
   restart = () => {
