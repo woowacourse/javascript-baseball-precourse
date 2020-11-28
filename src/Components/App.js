@@ -19,6 +19,7 @@ class BaseballGame {
     };
 
     this.bindEvents();
+    this.render('');
   }
 
   play(computerInputNumbers, userInputNumbers) {
@@ -42,7 +43,8 @@ class BaseballGame {
       return;
     }
 
-    console.log(this.play(this.state.answer, this.userInput.value));
+    const hint = this.play(this.state.answer, this.userInput.value);
+    this.render(hint);
   }
 
   onKeyDown({ target, key }) {
@@ -54,7 +56,8 @@ class BaseballGame {
       return;
     }
 
-    console.log(this.play(this.state.answer, target.value));
+    const hint = this.play(this.state.answer, target.value);
+    this.render(hint);
   }
 
   setSate(nextState) {
@@ -67,7 +70,12 @@ class BaseballGame {
     };
   }
 
-  render(hint) {}
+  render(message) {
+    this.resultView.innerHTML =
+      this.state.strike === 3
+        ? `<span>${message}<button id="game-restart-button">재시작</button></span>`
+        : `<span>${message}</span>`;
+  }
 }
 
 export default BaseballGame;
