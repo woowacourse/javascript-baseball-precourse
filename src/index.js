@@ -118,7 +118,7 @@ export default function BaseballGame() {
     if (e.target.tagName !== 'BUTTON') {
       return;
     }
-    result.innerHTML = null;
+    result.innerHTML = '';
     userInput.value = '';
     this.initComputerInputNumbers = this.makeRandomNumbers();
     this.status = 'PLAYING';
