@@ -28,8 +28,8 @@ export default function BaseballGame() {
   let _resultArea = document.querySelector('#result');
   let _button = document.querySelector("#submit");
   let _input = document.querySelector("#user-input");
-  let _InitUtils = new initGame();
-  let _answer = _InitUtils.StartGame(_input);
+  let _privateInitUtils = new initGame();
+  let _answer = _privateInitUtils.StartGame(_input);
 
   _button.addEventListener('click', (e) => {
     e.preventDefault();
@@ -69,7 +69,7 @@ export default function BaseballGame() {
 
       restartButton.addEventListener('click', (e) => {
         e.preventDefault();
-        _InitUtils.RestartGame(_resultArea, _answer, _input);
+        _privateInitUtils.RestartGame(_resultArea, _answer, _input);
 		  })
     } 
     else
