@@ -58,7 +58,25 @@ export default class BaseballGame {
 
   play(computerInputNumbers, userInputNumbers) {
 
-    return "";
+    const splittedComputerInput = computerInputNumbers.toString().split("");
+    const splittedUserInput = userInputNumbers.toString().split("");
+
+    const total = splittedUserInput.filter(val => splittedComputerInput.includes(val)).length;
+    const strike = splittedUserInput.filter((val, idx) => val === splittedComputerInput[idx]).length;
+    const ball = total - strike;
+
+    let _return = null;
+    if (strike === 0 && ball === 0) {
+      _return = "낫싱";
+    } else if (strike === 0) {
+      _return = `${ball}볼`;
+    } else if (ball === 0) {
+      _return = `${strike}스트라이크`;  
+    } else {
+      _return = `${ball}볼 ${strike}스트라이크`;
+    }
+
+    return _return;
   }
 
 }
