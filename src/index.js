@@ -61,8 +61,6 @@ export default class BaseballGame {
     
 
     if(!this.result || !this.result.ok) return;
-
-    askRestartSection.style = "{flex-direction: row;}";
     
     askRestartSection.id = "ask-restart";
     restartButton.id = "restart-button";
@@ -110,15 +108,15 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    const result = compareAnswersAndGetResult(computerInputNumbers, userInputNumbers);
-    const { strike, ball } = result;
-    this.result = result;
+    const _result = compareAnswersAndGetResult(computerInputNumbers, userInputNumbers);
+    const { strike, ball } = _result;
+    this.result = _result;
     this.records.push({ 
       userInputNumbers, 
       strike, 
       ball 
     });
-    return this._printResult(result);
+    return this._printResult(_result);
   }
 }
 
