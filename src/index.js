@@ -1,6 +1,9 @@
 import { validateUserInput } from "./validate.js";
 export default class BaseballGame {
   constructor() {
+    this.isEnded = false;
+    this.computerInputNumbers = "";
+
     this.init();
   }
 
@@ -8,8 +11,6 @@ export default class BaseballGame {
   init = () => {
     this.isEnded = false;
     this.computerInputNumbers = this.generateRandomNumbers(); // 컴퓨터 입력값 설정
-    const submitButton = document.getElementById("submit");
-    submitButton.onclick = this.start;
   };
 
   // 랜덤 값 생성 메서드
@@ -100,7 +101,7 @@ export default class BaseballGame {
   }
 
   //* 게임 조작 메서드
-  start = () => {
+  handle = () => {
     const computerInputNumbers = this.computerInputNumbers; // 컴퓨터 입력값
     const userInputNumbers = this.getUserInputNumbers(); // 사용자 입력값
     const isValid = validateUserInput(userInputNumbers); // 사용자 입력값 검사
@@ -115,4 +116,9 @@ export default class BaseballGame {
   };
 }
 
-const game = new BaseballGame();
+const initGame = () => {
+  const game = new BaseballGame();
+  const submitButton = document.getElementById("submit");
+  submitButton.addEventListener("click", game.handle);
+};
+initGame();
