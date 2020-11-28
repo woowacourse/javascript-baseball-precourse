@@ -119,21 +119,24 @@ export default class BaseballGame {
         "<button id='game-restart-button'>게임 재시작</button>";
 
       const restartBtn = document.getElementById("game-restart-button");
-      restartBtn.addEventListener("click", baseballGame.resetGame);
+      restartBtn.addEventListener("click", () => this.resetGame());
     }
   }
 
   // 게임 시작 메서드
   startGame(computerInputNumbers) {
-    const userInputValue = document.getElementById("user-input").value;
+    const userInputContainer = document.getElementById("user-input");
+    const userInputValue = userInputContainer.value;
     const userInputNumbers = Array.from(userInputValue, Number);
 
     if (this.checkVaild(userInputNumbers)) {
-      const answer = baseballGame.play(computerInputNumbers, userInputNumbers);
+      const answer = this.play(computerInputNumbers, userInputNumbers);
 
-      baseballGame.showGameResult(answer);
+      this.showGameResult(answer);
     }
+
+    this.handleClick(computerInputNumbers);
   }
 }
 
-const baseballGame = new BaseballGame();
+new BaseballGame();
