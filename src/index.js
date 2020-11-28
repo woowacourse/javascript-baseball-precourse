@@ -147,6 +147,11 @@ export default function BaseballGame() {
          const button = document.querySelector("#restart-button");
          button.addEventListener("click", () => this.restart());
      };
+    // * 결과 출력하기
+     this.showResult = function (result) {
+         const resultDiv = document.querySelector("#result");
+         resultDiv.innerHTML = result;
+     };
 };
 
 
