@@ -49,6 +49,9 @@ export default function BaseballGame() {
   const gameStart = () => {
     if (isValidNumbers(userInput.value)) {
       play(computerNumbers, userInput.value);
+    } else {
+      alert("🙅 1~9까지의 수를 중복없이 3개 작성해주세요!");
+      userInput.value = "";
     }
   };
 
