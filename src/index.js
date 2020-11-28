@@ -2,6 +2,7 @@ export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = "";
     this.resetGame();
+    this.handleClick();
   }
 
   // 랜덤 3자리 수 생성 메서드
@@ -140,21 +141,16 @@ export default class BaseballGame {
 
       this.showGameResult(answer);
     }
-
-    this.handleClick();
   }
 
   // 게임 초기화 메서드
   resetGame() {
     this.computerInputNumbers = this.generateRandomNumber();
-
     const resultContainer = document.getElementById("result");
     const userInputContainer = document.getElementById("user-input");
 
     resultContainer.innerHTML = "";
     userInputContainer.value = "";
-
-    this.handleClick();
   }
 }
 
