@@ -18,6 +18,9 @@
   "homepage": "https://github.com/jho2301/javascript-baseball-precourse#readme",
   "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.14.0",
     "prettier": "^2.2.0"
   }
