@@ -7,12 +7,13 @@ export default class BaseballGame {
     this.$submit = document.getElementById('submit');
     this.$submit.addEventListener('click', this.handleClickSubmit);
 
-    this.computerInputNumbers = '';
-    this.startNewGame();
+    this.computerInputNumbers = this.createComputerInputNumbers();
   }
 
-  startNewGame = () => {
+  handleClickRestartGame = () => {
     this.computerInputNumbers = this.createComputerInputNumbers();
+    this.$userInput.value = '';
+    this.$result.innerHTML = '';
   }
 
   createComputerInputNumbers = () => {
@@ -95,6 +96,9 @@ export default class BaseballGame {
         <button id="game-restart-button">게임 재시작</button>
       </p>
     `;
+
+    const $gameRestartButton = document.querySelector('#game-restart-button');
+    $gameRestartButton.addEventListener('click', this.handleClickRestartGame);
   }
 
   renderGameResult = (strike, ball) => {
