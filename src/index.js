@@ -2,11 +2,11 @@ export default function BaseballGame() {
   this.computerInputNumbers;
 
   const inputText = document.querySelector('#user-input');
-  const submitButton = document.querySelector('#submit');
+  const submitBtn = document.querySelector('#submit');
   const resultDiv = document.querySelector('#result');
   const restartDiv = document.querySelector('#restart');
 
-  submitButton.addEventListener('click', () =>
+  submitBtn.addEventListener('click', () =>
     this.integrateFunction(inputText.value)
   );
   inputText.addEventListener('keyup', e => {
@@ -87,15 +87,28 @@ export default function BaseballGame() {
     }
   };
 
+  // 재시작 기능
+  this.restart = () => {
+    this.setComputerNum();
+    resultDiv.innerHTML = '';
+    resultDiv.removeAttribute('style');
+    submitBtn.disabled = false;
+    while (restartDiv.hasChildNodes()) {
+      restartDiv.removeChild(restartDiv.firstChild);
+    }
+  };
+
   // 재시작 버튼 생성
   this.createRestartBtn = () => {
-    const restartPhrase = document.createElement('p');
+    const restartMessage = document.createElement('p');
     const restartBtn = document.createElement('button');
-    restartPhrase.innerHTML = '게임을 새로 시작하시겠습니까? ';
+    restartMessage.innerHTML = '게임을 새로 시작하시겠습니까? ';
+    restartMessage.id = 'restart-message';
     restartBtn.id = 'game-restart-button';
     restartBtn.innerHTML = '게임 재시작';
-    restartDiv.appendChild(restartPhrase);
-    restartPhrase.appendChild(restartBtn);
+    restartDiv.appendChild(restartMessage);
+    restartMessage.appendChild(restartBtn);
+    restartBtn.addEventListener('click', () => this.restart());
   };
 
   // 결과값 보여주기
@@ -103,7 +116,7 @@ export default function BaseballGame() {
     if (resultString === '3스트라이크') {
       resultDiv.style.fontWeight = 'bold';
       resultDiv.innerHTML = '🎉정답을 맞추셨습니다🎉';
-      submitButton.disabled = 'disabled';
+      submitBtn.disabled = 'disabled';
       this.createRestartBtn();
     } else {
       resultDiv.innerHTML = resultString;
