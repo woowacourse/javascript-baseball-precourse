@@ -59,6 +59,17 @@ export default class BaseballGame {
 
     const submitButton = document.getElementById("submit");
     submitButton.disabled = true;
+
+    const restartButton = document.getElementById("game-restart-button");
+    restartButton.addEventListener("click", this.handleRestart);
+    restartButton.addEventListener("click", this.init);
+  }
+
+  handleRestart() {
+    const resultBox = document.getElementById("result");
+    const submitButton = document.getElementById("submit");
+    resultBox.innerHTML = "";
+    submitButton.disabled = false;
   }
 
   start = () => {
@@ -75,5 +86,5 @@ export default class BaseballGame {
 
 //DOM Elements
 const game = new BaseballGame();
-// const submitButton = document.getElementById("submit");
-// submitButton.onclick = game.start;
+const submitButton = document.getElementById("submit");
+submitButton.onclick = game.start;
