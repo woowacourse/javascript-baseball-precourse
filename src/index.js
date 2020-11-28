@@ -1,6 +1,18 @@
 export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    const ball = this.checkBall(computerInputNumbers, userInputNumbers);
+    const strike = this.checkStrike(computerInputNumbers, userInputNumbers);
+    if (ball === 0 && strike === 0) {
+      return "낫싱";
+    }
+    let retStr = "";
+    if (ball > 0) {
+      retStr += `${ball}볼 `;
+    }
+    if (strike > 0) {
+      retStr += `${strike}스트라이크`;
+    }
+    return retStr;
   }
 
   checkBall(computerInputNumbers, userInputNumbers) {
