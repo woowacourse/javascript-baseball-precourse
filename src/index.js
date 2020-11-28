@@ -12,6 +12,7 @@ export default function BaseballGame(N) {
   const REDUNDANT = 3;
   const ZERO_INCLUDED = 4;
   const CHAR_INCLUDED = 5;
+  const KEY_ENTER = 13;
 
   N = N === undefined ? 3 : N;
 
@@ -139,12 +140,11 @@ export default function BaseballGame(N) {
     console.log(`⚾LOG: You Win!💛💛💛`);
   };
 
-  const clearForm = (e) => {
+  const clearForm = () => {
     util.initNode(userInputElem);
   };
 
-  const getReadyAndPlayGame = (e) => {
-    e.preventDefault();
+  const getReadyAndPlayGame = () => {
     util.initNode(resultElem);
 
     computerInputNumbers = getComputerInputNumbers(computerInputNumbers);
@@ -161,6 +161,11 @@ export default function BaseballGame(N) {
   let computerInputNumbers = '';
 
   userInputElem.addEventListener('click', clearForm);
+  userInputElem.addEventListener('keypress', (e) => {
+    if (e.keyCode == KEY_ENTER) {
+      getReadyAndPlayGame();
+    }
+  });
   playBtn.addEventListener('click', getReadyAndPlayGame);
 }
 
