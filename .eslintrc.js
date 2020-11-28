@@ -6,6 +6,7 @@ module.exports = {
   'extends': [
     'google',
   ],
+  'parser': 'babel-eslint',
   'parserOptions': {
     'ecmaVersion': 12,
     'sourceType': 'module',
@@ -42,5 +43,6 @@ module.exports = {
         'FunctionExpression': false,
       },
     }],
+    'no-invalid-this': 0,
   },
 };
