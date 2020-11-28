@@ -54,7 +54,7 @@ export default class BaseballGame {
     let strike = 0;
     let ball = 0;
 
-    for (var i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
       if (computerInputNumbers.indexOf(userInputNumbers[i]) === i) {
         strike++;
       } else if (computerInputNumbers.indexOf(userInputNumbers[i]) > -1) {
@@ -65,33 +65,56 @@ export default class BaseballGame {
     return [strike, ball];
   }
 
-  printResult(strike, ball) {
+  setResult(strike, ball) {
+    const strStrike = strike.toString();
+    const strBall = ball.toString();
+    let resultText = '';
+
     if (strike === 0 && ball === 0) {
-      console.log('낫싱');
+      resultText = '낫싱';
     } else if (strike === 3) {
-      console.log('정답입니다.');
+      resultText = '정답입니다.';
     } else if (strike > 0 && ball === 0) {
-      console.log(`${strike} 스트라이크`);
+      resultText = `${strStrike}스트라이크`;
     } else if (strike === 0 && ball > 0) {
-      console.log(`${ball} 볼`);
+      resultText = `${strBall}볼`;
     } else {
-      console.log(`${strike} 스트라이크 ${ball} 볼`);
+      resultText = `${strBall}볼 ${strStrike}스트라이크`;
     }
+
+    return resultText;
   }
 
   play(computerInputNumbers, userInputNumbers) {
+    let resultText = '';
+
     if (userInputNumbers === null) {
-      console.log('다시 입력');
+      resultText = '다시 입력하세요';
     } else {
       const [strike, ball] = this.compareNumber(
         computerInputNumbers,
         userInputNumbers
       );
-
-      this.printResult(strike, ball);
+      resultText = this.setResult(strike, ball);
     }
 
-    return `${computerInputNumbers} ${userInputNumbers}`;
+    return resultText;
+  }
+
+  resultToHTML(text) {
+    const resultHTML = document.querySelector('#result');
+    let buttonOn = false;
+
+    if (text === '정답입니다.') {
+      resultHTML.innerHTML =
+        text +
+        "<br><p>게임을 새로 시작하시겠습니까? <button id='game-restart-button'>게임 재시작</button></p>";
+      buttonOn = true;
+    } else {
+      resultHTML.innerHTML = text;
+    }
+
+    return buttonOn;
   }
 }
 
@@ -104,15 +127,17 @@ const testCase1 = game.getComputerNumber();
 // 확인 버튼 클릭
 btn.addEventListener('click', () => {
   const testCase2 = game.getUserNumber();
+  const text = game.play(testCase1, testCase2);
 
-  game.play(testCase1, testCase2);
+  game.resultToHTML(text);
 });
 
 // Enter
 userInput.addEventListener('keydown', (e) => {
   if (e.keyCode == 13) {
     const testCase2 = game.getUserNumber();
+    const text = game.play(testCase1, testCase2);
 
-    game.play(testCase1, testCase2);
+    game.resultToHTML(text);
   }
 });
