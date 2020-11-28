@@ -1,8 +1,8 @@
-// export default function BaseballGame() {
-//     this.play = function (computerInputNumbers, userInputNumbers) {
-//         return "결과 값 String";
-//     };
-// }
+export default function BaseballGame() {
+    this.play = function (computerInputNumbers, userInputNumbers) {
+        return "결과 값 String";
+    };
+}
 
 // export default class BaseballGame {
 //   play(computerInputNumbers, userInputNumbers) {
@@ -25,8 +25,8 @@ function makeComputerNumbers() {
 }
 
 function checkNumberLength(userInputNumbers) {
-    const inputValuelength = userInputNumbers.length;
-    return inputValuelength === 3 ? true : false;
+    const inputNumberlength = userInputNumbers.length;
+    return inputNumberlength === 3 ? true : false;
 }
 
 function checkNumber0(userInputNumbers) {
@@ -34,25 +34,26 @@ function checkNumber0(userInputNumbers) {
 }
 
 function checkSameNumber(userInputNumbers) {
-    return [...new Set(userInputNumbers)].length === 3 ? true : false;
+    const eachInputNumber = [...new Set(userInputNumbers)].length;
+    return eachInputNumber === 3 ? true : false;
 }
 
 function checkNotNumber(userInputNumbers) {
     const isNumber = userInputNumbers.filter((v) => {
         return v.charCodeAt(0) > 48 && v.charCodeAt(0) < 58;
     });
-    return isNumber.length === 3 ? true : false;
+    const countNumber = isNumber.length;
+    return countNumber === 3 ? true : false;
 }
 
 function validateInputNumber(userInputNumbers) {
     const checkFunctions = [
-        checkNotNumber,
-        checkNumber0,
-        checkNumberLength,
-        checkSameNumber,
+        checkNotNumber(userInputNumbers),
+        checkNumber0(userInputNumbers),
+        checkNumberLength(userInputNumbers),
+        checkSameNumber(userInputNumbers),
     ];
-    const isValidate = checkFunctions.every((func) => func(userInputNumbers));
-    return isValidate;
+    return checkFunctions.includes(false) ? false : true;
 }
 
 function isThreeStrike(ball, strike) {
