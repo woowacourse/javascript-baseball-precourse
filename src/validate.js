@@ -24,5 +24,6 @@ export const validateUserInput = function (input) {
     validateInputDigit(input) &&
     validateInputUnique(input) &&
     validateInputNumber(input);
+  if (!isValid) alert("입력값이 잘못되었습니다. 다시 입력해주세요 :)");
   return isValid;
 };

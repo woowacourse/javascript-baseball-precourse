@@ -17,6 +17,13 @@ export default class BaseballGame {
     return randomNumbers;
   }
 
+  getUserInputNumbers() {
+    const userInputBox = document.getElementById("user-input");
+    const userInputNumbers = userInputBox.value;
+    userInputBox.value = "";
+    return userInputNumbers;
+  }
+
   play(computerInputNumbers, userInputNumbers) {
     let resultMessage = "";
     let strikeCount = 0;
@@ -42,18 +49,5 @@ export default class BaseballGame {
 
 //DOM Elements
 const game = new BaseballGame();
-const userInputBox = document.getElementById("user-input");
-const submitButton = document.getElementById("submit");
-
-function getUserInputNumbers() {
-  const userInputNumbers = userInputBox.value;
-  const isValid = validateUserInput(userInputNumbers);
-  if (!isValid) {
-    alert("입력값이 잘못되었습니다. 다시 입력해주세요 :)");
-    userInputBox.value = "";
-    return;
-  }
-  console.log(userInputNumbers);
-  return userInputNumbers;
-}
-submitButton.onclick = getUserInputNumbers;
+// const submitButton = document.getElementById("submit");
+// submitButton.onclick = game.getUserInputNumbers;
