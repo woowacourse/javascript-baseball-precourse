@@ -142,8 +142,8 @@
 
 #### 9. `InputFieldConvenience()` 입력창 편의기능 제공
   - 인풋창 비우기
-  - placeholder에 이전 답 기록
   - 인풋창 focus() 편의기능 제공
+  - 유효한 입력값은 placeholder에 기록
 
 <br>
 <br>

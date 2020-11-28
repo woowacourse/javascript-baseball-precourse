@@ -84,7 +84,8 @@ export default class HandleInput {
 
   InputFieldConvenience(input, userValue) {
     input.value = '';
-    input.placeholder = userValue;
     input.focus();
+    if (userValue !== this.IS_NOT_VALID)
+      input.placeholder = userValue;
   }	
 }
