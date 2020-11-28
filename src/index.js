@@ -19,8 +19,12 @@ const hasZero = (num) => {
   return num.indexOf("0") !== -1;
 };
 
+const isNumeric = (num) => {
+  return !isNaN(Number(num));
+};
+
 const isValidNumbers = (num) => {
-  return !hasDuplicatedNumbers(num) && !hasZero(num);
+  return !hasDuplicatedNumbers(num) && !hasZero(num) && isNumeric(num);
 };
 
 export default function BaseballGame() {
