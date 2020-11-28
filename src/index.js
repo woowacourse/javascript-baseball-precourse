@@ -40,8 +40,15 @@ export default class BaseballGame {
     return /^[1-9]{3}$/g.test(numbers);
   }
 
+  isNotDuplicate = (numbers) => {
+    function compareNumberIndex(number) {
+      return numbers.indexOf(number) === numbers.lastIndexOf(number);
+    }
+    return numbers.split('').every(compareNumberIndex);
+  }
+
   isPossible = (numbers) => {
-    if (this.isThreeDigitNumber(numbers)) {
+    if (this.isThreeDigitNumber(numbers) && this.isNotDuplicate(numbers)) {
       return true;
     }
     return false;
