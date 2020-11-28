@@ -14,19 +14,19 @@ export default function BaseballGame() {
   };
 
   this.isDuplication = function (userInput) {
-    const inputNumber = userInput.split('')
-    let checkNumber = []
+    const inputNumber = userInput.split('');
+    let checkNumber = [];
 
     for (let i = 0; i < inputNumber.length; i++) {
       if (checkNumber.indexOf(inputNumber[i]) == -1) {
-        checkNumber.push(inputNumber[i])
+        checkNumber.push(inputNumber[i]);
       }
     }
 
     if (checkNumber.length !== 3) {
       return true;
     }
-  }
+  };
 
   this.getInputNumber = function () {
     const userInput = document.getElementById("user-input").value;
@@ -66,7 +66,7 @@ export default function BaseballGame() {
     }
 
     if (strike == 3) {
-      document.getElementById("restart").hidden = false
+      document.getElementById("restart").hidden = false;
       return "🎉정답을 맞추셨습니다!🎉";
     }
 
