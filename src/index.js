@@ -11,17 +11,28 @@ const getComputerNumbers = () => {
   return resultNumbers.join("");
 };
 
+const hasDuplicatedNumbers = (num) => {
+  return new Set(num).size !== num.length;
+};
+
+const isValidNumbers = (num) => {
+  return !hasDuplicatedNumbers(num);
+};
+
 export default function BaseballGame() {
   const submitButton = document.querySelector("#submit");
   const userInput = document.querySelector("#user-input");
   const computerNumbers = getComputerNumbers();
 
   const play = (computerInputNumbers, userInputNumbers) => {
+    console.log(computerInputNumbers, userInputNumbers);
     return "결과 값 String";
   };
 
   const gameStart = () => {
-    console.log(computerNumbers);
+    if (isValidNumbers(userInput.value)) {
+      play(computerNumbers, userInput.value);
+    }
   };
 
   const init = () => {
