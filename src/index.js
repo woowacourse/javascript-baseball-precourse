@@ -1,5 +1,7 @@
 export default class BaseballGame {
   constructor() {
+    this.computerInputNumbers = "";
+
     this.init();
   }
 
@@ -15,6 +17,27 @@ export default class BaseballGame {
     }
     return randomNumbers;
   }
+
+  play(computerInputNumbers, userInputNumbers) {
+    let resultMessage = "";
+    let strikeCount = 0;
+    let ballCount = 0;
+
+    if (computerInputNumbers === userInputNumbers) {
+      resultMessage = "🎉 정답을 맞추셨습니다. 🎉";
+      this.isEnded = true;
+      return resultMessage;
+    }
+
+    for (let i = 0; i < 3; i++) {
+      if (computerInputNumbers[i] === userInputNumbers[i]) strikeCount++;
+      else if (computerInputNumbers.includes(userInputNumbers[i])) ballCount++;
+    }
+
+    if (ballCount) resultMessage += `${ballCount}볼`;
+    if (strikeCount) resultMessage += ` ${strikeCount}스트라이크`;
+    if (!ballCount && !strikeCount) resultMessage = "낫싱";
+    return resultMessage;
+  }
 }
 const game = new BaseballGame();
-console.log(game.computerInputNumbers);
