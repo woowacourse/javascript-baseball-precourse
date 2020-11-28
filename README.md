@@ -66,3 +66,39 @@
      * 유저의 입력값 리턴(판별 기능만 하게 한다 - **한 가지 함수 한 가지 기능**)
    * 예외인 경우
      *  `alert`을 이용해 메시지를 보여주고, 재입력할 수 있게 한다.
+
+3. `컴퓨터의 랜덤값과 유저의 입력값 비교 기능`
+
+   > 스트라이크 개수를 담을 변수 `strikeNumbers`
+   >
+   > 볼 개수를 담을 변수 `ballNumbers`
+   >
+   > 유저의 입력값을 for문으로 하나씩 돌면서
+   >
+   > 컴퓨터의 랜덤값에 있고 위치도 같다면 `strikeNumbers`++
+   >
+   > 컴퓨터의 랜덤값에 있고 위치가 다르다면 `ballNumbers`++
+   >
+   > for문 종료 후
+
+   * `ballNumbers`가 0이고 `strikeNumbers` 3이면
+
+     * 게임 재시작 기능으로 이동
+
+   * `ballNumbers`가 0이고 `strikeNumbers`가 0이면
+
+     * `낫싱` 출력
+
+   * `ballNumbers`가 0이 아니고 `strikeNumbers`가 0이면
+
+     * `볼` 출력
+
+   * `ballNumbers`가 0이고 `strikeNumbers`가 0이 아니면
+
+     * `스트라이크` 출력
+
+   * `ballNumbers`와 `strikeNumbers` 둘 다 0이 아니면
+
+     * `볼` + `스트라이크` 출력
+
+     
