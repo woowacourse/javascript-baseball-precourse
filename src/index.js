@@ -3,7 +3,12 @@ import {
   checkValidNumber,
   compareAnswersAndGetResult 
 } from '/src/lib/gameFunctions.js';
-import { correctAnswerMessage, getWrongAnswerMessage } from '/src/lib/messages.js';
+
+import { 
+  correctAnswerMessage, 
+  getWrongAnswerMessage 
+} from '/src/lib/messages.js';
+
 import { printCorrectAnswerForTest } from '/src/lib/test.js';
 
 const gameTurn = document.getElementById('app');
@@ -19,11 +24,15 @@ export default class BaseballGame {
     this.records = [];
   }
 
-  showRecords() {
+  _showRecords() {
     const showRecordsSection = document.createElement("div");
     const tryCount = document.createElement("p");
     const showRecordsList = document.createElement("ol");
-    const getUserRecordText = ({userInputNumbers, ball, strike}) => `your answer: ${userInputNumbers} ` + getWrongAnswerMessage({ball, strike});
+    const getUserRecordText = ({
+      userInputNumbers, 
+      ball, 
+      strike
+    }) => `your answer: ${userInputNumbers} ` + getWrongAnswerMessage({ball, strike});
     
     showRecordsSection.id = "show-records";
     tryCount.id = 'try-count';
@@ -31,10 +40,9 @@ export default class BaseballGame {
 
     tryCount.innerText = `시도 횟수: ${this.records.length}`;
     this.records.forEach((record, idx) => {
-      const userRecord = document.createElement("li");
-      
-      userRecord.innerText = (idx < this.records.length-1) ? getUserRecordText(record) : '정답!!';
-      showRecordsList.appendChild(userRecord);
+      const _userRecord = document.createElement("li");      
+      _userRecord.innerText = (idx < this.records.length-1) ? getUserRecordText(record) : '정답!!';
+      showRecordsList.appendChild(_userRecord);
     })
 
     showRecordsSection.appendChild(tryCount);
@@ -42,7 +50,7 @@ export default class BaseballGame {
     resultElement.appendChild(showRecordsSection);
   }
 
-  askRestart() {
+  _askRestart() {
     const askRestartSection = document.createElement("div");
     const restartButton = document.createElement('button');
     const askRestartPlaceholder = document.createElement('p');
@@ -71,7 +79,7 @@ export default class BaseballGame {
     showRecordsButton.innerText = "show records";
 
     restartButton.addEventListener('click', () => window.location.reload());
-    showRecordsButton.addEventListener('click', () => this.showRecords());
+    showRecordsButton.addEventListener('click', () => this._showRecords());
 
     askRestartSection.appendChild(askRestartPlaceholder);
     askRestartSection.appendChild(restartButton);
@@ -83,21 +91,21 @@ export default class BaseballGame {
     resultElement.appendChild(askShowRecordsSection);
   }
 
-  resetResultMessage() {
+  _resetResultMessage() {
     const resultElementChildren = resultElement.childNodes;
     resultElementChildren.forEach(resultElementChild => resultElement.removeChild(resultElementChild));
   }
 
-  printResult(result) {
+  _printResult(result) {
     const resultMessageElement = result.ok ? document.createElement('strong') : document.createElement('p');
     const message = result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
     
-    this.resetResultMessage();
+    this._resetResultMessage();
     this.isFinished = result.ok;
     resultMessageElement.innerText = message;
     resultElement.appendChild(resultMessageElement);
 
-    if(this.result.ok) this.askRestart();
+    if(this.result.ok) this._askRestart();
     else userInput.value = '';
   }
 
@@ -105,8 +113,12 @@ export default class BaseballGame {
     const result = compareAnswersAndGetResult(computerInputNumbers, userInputNumbers);
     const { strike, ball } = result;
     this.result = result;
-    this.records.push({ userInputNumbers, strike, ball });
-    return this.printResult(result);
+    this.records.push({ 
+      userInputNumbers, 
+      strike, 
+      ball 
+    });
+    return this._printResult(result);
   }
 }
 
