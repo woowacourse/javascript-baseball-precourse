@@ -1,35 +1,43 @@
-let comNum = getRandNum();
-const BG = new BaseballGame();
-
-console.log(BG.test("123", "213"));
-console.log(BG.test("123", "123"));
-console.log(BG.test("123", "555"));
-console.log(BG.test("123", "124"));
-
-
-
-// functions
 export default function BaseballGame() {
   this.isValidInput = (userInput) => {
+    let ret = true;
+
     // 1~9가 아닌 문자와 일치할 경우
-    if(/[^1-9]/.test(userInput)) return false;
+    if(/[^1-9]/.test(userInput)) {
+      ret = false;
+    }
 
     // 3자리 인지 확인
-    if(userInput.length !== 3) return false;
+    if(userInput.length !== 3) {
+      ret = false;
+    }
 
     // 중복 확인
-    if(userInput[0] === userInput[1] || userInput[1] === userInput[2] || userInput[2] === userInput[0])
-      return false;
+    if(userInput[0] === userInput[1] || userInput[1] === userInput[2] || userInput[2] === userInput[0]) {
+      ret = false;
+    }
     
-    return true;
+    return ret;
   };
   
   this.play = (computerInputNumbers, userInputNumbers) => {
-    return "결과 값 String";
-  };
+    const ballsNum = countBalls(computerInputNumbers, userInputNumbers);
+    const strikesNum = countStrikes(computerInputNumbers, userInputNumbers);
+    let ret = '';
 
-  this.test = (a, b) => {
-    return countStrikes(a, b);
+    if(ballsNum === 0 && strikesNum === 0) {
+      ret = '낫싱';
+    } else if(strikesNum === 3) {
+      ret = '정답';
+    } else {
+      const ballResult = ballsNum ? `${ballsNum}볼` : '';
+      const strikeResult = strikesNum ? `${strikesNum}스트라이크` : '';
+
+      ret = `${ballResult} ${strikeResult}`;
+      ret = ret.replace(/^\s/, '');
+    }
+
+    return ret;
   };
 
   function countBalls(comInput, userInput) {
@@ -55,7 +63,7 @@ export default function BaseballGame() {
   }
 }
 
-function getRandNum() {
+const getRandNum = () => {
   let ret = '';
   const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   // 중복을 피하기 위해 nums에서 랜덤으로 하나씩 splice하여 가져온다.
@@ -67,3 +75,12 @@ function getRandNum() {
 
   return ret;
 };
+
+const BG = new BaseballGame();
+// let comNum = getRandNum();
+
+console.log(BG.play('123', '456'));
+console.log(BG.play('123', '156'));
+console.log(BG.play('123', '416'));
+console.log(BG.play('123', '152'));
+console.log(BG.play('123', '123'));
