@@ -3,9 +3,7 @@ export default function BaseballGame() {
 
   const inputText = document.querySelector('#user-input');
   const submitButton = document.querySelector('#submit');
-  submitButton.addEventListener('click', () =>
-    this.checkInput(inputText.value)
-  );
+  submitButton.addEventListener('click', () => console.log(inputText.value));
 
   // 3개의 다른 숫자 세개 생성
   this.getRandomNumber = () => {
@@ -21,13 +19,13 @@ export default function BaseballGame() {
 
   // 생성된 랜덤 숫자 세팅
   this.setComputerNum = () => {
-    const a = this.getRandomNumber();
-    this.computerInputNumbers = a.join('');
+    const computerNum = this.getRandomNumber();
+    this.computerInputNumbers = computerNum.join('');
   };
 
   // 중복 값이 있는지 확인
-  this.checkDuplicate = value => {
-    const words = value.split('');
+  this.checkDuplicate = userInput => {
+    const words = userInput.split('');
     const wordsSet = new Set(words);
     if (words.length == wordsSet.size) {
       return false;
@@ -37,23 +35,35 @@ export default function BaseballGame() {
   };
 
   // 규칙에 맞는 값인지 확인
-  this.checkInput = value => {
-    const isNotThree = value.length !== 3;
-    const isNotDigit = parseInt(value) != value;
-    const hasZero = value.includes('0');
-    const isDuplicate = this.checkDuplicate(value);
+  this.checkInput = userInput => {
+    const isNotThree = userInput.length !== 3;
+    const isNotDigit = parseInt(userInput) != userInput;
+    const hasZero = userInput.includes('0');
+    const isDuplicate = this.checkDuplicate(userInput);
+    inputText.value = '';
+    inputText.focus();
     if (isNotThree || isNotDigit || hasZero || isDuplicate) {
       alert('입력 값이 규칙에 맞지 않습니다. 다시 입력해주세요.');
-      inputText.value = '';
-      inputText.focus();
+      return false;
     } else {
-      // 세팅된 숫자가 있으면 진행 없으면 세팅
-      if (this.computerInputNumbers) {
-        console.log(this.computerInputNumbers);
-      } else {
-        this.setComputerNum();
+      return true;
+    }
+  };
+
+  // 컴퓨터의 숫자와 입력숫자 비교
+  this.compareNumber = userInput => {
+    const result = { strike: 0, ball: 0 };
+    for (let i = 0; i < 3; i++) {
+      if (userInput[i] === this.computerInputNumbers[i]) {
+        result.strike++;
+        continue;
+      }
+      if (this.computerInputNumbers.includes(userInput[i])) {
+        result.ball++;
       }
     }
+
+    return result;
   };
 
   this.play = function (computerInputNumbers, userInputNumbers) {
