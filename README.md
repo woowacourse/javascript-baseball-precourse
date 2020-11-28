@@ -14,13 +14,16 @@
 ## ✔️ 구현할 기능 목록(함수 별)
 
 1. 1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 랜덤으로 선택해 정답을 생성하는 `randomNumberMaker` 함수
-2. 유저의 입력을 받는 `userInput` 함수
-3. 유저의 입력의 유효성을 검사하는 `isValidUserInput` 함수
-4. 유저의 입력을 받고 볼이 몇 개인지 세는 `countBall` 함수
-5. 유저의 입력을 받고 스트라이크가 몇 개인지 세는 `countStrike` 함수
-6. 유저의 입력을 받고 맞춘 결과를 출력하는 `gameResult` 함수
-7. 게임이 끝났는 지 판단하는 `isGameEnded` 함수
-8. 게임을 다시 시작하는 `restartGame` 함수
+2. 게임을 시작하는 `playGame` 함수
+3. 유저의 입력을 받는 `userInput` 함수
+4. 유저의 입력의 유효성을 검사하는 `isValidUserInput` 함수
+5. 유저의 입력을 받고 볼이 몇 개인지 세는 `countBall` 함수
+6. 유저의 입력을 받고 스트라이크가 몇 개인지 세는 `countStrike` 함수
+7. 유저의 입력을 받고 맞춘 결과를 출력하는 `printMessage` 함수
+8. 결과의 내용을 클리어하는 `clearResult` 함수
+9. 게임이 끝났는 지 판단하는 `isGameEnded` 함수
+10. 게임을 다시 시작하는 `restartGame` 함수
+
 
 ---
 
