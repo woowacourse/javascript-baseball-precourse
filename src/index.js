@@ -68,11 +68,37 @@ const onClickSubmitBtn = (e) => {
   }
 }
 
+const onClickRestartBtn = (e) => {
+  if(e.target.dataset.restart === undefined) {
+    return;
+  }
+
+  window.idx = 1;
+  window.comNum = getRandNum();
+
+  e.target.closest('#app').innerHTML = `
+    <h1>⚾ 숫자 야구 게임</h1>
+    <p>
+      <strong>1~9까지의 수</strong>를 중복없이 <strong>3개</strong>를
+      작성해주세요. <br />
+      올바른 예) 139 <br />
+      틀린 예) 122
+    </p>
+    <div>
+      <input type="text" id="user-input-1" />
+      <button id="submit-1" data-index="1">확인</button>
+      <h3>📄 결과</h3>
+      <div id="result-1"></div>
+    </div>
+  `;
+};
+
 const BG = new BaseballGame();
 const app = document.getElementById('app');
 window.comNum = getRandNum();
 window.idx = 1;
 
 app.addEventListener('click', onClickSubmitBtn);
+app.addEventListener('click', onClickRestartBtn);
 
 console.log(window.comNum);

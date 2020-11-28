@@ -16,12 +16,6 @@
 
 <br>
 
-## 💻 프로그래밍 실행 결과
-
-![baseball_result](https://user-images.githubusercontent.com/50367798/100166088-32473e00-2eff-11eb-9454-5d45e648b37e.jpg)
-
-<br>
-
 ## 세부 기능 분류
 
 - 랜덤한 3자리 수를 생성
@@ -64,6 +58,12 @@
 - button(id=game-restart-button) click 이벤트
   - 화면 초기화
   - 새로운 BaseballGame객체 생성
+
+<br>
+
+## 💻 프로그래밍 실행 결과
+
+![baseball_result](https://user-images.githubusercontent.com/50367798/100166088-32473e00-2eff-11eb-9454-5d45e648b37e.jpg)
 
 <br>
 
