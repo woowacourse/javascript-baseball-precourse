@@ -1,7 +1,7 @@
-import Utils from './utils.js';
+import Util from './util.js';
 
 export default function BaseballGame(N) {
-  const util = new Utils();
+  const util = new Util();
 
   const userInputElem = document.querySelector('#user-input');
   const resultElem = document.querySelector('#result');

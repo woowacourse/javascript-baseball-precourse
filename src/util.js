@@ -1,4 +1,4 @@
-export default function Utils() {
+export default function Util() {
   this.generateRandomNumbers = (N) => {
     let numbers = [];
     while (numbers.length < N) {
