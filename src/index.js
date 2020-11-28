@@ -12,21 +12,26 @@ export default class BaseballGame {
   }
 
   makeOnAnswer() {
-    const MAX_NUMBER = 9;
-    const numberArray = Array(MAX_NUMBER)
-      .fill()
-      .map((v, number) => number + 1);
+    const maxNumberArray = this.createMaxNumberLengthArray();
     let answer = "";
-
     for (let i = 1; i <= 3; i++) {
-      const selectedNumber = numberArray.splice(
-        this.selectRandomNumber(numberArray.length),
+      const selectedNumber = maxNumberArray.splice(
+        this.selectRandomNumber(maxNumberArray.length),
         1
       );
       answer += selectedNumber;
     }
 
     return answer;
+  }
+
+  createMaxNumberLengthArray() {
+    const MAX_NUMBER = 9;
+    const maxNumberArray = Array(MAX_NUMBER)
+      .fill()
+      .map((v, index) => index + 1);
+
+    return maxNumberArray;
   }
 
   selectRandomNumber(length) {
