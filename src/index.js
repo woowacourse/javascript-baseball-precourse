@@ -11,7 +11,7 @@ export default function BaseballGame() {
     let i = 0;
 
     while (i < arrayLength) {
-      const randomNumber = Math.floor(Math.random() * 9 + 1)
+      const randomNumber = String(Math.floor(Math.random() * 9 + 1))
       if (this.notSameNumber(randomNumber)) {
         computerInputNumbers.push(randomNumber);
         i++;
