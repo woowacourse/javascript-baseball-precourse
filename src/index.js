@@ -45,9 +45,13 @@ export default class BaseballGame {
     if (!ballCount && !strikeCount) resultMessage = "낫싱";
     return resultMessage;
   }
+
+  renderResult(userInputNumbers, result) {
+    const resultBox = document.getElementById("result");
+    const resultHTML = `${userInputNumbers} <br><b>${result}</b><br><hr><br>`;
+    resultBox.innerHTML += resultHTML;
+  }
 }
 
 //DOM Elements
 const game = new BaseballGame();
-// const submitButton = document.getElementById("submit");
-// submitButton.onclick = game.getUserInputNumbers;
