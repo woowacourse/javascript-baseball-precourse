@@ -1,13 +1,20 @@
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+export default class BaseballGame {
+  constructor() {
+    this.computerInputNumbers = [];
+
+    this.init();
+  }
+
+  init = () => {
+    this.computerInputNumbers = this.setRandomNumbers();
   };
+
+  setRandomNumbers() {
+    const randomNumbers = [];
+    while (randomNumbers.length != 3) {
+      const number = Math.floor(Math.random() * 9) + 1;
+      if (!randomNumbers.includes(number)) randomNumbers.push(number);
+    }
+    return randomNumbers;
+  }
 }
-
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
-
-new BaseballGame();
