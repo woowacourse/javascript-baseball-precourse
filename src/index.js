@@ -66,19 +66,23 @@ export default class BaseballGame {
   }
 }
 
-let baseballGame = new BaseballGame();
-printCorrectAnswerForTest(baseballGame.answer);
+const startGame = () => {
+  let baseballGame = new BaseballGame();
+  const runGame = e => {
+    e.preventDefault();
+    const checkUserInput = checkValidNumber(userInput.value);
+    userInput.focus();
+    if(baseballGame.isFinished) return alert('이미 정답을 맞히셨습니다!');
+  
+    checkUserInput.ok ? baseballGame.play(baseballGame.answer, userInput.value) : alert(checkUserInput.msg);
+  }
 
-const playGame = e => {
-  e.preventDefault();
-  const checkUserInput = checkValidNumber(userInput.value);
-  userInput.focus();
-  if(baseballGame.isFinished) return alert('이미 정답을 맞히셨습니다!');
+  printCorrectAnswerForTest(baseballGame.answer);
 
-  checkUserInput.ok ? baseballGame.play(baseballGame.answer, userInput.value) : alert(checkUserInput.msg);
+  userInputButton.addEventListener('click', runGame);
+  userInput.addEventListener('keydown', e => {
+    if(e.key === 'Enter') return baseballGame.isFinished ? window.location.reload() : runGame(e);
+  });
 }
 
-userInputButton.addEventListener('click', playGame);
-userInput.addEventListener('keydown', e => {
-  if(e.key === 'Enter') return baseballGame.isFinished ? window.location.reload() : playGame(e);
-})
+startGame();
