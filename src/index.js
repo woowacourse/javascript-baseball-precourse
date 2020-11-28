@@ -26,16 +26,16 @@ function makeComputerNumbers() {
 
 function checkNumberLength(userInputNumbers) {
     const inputNumberlength = userInputNumbers.length;
-    return inputNumberlength === 3 ? true : false;
+    return inputNumberlength === 3;
 }
 
 function checkNumber0(userInputNumbers) {
-    return userInputNumbers.includes("0") ? false : true;
+    return !userInputNumbers.includes("0");
 }
 
 function checkSameNumber(userInputNumbers) {
     const eachInputNumber = [...new Set(userInputNumbers)].length;
-    return eachInputNumber === 3 ? true : false;
+    return eachInputNumber === 3;
 }
 
 function checkNotNumber(userInputNumbers) {
@@ -43,17 +43,20 @@ function checkNotNumber(userInputNumbers) {
         return v.charCodeAt(0) > 48 && v.charCodeAt(0) < 58;
     });
     const countNumber = isNumber.length;
-    return countNumber === 3 ? true : false;
+    return countNumber === 3;
 }
 
 function validateInputNumber(userInputNumbers) {
     const checkFunctions = [
-        checkNotNumber(userInputNumbers),
-        checkNumber0(userInputNumbers),
-        checkNumberLength(userInputNumbers),
-        checkSameNumber(userInputNumbers),
+        checkNotNumber,
+        checkNumber0,
+        checkNumberLength,
+        checkSameNumber,
     ];
-    return checkFunctions.includes(false) ? false : true;
+    const checkEveryFunction = checkFunctions.every((func) =>
+        func(userInputNumbers)
+    );
+    return checkEveryFunction;
 }
 
 function isThreeStrike(ball, strike) {
@@ -90,20 +93,19 @@ function noBallNoStrike(ball, strike) {
 
 function showResult(ball, strike) {
     const resultFunctions = [
-        isThreeStrike(ball, strike),
-        isOnlyBall(ball, strike),
-        isOnlyStrike(ball, strike),
-        ballAndstrike(ball, strike),
-        noBallNoStrike(ball, strike),
+        isThreeStrike,
+        isOnlyBall,
+        isOnlyStrike,
+        ballAndstrike,
+        noBallNoStrike,
     ];
-    const changeResult = resultFunctions.filter((value) => value !== undefined);
-    return changeResult;
+    const everyResult = resultFunctions.map((func) => func(ball, strike));
+    const getResult = everyResult.filter((result) => result !== undefined);
+
+    return getResult;
 }
 
-let computerNumbers = makeComputerNumbers();
-console.log(computerNumbers);
-
-function compareNumbers(userInputNumbers) {
+function compareNumbers(userInputNumbers, computerNumbers) {
     let strike = 0;
     let ball = 0;
     for (let i = 0; i < userInputNumbers.length; i++) {
@@ -124,15 +126,30 @@ function init() {
     const reStartDiv = document.createElement("div");
     const reStartButton = document.createElement("button");
 
-    function afterClickSettings(textContent) {
-        result.textContent = textContent;
-        userInput.value = "";
-        userInput.focus();
-        reStartDiv.textContent = "";
-    }
+    let computerNumbers = makeComputerNumbers();
+    console.log(computerNumbers);
+
+    button.addEventListener("click", handleSubmitClick);
+    reStartButton.addEventListener("click", reStart);
 
     function getUserInputNumbers() {
         return userInput.value.split("");
+    }
+
+    function handleSubmitClick() {
+        const userInputNumbers = getUserInputNumbers();
+        const isValidate = validateInputNumber(userInputNumbers);
+        if (isValidate) {
+            const [resultText] = compareNumbers(
+                userInputNumbers,
+                computerNumbers
+            );
+            afterClickSettings(resultText);
+            showRestartButton(resultText);
+        } else {
+            alert("다시 입력하세요.");
+            afterClickSettings("");
+        }
     }
 
     function showRestartButton(resultText) {
@@ -144,17 +161,11 @@ function init() {
         }
     }
 
-    function handleSubmitClick() {
-        const userInputNumbers = getUserInputNumbers();
-        const isValidate = validateInputNumber(userInputNumbers);
-        if (isValidate) {
-            const [resultText] = compareNumbers(userInputNumbers);
-            afterClickSettings(resultText);
-            showRestartButton(resultText);
-        } else {
-            alert("다시 입력하세요.");
-            afterClickSettings("");
-        }
+    function afterClickSettings(textContent) {
+        result.textContent = textContent;
+        userInput.value = "";
+        userInput.focus();
+        reStartDiv.textContent = "";
     }
 
     function reStart() {
@@ -162,8 +173,5 @@ function init() {
         computerNumbers = makeComputerNumbers();
         console.log(computerNumbers);
     }
-
-    reStartButton.addEventListener("click", reStart);
-    button.addEventListener("click", handleSubmitClick);
 }
 init();
