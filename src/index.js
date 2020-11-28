@@ -1,4 +1,8 @@
 export default function BaseballGame() {
+  const inputText = document.querySelector('#user-input');
+  const submitButton = document.querySelector('#submit');
+  submitButton.addEventListener('click', () => console.log(inputText.value));
+
   this.getRandomNumber = () => {
     let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let pickedNumbers = [];
