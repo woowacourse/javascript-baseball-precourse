@@ -52,14 +52,24 @@ export default class BaseballGame {
     resultBox.innerHTML += resultHTML;
   }
 
+  renderEnding() {
+    const resultBox = document.getElementById("result");
+    const endingHTML = `<br> 게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button>`;
+    resultBox.innerHTML += endingHTML;
+
+    const submitButton = document.getElementById("submit");
+    submitButton.disabled = true;
+  }
+
   start = () => {
     const computerInputNumbers = this.computerInputNumbers;
     const userInputNumbers = this.getUserInputNumbers();
     const isValid = validateUserInput(userInputNumbers);
-    if (isValid) {
-      const result = this.play(computerInputNumbers, userInputNumbers);
-      this.renderResult(userInputNumbers, result);
-    }
+    if (!isValid) return;
+
+    const result = this.play(computerInputNumbers, userInputNumbers);
+    this.renderResult(userInputNumbers, result);
+    if (this.isEnded) this.renderEnding();
   };
 }
 
