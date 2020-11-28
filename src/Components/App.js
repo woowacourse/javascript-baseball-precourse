@@ -9,9 +9,9 @@ import { ID, GAME, MESSAGE, KEY } from '../utils/constants.js';
 class BaseballGame {
   constructor($target) {
     this.$target = $target;
-    this.userInput = document.getElementById(ID.USER_INPUT);
-    this.tryButton = document.getElementById(ID.SUBMIT_BUTTON);
-    this.resultView = document.getElementById(ID.RESULT_VIEW);
+    this.$userInput = document.getElementById(ID.USER_INPUT);
+    this.$tryButton = document.getElementById(ID.SUBMIT_BUTTON);
+    this.$resultView = document.getElementById(ID.RESULT_VIEW);
 
     this.state = {
       answer: generateTargetNumbers(),
@@ -28,14 +28,14 @@ class BaseballGame {
     this.setSate(calculateCount(computerInputNumbers, userInputNumbers));
 
     if (this.state.strike === GAME.THREE) {
-      this.tryButton.disabled = true;
+      this.$tryButton.disabled = true;
     }
     return getHint(this.state);
   }
 
   restart() {
-    this.userInput.value = '';
-    this.tryButton.disabled = false;
+    this.$userInput.value = '';
+    this.$tryButton.disabled = false;
 
     this.state = {
       answer: generateTargetNumbers(),
@@ -60,13 +60,13 @@ class BaseballGame {
       return;
     }
 
-    if (!isValidInputData(this.userInput.value)) {
+    if (!isValidInputData(this.$userInput.value)) {
       alert(MESSAGE.INPUT_ERROR);
-      this.userInput.value = '';
+      this.$userInput.value = '';
       return;
     }
 
-    const hint = this.play(this.state.answer, this.userInput.value);
+    const hint = this.play(this.state.answer, this.$userInput.value);
     this.render(hint);
   }
 
@@ -94,7 +94,7 @@ class BaseballGame {
   }
 
   render(message) {
-    this.resultView.innerHTML =
+    this.$resultView.innerHTML =
       this.state.strike === GAME.THREE
         ? `<p>${message}</p>
            <span>${MESSAGE.RESTART}</span> <button id=${ID.RESTART_BUTTON}>재시작</button>`
