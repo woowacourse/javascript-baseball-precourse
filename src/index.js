@@ -28,6 +28,15 @@ submit.onclick = () => {
   }
 };
 
+// 재시작 버튼, 리스너
+const restart = document.getElementById('game-restart-button');
+restart.onclick = () => {
+  input.value = '';
+  result.innerHTML = '';
+  end.style.display = 'none';
+  randomNumbers = getRandomNum();
+};
+
 // 컴퓨터가 정해주는 랜덤 수 구하기
 let randomNumbers = getRandomNum();
 
@@ -59,8 +68,11 @@ export default class BaseballGame {
         i === idx ? this.strike++ : this.ball++;
   }
   getResult() {
-    if (this.strike === 3) return '🎉<strong>정답을 맞추셨습니다!</strong>🎉';
-    else if (this.strike === 0 && this.ball === 0) return '낫씽';
+    end.style.display = 'none';
+    if (this.strike === 3) {
+      end.style.display = 'block';
+      return '🎉<strong>정답을 맞추셨습니다!</strong>🎉';
+    } else if (this.strike === 0 && this.ball === 0) return '낫씽';
     else if (this.strike === 0) return `${this.ball}볼`;
     else if (this.ball === 0) return `${this.strike}스트라이크`;
     else return `${this.ball}볼 ${this.strike}스트라이크`;
