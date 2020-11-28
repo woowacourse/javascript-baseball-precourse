@@ -103,6 +103,12 @@ export default class BaseballGame {
     if (strike === 0 && ball === 0) {
       resultText = '낫띵';
     }
+    if (ball) {
+      resultText += `${ball}볼`;
+    }
+    if (strike) {
+      resultText += ` ${strike}스트라이크`;
+    }
 
     this.$result.innerHTML = `<p>${resultText}</p>`;
   }
