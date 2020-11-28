@@ -44,11 +44,11 @@ export default class BaseballGame {
     }
 
     // 주어진 숫자내 중복되는 값이 있는지 검사
-    const dupNumbers = userInputNumbers.filter(
+    const duplNumbers = userInputNumbers.filter(
       (num, index) => userInputNumbers.indexOf(num) !== index
     );
 
-    if (dupNumbers.length > 0) {
+    if (duplNumbers.length > 0) {
       alert("입력한 값에 중복된 값이 있습니다");
 
       return false;
@@ -92,6 +92,7 @@ export default class BaseballGame {
     const ball = this.countBall(computerInputNumbers, userInputNumbers);
 
     let answer = "";
+
     if (ball === 0 && strike === 0) {
       answer = "낫싱";
     }
@@ -145,12 +146,13 @@ export default class BaseballGame {
 
   // 게임 초기화 메서드
   resetGame() {
-    this.computerInputNumbers = this.generateRandomNumber();
     const resultContainer = document.getElementById("result");
     const userInputContainer = document.getElementById("user-input");
 
     resultContainer.innerHTML = "";
     userInputContainer.value = "";
+
+    this.computerInputNumbers = this.generateRandomNumber();
   }
 }
 
