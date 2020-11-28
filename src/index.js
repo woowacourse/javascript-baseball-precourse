@@ -33,11 +33,14 @@ const addNewInput = (e) => {
 };
 
 const endGame = (e) => {
-  e.target.closest('#app').innerHTML += `
+  const container = document.createElement('div');
+  container.innerHTML = `
     <h4>🎉정답을 맞추셨습니다!🎉</h4>
     <span>게임을 새로 시작하시겠습니까?</span>
     <button id="game-restart-button" data-restart>게임 재시작</button>
   `;
+
+  e.target.closest('#app').append(container);
 }
 
 const onClickSubmitBtn = (e) => {
