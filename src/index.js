@@ -3,7 +3,8 @@ export default function BaseballGame() {
 
   const inputText = document.querySelector('#user-input');
   const submitButton = document.querySelector('#submit');
-  const resultText = document.querySelector('#result');
+  const resultDiv = document.querySelector('#result');
+  const restartDiv = document.querySelector('#restart');
 
   submitButton.addEventListener('click', () =>
     this.integrateFunction(inputText.value)
@@ -86,14 +87,26 @@ export default function BaseballGame() {
     }
   };
 
+  // 재시작 버튼 생성
+  this.createRestartBtn = () => {
+    const restartPhrase = document.createElement('p');
+    const restartBtn = document.createElement('button');
+    restartPhrase.innerHTML = '게임을 새로 시작하시겠습니까? ';
+    restartBtn.id = 'game-restart-button';
+    restartBtn.innerHTML = '게임 재시작';
+    restartDiv.appendChild(restartPhrase);
+    restartPhrase.appendChild(restartBtn);
+  };
+
   // 결과값 보여주기
   this.showResult = resultString => {
     if (resultString === '3스트라이크') {
-      resultText.style.fontWeight = 'bold';
-      resultText.innerHTML = '정답을 맞추셨습니다.';
+      resultDiv.style.fontWeight = 'bold';
+      resultDiv.innerHTML = '🎉정답을 맞추셨습니다🎉';
       submitButton.disabled = 'disabled';
+      this.createRestartBtn();
     } else {
-      resultText.innerHTML = resultString;
+      resultDiv.innerHTML = resultString;
     }
   };
 
