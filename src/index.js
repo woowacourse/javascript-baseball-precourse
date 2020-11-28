@@ -3,6 +3,8 @@ import HandleInput from './handleInput.js';
 
 export default function BaseballGame() {
   document.body.style.fontFamily = 'Arial';
+  const IS_VALID = 1;
+  const IS_NOT_VALID = 0;
   const _resultArea = document.querySelector('#result');
   const _button = document.querySelector("#submit");
   const _input = document.querySelector("#user-input");
@@ -22,7 +24,7 @@ export default function BaseballGame() {
     const InputUtils = new HandleInput();
     let userValue = InputUtils.GetInput(_input);
 
-    if (userValue !== 'notValid') {
+    if (userValue !== IS_NOT_VALID) {
       let resultMessage = this.play(_answer, userValue);
       DisplayResult(resultMessage);
     }

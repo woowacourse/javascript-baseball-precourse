@@ -87,6 +87,7 @@
 ## handleInput.js
 #### 1. `GetInput()` 사용자 입력값 리턴
   - `CheckInputValidity()` 호출해서 인풋값이 유효한지 확인
+  - `InputFieldConvenience()` 호출
   - 인풋이 유효하면 입력값 리턴
   - 인풋이 유효하지 않으면 'notValid' 리턴
 

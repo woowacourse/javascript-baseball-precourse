@@ -5,12 +5,10 @@ export default class HandleInput {
   }
   
   GetInput(input) {
-    let userValue = '';
+    let userValue = this.IS_NOT_VALID;
 
     if (this.CheckInputValidity(input.value) === this.IS_VALID)
       userValue = input.value;
-    else
-      userValue = this.IS_NOT_VALID;
     
     this.InputFieldConvenience(input, userValue);
 
@@ -23,8 +21,10 @@ export default class HandleInput {
     const noOverlap = this.NoOverlap(number);
     const isThreeDigits = this.IsThreeDigits(number);
 
-    if (notZero * isNumber * noOverlap * isThreeDigits === 0)
+    if (notZero * isNumber * noOverlap * isThreeDigits === 0) {
       this.CreateErrorMessage(notZero, isNumber, noOverlap, isThreeDigits);
+      return this.IS_NOT_VALID;
+    }
 
     return this.IS_VALID;
   }
