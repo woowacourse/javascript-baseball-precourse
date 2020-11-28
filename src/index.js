@@ -1,8 +1,8 @@
 import { validateUserInput } from "./validate.js";
 export default class BaseballGame {
   constructor() {
-    this.isEnded = false;
-    this.computerInputNumbers = "";
+    this.isEnded = false; //종료 플래그
+    this.computerInputNumbers = ""; // 컴퓨터 입력값
 
     this.init();
   }
@@ -10,10 +10,10 @@ export default class BaseballGame {
   //* 초기 설정 메서드
   init = () => {
     this.isEnded = false;
-    this.computerInputNumbers = this.generateRandomNumbers(); // 컴퓨터 입력값 설정
+    this.computerInputNumbers = this.generateRandomNumbers();
   };
 
-  // 랜덤 값 생성 메서드
+  //* 랜덤 값 생성 메서드
   generateRandomNumbers() {
     let randomNumbers = "";
     while (randomNumbers.length != 3) {
@@ -23,7 +23,7 @@ export default class BaseballGame {
     return randomNumbers;
   }
 
-  // 사용자 입력값 반환 메서드
+  //* 사용자 입력값 반환 메서드
   getUserInputNumbers() {
     const userInputBox = document.getElementById("user-input");
     const userInputNumbers = userInputBox.value;
@@ -31,7 +31,7 @@ export default class BaseballGame {
     return userInputNumbers;
   }
 
-  // 입력값 비교 메서드
+  //* 입력값 비교 메서드
   compareNumbers(computerInputNumbers, userInputNumbers) {
     let strikeCount = 0;
     let ballCount = 0;
@@ -42,13 +42,13 @@ export default class BaseballGame {
     return { strikeCount, ballCount };
   }
 
-  // 비교값에 따른 종료플래그 반환 메서드
+  //* 비교값에 따른 종료플래그 반환 메서드
   checkIsEnded(strikeCount) {
     if (strikeCount === 3) this.isEnded = true;
     return this.isEnded;
   }
 
-  // 비교값에 따른 결과 반환 메서드
+  //* 게임 실행 메서드
   play(computerInputNumbers, userInputNumbers) {
     let result = "";
     const { strikeCount, ballCount } = this.compareNumbers(
@@ -77,7 +77,7 @@ export default class BaseballGame {
     }
   }
 
-  // * 게임 결과 초기화 메서드
+  //* 게임 결과 초기화 메서드
   resetResultHTML() {
     const resultBox = document.getElementById("result");
     resultBox.innerHTML = "";
