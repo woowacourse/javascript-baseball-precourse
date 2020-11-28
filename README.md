@@ -50,30 +50,36 @@
 <br>
 <br>
 
-## initGame.js
-#### 1. `GenerateAnswer()` 정답 생성 후 리턴
+## handleInit.js
+#### 1. `InitGame()` 게임 시작
+  - `GenerateAnswer()` 호출해서 정답 생성 후 리턴
+  - `InitGameWindow()` 호출
+
+<br>
+
+#### 2. `GenerateAnswer()` 정답 생성 후 리턴
   - `OneToNine()` 호출해서 1~9까지 담긴 candidate 배열 생성
   - `InitGameWindow()` 호출해서 게임화면 초기화
   - `PickRandomDigits()` 호출해서 정답 생성 후 리턴
 
 <br>
 
-#### 2. `OneToNine()` 1~9 숫자 배열 생성
-  - 1부터 9까지의 숫자를 담은 candidate 배열 리턴
-
-<br>
-
-#### 3. `PickRandomDigits()`
-  - candidate 배열에서 중복없이 랜덤으로 숫자 세 개 선택
-  - 선택된 숫자들은 새로운 배열에 담아 리턴
-
-<br>
-
-#### 4. `InitGameWindow()` 게임화면 초기화
+#### 3. `InitGameWindow()` 게임화면 초기화
   - 결과창 비우기
   - 입력창 비우기
   - placeholder 비우기
   - 입력창에 focus()
+
+<br>
+
+#### 4. `OneToNine()` 1~9 숫자 배열 생성
+  - 1부터 9까지의 숫자를 담은 candidate 배열 리턴
+
+<br>
+
+#### 5. `PickRandomDigits()`
+  - candidate 배열에서 중복없이 랜덤으로 숫자 세 개 선택
+  - 선택된 숫자들은 새로운 배열에 담아 리턴
 
 <br>
 <br>

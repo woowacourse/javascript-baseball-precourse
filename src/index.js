@@ -9,6 +9,25 @@ export default function BaseballGame() {
   const _privateInitUtils = new handleInit();
   let _answer = _privateInitUtils.InitGame(_resultArea, _input);
 
+  _button.addEventListener('click', () => {
+    PlayIfValid();
+  })
+
+  _input.addEventListener('keypress', (e) => {
+    if (e.keyCode === 13)
+      PlayIfValid();
+  })
+
+  const PlayIfValid = () => {
+    const InputUtils = new CheckInput();
+    let userValue = InputUtils.GetInput(_input);
+
+    if (userValue !== 'notValid') {
+      let resultMessage = this.play(_answer, userValue);
+      DisplayResult(resultMessage);
+    }
+  }
+
 	this.play = function (computerInputNumbers, userInputNumbers) {
     let [ball, strike] = CountBallStrike(computerInputNumbers, userInputNumbers);
     let resultMessage = '';
@@ -29,25 +48,6 @@ export default function BaseballGame() {
 		  resultMessage = 'success';
   
 	  return resultMessage;
-  }
-
-  _button.addEventListener('click', () => {
-    PlayIfValid();
-  })
-
-  _input.addEventListener('keypress', (e) => {
-    if (e.keyCode === 13)
-      PlayIfValid();
-  })
-
-  const PlayIfValid = () => {
-    const InputUtils = new CheckInput();
-    let userValue = InputUtils.GetInput(_input);
-
-    if (userValue !== 'notValid') {
-      let resultMessage = this.play(_answer, userValue);
-      DisplayResult(resultMessage);
-    }
   }
 
 	const CountBallStrike = (answer, userValue) => {
