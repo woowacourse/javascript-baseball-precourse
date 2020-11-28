@@ -35,6 +35,7 @@ class BaseballGame {
 
   restart() {
     this.$userInput.value = '';
+    this.$userInput.focus();
     this.$tryButton.disabled = false;
 
     this.state = {
