@@ -15,7 +15,17 @@ export default class HandleInput {
     return userValue;
   }
   
+  CheckInputValidity(number) {
+    const notZero = this.NotZero(number);
+    const isNumber = this.IsNumber(number);
+    const noOverap = this.NoOverap(number);
+    const isThreeDigits = this.IsThreeDigits(number);
 
+    if (notZero * isNumber * noOverap * isThreeDigits === 0)
+      CreateErrorMessage(notZero, isNumber, noOverap, isThreeDigits);
+
+    return this.IS_VALID;
+  }
 
   NotZero(number) {
     if (number.indexOf("0") !== -1)
