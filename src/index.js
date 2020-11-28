@@ -14,27 +14,37 @@ export default class BaseballGame {
 
   getUserInput() {
     const userInput = userInputEl.value;
-    const userInputNumbers = userInput.split('');
-
-    if (hasDuplicates(userInputNumbers)) {
+    const userInputNumbers = userInput.split('').map(Number);
+    
+    if (isInvalidNumbers(userInputNumbers)) {
       alert('1~9까지의 숫자를 중복 없이 입력해주세요');
       userInputEl.focus();
     }
 
-    function hasDuplicates(array = []) {
+    function isInvalidNumbers(numbers) {
       const visited = [];
 
-      return array.some((item) => {
-        let result = false;
+      // 길이가 3이 아니라면
+      return numbers.length !== 3 || (
+        numbers.some((number) => {
+          let isInvalid = false;
 
-        if (visited.includes(item)) {
-          result = true;
-        } else {
-          visited.push(item);
-        }
+          // 1 부터 9 까지의 범위가 아니라면 invalid함
+          if (!(number >= 1 && number <= 9)) { 
+            isInvalid = true;
+          }
+          // 중복된 값이라면 invalid함
+          else if (visited.includes(number)) {
+            isInvalid = true;
+          }
+          // 중복된 값 체크를 위해 visited 배열에 추가
+          else {
+            visited.push(number);
+          }
 
-        return result;
-      });
+          return isInvalid;
+        })
+      )
     }
   }
 
