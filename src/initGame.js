@@ -16,7 +16,7 @@ export default function InitGame() {
     return answer;
 	}
 
-  let StartGameBind = this.StartGame.bind();
+  const StartGameBind = this.StartGame.bind();
 
   this.RestartGame = function (resultArea, answer, input) {
     resultArea.innerHTML = '';

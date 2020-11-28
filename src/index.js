@@ -25,15 +25,15 @@ export default function BaseballGame() {
   }
 
   document.body.style.fontFamily = 'Arial';
-  let _resultArea = document.querySelector('#result');
-  let _button = document.querySelector("#submit");
-  let _input = document.querySelector("#user-input");
-  let _privateInitUtils = new initGame();
+  const _resultArea = document.querySelector('#result');
+  const _button = document.querySelector("#submit");
+  const _input = document.querySelector("#user-input");
+  const _privateInitUtils = new initGame();
   let _answer = _privateInitUtils.StartGame(_input);
 
   _button.addEventListener('click', (e) => {
     e.preventDefault();
-    let InputUtils = new CheckInput();
+    const InputUtils = new CheckInput();
     let userValue = InputUtils.GetInput(_input);
 
     if (userValue !== 0) {
