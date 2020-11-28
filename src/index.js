@@ -10,7 +10,7 @@ export default class BaseballGame {
     this.$submitButton = document.querySelector("#submit");
     this.$result = document.querySelector("#result");
 
-    const onClick = () => {
+    const onClickSubmitButton = () => {
       const userInput = this.$userInput.value;
       if (userInput === "") return;
       console.log(`유저의 입력값: ${userInput}`);
@@ -20,9 +20,12 @@ export default class BaseballGame {
         const playResult = this.play(this.answer, userInputNumbers);
         console.log(`힌트: ${playResult}`);
 
+        const isUserFoundAnswer = this.answer === userInputNumbers;
+
         this.setState([{
           userInput: userInputNumbers, 
-          playResult
+          playResult,
+          isUserFoundAnswer
         },
         ...this.roundData]);
       } else {
@@ -33,22 +36,27 @@ export default class BaseballGame {
       this.$userInput.focus();
     };
 
+    const onClickGameRestartButton = () => {
+      this.setState([]);
+      this.answer = this.generateAnswer();
+      console.log(`컴퓨터의 랜덤값: ${this.answer}`);
+  
+      this.$userInput.focus();  
+    };
+
     const onKeydown = (e) => {
       if (e.key === "Enter") {
-        onClick();
-      }
-    }
+        onClickSubmitButton();
+      };
+    };
 
-    this.$submitButton.addEventListener("click", onClick);
     this.$userInput.addEventListener("keydown", onKeydown);
 
     this.$app.addEventListener("click", (e) => {
-      if (e.target.id === "game-restart-button") {
-        this.setState([]);
-        this.answer = this.generateAnswer();
-        console.log(`컴퓨터의 랜덤값: ${this.answer}`);
-
-        this.$userInput.focus();
+      if (e.target.id === "submit") {
+        onClickSubmitButton();
+      } else if (e.target.id === "game-restart-button") {
+        onClickGameRestartButton();
       };
     });
 
@@ -61,31 +69,35 @@ export default class BaseballGame {
   }
 
   render() {
-    this.$result.innerHTML = "";
 
-    if (this.roundData.some(({userInput}) => userInput === this.answer)) {
-      this.$result.innerHTML = `
-        <div>
-          <strong>🎉 정답을 맞추셨습니다! 🎉</strong>
-        </div>
-        <div>
-          <span>게임을 새로 시작하시겠습니까?</span>
-          <button id="game-restart-button">게임 재시작</button>
-        </div>
-        <br>
-      `;
-    };
+    this.$result.innerHTML = this.roundData.map((data, index, arr) => {
+      const {userInput, playResult, isUserFoundAnswer} = data;
+      let _returnHTML = "";
+      
+      if (isUserFoundAnswer) {
+        _returnHTML =`
+          <div>
+            <strong>🎉 정답을 맞추셨습니다! 🎉</strong>
+          </div>
+          <div>
+            <span>게임을 새로 시작하시겠습니까?</span>
+            <button id="game-restart-button">게임 재시작</button>
+          </div>
+          <br>
+          `;
+      };
 
-    this.$result.innerHTML += this.roundData.map(({userInput, playResult}, index, arr) => {
-      return `
-      <div class="result__row-container">
-        <div>
-          <strong>${arr.length - index}라운드: ${userInput}</strong>
+      _returnHTML += `
+        <div class="result__row-container">
+          <div>
+            <strong>${arr.length - index}라운드: ${userInput}</strong>
+          </div>
+          <div class="result__play-result">${playResult}</div>
+          <hr>
         </div>
-        <div class="result__play-result">${playResult}</div>
-        <hr>
-      </div>
-      `;
+        `;
+
+        return _returnHTML;
     }).join("");
   }
 
@@ -154,20 +166,19 @@ export default class BaseballGame {
     const strike = splittedUserInput.filter((val, idx) => val === splittedComputerInput[idx]).length;
     const ball = total - strike;
 
-    let _return = null;
+    let playResult = null;
     if (strike === 0 && ball === 0) {
-      _return = "낫싱";
+      playResult = "낫싱";
     } else if (strike === 0) {
-      _return = `${ball}볼`;
+      playResult = `${ball}볼`;
     } else if (ball === 0) {
-      _return = `${strike}스트라이크`;  
+      playResult = `${strike}스트라이크`;  
     } else {
-      _return = `${ball}볼 ${strike}스트라이크`;
-    }
+      playResult = `${ball}볼 ${strike}스트라이크`;
+    };
 
-    return _return;
-  }
-
+    return playResult;
+  };
 }
 
 new BaseballGame();
