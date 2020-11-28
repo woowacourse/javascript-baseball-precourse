@@ -91,6 +91,7 @@ export default function BaseballGame() {
     if (resultString === '3스트라이크') {
       resultText.style.fontWeight = 'bold';
       resultText.innerHTML = '정답을 맞추셨습니다.';
+      submitButton.disabled = 'disabled';
     } else {
       resultText.innerHTML = resultString;
     }
