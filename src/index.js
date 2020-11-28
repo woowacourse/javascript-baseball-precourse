@@ -1,4 +1,9 @@
 export default class BaseballGame {
+  constructor() {
+    this.computerInputNumbers = "";
+    this.resetGame();
+  }
+
   // 랜덤 3자리 수 생성 메서드
   generateRandomNumber() {
     let computerInputNumbers = [];
@@ -132,4 +137,3 @@ export default class BaseballGame {
 }
 
 const baseballGame = new BaseballGame();
-// baseballGame.startGame([1, 2, 3]);
