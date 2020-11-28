@@ -1,7 +1,6 @@
+import { validateUserInput } from "./validate.js";
 export default class BaseballGame {
   constructor() {
-    this.computerInputNumbers = "";
-
     this.init();
   }
 
@@ -40,4 +39,21 @@ export default class BaseballGame {
     return resultMessage;
   }
 }
+
+//DOM Elements
 const game = new BaseballGame();
+const userInputBox = document.getElementById("user-input");
+const submitButton = document.getElementById("submit");
+
+function getUserInputNumbers() {
+  const userInputNumbers = userInputBox.value;
+  const isValid = validateUserInput(userInputNumbers);
+  if (!isValid) {
+    alert("입력값이 잘못되었습니다. 다시 입력해주세요 :)");
+    userInputBox.value = "";
+    return;
+  }
+  console.log(userInputNumbers);
+  return userInputNumbers;
+}
+submitButton.onclick = getUserInputNumbers;
