@@ -1,3 +1,4 @@
+const NUMBER_LENGTH = 3;
 const userInputEl = document.querySelector('#user-input');
 const submitEl = document.querySelector('#submit');
 
@@ -15,17 +16,17 @@ export default class BaseballGame {
   getUserInput() {
     const userInput = userInputEl.value;
     const userInputNumbers = userInput.split('').map(Number);
-    
+
     if (isInvalidNumbers(userInputNumbers)) {
-      alert('1~9까지의 숫자를 중복 없이 입력해주세요');
+      alert('1~9까지의 3자리 숫자를 중복 없이 입력해주세요');
       userInputEl.focus();
     }
 
     function isInvalidNumbers(numbers) {
       const visited = [];
 
-      // 길이가 3이 아니라면
-      return numbers.length !== 3 || (
+      // 길이와 NUMBER_LENGTH가 같지 않다면
+      return numbers.length !== NUMBER_LENGTH || (
         numbers.some((number) => {
           let isInvalid = false;
 
@@ -51,7 +52,7 @@ export default class BaseballGame {
   generateComputerNumbers() {
     const numbers = [];
 
-    while (numbers.length < 3) {
+    while (numbers.length < NUMBER_LENGTH) {
       const randomNumber = Math.floor(Math.random() * 9 + 1);
       
       if (isUniqueNumber(numbers, randomNumber)) {
