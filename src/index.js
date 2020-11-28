@@ -29,7 +29,7 @@ export default class BaseballGame {
     }
 
     // 0이 포함되어있는지 검사
-    if (userInputNumbers.includes("0")) {
+    if (userInputNumbers.includes(0)) {
       alert("입력한 숫자에 0이 포함됩니다");
 
       return false;
