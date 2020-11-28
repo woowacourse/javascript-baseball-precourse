@@ -15,13 +15,17 @@ export const calculateCount = (target, inputs) => {
 
 export const getHint = ({ strike, ball }) => {
   let result = '';
+  if (strike === GAME.THREE) {
+    return MESSAGE.SUCCESS;
+  }
+
   const ballCnt = ball ? `${ball}${MESSAGE.BALL}` : '';
   const strikeCnt = strike ? `${strike}${MESSAGE.STRIKE}` : '';
 
   result = ballCnt + ' ' + strikeCnt;
   result = result.trim();
 
-  return result ? result : `${MESSAGE.NOTHING}`;
+  return result ? result : MESSAGE.NOTHING;
 };
 
 // 정답 숫자 생성 관련

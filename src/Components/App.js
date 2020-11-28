@@ -19,8 +19,6 @@ class BaseballGame {
       ball: 0,
     };
 
-    console.log(this.state.answer);
-
     this.bindEvents();
     this.render('');
   }
@@ -29,9 +27,7 @@ class BaseballGame {
     userInputNumbers = Array.from(userInputNumbers).map((num) => parseInt(num));
     this.setSate(calculateCount(computerInputNumbers, userInputNumbers));
 
-    return this.state.strike === GAME.THREE
-      ? MESSAGE.SUCCESS
-      : getHint(this.state);
+    return getHint(this.state);
   }
 
   restart() {
@@ -54,7 +50,6 @@ class BaseballGame {
     if (target.id !== ID.RESTART_BUTTON && target.id !== ID.SUBMIT_BUTTON)
       return;
 
-    // 정답 로직
     if (target.id === ID.RESTART_BUTTON) {
       this.restart();
       return;
@@ -96,8 +91,9 @@ class BaseballGame {
   render(message) {
     this.resultView.innerHTML =
       this.state.strike === GAME.THREE
-        ? `<span>${message}</span><button id="game-restart-button">재시작</button>`
-        : `<span>${message}</span>`;
+        ? `<p>${message}</p>
+           <span>${MESSAGE.RESTART}</span> <button id=${ID.RESTART_BUTTON}>재시작</button>`
+        : `<p>${message}</p>`;
   }
 }
 
