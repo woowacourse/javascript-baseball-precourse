@@ -52,9 +52,12 @@ describe('유저의 입력값이 서로 다른 3개의 숫자로 이루어져있
 
 describe('서로 다른 수로 이루어진 3자리의 수(이하 "정답")를 랜덤으로 생성하는 함수가 생성한 정답은', () => {
     const baseballGame = new BaseballGame();
-    const answer = baseballGame.generateAnswer();
-
+    const TEST_CASES = 1000;
     test('서로 다른 3개의 숫자로 이루어져있다. ', ()=> {
-        expect(baseballGame.isValid(answer)).toBe(true);
-    })
+        for (let i = 0; i < TEST_CASES; i++) {
+            const answer = baseballGame.generateAnswer();
+        
+            expect(baseballGame.isValid(answer.toString())).toBe(true);
+        };
+    });
 });
