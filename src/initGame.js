@@ -22,6 +22,7 @@ export default function InitGame() {
     resultArea.innerHTML = '';
     answer = StartGameBind(input);
     input.value = '';
+    input.placeholder = '';
 
     return answer;
   }
