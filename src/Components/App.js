@@ -10,9 +10,14 @@ class BaseballGame {
     this.$target = $target;
     this.userInput = document.querySelector('#user-input');
     this.tryButton = document.querySelector('#submit');
+    this.resultView = document.querySelector('#result');
 
-    this.answer = generateTargetNumbers();
-    console.log(this.answer);
+    this.state = {
+      answer: generateTargetNumbers(),
+      strike: 0,
+      ball: 0,
+    };
+
     this.bindEvents();
   }
 
@@ -37,7 +42,7 @@ class BaseballGame {
       return;
     }
 
-    console.log(this.play(this.answer, this.userInput.value));
+    console.log(this.play(this.state.answer, this.userInput.value));
   }
 
   onKeyDown({ target, key }) {
@@ -49,7 +54,7 @@ class BaseballGame {
       return;
     }
 
-    console.log(this.play(this.answer, target.value));
+    console.log(this.play(this.state.answer, target.value));
   }
 }
 
