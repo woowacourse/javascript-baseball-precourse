@@ -19,12 +19,14 @@ export default function BaseballGame(N) {
     }
     numbers = util.generateRandomNumbers(N);
     console.log(`⚾LOG: Sorry For The Spolier! The Answer Is... ${numbers}`);
+
     return numbers;
   };
 
   const getUserInputNumbers = () => {
     let userInputNumbers = userInputElem.value;
     console.log(`⚾LOG: Your Guess Is... ${userInputNumbers}`);
+
     return userInputNumbers;
   };
 
@@ -46,6 +48,7 @@ export default function BaseballGame(N) {
     if (numbers.length !== new Set(numbers).size) {
       return REDUNDANT;
     }
+
     return false;
   };
 
@@ -77,6 +80,7 @@ export default function BaseballGame(N) {
 
   const play = (computerInputNumbers, userInputNumbers) => {
     let score = markScore(computerInputNumbers, userInputNumbers);
+
     return getGameResultStr(score);
   };
 
@@ -106,6 +110,7 @@ export default function BaseballGame(N) {
     if (score.strike === 0 && score.ball === 0) {
       return `낫싱`;
     }
+
     let msg = '';
     if (score.ball !== 0) {
       msg += `${score.ball}볼 `;

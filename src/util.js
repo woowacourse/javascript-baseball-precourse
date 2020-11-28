@@ -7,6 +7,7 @@ export default function Util() {
         numbers.push(r);
       }
     }
+
     return numbers.join('');
   };
 
@@ -23,6 +24,7 @@ export default function Util() {
     let button = document.createElement('button');
     button.id = id;
     button.textContent = textContent;
+
     return button;
   };
 
