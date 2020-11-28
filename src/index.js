@@ -1,5 +1,6 @@
 import HandleInit from './handleInit.js';
 import HandleInput from './handleInput.js';
+import HandleResult from './handleResult.js';
 
 export default function BaseballGame() {
   document.body.style.fontFamily = 'Arial';
@@ -67,22 +68,12 @@ export default function BaseballGame() {
 	}
 
 	const DisplayResult = (resultMessage) => {
-	  if (resultMessage == 'success') {
-      let restartMessage = document.createElement('span');
-      let restartButton = document.createElement('button');
+    const ResultUtils = new HandleResult();
 
-      restartMessage.textContent = '게임을 새로 시작하시겠습니까?';
-      restartButton.textContent = '게임 재시작';
-      _resultArea.innerHTML = `<h4>🎉<strong> 정답을 맞추셨습니다! </strong>🎉</h4>`;
-      _resultArea.appendChild(restartMessage);
-      _resultArea.appendChild(restartButton);
-
-      restartButton.addEventListener('click', () => {
-        _answer = _privateInitUtils.InitGame(_resultArea, _input);
-		  })
-    } 
+    if (resultMessage === 'success')
+      _answer = ResultUtils.IsCorrect(_resultArea, _input);
     else
-		  _resultArea.textContent = resultMessage;
+      ResultUtils.IsWrong(_resultArea, resultMessage);
   }
 }
  
