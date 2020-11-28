@@ -1,7 +1,8 @@
-import userInput, { isValidUserInput } from "./user-input.js";
 import randomNumberMaker from "./random-number-maker.js";
+import printMessage, { clearResult } from "./print-messages.js";
+import userInput, { isValidUserInput } from "./user-input.js";
 
-const randomNumberArray = randomNumberMaker(3)
+const randomNumberArray = randomNumberMaker(3);
 
 export function countStrike(validUserInputValueArray) {
   let strikeCount = 0;
@@ -29,25 +30,19 @@ export function countBall(validUserInputValueArray) {
 
 const LENGTH_OF_NUMBERS_GIVEN = 3;
 
-export default function gameResult() {
-  const validUserInputValueArray = isValidUserInput(userInput(), LENGTH_OF_NUMBERS_GIVEN);
-  const BALL_COUNT = countBall(validUserInputValueArray);
-  const STRIKE_COUNT = countStrike(validUserInputValueArray);
-  let RETURN_MESSAGE = '';
+export default function playGame() {
+  const userInputValue = userInput();
+  let validUserInputValueArray = [];
 
-  if (BALL_COUNT !== 0 && STRIKE_COUNT !== 0) {
-    RETURN_MESSAGE = RETURN_MESSAGE.concat(`${BALL_COUNT}볼 ${STRIKE_COUNT}스트라이크`);
+  if (isValidUserInput(userInputValue, LENGTH_OF_NUMBERS_GIVEN)) {
+    validUserInputValueArray = userInputValue.split("").map(Number);   
+    
+    const BALL_COUNT = countBall(validUserInputValueArray);
+    const STRIKE_COUNT = countStrike(validUserInputValueArray);
 
-  } else if (BALL_COUNT !== 0) {
-    RETURN_MESSAGE = RETURN_MESSAGE.concat(`${BALL_COUNT}볼`);
-
-  } else if (STRIKE_COUNT !== 0) {
-    RETURN_MESSAGE = RETURN_MESSAGE.concat(`${STRIKE_COUNT}스트라이크`);
-
+    printMessage(BALL_COUNT, STRIKE_COUNT);
   } else {
-    RETURN_MESSAGE = RETURN_MESSAGE.concat("낫싱");
-
+    clearResult()
   }
-
-  return RETURN_MESSAGE;
+  
 }
