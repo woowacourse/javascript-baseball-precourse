@@ -25,7 +25,11 @@ class BaseballGame {
 
   play(computerInputNumbers, userInputNumbers) {
     userInputNumbers = Array.from(userInputNumbers).map((num) => parseInt(num));
-    this.setSate(calculateCount(computerInputNumbers, userInputNumbers));
+    const countInfo = calculateCount(computerInputNumbers, userInputNumbers);
+    this.setSate({
+      answer: this.state.answer,
+      ...countInfo,
+    });
 
     if (this.state.strike === GAME.THREE) {
       this.$tryButton.disabled = true;
@@ -38,12 +42,11 @@ class BaseballGame {
     this.$userInput.focus();
     this.$tryButton.disabled = false;
 
-    this.state = {
+    this.setSate({
       answer: generateTargetNumbers(),
       strike: 0,
       ball: 0,
-    };
-
+    });
     this.render('');
   }
 
@@ -84,11 +87,10 @@ class BaseballGame {
     this.render(hint);
   }
 
-  setSate(nextState) {
-    const { strike, ball } = nextState;
-
+  setSate({ answer, strike, ball }) {
     this.state = {
       ...this.state,
+      answer,
       strike,
       ball,
     };
