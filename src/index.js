@@ -6,6 +6,11 @@ export default function BaseballGame() {
   submitButton.addEventListener('click', () =>
     this.integrateFunction(inputText.value)
   );
+  inputText.addEventListener('keyup', e => {
+    if (e.keyCode === 13) {
+      this.integrateFunction(inputText.value);
+    }
+  });
 
   // 3개의 다른 숫자 세개 생성
   this.getRandomNumber = () => {
@@ -94,6 +99,7 @@ export default function BaseballGame() {
       }
     }
     resultString = resultString.trim();
+    console.log(resultString);
     return resultString;
   };
 }
