@@ -1,5 +1,30 @@
 export default class BaseballGame {
 
+  constructor() {
+    this.answer = this.generateAnswer();
+    console.log(`컴퓨터의 랜덤값: ${this.answer}`);
+
+    this.$userInput = document.querySelector("#user-input");
+    this.$submitButton = document.querySelector("#submit");
+    this.$result = document.querySelector("#result");
+
+    const onClick = () => {
+      const userInput = this.$userInput.value;
+      if (userInput === "") return;
+      console.log(`유저의 입력값: ${userInput}`);
+
+    };
+
+    const onKeydown = (e) => {
+      if (e.key === "Enter") {
+        onClick();
+      }
+    }
+
+    this.$submitButton.addEventListener("click", onClick);
+    this.$userInput.addEventListener("keydown", onKeydown);
+  }
+
   generateAnswer() {
     const getRandomNumber = () => {
       const MIN = 1;
