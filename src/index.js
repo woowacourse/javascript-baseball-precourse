@@ -4,6 +4,7 @@ export default class BaseballGame {
     this.init();
   }
 
+  //* 초기 설정 메서드
   init = () => {
     this.isEnded = false;
     this.computerInputNumbers = this.generateRandomNumbers(); // 컴퓨터 입력값 설정
@@ -63,34 +64,42 @@ export default class BaseballGame {
     return result;
   }
 
-  // 게임 결과 출력 메서드
-  renderResult(userInputNumbers, result) {
+  //* 게임 결과 출력 메서드
+  renderResultHTML(userInputNumbers, result) {
     const resultBox = document.getElementById("result");
     const resultHTML = `<div>${userInputNumbers} <br><b>${result}</b></div><hr>`;
     resultBox.innerHTML += resultHTML;
+    if (this.isEnded) {
+      const endingHTML =
+        "게임을 새로 시작하시겠습니까? <button id='game-restart-button'>게임 재시작</button>";
+      resultBox.innerHTML += endingHTML;
+    }
   }
 
-  // 게임 엔딩 출력 메서드
-  renderEnding() {
+  // * 게임 결과 초기화 메서드
+  resetResultHTML() {
     const resultBox = document.getElementById("result");
-    const endingHTML = `<br> 게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button>`;
-    resultBox.innerHTML += endingHTML;
-
-    const submitButton = document.getElementById("submit");
-    submitButton.disabled = true;
-
-    const restartButton = document.getElementById("game-restart-button");
-    restartButton.addEventListener("click", this.handleRestart);
-    restartButton.addEventListener("click", this.init);
-  }
-
-  handleRestart() {
-    const resultBox = document.getElementById("result");
-    const submitButton = document.getElementById("submit");
     resultBox.innerHTML = "";
-    submitButton.disabled = false;
   }
 
+  //* 확인 버튼 핸들러 메서드
+  handleSubmitButton() {
+    const submitButton = document.getElementById("submit");
+    if (submitButton.disabled) submitButton.disabled = false;
+    else submitButton.disabled = true; //종료시 비활성화
+  }
+
+  //* 재시작 버튼 핸들러 메서드
+  handleRestartButton() {
+    const restartButton = document.getElementById("game-restart-button");
+    if (restartButton) {
+      restartButton.addEventListener("click", this.handleSubmitButton);
+      restartButton.addEventListener("click", this.resetResultHTML);
+      restartButton.addEventListener("click", this.init);
+    }
+  }
+
+  //* 게임 조작 메서드
   start = () => {
     const computerInputNumbers = this.computerInputNumbers; // 컴퓨터 입력값
     const userInputNumbers = this.getUserInputNumbers(); // 사용자 입력값
@@ -98,8 +107,11 @@ export default class BaseballGame {
     if (!isValid) return;
 
     const result = this.play(computerInputNumbers, userInputNumbers); // 게임 진행
-    const resultElement = this.renderResult(userInputNumbers, result); // 게임 결과 출력
-    if (this.isEnded) this.renderEnding(); //게임 종료
+    const resultElement = this.renderResultHTML(userInputNumbers, result); // 게임 결과 출력
+    if (this.isEnded) {
+      const handleSubmit = this.handleSubmitButton();
+      const handleRestart = this.handleRestartButton(this.init);
+    }
   };
 }
 
