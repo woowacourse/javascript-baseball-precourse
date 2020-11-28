@@ -4,11 +4,15 @@ export default class CheckInput {
 
     if (this.CheckInputValidity(input.value) === 1) {
       alert("1~9까지의 중복되지 않는 세자리 숫자를 입력해주세요");
+      input.placeholer = input.value;
+      input.value = '';
       input.focus();
       return 0;
-    } else
-      userValue = input.value;
-
+    }
+    
+    userValue = input.value;
+    input.placeholder = userValue;
+    input.value = '';
     input.focus();
 
     return userValue;

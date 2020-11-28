@@ -2,6 +2,13 @@ import initGame from './initGame.js';
 import CheckInput from './checkInput.js';
 
 export default function BaseballGame() {
+  document.body.style.fontFamily = 'Arial';
+  const _resultArea = document.querySelector('#result');
+  const _button = document.querySelector("#submit");
+  const _input = document.querySelector("#user-input");
+  const _privateInitUtils = new initGame();
+  let _answer = _privateInitUtils.StartGame(_input);
+
 	this.play = function (computerInputNumbers, userInputNumbers) {
     let [ball, strike] = CountBallStrike(computerInputNumbers, userInputNumbers);
     let resultMessage = '';
@@ -24,15 +31,17 @@ export default function BaseballGame() {
 	  return resultMessage;
   }
 
-  document.body.style.fontFamily = 'Arial';
-  const _resultArea = document.querySelector('#result');
-  const _button = document.querySelector("#submit");
-  const _input = document.querySelector("#user-input");
-  const _privateInitUtils = new initGame();
-  let _answer = _privateInitUtils.StartGame(_input);
-
   _button.addEventListener('click', (e) => {
-    e.preventDefault();
+    PlayGame(e);
+  })
+
+  _input.addEventListener('keypress', (e) => {
+    if (e.keyCode === 13)
+      PlayGame(e);
+  })
+
+  const PlayGame = (e) => {
+    // e.preventDefault();
     const InputUtils = new CheckInput();
     let userValue = InputUtils.GetInput(_input);
 
@@ -40,7 +49,7 @@ export default function BaseballGame() {
       let resultMessage = this.play(_answer, userValue);
       DisplayResult(resultMessage);
     }
-  })
+  }
 
 	const CountBallStrike = (answer, userValue) => {
 	  let ball = 0;
