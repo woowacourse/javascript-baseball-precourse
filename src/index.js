@@ -52,7 +52,7 @@ export default function BaseballGame() {
       userInput.value = '';
       gameRestartButton.style.display = 'none';
       gameRestartText.style.display = 'none';
-      result.style.display = 'none';
+      result.innerText = '';
       this.createComputerInputNumbers();
     });
   };
