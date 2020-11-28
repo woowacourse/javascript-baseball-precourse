@@ -22,6 +22,51 @@
 
 <br>
 
+## 세부 기능 분류
+
+- 랜덤한 3자리 수를 생성
+  - 랜덤한 3자리 수를 만들어 comNum에 저장
+  - getRandNum 함수로 구현
+
+- 입력 값이 유효한지 확인
+  - isValidInput(유저의 입력)  메서드로 구현
+  - 입력의 유효성은 다음 기준으로 판단한다.
+    - 1부터 9까지의 숫자로만 이루어져 있는가
+    - 정확히 3개의 숫자가 입력되었는가
+    - 중복되는 숫자는 없는가
+  - 입력이 유효할 경우 true를 반환, flase를 반환
+
+- 볼이 있는지 확인
+  - countBalls(컴퓨터의 값, 유저의 입력) 메서드로 구현
+  
+- 스트라이크가 있는지 확인
+  - countStrikes(컴퓨터의 값, 유저의 입력) 메서드로 구현
+  
+- play 메서드  
+  - 볼이 있는지 확인
+  - 스트라이크가 있는지 확인
+  - 결과값을 형식에 맞춰 반환
+  
+- 새로운 입력 폼을 추가
+  - addNewInput 함수로 구현
+  
+- 게임 종료 메시지와 함께 재시간 버튼 추가
+  - endGame 함수로 
+  
+- button(id=submit) click 이벤트
+  - 입력 값 유효성 확인
+    - isValidInput이 true를 반환하면 다음 단계 진행, false를 반환하면 alert호출 후 return
+  - play 메서드 호출
+  - 결과 값을 div(id=result)에 반영
+  - 기존 input을 'read-only'로 바꾸고 새로운 input을 
+  - '정답'일 경우 재시작 버튼 노출
+
+- button(id=game-restart-button) click 이벤트
+  - 화면 초기화
+  - 새로운 BaseballGame객체 생성
+
+<br>
+
 ## ✅ 프로그래밍 요구사항
 
 - `play`(컴퓨터의 랜덤 값, 유저의 입력 값) 메서드를 만들어 게임을 진행한다.

@@ -15,15 +15,21 @@ const getRandNum = () => {
 
 const addNewInput = (e) => {
   const idx = ++window.idx;
-  e.target.closest('#app').innerHTML += `
-    <hr class="hr-line" />
-    <div id="input-container-${idx}">
-      <input type="text" id="user-input-${idx}" />
-      <button id="submit-${idx}" data-index="${idx}">확인</button>
-      <h3>📄 결과</h3>
-      <div id="result-${idx}"></div>
-    </div>
+
+  const container = document.createElement('div');
+  container.innerHTML = `
+    <input type="text" id="user-input-${idx}" />
+    <button id="submit-${idx}" data-index="${idx}">확인</button>
+    <h3>📄 결과</h3>
+    <div id="result-${idx}"></div>
   `;
+
+  const hr = document.createElement('hr');
+  hr.className = 'hr-line';
+
+  const app = e.target.closest('#app');
+  app.append(hr);
+  app.append(container);  
 };
 
 const endGame = (e) => {
@@ -34,10 +40,36 @@ const endGame = (e) => {
   `;
 }
 
+const onClickSubmitBtn = (e) => {
+  const idx = window.idx;
+  if(e.target.dataset.index !== idx.toString()) {
+    return;
+  }
+
+  const userInput = document.getElementById(`user-input-${idx}`);
+  const userInputValue = userInput.value;
+  if(!BG.isValidInput(userInputValue)) {
+    alert('올바른 입력이 아닙니다. 1~9사이의 수 3자리를 중복없이 입력해주세요.');
+    return;
+  }
+
+  // 기존 input 비활성화
+  userInput.setAttribute('readonly', 'readonly');
+
+  const result = BG.play(window.comNum, userInputValue);
+  if(result === '정답') {
+    endGame(e);
+  } else {
+    document.getElementById(`result-${idx}`).innerHTML = result;
+    addNewInput(e);
+  }
+}
+
 const BG = new BaseballGame();
 const app = document.getElementById('app');
-// window.comNum = getRandNum();
+window.comNum = getRandNum();
 window.idx = 1;
 
-// test code
-app.addEventListener('click', endGame);
+app.addEventListener('click', onClickSubmitBtn);
+
+console.log(window.comNum);
