@@ -23,9 +23,9 @@ class BaseballGame {
 
   play(computerInputNumbers, userInputNumbers) {
     userInputNumbers = Array.from(userInputNumbers).map((num) => parseInt(num));
-    const countInfo = calculateCount(computerInputNumbers, userInputNumbers);
+    this.setSate(calculateCount(computerInputNumbers, userInputNumbers));
 
-    return countInfo.strike === 3 ? '정답입니다' : getHint(countInfo);
+    return this.state.strike === 3 ? '정답입니다' : getHint(this.state);
   }
 
   bindEvents() {
@@ -56,6 +56,18 @@ class BaseballGame {
 
     console.log(this.play(this.state.answer, target.value));
   }
+
+  setSate(nextState) {
+    const { strike, ball } = nextState;
+
+    this.state = {
+      ...this.state,
+      strike,
+      ball,
+    };
+  }
+
+  render(hint) {}
 }
 
 export default BaseballGame;
