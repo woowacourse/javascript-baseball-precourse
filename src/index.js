@@ -4,16 +4,16 @@ export default class BaseballGame {
 
     this.computerInputNumber = this.getComputerInputNumbers();
     this.userSubmitButton = document.getElementById('submit');
-    this.userInputNumber = document.getElementById('user-input');
 
     this.userSubmitButton.addEventListener('click', () => {
-      let userInputNumbers = this.parseUserInput(this.userInputNumber.value);
+      let userInputNumber = document.getElementById('user-input');
+      let userInputNumbers = this.parseUserInput(userInputNumber.value);
       
       // 사용자 입력에 오류가 있을 겨우 반환 숫자 배열이 없음으로 play 메소드를 실행하지 않음
       if (userInputNumbers.length === 0) {
         return;
       }
-      
+
       console.log(this.play(this.computerInputNumber, userInputNumbers));
     });
   }
@@ -25,12 +25,61 @@ export default class BaseballGame {
     if (this.isEveryNumberSame(computerInputNumbers, userInputNumbers)) {
       gameResult = '정답';
     } else if (this.isNothing(computerInputNumbers, userInputNumbers)) {
-      gameResult = '나싱';
+      gameResult = '낫싱';
     } else if (this.isSomeNumberSame(computerInputNumbers, userInputNumbers)) {
       gameResult = this.getGameResultString(computerInputNumbers, userInputNumbers);
     }
 
+    this.displayResult(gameResult);
+
     return gameResult;
+  }
+
+  displayResult(gameResult) {
+    const resultDivElement = document.getElementById('result');
+    if (gameResult === '정답') {
+      resultDivElement.innerHTML += `<p><b>정답을 맞추셨습니다!<b><p>`;
+    } else {
+      resultDivElement.innerHTML += `<p>${gameResult}<p><hr /><br />`;
+
+      this.renderInput();
+      this.continueGame();
+    }
+  }
+
+  renderInput() {
+    this.deletePreviousAttributes();
+    const appElement = document.getElementById('app');
+    
+    appElement.innerHTML += 
+    `<input type="text" id="user-input" />
+    <button id="submit">확인</button>
+    <h3>📄 결과</h3>
+    <div id="result"></div>`;
+  }
+
+  deletePreviousAttributes() {
+    const userInputElement = document.getElementById('user-input');
+    userInputElement.removeAttribute('id');
+    const userSubmitButtonElement = document.getElementById('submit');
+    userSubmitButtonElement.removeAttribute('id');
+    const resultDivElement = document.getElementById('result');
+    resultDivElement.removeAttribute('id');
+  }
+
+  continueGame() {
+    const userSubmitButton = document.getElementById('submit');
+    userSubmitButton.addEventListener('click', () => {
+      const userInputNumber = document.getElementById('user-input');
+      let userInputNumbers = this.parseUserInput(userInputNumber.value);
+      
+      // 사용자 입력에 오류가 있을 겨우 반환 숫자 배열이 없음으로 play 메소드를 실행하지 않음
+      if (userInputNumbers.length === 0) {
+        return;
+      }
+      
+      console.log(this.play(this.computerInputNumber, userInputNumbers));
+    });
   }
 
   isEveryNumberSame(computerInputNumbers, userInputNumbers) {
