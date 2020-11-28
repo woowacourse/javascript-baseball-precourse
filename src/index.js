@@ -151,8 +151,29 @@ export default function BaseballGame() {
      this.showResult = function (result) {
          const resultDiv = document.querySelector("#result");
          resultDiv.innerHTML = result;
+      };
+
+    // * 확인버튼에 게임을 진행할 수 있도록 이벤트리스너 추가하기
+     this.startGame = function () {
+         const input = document.querySelector("#user-input");
+         const checkButton = document.querySelector("#submit");
+         this.randomNumber = this.makeRandomNumbers()
+         checkButton.addEventListener("click", () => {
+             if (!this.isInputRight(input.value)) {
+                 return alert("3자리 서로다른 숫자를 입력해주세요(0제외)");
+             };
+             const result = this.play(this.randomNumber,input.value);
+             if (this.isRight(this.randomNumber,input.value)) {
+                 this.addCorrectHTML();
+                 this.addNewGameHTML();
+                 this.addEventToRestartButton();
+                 return checkButton.disabled = true;
+             };
+             return this.showResult(result);
+         });
      };
 };
 
 
 let baseballGame = new BaseballGame();
+baseballGame.startGame();
