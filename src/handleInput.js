@@ -21,7 +21,7 @@ export default class HandleInput {
     const noOverlap = this.NoOverlap(number);
     const isThreeDigits = this.IsThreeDigits(number);
 
-    if (notZero * isNumber * noOverlap * isThreeDigits === 0) {
+    if (notZero * isNumber * noOverlap * isThreeDigits === this.IS_NOT_VALID) {
       this.CreateErrorMessage(notZero, isNumber, noOverlap, isThreeDigits);
       return this.IS_NOT_VALID;
     }
@@ -37,7 +37,7 @@ export default class HandleInput {
   }
 
   IsNumber(number) {
-    for (let i = 0; i <= 2; i++) {
+    for (let i = 0; i < number.length; i++) {
 		  if (!(number[i] >= 1 && number[i] <= 9))
         return this.IS_NOT_VALID;
     }
@@ -46,7 +46,7 @@ export default class HandleInput {
   }
 
   NoOverlap(number) {
-    for (let i = 0; i <= 2; i++) {
+    for (let i = 0; i < number.length; i++) {
 		  if (number.split(number[i]).length - 1 !== 1)
         return this.IS_NOT_VALID;
     }
