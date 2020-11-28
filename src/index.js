@@ -3,15 +3,16 @@ export default function BaseballGame() {
 
   const inputText = document.querySelector('#user-input');
   const submitButton = document.querySelector('#submit');
-  submitButton.addEventListener('click', () => console.log(inputText.value));
+  submitButton.addEventListener('click', () =>
+    this.integrateFunction(inputText.value)
+  );
 
   // 3개의 다른 숫자 세개 생성
   this.getRandomNumber = () => {
     let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let pickedNumbers = [];
     for (let i = 0; i < 3; i++) {
-      let picked;
-      picked = numbers.splice(Math.floor(Math.random() * (9 - i)), 1)[0];
+      const picked = numbers.splice(Math.floor(Math.random() * (9 - i)), 1)[0];
       pickedNumbers.push(picked);
     }
     return pickedNumbers;
@@ -51,14 +52,14 @@ export default function BaseballGame() {
   };
 
   // 컴퓨터의 숫자와 입력숫자 비교
-  this.compareNumber = userInput => {
+  this.compareNumber = (computerInput, userInput) => {
     const result = { strike: 0, ball: 0 };
     for (let i = 0; i < 3; i++) {
-      if (userInput[i] === this.computerInputNumbers[i]) {
+      if (userInput[i] === computerInput[i]) {
         result.strike++;
         continue;
       }
-      if (this.computerInputNumbers.includes(userInput[i])) {
+      if (computerInput.includes(userInput[i])) {
         result.ball++;
       }
     }
@@ -66,8 +67,34 @@ export default function BaseballGame() {
     return result;
   };
 
+  this.integrateFunction = userInput => {
+    const checked = this.checkInput(userInput);
+    if (checked) {
+      if (!this.computerInputNumbers) {
+        this.setComputerNum();
+      }
+      this.play(this.computerInputNumbers, userInput);
+    }
+  };
+
   this.play = function (computerInputNumbers, userInputNumbers) {
-    return '결과 값 String';
+    let resultString = '';
+    const { strike, ball } = this.compareNumber(
+      computerInputNumbers,
+      userInputNumbers
+    );
+    if (strike === 0 && ball === 0) {
+      resultString = '낫싱';
+    } else {
+      if (ball !== 0) {
+        resultString = resultString.concat(`${ball}볼 `);
+      }
+      if (strike !== 0) {
+        resultString = resultString.concat(`${strike}스트라이크`);
+      }
+    }
+    resultString = resultString.trim();
+    return resultString;
   };
 }
 
