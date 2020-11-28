@@ -32,7 +32,6 @@ export default function BaseballGame() {
             };
         };
     };
-    this.randomNumbers = this.makeRandomNumbers()
 // *입력의 길이가 3인지 확인한다.
     this.isLengthEqualsThree = function (input) {
         if (input.length === 3) {
@@ -121,6 +120,7 @@ export default function BaseballGame() {
     this.addCorrectHTML = function () {
         const child = document.querySelector('#result');
         const newChild = document.createElement('Strong');
+        child.innerHTML = ""
         child.appendChild(newChild);
         newChild.innerHTML = " 🎉 정답을 맞추셨습니다! 🎉 ";
     };
