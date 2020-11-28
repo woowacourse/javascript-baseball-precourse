@@ -13,6 +13,17 @@ export default class BaseballGame {
       if (userInput === "") return;
       console.log(`유저의 입력값: ${userInput}`);
 
+      if (this.isValid(userInput)) {
+        const userInputNumbers = Number(userInput);
+        const playResult = this.play(this.answer, userInputNumbers);
+        console.log(`힌트: ${playResult}`);
+
+      } else {
+        alert(`'${userInput}'은(는) 유효한 입력값이 아닙니다. 다시 입력해주세요.`);
+        this.$userInput.value = "";
+        this.$userInput.focus();
+      }
+
     };
 
     const onKeydown = (e) => {
