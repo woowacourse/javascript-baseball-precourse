@@ -3,7 +3,25 @@ export default function BaseballGame() {
 
   submitBtn.addEventListener('click', () => {
     const userInputNumbers = document.getElementById('user-input').value;
+    const isUserInputValid = validateInput(userInputNumbers);
+    console.log(isUserInputValid);
   });
+
+  const validateInput = (userInputNumbers) => {
+    if (isNaN(parseInt(userInputNumbers))) {
+      alert("숫자를 입력해주세요.");
+      clearInput();
+      return false;
+    } else if (userInputNumbers.length !== 3) {
+      alert("숫자를 3자리로 입력해주세요.");
+      clearInput();
+      return false;
+    } else return true;
+  }
+
+  const clearInput = () => {
+    document.getElementById('user-input').value = "";
+  }
 
   const genRandomNum = () => {
     let originalNums = [];
