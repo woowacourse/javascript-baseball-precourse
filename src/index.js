@@ -39,6 +39,10 @@ export default function BaseballGame() {
     document.getElementById('user-input').value = "";
   }
 
+  const clearResult = () => {
+    resultArea.remove();
+  }
+
   const validateInput = (userInputNumbers) => {
     if (isNaN(parseInt(userInputNumbers))) {
       alert("숫자를 입력해주세요.");
@@ -56,6 +60,7 @@ export default function BaseballGame() {
     let strike = 0; 
 
     if (computerInputNumbers === userInputNumbers) {
+      showRestartButton();
       return '정답입니다!';
     } else if (computerInputNumbers.includes(userInputNumbers[0])) {
       for (let i=0; i<3; i++) {
@@ -76,6 +81,22 @@ export default function BaseballGame() {
     } else if (ball > 0 && strike > 0) {
       return `${ball}볼 ${strike}스트라이크`;
     }
+  }
+
+  const showRestartButton = () => {
+    const screen = document.getElementById('app');
+    const restartBtn = document.createElement('button');
+    restartBtn.setAttribute('id', 'game-restart-button');
+    restartBtn.appendChild(document.createTextNode("다시 하기"));
+    screen.appendChild(restartBtn); 
+
+    restartBtn.addEventListener('click', () => {
+      clearInput();
+      clearResult();
+      restartBtn.remove();
+
+      new BaseballGame();
+    });
   }
 }
 
