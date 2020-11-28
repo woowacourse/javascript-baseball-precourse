@@ -6,7 +6,7 @@ export default function BaseballGame() {
   this.notSameNumber = function(randomNumber) { 
     return computerInputNumbers.every((computerInputNumber) => randomNumber !== computerInputNumber);
   };
-
+  
   this.createComputerInputNumbers = function() {
     let i = 0;
 
@@ -17,13 +17,13 @@ export default function BaseballGame() {
         i++;
       }
     }
-    console.log(computerInputNumbers)
+
     return computerInputNumbers;
   };
 
   // 2. 유저의 입력값 판별 기능
   const submitButton = document.querySelector("#submit");
-  const userInput = document.querySelector("#user-input")
+  const userInput = document.querySelector("#user-input");
   
   this.getUserInputNumbers = function() {
     const userInputNumbers = userInput.value.split('');
@@ -36,11 +36,27 @@ export default function BaseballGame() {
     }
   };
 
+  // 4. 게임 재시작 기능
+  const gameRestartButton = document.querySelector("#game-restart-button")
+  gameRestartButton.style.display = 'none';
 
   this.gameRestart = function() {
-    console.log("to be continued")
+    let gameRestartText = document.querySelector("#game-restart-text");
+    result.innerText = "🎉정답을 맞추셨습니다! 🎉";
+    result.style.fontWeight = "bold";
+    gameRestartText.innerText = "게임을 다시 시작하시겠습니까?";
+    gameRestartText.style.display = "inline-block";
+    gameRestartButton.style.display = 'inline-block';
+    gameRestartButton.addEventListener("click", () => {
+      computerInputNumbers = [];
+      userInput.value = '';
+      gameRestartButton.style.display = 'none';
+      gameRestartText.style.display = 'none';
+      result.style.display = 'none';
+      this.createComputerInputNumbers();
+    });
   };
-  
+
   // 3. 컴퓨터의 랜덤값과 유저의 입력값 비교 기능
   this.play = function (computerInputNumbers, userInputNumbers) {
     let result = document.querySelector("#result");
@@ -80,7 +96,7 @@ export default function BaseballGame() {
     this.createComputerInputNumbers();
     submitButton.addEventListener("click", () => {
       const userInputNumbers = this.getUserInputNumbers();
-      
+
       if (userInputNumbers) {
         this.play(computerInputNumbers, userInputNumbers)
       }
