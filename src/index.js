@@ -38,6 +38,18 @@ export default class BaseballGame {
     ]);
   };
 
+  initializeComponents() {
+    const $inputWrap = document.getElementById('input-wrap');
+    const $result = document.getElementById('result');
+    new UserInput($inputWrap, {
+      userNumber: this.#userNumber,
+    });
+    new GameResult($result, {
+      playResult: this.#playResult,
+      restart: this.restart,
+    });
+  }
+
   restart = () => {
     this.setAnswer();
     this.#userNumber.value = INITIAL_STATE_NUMBER;
@@ -101,18 +113,6 @@ export default class BaseballGame {
     }
 
     return playResult;
-  }
-
-  initializeComponents() {
-    const $inputWrap = document.getElementById('input-wrap');
-    const $result = document.getElementById('result');
-    new UserInput($inputWrap, {
-      userNumber: this.#userNumber,
-    });
-    new GameResult($result, {
-      playResult: this.#playResult,
-      restart: this.restart,
-    });
   }
 }
 
