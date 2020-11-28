@@ -1,12 +1,16 @@
 export default class BaseballGame {
   constructor() {
+    this.$result = document.getElementById('result');
+    this.$userInput = document.getElementById('user-input');
+    this.$submit = document.getElementById('submit');
+    this.$submit.addEventListener('click', this.handleClickSubmit);
+
     this.computerInputNumbers = '';
     this.startNewGame();
   }
 
   startNewGame = () => {
     this.computerInputNumbers = this.createComputerInputNumbers();
-    console.log(this.computerInputNumbers);
   }
 
   createComputerInputNumbers = () => {
@@ -22,7 +26,28 @@ export default class BaseballGame {
     return computerNumbers;
   }
 
-  play(computerInputNumbers, userInputNumbers) {
+  handleClickSubmit = () => {
+    const userInputNumbers = this.$userInput.value;
+
+    if (this.isPossible(userInputNumbers)) {
+      console.log('game start');
+    } else {
+      console.log('error');
+    }
+  }
+
+  isThreeDigitNumber = (numbers) => {
+    return /^[1-9]{3}$/g.test(numbers);
+  }
+
+  isPossible = (numbers) => {
+    if (this.isThreeDigitNumber(numbers)) {
+      return true;
+    }
+    return false;
+  }
+
+  play = (computerInputNumbers, userInputNumbers) => {
     return '결과 값 String';
   }
 }
