@@ -1,4 +1,4 @@
-import initGame from './initGame.js';
+import handleInit from './handleInit.js';
 import CheckInput from './checkInput.js';
 
 export default function BaseballGame() {
@@ -6,8 +6,8 @@ export default function BaseballGame() {
   const _resultArea = document.querySelector('#result');
   const _button = document.querySelector("#submit");
   const _input = document.querySelector("#user-input");
-  const _privateInitUtils = new initGame();
-  let _answer = _privateInitUtils.GenerateAnswer(_resultArea, _input);
+  const _privateInitUtils = new handleInit();
+  let _answer = _privateInitUtils.InitGame(_resultArea, _input);
 
 	this.play = function (computerInputNumbers, userInputNumbers) {
     let [ball, strike] = CountBallStrike(computerInputNumbers, userInputNumbers);
@@ -76,7 +76,7 @@ export default function BaseballGame() {
       _resultArea.appendChild(restartButton);
 
       restartButton.addEventListener('click', () => {
-        _answer = _privateInitUtils.RestartGame(_resultArea, _answer, _input);
+        _answer = _privateInitUtils.InitGame(_resultArea, _input);
 		  })
     } 
     else

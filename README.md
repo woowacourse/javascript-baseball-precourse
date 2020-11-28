@@ -76,12 +76,6 @@
   - 입력창에 focus()
 
 <br>
-
-#### 5. `RestartGame()` 새로운 정답 생성해서 리턴
-  - `InitGamewindow()` 호출해서 게임화면 초기화
-  - `GenerateAnswer()` 호출해서 새로운 정답 리턴
-
-<br>
 <br>
 
 ## handleInput.js
