@@ -10,22 +10,31 @@ export default class BaseballGame {
   }
 
   setEventListener() {
-    submitEl.addEventListener('click', this.getUserInput);
+    const clickSubmitEl = () => {
+      const userInputNumbers = this.getUserInput();
+      if (userInputNumbers) {
+        this.play(this.computerNumbers, userInputNumbers);
+      }
+    }
+
+    submitEl.addEventListener('click', clickSubmitEl);
   }
 
   getUserInput() {
+    let isValid = true;
     const userInput = userInputEl.value;
     const userInputNumbers = userInput.split('').map(Number);
 
     if (isInvalidNumbers(userInputNumbers)) {
       alert('1~9까지의 3자리 숫자를 중복 없이 입력해주세요');
       userInputEl.focus();
+      isValid = false;
     }
 
     function isInvalidNumbers(numbers) {
       const visited = [];
 
-      // 길이와 NUMBER_LENGTH가 같지 않다면
+      // 길이와 NUMBER_LENGTH가 같지 않다면 invalid함
       return numbers.length !== NUMBER_LENGTH || (
         numbers.some((number) => {
           let isInvalid = false;
@@ -47,6 +56,8 @@ export default class BaseballGame {
         })
       )
     }
+
+    return isValid && userInputNumbers;
   }
 
   generateComputerNumbers() {
@@ -68,6 +79,20 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
+    let ballCount = 0;
+    let strikeCount = 0;
+
+    for (let i = 0; i < NUMBER_LENGTH; i++) {
+      const computerInputNumber = computerInputNumbers[i];
+      const userInputNumber = userInputNumbers[i];
+
+      if (computerInputNumber === userInputNumber) {
+        strikeCount += 1;
+      } else if (computerInputNumbers.includes(userInputNumber)) {
+        ballCount += 1;
+      }
+    }
+
     return '결과 값 String';
   }
 }
