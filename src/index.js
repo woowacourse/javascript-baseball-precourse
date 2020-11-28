@@ -3,6 +3,7 @@ export default function BaseballGame() {
   const userInput = document.getElementById("user-input");
   
   this.play = function (computerInputNumbers, userInputNumbers) {
+    
     return "결과 값 String";
   };
 
@@ -15,7 +16,7 @@ export default function BaseballGame() {
         computerNumbers.push(randomNumber)
       }
     }
-
+    console.log(computerNumbers.join(""))
     return computerNumbers;
   };
 
