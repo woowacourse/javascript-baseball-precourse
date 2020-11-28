@@ -5,23 +5,20 @@ import {
 } from '../library/constants/alert-message.js';
 import { MIN3DIGIT } from '../library/constants/number.js';
 import { INITIAL_STATE_NUMBER } from '../library/constants/state.js';
+import Component from '../library/core/component.js';
 import { hasDuplicateCharacter } from '../library/utils/check.js';
 
-class UserInput {
-  #$target;
-  #props;
+class UserInput extends Component {
   #$userInput;
 
   constructor($target, props) {
-    this.#$target = $target;
-    this.#props = props;
+    super($target, props);
     this.#$userInput = $target.querySelector('#user-input');
     props.userNumber.subscribe(this.render);
-    this.initializeEventListener();
   }
 
   initializeEventListener() {
-    this.#$target.addEventListener('submit', event => this.onSubmit(event));
+    this._$target.addEventListener('submit', event => this.onSubmit(event));
   }
 
   onSubmit(event) {
@@ -29,7 +26,7 @@ class UserInput {
     const input = this.#$userInput.value;
     if (this.isValidInput(input)) {
       const userNumber = parseInt(input, 10);
-      this.#props.userNumber.value = userNumber;
+      this._props.userNumber.value = userNumber;
     } else {
       this.alertByCase(input);
       this.clearInput();
@@ -71,7 +68,7 @@ class UserInput {
   };
 
   render = () => {
-    if (this.#props.userNumber.value === INITIAL_STATE_NUMBER) {
+    if (this._props.userNumber.value === INITIAL_STATE_NUMBER) {
       this.clearInput();
     }
   };
