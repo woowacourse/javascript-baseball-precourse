@@ -71,9 +71,9 @@ export default function BaseballGame() {
     const ResultUtils = new HandleResult();
 
     if (resultMessage === 'success')
-      _answer = ResultUtils.IsCorrect(_resultArea, _input);
+      _answer = ResultUtils.IsCorrect();
     else
-      ResultUtils.IsWrong(_resultArea, resultMessage);
+      ResultUtils.IsWrong(resultMessage);
   }
 }
  
