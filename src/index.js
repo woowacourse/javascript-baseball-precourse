@@ -3,6 +3,8 @@ export default function BaseballGame() {
 
   const inputText = document.querySelector('#user-input');
   const submitButton = document.querySelector('#submit');
+  const resultText = document.querySelector('#result');
+
   submitButton.addEventListener('click', () =>
     this.integrateFunction(inputText.value)
   );
@@ -72,6 +74,7 @@ export default function BaseballGame() {
     return result;
   };
 
+  // 기능 통합
   this.integrateFunction = userInput => {
     const checked = this.checkInput(userInput);
     if (checked) {
@@ -82,6 +85,7 @@ export default function BaseballGame() {
     }
   };
 
+  // 결과값 가져오기
   this.play = function (computerInputNumbers, userInputNumbers) {
     let resultString = '';
     const { strike, ball } = this.compareNumber(
@@ -99,7 +103,7 @@ export default function BaseballGame() {
       }
     }
     resultString = resultString.trim();
-    console.log(resultString);
+    resultText.innerHTML = resultString;
     return resultString;
   };
 }
