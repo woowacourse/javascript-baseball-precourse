@@ -106,3 +106,5 @@ function startGame() {
     }
   };
 }
+
+onload = startGame
