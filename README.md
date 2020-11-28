@@ -51,9 +51,11 @@
 <br>
 
 ## initGame.js
+#### 0. 지역변수
+  - _candidate = `OneToNine()`
+
 #### 1. `GenerateAnswer()` 정답 생성 후 리턴
   - `InitGameWindow()` 호출해서 게임화면 초기화
-  - `OneToNine()` 호출해서 1~9까지 담긴 candidate 배열 생성
   - `PickRandomDigits()` 호출해서 정답 생성 후 리턴
 
 <br>

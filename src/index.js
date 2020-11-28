@@ -44,7 +44,7 @@ export default function BaseballGame() {
     const InputUtils = new CheckInput();
     let userValue = InputUtils.GetInput(_input);
 
-    if (userValue !== 0) {
+    if (userValue !== 'notValid') {
       let resultMessage = this.play(_answer, userValue);
       DisplayResult(resultMessage);
     }

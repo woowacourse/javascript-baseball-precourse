@@ -7,7 +7,8 @@ export default class CheckInput {
       input.placeholer = input.value;
       input.value = '';
       input.focus();
-      return 0;
+      userValue = 'notValid';
+      return userValue;
     }
     
     userValue = input.value;
