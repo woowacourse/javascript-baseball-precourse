@@ -53,6 +53,7 @@ const onClickSubmitBtn = (e) => {
   const userInputValue = userInput.value;
   if(!BG.isValidInput(userInputValue)) {
     alert('올바른 입력이 아닙니다. 1~9사이의 수 3자리를 중복없이 입력해주세요.');
+    userInput.value = '';
     return;
   }
 
@@ -100,5 +101,3 @@ window.idx = 1;
 
 app.addEventListener('click', onClickSubmitBtn);
 app.addEventListener('click', onClickRestartBtn);
-
-console.log(window.comNum);
