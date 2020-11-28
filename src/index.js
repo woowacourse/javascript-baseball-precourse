@@ -51,7 +51,19 @@ export default class BaseballGame {
     const resultHTML = `${userInputNumbers} <br><b>${result}</b><br><hr><br>`;
     resultBox.innerHTML += resultHTML;
   }
+
+  start = () => {
+    const computerInputNumbers = this.computerInputNumbers;
+    const userInputNumbers = this.getUserInputNumbers();
+    const isValid = validateUserInput(userInputNumbers);
+    if (isValid) {
+      const result = this.play(computerInputNumbers, userInputNumbers);
+      this.renderResult(userInputNumbers, result);
+    }
+  };
 }
 
 //DOM Elements
 const game = new BaseballGame();
+// const submitButton = document.getElementById("submit");
+// submitButton.onclick = game.start;
