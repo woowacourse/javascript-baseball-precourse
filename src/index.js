@@ -23,8 +23,17 @@ const isNumeric = (num) => {
   return !isNaN(Number(num));
 };
 
+const isThreeDigits = (num) => {
+  return num.length === 3;
+};
+
 const isValidNumbers = (num) => {
-  return !hasDuplicatedNumbers(num) && !hasZero(num) && isNumeric(num);
+  return (
+    !hasDuplicatedNumbers(num) &&
+    !hasZero(num) &&
+    isNumeric(num) &&
+    isThreeDigits(num)
+  );
 };
 
 export default function BaseballGame() {
