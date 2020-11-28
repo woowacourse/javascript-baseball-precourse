@@ -32,7 +32,7 @@ export default class BaseballGame {
     if (this.isPossible(userInputNumbers)) {
       console.log('game start');
     } else {
-      console.log('error');
+      this.randerErrorMessage('잘못된 입력입니다. 다시 입력해주세요');
     }
   }
 
@@ -52,6 +52,12 @@ export default class BaseballGame {
       return true;
     }
     return false;
+  }
+
+  randerErrorMessage = (message) => {
+    alert(message);
+    this.$userInput.value = '';
+    this.$userInput.focus();
   }
 
   play = (computerInputNumbers, userInputNumbers) => {
