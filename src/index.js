@@ -29,6 +29,7 @@ export default function BaseballGame() {
   this.setComputerNum = () => {
     const computerNum = this.getRandomNumber();
     this.computerInputNumbers = computerNum.join('');
+    console.log(this.computerInputNumbers);
   };
 
   // 중복 값이 있는지 확인
@@ -85,6 +86,16 @@ export default function BaseballGame() {
     }
   };
 
+  // 결과값 보여주기
+  this.showResult = resultString => {
+    if (resultString === '3스트라이크') {
+      resultText.style.fontWeight = 'bold';
+      resultText.innerHTML = '정답을 맞추셨습니다.';
+    } else {
+      resultText.innerHTML = resultString;
+    }
+  };
+
   // 결과값 가져오기
   this.play = function (computerInputNumbers, userInputNumbers) {
     let resultString = '';
@@ -103,7 +114,8 @@ export default function BaseballGame() {
       }
     }
     resultString = resultString.trim();
-    resultText.innerHTML = resultString;
+    this.showResult(resultString);
+
     return resultString;
   };
 }
