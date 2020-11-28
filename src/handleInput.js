@@ -11,6 +11,8 @@ export default class HandleInput {
       userValue = input.value;
     else
       userValue = this.IS_NOT_VALID;
+    
+    this.InputFieldConvenience(input, userValue);
 
     return userValue;
   }
@@ -75,30 +77,14 @@ export default class HandleInput {
       errorMessage += '세 개의 ';
     
     errorMessage += '숫자를 입력해주세요';
-    console.log(errorMessage);
     this.AlertErrorMessage(errorMessage);
   }
 
   AlertErrorMessage = (errorMessage => alert(errorMessage));
 
-  GetInput(input) {
-    let userValue = '';
-
-    if (this.CheckInputValidity(input.value) === 1) {
-      input.placeholer = input.value;
-      input.value = '';
-      input.focus();
-      userValue = 'notValid';
-      return userValue;
-    }
-    
-    userValue = input.value;
-    input.placeholder = userValue;
+  InputFieldConvenience(input, userValue) {
     input.value = '';
+    input.placeholder = userValue;
     input.focus();
-
-    return userValue;
-  }
-
-	
+  }	
 }
