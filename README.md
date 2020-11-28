@@ -4,7 +4,7 @@
 ## TODOs
 
 - [X] todos 정리
-- [ ] 3개 랜덤 숫자 함수
+- [X] 3개 랜덤 숫자 함수
 - [ ] 유저 input 받기
 - [ ] 유저 input 유효성 검사
 - [ ] 유저 input & 컴퓨터 input 비교

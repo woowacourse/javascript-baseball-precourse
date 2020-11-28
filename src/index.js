@@ -1,13 +1,20 @@
 export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
-}
+  const genRandomNum = () => {
+    let originalNums = [];
+    let num = "";
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
+    for (let i=1; i<10; i++) {
+      originalNums.push(i);
+    }
+    
+    for (let i=0; i<3; i++) {
+      let randomIdx = Math.floor(Math.random()*(9-i));
+      num += originalNums[randomIdx];  
+      originalNums.splice(randomIdx, 1);
+    }
+    
+    return num;   
+  }
+}
 
 new BaseballGame();
