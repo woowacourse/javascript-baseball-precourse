@@ -1,6 +1,9 @@
 export default class BaseballGame {
   constructor() {
     this.answerNumbers = this.makeAnswerNumbers();
+    this.userInputNumbers = [];
+
+    this.bindEventListener();
   }
 
   makeAnswerNumbers = () => {
@@ -15,6 +18,16 @@ export default class BaseballGame {
     }
 
     return result;
+  };
+
+  checkUserInput = (userInput) => {
+    // check
+  };
+
+  bindEventListener = () => {
+    document
+      .querySelector("#submit")
+      .addEventListener("click", (e) => this.checkUserInput(document.querySelector("#user-input").value));
   };
 
   play(computerInputNumbers, userInputNumbers) {
