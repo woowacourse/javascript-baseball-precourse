@@ -79,7 +79,14 @@ let _baseballGame = new BaseballGame();
     - 결과 출력 묻는 메소드는 _askShowRecords()에 저장됨
     - 출력하면서 DOM 조작하는 메소드는 _showRecords()
 
+<hr/>
 
+## 결과 화면
+
+<br/>
+
+![baseball_result](./captures/result1.png)
+![baseball_result_with_additional_func](./captures/result2.png)
 
 
 <br/>
