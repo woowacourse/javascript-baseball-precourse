@@ -54,7 +54,7 @@ export default function BaseballGame() {
       gameRestartText.style.display = 'none';
       result.innerText = '';
       this.createComputerNumbers();
-    });
+    }, {once : true});
   };
 
   // 3. 컴퓨터의 랜덤값과 유저의 입력값 비교 기능
