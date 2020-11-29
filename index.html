@@ -47,13 +47,18 @@
           return alert('중복된 값을 입력하였습니다');
         }
         
+        
         let {ball, strike} = game.play(userInput);
         if(strike === 3) {
-          winHandler();
+          winHandler(function(){
+            game = new BaseballGame();
+          });
         } else {
           wrongResultHandler(ball, strike);
         }      
       });
+
+      
       
     </script>
   </body>

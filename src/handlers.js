@@ -12,10 +12,14 @@ export function wrongResultHandler(ball, strike) {
   document.getElementById('result').innerHTML = result;
 }
 
-export function winHandler() {
+export function winHandler(callback) {
   document.getElementById('result').innerHTML = '🎉정답을 맞추셨습니다!🎉';
-  let restart = document.querySelector('#restartTemplate');
-  let clone = document.importNode(restart.content, true);
+  const restart = document.querySelector('#restartTemplate');
+  const clone = document.importNode(restart.content, true);
+  clone.getElementById('restartbtn').addEventListener('click', () => {
+    document.getElementById('result').innerHTML = '';
+    document.getElementById('restart').innerHTML = '';
+    callback();
+  });
   document.getElementById('restart').appendChild(clone);
-
 }
