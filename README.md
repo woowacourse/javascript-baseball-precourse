@@ -91,25 +91,24 @@ play(123, 124); // '2스트라이크'
 ## 기능 목록
 
 
-- event handling function
-  - handleUserInputSubmit : 입력한 숫자 제출 이벤트 핸들링 (구현)
-  - handleReStartClick : 재시작 버튼 클릭 이벤트 핸들링 (구현)
-  
-- userinput exception handling function
-  - isNumber : user input이 1~9까지의 숫자로 이루어져 있는가 판별 (구현)
-  - isNot3Digit : user input이 3자리 숫자가 아닌지 판별 (구현)
-  - isInZero : user input에 0이 포함되어 있는지 판별 (구현)
-  - isInduplicateDigit : user input에 중복된 숫자들이 섞여있는지 판별 (구현)
   
 - BaseballGame class (Model)
   - init : class 생성시 초기화 함수 (구현)
   - randomComputerInputNumbers : 3자리 난수 뽑는 함수, _computerInputNumbers setter (구현)
   - getComputerInputNumbers : _computerInputNumbers getter (구현)
-  - judge : 컴퓨터 입력 값, 사용자의 입력 값을 받아 일치 여부 판단하여 스트라이크 개수, 볼 개수 반환(구현)
+  - countStrikeBall : 컴퓨터 입력 값, 사용자의 입력 값을 받아 일치 여부 판단하여 스트라이크 개수, 볼 개수 객체로 반환(구현)
   - play : 컴퓨터 입력 값, 사용자의 입력 값을 받아 스트라이크, 볼, 낫싱, 정답 관련 String 반환(구현)
-  - restart : 게임 재시작 함수 (구현)
   
 - BaseballGameView class (View)
    - renderResult : 게임 결과를 나타내는 DOM 생성, 렌더 (구현)
    - cleanResult : 게임 결과를 나타내는 DOM 소거 (구현)
    - resetInputNumbers : user input 입력 칸 초기화 (구현)
+   - validUserInputNumbers : exception handling function들로 user input이 정상적인 입력인지 검증(구현)
+   - handleUserInputSubmit : 입력한 숫자 제출 이벤트 핸들링 (구현)
+   - handleReStartClick : 재시작 버튼 클릭 이벤트 핸들링 (구현)
+   
+- userinput exception handling function
+   - isNumber : user input이 1~9까지의 숫자로 이루어져 있는가 판별 (구현)
+   - isNot3Digit : user input이 3자리 숫자가 아닌지 판별 (구현)
+   - isInZero : user input에 0이 포함되어 있는지 판별 (구현)
+   - isInduplicateDigit : user input에 중복된 숫자들이 섞여있는지 판별 (구현)
