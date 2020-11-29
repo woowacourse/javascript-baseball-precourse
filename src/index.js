@@ -25,9 +25,11 @@ export default class BaseballGame {
   }
 
   _showRecords() {
+    const showRecordsButton = resultElement.querySelector('#show-records-button');
     const showRecordsSection = document.createElement("div");
     const tryCount = document.createElement("p");
     const showRecordsList = document.createElement("ul");
+
     const getUserRecordText = ({
       userInputNumbers, 
       ball, 
@@ -37,6 +39,7 @@ export default class BaseballGame {
     showRecordsSection.id = "show-records";
     tryCount.id = 'try-count';
     showRecordsList.id = 'show-records-list';
+
 
     tryCount.innerText = `시도 횟수: ${this.records.length}`;
     this.records.forEach((record, idx) => {
@@ -48,52 +51,40 @@ export default class BaseballGame {
     showRecordsSection.appendChild(tryCount);
     showRecordsSection.appendChild(showRecordsList);
     resultElement.appendChild(showRecordsSection);
-    
-    resultElement.removeChild(document.getElementById('ask-show-records'));
+    resultElement.removeChild(showRecordsButton);
   }
 
   _askShowRecords() {
-    const askShowRecordsSection = document.createElement("div");
+    const getHrElement = document.createElement('hr');
     const showRecordsButton = document.createElement('button');
-    const askShowRecordsPlaceholder = document.createElement('p');
 
     if(!this.result || !this.result.ok) return;
 
-    askShowRecordsSection.id = 'ask-show-records';
     showRecordsButton.id = "show-records-button";
-    askShowRecordsPlaceholder.id = "ask-show-records-placeholder";
-
-    askShowRecordsPlaceholder.innerText = "기록 보기";
     showRecordsButton.innerText = "show records";
 
     showRecordsButton.addEventListener('click', () => this._showRecords());
 
-    askShowRecordsSection.appendChild(askShowRecordsPlaceholder);
-    askShowRecordsSection.appendChild(showRecordsButton);
-
-    resultElement.appendChild(askShowRecordsSection);
+    resultElement.appendChild(getHrElement);
+    resultElement.appendChild(showRecordsButton);
   }
 
   _askRestart() {
-    const askRestartSection = document.createElement("div");
     const restartButton = document.createElement('button');
     const askRestartPlaceholder = document.createElement('p');
 
     if(!this.result || !this.result.ok) return;
     
-    askRestartSection.id = "ask-restart";
     restartButton.id = "restart-button";
     askRestartPlaceholder.id = "ask-restart-placeholder";
 
-    askRestartPlaceholder.innerText = "게임을 새로 시작하시겠습니까?";
+    askRestartPlaceholder.innerText = "게임을 새로 시작하시겠습니까? ";
     restartButton.innerText = "restart";
 
     restartButton.addEventListener('click', () => window.location.reload());
 
-    askRestartSection.appendChild(askRestartPlaceholder);
-    askRestartSection.appendChild(restartButton);
-    
-    resultElement.appendChild(askRestartSection);
+    resultElement.appendChild(askRestartPlaceholder);
+    resultElement.appendChild(restartButton);
   }
 
   _resetResultMessage() {
