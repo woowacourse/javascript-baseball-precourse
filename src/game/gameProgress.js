@@ -1,3 +1,5 @@
+import printGameResult from './printGameResult.js';
+
 function getStrikeCount(computerInputNumbers, userInputNumbers) {
   return computerInputNumbers.reduce((acc, currentValue, index) => {
     if (currentValue === userInputNumbers[index]) {
@@ -23,7 +25,5 @@ export default function gameProgress(computerInputNumbers, userInputNumbers) {
   const strikeCount = getStrikeCount(computerInputNumbers, userInputNumbers);
   const ballCount = getBallCount(computerInputNumbers, userInputNumbers);
 
-  console.log(computerInputNumbers, userInputNumbers);
-  console.log('strikeCount : ', strikeCount);
-  console.log('balleCount : ', ballCount);
+  return printGameResult(strikeCount, ballCount);
 }
