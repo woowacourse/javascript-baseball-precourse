@@ -43,7 +43,6 @@ function checkInputType(userInputNumbers) {
   if (userInputNumbers.every(isNumber)) {
     return true;
   }
-
   return false;
 }
 
@@ -60,6 +59,5 @@ export default function checkValidInput(userInputNumbers) {
   if (!userInputNumbers.every(checkValidScope)) {
     return alertInvalidInput('inValidScope');
   }
-
   return true;
 }
