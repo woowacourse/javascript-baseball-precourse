@@ -78,6 +78,10 @@ export default class BaseballGame {
   restart() {
     this.init();
   }
+}
+
+export default class BaseballGameView {
+  constructor(BaseballGame) {}
 
   renderResult(string) {
     const responseP = doc.createElement('p');
@@ -151,8 +155,8 @@ function resetInputNumbers() {
 
 function handleReStartClick() {
   resetInputNumbers();
-  game.cleanResult();
-  game.restart();
+  gameView.cleanResult();
+  gameView.restart();
 }
 
 function handleUserInputSubmit() {
@@ -178,14 +182,15 @@ function handleUserInputSubmit() {
     return alert(text.warningForduplicate);
   }
 
-  game.cleanResult();
-  game.renderResult(
-    game.play(game.getComputerInputNumbers(), userInputNumbers),
+  gameView.cleanResult();
+  gameView.renderResult(
+    gameModel.play(gameModel.getComputerInputNumbers(), userInputNumbers),
   );
 }
 
 const doc = window.document;
 const resultDiv = doc.getElementById('result');
-const game = new BaseballGame(resultDiv);
+const gameModel = new BaseballGame(resultDiv);
+const gameView = new BaseballGameView(gameModel);
 const submitNumButton = doc.getElementById('submit');
 submitNumButton.addEventListener('click', handleUserInputSubmit);
