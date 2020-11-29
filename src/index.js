@@ -3,7 +3,14 @@ const USER_INPUT_LENGTH = 3;
 export default class BaseballGame {
   constructor() {
     this.$result = document.getElementById('result');
+
     this.$userInput = document.getElementById('user-input');
+    this.$userInput.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        this.handleClickSubmit();
+      }
+    });
+
     this.$submit = document.getElementById('submit');
     this.$submit.addEventListener('click', this.handleClickSubmit);
 
@@ -32,9 +39,11 @@ export default class BaseballGame {
   handleClickSubmit = () => {
     const userInputNumbers = this.$userInput.value;
 
-    return this.isPossible(userInputNumbers) ?
+    this.isPossible(userInputNumbers) ?
       this.play(this.computerInputNumbers, userInputNumbers) :
       this.randerErrorMessage('잘못된 입력입니다. 다시 입력해주세요');
+
+    this.$userInput.select();
   }
 
   isThreeDigitNumbers = (numbers) => {
