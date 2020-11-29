@@ -1,9 +1,20 @@
 export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = []
+    this.userInputNumbers = []
+  }
+
+  getUserInputNumbers() {
+    const userInput = document.getElementById("user-input")
+    const userInputNumberString = userInput.value
+  }
+  setBtnEventListener() {
+    const submitBtn = document.getElementById("submit")
+    submitBtn.addEventListener("click", (e) => this.getUserInputNumbers())
   }
   init() {
     this.computerInputNumbers = this.createRandomNumbers()
+    this.setBtnEventListener()
   }
   createRandomNumbers() {
     const randomNumbers = []
