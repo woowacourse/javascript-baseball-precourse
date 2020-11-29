@@ -11,7 +11,7 @@ export default class BaseballGame {
 
   startGame = () => {
     const userInputElem = document.getElementById('user-input');
-    const userInputButtonElem = document.getElementById('submit');
+    
 
     let userInputNumbers = this.parseUserInput(userInputElem.value);
         
@@ -19,7 +19,7 @@ export default class BaseballGame {
     if (userInputNumbers.length === 0) {
       return;
     }
-  
+
     this.play(this.computerInputNumber, userInputNumbers);
   }
 
@@ -87,6 +87,7 @@ export default class BaseballGame {
   displayResult = (gameResult) => {
     let gameResultDisplay;
 
+    this.disablePreviousElements();
     if (gameResult === '정답') {
       gameResultDisplay = document.getElementById('result').innerHTML += 
       `<p><strong>🎉 정답을 맞추셨습니다! 🎉</strong></p>
@@ -97,6 +98,11 @@ export default class BaseballGame {
     }
 
     gameResultDisplay;
+  }
+
+  disablePreviousElements = () => {
+    document.getElementById('user-input').disabled = true;
+    document.getElementById('submit').disabled = true;
   }
 
   restartGame = () => {
