@@ -5,24 +5,27 @@ export default class BaseballGame {
     this.$result = document.getElementById('result');
 
     this.$userInput = document.getElementById('user-input');
-    this.$userInput.addEventListener('keypress', (event) => {
-      if (event.key === 'Enter') {
-        this.handleClickSubmit();
-      }
-    });
+    this.$userInput.addEventListener('keypress', this.onKeyPressEnter);
 
     this.$submit = document.getElementById('submit');
-    this.$submit.addEventListener('click', this.handleClickSubmit);
+    this.$submit.addEventListener('click', this.onClickSubmitButton);
 
     this.errorMessage = '';
     this.computerInputNumbers = this.createComputerInputNumbers();
   }
 
-  handleClickRestartGame = () => {
+  onClickRestartButton = () => {
     this.computerInputNumbers = this.createComputerInputNumbers();
     this.$userInput.value = '';
     this.$result.innerHTML = '';
     this.errorMessage = '';
+  }
+
+  onKeyPressEnter = (event) => {
+    const { key } = event;
+    if (key === 'Enter') {
+      this.onClickSubmitButton();
+    }
   }
 
   createComputerInputNumbers = () => {
@@ -38,7 +41,7 @@ export default class BaseballGame {
     return _computerNumbers;
   }
 
-  handleClickSubmit = () => {
+  onClickSubmitButton = () => {
     const _userInputNumbers = this.$userInput.value;
 
     if (this.isPossible(_userInputNumbers)) {
@@ -126,7 +129,7 @@ export default class BaseballGame {
     `;
 
     const $gameRestartButton = document.querySelector('#game-restart-button');
-    $gameRestartButton.addEventListener('click', this.handleClickRestartGame);
+    $gameRestartButton.addEventListener('click', this.onClickRestartButton);
   }
 
   renderGameResult = (strike, ball) => {
