@@ -78,7 +78,7 @@ export default function BaseballGame() {
   const submitButton = document.querySelector("#submit");
   const userInput = document.querySelector("#user-input");
   const resultContainer = document.querySelector("#result");
-  const computerNumbers = getComputerNumbers();
+  let computerNumbers = getComputerNumbers();
   let correctState = false;
 
   const play = (computerInputNumbers, userInputNumbers) => {
@@ -91,11 +91,33 @@ export default function BaseballGame() {
     return getResultMessage(ball, strike, correct);
   };
 
+  const gameRestart = () => {
+    const appContainer = document.querySelector("#app");
+    const restartWrap = document.createElement("div");
+    const restartText = document.createElement("span");
+    const restartButton = document.createElement("button");
+
+    restartText.textContent = "게임을 새로 시작하시겠습니까? ";
+    restartButton.setAttribute("id", "game-restart-button");
+    restartButton.textContent = "게임 재시작";
+    restartWrap.appendChild(restartText);
+    restartWrap.appendChild(restartButton);
+    appContainer.appendChild(restartWrap);
+
+    restartButton.addEventListener("click", () => {
+      resultContainer.textContent = "";
+      userInput.value = "";
+      computerNumbers = getComputerNumbers();
+      appContainer.removeChild(restartWrap);
+    });
+  };
+
   const resultProvider = (message) => {
     if (!correctState) {
       resultContainer.textContent = message;
     } else {
       resultContainer.innerHTML = message;
+      gameRestart();
     }
   };
 
