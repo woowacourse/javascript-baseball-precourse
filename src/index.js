@@ -16,7 +16,7 @@ export default class BaseballGame {
   }
 
   randomComputerInputNumbers() {
-    const table = Array.from({ length: 10 }).map(() => false);
+    const table = Array.from({ length: 10 }, () => false);
     let random = '';
     let count = 0;
 
