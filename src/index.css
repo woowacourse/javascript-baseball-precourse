@@ -1,0 +1,6 @@
+#restart-wrapper{
+    display: flex;
+    align-items: center;
+    visibility: hidden;
+}
+

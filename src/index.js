@@ -2,7 +2,10 @@ export default function BaseballGame() {
   const submit = document.getElementById("submit");
   const userInput = document.getElementById("user-input");
   const resultWrapper = document.getElementById("result");
-  
+  const restartWrapper = document.getElementById("restart-wrapper");
+  const restart = document.getElementById("restart");
+  let inRound = false;
+
   this.play = function (computerInputNumbers, userInputNumbers) {
     let ball = 0;
     let strike = 0;
@@ -14,9 +17,9 @@ export default function BaseballGame() {
         ball++;
       }
     }
-    
+
     let result = this.judgeResult(strike, ball);
-    
+
     return result;
   }; 
 
@@ -33,6 +36,7 @@ export default function BaseballGame() {
 
   this.getComputerInputNumbers = function () {
     let computerNumbers = [];
+
     while (computerNumbers.length < 3) {
       let randomNumber = getRandomNumber();
 
@@ -45,6 +49,7 @@ export default function BaseballGame() {
   };
 
   this.checkInputError = function(userInputNumber) {
+
     if(userInputNumber.length != 3) { 
       alert("3개의 숫자를 작성해주세요!");
       return ;
@@ -57,21 +62,36 @@ export default function BaseballGame() {
     } else if( isNaN( Number(userInputNumber) ) ){
       alert("숫자만 적어주세요!");
       return ;
-    } else if(userInputNumber === "") {
-      alert("입력해주세요!");
-      return ;
-    }
+    } 
+    
+    inRound = true;
   };
 
   this.getUserInput = function() {
     let userInputNumber = userInput.value;
-
+    userInput.value = "";
     this.checkInputError(userInputNumber);
-    this.play(computerInputNumbers, userInputNumber);
+    
+    if(inRound) {
+      let result = this.play(computerInputNumbers, userInputNumber);
+      this.handleResultHTML(result);
+    }
+    
   };
 
+  this.handleResultHTML = function(result) {
+    if(result === "정답") {
+      resultWrapper.innerHTML = `<strong>🎉 정답을 맞추셨습니다! 🎉</strong>`
+      restartWrapper.style.visibility = 'visible';
+    } else {
+      resultWrapper.innerHTML = `<p>${result}</p>`
+    }
+
+    inRound = false;
+  }
+
   submit.addEventListener('click',() => this.getUserInput());
-  const computerInputNumbers = this.getComputerInputNumbers();
+  let computerInputNumbers = this.getComputerInputNumbers();
   console.log(computerInputNumbers);
 }
 
