@@ -82,9 +82,10 @@ export default class BaseballGame {
 
 // BaseballGameView class (View)
 export class BaseballGameView {
-  constructor(baseballGameModel, resultDiv) {
+  constructor(baseballGameModel, resultDiv, userInput) {
     this.baseballGameModel = baseballGameModel;
     this._resultDiv = resultDiv;
+    this._userInput = userInput;
   }
 
   renderResult(userInputNumbers) {
@@ -114,21 +115,18 @@ export class BaseballGameView {
   }
 
   cleanResult() {
-    this._resultDiv.innerHTML = ``;
+    this._resultDiv.innerHTML = '';
   }
-}
 
-// reset input function
-
-function resetInputNumbers() {
-  const userInput = document.getElementById('user-input');
-  userInput.value = '';
+  resetUserInputNumbers() {
+    this._userInput.value = '';
+  }
 }
 
 // event handler functions
 
 function handleReStartClick() {
-  resetInputNumbers();
+  gameView.resetUserInputNumbers();
   gameView.cleanResult();
   gameModel.restart();
 }
@@ -137,22 +135,22 @@ function handleUserInputSubmit() {
   const userInputNumbers = document.getElementById('user-input').value;
 
   if (!isNumber(userInputNumbers)) {
-    resetInputNumbers();
+    gameView.resetUserInputNumbers();
     return alert(text.WARNING_FOR_NOT_NUM);
   }
 
   if (isNot3Digit(userInputNumbers)) {
-    resetInputNumbers();
+    gameView.resetUserInputNumbers();
     return alert(text.WARNING_FOR_3DIGIT);
   }
 
   if (isInZero(userInputNumbers)) {
-    resetInputNumbers();
+    gameView.resetUserInputNumbers();
     return alert(text.WARNING_FOR_ZERO);
   }
 
   if (isInDuplicateDigit(userInputNumbers)) {
-    resetInputNumbers();
+    gameView.resetUserInputNumbers();
     return alert(text.WARNING_FOR_DUPLICATE);
   }
 
@@ -160,8 +158,11 @@ function handleUserInputSubmit() {
   gameView.renderResult(userInputNumbers);
 }
 
+// start
+
 const gameModel = new BaseballGame();
 const resultDiv = document.getElementById('result');
-const gameView = new BaseballGameView(gameModel, resultDiv);
+const userInput = document.getElementById('user-input');
+const gameView = new BaseballGameView(gameModel, resultDiv, userInput);
 const submitNumButton = document.getElementById('submit');
 submitNumButton.addEventListener('click', handleUserInputSubmit);
