@@ -1,19 +1,30 @@
-// export default function BaseballGame() {
-//   this.play = function (computerInputNumbers, userInputNumbers) {
-//     return '결과 값 String';
-//   };
-// }
+import getUserInput from './input/getUserInput.js';
+import getRandomNumbers from './utils/getRandomNumbers.js';
 
-import userInput from './input/userInput.js';
-import makeAnswer from './utils/makeAnswer.js';
+function prepareGameSet() {
+  //
+}
+
+function startGame() {
+  //
+}
 
 export default function BaseballGame() {
-  const computerInputNumbers = makeAnswer();
-  const userInputNumbers = userInput();
+  // 이벤트 리스너 등록
+  const $submit = document.querySelector('#submit');
+  $submit.addEventListener('click', getUserInput);
+
+  // 정답 생성
+  const computerInputNumbers = getRandomNumbers();
+
+  // USER에게 인풋 받기
+  const userInputNumbers = getUserInput();
 
   this.play = function (computerInputNumbers, userInputNumbers) {
-    console.log('computer : ', computerInputNumbers);
-    console.log('user : ', userInputNumbers);
+    if (userInputNumbers) {
+      console.log('computer : ', computerInputNumbers);
+      console.log('user : ', userInputNumbers);
+    }
   };
 
   this.play(computerInputNumbers, userInputNumbers);
