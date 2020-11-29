@@ -46,10 +46,7 @@ export default class BaseballGame {
 
         //리턴 메세지 구성
         if(strike === 3){
-            return_str = `
-            <p>🎉정답을 맞추셨습니다!🎉</p>
-            <p>게임을 새로 시작하시겠습니까? <button onclick="window.location.reload()">게임 재시작</button></p> 
-            `
+            return_str="정답";
         }else if(ball && !strike){
             return_str= `${ball}볼`;
         }else if(strike && !ball){
