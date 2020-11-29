@@ -1,7 +1,7 @@
 import getBallCount from './getBallCount.js';
 import getStrikeCount from './getStrikeCount.js';
 
-function textContent(strikeCount, ballCount) {
+function getResultText(strikeCount, ballCount) {
   if (strikeCount === 3) {
     return `<div>
               <strong>🎉정답입니다🎉</strong>
@@ -27,5 +27,5 @@ export default function getGameResult(computerInputNumbers, userInputNumbers) {
   const ballCount = getBallCount(computerInputNumbers, userInputNumbers);
 
   console.log(computerInputNumbers);
-  return textContent(strikeCount, ballCount);
+  return getResultText(strikeCount, ballCount);
 }
