@@ -38,7 +38,7 @@ export default class BaseballGame {
         if(strike === 3){
             return_str = `
             <p>🎉정답을 맞추셨습니다!🎉</p>
-            <p>게임을 새로 시작하시겠습니까? <button>게임 재시작</button></p> 
+            <p>게임을 새로 시작하시겠습니까? <button onclick="window.location.reload()">게임 재시작</button></p> 
             `
         }else if(ball && !strike){
             return_str= `${ball}볼`;
