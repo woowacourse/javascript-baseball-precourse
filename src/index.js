@@ -53,21 +53,15 @@ export default class BaseballGame {
   }
 
   checkInput(userInputNumbers) {
-    let ret = true;
-    if (ret && userInputNumbers.match(/^[1-9]{3}$/) === null) {
-      ret = false;
-    }
-    if (ret && (
-      userInputNumbers[0] === userInputNumbers[1]
+    if (
+      userInputNumbers.match(/^[1-9]{3}$/) === null
+      || userInputNumbers[0] === userInputNumbers[1]
       || userInputNumbers[0] === userInputNumbers[2]
       || userInputNumbers[1] === userInputNumbers[2]
-    )) {
-      ret = false;
+    ) {
+      return false;
     }
-    if (!ret) {
-      alert('1~9까지의 수를 중복없이 3개를 작성해주세요.');
-    }
-    return ret;
+    return true;
   }
 }
 
@@ -104,15 +98,16 @@ function createNumber() {
 
 function clickSubmit() {
   const userInput = document.getElementById('user-input');
-  if (baseballGame.checkInput(userInput.value)) {
-    const ret = baseballGame.play(randomNumber, userInput.value);
-    if (ret === '3스트라이크') {
-      result.innerHTML = '<p>🎉 <b>정답을 맞추셨습니다!</b> 🎉</p>'
-                       + '<p>게임을 새로 시작하시겠습니까? '
-                       + '<button id="game-restart-button">게임 재시작</button></p>';
-      document.getElementById('game-restart-button').onclick = startGame;
-    } else {
-      result.innerHTML = ret;
-    }
+  if (!baseballGame.checkInput(userInput.value)) {
+    alert('1~9까지의 수를 중복없이 3개를 작성해주세요.');
+  }
+  const ret = baseballGame.play(randomNumber, userInput.value);
+  if (ret === '3스트라이크') {
+    result.innerHTML = '<p>🎉 <b>정답을 맞추셨습니다!</b> 🎉</p>'
+                      + '<p>게임을 새로 시작하시겠습니까? '
+                      + '<button id="game-restart-button">게임 재시작</button></p>';
+    document.getElementById('game-restart-button').onclick = startGame;
+  } else {
+    result.innerHTML = ret;
   }
 }
