@@ -2,9 +2,8 @@ import { text } from './fixtrue';
 
 // BaseballGame class
 export default class BaseballGame {
-  constructor(resultDiv) {
+  constructor() {
     this._computerInputNumbers = null;
-    this._resultDiv = resultDiv;
     this.init();
   }
 
@@ -80,26 +79,34 @@ export default class BaseballGame {
   }
 }
 
-export default class BaseballGameView {
-  constructor(BaseballGame) {}
+export class BaseballGameView {
+  constructor(baseballGameModel, resultDiv) {
+    this.baseballGameModel = baseballGameModel;
+    this._resultDiv = resultDiv;
+  }
 
-  renderResult(string) {
-    const responseP = doc.createElement('p');
-    responseP.innerHTML = string;
+  renderResult(userInputNumbers) {
+    const resultString = this.baseballGameModel.play(
+      this.baseballGameModel.getComputerInputNumbers(),
+      userInputNumbers,
+    );
 
-    if (string === text.correct) {
-      const strong = doc.createElement('strong');
+    const responseP = document.createElement('p');
+    responseP.innerHTML = resultString;
+
+    if (resultString === text.correct) {
+      const strong = document.createElement('strong');
       strong.appendChild(responseP);
       this._resultDiv.appendChild(strong);
 
-      const restartDiv = doc.createElement('div');
+      const restartDiv = document.createElement('div');
       restartDiv.id = 'restart';
 
-      const restartP = doc.createElement('p');
+      const restartP = document.createElement('p');
       restartP.innerHTML = text.askRestart;
       restartDiv.appendChild(restartP);
 
-      const restartButton = doc.createElement('button');
+      const restartButton = document.createElement('button');
       restartButton.innerHTML = text.restart;
       restartButton.id = 'game-restart-button';
       restartButton.addEventListener('click', handleReStartClick);
@@ -147,7 +154,7 @@ function isInDuplicateDigit(userInputNumbers) {
 }
 
 function resetInputNumbers() {
-  const userInput = doc.getElementById('user-input');
+  const userInput = document.getElementById('user-input');
   userInput.value = '';
 }
 
@@ -156,11 +163,11 @@ function resetInputNumbers() {
 function handleReStartClick() {
   resetInputNumbers();
   gameView.cleanResult();
-  gameView.restart();
+  gameModel.restart();
 }
 
 function handleUserInputSubmit() {
-  const userInputNumbers = doc.getElementById('user-input').value;
+  const userInputNumbers = document.getElementById('user-input').value;
 
   if (!isNumber(userInputNumbers)) {
     resetInputNumbers();
@@ -183,14 +190,11 @@ function handleUserInputSubmit() {
   }
 
   gameView.cleanResult();
-  gameView.renderResult(
-    gameModel.play(gameModel.getComputerInputNumbers(), userInputNumbers),
-  );
+  gameView.renderResult(userInputNumbers);
 }
 
-const doc = window.document;
-const resultDiv = doc.getElementById('result');
-const gameModel = new BaseballGame(resultDiv);
-const gameView = new BaseballGameView(gameModel);
-const submitNumButton = doc.getElementById('submit');
+const gameModel = new BaseballGame();
+const resultDiv = document.getElementById('result');
+const gameView = new BaseballGameView(gameModel, resultDiv);
+const submitNumButton = document.getElementById('submit');
 submitNumButton.addEventListener('click', handleUserInputSubmit);
