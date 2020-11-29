@@ -43,6 +43,8 @@
 - 입력창에 eventListener 연결 (click)
 - 입력값 처리 로직 연결
 - 결과를 처리하는 wrongResultHandler 함수 생성
-- 정답일 경우를 처리하는 win함수 생성
-- win함수 안에 재시작 template 생성, eventListener 연결하여 게임 재시작 처리
-- 재시작 버튼 클릭시 정답 재설정, 재시작 template 제거
+- 정답일 경우를 처리하는 winHanlder함수 생성
+   1. 결과출력 🎉정답을 맞추셨습니다!🎉
+   2. template 작성, html에 추가
+   3. 재시작 event handler 작성 - 재시작 template을 제거하고 새로운 랜덤값 생성
+   4. template에 event handler 연결
