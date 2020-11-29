@@ -27,9 +27,9 @@ export default function BaseballGame() {
   
   this.getUserNumbers = function() {
     const userNumbers = userInput.value.split('');
-    const isDuplicated = new Set(userNumbers);
+    const userNumbersSet = new Set(userNumbers);
   
-    if (userNumbers.length === arrayLength && userNumbers.length === isDuplicated.size) {
+    if (userNumbers.length === arrayLength && userNumbers.length === userNumbersSet.size) {
       return userNumbers
     } else {
       alert("1~9까지의 수를 중복없이 3개 작성해 주세요.")
