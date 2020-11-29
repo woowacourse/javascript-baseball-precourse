@@ -1,18 +1,18 @@
 export default function BaseballGame() {
-  // 1. 컴퓨터의 랜덤값 생성 기능
-  const arrayLength = 3;
-  let computerInputNumbers = [];
-  
-  this.isAvailableNumber = function(randomNumber) { 
+  // 중복 숫자 판별 함수
+  this.isAvailableNumber = function(randomNumber, computerInputNumbers) { 
     return computerInputNumbers.every((computerInputNumber) => randomNumber !== computerInputNumber);
   };
-  
+
+  // 컴퓨터의 랜덤값 생성 함수
   this.createComputerNumbers = function() {
+    const arrayLength = 3;
+    let computerInputNumbers = [];
     let i = 0;
 
     while (i < arrayLength) {
       const randomNumber = String(Math.floor(Math.random() * 9 + 1))
-      if (this.isAvailableNumber(randomNumber)) {
+      if (this.isAvailableNumber(randomNumber, computerInputNumbers)) {
         computerInputNumbers.push(randomNumber);
         i++;
       }
@@ -21,11 +21,10 @@ export default function BaseballGame() {
     return computerInputNumbers;
   };
 
-  // 2. 유저의 입력값 판별 기능
-  const submitButton = document.querySelector("#submit");
-  const userInput = document.querySelector("#user-input");
-  
+  // 유저의 입력값 판별 함수  
   this.getUserNumbers = function() {
+    const arrayLength = 3;
+    const userInput = document.querySelector("#user-input");
     const userNumbers = userInput.value.split('');
     const userNumbersSet = new Set(userNumbers);
   
@@ -36,11 +35,12 @@ export default function BaseballGame() {
     }
   };
 
-  // 4. 게임 재시작 기능
-  const gameRestartButton = document.querySelector("#game-restart-button")
-  gameRestartButton.style.display = 'none';
+  // 게임 재시작 함수
+  this.gameRestart = function(computerInputNumbers) {
+    const gameRestartButton = document.querySelector("#game-restart-button")
+    const userInput = document.querySelector("#user-input");
 
-  this.gameRestart = function() {
+    gameRestartButton.style.display = 'none';
     let gameRestartText = document.querySelector("#game-restart-text");
     result.innerText = "🎉정답을 맞추셨습니다! 🎉";
     result.style.fontWeight = "bold";
@@ -57,8 +57,9 @@ export default function BaseballGame() {
     }, {once : true});
   };
 
-  // 3. 컴퓨터의 랜덤값과 유저의 입력값 비교 기능
+  // 컴퓨터의 랜덤값과 유저의 입력값 비교 함수
   this.play = function (computerInputNumbers, userInputNumbers) {
+    const arrayLength = 3;
     let result = document.querySelector("#result");
     let ballNumbers = 0;
     let strikeNumbers = 0;
@@ -77,7 +78,7 @@ export default function BaseballGame() {
     }
 
     if (ballNumbers === 0 && strikeNumbers === 3) {
-      this.gameRestart();
+      this.gameRestart(computerInputNumbers);
     } else if (ballNumbers === 0 && strikeNumbers === 0) {
       result.innerText = "낫싱";
     } else if (ballNumbers && strikeNumbers === 0) {
@@ -91,9 +92,12 @@ export default function BaseballGame() {
     return result;
   };
 
-  // init()
+  // init 함수
   this.init = function() {
-    this.createComputerNumbers();
+    const computerInputNumbers = this.createComputerNumbers();
+    const submitButton = document.querySelector("#submit");
+    const gameRestartButton = document.querySelector("#game-restart-button")
+    gameRestartButton.style.display = "none";
     submitButton.addEventListener("click", () => {
       const userInputNumbers = this.getUserNumbers();
 
