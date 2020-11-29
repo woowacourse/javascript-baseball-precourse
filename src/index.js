@@ -1,11 +1,35 @@
 export default function BaseballGame() {
   const submit = document.getElementById("submit");
   const userInput = document.getElementById("user-input");
+  const resultWrapper = document.getElementById("result");
   
   this.play = function (computerInputNumbers, userInputNumbers) {
+    let ball = 0;
+    let strike = 0;
+
+    for( let i=0 ; i < 3 ; i++ ) {
+      if(computerInputNumbers[i] === userInputNumbers[i]) {
+        strike++;
+      } else if (computerInputNumbers.includes(userInputNumbers[i])) {
+        ball++;
+      }
+    }
     
-    return "결과 값 String";
-  };
+    let result = this.judgeResult(strike, ball);
+    
+    return result;
+  }; 
+
+  this.judgeResult = function (strike, ball) {
+    let result = "";
+
+    if(strike === 3) return "정답";
+    if(strike === 0 && ball === 0) return "낫싱";
+    if(ball !== 0) result += `${ball}볼 `;
+    if(strike !== 0) result += `${strike}스트라이크`
+
+    return result;
+  }
 
   this.getComputerInputNumbers = function () {
     let computerNumbers = [];
@@ -16,8 +40,8 @@ export default function BaseballGame() {
         computerNumbers.push(randomNumber)
       }
     }
-    console.log(computerNumbers.join(""))
-    return computerNumbers;
+
+    return computerNumbers.join("");
   };
 
   this.checkInputError = function(userInputNumber) {
@@ -33,17 +57,22 @@ export default function BaseballGame() {
     } else if( isNaN( Number(userInputNumber) ) ){
       alert("숫자만 적어주세요!");
       return ;
+    } else if(userInputNumber === "") {
+      alert("입력해주세요!");
+      return ;
     }
   };
 
   this.getUserInput = function() {
     let userInputNumber = userInput.value;
+
     this.checkInputError(userInputNumber);
     this.play(computerInputNumbers, userInputNumber);
   };
 
   submit.addEventListener('click',() => this.getUserInput());
   const computerInputNumbers = this.getComputerInputNumbers();
+  console.log(computerInputNumbers);
 }
 
 function isDuplication(numbers) {
