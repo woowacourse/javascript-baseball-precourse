@@ -6,7 +6,7 @@ export default function getUserInput() {
   $userInput.value = '';
 
   if (checkValidInput(userInputNumbers)) {
-    return console.log(userInputNumbers);
+    return userInputNumbers;
   }
-  return console.log(false);
+  return false;
 }
