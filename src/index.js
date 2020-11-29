@@ -56,6 +56,18 @@ export default class BaseballGame {
     }
     this.computerRandomNumbers = result;
   }
+  //게임을 재시작하기 위해서 결과들을 모두 갱신하는 함수
+  gameRestart() {
+    const result = document.getElementById('result0');
+    for(let i = this.idNum; i > 0; i--) {
+      const element = document.getElementById(`play${i}`);
+      element.remove();
+    }
+    result.innerHTML = "";
+    this.idNum = 0;
+    this.getComputerRandomNumbers();
+    this.addClickEventListener();
+  }
   //정답을 못맞췄을때 element들을 재생성하는 함수
   wrongResult() {
     const app = document.getElementById('app');
@@ -76,11 +88,21 @@ export default class BaseballGame {
     app.append(play);
     this.addClickEventListener();
   }
+  //정답을 맞췄을때 element들을 새로 생성하는 함수
+  correctResult(result) {
+    result.innerHTML = `<p><strong>🎉정답을 맞추셨습니다!🎉</strong></p>
+                        <span>게임을 새로 시작하시겠습니까?</span>
+                        <button id="game-restart-button">재시작</button>`;
+    const gameRestartBtn = document.getElementById('game-restart-button');
+    gameRestartBtn.addEventListener('click', () => {this.gameRestart()});
+  }
   // 게임 결과를 화면에 출력하는 함수
   printResult(playResult) {
     const result = document.getElementById(`result${this.idNum}`);
+    // const submit = document.getElementById(`submit${this.idNum}`);
+    // submit.removeEventListener('click', this.checkUserInputNumbers);
     if(playResult === '정답') {
-      //this.correctResult(result);
+      this.correctResult(result);
     }
     else {
       result.innerHTML = playResult;
