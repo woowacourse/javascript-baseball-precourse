@@ -58,18 +58,20 @@ export default class BaseballGame {
     if (_isOk) {
       return true;
     }
+
     this.setErrorMessage('세 자리가 아니거나 문자 또는 공백이 존재합니다. 다시 입력해주세요.');
     return false;
   }
 
   isNotDuplicate = (numbers) => {
-    const _isOk = numbers.split('').every((number) => {
-      return numbers.indexOf(number) === numbers.lastIndexOf(number);
-    });
+    const _isOk = numbers.split('').every((number) => (
+      numbers.indexOf(number) === numbers.lastIndexOf(number)
+    ));
 
     if (_isOk) {
       return true;
     }
+
     this.setErrorMessage('중복되는 숫자가 존재합니다. 다시 입력해주세요.');
     return false;
   }
@@ -89,24 +91,26 @@ export default class BaseballGame {
   }
 
   getStrikeCount = (computerInputNumbers, userInputNumbers) => {
-    function process(strikeCount, number, computerIndex) {
+    const process = (strikeCount, number, computerIndex) => {
       const _userIndex = userInputNumbers.indexOf(number);
       if (_userIndex == computerIndex) {
         return strikeCount + 1;
       }
       return strikeCount;
-    }
+    };
+
     return computerInputNumbers.split('').reduce(process, 0);
   }
 
   getBallCount = (computerInputNumbers, userInputNumbers) => {
-    function process(ballCount, number, computerIndex) {
+    const process = (ballCount, number, computerIndex) => {
       const _userIndex = userInputNumbers.indexOf(number);
       if (_userIndex === -1 || _userIndex === computerIndex) {
         return ballCount;
       }
       return ballCount + 1;
-    }
+    };
+
     return computerInputNumbers.split('').reduce(process, 0);
   }
 
