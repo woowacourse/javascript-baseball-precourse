@@ -19,11 +19,11 @@
 4. 유저의 입력의 유효성을 검사하는 `isValidUserInput` 함수
 5. 유저의 입력을 받고 볼이 몇 개인지 세는 `countBall` 함수
 6. 유저의 입력을 받고 스트라이크가 몇 개인지 세는 `countStrike` 함수
-7. 유저의 입력을 받고 맞춘 결과를 출력하는 `printMessage` 함수
+7. 유저의 입력을 받고 맞춘 결과를 출력하는 `printResult` 함수
 8. 결과의 내용을 클리어하는 `clearResult` 함수
 9. 게임이 끝났는 지 판단하는 `isGameEnded` 함수
 10. 게임을 다시 시작하는 `restartGame` 함수
-
+11. 게임 재시작 버튼을 만들어주는 `makeRestartBtn` 함수
 
 ---
 
