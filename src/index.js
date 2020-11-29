@@ -2,20 +2,28 @@ import { NUMBER_LIST, START_INDEX_ZERO, NUMBER_DIGIT, STRIKE_INDEX, BALL_INDEX, 
 
 export default function BaseballGame() {
   
-  // const init = function() {
-  //   const computerInputNumbers = getRandomNumberList();
-  //   const submitButton = document.querySelector("#submit");
+  const init = function() {
+    const computerInputNumbers = getRandomNumberList();
+    
+    handleSubmitButton(computerInputNumbers);
+  };
 
-  //   submitButton.addEventListener("click", handleSubmitButton);
-  // };
+  const handleSubmitButton = function(computerInputNumbers) {
+    const submitButton = document.querySelector("#submit");
 
-  const handleSubmitButton = function() {
+    submitButton.addEventListener("click", function() {
+      startGame(computerInputNumbers);
+    }, false);
+  };
+
+  const startGame = function(computerInputNumbers) {
     const userInputNumbers = getUserInputNumberList();
 
     if (userInputNumbers !== undefined) {
       const resultElement = document.querySelector("#result");
       resultElement.innerHTML = play(computerInputNumbers, userInputNumbers);
     }
+    
     const restartElement = document.querySelector("#game-restart-button");
     if (restartElement !== null) {
       restartElement.addEventListener("click", handleRestartButton);
@@ -106,11 +114,7 @@ export default function BaseballGame() {
     return resultString;
   };
 
-  // init();
-  const computerInputNumbers = getRandomNumberList();
-  const submitElement = document.querySelector("#submit");
-
-  submitElement.addEventListener("click", handleSubmitButton);
+  init();
 }
 
 BaseballGame();
