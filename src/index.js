@@ -13,6 +13,11 @@ export default function BaseballGame() {
     return targetNumber;
   };
 
+  this.focusInput = function() {
+    document.getElementById("user-input").value = '';
+    document.getElementById("user-input").focus();
+  };
+
   this.isZero = function (userInput) {
     const inputNumber = userInput.split('');
 
@@ -38,10 +43,11 @@ export default function BaseballGame() {
 
   this.getInputNumber = function () {
     const userInput = document.getElementById("user-input").value;
+    
+    this.focusInput();
 
     if (isNaN(userInput)) {
       alert("숫자를 입력해 주세요.");
-      document.getElementById("user-input").value = '';
     } else if (userInput.length !== 3 || this.isZero(userInput) || this.isDuplication(userInput)) {
       alert("1~9까지의 수를 중복없이 3개를 작성해주세요.");
     } else {
@@ -113,7 +119,6 @@ export default function BaseballGame() {
 
   this.printResult = function (userInputNumbers, result) {
     document.getElementById("result").innerHTML += "[ " + userInputNumbers + " ] " + result + "<br />";
-    document.getElementById("user-input").value = '';
 
     if (result.includes("정답")) {
       document.getElementById("restart").hidden = false;
