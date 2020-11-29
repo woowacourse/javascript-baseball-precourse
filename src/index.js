@@ -1,7 +1,7 @@
 import { text } from './fixtrue';
 import { isNumber, isNot3Digit, isInZero, isInDuplicateDigit } from './utils';
 
-// BaseballGame class
+// BaseballGame class (Model)
 export default class BaseballGame {
   constructor() {
     this._computerInputNumbers = null;
@@ -49,11 +49,11 @@ export default class BaseballGame {
       }
     });
 
-    return [strike, ball];
+    return { strike, ball };
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    const [strike, ball] = this.judge(computerInputNumbers, userInputNumbers);
+    const { strike, ball } = this.judge(computerInputNumbers, userInputNumbers);
     let responseString = '';
 
     if (ball) {
@@ -80,6 +80,7 @@ export default class BaseballGame {
   }
 }
 
+// BaseballGameView class (View)
 export class BaseballGameView {
   constructor(baseballGameModel, resultDiv) {
     this.baseballGameModel = baseballGameModel;
