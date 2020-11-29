@@ -36,6 +36,16 @@ export default class BaseballGame {
     return this.userInputNumbers.includes(0);
   };
 
+  isDuplicate = () => {
+    const setNumbers = new Set(this.userInputNumbers);
+
+    if (this.userInputNumbers.length !== setNumbers.size) {
+      return true;
+    }
+
+    return false;
+  };
+
   checkUserInput = (userInput) => {
     const alertMessage = "1~9까지의 수를 중복없이 3개 작성해주세요";
 
@@ -45,7 +55,7 @@ export default class BaseballGame {
 
     this.setUserInputNumbers(userInput);
 
-    if (this.isIncludeZero()) {
+    if (this.isIncludeZero() || this.isDuplicate()) {
       alert(alertMessage);
     }
   };
