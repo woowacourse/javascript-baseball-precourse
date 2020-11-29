@@ -1,10 +1,4 @@
-import randomNumberMaker from "./random-number-maker.js";
-import printMessage, { clearResult } from "./print-messages.js";
-import userInput, { isValidUserInput } from "./user-input.js";
-
-const randomNumberArray = randomNumberMaker(3);
-
-export function countStrike(validUserInputValueArray) {
+export default function countStrike(randomNumberArray, validUserInputValueArray) {
   let strikeCount = 0;
 
   for (let i = 0; i < randomNumberArray.length; i++) {
@@ -16,7 +10,7 @@ export function countStrike(validUserInputValueArray) {
   return strikeCount;
 }
 
-export function countBall(validUserInputValueArray) {
+export function countBall(randomNumberArray, validUserInputValueArray) {
   let ballCount = 0;
 
   for (let i = 0; i < randomNumberArray.length; i++) {
@@ -28,21 +22,10 @@ export function countBall(validUserInputValueArray) {
   return ballCount;
 }
 
-const LENGTH_OF_NUMBERS_GIVEN = 3;
-
-export default function playGame() {
-  const userInputValue = userInput();
-  let validUserInputValueArray = [];
-
-  if (isValidUserInput(userInputValue, LENGTH_OF_NUMBERS_GIVEN)) {
-    validUserInputValueArray = userInputValue.split("").map(Number);   
-    
-    const BALL_COUNT = countBall(validUserInputValueArray);
-    const STRIKE_COUNT = countStrike(validUserInputValueArray);
-
-    printMessage(BALL_COUNT, STRIKE_COUNT);
-  } else {
-    clearResult()
-  }
+export function isGameEnded(strikeCount) {
+  if (strikeCount === 3) {
+    return true;
+  } 
   
+  return false
 }
