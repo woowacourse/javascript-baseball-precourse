@@ -153,25 +153,28 @@ export class BaseballGameView {
   }
 
   handleUserInputSubmit() {
-    const exception = this.validUserInputNumbers(this._userInput.value);
+    const userInputNumbers = this._userInput.value;
+    const exception = this.validUserInputNumbers(userInputNumbers);
     if (exception) {
       alert(exception);
       return;
     }
 
-    gameView.cleanResult();
-    gameView.renderResult(userInputNumbers);
+    this.cleanResult();
+    this.renderResult(userInputNumbers);
   }
 }
 
 // start
 
-const gameModel = new BaseballGame();
-const resultDiv = document.getElementById('result');
-const userInput = document.getElementById('user-input');
-const gameView = new BaseballGameView(gameModel, resultDiv, userInput);
-const submitNumButton = document.getElementById('submit');
-submitNumButton.addEventListener(
-  'click',
-  gameView.handleUserInputSubmit.bind(gameView),
-);
+window.addEventListener('DOMContentLoaded', () => {
+  const gameModel = new BaseballGame();
+  const resultDiv = document.getElementById('result');
+  const userInput = document.getElementById('user-input');
+  const gameView = new BaseballGameView(gameModel, resultDiv, userInput);
+  const submitNumButton = document.getElementById('submit');
+  submitNumButton.addEventListener(
+    'click',
+    gameView.handleUserInputSubmit.bind(gameView),
+  );
+});
