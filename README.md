@@ -31,9 +31,14 @@
 ```plaintext
 ├── LICENSE
 ├── README.md
+├── babel.config.js
 ├── index.html
+├── jest.config.mjs
 ├── package-lock.json
 ├── package.json
+├── test
+│   ├── main.spec.js
+│   └── utils.spec.js
 └── src
     ├── components
     │   ├── game-result.js // 게임결과를 나타내는 컴포넌트 클래스
@@ -54,7 +59,7 @@
             ├── check.js // 검증하는 함수 모음
             └── getRandomNumber.js // 난수 생성 함수 모음
 
-6 directories, 18 files
+7 directories, 22 files
 ```
 
 ## 👀 신경을 쓴 부분
