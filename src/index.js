@@ -21,12 +21,12 @@ export default class BaseballGame {
     let count = 0;
 
     while (count < 3) {
-      let number = Math.floor(
+      let idx = Math.floor(
         Math.random() * (this.MAXVAL - this.MINVAL + 1) + this.MINVAL,
       );
-      if (table[number] === false) {
-        table[number] = true;
-        random += number.toString();
+      if (table[idx] === false) {
+        table[idx] = true;
+        random += idx.toString();
         count++;
       }
     }
@@ -124,41 +124,39 @@ export class BaseballGameView {
   resetUserInputNumbers() {
     this._userInput.value = '';
   }
-}
 
-// event handler functions
-
-function handleReStartClick() {
-  gameView.resetUserInputNumbers();
-  gameView.cleanResult();
-  gameModel.restart();
-}
-
-function handleUserInputSubmit() {
-  const userInputNumbers = document.getElementById('user-input').value;
-
-  if (!isNumber(userInputNumbers)) {
-    gameView.resetUserInputNumbers();
-    return alert(text.WARNING_FOR_NOT_NUM);
+  handleReStartClick() {
+    this.resetUserInputNumbers();
+    this.cleanResult();
+    this.baseballGameModel.restart();
   }
 
-  if (isNot3Digit(userInputNumbers)) {
-    gameView.resetUserInputNumbers();
-    return alert(text.WARNING_FOR_3DIGIT);
-  }
+  handleUserInputSubmit() {
+    const userInputNumbers = this._userInput.value;
 
-  if (isInZero(userInputNumbers)) {
-    gameView.resetUserInputNumbers();
-    return alert(text.WARNING_FOR_ZERO);
-  }
+    if (!isNumber(userInputNumbers)) {
+      gameView.resetUserInputNumbers();
+      return alert(text.WARNING_FOR_NOT_NUM);
+    }
 
-  if (isInDuplicateDigit(userInputNumbers)) {
-    gameView.resetUserInputNumbers();
-    return alert(text.WARNING_FOR_DUPLICATE);
-  }
+    if (isNot3Digit(userInputNumbers)) {
+      gameView.resetUserInputNumbers();
+      return alert(text.WARNING_FOR_3DIGIT);
+    }
 
-  gameView.cleanResult();
-  gameView.renderResult(userInputNumbers);
+    if (isInZero(userInputNumbers)) {
+      gameView.resetUserInputNumbers();
+      return alert(text.WARNING_FOR_ZERO);
+    }
+
+    if (isInDuplicateDigit(userInputNumbers)) {
+      gameView.resetUserInputNumbers();
+      return alert(text.WARNING_FOR_DUPLICATE);
+    }
+
+    gameView.cleanResult();
+    gameView.renderResult(userInputNumbers);
+  }
 }
 
 // start
