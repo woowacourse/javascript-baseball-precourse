@@ -1,6 +1,51 @@
 export default class BaseballGame {
-    play(userInputNumbers) {
-      return "결과 값 String";
+
+    checkStrike(computerNumArr,userInputNumArr){
+        let strike = 0;
+        computerNumArr.forEach((element,index)=>{
+            if(element === userInputNumArr[index]){
+                strike++;
+            }
+        });
+        return strike;
+    }
+
+    checkBall(computerNumArr,userInputNumArr){
+        let ball = 0;
+        const userInputSet = new Set(userInputNumArr);
+        computerNumArr.forEach((element,index)=>{
+            if(element === userInputNumArr[index]){
+                return;
+            }
+            if(userInputSet.has(element)){
+                ball++;
+            }
+        })
+        return ball;
+    }
+
+    play(computerInputNumbers, userInputNumbers) {
+        const computerNumArr = [...String(computerInputNumbers)];
+        const userInputNumArr = [...String(userInputNumbers)];
+        let strike = 0;
+        let ball = 0;
+        let return_str = "";
+        //스트라이크
+        strike += this.checkStrike(computerNumArr,userInputNumArr);
+        //볼
+        ball += this.checkBall(computerNumArr,userInputNumArr);
+        //리턴 메세지 구성
+        if(ball && !strike){
+            return_str= `${ball}볼`;
+        }else if(strike && !ball){
+            return_str= `${strike}스트라이크`
+        }else if(ball && strike){
+            return_str= `${ball}볼 ${strike}스트라이크`;
+        }else{
+            return_str = "낫싱";
+        }
+        console.log(return_str);
+        return return_str;
     }
 
     initComputerNum(){
@@ -14,16 +59,28 @@ export default class BaseballGame {
         this.computerNum = num*1;
         console.log(num);
     }
+    isNum(input){
+        const arr = [...input];
+        let ret = true;
+        //숫자인지 확인
+        if(isNaN(input*1)){
+            return false;
+        }
+        
+        //숫자중 0이 포함되어있는지 확인
+        arr.forEach(element =>{
+            if(element === "0"){
+                ret = false;
+            }
+        });
+        return ret;
+    }
   
     isAlright(input){
-      const inputSet = new Set();
+      const inputSet = new Set([...input]);
       let retValue = false;
-    
-      [...input].forEach(element => {
-        inputSet.add(element);
-      });
       //숫자인지, 중복이 존재하는지, 숫자길이가 3인지
-      if(!isNaN(input*1) && inputSet.size === 3 && String(input).length === 3){
+      if(this.isNum(input) && inputSet.size === 3 && String(input).length === 3){
         retValue = true
       }
       return retValue;
