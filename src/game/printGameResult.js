@@ -1,23 +1,23 @@
 function textContent(strikeCount, ballCount) {
   if (strikeCount === 3) {
-    return '정답입니다';
+    return `<h4>🎉정답입니다🎉</h4>`;
   }
   if (!strikeCount && !ballCount) {
-    return '낫싱';
+    return `<h4>낫싱</h4>`;
   }
   if (strikeCount && ballCount) {
-    return `${ballCount}볼 ${strikeCount}스트라이크`;
+    return `<h4>${ballCount}볼 ${strikeCount}스트라이크⚾️</h4>`;
   }
   if (strikeCount && !ballCount) {
-    return `${strikeCount}스트라이크`;
+    return `<h4>${strikeCount}스트라이크⚾️</h4>`;
   }
   if (!strikeCount && ballCount) {
-    return `${ballCount}볼`;
+    return `<h4>${ballCount}볼</h4>`;
   }
 }
 
 export default function printGameResult(strikeCount, ballCount) {
   const $result = document.querySelector('#result');
 
-  $result.textContent = textContent(strikeCount, ballCount);
+  $result.innerHTML = textContent(strikeCount, ballCount);
 }
