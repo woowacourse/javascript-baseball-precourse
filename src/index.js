@@ -35,4 +35,17 @@ class BaseballGame {
   }
 }
 
+class Validation {
+  isNumber(inputArray) {
+    for (let i = 0; i < inputArray.length; i += 1) {
+      if (isNaN(Number(inputArray[i])) === true) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+}
+
 let game = new BaseballGame();
+let validation = new Validation();
