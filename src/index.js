@@ -11,23 +11,15 @@ const getComputerNumbers = () => {
   return resultNumbers.join("");
 };
 
-const hasDuplicatedNumbers = (num) => {
-  return new Set(num).size !== num.length;
-};
+const hasDuplicatedNumbers = num => new Set(num).size !== num.length;
 
-const hasZero = (num) => {
-  return num.indexOf("0") !== -1;
-};
+const hasZero = num => num.indexOf("0") !== -1;
 
-const isNumeric = (num) => {
-  return !isNaN(Number(num));
-};
+const isNumeric = num => !isNaN(Number(num));
 
-const isThreeDigits = (num) => {
-  return num.length === 3;
-};
+const isThreeDigits = num => num.length === 3;
 
-const isValidNumbers = (num) => {
+const isValidNumbers = num => {
   return (
     !hasDuplicatedNumbers(num) &&
     !hasZero(num) &&
@@ -112,7 +104,7 @@ export default function BaseballGame() {
     });
   };
 
-  const resultProvider = (message) => {
+  const resultProvider = message => {
     if (!correctState) {
       resultContainer.textContent = message;
     } else {
@@ -133,7 +125,7 @@ export default function BaseballGame() {
 
   const init = () => {
     submitButton.addEventListener("click", () => gameStart());
-    userInput.addEventListener("keyup", (event) => {
+    userInput.addEventListener("keyup", event => {
       if (event.keyCode === 13) {
         gameStart();
       }
