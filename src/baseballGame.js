@@ -35,7 +35,12 @@ export default class BaseballGame {
         //볼
         ball += this.checkBall(computerNumArr,userInputNumArr);
         //리턴 메세지 구성
-        if(ball && !strike){
+        if(strike === 3){
+            return_str = `
+            <p>🎉정답을 맞추셨습니다!🎉</p>
+            <p>게임을 새로 시작하시겠습니까? <button>게임 재시작</button></p> 
+            `
+        }else if(ball && !strike){
             return_str= `${ball}볼`;
         }else if(strike && !ball){
             return_str= `${strike}스트라이크`
