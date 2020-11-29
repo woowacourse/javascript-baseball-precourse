@@ -45,6 +45,14 @@ class Validation {
 
     return true;
   }
+
+  isThreeDigit(inputArray) {
+    if (inputArray.length !== 3) {
+      return false;
+    }
+
+    return true;
+  }
 }
 
 let game = new BaseballGame();
