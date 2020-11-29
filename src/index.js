@@ -86,20 +86,7 @@ function startGame() {
 
   randomNumber = createNumber();
 
-  submit.onclick = function () {
-    const userInput = document.getElementById('user-input');
-    if (baseballGame.checkInput(userInput.value)) {
-      const ret = baseballGame.play(randomNumber, userInput.value);
-      if (ret === '3스트라이크') {
-        result.innerHTML = '<p>🎉 <b>정답을 맞추셨습니다!</b> 🎉</p>'
-                         + '<p>게임을 새로 시작하시겠습니까? '
-                         + '<button id="game-restart-button">게임 재시작</button></p>';
-        document.getElementById('game-restart-button').onclick = startGame;
-      } else {
-        result.innerHTML = ret;
-      }
-    }
-  };
+  submit.onclick = clickSubmit;
 }
 
 function createNumber() {
@@ -113,4 +100,19 @@ function createNumber() {
     || randomNumber[1] === randomNumber[2]
   );
   return randomNumber;
+}
+
+function clickSubmit() {
+  const userInput = document.getElementById('user-input');
+  if (baseballGame.checkInput(userInput.value)) {
+    const ret = baseballGame.play(randomNumber, userInput.value);
+    if (ret === '3스트라이크') {
+      result.innerHTML = '<p>🎉 <b>정답을 맞추셨습니다!</b> 🎉</p>'
+                       + '<p>게임을 새로 시작하시겠습니까? '
+                       + '<button id="game-restart-button">게임 재시작</button></p>';
+      document.getElementById('game-restart-button').onclick = startGame;
+    } else {
+      result.innerHTML = ret;
+    }
+  }
 }
