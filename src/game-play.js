@@ -29,3 +29,8 @@ export default function playGame() {
     clearResult()
   }
 }
+
+export function restartGame() {
+  clearResult();
+  window.location.reload();
+}
