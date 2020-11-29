@@ -1,6 +1,7 @@
 import getUserInput from './input/getUserInput.js';
 import getRandomNumbers from './utils/getRandomNumbers.js';
 import getGameResult from './game/getGameResult.js';
+import printGameResult from './utils/printGameResult.js';
 
 /*
  ** export default function BaseballGame() {
@@ -25,7 +26,7 @@ export default function BaseballGame() {
 
     if (userInputNumbers) {
       const gameResult = this.play(computerInputNumbers, userInputNumbers);
-      console.log(typeof gameResult, gameResult);
+      printGameResult(gameResult);
     }
   });
 }
