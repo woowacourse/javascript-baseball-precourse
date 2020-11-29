@@ -32,11 +32,9 @@ export default class BaseballGame {
   handleClickSubmit = () => {
     const userInputNumbers = this.$userInput.value;
 
-    if (this.isPossible(userInputNumbers)) {
-      this.play(this.computerInputNumbers, userInputNumbers);
-    } else {
+    return this.isPossible(userInputNumbers) ?
+      this.play(this.computerInputNumbers, userInputNumbers) :
       this.randerErrorMessage('잘못된 입력입니다. 다시 입력해주세요');
-    }
   }
 
   isThreeDigitNumber = (numbers) => {
@@ -121,12 +119,9 @@ export default class BaseballGame {
     const ballCount = this.getBallCount(computerInputNumbers, userInputNumbers);
     const strikeCount = this.getStrikeCount(computerInputNumbers, userInputNumbers);
 
-    if (this.isCorrect(strikeCount)) {
-      this.renderCorrectMessage();
-    } else {
-      console.log(this.computerInputNumbers);
+    return this.isCorrect(strikeCount) ?
+      this.renderCorrectMessage() :
       this.renderGameResult(strikeCount, ballCount);
-    }
   }
 }
 
