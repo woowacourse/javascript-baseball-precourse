@@ -1,4 +1,4 @@
-import checkValidInput from './checkInput.js';
+import checkValidInput from './checkValidInput.js';
 
 export default function getUserInput() {
   const $userInput = document.querySelector('#user-input');
