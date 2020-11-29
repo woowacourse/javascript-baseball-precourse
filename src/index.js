@@ -21,7 +21,9 @@ export default class BaseballGame {
   };
 
   checkUserInput = (userInput) => {
-    // check
+    if (userInput.length === 0) {
+      alert("1~9까지의 수를 중복없이 3개 작성해주세요");
+    }
   };
 
   bindEventListener = () => {
