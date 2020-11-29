@@ -27,12 +27,12 @@ export default class BaseballGame {
   _showRecords() {
     const showRecordsSection = document.createElement("div");
     const tryCount = document.createElement("p");
-    const showRecordsList = document.createElement("ol");
+    const showRecordsList = document.createElement("ul");
     const getUserRecordText = ({
       userInputNumbers, 
       ball, 
       strike
-    }) => `your answer: ${userInputNumbers} ` + getWrongAnswerMessage({ball, strike});
+    }) => `your answer: ${userInputNumbers}, result message: ` + getWrongAnswerMessage({ball, strike});
     
     showRecordsSection.id = "show-records";
     tryCount.id = 'try-count';
@@ -41,13 +41,14 @@ export default class BaseballGame {
     tryCount.innerText = `시도 횟수: ${this.records.length}`;
     this.records.forEach((record, idx) => {
       const _userRecord = document.createElement("li");      
-      _userRecord.innerText = (idx < this.records.length-1) ? getUserRecordText(record) : '정답!!';
+      _userRecord.innerText = `${idx+1}차 시도➡ ` + (idx < this.records.length-1 ? getUserRecordText(record) : '정답!!');
       showRecordsList.appendChild(_userRecord);
     })
 
     showRecordsSection.appendChild(tryCount);
     showRecordsSection.appendChild(showRecordsList);
     resultElement.appendChild(showRecordsSection);
+    
     resultElement.removeChild(document.getElementById('ask-show-records'));
   }
 
@@ -105,6 +106,7 @@ export default class BaseballGame {
     const message = result.ok ? correctAnswerMessage : getWrongAnswerMessage(result);
     
     this._resetResultMessage();
+
     this.isFinished = result.ok;
     resultMessageElement.innerText = message;
     resultElement.appendChild(resultMessageElement);
