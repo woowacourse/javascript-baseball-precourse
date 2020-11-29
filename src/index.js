@@ -57,20 +57,20 @@ export default class BaseballGame {
     const { strike, ball } = this.judge(computerInputNumbers, userInputNumbers);
     let responseString = '';
 
+    if (ball === 0 && strike === 0) {
+      return text.NOTHING;
+    }
+
+    if (strike === 3) {
+      return text.CORRECT;
+    }
+
     if (ball) {
       responseString += `${ball}${text.BALL}`;
     }
 
     if (strike) {
       responseString += ` ${strike}${text.STRIKE}`;
-    }
-
-    if (ball === 0 && strike === 0) {
-      responseString = text.NOTHING;
-    }
-
-    if (strike === 3) {
-      responseString = text.CORRECT;
     }
 
     return responseString;
@@ -106,6 +106,7 @@ export class BaseballGameView {
           <button id="game-restart-button">${text.RESTART}</button>
         <div/>
       `;
+
       document
         .getElementById('game-restart-button')
         .addEventListener('click', handleReStartClick);
