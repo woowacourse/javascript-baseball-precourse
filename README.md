@@ -16,41 +16,7 @@
 
 <br>
 
-## 💻 프로그래밍 실행 결과
-
-![baseball_result](https://user-images.githubusercontent.com/50367798/100166088-32473e00-2eff-11eb-9454-5d45e648b37e.jpg)
-
-<br>
-
 ## ✅ 프로그래밍 요구사항
-
-- `play`(컴퓨터의 랜덤 값, 유저의 입력 값) 메서드를 만들어 게임을 진행한다.
-- `play`메서드는 `String`으로 결과값을 return 한다.
-- `index.js`에서 아래의 function 또는 class 형태를 활용한다.
-
-```javascript
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
-}
-
-export default class BaseballGame {
-  play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  }
-}
-
-// 예시
-play(123, 456); // '낫싱'
-play(123, 345); // '1볼'
-play(123, 432); // '2볼'
-play(123, 312); // '3볼'
-play(123, 145); // '1스트라이크'
-play(123, 134); // '1볼 1스트라이크'
-play(123, 132); // '2볼 1스트라이크'
-play(123, 124); // '2스트라이크'
-```
 
 - 스트라이크와 볼이 같이 있는 경우 볼을 먼저쓰고, 스트라이크를 쓴다.
 - 사용자가 잘못된 입력 값을 작성한 경우 `alert`을 이용해 메시지를 보여주고, 재입력할 수 있게 한다.
@@ -65,25 +31,20 @@ play(123, 124); // '2스트라이크'
 
 <br>
 
-## 📝 미션 저장소 및 진행 요구사항
+## 작업 상세 내용
 
-- 저장소를 fork/clone해 시작한다.
-- **기능을 구현하기 전에 README.md 파일에 구현할 기능 목록**을 정리해 추가한다.
-- **git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가**한다.
-- [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서 절차를 따라 미션을 제출한다.
-
-<br>
-
-## 🔗 참고 링크
-
-미션 진행이 어렵다면 아래 링크를 참고한다.
-
-- DOM
-  - [MDN DOM](https://developer.mozilla.org/ko/docs/Web/API/Document_Object_Model/%EC%86%8C%EA%B0%9C)
-- alert
-  - [MDN alert](https://developer.mozilla.org/ko/docs/Web/API/Window/alert)
-- javascript module
-  - [module](https://ko.javascript.info/modules-intro)
-- event
-  - [이벤트](https://ko.javascript.info/introduction-browser-events)
-  - [이벤트 위임](https://ko.javascript.info/event-delegation)
+- 게임 오브젝트 생성
+- 정답을 생성하는 game.setAnswer 함수 작성
+- 게임 결과를 연산하는 game.play 함수 작성
+- 입력값 유효성을 검사하는 validate 오브젝트 생성
+- 입력값이 숫자인지 체크하는 isNumber 생성
+- 입력값 자리수가 맞는지 확인하는 isThreeDigit 생성
+- 입력값이 중복된 숫자가 있는지 확인하는 hasDuplicateNumber 생성
+- 입력창에 eventListener 연결 (click)
+- 입력값 처리 로직 연결
+- 결과를 처리하는 wrongResultHandler 함수 생성
+- 정답일 경우를 처리하는 winHanlder함수 생성
+   1. 결과출력 🎉정답을 맞추셨습니다!🎉
+   2. template 작성, html에 추가
+   3. 재시작 event handler 작성 - 재시작 template을 제거하고 새로운 랜덤값 생성
+   4. template에 event handler 연결

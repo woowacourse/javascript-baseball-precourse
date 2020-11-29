@@ -17,7 +17,49 @@
       <button id="submit">확인</button>
       <h3>📄 결과</h3>
       <div id="result"></div>
+      <div id="restart"></div>
     </div>
+    <template id="restartTemplate">
+      게임을 새로 시작하시겠습니까? <button id="restartbtn">게임 재시작</button>
+    </template>
     <script type="module" src="src/index.js"></script>
+    <script type="module" src="src/handlers.js"></script>
+    <script type="module">
+      import {BaseballGame, Validation} from './src/index.js';
+      import {wrongResultHandler, winHandler} from './src/handlers.js';
+      let game = new BaseballGame();
+      let validation = new Validation();
+      
+      document.getElementById('submit').addEventListener("click", function(){
+        const userInput = document.getElementById('user-input').value;
+
+        let inputArray = [];
+        inputArray = userInput.split('');
+        if (validation.isNumber(inputArray) === false) {
+          return alert('1에서 9 사이의 숫자만 입력해주세요');
+        }
+
+        if (validation.isThreeDigit(inputArray) === false) {
+          return alert('세자리의 숫자를 입력해주세요');
+        }
+
+        if (validation.hasDuplicatedNumber(inputArray) === true) {
+          return alert('중복된 값을 입력하였습니다');
+        }
+        
+        
+        let {ball, strike} = game.play(userInput);
+        if(strike === 3) {
+          winHandler(function(){
+            game = new BaseballGame();
+          });
+        } else {
+          wrongResultHandler(ball, strike);
+        }      
+      });
+
+      
+      
+    </script>
   </body>
 </html>
