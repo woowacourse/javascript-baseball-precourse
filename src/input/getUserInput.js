@@ -1,20 +1,12 @@
 import checkValidInput from './checkInput.js';
 
-export default function userInputHandler() {
+export default function getUserInput() {
   const $userInput = document.querySelector('#user-input');
   const userInputNumbers = $userInput.value.split('').map((x) => Number(x));
   $userInput.value = '';
 
   if (checkValidInput(userInputNumbers)) {
-    return userInputNumbers;
+    return console.log(userInputNumbers);
   }
-  return false;
+  return console.log(false);
 }
-
-// export default function getUserInput() {
-//   const $submit = document.querySelector('#submit');
-
-//   $submit.addEventListener('click', userInputHandler);
-// }
-
-// getUserInput

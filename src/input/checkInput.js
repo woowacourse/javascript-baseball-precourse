@@ -41,5 +41,5 @@ export default function checkValidInput(userInputNumbers) {
     return alertInvalidInput('inValidScope');
   }
 
-  return userInputNumbers;
+  return true;
 }
