@@ -14,5 +14,8 @@ export function wrongResultHandler(ball, strike) {
 
 export function winHandler() {
   document.getElementById('result').innerHTML = '🎉정답을 맞추셨습니다!🎉';
+  let restart = document.querySelector('#restartTemplate');
+  let clone = document.importNode(restart.content, true);
+  document.getElementById('restart').appendChild(clone);
 
 }
