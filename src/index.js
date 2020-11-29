@@ -61,27 +61,26 @@ export default class BaseballGame {
     this.$userInput.focus();
   }
 
-  getBallCount = (computerInputNumbers, userInputNumbers) => {
-    let ball = 0;
-    for (let i = 0; i < USER_INPUT_LENGTH; i += 1) {
-      if (computerInputNumbers[i] === userInputNumbers[i]) {
-        continue;
-      }
-      if (computerInputNumbers.includes(userInputNumbers[i])) {
-        ball += 1;
-      }
-    }
-    return ball;
-  };
-
   getStrikeCount = (computerInputNumbers, userInputNumbers) => {
-    let strike = 0;
-    for (let i = 0; i < USER_INPUT_LENGTH; i += 1) {
-      if (computerInputNumbers[i] === userInputNumbers[i]) {
-        strike += 1;
+    function process(strikeCount, number, computerIndex) {
+      const userIndex = userInputNumbers.indexOf(number);
+      if (userIndex == computerIndex) {
+        return strikeCount + 1;
       }
+      return strikeCount;
     }
-    return strike;
+    return computerInputNumbers.split('').reduce(process, 0);
+  }
+
+  getBallCount = (computerInputNumbers, userInputNumbers) => {
+    function process(ballCount, number, computerIndex) {
+      const userIndex = userInputNumbers.indexOf(number);
+      if (userIndex === -1 || userIndex === computerIndex) {
+        return ballCount;
+      }
+      return ballCount + 1;
+    }
+    return computerInputNumbers.split('').reduce(process, 0);
   }
 
   isCorrect = (strikeCount) => strikeCount === USER_INPUT_LENGTH;
