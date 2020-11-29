@@ -3,6 +3,29 @@ export default class BaseballGame {
     this.computerNumbers = this._makeDiffNumber()
   }
 
+  _showErrorAlert(str) {
+    alert(`숫자 야구 게임 에러 내용\n ${str}`)
+  }
+
+  play(computerInputNumbers, userInputNumbers) {
+    const computerNumbers = computerInputNumbers || this.computerNumbers
+    if (computerInputNumbers) return "결과 값 String"
+  }
+}
+
+class RandomBaseball {
+  constructor(length) {
+    this.computerNumbers = this._makeDiffNumber(length)
+  }
+
+  resetRandomBaseball(length) {
+    this.computerNumbers = this._makeDiffNumber(length)
+  }
+
+  getBaseball() {
+    return this.computerNumbers
+  }
+
   _makeRandomValue(max, min) {
     // max ~ min 두 값 사이의 값을 출력(max, min값 포함)
     return Math.floor(Math.random() * max) + min
@@ -18,13 +41,7 @@ export default class BaseballGame {
     let stringNumbers = [...numberSet].join("")
     return parseInt(stringNumbers)
   }
-
-  _showErrorAlert(str) {
-    alert(`숫자 야구 게임 에러 내용\n ${str}`)
-  }
-
-  play(computerInputNumbers, userInputNumbers) {
-    const computerNumbers = computerInputNumbers || this.computerNumbers
-    if (computerInputNumbers) return "결과 값 String"
-  }
 }
+
+const randomBaseball = new RandomBaseball()
+console.log(randomBaseball)
