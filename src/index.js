@@ -111,21 +111,22 @@ export default function BaseballGame() {
     return result;
   };
 
-  this.printResult = function (result) {
-    document.getElementById("result").innerText = result;
-    
+  this.printResult = function (userInputNumbers, result) {
+    document.getElementById("result").innerHTML += "[ " + userInputNumbers + " ] " + result + "<br />";
+    document.getElementById("user-input").value = '';
+
     if (result.includes("정답")) {
       document.getElementById("restart").hidden = false;
     }
   };
 
-  this.start = function () {
-    const userInputNumbers = this.getInputNumber()
+  this.start = function (computerInputNumbers) {
+    const userInputNumbers = this.getInputNumber();
 
     if (userInputNumbers) {
       const result = this.play(computerInputNumbers, userInputNumbers);
 
-      this.printResult(result);
+      this.printResult(userInputNumbers, result);
     }
   };
 
@@ -134,12 +135,12 @@ export default function BaseballGame() {
   const submitEnter = document.getElementById("user-input");
 
   submitBtn.addEventListener("click", () => {
-    this.start();
+    this.start(computerInputNumbers);
   });
 
   submitEnter.addEventListener("keypress", (e) => {
     if (e.key == "Enter") {
-      this.start();
+      this.start(computerInputNumbers);
     }
   });
 }
