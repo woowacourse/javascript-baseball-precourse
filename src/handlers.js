@@ -11,3 +11,8 @@ export function wrongResultHandler(ball, strike) {
   }
   document.getElementById('result').innerHTML = result;
 }
+
+export function winHandler() {
+  document.getElementById('result').innerHTML = '🎉정답을 맞추셨습니다!🎉';
+
+}
