@@ -1,5 +1,7 @@
 function alertInvalidInput(info) {
-  if (info === 'inValidLength') {
+  if (info === 'NaN') {
+    alert('잘못 된 입력입니다! 숫자만 입력 가능합니다! 예)139');
+  } else if (info === 'inValidLength') {
     alert('잘못 된 입력입니다! 숫자는 반드시 3개를 입력해야합니다! 예)139');
   } else if (info === 'duplicate') {
     alert('잘못 된 입력입니다! 중복된 숫자는 입력할 수 없습니다! 예)139');
@@ -30,7 +32,25 @@ function checkDuplicate(userInputNumbers) {
   return false;
 }
 
+function isNumber(text) {
+  if (typeof text === 'number') {
+    return true;
+  }
+  return false;
+}
+
+function checkInputType(userInputNumbers) {
+  if (userInputNumbers.every(isNumber)) {
+    return true;
+  }
+
+  return false;
+}
+
 export default function checkValidInput(userInputNumbers) {
+  if (!checkInputType(userInputNumbers)) {
+    return alertInvalidInput('NaN');
+  }
   if (!checkValidLength(userInputNumbers)) {
     return alertInvalidInput('inValidLength');
   }
