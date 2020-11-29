@@ -8,6 +8,7 @@ export default class BaseballGame {
       userInput: document.querySelector('#user-input'),
       submit: document.querySelector('#submit'),
       result: document.querySelector('#result'),
+      gameForm: document.querySelector('#game-form'),
     };
 
     this.setEventListener();
@@ -19,6 +20,7 @@ export default class BaseballGame {
       userInput: document.querySelector('#user-input'),
       submit: document.querySelector('#submit'),
       result: document.querySelector('#result'),
+      gameForm: document.querySelector('#game-form'),
     };
   }
 
@@ -40,7 +42,8 @@ export default class BaseballGame {
     }
 
     const createNewForm = () => {
-      const inputEl = createNewElement('input', 'user-input')
+      const gameFormEl = createNewElement('form', 'game-form');
+      const inputEl = createNewElement('input', 'user-input');
       const blankTextNodeEl = document.createTextNode(' ');
       const submitButtonEl = createNewElement('button', 'submit', '확인');
       const h3El = createNewElement('h3', null, '📄 결과');
@@ -49,16 +52,20 @@ export default class BaseballGame {
       this.el.userInput.removeAttribute('id');
       this.el.submit.removeAttribute('id');
       this.el.result.removeAttribute('id');
+      this.el.gameForm.removeAttribute('id');
 
-      this.el.app.appendChild(inputEl);
-      this.el.app.appendChild(blankTextNodeEl);
-      this.el.app.appendChild(submitButtonEl);
+      this.el.app.appendChild(gameFormEl);
+      gameFormEl.appendChild(inputEl);
+      gameFormEl.appendChild(blankTextNodeEl);
+      gameFormEl.appendChild(submitButtonEl);
+      this.el.app.appendChild(gameFormEl);
       this.el.app.appendChild(h3El);
       this.el.app.appendChild(resultDivEl);
     }
 
-    const clickSubmitEl = (e) => {
-      if (e.target.id !== 'submit') return;
+    const submitInput = (e) => {
+      e.preventDefault();
+      if (e.target.id !== 'game-form') return;
       
       const userInputNumbers = this.getUserInput();
       if (userInputNumbers) {
@@ -73,7 +80,7 @@ export default class BaseballGame {
       }
     }
 
-    this.el.app.addEventListener('click', clickSubmitEl);
+    this.el.app.addEventListener('submit', submitInput);
   }
 
   getUserInput() {
