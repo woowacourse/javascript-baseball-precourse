@@ -1,4 +1,8 @@
 class BaseballGame {
+  constructor() {
+    this.answer = this.setAnswer();
+  }
+
   setAnswer() {
     const arr = [];
     let ranNum = Math.floor(Math.random() * 10);
