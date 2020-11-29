@@ -123,7 +123,7 @@ export default class BaseballGame {
 
   continueGame = () => {
     this.displayNextInput();
-    document.getElementById('submit').addEventListener('click', this.startGame);
+    this.handleSubmitClick();
   }
 
   displayNextInput = () => {
