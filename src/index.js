@@ -53,6 +53,18 @@ class Validation {
 
     return true;
   }
+
+  hasDuplicatedNumber(inputArray) {
+    const copyGetInput = inputArray.slice();
+    copyGetInput.sort((a, b) => a - b);
+    for (let i = 0; i < copyGetInput.length - 1; i += 1) {
+      if (copyGetInput[i] === copyGetInput[i + 1]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 }
 
 let game = new BaseballGame();
