@@ -3,22 +3,19 @@ import getStrikeCount from './getStrikeCount.js';
 
 function getResultText(strikeCount, ballCount) {
   if (strikeCount === 3) {
-    return `<div>
-              <strong>🎉정답입니다🎉</strong>
-              <button id="game-restart-button">게임 재시작</button>
-            </div>`;
+    return '정답';
   }
   if (!strikeCount && !ballCount) {
     return '낫싱';
   }
-  if (strikeCount && ballCount) {
-    return `${ballCount}볼 ${strikeCount}스트라이크⚾️`;
-  }
-  if (strikeCount && !ballCount) {
-    return `${strikeCount}스트라이크⚾️`;
-  }
   if (!strikeCount && ballCount) {
     return `${ballCount}볼`;
+  }
+  if (strikeCount && !ballCount) {
+    return `${strikeCount}스트라이크`;
+  }
+  if (strikeCount && ballCount) {
+    return `${ballCount}볼 ${strikeCount}스트라이크`;
   }
 }
 
