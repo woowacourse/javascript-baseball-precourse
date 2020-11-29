@@ -6,11 +6,6 @@ export default class BaseballGame {
     this.answer = this.makeOnAnswer();
   }
 
-  initValue() {
-    this.strike = 0;
-    this.ball = 0;
-  }
-
   makeOnAnswer() {
     const maxNumberArray = this.createMaxNumberLengthArray();
     let answer = '';
@@ -40,12 +35,53 @@ export default class BaseballGame {
     return randomNumber;
   }
 
+  isInputRight(value) {
+    if (value.match(/0/)) {
+      return alert('1~9까지의 숫자만 입력해주세요.');
+    }
+    if (value.match(/\D/)) {
+      return alert('숫자가 아닙니다.');
+    }
+    if (value.length !== new Set(value).size) {
+      return alert('숫자가 중복됩니다.');
+    }
+    if (value.length !== 3) {
+      return alert('3자리의 숫자를 입력해주세요.');
+    }
+
+    return true;
+  }
+
+  play(computerInputNumbers, userInputNumbers) {
+    this.initValue();
+    this.compareInput(computerInputNumbers, userInputNumbers);
+
+    if (!this.strike && !this.ball) return '낫싱';
+    if (!this.strike) return `${this.ball}볼`;
+    if (!this.ball) return `${this.strike}스트라이크`;
+    return `${this.ball}볼 ${this.strike}스트라이크`;
+  }
+
+  initValue() {
+    this.strike = 0;
+    this.ball = 0;
+  }
+
   compareInput(answer, userInput) {
     for (let userIndex = 0; userIndex < 3; userIndex++) {
       const answerNumberIndex = answer.indexOf(userInput[userIndex]);
       if (answerNumberIndex >= 0) {
         answerNumberIndex === userIndex ? this.strike++ : this.ball++;
       }
+    }
+  }
+
+  showResultOnScreen(resultText) {
+    const resultDiv = document.body.querySelector('#result');
+    resultDiv.innerText = resultText;
+
+    if (this.strike === 3) {
+      return this.gameFinish();
     }
   }
 
@@ -81,41 +117,5 @@ export default class BaseballGame {
     this.runningGame = true;
 
     return (this.answer = this.makeOnAnswer());
-  }
-
-  isInputRight(value) {
-    if (value.match(/0/)) {
-      return alert('1~9까지의 숫자만 입력해주세요.');
-    }
-    if (value.match(/\D/)) {
-      return alert('숫자가 아닙니다.');
-    }
-    if (value.length !== new Set(value).size) {
-      return alert('숫자가 중복됩니다.');
-    }
-    if (value.length !== 3) {
-      return alert('3자리의 숫자를 입력해주세요.');
-    }
-
-    return true;
-  }
-
-  play(computerInputNumbers, userInputNumbers) {
-    this.initValue();
-    this.compareInput(computerInputNumbers, userInputNumbers);
-
-    if (!this.strike && !this.ball) return '낫싱';
-    if (!this.strike) return `${this.ball}볼`;
-    if (!this.ball) return `${this.strike}스트라이크`;
-    return `${this.ball}볼 ${this.strike}스트라이크`;
-  }
-
-  showResultOnScreen(resultText) {
-    const resultDiv = document.body.querySelector('#result');
-    resultDiv.innerText = resultText;
-
-    if (this.strike === 3) {
-      return this.gameFinish();
-    }
   }
 }
