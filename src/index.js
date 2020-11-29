@@ -42,9 +42,9 @@ export default class BaseballGame {
     return { strikeCount, ballCount };
   }
 
-  //* 비교값에 따른 종료플래그 반환 메서드
-  checkIsEnded(strikeCount) {
-    if (strikeCount === DIGITS) this.isEnded = true;
+  //* 종료플래그 설정 메서드
+  checkIsEnded() {
+    this.isEnded = true;
     return this.isEnded;
   }
 
@@ -55,13 +55,14 @@ export default class BaseballGame {
       computerInputNumbers,
       userInputNumbers
     );
-    const isEnded = this.checkIsEnded(strikeCount);
-    if (isEnded) result = "🎉 정답을 맞추셨습니다. 🎉";
-    else {
-      if (ballCount) result += `${ballCount}볼`;
-      if (strikeCount) result += ` ${strikeCount}스트라이크`;
-      if (!ballCount && !strikeCount) result = "낫싱";
+    if (strikeCount === DIGITS) {
+      this.isEnded = true;
+      result = "🎉 정답을 맞추셨습니다. 🎉";
+      return result;
     }
+    if (ballCount) result += `${ballCount}볼`;
+    if (strikeCount) result += ` ${strikeCount}스트라이크`;
+    if (!ballCount && !strikeCount) result = "낫싱";
     return result;
   }
 
