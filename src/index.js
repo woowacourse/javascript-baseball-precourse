@@ -1,8 +1,8 @@
-
 export default function BaseballGame() {
   const inputLen = 3; // 입력받는 숫자의 길이
   var count = 1;
   var submitButton = document.getElementById("submit");
+  var randomNum = getRandomNum();
 
   // 각 자리의 스트라이크, 볼 카운트 측정
   function checkEachCount(computerInputNumbers, userInputNumbers, compareIndex) {
@@ -110,29 +110,59 @@ export default function BaseballGame() {
     var newElementText = document.createTextNode(text);
     if (element === "input") {
       newElement.type = "text";
+    } else if (element === "hr") {
+      newElement.style = "width: 200px";
+      newElement.align = "left";
     }
-    newElement.id = id;
+    if (id !== "") {
+      newElement.id = id;
+    }
     newElement.appendChild(newElementText);
 
     return newElement;
   }
 
+  function onRestart() { // 게임 재시작
+    window.location.reload(); // 새로고침으로 재시작
+  }
+
+  // 컴퓨터측 random 번호 생성
+  function getRandomNum() {
+    var number = [];
+
+    number[0] = Math.floor(Math.random() * 9) + 1;
+    do {
+      number[1] = Math.floor(Math.random() * 9) + 1;
+    } while (number[1] === number[0]);
+    do {
+      number[2] = Math.floor(Math.random() * 9) + 1;
+    } while (number[2] === number[1] || number[2] === number[0]);
+    
+    return String(number[0]) + String(number[1]) + String(number[2]);
+  }
+
   // 사용자가 '확인'을 클릭했을 시 실행되는 함수
   function onSubmit() {
+    const appId = document.getElementById("app");
     const userInputNumbers = document.getElementById('user-input').value;
-    console.log("clicked")
+
     if (checkRightInput(userInputNumbers)) {
       const resultId = document.getElementById("result");
-      let result = play("456", userInputNumbers);
+      let result = play(randomNum, userInputNumbers);
+
       if (result === "3스트라이크") {
-        resultId.appendChild(makeElement("div", "correct", "🎉정답을 맞추셨습니다!🎉"));
+        resultId.appendChild(makeElement("h3", "correct", "🎉정답을 맞추셨습니다!🎉"));
+        resultId.appendChild(makeElement("span", "ask", "게임을 새로 시작하시겠습니까? "));
+        resultId.appendChild(makeElement("button", "game-restart-button", "게임 재시작"));
+        const reStartButton = document.getElementById("game-restart-button");
+        reStartButton.addEventListener("click", onRestart);
       } else {
-        resultId.appendChild(makeElement("span", "", `${result}`));
+        resultId.appendChild(makeElement("h3", "", `${result}`));
+        resultId.appendChild(makeElement("hr", "", ""));
         document.getElementById('user-input').id = `user-input${count}`;
         resultId.id = `result${count}`;
         document.getElementById('submit').id = `submit${count}`;
         count++;
-        const appId = document.getElementById("app");
         appId.appendChild(makeElement("input", "user-input", ""));
         appId.appendChild(makeElement("button", "submit", "확인"));
         appId.appendChild(makeElement("h3", "", "📄 결과"));
