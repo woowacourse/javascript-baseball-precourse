@@ -82,23 +82,20 @@
    > for문 종료 후
 
    * `ballNumbers`가 0이고 `strikeNumbers` 3이면
-
      * 게임 재시작 기능으로 이동
-
    * `ballNumbers`가 0이고 `strikeNumbers`가 0이면
-
      * `낫싱` 출력
-
    * `ballNumbers`가 0이 아니고 `strikeNumbers`가 0이면
-
      * `볼` 출력
-
    * `ballNumbers`가 0이고 `strikeNumbers`가 0이 아니면
-
      * `스트라이크` 출력
-
    * `ballNumbers`와 `strikeNumbers` 둘 다 0이 아니면
-
      * `볼` + `스트라이크` 출력
 
-     
+4. `게임 재시작 기능`
+
+   > `ballNumbers`가 0이고 `strikeNumbers`가 3일 경우 게임 재시작 기능을 실행
+
+   * 결과값으로 정답을 맞추었다는 문구 띄우기
+   * 게임 재시작 버튼 제공
+     * id가 `game-restart-button` 인 버튼에 이벤트리스너를 달아서 컴퓨터의 랜덤값 새로 생성하고 유저의 입력값과 문구 초기화
