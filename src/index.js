@@ -14,8 +14,62 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    const computerNumbers = computerInputNumbers || this.computerNumbers;
-    if (computerInputNumbers) return "결과 값 String";
+    if (typeof computerInputNumbers !== "number" || typeof userInputNumbers !== "number") {
+      throw new Error("Unhandled Type Error");
+    }
+
+    const computerInputStr = "" + computerInputNumbers;
+    const userInputStr = "" + userInputNumbers;
+
+    if (computerInputStr.length !== userInputStr.length) {
+      const str = `입력 값의 길이가 맞추어야 하는 길이 ${computerInputStr.length}와 같지 않습니다.`;
+      this._showErrorAlert(str);
+    } else if (this._validateInput(computerInputStr) === false || this._validateInput(userInputStr) === false) {
+      this._showErrorAlert("입력 값이 올바르지 않습니다.");
+    }
+
+    const verdictedObj = this._verdictStrikeOrBall(computerInputStr, userInputStr);
+
+    const { message, finished } = this._makeResultMessage(verdictedObj);
+
+    return message;
+  }
+
+  _verdictStrikeOrBall(computerInputStr, userInputStr) {
+    const strikeOrBallObj = {
+      ball: 0,
+      strike: 0,
+      totalLength: computerInputStr.length,
+    };
+
+    for (let idx = 0; idx < computerInputStr.length; idx++) {
+      const curComputerInput = computerInputStr[idx];
+      const curUserInput = userInputStr[idx];
+      if (curComputerInput === curUserInput) {
+        strikeOrBallObj.strike += 1;
+      } else if (computerInputStr.includes(curUserInput)) {
+        strikeOrBallObj.ball += 1;
+      }
+    }
+    return strikeOrBallObj;
+  }
+
+  _makeResultMessage({ ball, strike, totalLength }) {
+    const result = { message: "", finished: false };
+    if (strike === totalLength) {
+      result.message = "축하합니다. 정답입니다.";
+      result.finished = true;
+    } else if (ball > 0 && strike === 0) {
+      result.message = `${ball}볼`;
+    } else if (strike > 0 && ball === 0) {
+      result.message = `${strike}스트라이크`;
+    } else if (ball > 0 && strike > 0) {
+      result.message = `${ball}볼 ${strike}스트라이크`;
+    } else {
+      result.message = "낫싱";
+    }
+
+    return result;
   }
 }
 
@@ -48,3 +102,8 @@ class RandomBaseball {
     return parseInt(stringNumbers);
   }
 }
+
+const baseballGame = new BaseballGame();
+const randomBaseball = new RandomBaseball();
+window.baseballGame = baseballGame;
+window.randomBaseball = randomBaseball;
