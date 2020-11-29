@@ -74,6 +74,8 @@ export default class BaseballGame {
 const baseballGame = new BaseballGame();
 let randomNumber;
 
+onload = startGame
+
 function startGame() {
   const userInput = document.getElementById('user-input');
   const submit = document.getElementById('submit');
@@ -82,14 +84,7 @@ function startGame() {
   userInput.value = '';
   result.innerHTML = '';
 
-  do {
-    randomNumber = Math.floor(Math.random() * 1000).toString();
-  } while (
-    randomNumber.match(/^[1-9]{3}$/) === null
-    || randomNumber[0] === randomNumber[1]
-    || randomNumber[0] === randomNumber[2]
-    || randomNumber[1] === randomNumber[2]
-  );
+  randomNumber = createNumber();
 
   submit.onclick = function () {
     const userInput = document.getElementById('user-input');
@@ -107,4 +102,15 @@ function startGame() {
   };
 }
 
-onload = startGame
+function createNumber() {
+  let randomNumber;
+  do {
+    randomNumber = Math.floor(Math.random() * 1000).toString();
+  } while (
+    randomNumber.match(/^[1-9]{3}$/) === null
+    || randomNumber[0] === randomNumber[1]
+    || randomNumber[0] === randomNumber[2]
+    || randomNumber[1] === randomNumber[2]
+  );
+  return randomNumber;
+}
