@@ -16,7 +16,6 @@
 - `getBallAndStrike` - 볼과 스트라이크의 개수를 반환하는 함수
 - `RandomNumber` - 유저가 결과를 맞출 때 까지 유지되는 3글자랜덤숫자로 된 문자열
 - `clearAll` - 다시시작하기 위한 환경을 만들어주는 함수
-- `changeHTML` - HTML을 바꾸는 함수
 
   <br>
 
