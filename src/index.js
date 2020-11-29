@@ -5,11 +5,11 @@ export class BaseballGame {
 
   setAnswer() {
     const arr = [];
-    let ranNum = Math.floor(Math.random() * 10);
+    let ranNum = Math.floor((Math.random() * (10 - 1) + 1));
 
     for (let i = 0; i < 3; i += 1) {
       while (arr.includes(ranNum) === true) {
-        ranNum = Math.floor(Math.random() * 10);
+        ranNum = Math.floor((Math.random() * (10 - 1) + 1));
       }
       arr.push(ranNum);
     }
@@ -38,7 +38,7 @@ export class BaseballGame {
 export class Validation {
   isNumber(inputArray) {
     for (let i = 0; i < inputArray.length; i += 1) {
-      if (isNaN(Number(inputArray[i])) === true) {
+      if ((isNaN(Number(inputArray[i]))) || inputArray[i] === '0') {
         return false;
       }
     }
