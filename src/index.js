@@ -11,21 +11,14 @@ export default class BaseballGame {
 
   startGame = () => {
     const userInputElem = document.getElementById('user-input');
-    
-
     let userInputNumbers = this.parseUserInput(userInputElem.value);
-        
-    // 사용자 입력에 오류가 있을 겨우 반환 숫자 배열이 없음으로 play 메소드를 실행하지 않음
-    if (userInputNumbers.length === 0) {
-      return;
-    }
 
-    this.play(this.computerInputNumber, userInputNumbers);
+    if (userInputNumbers.length > 0) {
+      this.play(this.computerInputNumber, userInputNumbers);
+    }
   }
 
   play = (computerInputNumbers, userInputNumbers) => {
-    console.log(computerInputNumbers, userInputNumbers);
-
     const ballCount = this.getBallCount(computerInputNumbers, userInputNumbers);
     const strikeCount = this.getStrikeCount(computerInputNumbers, userInputNumbers);
     const gameResult = this.getGameResultString(ballCount, strikeCount);
