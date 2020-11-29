@@ -89,8 +89,17 @@ export default function BaseballGame() {
 
     inRound = false;
   }
+  
+  this.handleRestart = function() {
+    restartWrapper.style.visibility = 'hidden';
+    userInput.value = "";
+    resultWrapper.innerHTML="";
+    computerInputNumbers = this.getComputerInputNumbers();
+    console.log(computerInputNumbers);
+  }
 
   submit.addEventListener('click',() => this.getUserInput());
+  restart.addEventListener('click', () => this.handleRestart());
   let computerInputNumbers = this.getComputerInputNumbers();
   console.log(computerInputNumbers);
 }
