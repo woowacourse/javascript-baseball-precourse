@@ -79,4 +79,8 @@ function getResult(strike, ball) {
   return retString;
 }
 
+function getUserInput() {
+  return document.getElementById("user-input").value;
+}
+
 new BaseballGame();
