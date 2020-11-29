@@ -1,37 +1,89 @@
 const NUMBER_LENGTH = 3;
-const userInputEl = document.querySelector('#user-input');
-const submitEl = document.querySelector('#submit');
-const resultEl = document.querySelector('#result');
 
 export default class BaseballGame {
   constructor() {
     this.computerNumbers = this.generateComputerNumbers();
+    this.el = {
+      app: document.querySelector('#app'),
+      userInput: document.querySelector('#user-input'),
+      submit: document.querySelector('#submit'),
+      result: document.querySelector('#result'),
+    };
 
     this.setEventListener();
   }
 
+  resetEl() {
+    this.el = {
+      app: document.querySelector('#app'),
+      userInput: document.querySelector('#user-input'),
+      submit: document.querySelector('#submit'),
+      result: document.querySelector('#result'),
+    };
+  }
+
   setEventListener() {
-    const clickSubmitEl = () => {
+    const createNewElement = (tag, id, content) => {
+      const el = document.createElement(tag);
+      
+      if (tag === 'input') {
+        el.setAttribute('type', 'text');
+      }
+      if (id) {
+        el.id = id;
+      }
+      if (content) {
+        el.append(content);
+      }
+
+      return el;
+    }
+
+    const createNewForm = () => {
+      const inputEl = createNewElement('input', 'user-input')
+      const blankTextNodeEl = document.createTextNode(' ');
+      const submitButtonEl = createNewElement('button', 'submit', '확인');
+      const h3El = createNewElement('h3', null, '📄 결과');
+      const resultDivEl = createNewElement('div', 'result');
+      
+      this.el.userInput.removeAttribute('id');
+      this.el.submit.removeAttribute('id');
+      this.el.result.removeAttribute('id');
+
+      this.el.app.appendChild(inputEl);
+      this.el.app.appendChild(blankTextNodeEl);
+      this.el.app.appendChild(submitButtonEl);
+      this.el.app.appendChild(h3El);
+      this.el.app.appendChild(resultDivEl);
+    }
+
+    const clickSubmitEl = (e) => {
+      if (e.target.id !== 'submit') return;
+      
       const userInputNumbers = this.getUserInput();
       if (userInputNumbers) {
         const result = this.play(this.computerNumbers, userInputNumbers);
         const resultTextEl = document.createElement('p');
+        this.el.result.appendChild(resultTextEl);
         resultTextEl.append(result);
-        resultEl.appendChild(resultTextEl)
+
+        createNewForm();
+        this.resetEl();
+        this.el.userInput.focus();
       }
     }
 
-    submitEl.addEventListener('click', clickSubmitEl);
+    this.el.app.addEventListener('click', clickSubmitEl);
   }
 
   getUserInput() {
     let isValid = true;
-    const userInput = userInputEl.value;
+    const userInput = this.el.userInput.value;
     const userInputNumbers = userInput.split('').map(Number);
 
     if (isInvalidNumbers(userInputNumbers)) {
       alert('1~9까지의 3자리 숫자를 중복 없이 입력해주세요');
-      userInputEl.focus();
+      this.el.userInput.focus();
       isValid = false;
     }
 
