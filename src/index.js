@@ -59,9 +59,13 @@ export default class BaseballGame {
     }
 
     const showResult = (result) => {
-      const resultTextEl = document.createElement('p');
+      const { status, string } = result;
+      
+      const resultTextEl = createNewElement('p', null, string);
       this.el.result.appendChild(resultTextEl);
-      resultTextEl.append(result);
+      if (status === 'finish') {
+        resultTextEl.style.fontWeight = 'bold';
+      }
     }
 
     const submitInput = (e) => {
@@ -154,22 +158,26 @@ export default class BaseballGame {
       }
     }
 
-    let resultString = '';
+    let result = {
+      status: 'playing',
+      string: '',
+    };
 
     if (ballCount) {
-      resultString += `${ballCount}볼 `;
+      result.string += `${ballCount}볼 `;
     }
     if (strikeCount) {
-      resultString += `${strikeCount}스트라이크`;
+      result.string += `${strikeCount}스트라이크`;
     }
     if (ballCount <= 0 && strikeCount <= 0) {
-      resultString = '낫싱';
+      result.string = '낫싱';
     }
     if (strikeCount === NUMBER_LENGTH) {
-      resultString = '🎉 정답을 맞추셨습니다! 🎉'
+      result.status = 'finish';
+      result.string = '🎉 정답을 맞추셨습니다! 🎉';
     }
 
-    return resultString;
+    return result;
   }
 }
 
