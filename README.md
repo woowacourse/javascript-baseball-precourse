@@ -42,7 +42,7 @@
 - 입력값이 중복된 숫자가 있는지 확인하는 hasDuplicateNumber 생성
 - 입력창에 eventListener 연결 (click)
 - 입력값 처리 로직 연결
-- 결과를 처리하는 printAnswer 함수 생성
+- 결과를 처리하는 wrongResultHandler 함수 생성
 - 정답일 경우를 처리하는 win함수 생성
 - win함수 안에 재시작 template 생성, eventListener 연결하여 게임 재시작 처리
 - 재시작 버튼 클릭시 정답 재설정, 재시작 template 제거
