@@ -21,7 +21,7 @@ export default class BaseballGame {
   };
 
   setUserInputNumbers = (inputNumber) => {
-    this.userInputNumbers = inputNumber.split("");
+    this.userInputNumbers = inputNumber.split("").map((numStr) => parseInt(numStr));
   };
 
   isNumber = (item) => {
@@ -32,14 +32,22 @@ export default class BaseballGame {
     return true;
   };
 
+  isIncludeZero = () => {
+    return this.userInputNumbers.includes(0);
+  };
+
   checkUserInput = (userInput) => {
     const alertMessage = "1~9까지의 수를 중복없이 3개 작성해주세요";
 
-    if (userInput.length === 3 && this.isNumber(userInput)) {
-      setUserInputNumbers(userInput);
+    if (!(userInput.length === 3 && this.isNumber(userInput))) {
+      alert(alertMessage);
     }
 
-    alert(alertMessage);
+    this.setUserInputNumbers(userInput);
+
+    if (this.isIncludeZero()) {
+      alert(alertMessage);
+    }
   };
 
   bindEventListener = () => {
