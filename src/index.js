@@ -5,27 +5,27 @@ import { isNumber, isNot3Digit, isInZero, isInDuplicateDigit } from './utils';
 export default class BaseballGame {
   constructor() {
     this._computerInputNumbers = null;
+    this.MAXVAL = 9;
+    this.MINVAL = 1;
     this.init();
   }
 
   init() {
-    this.RandomComputerInputNumbers();
+    this.randomComputerInputNumbers();
   }
 
-  RandomComputerInputNumbers() {
-    const minVal = 1;
-    const maxVal = 9;
-    let table;
+  randomComputerInputNumbers() {
+    const table = Array.from({ length: 10 }).map(() => false);
     let random = '';
     let count = 0;
 
-    table = Array.from({ length: 10 }).map(() => false);
-
     while (count < 3) {
-      let number = Math.floor(Math.random() * (maxVal - minVal + 1) + minVal);
+      let number = Math.floor(
+        Math.random() * (this.MAXVAL - this.MINVAL + 1) + this.MINVAL,
+      );
       if (table[number] === false) {
         table[number] = true;
-        random += number;
+        random += number.toString();
         count++;
       }
     }
