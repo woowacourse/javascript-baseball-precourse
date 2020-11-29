@@ -14,6 +14,7 @@ export default class BaseballGame {
     this.$submit = document.getElementById('submit');
     this.$submit.addEventListener('click', this.handleClickSubmit);
 
+    this.errorMessage = '';
     this.computerInputNumbers = this.createComputerInputNumbers();
   }
 
@@ -21,6 +22,7 @@ export default class BaseballGame {
     this.computerInputNumbers = this.createComputerInputNumbers();
     this.$userInput.value = '';
     this.$result.innerHTML = '';
+    this.errorMessage = '';
   }
 
   createComputerInputNumbers = () => {
@@ -44,18 +46,32 @@ export default class BaseballGame {
       this.$userInput.select();
       return;
     }
-    return this.randerErrorMessage('잘못된 입력입니다. 다시 입력해주세요');
+    return this.randerErrorMessage(this.errorMessage);
+  }
+
+  setErrorMessage = (message) => {
+    this.errorMessage = message;
   }
 
   isThreeDigitNumbers = (numbers) => {
-    return /^[1-9]{3}$/g.test(numbers);
+    const _isOk = /^[1-9]{3}$/g.test(numbers);
+    if (_isOk) {
+      return true;
+    }
+    this.setErrorMessage('세 자리가 아니거나 문자 또는 공백이 존재합니다. 다시 입력해주세요.');
+    return false;
   }
 
   isNotDuplicate = (numbers) => {
-    function compareNumberIndex(number) {
+    const _isOk = numbers.split('').every((number) => {
       return numbers.indexOf(number) === numbers.lastIndexOf(number);
+    });
+
+    if (_isOk) {
+      return true;
     }
-    return numbers.split('').every(compareNumberIndex);
+    this.setErrorMessage('중복되는 숫자가 존재합니다. 다시 입력해주세요.');
+    return false;
   }
 
   isPossible = (numbers) => {
@@ -67,6 +83,7 @@ export default class BaseballGame {
 
   randerErrorMessage = (message) => {
     alert(message);
+    this.errorMessage = '';
     this.$userInput.value = '';
     this.$userInput.focus();
   }
