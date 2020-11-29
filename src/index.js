@@ -1,4 +1,4 @@
-import { text } from './fixtrue';
+import { text } from './constants';
 import { isNumber, isNot3Digit, isInZero, isInDuplicateDigit } from './utils';
 
 // BaseballGame class (Model)
