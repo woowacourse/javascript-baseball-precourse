@@ -6,7 +6,6 @@ jest.spyOn(document, "querySelector").mockReturnValue(document.documentElement);
 describe('유저의 입력값이 서로 다른 3개의 숫자로 이루어져있는지 검증', () => {
     const baseballGame = new BaseballGame();
 
-
     test('유저의 입력값은 3개의 문자로 구성되어 있어야 한다.', () => {
         expect(baseballGame.isValid('abce')).toBe(false);
         expect(baseballGame.isValid('2456')).toBe(false);
@@ -14,18 +13,17 @@ describe('유저의 입력값이 서로 다른 3개의 숫자로 이루어져있
         expect(baseballGame.isValid('9')).toBe(false);
     });
 
-    test('유저의 입력값의 각 문자는 숫자로 구성되어 있어야 한다.', ()=> {
+    test('유저의 입력값의 각 문자는 숫자로 구성되어 있어야 한다.', () => {
         expect(baseballGame.isValid('0x3')).toBe(false);
         expect(baseballGame.isValid('0 3')).toBe(false);
-        }
-    );
+    });
 
-    test('유저의 입력값의 각 숫자는 중복되지 않아야 한다.', ()=> { 
+    test('유저의 입력값의 각 숫자는 중복되지 않아야 한다.', () => { 
         expect(baseballGame.isValid('244')).toBe(false);
         expect(baseballGame.isValid('777')).toBe(false);
     });
     
-    test('유저의 입력값의 각 숫자는 0을 포함하지 않는다.', ()=> { 
+    test('유저의 입력값의 각 숫자는 0을 포함하지 않는다.', () => { 
         expect(baseballGame.isValid('709')).toBe(false);
     });
 
