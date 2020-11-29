@@ -3,7 +3,7 @@ export default function BaseballGame() {
   const arrayLength = 3;
   let computerInputNumbers = [];
   
-  this.notSameNumber = function(randomNumber) { 
+  this.isAvailableNumber = function(randomNumber) { 
     return computerInputNumbers.every((computerInputNumber) => randomNumber !== computerInputNumber);
   };
   
@@ -12,7 +12,7 @@ export default function BaseballGame() {
 
     while (i < arrayLength) {
       const randomNumber = String(Math.floor(Math.random() * 9 + 1))
-      if (this.notSameNumber(randomNumber)) {
+      if (this.isAvailableNumber(randomNumber)) {
         computerInputNumbers.push(randomNumber);
         i++;
       }
