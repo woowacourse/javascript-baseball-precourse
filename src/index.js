@@ -24,26 +24,27 @@ export default class BaseballGame {
   }
 
   createComputerInputNumbers = () => {
-    const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const _numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-    let computerNumbers = '';
-    while (computerNumbers.length !== USER_INPUT_LENGTH) {
-      const randomIndex = Math.floor(Math.random() * numbers.length);
-      computerNumbers += numbers[randomIndex];
-      numbers.splice(randomIndex, 1);
+    let _computerNumbers = '';
+    while (_computerNumbers.length !== USER_INPUT_LENGTH) {
+      const randomIndex = Math.floor(Math.random() * _numbers.length);
+      _computerNumbers += _numbers[randomIndex];
+      _numbers.splice(randomIndex, 1);
     }
 
-    return computerNumbers;
+    return _computerNumbers;
   }
 
   handleClickSubmit = () => {
-    const userInputNumbers = this.$userInput.value;
+    const _userInputNumbers = this.$userInput.value;
 
-    this.isPossible(userInputNumbers) ?
-      this.play(this.computerInputNumbers, userInputNumbers) :
-      this.randerErrorMessage('잘못된 입력입니다. 다시 입력해주세요');
-
-    this.$userInput.select();
+    if (this.isPossible(_userInputNumbers)) {
+      this.play(this.computerInputNumbers, _userInputNumbers);
+      this.$userInput.select();
+      return;
+    }
+    return this.randerErrorMessage('잘못된 입력입니다. 다시 입력해주세요');
   }
 
   isThreeDigitNumbers = (numbers) => {
@@ -72,8 +73,8 @@ export default class BaseballGame {
 
   getStrikeCount = (computerInputNumbers, userInputNumbers) => {
     function process(strikeCount, number, computerIndex) {
-      const userIndex = userInputNumbers.indexOf(number);
-      if (userIndex == computerIndex) {
+      const _userIndex = userInputNumbers.indexOf(number);
+      if (_userIndex == computerIndex) {
         return strikeCount + 1;
       }
       return strikeCount;
@@ -83,8 +84,8 @@ export default class BaseballGame {
 
   getBallCount = (computerInputNumbers, userInputNumbers) => {
     function process(ballCount, number, computerIndex) {
-      const userIndex = userInputNumbers.indexOf(number);
-      if (userIndex === -1 || userIndex === computerIndex) {
+      const _userIndex = userInputNumbers.indexOf(number);
+      if (_userIndex === -1 || _userIndex === computerIndex) {
         return ballCount;
       }
       return ballCount + 1;
@@ -108,28 +109,28 @@ export default class BaseballGame {
   }
 
   renderGameResult = (strike, ball) => {
-    let resultText = '';
+    let _resultText = '';
 
     if (strike === 0 && ball === 0) {
-      resultText = '낫띵';
+      _resultText = '낫띵';
     }
     if (ball) {
-      resultText += `${ball}볼`;
+      _resultText += `${ball}볼`;
     }
     if (strike) {
-      resultText += ` ${strike}스트라이크`;
+      _resultText += ` ${strike}스트라이크`;
     }
 
-    this.$result.innerHTML = `<p>${resultText}</p>`;
+    this.$result.innerHTML = `<p>${_resultText}</p>`;
   }
 
   play = (computerInputNumbers, userInputNumbers) => {
-    const ballCount = this.getBallCount(computerInputNumbers, userInputNumbers);
-    const strikeCount = this.getStrikeCount(computerInputNumbers, userInputNumbers);
+    const _ballCount = this.getBallCount(computerInputNumbers, userInputNumbers);
+    const _strikeCount = this.getStrikeCount(computerInputNumbers, userInputNumbers);
 
-    return this.isCorrect(strikeCount) ?
+    return this.isCorrect(_strikeCount) ?
       this.renderCorrectMessage() :
-      this.renderGameResult(strikeCount, ballCount);
+      this.renderGameResult(_strikeCount, _ballCount);
   }
 }
 
