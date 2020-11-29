@@ -104,20 +104,23 @@ export default class BaseballGame {
   }
 
   createPlayResult(strikeCount, ballCount) {
+    const MAX_STRIKE_COUNT = 3;
+    const MIN_STRIKE_COUNT = 0;
+    const MIN_BALL_COUNT = 0;
     let playResult = '';
-    if (strikeCount === 3) {
+    if (strikeCount === MAX_STRIKE_COUNT) {
       playResult = VICTORY_MESSAGE;
     }
-    if (strikeCount === 0 && ballCount === 0) {
+    if (strikeCount === MIN_STRIKE_COUNT && ballCount === MIN_BALL_COUNT) {
       playResult = NOTHING_MESSAGE;
     }
-    if (ballCount > 0) {
+    if (ballCount > MIN_BALL_COUNT) {
       playResult = ballCount.toString() + BALL_MESSAGE;
     }
-    if (ballCount > 0 && strikeCount > 0) {
+    if (ballCount > MIN_BALL_COUNT && strikeCount > MIN_BALL_COUNT) {
       playResult += ' ';
     }
-    if (strikeCount > 0 && strikeCount < 3) {
+    if (strikeCount > MIN_STRIKE_COUNT && strikeCount < MAX_STRIKE_COUNT) {
       playResult += strikeCount.toString() + STRIKE_MESSAGE;
     }
 
