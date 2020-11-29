@@ -1,16 +1,15 @@
-import randomNumberMaker from "./random-number-maker.js";
 import printResult, { clearResult, makeRestartBtn } from "./print-result.js";
 import userInput, { isValidUserInput } from "./user-input.js";
 import countStrike, { isGameEnded, countBall } from "./game-count.js";
+import randomNumberMaker from "./random-number-maker.js";
 
-const LENGTH_OF_NUMBERS_GIVEN = 3;
-const randomNumberArray = randomNumberMaker(LENGTH_OF_NUMBERS_GIVEN);
-
-export default function playGame() {
+export default function playGame(state) {
   const userInputValue = userInput();
+  const randomNumberArray = state.randomNumber;
+  const givenNumberLength = state.givenNumberLength;
   let validUserInputValueArray = [];
 
-  if (isValidUserInput(userInputValue, LENGTH_OF_NUMBERS_GIVEN)) {
+  if (isValidUserInput(userInputValue, givenNumberLength)) {
     validUserInputValueArray = userInputValue.split("").map(Number);   
     
     const BALL_COUNT = countBall(randomNumberArray, validUserInputValueArray);
@@ -21,16 +20,17 @@ export default function playGame() {
     if (isGameEnded(STRIKE_COUNT)) {
       makeRestartBtn();
       document.getElementById('game-restart-button').addEventListener('click', () => {
-        restartGame();
+        restartGame(state);
       })
     }
 
   } else {
-    clearResult()
+    clearResult();
   }
 }
 
-export function restartGame() {
+export function restartGame(state) {
+  const givenNumberLength = state.givenNumberLength;
+  state.randomNumber = randomNumberMaker(givenNumberLength);
   clearResult();
-  window.location.reload();
 }
