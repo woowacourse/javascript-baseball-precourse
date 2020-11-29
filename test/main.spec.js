@@ -15,7 +15,7 @@ import {
   VICTORY_MESSAGE,
 } from '../src/library/constants/playResult.js';
 
-describe('UserInput 클래스', () => {
+const userInputDescribe = () => {
   const $userInput = document.createElement('input');
   const userNumber = { subscribe() {} };
   const userInput = new UserInput($userInput, { userNumber });
@@ -40,9 +40,9 @@ describe('UserInput 클래스', () => {
       expect(userInput.isValidInput('133')).toBe(false);
     });
   });
-});
+};
 
-describe('BaseballGame 클래스', () => {
+const baseballGameDescribe = () => {
   let baseballGame;
 
   beforeEach(() => {
@@ -132,4 +132,7 @@ describe('BaseballGame 클래스', () => {
       expect(baseballGame.createPlayResult(0, 0)).toEqual(NOTHING_MESSAGE);
     });
   });
-});
+};
+
+describe('UserInput 클래스', () => userInputDescribe());
+describe('BaseballGame 클래스', () => baseballGameDescribe());
