@@ -1,17 +1,17 @@
 export default class BaseballGame {
   constructor() {
-    this.strike = 0;
-    this.ball = 0;
     this.runningGame = true;
-    this.answer = this.makeOnAnswer();
+    this.answer = this._makeOnAnswer();
+    this._strike = 0;
+    this._ball = 0;
   }
 
-  makeOnAnswer() {
-    const maxNumberArray = this.createMaxNumberLengthArray();
+  _makeOnAnswer() {
+    const maxNumberArray = this._createMaxNumberLengthArray();
     let answer = '';
     for (let i = 1; i <= 3; i++) {
       const selectedNumber = maxNumberArray.splice(
-        this.selectRandomNumber(maxNumberArray.length),
+        this._selectRandomNumber(maxNumberArray.length),
         1,
       );
       answer += selectedNumber;
@@ -20,7 +20,7 @@ export default class BaseballGame {
     return answer;
   }
 
-  createMaxNumberLengthArray() {
+  _createMaxNumberLengthArray() {
     const MAX_NUMBER = 9;
     const maxNumberArray = Array(MAX_NUMBER)
       .fill()
@@ -29,7 +29,7 @@ export default class BaseballGame {
     return maxNumberArray;
   }
 
-  selectRandomNumber(length) {
+  _selectRandomNumber(length) {
     const randomNumber = Math.floor(Math.random() * length);
 
     return randomNumber;
@@ -53,25 +53,25 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    this.initValue();
-    this.compareInput(computerInputNumbers, userInputNumbers);
+    this._initValue();
+    this._compareInput(computerInputNumbers, userInputNumbers);
 
-    if (!this.strike && !this.ball) return '낫싱';
-    if (!this.strike) return `${this.ball}볼`;
-    if (!this.ball) return `${this.strike}스트라이크`;
-    return `${this.ball}볼 ${this.strike}스트라이크`;
+    if (!this._strike && !this._ball) return '낫싱';
+    if (!this._strike) return `${this._ball}볼`;
+    if (!this._ball) return `${this._strike}스트라이크`;
+    return `${this._ball}볼 ${this._strike}스트라이크`;
   }
 
-  initValue() {
-    this.strike = 0;
-    this.ball = 0;
+  _initValue() {
+    this._strike = 0;
+    this._ball = 0;
   }
 
-  compareInput(answer, userInput) {
+  _compareInput(answer, userInput) {
     for (let userIndex = 0; userIndex < 3; userIndex++) {
       const answerNumberIndex = answer.indexOf(userInput[userIndex]);
       if (answerNumberIndex >= 0) {
-        answerNumberIndex === userIndex ? this.strike++ : this.ball++;
+        answerNumberIndex === userIndex ? this._strike++ : this._ball++;
       }
     }
   }
@@ -80,32 +80,35 @@ export default class BaseballGame {
     const resultDiv = document.body.querySelector('#result');
     resultDiv.innerText = resultText;
 
-    if (this.strike === 3) {
-      return this.gameFinish();
+    if (this._strike === 3) {
+      return this._gameFinish();
     }
   }
 
-  gameFinish() {
+  _gameFinish() {
     const resultDiv = document.body.querySelector('#result');
 
     resultDiv.innerHTML = `<h3>🎉정답을 맞추셨습니다!🎉</h3> 
     <div id=restart-text>게임을 새로 시작하시겠습니까? </div>`;
     this.runningGame = false;
 
-    return this.reStartButton();
+    return this._reStartButton();
   }
 
-  reStartButton() {
+  _reStartButton() {
     const restartDiv = document.body.querySelector('#restart-text');
     const reStartButton = document.createElement('button');
     reStartButton.id = 'game-restart-button';
     reStartButton.innerText = '게임 재시작';
     restartDiv.appendChild(reStartButton);
 
-    return reStartButton.addEventListener('click', this.gameReStart.bind(this));
+    return reStartButton.addEventListener(
+      'click',
+      this._gameReStart.bind(this),
+    );
   }
 
-  gameReStart() {
+  _gameReStart() {
     const userInput = document.body.querySelector('#user-input');
     const resultDiv = document.body.querySelector('#result');
 
@@ -116,6 +119,6 @@ export default class BaseballGame {
     userInput.value = '';
     this.runningGame = true;
 
-    return (this.answer = this.makeOnAnswer());
+    return (this.answer = this._makeOnAnswer());
   }
 }
