@@ -1,32 +1,32 @@
 export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = '';
-    this.start();
+    this.startGame();
   }
 
   getComputerNumber() {
-    let computerInputNumbers = '';
+    let _computerInputNumbers = '';
 
-    while (computerInputNumbers.length < 3) {
+    while (_computerInputNumbers.length < 3) {
       const randomNumber = Math.floor(Math.random() * 9 + 1);
 
-      if (this.isDuplicate(computerInputNumbers, randomNumber)) {
-        computerInputNumbers += randomNumber.toString();
+      if (this.isDuplicate(_computerInputNumbers, randomNumber)) {
+        _computerInputNumbers += randomNumber.toString();
       }
     }
 
-    return computerInputNumbers;
+    return _computerInputNumbers;
   }
 
-  isDuplicate(text1, text2) {
-    let resultData = false;
+  isDuplicate(firstString, secondString) {
+    let checkValue = false;
 
     // 중복이 없으면 -1을 출력함
-    if (text1.indexOf(text2) === -1) {
-      resultData = true;
+    if (firstString.indexOf(secondString) === -1) {
+      checkValue = true;
     }
 
-    return resultData;
+    return checkValue;
   }
 
   getUserNumber() {
@@ -36,46 +36,47 @@ export default class BaseballGame {
     return userInputNumber;
   }
 
-  isUserNumberRight(userInput, text) {
-    let returnValue = null;
+  isUserNumberRight(userInput, _userInputNumbers) {
+    let returnUserNumberValue = null;
 
     if (
-      text.length === 3 &&
-      isNaN(text) === false &&
-      this.isDuplicate(text[0], text[1]) === true &&
-      this.isDuplicate(text.slice(0, 2), text[2]) === true
+      _userInputNumbers.length === 3 &&
+      isNaN(_userInputNumbers) === false &&
+      this.isDuplicate(_userInputNumbers[0], _userInputNumbers[1]) === true &&
+      this.isDuplicate(_userInputNumbers.slice(0, 2), _userInputNumbers[2]) ===
+        true
     ) {
       userInput.value = '';
-      returnValue = text;
+      returnUserNumberValue = _userInputNumbers;
     } else {
       userInput.value = '';
       alert('다시 입력해주세요');
     }
 
-    return returnValue;
+    return returnUserNumberValue;
   }
 
-  start() {
+  startGame() {
     const playButton = document.querySelector('#submit');
     this.computerInputNumbers = this.getComputerNumber();
 
     playButton.addEventListener('click', () => {
       const userInputNumbers = this.getUserNumber();
-      const _text = this.play(this.computerInputNumbers, userInputNumbers);
+      const gameResult = this.play(this.computerInputNumbers, userInputNumbers);
 
-      this.resultToHTML(_text);
+      this.resultToHTML(gameResult);
     });
   }
 
-  play(computerInputNumbers, userInputNumbers) {
+  play(_computerInputNumbers, _userInputNumbers) {
     let resultText = '';
 
-    if (userInputNumbers === null) {
+    if (_userInputNumbers === null) {
       resultText = '다시 입력하세요';
     } else {
       const [strike, ball] = this.compareNumber(
-        computerInputNumbers,
-        userInputNumbers
+        _computerInputNumbers,
+        _userInputNumbers
       );
       resultText = this.setResult(strike, ball);
     }
@@ -83,14 +84,14 @@ export default class BaseballGame {
     return resultText;
   }
 
-  compareNumber(computerInputNumbers, userInputNumbers) {
+  compareNumber(_computerInputNumbers, _userInputNumbers) {
     let strike = 0;
     let ball = 0;
 
     for (let i = 0; i < 3; i++) {
-      if (computerInputNumbers.indexOf(userInputNumbers[i]) === i) {
+      if (_computerInputNumbers.indexOf(_userInputNumbers[i]) === i) {
         strike++;
-      } else if (computerInputNumbers.indexOf(userInputNumbers[i]) > -1) {
+      } else if (_computerInputNumbers.indexOf(_userInputNumbers[i]) > -1) {
         ball++;
       }
     }
@@ -106,7 +107,7 @@ export default class BaseballGame {
     if (strike === 0 && ball === 0) {
       resultText = '낫싱';
     } else if (strike === 3) {
-      resultText = '정답입니다.';
+      resultText = '🎉정답을 맞추셨습니다!🎉';
     } else if (strike > 0 && ball === 0) {
       resultText = `${strStrike}스트라이크`;
     } else if (strike === 0 && ball > 0) {
@@ -122,9 +123,9 @@ export default class BaseballGame {
     const resultHTML = document.querySelector('#result');
     let buttonOn = false;
 
-    if (text === '정답입니다.') {
+    if (text === '🎉정답을 맞추셨습니다!🎉') {
       resultHTML.innerHTML =
-        text +
+        `<strong>${text}</strong>` +
         "<br><p>게임을 새로 시작하시겠습니까? <button id='game-restart-button'>게임 재시작</button></p>";
       buttonOn = true;
     } else {
@@ -136,9 +137,9 @@ export default class BaseballGame {
 
   reStart(value) {
     if (value === true) {
-      const restartBtn = document.querySelector('#game-restart-button');
+      const restartButton = document.querySelector('#game-restart-button');
 
-      restartBtn.addEventListener('click', () => {
+      restartButton.addEventListener('click', () => {
         window.location.reload();
       });
     }
@@ -146,5 +147,3 @@ export default class BaseballGame {
 }
 
 new BaseballGame();
-
-// 생성자 만들기 + 코딩컨벤션 지키기 + 리팩토링 하기 + 요구사항 지켰는 지 확인하기
