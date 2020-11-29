@@ -31,8 +31,6 @@ export default class BaseballGame {
       }
     }
 
-    console.log(random);
-
     this._computerInputNumbers = random;
   }
 
@@ -40,7 +38,7 @@ export default class BaseballGame {
     return this._computerInputNumbers;
   }
 
-  judge(computerInputNumbers, userInputNumbers) {
+  countStrikeBall(computerInputNumbers, userInputNumbers) {
     return computerInputNumbers.split('').reduce(
       (acc, curVal, curIdx) => {
         if (curVal === userInputNumbers[curIdx]) {
@@ -55,7 +53,10 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    const { strike, ball } = this.judge(computerInputNumbers, userInputNumbers);
+    const { strike, ball } = this.countStrikeBall(
+      computerInputNumbers,
+      userInputNumbers,
+    );
     let responseString = '';
 
     if (ball === 0 && strike === 0) {
@@ -75,10 +76,6 @@ export default class BaseballGame {
     }
 
     return responseString;
-  }
-
-  restart() {
-    this.init();
   }
 }
 
@@ -149,7 +146,7 @@ export class BaseballGameView {
   handleReStartClick() {
     this.resetUserInputNumbers();
     this.cleanResult();
-    this.baseballGameModel.restart();
+    this.baseballGameModel.init();
   }
 
   handleUserInputSubmit() {
