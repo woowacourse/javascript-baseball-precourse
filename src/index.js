@@ -20,7 +20,7 @@ export default class BaseballGame {
     const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
     let computerNumbers = '';
-    while (computerNumbers.length !== 3) {
+    while (computerNumbers.length !== USER_INPUT_LENGTH) {
       const randomIndex = Math.floor(Math.random() * numbers.length);
       computerNumbers += numbers[randomIndex];
       numbers.splice(randomIndex, 1);
