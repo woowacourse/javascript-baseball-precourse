@@ -36,13 +36,31 @@ const isValidNumbers = (num) => {
   );
 };
 
+const compareNumbers = (computerNumbers, userNumbers) => {
+  let ball = 0;
+  let strike = 0;
+
+  for (let i = 0; i < userNumbers.length; i++) {
+    if (!computerNumbers.includes(userNumbers[i])) {
+      continue;
+    }
+    computerNumbers.indexOf(userNumbers[i]) === i ? (strike += 1) : (ball += 1);
+  }
+  return [ball, strike];
+};
+
 export default function BaseballGame() {
   const submitButton = document.querySelector("#submit");
   const userInput = document.querySelector("#user-input");
   const computerNumbers = getComputerNumbers();
 
   const play = (computerInputNumbers, userInputNumbers) => {
-    console.log(computerInputNumbers, userInputNumbers);
+    const [ball, strike] = compareNumbers(
+      computerInputNumbers,
+      userInputNumbers,
+    );
+
+    console.log(ball, strike);
     return "결과 값 String";
   };
 
