@@ -87,4 +87,8 @@ function showResult(string) {
   document.getElementById("result").innerText = string;
 }
 
+function alertInvalidInputMessage() {
+  alert("잘못된 입력입니다.\n1-9사이의 세 자리 숫자를 중복없이 입력해 주세요.");
+}
+
 new BaseballGame();
