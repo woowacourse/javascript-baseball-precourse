@@ -94,6 +94,8 @@ export default function BaseballGame() {
   const resultProvider = (message) => {
     if (!correctState) {
       resultContainer.textContent = message;
+    } else {
+      resultContainer.innerHTML = message;
     }
   };
 
