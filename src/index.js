@@ -18,11 +18,10 @@ export default function BaseballGame() {
       originalNums.splice(randomIdx, 1);
     }
     
-    console.log(num);
     return num;   
   } 
 
-  const computerInput = genRandomNum();
+  let computerInput = genRandomNum();
   const submitBtn = document.getElementById('submit');
   const resultArea = document.getElementById('result');
 
@@ -42,7 +41,7 @@ export default function BaseballGame() {
   }
 
   const clearResult = () => {
-    resultArea.remove();
+    resultArea.innerHTML = "";
   }
 
   const validateInput = (userInputNumbers) => {
@@ -73,7 +72,7 @@ export default function BaseballGame() {
 
     if (computerInputNumbers === userInputNumbers) {
       showRestartButton();
-      return '정답입니다!';
+      return '🎉<b>정답을 맞추셨습니다!</b>🎉';
     } else {
       for (let i=0; i<3; i++) {
         if (userInputNumbers[i] === computerInputNumbers[i]) {
@@ -98,17 +97,20 @@ export default function BaseballGame() {
 
   const showRestartButton = () => {
     const screen = document.getElementById('app');
+    const restartText = document.createTextNode("게임을 새로 시작하시겠습니까?");
     const restartBtn = document.createElement('button');
     restartBtn.setAttribute('id', 'game-restart-button');
-    restartBtn.appendChild(document.createTextNode("다시 하기"));
+    restartBtn.appendChild(document.createTextNode("게임 재시작"));
+    screen.appendChild(restartText); 
     screen.appendChild(restartBtn); 
 
     restartBtn.addEventListener('click', () => {
       clearInput();
       clearResult();
+      restartText.remove();
       restartBtn.remove();
 
-      new BaseballGame();
+      computerInput = genRandomNum();
     });
   }
 }
