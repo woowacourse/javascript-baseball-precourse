@@ -1,4 +1,5 @@
 export default class BaseballGame {
+  // 결과를 반환하는 메소드
   play(computerInputNumbers, userInputNumbers) {
     const ball = this.checkBall(computerInputNumbers, userInputNumbers);
     const strike = this.checkStrike(computerInputNumbers, userInputNumbers);
@@ -15,6 +16,7 @@ export default class BaseballGame {
     return retStr;
   }
 
+  // 볼이 몇 개인지 반환하는 메소드
   checkBall(computerInputNumbers, userInputNumbers) {
     let count = 0;
     if (computerInputNumbers[0] === userInputNumbers[1]) {
@@ -38,6 +40,7 @@ export default class BaseballGame {
     return count;
   }
 
+  // 스트라이크가 몇 개인지 반환하는 메소드
   checkStrike(computerInputNumbers, userInputNumbers) {
     let count = 0;
     if (computerInputNumbers[0] === userInputNumbers[0]) {
@@ -52,6 +55,7 @@ export default class BaseballGame {
     return count;
   }
 
+  // 올바른 입력인지 확인하는 메소드
   checkInput(userInputNumbers) {
     if (
       userInputNumbers.match(/^[1-9]{3}$/) === null
@@ -70,6 +74,7 @@ let randomNumber;
 
 onload = startGame
 
+// 야구 게임 시작 메소드 (숫자, UI 초기화)
 function startGame() {
   const userInput = document.getElementById('user-input');
   const submit = document.getElementById('submit');
@@ -83,6 +88,7 @@ function startGame() {
   submit.onclick = clickSubmit;
 }
 
+// 랜덤 숫자 생성
 function createNumber() {
   let randomNumber;
   do {
@@ -96,6 +102,7 @@ function createNumber() {
   return randomNumber;
 }
 
+// 확인 버튼 클릭
 function clickSubmit() {
   const userInput = document.getElementById('user-input');
   if (!baseballGame.checkInput(userInput.value)) {
