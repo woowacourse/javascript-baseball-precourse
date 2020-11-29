@@ -1,6 +1,8 @@
 export default class BaseballGame {
 
   constructor() {
+    this.NUMBER_DIGITS = 3;
+
     this.roundData = [];
     this.answer = this.generateAnswer();
     console.log(`컴퓨터의 랜덤값: ${this.answer}`);
@@ -12,7 +14,6 @@ export default class BaseballGame {
 
     const onClickSubmitButton = () => {
       const userInput = this.$userInput.value;
-      if (userInput === "") return;
       console.log(`유저의 입력값: ${userInput}`);
 
       if (this.isValid(userInput)) {
@@ -47,7 +48,7 @@ export default class BaseballGame {
     };
 
     const onKeydown = (e) => {
-      if (e.key === "Enter") {
+      if (e.key === "Enter" && this.$userInput.value !== "") {
         onClickSubmitButton();
       };
     };
@@ -55,7 +56,7 @@ export default class BaseballGame {
     this.$userInput.addEventListener("keydown", onKeydown);
 
     this.$app.addEventListener("click", (e) => {
-      if (e.target.id === "submit") {
+      if (e.target.id === "submit" && this.$userInput.value !== "") {
         onClickSubmitButton();
       } else if (e.target.id === "game-restart-button") {
         onClickGameRestartButton();
@@ -71,7 +72,6 @@ export default class BaseballGame {
   }
 
   render() {
-
     this.$result.innerHTML = this.roundData.map((data, index, arr) => {
       const {userInput, playResult, isUserFoundAnswer} = data;
       let _returnHTML = "";
@@ -104,68 +104,71 @@ export default class BaseballGame {
   }
 
   generateAnswer() {
-    const getRandomNumber = () => {
-      const MIN = 1;
-      const MAX = 9;
-
-      return Math.floor(Math.random() * (MAX - MIN + 1) + MIN, 0);
-    }
-
     const randomNumbers = [];
-    const NUMBER_DIGITS = 3;
-
-    while (randomNumbers.length < NUMBER_DIGITS) {
-      const randomNumber = getRandomNumber();
+    
+    while (randomNumbers.length < this.NUMBER_DIGITS) {
+      const randomNumber = this.getRandomNumber();
 
       if (!randomNumbers.includes(randomNumber)) {
         randomNumbers.push(randomNumber);
-      }
-    }
+      };
+    };
 
     const _answer = Number(randomNumbers.join(""));
 
     return _answer;
   }
 
+  getRandomNumber() {
+    const MIN = 1;
+    const MAX = 9;
+
+    return Math.floor(Math.random() * (MAX - MIN + 1) + MIN, 0);
+  };
+
   isValid(userInputString) {
-    const AVAILABLE_DIGITS = "123456789";
-    const NUMBER_DIGITS = 3;
     let _isValid = null;
 
-    if (userInputString.length !== NUMBER_DIGITS) {
+    if (userInputString.length !== this.NUMBER_DIGITS) {
       _isValid = false;
-    } else if (!this.isContainingGivenCharacters(userInputString, AVAILABLE_DIGITS)) {
+    } else if (!this.isMadeUpOf1to9(userInputString)) {
       _isValid = false;
     } else if (!this.hasDifferentNumbers(userInputString)) {
       _isValid = false;
     } else {
       _isValid = true;
-    }
+    };
     
     return _isValid;
   }
 
+  isMadeUpOf1to9(str) {
+    const AVAILABLE_DIGITS = "123456789";
+
+    return this.isContainingGivenCharacters(str, AVAILABLE_DIGITS);
+  }
+
   isContainingGivenCharacters(str, GIVEN_CHARACTERS) {
-    const splittedStr = str.split("");
-    const isContaining = splittedStr.every(char => GIVEN_CHARACTERS.includes(char));
+    const chars = str.split("");
+    const isContaining = chars.every(char => GIVEN_CHARACTERS.includes(char));
 
     return isContaining;
   }
 
   hasDifferentNumbers(str) {
-    const splittedStr = str.split("");
-    const strSet = Array.from(new Set(splittedStr));
+    const chars = str.split("");
+    const charSet = Array.from(new Set(chars));
 
-    return strSet.length === str.length;
+    return charSet.length === str.length;
   }
 
   play(computerInputNumbers, userInputNumbers) {
 
-    const splittedComputerInput = computerInputNumbers.toString().split("");
-    const splittedUserInput = userInputNumbers.toString().split("");
+    const computerInputChars = computerInputNumbers.toString().split("");
+    const userInputChars = userInputNumbers.toString().split("");
 
-    const total = splittedUserInput.filter(val => splittedComputerInput.includes(val)).length;
-    const strike = splittedUserInput.filter((val, idx) => val === splittedComputerInput[idx]).length;
+    const total = userInputChars.filter(char => computerInputChars.includes(char)).length;
+    const strike = userInputChars.filter((char, idx) => char === computerInputChars[idx]).length;
     const ball = total - strike;
 
     let playResult = null;
