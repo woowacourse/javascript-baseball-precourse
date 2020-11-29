@@ -57,19 +57,19 @@ export default class BaseballGame {
     let responseString = '';
 
     if (ball) {
-      responseString += `${ball}${text.ball}`;
+      responseString += `${ball}${text.BALL}`;
     }
 
     if (strike) {
-      responseString += ` ${strike}${text.strike}`;
+      responseString += ` ${strike}${text.STRIKE}`;
     }
 
     if (ball === 0 && strike === 0) {
-      responseString = text.nothing;
+      responseString = text.NOTHING;
     }
 
     if (strike === 3) {
-      responseString = text.correct;
+      responseString = text.CORRECT;
     }
 
     return responseString;
@@ -93,41 +93,32 @@ export class BaseballGameView {
       userInputNumbers,
     );
 
-    const responseP = document.createElement('p');
-    responseP.innerHTML = resultString;
-
-    if (resultString === text.correct) {
-      const strong = document.createElement('strong');
-      strong.appendChild(responseP);
-      this._resultDiv.appendChild(strong);
-
-      const restartDiv = document.createElement('div');
-      restartDiv.id = 'restart';
-
-      const restartP = document.createElement('p');
-      restartP.innerHTML = text.askRestart;
-      restartDiv.appendChild(restartP);
-
-      const restartButton = document.createElement('button');
-      restartButton.innerHTML = text.restart;
-      restartButton.id = 'game-restart-button';
-      restartButton.addEventListener('click', handleReStartClick);
-      restartDiv.appendChild(restartButton);
-
-      this._resultDiv.appendChild(restartDiv);
+    if (resultString === text.CORRECT) {
+      this._resultDiv.innerHTML = `
+        <strong>
+          <p>${resultString}</p>
+        </strong>
+        <div id="restart">
+          <p>${text.ASK_RESTART}</p>
+          <button id="game-restart-button">${text.RESTART}</button>
+        <div/>
+      `;
+      document
+        .getElementById('game-restart-button')
+        .addEventListener('click', handleReStartClick);
     } else {
-      this._resultDiv.appendChild(responseP);
+      this._resultDiv.innerHTML = `
+        <p>${resultString}</p>
+      `;
     }
   }
 
   cleanResult() {
-    while (this._resultDiv.hasChildNodes()) {
-      this._resultDiv.removeChild(this._resultDiv.firstChild);
-    }
+    this._resultDiv.innerHTML = ``;
   }
 }
 
-// user input judge function and reset input function
+// reset input function
 
 function resetInputNumbers() {
   const userInput = document.getElementById('user-input');
@@ -147,22 +138,22 @@ function handleUserInputSubmit() {
 
   if (!isNumber(userInputNumbers)) {
     resetInputNumbers();
-    return alert(text.warningForNotNum);
+    return alert(text.WARNING_FOR_NOT_NUM);
   }
 
   if (isNot3Digit(userInputNumbers)) {
     resetInputNumbers();
-    return alert(text.warningFor3Digit);
+    return alert(text.WARNING_FOR_3DIGIT);
   }
 
   if (isInZero(userInputNumbers)) {
     resetInputNumbers();
-    return alert(text.warningForZero);
+    return alert(text.WARNING_FOR_ZERO);
   }
 
   if (isInDuplicateDigit(userInputNumbers)) {
     resetInputNumbers();
-    return alert(text.warningForduplicate);
+    return alert(text.WARNING_FOR_DUPLICATE);
   }
 
   gameView.cleanResult();
