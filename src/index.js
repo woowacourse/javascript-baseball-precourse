@@ -126,6 +126,26 @@ export class BaseballGameView {
     this._userInput.value = '';
   }
 
+  validUserInputNumbers(userInputNumbers) {
+    if (!isNumber(userInputNumbers)) {
+      return text.WARNING_FOR_NOT_NUM;
+    }
+
+    if (isNot3Digit(userInputNumbers)) {
+      return text.WARNING_FOR_3DIGIT;
+    }
+
+    if (isInZero(userInputNumbers)) {
+      return text.WARNING_FOR_ZERO;
+    }
+
+    if (isInDuplicateDigit(userInputNumbers)) {
+      return text.WARNING_FOR_DUPLICATE;
+    }
+
+    return '';
+  }
+
   handleReStartClick() {
     this.resetUserInputNumbers();
     this.cleanResult();
@@ -133,26 +153,10 @@ export class BaseballGameView {
   }
 
   handleUserInputSubmit() {
-    const userInputNumbers = this._userInput.value;
-
-    if (!isNumber(userInputNumbers)) {
-      gameView.resetUserInputNumbers();
-      return alert(text.WARNING_FOR_NOT_NUM);
-    }
-
-    if (isNot3Digit(userInputNumbers)) {
-      gameView.resetUserInputNumbers();
-      return alert(text.WARNING_FOR_3DIGIT);
-    }
-
-    if (isInZero(userInputNumbers)) {
-      gameView.resetUserInputNumbers();
-      return alert(text.WARNING_FOR_ZERO);
-    }
-
-    if (isInDuplicateDigit(userInputNumbers)) {
-      gameView.resetUserInputNumbers();
-      return alert(text.WARNING_FOR_DUPLICATE);
+    const exception = this.validUserInputNumbers(this._userInput.value);
+    if (exception) {
+      alert(exception);
+      return;
     }
 
     gameView.cleanResult();
