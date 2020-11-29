@@ -39,27 +39,36 @@ const isValidNumbers = (num) => {
 const compareNumbers = (computerNumbers, userNumbers) => {
   let ball = 0;
   let strike = 0;
+  let correct = false;
 
+  if (computerNumbers === userNumbers) {
+    correct = true;
+  }
   for (let i = 0; i < userNumbers.length; i++) {
     if (!computerNumbers.includes(userNumbers[i])) {
       continue;
     }
     computerNumbers.indexOf(userNumbers[i]) === i ? (strike += 1) : (ball += 1);
   }
-  return [ball, strike];
+
+  return [ball, strike, correct];
 };
 
-const getResultMessage = (ball, strike) => {
+const getResultMessage = (ball, strike, correct) => {
   let resultMessage = "";
 
-  if (!ball && !strike) {
-    resultMessage = "낫싱";
-  } else if (ball && strike) {
-    resultMessage = `${ball}볼 ${strike}스트라이크`;
-  } else if (!ball && strike) {
-    resultMessage = `${strike}스트라이크`;
-  } else if (ball & !strike) {
-    resultMessage = `${ball}볼`;
+  if (correct) {
+    resultMessage = `<p>🎉<strong> 정답을 맞추셨습니다! </strong>🎉</p>`;
+  } else {
+    if (!ball && !strike) {
+      resultMessage = "낫싱";
+    } else if (ball && strike) {
+      resultMessage = `${ball}볼 ${strike}스트라이크`;
+    } else if (!ball && strike) {
+      resultMessage = `${strike}스트라이크`;
+    } else if (ball & !strike) {
+      resultMessage = `${ball}볼`;
+    }
   }
 
   return resultMessage;
@@ -70,18 +79,22 @@ export default function BaseballGame() {
   const userInput = document.querySelector("#user-input");
   const resultContainer = document.querySelector("#result");
   const computerNumbers = getComputerNumbers();
+  let correctState = false;
 
   const play = (computerInputNumbers, userInputNumbers) => {
-    const [ball, strike] = compareNumbers(
+    const [ball, strike, correct] = compareNumbers(
       computerInputNumbers,
       userInputNumbers,
     );
+    correctState = correct;
 
-    return getResultMessage(ball, strike);
+    return getResultMessage(ball, strike, correct);
   };
 
   const resultProvider = (message) => {
-    resultContainer.textContent = message;
+    if (!correctState) {
+      resultContainer.textContent = message;
+    }
   };
 
   const gameStart = () => {
