@@ -20,10 +20,26 @@ export default class BaseballGame {
     return result;
   };
 
-  checkUserInput = (userInput) => {
-    if (userInput.length === 0) {
-      alert("1~9까지의 수를 중복없이 3개 작성해주세요");
+  setUserInputNumbers = (inputNumber) => {
+    this.userInputNumbers = inputNumber.split("");
+  };
+
+  isNumber = (item) => {
+    if (isNaN(item)) {
+      return false;
     }
+
+    return true;
+  };
+
+  checkUserInput = (userInput) => {
+    const alertMessage = "1~9까지의 수를 중복없이 3개 작성해주세요";
+
+    if (userInput.length === 3 && this.isNumber(userInput)) {
+      setUserInputNumbers(userInput);
+    }
+
+    alert(alertMessage);
   };
 
   bindEventListener = () => {
