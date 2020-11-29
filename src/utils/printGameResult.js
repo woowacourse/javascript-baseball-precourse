@@ -1,3 +1,5 @@
+import BaseballGame from '../index.js';
+
 function printCorrectAnswer($result) {
   $result.innerHTML = `<div>
                         <strong>🎉정답입니다🎉</strong>
@@ -14,7 +16,9 @@ export default function printGameResult(gameResult) {
 
   if (gameResult === '정답') {
     printCorrectAnswer($result);
+    return true;
   } else {
     printInCorrectAnswer($result, gameResult);
+    return false;
   }
 }

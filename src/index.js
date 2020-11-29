@@ -11,11 +11,25 @@ import printGameResult from './utils/printGameResult.js';
  ** }
  */
 
+function restartGame() {
+  const $result = document.querySelector('#result');
+  const $userInput = document.querySelector('#user-input');
+
+  $result.addEventListener('click', ({ target }) => {
+    if (target.id === 'game-restart-button') {
+      $userInput.value = '';
+      $result.textContent = '';
+      new BaseballGame();
+    }
+  });
+}
+
 export default function BaseballGame() {
   const $submit = document.querySelector('#submit');
-  const $app = document.querySelector('#app');
 
   const computerInputNumbers = getRandomNumbers();
+  let done = false;
+  console.log(computerInputNumbers);
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     return getGameResult(computerInputNumbers, userInputNumbers);
@@ -26,7 +40,11 @@ export default function BaseballGame() {
 
     if (userInputNumbers) {
       const gameResult = this.play(computerInputNumbers, userInputNumbers);
-      printGameResult(gameResult);
+      done = printGameResult(gameResult);
+    }
+
+    if (done) {
+      restartGame();
     }
   });
 }
