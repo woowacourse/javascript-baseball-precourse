@@ -24,7 +24,7 @@ export default class BaseballGame {
   constructor() {
     this.setAnswer();
     this.initializeStates();
-    this.initializeComponents();
+    window.onload = () => this.initializeComponents();
   }
 
   setAnswer = () => {
