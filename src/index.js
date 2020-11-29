@@ -32,6 +32,8 @@ export default function BaseballGame() {
     if (isUserInputValid) {
       const returnString = play(computerInput, userInput);
       resultArea.innerHTML = returnString;
+    } else {
+      clearInput();
     }
   });
 
@@ -46,13 +48,23 @@ export default function BaseballGame() {
   const validateInput = (userInputNumbers) => {
     if (isNaN(parseInt(userInputNumbers))) {
       alert("숫자를 입력해주세요.");
-      clearInput();
       return false;
     } else if (userInputNumbers.length !== 3) {
       alert("숫자를 3자리로 입력해주세요.");
-      clearInput();
+      return false;
+    } else if (userInputNumbers.includes("0")) {
+      alert("0을 포함하지 않는 숫자를 입력해주세요.")
+      return false;
+    } else if (findDuplicateNumbers(userInputNumbers)) {
+      alert("숫자를 중복 없이 입력해주세요.");
       return false;
     } else return true;
+  }
+
+  const findDuplicateNumbers = (numbers) => {
+    return numbers.split("").some((e, i) => {
+      return numbers.lastIndexOf(e) !== i;
+    });
   }
 
   const compareNumbers = (computerInputNumbers, userInputNumbers) => {
