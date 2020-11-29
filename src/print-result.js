@@ -27,3 +27,12 @@ export function clearResult() {
   document.getElementById('result').innerHTML = '';
   document.getElementById('user-input').value = '';
 }
+
+export function makeRestartBtn() {
+  const button = document.createElement("button");
+  
+  button.innerHTML = "게임 재시작"
+  button.id = "game-restart-button";
+  
+  document.getElementById('result').appendChild(button);
+}
