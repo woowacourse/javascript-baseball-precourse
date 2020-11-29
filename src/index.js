@@ -1,4 +1,4 @@
-class BaseballGame {
+export class BaseballGame {
   constructor() {
     this.answer = this.setAnswer();
   }
@@ -35,7 +35,7 @@ class BaseballGame {
   }
 }
 
-class Validation {
+export class Validation {
   isNumber(inputArray) {
     for (let i = 0; i < inputArray.length; i += 1) {
       if (isNaN(Number(inputArray[i])) === true) {
@@ -66,6 +66,3 @@ class Validation {
     return true;
   }
 }
-
-let game = new BaseballGame();
-let validation = new Validation();

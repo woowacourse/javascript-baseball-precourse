@@ -19,5 +19,16 @@
       <div id="result"></div>
     </div>
     <script type="module" src="src/index.js"></script>
+    <script type="module">
+      import {BaseballGame, Validation} from './src/index.js';
+      let game = new BaseballGame();
+      let validation = new Validation();
+      
+      document.getElementById('submit').addEventListener("click", function(){
+        const userInput = document.getElementById('user-input').value;
+        alert(userInput);
+      });
+      
+    </script>
   </body>
 </html>
