@@ -31,6 +31,8 @@ export default class BaseballGame {
       }
     }
 
+    console.log(random);
+
     this._computerInputNumbers = random;
   }
 
@@ -39,18 +41,17 @@ export default class BaseballGame {
   }
 
   judge(computerInputNumbers, userInputNumbers) {
-    let strike = 0;
-    let ball = 0;
-
-    [...computerInputNumbers].forEach((digit, index) => {
-      if (digit === userInputNumbers[index]) {
-        strike++;
-      } else if (userInputNumbers.includes(digit)) {
-        ball++;
-      }
-    });
-
-    return { strike, ball };
+    return computerInputNumbers.split('').reduce(
+      (acc, curVal, curIdx) => {
+        if (curVal === userInputNumbers[curIdx]) {
+          acc['strike']++;
+        } else if (userInputNumbers.includes(curVal)) {
+          acc['ball']++;
+        }
+        return acc;
+      },
+      { strike: 0, ball: 0 },
+    );
   }
 
   play(computerInputNumbers, userInputNumbers) {
@@ -109,7 +110,7 @@ export class BaseballGameView {
 
       document
         .getElementById('game-restart-button')
-        .addEventListener('click', handleReStartClick);
+        .addEventListener('click', this.handleReStartClick.bind(this));
     } else {
       this._resultDiv.innerHTML = `
         <p>${resultString}</p>
@@ -166,4 +167,7 @@ const resultDiv = document.getElementById('result');
 const userInput = document.getElementById('user-input');
 const gameView = new BaseballGameView(gameModel, resultDiv, userInput);
 const submitNumButton = document.getElementById('submit');
-submitNumButton.addEventListener('click', handleUserInputSubmit);
+submitNumButton.addEventListener(
+  'click',
+  gameView.handleUserInputSubmit.bind(gameView),
+);
