@@ -1,3 +1,6 @@
+import getBallCount from './getBallCount.js';
+import getStrikeCount from './getStrikeCount.js';
+
 function textContent(strikeCount, ballCount) {
   if (strikeCount === 3) {
     return `<div>
@@ -19,8 +22,10 @@ function textContent(strikeCount, ballCount) {
   }
 }
 
-export default function printGameResult(strikeCount, ballCount) {
-  const $result = document.querySelector('#result');
+export default function getGameResult(computerInputNumbers, userInputNumbers) {
+  const strikeCount = getStrikeCount(computerInputNumbers, userInputNumbers);
+  const ballCount = getBallCount(computerInputNumbers, userInputNumbers);
 
-  $result.innerHTML = textContent(strikeCount, ballCount);
+  console.log(computerInputNumbers);
+  return textContent(strikeCount, ballCount);
 }
