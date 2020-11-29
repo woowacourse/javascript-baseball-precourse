@@ -3,14 +3,9 @@ const NUMBER_LENGTH = 3;
 export default class BaseballGame {
   constructor() {
     this.computerNumbers = this.generateComputerNumbers();
-    this.el = {
-      app: document.querySelector('#app'),
-      userInput: document.querySelector('#user-input'),
-      submit: document.querySelector('#submit'),
-      result: document.querySelector('#result'),
-      gameForm: document.querySelector('#game-form'),
-    };
+    this.el = {};
 
+    this.resetEl();
     this.setEventListener();
   }
 
@@ -63,6 +58,12 @@ export default class BaseballGame {
       this.el.app.appendChild(resultDivEl);
     }
 
+    const showResult = (result) => {
+      const resultTextEl = document.createElement('p');
+      this.el.result.appendChild(resultTextEl);
+      resultTextEl.append(result);
+    }
+
     const submitInput = (e) => {
       e.preventDefault();
       if (e.target.id !== 'game-form') return;
@@ -70,10 +71,7 @@ export default class BaseballGame {
       const userInputNumbers = this.getUserInput();
       if (userInputNumbers) {
         const result = this.play(this.computerNumbers, userInputNumbers);
-        const resultTextEl = document.createElement('p');
-        this.el.result.appendChild(resultTextEl);
-        resultTextEl.append(result);
-
+        showResult(result);
         createNewForm();
         this.resetEl();
         this.el.userInput.focus();
