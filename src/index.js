@@ -1,4 +1,9 @@
 export default class BaseballGame {
+  constructor() {
+    this.computerInputNumbers = '';
+    this.start();
+  }
+
   getComputerNumber() {
     let computerInputNumbers = '';
 
@@ -50,6 +55,34 @@ export default class BaseballGame {
     return returnValue;
   }
 
+  start() {
+    const playButton = document.querySelector('#submit');
+    this.computerInputNumbers = this.getComputerNumber();
+
+    playButton.addEventListener('click', () => {
+      const userInputNumbers = this.getUserNumber();
+      const _text = this.play(this.computerInputNumbers, userInputNumbers);
+
+      this.resultToHTML(_text);
+    });
+  }
+
+  play(computerInputNumbers, userInputNumbers) {
+    let resultText = '';
+
+    if (userInputNumbers === null) {
+      resultText = '다시 입력하세요';
+    } else {
+      const [strike, ball] = this.compareNumber(
+        computerInputNumbers,
+        userInputNumbers
+      );
+      resultText = this.setResult(strike, ball);
+    }
+
+    return resultText;
+  }
+
   compareNumber(computerInputNumbers, userInputNumbers) {
     let strike = 0;
     let ball = 0;
@@ -85,32 +118,6 @@ export default class BaseballGame {
     return resultText;
   }
 
-  play(computerInputNumbers, userInputNumbers) {
-    let resultText = '';
-
-    if (userInputNumbers === null) {
-      resultText = '다시 입력하세요';
-    } else {
-      const [strike, ball] = this.compareNumber(
-        computerInputNumbers,
-        userInputNumbers
-      );
-      resultText = this.setResult(strike, ball);
-    }
-
-    return resultText;
-  }
-
-  reStart(value) {
-    if (value === true) {
-      const restartBtn = document.querySelector('#game-restart-button');
-
-      restartBtn.addEventListener('click', () => {
-        window.location.reload();
-      });
-    }
-  }
-
   resultToHTML(text) {
     const resultHTML = document.querySelector('#result');
     let buttonOn = false;
@@ -126,28 +133,18 @@ export default class BaseballGame {
 
     this.reStart(buttonOn);
   }
+
+  reStart(value) {
+    if (value === true) {
+      const restartBtn = document.querySelector('#game-restart-button');
+
+      restartBtn.addEventListener('click', () => {
+        window.location.reload();
+      });
+    }
+  }
 }
 
-// 테스트 케이스
-const game = new BaseballGame();
-const btn = document.querySelector('#submit');
-const userInput = document.querySelector('#user-input');
-const testCase1 = game.getComputerNumber();
+new BaseballGame();
 
-// 확인 버튼 클릭
-btn.addEventListener('click', () => {
-  const testCase2 = game.getUserNumber();
-  const text = game.play(testCase1, testCase2);
-
-  game.resultToHTML(text);
-});
-
-// Enter
-userInput.addEventListener('keydown', (e) => {
-  if (e.keyCode == 13) {
-    const testCase2 = game.getUserNumber();
-    const text = game.play(testCase1, testCase2);
-
-    game.resultToHTML(text);
-  }
-});
+// 생성자 만들기 + 코딩컨벤션 지키기 + 리팩토링 하기 + 요구사항 지켰는 지 확인하기
