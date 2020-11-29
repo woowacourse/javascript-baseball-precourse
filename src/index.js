@@ -1,40 +1,43 @@
 import { NUMBER_LIST, START_INDEX_ZERO, NUMBER_DIGIT, STRIKE_INDEX, BALL_INDEX, ERROR_STRING, ANSWER_STRING, NOTHING_STRING} from "./constants.js";
 
-export default function BaseballGame() {
-  
-  const init = function() {
-    const computerInputNumbers = getRandomNumberList();
+export default class BaseballGame {
+
+  constructor() {
+    const computerInputNumbers = this.getRandomNumberList();
     
-    handleSubmitButton(computerInputNumbers);
+    this.clickSubmitButton(computerInputNumbers);
   };
 
-  const handleSubmitButton = function(computerInputNumbers) {
+  clickSubmitButton(computerInputNumbers) {
     const submitButton = document.querySelector("#submit");
 
-    submitButton.addEventListener("click", function() {
-      startGame(computerInputNumbers);
+    submitButton.addEventListener("click", () => {
+      this.startGame(computerInputNumbers);
     }, false);
   };
 
-  const startGame = function(computerInputNumbers) {
-    const userInputNumbers = getUserInputNumberList();
+  startGame(computerInputNumbers) {
+    const userInputNumbers = this.getUserInputNumberList();
 
-    if (userInputNumbers !== undefined) {
-      const resultElement = document.querySelector("#result");
-      resultElement.innerHTML = play(computerInputNumbers, userInputNumbers);
-    }
-    
+    this.printResult(computerInputNumbers, userInputNumbers);
+    this.restartGame();
+  };
+
+  restartGame() {
     const restartElement = document.querySelector("#game-restart-button");
     if (restartElement !== null) {
-      restartElement.addEventListener("click", handleRestartButton);
+      restartElement.addEventListener("click", location.reload.bind(location));
     }
   };
 
-  const handleRestartButton = function() {
-    location.reload();
-  }
+  printResult(computerInputNumbers, userInputNumbers) {
+    if (userInputNumbers !== undefined) {
+      const resultElement = document.querySelector("#result");
+      resultElement.innerHTML = this.play(computerInputNumbers, userInputNumbers);
+    }
+  };
 
-  const getRandomNumberList = function() {
+  getRandomNumberList() {
     let tmpNumbers = NUMBER_LIST;
     
     tmpNumbers.sort(function() {
@@ -43,23 +46,23 @@ export default function BaseballGame() {
     return tmpNumbers.slice(START_INDEX_ZERO, NUMBER_DIGIT);
   };
 
-  const getUserInputNumberList = function() {
+  getUserInputNumberList() {
     const userInputList = document.querySelector('#user-input').value.split('');
     let userInputNumbers = [];
 
-    if (isNotValid(userInputList)) {
+    if (this.isNotValid(userInputList)) {
       alert(ERROR_STRING);
     } else {
-      userInputNumbers = userInputList.map(x => +x);
+      userInputNumbers = userInputList.map(x => Number(x));
       return userInputNumbers;
     }
   };
 
-  const isNotValid = function(userInputList) {
-    return !(isNumber(userInputList) && isThreeDigit(userInputList) && isNotDuplicated(userInputList));
+  isNotValid(userInputList) {
+    return !(this.isNumber(userInputList) && this.isThreeDigit(userInputList) && this.isNotDuplicated(userInputList));
   };
 
-  const isNumber = function(userInputList) {
+  isNumber(userInputList) {
     let i;
     for (i = 0; i < userInputList.length; i++) {
       if (!('1' <= userInputList[i] && userInputList[i] <= '9')) {
@@ -69,17 +72,17 @@ export default function BaseballGame() {
     return true;
   };
 
-  const isThreeDigit = function(userInputList) {
+  isThreeDigit(userInputList) {
     return userInputList.length === NUMBER_DIGIT;
   };
 
-  const isNotDuplicated = function(userInputList) {
+  isNotDuplicated(userInputList) {
     const checkingSet = new Set(userInputList);
 
     return userInputList.length === checkingSet.size;
   };
 
-  const play = function (computerInputNumbers, userInputNumbers) {
+  play(computerInputNumbers, userInputNumbers) {
     let resultString = '';
     let ballStrikeList = [0, 0];
 
@@ -113,8 +116,6 @@ export default function BaseballGame() {
 
     return resultString;
   };
-
-  init();
 }
 
-BaseballGame();
+new BaseballGame();
