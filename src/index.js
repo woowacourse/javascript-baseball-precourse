@@ -49,9 +49,26 @@ const compareNumbers = (computerNumbers, userNumbers) => {
   return [ball, strike];
 };
 
+const getResultMessage = (ball, strike) => {
+  let resultMessage = "";
+
+  if (!ball && !strike) {
+    resultMessage = "낫싱";
+  } else if (ball && strike) {
+    resultMessage = `${ball}볼 ${strike}스트라이크`;
+  } else if (!ball && strike) {
+    resultMessage = `${strike}스트라이크`;
+  } else if (ball & !strike) {
+    resultMessage = `${ball}볼`;
+  }
+
+  return resultMessage;
+};
+
 export default function BaseballGame() {
   const submitButton = document.querySelector("#submit");
   const userInput = document.querySelector("#user-input");
+  const resultContainer = document.querySelector("#result");
   const computerNumbers = getComputerNumbers();
 
   const play = (computerInputNumbers, userInputNumbers) => {
@@ -60,13 +77,17 @@ export default function BaseballGame() {
       userInputNumbers,
     );
 
-    console.log(ball, strike);
-    return "결과 값 String";
+    return getResultMessage(ball, strike);
+  };
+
+  const resultProvider = (message) => {
+    resultContainer.textContent = message;
   };
 
   const gameStart = () => {
     if (isValidNumbers(userInput.value)) {
-      play(computerNumbers, userInput.value);
+      const resultMessage = play(computerNumbers, userInput.value);
+      resultProvider(resultMessage);
     } else {
       alert("🙅 1~9까지의 수를 중복없이 3개 작성해주세요!");
       userInput.value = "";
