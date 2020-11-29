@@ -63,30 +63,39 @@ export default class BaseballGame {
     return this.play(this.#answer, this.#userNumber.value);
   };
 
-  getPlayStatus(answerNumbers, userNumbers) {
+  getStrikeCount(answerNumbers, userNumbers) {
     let strikeCount = 0;
+    answerNumbers.forEach((answerNumber, index) => {
+      if (answerNumber === userNumbers[index]) {
+        strikeCount++;
+      }
+    });
+
+    return strikeCount;
+  }
+
+  getBallCount(answerNumbers, userNumbers) {
     let ballCount = 0;
-    answerNumbers.forEach(answerNumber => {
-      if (userNumbers.includes(answerNumber)) {
+    answerNumbers.forEach((answerNumber, index) => {
+      const indexFound = userNumbers.findIndex(
+        userNumber => userNumber === answerNumber,
+      );
+      if (indexFound !== -1 && indexFound !== index) {
         ballCount++;
       }
     });
-    for (let i = 0; i < answerNumbers.length; i++) {
-      if (answerNumbers[i] === userNumbers[i]) {
-        ballCount--;
-        strikeCount++;
-      }
-    }
 
-    return [strikeCount, ballCount];
+    return ballCount;
   }
 
   play(computerInputNumbers, userInputNumbers) {
     const parsedComputerNumbers = computerInputNumbers.toString().split('');
     const parsedUserNumbers = userInputNumbers.toString().split('');
-    let strikeCount = 0;
-    let ballCount = 0;
-    [strikeCount, ballCount] = this.getPlayStatus(
+    const strikeCount = this.getStrikeCount(
+      parsedComputerNumbers,
+      parsedUserNumbers,
+    );
+    const ballCount = this.getBallCount(
       parsedComputerNumbers,
       parsedUserNumbers,
     );
