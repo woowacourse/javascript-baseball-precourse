@@ -2,16 +2,31 @@ const NUMBER_LENGTH = 3;
 
 export default class BaseballGame {
   constructor() {
-    this.computerNumbers = this.generateComputerNumbers();
-    this.el = {};
-
-    this.resetEl();
+    this.initialize();
     this.setEventListener();
+  }
+
+  initialize() {
+    this.computerNumbers = this.generateComputerNumbers();
+    this.resetEl();
+    this.el.userInput.focus();
+  }
+
+  resetUI() {
+    this.el.gameContainer.innerHTML = `
+      <form id="game-form">
+        <input type="text" id="user-input" />
+        <button id="submit">확인</button>
+      </form>
+      <h3>📄 결과</h3>
+      <div id="result"></div>
+    `;
   }
 
   resetEl() {
     this.el = {
       app: document.querySelector('#app'),
+      gameContainer: document.querySelector('#game-container'),
       userInput: document.querySelector('#user-input'),
       submit: document.querySelector('#submit'),
       result: document.querySelector('#result'),
@@ -36,6 +51,13 @@ export default class BaseballGame {
       return el;
     }
 
+    const removeBeforeAttribute = () => {
+      this.el.userInput.removeAttribute('id');
+      this.el.submit.removeAttribute('id');
+      this.el.result.removeAttribute('id');
+      this.el.gameForm.removeAttribute('id');
+    }
+
     const createNewForm = () => {
       const gameFormEl = createNewElement('form', 'game-form');
       const inputEl = createNewElement('input', 'user-input');
@@ -43,19 +65,33 @@ export default class BaseballGame {
       const submitButtonEl = createNewElement('button', 'submit', '확인');
       const h3El = createNewElement('h3', null, '📄 결과');
       const resultDivEl = createNewElement('div', 'result');
-      
-      this.el.userInput.removeAttribute('id');
-      this.el.submit.removeAttribute('id');
-      this.el.result.removeAttribute('id');
-      this.el.gameForm.removeAttribute('id');
 
-      this.el.app.appendChild(gameFormEl);
+      removeBeforeAttribute();
+
+      this.el.gameContainer.appendChild(gameFormEl);
       gameFormEl.appendChild(inputEl);
       gameFormEl.appendChild(blankTextNodeEl);
       gameFormEl.appendChild(submitButtonEl);
-      this.el.app.appendChild(gameFormEl);
-      this.el.app.appendChild(h3El);
-      this.el.app.appendChild(resultDivEl);
+      this.el.gameContainer.appendChild(gameFormEl);
+      this.el.gameContainer.appendChild(h3El);
+      this.el.gameContainer.appendChild(resultDivEl);
+    }
+
+    const createRestartButton = () => {
+      const restartEl = createNewElement('div', 'restart', '게임을 새로 시작하시겠습니까? ');
+      const gameRestartButtonEl = createNewElement('button', 'game-restart-button', '게임 재시작');
+      
+      restartEl.appendChild(gameRestartButtonEl);
+      gameRestartButtonEl.addEventListener('click', handleClickRestart);
+
+      this.el.gameContainer.appendChild(restartEl);
+      gameRestartButtonEl.focus();
+    }
+
+    const handleClickRestart = () => {
+      removeBeforeAttribute();
+      this.resetUI();
+      this.initialize();
     }
 
     const showResult = (result) => {
@@ -68,7 +104,20 @@ export default class BaseballGame {
       }
     }
 
-    const submitInput = (e) => {
+    const disableForms = () => {
+      const userInputEls = document.querySelectorAll('input');
+      const buttonEls = document.querySelectorAll('button');
+
+      userInputEls.forEach((el) => {
+        el.setAttribute('disabled', 'disabled');
+      });
+
+      buttonEls.forEach((el) => {
+        el.setAttribute('disabled', 'disabled');
+      });
+    }
+
+    const handleSubmitInput = (e) => {
       e.preventDefault();
       if (e.target.id !== 'game-form') return;
       
@@ -76,13 +125,18 @@ export default class BaseballGame {
       if (userInputNumbers) {
         const result = this.play(this.computerNumbers, userInputNumbers);
         showResult(result);
-        createNewForm();
+        if (result.status === 'playing') {
+          createNewForm();
+        } else {
+          disableForms();
+          createRestartButton();
+        }
         this.resetEl();
         this.el.userInput.focus();
       }
     }
-
-    this.el.app.addEventListener('submit', submitInput);
+    
+    this.el.app.addEventListener('submit', handleSubmitInput);
   }
 
   getUserInput() {
