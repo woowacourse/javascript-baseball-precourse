@@ -37,7 +37,7 @@ export default class BaseballGame {
       this.randerErrorMessage('잘못된 입력입니다. 다시 입력해주세요');
   }
 
-  isThreeDigitNumber = (numbers) => {
+  isThreeDigitNumbers = (numbers) => {
     return /^[1-9]{3}$/g.test(numbers);
   }
 
@@ -49,7 +49,7 @@ export default class BaseballGame {
   }
 
   isPossible = (numbers) => {
-    if (this.isThreeDigitNumber(numbers) && this.isNotDuplicate(numbers)) {
+    if (this.isThreeDigitNumbers(numbers) && this.isNotDuplicate(numbers)) {
       return true;
     }
     return false;
