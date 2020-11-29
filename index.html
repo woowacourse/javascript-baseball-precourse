@@ -19,12 +19,13 @@
       <div id="result"></div>
     </div>
     <script type="module" src="src/index.js"></script>
+    <script type="module" src="src/handlers.js"></script>
     <script type="module">
       import {BaseballGame, Validation} from './src/index.js';
+      import {wrongResultHandler} from './src/handlers.js';
       let game = new BaseballGame();
       let validation = new Validation();
       
-
       document.getElementById('submit').addEventListener("click", function(){
         const userInput = document.getElementById('user-input').value;
 
@@ -47,22 +48,7 @@
           // win();
         } else {
           wrongResultHandler(ball, strike);
-        }
-
-        function wrongResultHandler(ball, strike) {
-          let result = '';
-          if (ball > 0 && strike > 0) {
-            result = `${ball}볼 ${strike}스트라이크`;
-          } else if (ball > 0 && strike === 0) {
-              result = `${ball}볼`;
-          } else if (ball === 0 && strike > 0) {
-              result = `${strike}스트라이크`;
-          } else {
-              result = '낫싱';
-          }
-
-          document.getElementById('result').innerHTML = result;
-        }
+        }      
       });
       
     </script>
