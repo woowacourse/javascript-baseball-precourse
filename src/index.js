@@ -1,13 +1,17 @@
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
+class BaseballGame {
+  setAnswer() {
+    const arr = [];
+    let ranNum = Math.floor(Math.random() * 10);
+
+    for (let i = 0; i < 3; i += 1) {
+      while (arr.includes(ranNum) === true) {
+        ranNum = Math.floor(Math.random() * 10);
+      }
+      arr.push(ranNum);
+    }
+
+    return arr;
+  }
 }
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
-
-new BaseballGame();
+let game = new BaseballGame();
