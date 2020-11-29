@@ -83,4 +83,8 @@ function getUserInput() {
   return document.getElementById("user-input").value;
 }
 
+function showResult(string) {
+  document.getElementById("result").innerText = string;
+}
+
 new BaseballGame();
