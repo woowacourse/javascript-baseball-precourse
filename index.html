@@ -26,7 +26,20 @@
       
       document.getElementById('submit').addEventListener("click", function(){
         const userInput = document.getElementById('user-input').value;
-        alert(userInput);
+
+        let inputArray = [];
+        inputArray = userInput.split('');
+        if (validation.isNumber(inputArray) === false) {
+          return alert('숫자만 입력해주세요');
+        }
+
+        if (validation.isThreeDigit(inputArray) === false) {
+          return alert('세자리의 숫자를 입력해주세요');
+        }
+
+        if (validation.hasDuplicatedNumber(inputArray) === true) {
+          return alert('중복된 값을 입력하였습니다');
+        }
       });
       
     </script>
