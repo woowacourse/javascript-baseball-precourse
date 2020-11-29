@@ -51,13 +51,17 @@ export default class BaseballGame {
 
     if (!(userInput.length === 3 && this.isNumber(userInput))) {
       alert(alertMessage);
+      return;
     }
 
     this.setUserInputNumbers(userInput);
 
     if (this.isIncludeZero() || this.isDuplicate()) {
       alert(alertMessage);
+      return;
     }
+
+    this.play(this.answerNumbers, this.userInputNumbers);
   };
 
   bindEventListener = () => {
@@ -66,8 +70,16 @@ export default class BaseballGame {
       .addEventListener("click", (e) => this.checkUserInput(document.querySelector("#user-input").value));
   };
 
+  isCorrectAnswer = ({ computerInputNumbers, userInputNumbers }) => {
+    return computerInputNumbers.every((num, index) => num === userInputNumbers[index]);
+  };
+
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    if (this.isCorrectAnswer({ computerInputNumbers, userInputNumbers })) {
+      return "🎉 정답을 맞추셨습니다! 🎉";
+    }
+
+    return "error";
   }
 }
 
