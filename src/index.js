@@ -7,7 +7,7 @@ export default function BaseballGame() {
     return computerInputNumbers.every((computerInputNumber) => randomNumber !== computerInputNumber);
   };
   
-  this.createComputerInputNumbers = function() {
+  this.createComputerNumbers = function() {
     let i = 0;
 
     while (i < arrayLength) {
@@ -25,7 +25,7 @@ export default function BaseballGame() {
   const submitButton = document.querySelector("#submit");
   const userInput = document.querySelector("#user-input");
   
-  this.getUserInputNumbers = function() {
+  this.getUserNumbers = function() {
     const userInputNumbers = userInput.value.split('');
     const isDuplicated = new Set(userInputNumbers);
   
@@ -53,7 +53,7 @@ export default function BaseballGame() {
       gameRestartButton.style.display = 'none';
       gameRestartText.style.display = 'none';
       result.innerText = '';
-      this.createComputerInputNumbers();
+      this.createComputerNumbers();
     });
   };
 
@@ -93,9 +93,9 @@ export default function BaseballGame() {
 
   // init()
   this.init = function() {
-    this.createComputerInputNumbers();
+    this.createComputerNumbers();
     submitButton.addEventListener("click", () => {
-      const userInputNumbers = this.getUserInputNumbers();
+      const userInputNumbers = this.getUserNumbers();
 
       if (userInputNumbers) {
         this.play(computerInputNumbers, userInputNumbers)
