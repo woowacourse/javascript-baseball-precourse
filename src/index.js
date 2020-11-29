@@ -74,7 +74,7 @@ export default function BaseballGame() {
     if (computerInputNumbers === userInputNumbers) {
       showRestartButton();
       return '정답입니다!';
-    } else if (computerInputNumbers.includes(userInputNumbers[0])) {
+    } else {
       for (let i=0; i<3; i++) {
         if (userInputNumbers[i] === computerInputNumbers[i]) {
           ball++;
@@ -82,8 +82,9 @@ export default function BaseballGame() {
           strike++;
         }
       }
-    } else {
-      return '낫싱';
+      if (ball === 0 && strike === 0) {
+        return '낫싱';
+      }
     }
 
     if (ball > 0 && strike === 0) {
