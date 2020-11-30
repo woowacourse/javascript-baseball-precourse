@@ -1,3 +1,8 @@
+const RESULT_MESSAGE = {
+  correct: "🎉 정답을 맞추셨습니다! 🎉",
+  nothing: "낫싱",
+};
+
 export default class BaseballGame {
   constructor() {
     this.answerNumbers = this.makeAnswerNumbers();
@@ -50,7 +55,7 @@ export default class BaseballGame {
   renderResult = (resultMessage) => {
     this.$result.textContent = resultMessage;
 
-    if (resultMessage === "🎉 정답을 맞추셨습니다! 🎉") {
+    if (resultMessage === RESULT_MESSAGE.correct) {
       this.$result.insertAdjacentHTML("beforeend", " <button id='restart'>게임 재시작</button>");
       this.bindRestartEvent();
     }
@@ -130,14 +135,14 @@ export default class BaseballGame {
 
   play(computerInputNumbers, userInputNumbers) {
     if (this.isCorrectAnswer({ computerInputNumbers, userInputNumbers })) {
-      return "🎉 정답을 맞추셨습니다! 🎉";
+      return RESULT_MESSAGE.correct;
     }
 
     const numOfBall = this.getNumOfBall({ computerInputNumbers, userInputNumbers });
     const numOfStrike = this.getNumOfStrike({ computerInputNumbers, userInputNumbers });
 
     if (numOfBall === 0 && numOfStrike === 0) {
-      return "낫싱";
+      return RESULT_MESSAGE.nothing;
     }
 
     return `${numOfBall > 0 ? `${numOfBall}볼 ` : ""}${numOfStrike > 0 ? `${numOfStrike}스트라이크` : ""}`;
