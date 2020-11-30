@@ -1,6 +1,8 @@
 export default class BaseballGame {
   constructor() {
     this.answerNumbers = this.makeAnswerNumbers();
+    this.$userInput = document.querySelector("#user-input");
+    this.$result = document.querySelector("#result");
 
     this.bindSubmitEvent();
   }
@@ -46,11 +48,10 @@ export default class BaseballGame {
   };
 
   renderResult = (resultMessage) => {
-    const $result = document.querySelector("#result");
-    $result.textContent = resultMessage;
+    this.$result.textContent = resultMessage;
 
     if (resultMessage === "🎉 정답을 맞추셨습니다! 🎉") {
-      $result.insertAdjacentHTML("beforeend", " <button id='restart'>게임 재시작</button>");
+      this.$result.insertAdjacentHTML("beforeend", " <button id='restart'>게임 재시작</button>");
       this.bindRestartEvent();
     }
   };
@@ -58,13 +59,13 @@ export default class BaseballGame {
   bindRestartEvent = () => {
     document.querySelector("#restart").addEventListener("click", () => {
       this.answerNumbers = this.makeAnswerNumbers();
-      document.querySelector("#result").innerHTML = "";
+      this.$result.innerHTML = "";
       this.resetInput();
     });
   };
 
   resetInput = () => {
-    document.querySelector("#user-input").value = "";
+    this.$userInput.value = "";
   };
 
   checkUserInput = (userInput) => {
@@ -88,9 +89,7 @@ export default class BaseballGame {
   };
 
   bindSubmitEvent = () => {
-    document
-      .querySelector("#submit")
-      .addEventListener("click", (e) => this.checkUserInput(document.querySelector("#user-input").value));
+    document.querySelector("#submit").addEventListener("click", (e) => this.checkUserInput(this.$userInput.value));
   };
 
   isCorrectAnswer = ({ computerInputNumbers, userInputNumbers }) => {
