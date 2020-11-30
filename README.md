@@ -11,7 +11,7 @@
 - 위 숫자 야구게임에서 상대방의 역할을 컴퓨터가 한다. 컴퓨터는 1에서 9까지 서로 다른 임의의 수 3개를 선택한다. 게임 플레이어는 컴퓨터가 생각하고 있는 3개의 숫자를 입력하고, 컴퓨터는 입력한 숫자에 대한 결과를 출력한다.
 - 이 같은 과정을 반복해 컴퓨터가 선택한 3개의 숫자를 모두 맞히면 게임이 종료된다.
 - 게임을 종료한 후 게임을 다시 시작할 수 있다.
-- 게임을 종료한 후 id가 `game-restart-button`인 버튼을 클릭함으로써 게임을 다시 시작할 수 있다. 
+- 게임을 종료한 후 id가 `game-restart-button`인 버튼을 클릭함으로써 게임을 다시 시작할 수 있다.
   - `예) <button id="game-restart-button">재시작</button>`
 
 <br>
@@ -31,13 +31,13 @@
 ```javascript
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    return '결과 값 String';
   };
 }
 
 export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    return '결과 값 String';
   }
 }
 
@@ -87,3 +87,42 @@ play(123, 124); // '2스트라이크'
 - event
   - [이벤트](https://ko.javascript.info/introduction-browser-events)
   - [이벤트 위임](https://ko.javascript.info/event-delegation)
+
+<br>
+
+## 👉 구현 기능 목록
+
+#### 유틸 함수 목록
+
+- 1~9 로 이루어진 서로 다른 N자리 숫자를 만들어주는 함수 `generateRandomNumbers`
+- 숫자인지 확인해주는 함수 `isNumber`
+- 새로운 버튼 노드를 반환해주는 함수 `createBtn`
+- 노드를 초기화 해주는 함수 `initNode`
+
+#### 숫자야구게임 함수 목록
+
+- 상대방(컴퓨터)의 숫자를 준비해주는 함수 `getComputerInputnumbers`
+- 사용자가 입력한 숫자를 반환해주는 함수 `getUserInputnumbers`
+- 입력된 숫자가 조건에 안맞는지 판단해주는 함수 `isErrorInput`
+- 입력된 숫자가 조건에 안맞을 때 경고창을 띄워주는 함수 `alertErrorMessage`
+  - 경고창이 꺼지면 폼을 초기화하고 포커스를 주어 다시 입력받는다.
+- 에러번호에 따라 경고창에 들어갈 메세지를 만들어주는 함수 `getErrorMessage`
+  - 1: 입력없음
+  - 2: 자릿수불일치
+  - 3: 중복숫자존재
+  - 4: 0포함
+  - 5: 문자포함
+- 이번 판의 결과스트링을 반환하는 함수 `play`
+- 두 숫자를 비교해서 점수를 매기고 점수를 객체로 반환해주는 함수 `markScore`
+  - 상대방 숫자와 자리까지 일치할 경우: 'strike' 1 증가
+  - 상대방 숫자와 자리가 일치하지는 않지만 상대방 숫자에 포함되는 경우: 'ball' 1 증가
+- 점수에 따라 게임의 결과스트링을 만들어주는 함수 `getGameResultStr`
+  - 정답이라면 재시작 버튼을 준비하고 축하메세지 출력한다.
+  - 그게 아니라면 아래의 순서로 출력한다.
+    - (볼이 있다면) 'n볼 '을 먼저 출력한다.
+    - 그 후 (스트라이크가 있다면) 'n스트라이크'를 출력한다.
+    - 만일 볼도 스트라이크도 없다면 '낫싱'을 출력한다.
+- 재시작 버튼을 화면에 덧붙여주는 함수 `prepareRestartButton`
+  - 재시작 버튼을 누르면 출력된 내용을 지워주고 게임시작 단계로 돌아간다.
+- Input태그 클릭 시, 이전 내용을 자동으로 지워주는 함수 `clearForm`
+- 확인버튼 클릭 시, 게임을 세팅하고 play메서드를 호출해주는 함수 `getReadyAndPlayGame`
