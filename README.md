@@ -1,3 +1,4 @@
+## 우아한 테크코스 프리코스 미션 #1
 # ⚾ 미션 - 숫자 야구 게임
 
 ## 🎯 기능 요구사항
@@ -15,13 +16,6 @@
   - `예) <button id="game-restart-button">재시작</button>`
 
 <br>
-
-## 💻 프로그래밍 실행 결과
-
-![baseball_result](https://user-images.githubusercontent.com/50367798/100166088-32473e00-2eff-11eb-9454-5d45e648b37e.jpg)
-
-<br>
-
 ## ✅ 프로그래밍 요구사항
 
 - `play`(컴퓨터의 랜덤 값, 유저의 입력 값) 메서드를 만들어 게임을 진행한다.
@@ -65,25 +59,28 @@ play(123, 124); // '2스트라이크'
 
 <br>
 
-## 📝 미션 저장소 및 진행 요구사항
+# 👩‍💻 기능
+1) **getComputerInputNumbers()**: 컴퓨터의 3자리 수 랜덤으로 생성해 String으로 결과값을 반환하는 함수 
+    - **getRandomNumber()**: 1-9까지의 난수를 한 개씩 반환하는 함수 
 
-- 저장소를 fork/clone해 시작한다.
-- **기능을 구현하기 전에 README.md 파일에 구현할 기능 목록**을 정리해 추가한다.
-- **git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가**한다.
-- [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서 절차를 따라 미션을 제출한다.
+2) **setReadyForPlay()**: play하기 전, input을 받아서 예외처리 할 수 있도록 전달하는 함수 
+    - **checkInputError()**: 받은 사용자의 input이 조건에 맞는지 확인하고, 아닐경우 alert로 표시해주는 함수 
+    - **isDuplication()**: input값에 중복된 값이 존재하는지 boolean 값으로 반환하는 함수 
 
-<br>
+3) **startRoundFlow()**: input조건의 값이 조건에 알맞아 한 round를 시작해도 될 시에, 한 라운드의 게임을 플레이하고, 결과값을 보여주는 함수 
+    - **play()**: 컴퓨터와 사용자의 숫자들을 비교해 strike와 ball의 갯수를 판별해 String으로 결과값을 반환하는 함수
+    - **judgeResult()**: strike와 ball의 갯수들로 결과를 판단해 String으로 반환하는 함수 
 
-## 🔗 참고 링크
+4) **handleResultHTML()**: Hint 또는 정답화면을 화면에 보여줄 함수 
 
-미션 진행이 어렵다면 아래 링크를 참고한다.
+5) **handleRestart()**: 재시작 버튼을 눌렀을 경우 게임 초기상태로 다시 돌아가게 만드는 함수 
 
-- DOM
-  - [MDN DOM](https://developer.mozilla.org/ko/docs/Web/API/Document_Object_Model/%EC%86%8C%EA%B0%9C)
-- alert
-  - [MDN alert](https://developer.mozilla.org/ko/docs/Web/API/Window/alert)
-- javascript module
-  - [module](https://ko.javascript.info/modules-intro)
-- event
-  - [이벤트](https://ko.javascript.info/introduction-browser-events)
-  - [이벤트 위임](https://ko.javascript.info/event-delegation)
+6) src/constants.js : BaseBallGame에 필요한 모든 string 값 enum형식으로 저장해 놓은 파일
+
+# 고민한 점
+1) js 문법 - js 문법이 익숙치 않아서 초반에 공부를 했었어야 했다.
+2) 함수 분리 - 함수에 원하는 기능이 잘 들어가 있는가, 네이밍은 함수 기능에 충실했는가.
+3) 파일 분리 - 굳이 파일분리를 해야할 것인가 하지 않아도 될 것인가.
+4) 기능 별 commit - 구현 도중 많은 수정들이 생기는데, 기능 별 commit의 기능은 어느정도를 얘기하는 것일까.
+5) this에 대한 고민 - js 문법이 익숙치 않아 생긴 오류. event listener를 달 때 고민함.
+6) 코드 컨벤션 - if문을 이렇게 계속 나열해도 되는 것인가. 이곳에서 return을 해도 되는 것인가. 등
