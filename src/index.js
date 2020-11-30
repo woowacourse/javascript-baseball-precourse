@@ -63,12 +63,11 @@ export default function BaseballGame() {
   };
 
   const handleUserInputSubmit = () => {
-    let userInputNumbers = null;
+    const userInputNumbers = $userInput.value
+      .split("")
+      .map((value) => parseInt(value));
+    if (!isValidNumber(userInputNumbers)) return;
 
-    const currentInputNumber = $userInput.value.split("");
-    if (!isValidNumber(currentInputNumber)) return;
-
-    userInputNumbers = currentInputNumber.map((value) => parseInt(value));
     play(computerInputNumbers, userInputNumbers);
   };
 
