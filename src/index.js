@@ -19,7 +19,28 @@ export default function BaseballGame() {
       <button id="restart">게임 재시작</button>`;
   };
 
-  const getHint = (computerInputNumbers, userInputNumbers) => {};
+  const getHint = (computerInputNumbers, userInputNumbers) => {
+    let hint = "";
+    let strike = 0;
+    let ball = 0;
+
+    userInputNumbers.forEach((value, index) => {
+      if (computerInputNumbers.indexOf(value) === index) {
+        strike++;
+      } else if (computerInputNumbers.indexOf(value) !== -1) {
+        ball++;
+      }
+    });
+
+    if (strike === 0 && ball === 0) `낫싱`;
+    else {
+      hint =
+        `${ball === 0 ? "" : `${ball}볼`} ` +
+        `${strike === 0 ? "" : `${strike}스트라이크`}`;
+    }
+
+    return hint;
+  };
 
   const play = (computerInputNumbers, userInputNumbers) => {
     const answer =
