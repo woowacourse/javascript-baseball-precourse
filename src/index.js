@@ -1,13 +1,79 @@
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
-}
+import getRandomNums from "./randomNums.js";
+import isValidNumber from "./numberValidator.js";
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
+const $userInput = document.querySelector("#user-input");
+const $submitBtn = document.querySelector("#submit");
+const $result = document.querySelector("#result");
+
+let computerInputNumbers = getRandomNums();
+const CORRECT = "🎉 정답을 맞추셨습니다. 🎉";
+
+export default function BaseballGame() {
+  const onRestartHandler = () => {
+    $userInput.value = "";
+    $result.innerHTML = "";
+    computerInputNumbers = getRandomNums();
+  };
+
+  const getResult = (text) => {
+    if (text !== CORRECT) {
+      $result.innerHTML = `<p>${text}</p>`;
+
+      return;
+    }
+
+    $result.innerHTML = `<p><strong>${text}</strong></p>
+      <span>게임을 새로 시작하겠습니까?</span>
+      <button id="game-restart-button">게임 재시작</button>`;
+
+    const $restart = $result.querySelector("#game-restart-button");
+    $restart.addEventListener("click", onRestartHandler);
+  };
+
+  const getHint = (computerInputNumbers, userInputNumbers) => {
+    let hint;
+    let strike = 0;
+    let ball = 0;
+
+    userInputNumbers.forEach((value, index) => {
+      if (computerInputNumbers.indexOf(value) === index) {
+        strike++;
+      } else if (computerInputNumbers.indexOf(value) !== -1) {
+        ball++;
+      }
+    });
+
+    if (strike === 0 && ball === 0) hint = `낫싱`;
+    else {
+      hint =
+        `${ball === 0 ? "" : `${ball}볼`} ` +
+        `${strike === 0 ? "" : `${strike}스트라이크`}`;
+    }
+
+    return hint;
+  };
+
+  const play = (computerInputNumbers, userInputNumbers) => {
+    return JSON.stringify(computerInputNumbers) ===
+      JSON.stringify(userInputNumbers)
+      ? CORRECT
+      : getHint(computerInputNumbers, userInputNumbers);
+  };
+
+  const onUserInputSubmitHandler = () => {
+    const userInputNumbers = $userInput.value
+      .split("")
+      .map((value) => parseInt(value));
+
+    if (!isValidNumber(userInputNumbers)) {
+      return;
+    }
+
+    const result = play(computerInputNumbers, userInputNumbers);
+    getResult(result);
+  };
+
+  $submitBtn.addEventListener("click", onUserInputSubmitHandler);
+}
 
 new BaseballGame();
