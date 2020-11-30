@@ -31,25 +31,25 @@
 ```javascript
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String"
-  }
+    return "결과 값 String";
+  };
 }
 
 export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String"
+    return "결과 값 String";
   }
 }
 
 // 예시
-play(123, 456) // '낫싱'
-play(123, 345) // '1볼'
-play(123, 432) // '2볼'
-play(123, 312) // '3볼'
-play(123, 145) // '1스트라이크'
-play(123, 134) // '1볼 1스트라이크'
-play(123, 132) // '2볼 1스트라이크'
-play(123, 124) // '2스트라이크'
+play(123, 456); // '낫싱'
+play(123, 345); // '1볼'
+play(123, 432); // '2볼'
+play(123, 312); // '3볼'
+play(123, 145); // '1스트라이크'
+play(123, 134); // '1볼 1스트라이크'
+play(123, 132); // '2볼 1스트라이크'
+play(123, 124); // '2스트라이크'
 ```
 
 - 스트라이크와 볼이 같이 있는 경우 볼을 먼저쓰고, 스트라이크를 쓴다.
@@ -90,14 +90,19 @@ play(123, 124) // '2스트라이크'
 
 ## 기능 목록
 
-- 1부터 9까지 서로 다른 수 3자리를 만드는 함수(makeDiffNumber(length) - length -> 자릿 수)
-- 최솟값 최댓값을 받아 랜덤한 수를 만들어주는 함수(makeRadomValue(max, min))
-- RandomBaseball Class에서 computerNumbers를 가져오는 함수(getBaseball)
-- 랜덤 값을 다시 만들어주는 함수 (resetRandomBaseball)
 - 두 값을 입력 받아 각 자릿수를 비교하는데 같은 자리 같은 숫자면 스트라이크, 같은 자리에는 없지만 숫자가 포함되어 있으면 볼, 스트라이크나 볼이 없으면 낫싱(play(computerInput, userInput))
-- 게임 재시작해주는 콜백 함수(restartGame())
-- 사용자의 입력을 전달 해주는 콜백 함수 (sendBaseBall(userInput))
-- 입력 값을 검증해주는 함수(validateInput(userInput))
+- Strike와 Ball의 갯수를 판별해주는 함수 (verdictStrikeOrBall(computerInputstr, userInputStr))
+- ball가 strike 개수를 통해 적절한 message를 만들어주는 함수(makeResultMessage)
+- 입력 값의 각 자릿수가 다른지 검증해주는 함수(validateInput(userInput))
+- 두 인풋에서 에러가 있는지 확인 해주는 함수 (verdictInputError(computerInput, userInput))
+
+- 1부터 9까지 서로 다른 수 3자리를 만드는 함수(makeDiffNumber(length) - length -> 자릿 수)
+- 최대값 최소값을 받아 랜덤한 수를 만들어주는 함수(makeRadomValue(max, min))
+- 랜덤하게 생성된 computerNumbers를 가져오는 함수(getBaseball)
+- 랜덤 값을 다시 만들어주는 함수 (resetRandomBaseball)
+
 - 잘못 입력된 경우 alert을 통해 메시지를 보여주는 함수(showErrorAlert(str))
+- 게임 재시작해주는 함수(restartGame())
+- 사용자의 입력을 전달 해주는 함수 (sendBaseBall(userInput))
 - input Element의 값을 초기화 하고 focus 주는 함수(initValueAndFoucsIn(el) - element 전달)
-- 결과 보여주는 함수 (showResult(str))
+- 결과 보여주는 함수 (showResult({message, finished}))

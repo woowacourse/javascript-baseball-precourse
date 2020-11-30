@@ -1,8 +1,4 @@
 export default class BaseballGame {
-  _showErrorAlert(str) {
-    alert(`숫자 야구 게임 에러 내용\n ${str}`);
-  }
-
   _validateInput(input) {
     if (typeof input !== "string") {
       return false;
@@ -13,26 +9,40 @@ export default class BaseballGame {
     return inputSet.size === input.length ? true : false;
   }
 
-  play(computerInputNumbers, userInputNumbers) {
-    if (typeof computerInputNumbers !== "number" || typeof userInputNumbers !== "number") {
-      throw new Error("Unhandled Type Error");
-    }
+  play(computerInputStr, userInputStr) {
+    const messageObj = {
+      message: "",
+      finished: false,
+      error: false,
+    };
 
-    const computerInputStr = "" + computerInputNumbers;
-    const userInputStr = "" + userInputNumbers;
+    const verdictedErrorObj = this._verdictInputError(computerInputStr, userInputStr);
 
-    if (computerInputStr.length !== userInputStr.length) {
-      const str = `입력 값의 길이가 맞추어야 하는 길이 ${computerInputStr.length}와 같지 않습니다.`;
-      this._showErrorAlert(str);
-    } else if (this._validateInput(computerInputStr) === false || this._validateInput(userInputStr) === false) {
-      this._showErrorAlert("입력 값이 올바르지 않습니다.");
+    if (verdictedErrorObj.error) {
+      messageObj.message = verdictedErrorObj.message;
+      messageObj.error = verdictedErrorObj.error;
+      return messageObj;
     }
 
     const verdictedObj = this._verdictStrikeOrBall(computerInputStr, userInputStr);
 
-    const { message, finished } = this._makeResultMessage(verdictedObj);
+    const resultMessageObj = this._makeResultMessage(verdictedObj);
+    messageObj.message = resultMessageObj.message;
+    if (resultMessageObj.finished) {
+      messageObj.finished = resultMessageObj.finished;
+    }
 
-    return message;
+    return messageObj;
+  }
+
+  _verdictInputError(computerInputStr, userInputStr) {
+    let str = null;
+    if (computerInputStr.length !== userInputStr.length) {
+      str = `입력 값의 길이가 맞추어야 하는 길이 ${computerInputStr.length}와 같지 않습니다.`;
+    } else if (this._validateInput(computerInputStr) === false || this._validateInput(userInputStr) === false) {
+      str = "입력 값이 올바르지 않습니다.";
+    }
+    return str === null ? { message: "", error: false } : { message: str, error: true };
   }
 
   _verdictStrikeOrBall(computerInputStr, userInputStr) {
@@ -99,11 +109,73 @@ class RandomBaseball {
     }
     // set에서 string으로 변환
     let stringNumbers = [...numberSet].join("");
-    return parseInt(stringNumbers);
+    return stringNumbers;
+  }
+}
+
+class BaseballEvent {
+  constructor({ inputEl, resultEl, appEl, baseball, randomBaseball }) {
+    this.inputEl = inputEl;
+    this.resultEl = resultEl;
+    this.appEl = appEl;
+    this.baseball = baseball;
+    this.randomBaseball = randomBaseball;
+
+    // event 바인딩 및
+    this.appEl.addEventListener("click", e => {
+      if (e.target.id === "submit") {
+        const userInput = this.inputEl.value;
+        this.sendBaseball(userInput);
+      } else if (e.target.id === "game-restart-button") {
+        this.restartGame();
+      }
+    });
+  }
+
+  _showErrorAlert(str) {
+    alert(`숫자 야구 게임 에러 내용\n${str}`);
+  }
+
+  _initValueAndFocusIn() {
+    this.inputEl.value = "";
+    this.inputEl.focus();
+  }
+
+  sendBaseball(userInput) {
+    const computerInput = this.randomBaseball.getBaseball();
+    let { message, finished, error } = this.baseball.play(computerInput, userInput);
+    if (error) {
+      this._showErrorAlert(message);
+      this._initValueAndFocusIn();
+    } else {
+      this._showResult({ message, finished });
+    }
+  }
+
+  restartGame() {
+    this.randomBaseball.resetRandomBaseball();
+    this._showResult({ message: null });
+    this._initValueAndFocusIn();
+  }
+
+  _showResult({ message, finished }) {
+    let template = "";
+    if (message) {
+      template += `<span>${message}</span>`;
+      if (finished) {
+        template += `<p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">재시작</button></p>`;
+      }
+    }
+    this.resultEl.innerHTML = template;
   }
 }
 
 const baseballGame = new BaseballGame();
 const randomBaseball = new RandomBaseball();
-window.baseballGame = baseballGame;
-window.randomBaseball = randomBaseball;
+const baseballEvent = new BaseballEvent({
+  inputEl: document.getElementById("user-input"),
+  resultEl: document.getElementById("result"),
+  appEl: document.getElementById("app"),
+  baseball: baseballGame,
+  randomBaseball: randomBaseball,
+});
