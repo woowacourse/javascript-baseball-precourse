@@ -1,13 +1,14 @@
 export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = '';
+    this.MAXINPUTLENGTH = 3;
     this.startGame();
   }
 
   getComputerNumber() {
     let _computerInputNumbers = '';
 
-    while (_computerInputNumbers.length < 3) {
+    while (_computerInputNumbers.length < this.MAXINPUTLENGTH) {
       const randomNumber = Math.floor(Math.random() * 9 + 1);
 
       if (this.isDuplicate(_computerInputNumbers, randomNumber)) {
@@ -40,7 +41,7 @@ export default class BaseballGame {
     let returnUserNumberValue = null;
 
     if (
-      _userInputNumbers.length === 3 &&
+      _userInputNumbers.length === this.MAXINPUTLENGTH &&
       isNaN(_userInputNumbers) === false &&
       this.isDuplicate(_userInputNumbers[0], _userInputNumbers[1]) === true &&
       this.isDuplicate(_userInputNumbers.slice(0, 2), _userInputNumbers[2]) ===
@@ -88,7 +89,7 @@ export default class BaseballGame {
     let strike = 0;
     let ball = 0;
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < this.MAXINPUTLENGTH; i++) {
       if (_computerInputNumbers.indexOf(_userInputNumbers[i]) === i) {
         strike++;
       } else if (_computerInputNumbers.indexOf(_userInputNumbers[i]) > -1) {
@@ -106,7 +107,7 @@ export default class BaseballGame {
 
     if (strike === 0 && ball === 0) {
       resultText = '낫싱';
-    } else if (strike === 3) {
+    } else if (strike === this.MAXINPUTLENGTH) {
       resultText = '🎉정답을 맞추셨습니다!🎉';
     } else if (strike > 0 && ball === 0) {
       resultText = `${strStrike}스트라이크`;
