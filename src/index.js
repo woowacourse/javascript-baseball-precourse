@@ -9,6 +9,7 @@ function init() {
     const reStartDiv = document.createElement("div");
     const reStartButton = document.createElement("button");
     const baseballGame = new BaseballGame();
+    let stopFlag = false;
 
     let computerInputNumbers = makeComputerNumbers();
     console.log(computerInputNumbers);
@@ -21,13 +22,17 @@ function init() {
     }
 
     function handleSubmitClick() {
+        if (stopFlag) {
+            return;
+        }
         const userInputNumbers = getUserInputNumbers();
         const isValidate = validateInputNumber(userInputNumbers);
+        const resultText = baseballGame.play(
+            computerInputNumbers,
+            userInputNumbers
+        );
+
         if (isValidate) {
-            const [resultText] = baseballGame.play(
-                computerInputNumbers,
-                userInputNumbers
-            );
             afterClickSettings(resultText);
             showRestartButton(resultText);
         } else {
@@ -42,6 +47,7 @@ function init() {
             reStartButton.textContent = "재실행";
             result.appendChild(reStartDiv);
             reStartDiv.appendChild(reStartButton);
+            stopFlag = true;
         }
     }
 
@@ -56,6 +62,7 @@ function init() {
         afterClickSettings("");
         computerInputNumbers = makeComputerNumbers();
         console.log(computerInputNumbers);
+        stopFlag = false;
     }
 }
 init();
