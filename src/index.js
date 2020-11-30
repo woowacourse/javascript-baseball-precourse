@@ -99,11 +99,11 @@ const getUserInput = () => {
 
 const makeComputerInput = () => {
   let nums = [];
-  let digit = Math.floor(Math.random() * 10);
+  let digit = Math.floor(Math.random() * 9) + 1;
 
   for (let i = 0; i < 3; i++) {
     while (nums.includes(digit)) {
-      digit = Math.floor(Math.random() * 10);
+      digit = Math.floor(Math.random() * 9) + 1;
     }
     nums.push(digit);
   }
