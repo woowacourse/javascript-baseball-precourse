@@ -1,97 +1,7 @@
 # ⚾ 미션 - 숫자 야구 게임
 
-## 🎯 기능 요구사항
-
-- 기본적으로 1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 맞추는 게임이다.
-- 같은 수가 같은 자리에 있으면 `스트라이크`, 다른 자리에 있으면 `볼`, 같은 수가 전혀 없으면 `낫싱`이란 힌트를 얻고, 그 힌트를 이용해서 먼저 상대방(컴퓨터)의 수를 맞추면 승리한다.
-  - 예) 상대방(컴퓨터)의 수가 425일 때
-  - 123을 제시한 경우 : 1스트라이크
-  - 456을 제시한 경우 : 1볼 1스트라이크
-  - 789를 제시한 경우 : 낫싱
-- 위 숫자 야구게임에서 상대방의 역할을 컴퓨터가 한다. 컴퓨터는 1에서 9까지 서로 다른 임의의 수 3개를 선택한다. 게임 플레이어는 컴퓨터가 생각하고 있는 3개의 숫자를 입력하고, 컴퓨터는 입력한 숫자에 대한 결과를 출력한다.
-- 이 같은 과정을 반복해 컴퓨터가 선택한 3개의 숫자를 모두 맞히면 게임이 종료된다.
-- 게임을 종료한 후 게임을 다시 시작할 수 있다.
-- 게임을 종료한 후 id가 `game-restart-button`인 버튼을 클릭함으로써 게임을 다시 시작할 수 있다.
-  - `예) <button id="game-restart-button">재시작</button>`
-
-<br>
-
-## 💻 프로그래밍 실행 결과
-
-![baseball_result](https://user-images.githubusercontent.com/50367798/100166088-32473e00-2eff-11eb-9454-5d45e648b37e.jpg)
-
-<br>
-
-## ✅ 프로그래밍 요구사항
-
-- `play`(컴퓨터의 랜덤 값, 유저의 입력 값) 메서드를 만들어 게임을 진행한다.
-- `play`메서드는 `String`으로 결과값을 return 한다.
-- `index.js`에서 아래의 function 또는 class 형태를 활용한다.
-
-```javascript
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return '결과 값 String';
-  };
-}
-
-export default class BaseballGame {
-  play(computerInputNumbers, userInputNumbers) {
-    return '결과 값 String';
-  }
-}
-
-// 예시
-play(123, 456); // '낫싱'
-play(123, 345); // '1볼'
-play(123, 432); // '2볼'
-play(123, 312); // '3볼'
-play(123, 145); // '1스트라이크'
-play(123, 134); // '1볼 1스트라이크'
-play(123, 132); // '2볼 1스트라이크'
-play(123, 124); // '2스트라이크'
-```
-
-- 스트라이크와 볼이 같이 있는 경우 볼을 먼저쓰고, 스트라이크를 쓴다.
-- 사용자가 잘못된 입력 값을 작성한 경우 `alert`을 이용해 메시지를 보여주고, 재입력할 수 있게 한다.
-- 외부 라이브러리(jQuery, Lodash 등)를 사용하지 않고, 순수 Vanilla JS로만 구현한다.
-- **자바스크립트 코드 컨벤션을 지키면서 프로그래밍** 한다
-  - [https://google.github.io/styleguide/jsguide.html](https://google.github.io/styleguide/jsguide.html)
-  - [https://ui.toast.com/fe-guide/ko_CODING-CONVENSION/](https://ui.toast.com/fe-guide/ko_CODING-CONVENTION)
-- **indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용**한다.
-  - 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
-  - 힌트: indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메소드)를 분리하면 된다.
-- **함수(또는 메소드)가 한 가지 일만 하도록 최대한 작게** 만들어라.
-
-<br>
-
-## 📝 미션 저장소 및 진행 요구사항
-
-- 저장소를 fork/clone해 시작한다.
-- **기능을 구현하기 전에 README.md 파일에 구현할 기능 목록**을 정리해 추가한다.
-- **git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가**한다.
-- [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서 절차를 따라 미션을 제출한다.
-
-<br>
-
-## 🔗 참고 링크
-
-미션 진행이 어렵다면 아래 링크를 참고한다.
-
-- DOM
-  - [MDN DOM](https://developer.mozilla.org/ko/docs/Web/API/Document_Object_Model/%EC%86%8C%EA%B0%9C)
-- alert
-  - [MDN alert](https://developer.mozilla.org/ko/docs/Web/API/Window/alert)
-- javascript module
-  - [module](https://ko.javascript.info/modules-intro)
-- event
-  - [이벤트](https://ko.javascript.info/introduction-browser-events)
-  - [이벤트 위임](https://ko.javascript.info/event-delegation)
-
 ## 기능 목록
 
-
-  
 - BaseballGame class (Model)
   - init : class 생성시 초기화 함수 (구현)
   - randomComputerInputNumbers : 3자리 난수 뽑는 함수, _computerInputNumbers setter (구현)
@@ -113,3 +23,38 @@ play(123, 124); // '2스트라이크'
    - isNot3Digit : user input이 3자리 숫자가 아닌지 판별 (구현)
    - isInZero : user input에 0이 포함되어 있는지 판별 (구현)
    - isInduplicateDigit : user input에 중복된 숫자들이 섞여있는지 판별 (구현)
+   
+## 이슈 및 느낀 점
+
+- Browser CORS 에러
+  - 모듈시스템을 활용하고 싶었다. 그러나, local의 자원을 받아오는데도, CORS 에러가 생겨 자원을 불러오지 못했다.
+  - type을 module로 설정한 <script> 태그가 포함된 HTML 파일을 로컬에서 로드할 경우 자바스크립트 모듈 보안 요구사항에 따라 CORS 오류가 발생한다.
+  - 처음엔, http-server를 설치해 서버를 만들고 그 위에 올려서 해결했으나, 깔끔하게 느껴지지 않았다.
+  - 결국, js 번들러 webpack 설치 후 bundle.js를 만든 후 사용하여 해결하였다.
+  
+- 숫자야구 내부 기능과 DOM 관련 기능 간 강한 의존성(강결합)
+  - 짜다 보니, 처음엔 BaseballGame 클래스에 숫자 야구 내부 기능과 DOM을 관련 기능들이 섞여 있었다.
+  - 가독성이 떨어졌고 기능 간 강한 의존성이 발생해 난잡하게 느껴졌다.
+  - 일단 내부 기능, DOM 조작 기능별로 함수를 만들어 나누었다. 그런데도 많은 기능, 책임을 져 비대한 함수를 다시 최대한 나누었다.(모듈화)
+  - 그리고 class를 나누어 BaseballGame 클래스(Model 역할)에 숫자 야구 내부 기능 함수, BaseballGameView 클래스(View 역할)에 DOM 관련 기능 함수를 두었다.
+  - 가독성을 확보하고 의존성을 제거할 수 있었다.
+  
+- export default의 존재 이유
+  - 프로그래밍 요구사항에선, 예시로 주어진 src/index.js에 있는 클래스와 함수에 export default가 붙어있었다.
+  - 모듈시스템을 활용하라는 뜻, 나중에 채점할 때 test를 돌리기 위해서가 아닐까 추측을 해보았다.
+  - 그러나 프로그래밍 요구사항을 1차 적으로 충족시키는 것이 중요하기에, BaseballGame 클래스는 src/index.js에 두고 나머지 클래스와 유틸 등은 import 해서
+    쓰는 것으로 절충하였다.
+
+- 함수와 클래스 모듈화의 어려움
+  - 혼자 코딩할 땐 함수 모듈화를 잘 의식하지 못했다.
+  - 그러다 과제를 수행하며 관심사 분리, 단일책임 원칙 등 개발 원칙을 신경 쓰게 되었는데, 이를 의식하며 함수와 클래스를 잘 나누기 몹시 어려웠다.
+  - 그러나 관심사, 책임별로 잘 나누어 정리된 코드가 훨씬 좋다는 것을 깨달았다.
+  - 자연스럽게 의존성이 제거되고, 현재의 가독성, 미래의 유지보수성과 확장성을 좋게 만들기 때문이다.
+  
+- 코딩 컨벤션 적용, 읽기 좋은 코드를 만드는 것의 어려움
+  - 혼자 코딩할 땐 남이 읽기 좋은 코드를 만들기 쉽지 않았다.
+  - 제공된 코딩 컨벤션 가이드이 얼른 이해 가지 않아 여러 번 읽어가며 코딩 컨벤션을 적용했고 가독성이 높아졌다.
+  - 그런데도 여전히 안 읽히는 코드가 있었다. 짠다고 짰고 잘 작동하지만 다른 사람이 읽기 어려운 코드들이었다. 코딩 컨벤션이 다루지 않은 부분도 있었다.
+  - 내 코드를 주변 지인에게 계속 읽히고 피드백에 따라 리팩토링하였다. 내가 생각지 못한 개선점을 객관적인 관점에서 찾을 수 있었다. 
+  - 나만 아는 코드를 남들도 알 수 있는 코드로 만들 수 있었고 코드의 가독성이 더욱 좋아졌다. 
+
