@@ -11,7 +11,7 @@ export default class BaseballGame {
   init = () => {
     this.isEnded = false;
     this.computerInputNumbers = this.generateRandomNumbers();
-    console.log(this.computerInputNumbers);
+    // console.log(this.computerInputNumbers);
   };
 
   //* 랜덤 값 생성 메서드
@@ -43,7 +43,7 @@ export default class BaseballGame {
     return { strikeCount, ballCount };
   }
 
-  //* 게임 실행 메서드
+  //* 결과 반환 메서드
   play(computerInputNumbers, userInputNumbers) {
     let result = "";
     const { strikeCount, ballCount } = this.compareNumbers(
@@ -61,8 +61,8 @@ export default class BaseballGame {
     return result;
   }
 
-  //* 게임 결과 출력 메서드
-  renderResultHTML(userInputNumbers, result) {
+  //* 결과 출력 메서드
+  renderResult(userInputNumbers, result) {
     const resultBox = document.getElementById("result");
     const resultHTML = `<div>${userInputNumbers} <br><b>${result}</b></div><hr>`;
     const endingHTML = `<div>게임을 새로 시작하시겠습니까? <button id="game-restart-button" data-action="restart">게임 재시작</button></div>`;
@@ -70,26 +70,27 @@ export default class BaseballGame {
     if (this.isEnded) resultBox.innerHTML += endingHTML;
   }
 
-  //* 게임 결과 초기화 메서드
-  resetResultHTML() {
+  //* 결과 초기화 메서드
+  resetResult() {
     const resultBox = document.getElementById("result");
     resultBox.innerHTML = "";
   }
 
   //* 확인 버튼 핸들러 메서드
-  handleSubmitButton() {
+  toggleSubmitButton() {
     const submitButton = document.getElementById("submit");
     if (submitButton.disabled) submitButton.disabled = false;
     else submitButton.disabled = true; //종료시 비활성화
   }
 
-  //* 재시작 이벤트 메서드
-  restart() {
+  //* 재시작 메서드
+  restart = () => {
     const initGame = this.init();
-    const resetResult = this.resetResultHTML();
-    const toggleOnSubmit = this.handleSubmitButton();
-  }
+    const resetResult = this.resetResult();
+    const toggleOnSubmit = this.toggleSubmitButton();
+  };
 
+  //* 실행 메서드
   run = () => {
     const computerInputNumbers = this.computerInputNumbers; // 컴퓨터 입력값
     const userInputNumbers = this.getUserInputNumbers(); // 사용자 입력값
@@ -97,8 +98,8 @@ export default class BaseballGame {
     if (!isValid) return;
 
     const result = this.play(computerInputNumbers, userInputNumbers); // 게임 진행
-    const resultElement = this.renderResultHTML(userInputNumbers, result); // 게임 결과 출력
-    if (this.isEnded) this.handleSubmitButton();
+    const resultElement = this.renderResult(userInputNumbers, result); // 게임 결과 출력
+    if (this.isEnded) this.toggleSubmitButton();
   };
 
   //* 메뉴 클릭
