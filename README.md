@@ -46,8 +46,11 @@
 
 ## 💻 프로그래밍 실행 결과
 
-![baseball_result](https://user-images.githubusercontent.com/50367798/100166088-32473e00-2eff-11eb-9454-5d45e648b37e.jpg)
-
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em;">
+  <img src="https://i.ibb.co/gyK2sNF/baseball-game-demo-0.png" alt="baseball-game-demo-0" border="0" >
+  <img src="https://i.ibb.co/H7Mnvcj/baseball-game-demo-1.png" alt="baseball-game-demo-1" border="0" >
+  <img src="https://i.ibb.co/Yj60Kxn/baseball-game-demo-2.png" alt="baseball-game-demo-2" border="0" >
+</div>
 <br>
 
 ## ✅ 프로그래밍 요구사항
@@ -82,14 +85,14 @@ play(123, 124); // '2스트라이크'
 
 - [x] 스트라이크와 볼이 같이 있는 경우 볼을 먼저쓰고, 스트라이크를 쓴다.
 - [x] 사용자가 잘못된 입력 값을 작성한 경우 `alert`을 이용해 메시지를 보여주고, 재입력할 수 있게 한다.
-- [ ] 외부 라이브러리(jQuery, Lodash 등)를 사용하지 않고, 순수 Vanilla JS로만 구현한다.
-- [ ] **자바스크립트 코드 컨벤션을 지키면서 프로그래밍** 한다
+- [x] 외부 라이브러리(jQuery, Lodash 등)를 사용하지 않고, 순수 Vanilla JS로만 구현한다.
+- [x] **자바스크립트 코드 컨벤션을 지키면서 프로그래밍** 한다
   - [https://google.github.io/styleguide/jsguide.html](https://google.github.io/styleguide/jsguide.html)
   - [https://ui.toast.com/fe-guide/ko_CODING-CONVENSION/](https://ui.toast.com/fe-guide/ko_CODING-CONVENTION)
-- [ ] **indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용**한다.
+- [x] **indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용**한다.
   - 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
   - 힌트: indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메소드)를 분리하면 된다.
-- [ ] **함수(또는 메소드)가 한 가지 일만 하도록 최대한 작게** 만들어라.
+- [x] **함수(또는 메소드)가 한 가지 일만 하도록 최대한 작게** 만들어라.
 
 <br>
 
@@ -97,8 +100,8 @@ play(123, 124); // '2스트라이크'
 
 - [x] 저장소를 fork/clone해 시작한다.
 - [x] **기능을 구현하기 전에 README.md 파일에 구현할 기능 목록**을 정리해 추가한다.
-- [ ] **git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가**한다.
-- [ ] [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서 절차를 따라 미션을 제출한다.
+- [x] **git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가**한다.
+- [x] [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서 절차를 따라 미션을 제출한다.
 
 <br>
 
