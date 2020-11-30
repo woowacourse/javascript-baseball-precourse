@@ -1,17 +1,23 @@
+import {BASEBALL_GUIDE as BASEBALL} from './constants.js'
+
 export default function BaseballGame() {
   const submit = document.getElementById("submit");
   const userInput = document.getElementById("user-input");
   const resultWrapper = document.getElementById("result");
   const restartWrapper = document.getElementById("restart-wrapper");
   const restart = document.getElementById("restart");
+  const BASEBALL_COUNT = 3;
+  const RANDOM_NUM_FROM = 1;
+  const RANDOM_NUM_TO = 9;
+
   let inRound = false;
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     let ball = 0;
     let strike = 0;
 
-    for (let i = 0; i < 3 ; i++) {
-      if(computerInputNumbers[i] === userInputNumbers[i]) {
+    for ( let i = 0; i < BASEBALL_COUNT; i++ ) {
+      if (computerInputNumbers[i] === userInputNumbers[i]) {
         strike++;
       } else if ( computerInputNumbers.includes(userInputNumbers[i]) ) {
         ball++;
@@ -26,10 +32,10 @@ export default function BaseballGame() {
   this.judgeResult = function (strike, ball) {
     let result = "";
 
-    if (strike === 3) return "정답";
-    if (strike === 0 && ball === 0) return "낫싱";
-    if (ball !== 0) result += `${ball}볼 `;
-    if (strike !== 0) result += `${strike}스트라이크`
+    if (strike === BASEBALL_COUNT) return BASEBALL.ANSWER;
+    if (strike === 0 && ball === 0) return BASEBALL.NOTHING;
+    if (ball !== 0) result += `${ball}${BASEBALL.BALL} `;
+    if (strike !== 0) result += `${strike}${BASEBALL.STRIKE}`
 
     return result;
   };
@@ -37,7 +43,7 @@ export default function BaseballGame() {
   this.getComputerInputNumbers = function () {
     let computerNumbers = [];
 
-    while (computerNumbers.length < 3) {
+    while (computerNumbers.length < BASEBALL_COUNT) {
       let randomNumber = getRandomNumber();
 
       if ( !computerNumbers.includes(randomNumber) ) {
@@ -51,16 +57,16 @@ export default function BaseballGame() {
   this.checkInputError = function(userInputNumber) {
 
     if (userInputNumber.length !== 3) { 
-      alert("3개의 숫자를 작성해주세요!");
+      alert(BASEBALL.INPUT_THREE_NUMBERS);
       return ;
     } else if ( isDuplicationThreeDigits(userInputNumber) ){
-      alert("중복된 숫자를 입력하셨습니다!");
+      alert(BASEBALL.IS_DUPLICATION);
       return ;
     } else if ( userInputNumber.includes(0) ){
-      alert("1-9까지의 숫자만 입력해주세요!");
+      alert(BASEBALL.ONE_TO_NINE);
       return ;
     } else if ( isNaN( Number(userInputNumber) ) ){
-      alert("숫자만 적어주세요!");
+      alert(BASEBALL.ONLY_NUMBERS);
       return ;
     } 
     
@@ -74,12 +80,12 @@ export default function BaseballGame() {
     this.checkInputError(userInputNumber);
 
     if (inRound) {
-      this.startRoundFlow();
+      this.startRoundFlow(userInputNumber);
     }
-    
+
   };
 
-  this.startRoundFlow = function() {
+  this.startRoundFlow = function(userInputNumber) {
       let result = this.play(computerInputNumbers, userInputNumber);
       this.handleResultHTML(result);
   };
@@ -87,7 +93,7 @@ export default function BaseballGame() {
   this.handleResultHTML = function(result) {
 
     if (result === "정답") {
-      resultWrapper.innerHTML = `<strong>🎉 정답을 맞추셨습니다! 🎉</strong>`;
+      resultWrapper.innerHTML = `<strong>${BASEBALL.IS_ANSWER}</strong>`;
       restartWrapper.style.visibility = 'visible';
     } else {
       resultWrapper.innerHTML = `<p>${result}</p>`;
@@ -105,7 +111,7 @@ export default function BaseballGame() {
     console.log(computerInputNumbers);
   };
 
-  submit.addEventListener('click', () => this.getUserInput());
+  submit.addEventListener('click', () => this.setReadyForPlay());
   restart.addEventListener('click', () => this.handleRestart());
   let computerInputNumbers = this.getComputerInputNumbers();
   console.log(computerInputNumbers);

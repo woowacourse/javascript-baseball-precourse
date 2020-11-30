@@ -74,3 +74,5 @@ play(123, 124); // '2스트라이크'
 4) handleResultHTML(): Hint 또는 정답화면을 화면에 보여줄 함수 
 
 5) handleRestart(): 재시작 버튼을 눌렀을 경우 게임 초기상태로 다시 돌아가게 만드는 함수 
+
+6) src/constants.js : BaseBallGame에 필요한 모든 string 값 enum형식으로 저장해 놓은 파일
