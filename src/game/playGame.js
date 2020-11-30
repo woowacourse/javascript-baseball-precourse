@@ -27,7 +27,6 @@ export default function playGame(computerInputNumbers, play) {
       resetScreen();
       computerInputNumbers.length = 0;
       computerInputNumbers.push(...getRandomNumbers());
-      console.log(computerInputNumbers);
     }
   });
 }
