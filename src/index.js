@@ -33,7 +33,6 @@ export function validateInput(userInputNumbers) {
 export default function BaseballGame() {
   const submitButton = document.querySelector("#submit");
   this.computerNumbers = createRandomNums();
-  console.log(this.computerNumbers);
   this.balls = 0;
   this.strikes = 0;
   this.compareNumber = function (
@@ -85,9 +84,9 @@ export default function BaseballGame() {
     const newGamePropal = document.createElement("span");
     const retryButton = document.createElement("button");
 
-    retryButton.setAttribute("id", "game-restart-button");
     successNews.textContent = "🎉 정답을 맞추셨습니다 🎉";
     newGamePropal.innerHTML = "게임을 새로 시작하시겠습니까? ";
+    retryButton.setAttribute("id", "game-restart-button");
     retryButton.innerHTML = "게임 재시작";
 
     result.appendChild(successNews);
@@ -97,7 +96,6 @@ export default function BaseballGame() {
     retryButton.addEventListener("click", () => {
       // 재시작 버튼을 클릭하면 숫자를 재 셋팅
       this.computerNumbers = createRandomNums();
-      console.log(this.computerNumbers);
       userInput.value = "";
       // 화면들 모두 지워주기
       result.removeChild(successNews);
