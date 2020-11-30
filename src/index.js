@@ -10,10 +10,10 @@ export default function BaseballGame() {
     let ball = 0;
     let strike = 0;
 
-    for( let i=0 ; i < 3 ; i++ ) {
+    for(let i = 0; i < 3 ; i++) {
       if(computerInputNumbers[i] === userInputNumbers[i]) {
         strike++;
-      } else if (computerInputNumbers.includes(userInputNumbers[i])) {
+      } else if ( computerInputNumbers.includes(userInputNumbers[i]) ) {
         ball++;
       }
     }
@@ -50,10 +50,10 @@ export default function BaseballGame() {
 
   this.checkInputError = function(userInputNumber) {
 
-    if(userInputNumber.length != 3) { 
+    if(userInputNumber.length !== 3) { 
       alert("3개의 숫자를 작성해주세요!");
       return ;
-    } else if( isDuplication(userInputNumber) ){
+    } else if( isDuplicationThreeDigits(userInputNumber) ){
       alert("중복된 숫자를 입력하셨습니다!");
       return ;
     } else if( userInputNumber.includes(0) ){
@@ -69,6 +69,7 @@ export default function BaseballGame() {
 
   this.getUserInput = function() {
     let userInputNumber = userInput.value;
+
     userInput.value = "";
     this.checkInputError(userInputNumber);
     
@@ -80,11 +81,12 @@ export default function BaseballGame() {
   };
 
   this.handleResultHTML = function(result) {
+
     if(result === "정답") {
-      resultWrapper.innerHTML = `<strong>🎉 정답을 맞추셨습니다! 🎉</strong>`
+      resultWrapper.innerHTML = `<strong>🎉 정답을 맞추셨습니다! 🎉</strong>`;
       restartWrapper.style.visibility = 'visible';
     } else {
-      resultWrapper.innerHTML = `<p>${result}</p>`
+      resultWrapper.innerHTML = `<p>${result}</p>`;
     }
 
     inRound = false;
@@ -93,18 +95,19 @@ export default function BaseballGame() {
   this.handleRestart = function() {
     restartWrapper.style.visibility = 'hidden';
     userInput.value = "";
-    resultWrapper.innerHTML="";
+    resultWrapper.innerHTML = "";
+
     computerInputNumbers = this.getComputerInputNumbers();
     console.log(computerInputNumbers);
   }
 
-  submit.addEventListener('click',() => this.getUserInput());
+  submit.addEventListener('click', () => this.getUserInput());
   restart.addEventListener('click', () => this.handleRestart());
   let computerInputNumbers = this.getComputerInputNumbers();
   console.log(computerInputNumbers);
 }
 
-function isDuplication(numbers) {
+function isDuplicationThreeDigits(numbers) {
   return (
     numbers[0] === numbers[1] ||
     numbers[0] === numbers[2] ||
