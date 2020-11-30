@@ -1,4 +1,4 @@
-import BaseballGame from './BaseballGame.js';
+import BaseballGame from './baseball_game.js';
 
 const getRandNum = () => {
   let ret = '';
@@ -30,6 +30,8 @@ const addNewInput = (e) => {
   const app = e.target.closest('#app');
   app.append(hr);
   app.append(container);  
+
+  container.children[0].focus();
 };
 
 const endGame = (e) => {
@@ -43,14 +45,10 @@ const endGame = (e) => {
   e.target.closest('#app').append(container);
 }
 
-const onClickSubmitBtn = (e) => {
-  const idx = window.idx;
-  if(e.target.dataset.index !== idx.toString()) {
-    return;
-  }
-
-  const userInput = document.getElementById(`user-input-${idx}`);
+const submitNums = (e) => {
+  const userInput = e.target.parentNode.children[0]; // input
   const userInputValue = userInput.value;
+
   if(!BG.isValidInput(userInputValue)) {
     alert('올바른 입력이 아닙니다. 1~9사이의 수 3자리를 중복없이 입력해주세요.');
     userInput.value = '';
@@ -64,10 +62,32 @@ const onClickSubmitBtn = (e) => {
   if(result === '정답') {
     endGame(e);
   } else {
-    document.getElementById(`result-${idx}`).innerHTML = result;
+    // div id="result-{idx}"
+    e.target.parentNode.children[3].innerHTML = result;
     addNewInput(e);
   }
+};
+
+const onClickSubmitBtn = (e) => {
+  const idx = window.idx;
+  if(e.target.dataset.index !== idx.toString()) {
+    return;
+  }
+
+  submitNums(e);
 }
+
+const onPressEnter = (e) => {
+  const btnElm = e.target.parentNode.children[1]; // button
+  const idx = window.idx;
+  if(btnElm.dataset.index !== idx.toString()) {
+    return;
+  }
+
+  if(e.keyCode === 13) {
+    submitNums(e);
+  }
+};
 
 const onClickRestartBtn = (e) => {
   if(e.target.dataset.restart === undefined) {
@@ -101,3 +121,4 @@ window.idx = 1;
 
 app.addEventListener('click', onClickSubmitBtn);
 app.addEventListener('click', onClickRestartBtn);
+app.addEventListener('keyup', onPressEnter);
