@@ -4,7 +4,7 @@ export default function BaseballGame() {
   const inputText = document.querySelector('#user-input');
   const submitBtn = document.querySelector('#submit');
   const resultDiv = document.querySelector('#result');
-  const restartDiv = document.querySelector('#restart');
+  const resultMessage = document.createElement('p');
 
   submitBtn.addEventListener('click', () => this.integrateFunction(inputText.value));
   inputText.addEventListener('keydown', e => {
@@ -112,12 +112,9 @@ export default function BaseballGame() {
   // 재시작 기능
   this.restart = () => {
     this.setComputerNum();
-    resultDiv.innerHTML = '';
-    resultDiv.removeAttribute('style');
+    resultDiv.innerHTML = ''
+    resultMessage.removeAttribute('style');
     submitBtn.disabled = false;
-    while (restartDiv.hasChildNodes()) {
-      restartDiv.removeChild(restartDiv.firstChild);
-    }
   };
 
   // 재시작 버튼 생성
@@ -128,7 +125,7 @@ export default function BaseballGame() {
     restartMessage.id = 'restart-message';
     restartBtn.id = 'game-restart-button';
     restartBtn.innerHTML = '게임 재시작';
-    restartDiv.appendChild(restartMessage);
+    resultDiv.appendChild(restartMessage);
     restartMessage.appendChild(restartBtn);
     restartBtn.addEventListener('click', () => this.restart());
   };
@@ -136,12 +133,14 @@ export default function BaseballGame() {
   // 결과값 보여주기
   this.showResult = resultString => {
     if (resultString === '3스트라이크') {
-      resultDiv.style.fontWeight = 'bold';
-      resultDiv.innerHTML = '🎉정답을 맞추셨습니다🎉';
+      resultMessage.style.fontWeight = 'bold';
+      resultMessage.innerHTML = '🎉정답을 맞추셨습니다🎉';
+      resultDiv.appendChild(resultMessage);
       submitBtn.disabled = 'disabled';
       this.createRestartBtn();
     } else {
-      resultDiv.innerHTML = resultString;
+      resultMessage.innerHTML = resultString;
+      resultDiv.appendChild(resultMessage);
     }
   };
 
