@@ -65,9 +65,7 @@ export default class BaseballGame {
   renderResult(userInputNumbers, result) {
     const resultBox = document.getElementById("result");
     const resultHTML = `<p>입력: ${userInputNumbers}</p><p><b>${result}</b></p><hr>`;
-    const endingHTML = `<div>게임을 새로 시작하시겠습니까? <button id="game-restart-button" data-action="restart">게임 재시작</button></div>`;
     resultBox.innerHTML += resultHTML;
-    if (this.isEnded) resultBox.innerHTML += endingHTML;
   }
 
   //* 결과 초기화 메서드
@@ -82,6 +80,19 @@ export default class BaseballGame {
     if (submitButton.disabled) submitButton.disabled = false;
     else submitButton.disabled = true; //종료시 비활성화
   }
+
+  //* 재시작 버튼 생성 메서드
+  renderRestartButton() {
+    const resultBox = document.getElementById("result");
+    const restartButtonHTML = `<div>게임을 새로 시작하시겠습니까? <button id="game-restart-button" data-action="restart">게임 재시작</button></div>`;
+    resultBox.innerHTML += restartButtonHTML;
+  }
+
+  //* 종료 메서드
+  end = () => {
+    const toggleOffSubmit = this.toggleSubmitButton();
+    const renderRestartButton = this.renderRestartButton();
+  };
 
   //* 재시작 메서드
   restart = () => {
@@ -99,7 +110,7 @@ export default class BaseballGame {
 
     const result = this.play(computerInputNumbers, userInputNumbers); // 게임 진행
     const resultElement = this.renderResult(userInputNumbers, result); // 게임 결과 출력
-    if (this.isEnded) this.toggleSubmitButton();
+    if (this.isEnded) this.end(); //게임 종료
   };
 
   //* 메뉴 클릭
