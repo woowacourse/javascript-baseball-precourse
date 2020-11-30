@@ -1,4 +1,5 @@
 import { NUMBERS_LENGTH, NO_MATCH_TEXT, ALL_MATCH_TEXT } from '../constants/configuration.js'
+import { checkInputNumbers } from '../utils/validation.js';
 
 export default class BaseballGame {
   _calculatePoints(numbers1, numbers2) {
@@ -36,6 +37,12 @@ export default class BaseballGame {
     return resultString;
   }
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    let resultString = '';
+    if (checkInputNumbers(userInputNumbers)) {
+      const points = this._calculatePoints(computerInputNumbers, userInputNumbers);
+      resultString = this._getPlayResultString(points);
+    }
+
+    return resultString;
   }
 }
