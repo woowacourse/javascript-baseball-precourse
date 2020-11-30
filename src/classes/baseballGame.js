@@ -1,4 +1,4 @@
-import { NUMBERS_LENGTH } from '../constants/configuration.js'
+import { NUMBERS_LENGTH, NO_MATCH_TEXT, ALL_MATCH_TEXT } from '../constants/configuration.js'
 
 export default class BaseballGame {
   _calculatePoints(numbers1, numbers2) {
@@ -18,6 +18,22 @@ export default class BaseballGame {
     points.ballCount = nonStrikeNumbers.length - new Set(nonStrikeNumbers).size;
 
     return points;
+  }
+  _getPlayResultString({ strikeCount, ballCount }) {
+    let resultString;
+    if (strikeCount == 0 && ballCount == 0) {
+      resultString = NO_MATCH_TEXT;
+    } else if (strikeCount === NUMBERS_LENGTH) {
+      resultString = ALL_MATCH_TEXT;
+    } else if (strikeCount === 0) {
+      resultString = `${ballCount}볼`;
+    } else if (ballCount === 0) {
+      resultString = `${strikeCount}스트라이크`;
+    } else {
+      resultString = `${ballCount}볼 ${strikeCount}스트라이크`;
+    }
+
+    return resultString;
   }
   play(computerInputNumbers, userInputNumbers) {
     return "결과 값 String";
