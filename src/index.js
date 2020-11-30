@@ -12,6 +12,10 @@ export default function BaseballGame() {
 const updateResult = (result) => {};
 
 const validateInput = (input) => {
+  const inputArray = input.split("");
+  if (input.length !== 3 || input.includes("0") || isNaN(parseInt(input)))
+    return false;
+  if (new Set(inputArray).size !== inputArray.length) return false;
   return true;
 };
 
