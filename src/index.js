@@ -90,6 +90,7 @@ const getUserInput = () => {
   if (!validateInput(userInput)) {
     alert("세 자리의 중복 없는 숫자를 다시 입력해주세요.");
     document.getElementById("user-input").value = "";
+    document.getElementById("result").innerHTML = "";
   } else {
     let result = new BaseballGame().play(gameData.computerNumbers, userInput);
     console.log(result, gameData.computerNumbers);
