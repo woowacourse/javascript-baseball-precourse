@@ -12,7 +12,7 @@ export default function BaseballGame() {
   const RANDOM_NUM_TO = 9;
   let inRound = false;
 
-  this.play = function (computerInputNumbers, userInputNumbers) {
+  this.play = (computerInputNumbers, userInputNumbers) => {
     let ball = 0;
     let strike = 0;
 
@@ -29,7 +29,7 @@ export default function BaseballGame() {
     return result;
   }; 
 
-  this.judgeResult = function (strike, ball) {
+  this.judgeResult = (strike, ball) => {
     let result = "";
 
     if (strike === BASEBALL_COUNT) return BASEBALL.ANSWER;
@@ -40,7 +40,7 @@ export default function BaseballGame() {
     return result;
   };
 
-  this.getComputerInputNumbers = function () {
+  this.getComputerInputNumbers = () => {
     let computerNumbers = [];
 
     while (computerNumbers.length < BASEBALL_COUNT) {
@@ -54,7 +54,7 @@ export default function BaseballGame() {
     return computerNumbers.join("");
   };
 
-  this.checkInputError = function(userInputNumber) {
+  this.checkInputError = (userInputNumber) => {
 
     if (userInputNumber.length !== 3) { 
       alert(BASEBALL.INPUT_THREE_NUMBERS);
@@ -73,7 +73,7 @@ export default function BaseballGame() {
     inRound = true;
   };
 
-  this.setReadyForPlay = function() {
+  this.setReadyForPlay = () => {
     let userInputNumber = userInput.value;
 
     userInput.value = "";
@@ -85,12 +85,12 @@ export default function BaseballGame() {
 
   };
 
-  this.startRoundFlow = function(userInputNumber) {
+  this.startRoundFlow = (userInputNumber) => {
       let result = this.play(computerInputNumbers, userInputNumber);
       this.handleResultHTML(result);
   };
 
-  this.handleResultHTML = function(result) {
+  this.handleResultHTML = (result) => {
 
     if (result === "정답") {
       resultWrapper.innerHTML = `<strong>${BASEBALL.IS_ANSWER}</strong>`;
@@ -102,7 +102,7 @@ export default function BaseballGame() {
     inRound = false;
   };
   
-  this.handleRestart = function() {
+  this.handleRestart = () => {
     restartWrapper.style.visibility = 'hidden';
     userInput.value = "";
     resultWrapper.innerHTML = "";
@@ -110,9 +110,9 @@ export default function BaseballGame() {
     computerInputNumbers = this.getComputerInputNumbers();
     console.log(computerInputNumbers);
   };
-
-  submit.addEventListener('click', () => this.setReadyForPlay());
-  restart.addEventListener('click', () => this.handleRestart());
+  
+  submit.addEventListener('click', this.setReadyForPlay);
+  restart.addEventListener('click', this.handleRestart);
   let computerInputNumbers = this.getComputerInputNumbers();
   console.log(computerInputNumbers);
 }
