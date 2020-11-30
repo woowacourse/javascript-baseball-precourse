@@ -18,6 +18,7 @@ export default function BaseballGame() {
   const getResult = (text) => {
     if (text !== CORRECT) {
       $result.innerHTML = `<p>${text}</p>`;
+
       return;
     }
 
@@ -63,7 +64,10 @@ export default function BaseballGame() {
     const userInputNumbers = $userInput.value
       .split("")
       .map((value) => parseInt(value));
-    if (!isValidNumber(userInputNumbers)) return;
+
+    if (!isValidNumber(userInputNumbers)) {
+      return;
+    }
 
     const result = play(computerInputNumbers, userInputNumbers);
     getResult(result);

@@ -1,6 +1,6 @@
 export default function getRandomNums() {
   const NUMBER_LENGTH = 3;
-  const computerInputNumbers = new Array(NUMBER_LENGTH).fill(0);
+  const computerInputNumbers = [0, 0, 0];
 
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
