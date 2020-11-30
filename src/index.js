@@ -6,49 +6,54 @@ import {
   BALL_INDEX,
   ERROR_MESSAGE,
   ANSWER_MESSAGE,
-  NOTHING_MESSAGE,
+  NOTHING_MESSAGE
 } from "./constants.js";
 
 export default class BaseballGame {
   constructor() {
-    const computerInputNumbers = this.getRandomNumberList();
+    this.computerInputNumbers = this.getRandomNumberList();
 
-    this.clickSubmitButton(computerInputNumbers);
+    this.clickSubmitButton();
   }
 
-  clickSubmitButton(computerInputNumbers) {
-    const _submitButton = document.querySelector("#submit");
+  clickSubmitButton() {
+    const _submitElement = document.querySelector("#submit");
 
-    _submitButton.addEventListener(
-      "click",
-      () => {
-        this.startGame(computerInputNumbers);
-      },
-      false
-    );
+    _submitElement.addEventListener("click", () => {
+      this.startGame();
+    });
   }
 
-  startGame(computerInputNumbers) {
+  startGame() {
     const userInputNumbers = this.getUserInputNumberList();
 
-    this.printResult(computerInputNumbers, userInputNumbers);
-    this.restartGame();
+    this.printResult(userInputNumbers);
+    this.checkRestartGame();
   }
 
-  restartGame() {
+  checkRestartGame() {
     const _restartElement = document.querySelector("#game-restart-button");
 
     if (_restartElement !== null) {
-      _restartElement.addEventListener("click", location.reload.bind(location));
+      _restartElement.addEventListener("click", () => {
+        this.restartGame();
+      });
     }
   }
 
-  printResult(computerInputNumbers, userInputNumbers) {
+  restartGame() {
+    document.querySelector("#result").innerHTML = "";
+    document.querySelector("#user-input").value = "";
+
+    this.computerInputNumbers = this.getRandomNumberList();
+  }
+
+  printResult(userInputNumbers) {
     if (userInputNumbers !== undefined) {
       const _resultElement = document.querySelector("#result");
 
       _resultElement.innerHTML = this.play(
-        computerInputNumbers,
+        this.computerInputNumbers,
         userInputNumbers
       );
     }
