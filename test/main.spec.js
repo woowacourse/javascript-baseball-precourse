@@ -39,6 +39,11 @@ const userInputDescribe = () => {
       expect(userInput.isValidInput('111')).toBe(false);
       expect(userInput.isValidInput('133')).toBe(false);
     });
+
+    test('0이 포함된 수일 때 false', () => {
+      expect(userInput.isValidInput('102')).toBe(false);
+      expect(userInput.isValidInput('130')).toBe(false);
+    });
   });
 };
 
