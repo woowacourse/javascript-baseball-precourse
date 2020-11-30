@@ -4,9 +4,11 @@ const NUMBER_LENGTH = 3;
 
 export default function numberGenerator() {
   for (let i = 0; i < NUMBER_LENGTH; i++) {
+    const pickNumber = Math.floor(Math.random() * (numberArray.length - 1) + 1);
+    const selectedIndex = numberArray.indexOf(pickNumber);
     computerInputNumbers[i] =
-      Math.floor(Math.random() * numberArray.length) + 1;
-    numberArray.splice(numberArray.indexOf(computerInputNumbers[i], 1));
+      selectedIndex === -1 ? numberArray[0] : pickNumber;
+    numberArray.splice(numberArray.indexOf(computerInputNumbers[i]), 1);
   }
 
   return computerInputNumbers;
