@@ -64,7 +64,7 @@ export default class BaseballGame {
   //* 결과 출력 메서드
   renderResult(userInputNumbers, result) {
     const resultBox = document.getElementById("result");
-    const resultHTML = `<div>${userInputNumbers} <br><b>${result}</b></div><hr>`;
+    const resultHTML = `<p>입력: ${userInputNumbers}</p><p><b>${result}</b></p><hr>`;
     const endingHTML = `<div>게임을 새로 시작하시겠습니까? <button id="game-restart-button" data-action="restart">게임 재시작</button></div>`;
     resultBox.innerHTML += resultHTML;
     if (this.isEnded) resultBox.innerHTML += endingHTML;
