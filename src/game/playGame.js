@@ -25,8 +25,7 @@ export default function playGame(computerInputNumbers, play) {
   $result.addEventListener('click', ({ target }) => {
     if (target.id === 'game-restart-button') {
       resetScreen();
-      computerInputNumbers.length = 0;
-      computerInputNumbers.push(...getRandomNumbers());
+      computerInputNumbers = getRandomNumbers();
     }
   });
 }

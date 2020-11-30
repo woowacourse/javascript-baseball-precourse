@@ -5,7 +5,7 @@ export default function getUserInput() {
   const userInputNumbers = $userInput.value.split('').map((x) => Number(x));
 
   if (checkValidInput(userInputNumbers)) {
-    return userInputNumbers;
+    return Number(userInputNumbers.join(''));
   }
   return false;
 }

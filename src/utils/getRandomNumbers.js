@@ -10,5 +10,5 @@ export default function getRandomNumbers() {
   while ([...answer].length < 3) {
     answer.add(getRandomNumber());
   }
-  return [...answer];
+  return Number([...answer].join(''));
 }
