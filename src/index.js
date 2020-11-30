@@ -90,6 +90,12 @@ export default class BaseballGame {
 
   bindSubmitEvent = () => {
     document.querySelector("#submit").addEventListener("click", (e) => this.checkUserInput(this.$userInput.value));
+
+    this.$userInput.addEventListener("keyup", (e) => {
+      if (e.key === "Enter") {
+        this.checkUserInput(e.target.value);
+      }
+    });
   };
 
   isCorrectAnswer = ({ computerInputNumbers, userInputNumbers }) => {
