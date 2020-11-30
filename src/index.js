@@ -32,7 +32,22 @@ const compareNums = (computerNum, inputNum) => {
   else return `${ball}볼 ${strike}스트라이크`;
 };
 
-const updateResult = (result) => {};
+const resetResult = () => {};
+
+const updateResult = (result) => {
+  if (gameData.isSuccess) {
+    document.getElementById("result").innerHTML = `
+  <div><span>🎉</span> <strong>정답을 맞추셨습니다!</strong> <span>🎉</span></div>
+  <span>게임을 새로 시작하시겠습니까?</span>
+  <button id="game-restart-button">게임 재시작</button>
+  `;
+    resetResult();
+    init();
+  } else {
+    console.log(gameData.computerNumbers);
+    document.getElementById("result").innerHTML = result;
+  }
+};
 
 const validateInput = (input) => {
   const inputArray = input.split("");
