@@ -5,9 +5,30 @@ const gameData = {
 
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    return compareNums(computerInputNumbers, userInputNumbers);
   };
 }
+
+const findLocation = (target, nums) => {
+  return -1;
+};
+
+const compareNums = (computerNum, inputNum) => {
+  let ball = 0;
+  let strike = 0;
+  for (let i = 0; i <= inputNum.length; i++) {
+    let idx = findLocation(inputNum[i], computerNum);
+    if (idx === -1) continue;
+    else if (idx === i) strike++;
+    else ball++;
+  }
+
+  if (strike === 3 && ball === 0) gameData.isSuccess = true;
+  else if (strike === 0 && ball === 0) return "낫싱";
+  else if (strike !== 0 && ball === 0) return `${strike}스트라이크`;
+  else if (strike === 0 && ball !== 0) return `${ball}볼`;
+  else return `${ball}볼 ${strike}스트라이크`;
+};
 
 const updateResult = (result) => {};
 
