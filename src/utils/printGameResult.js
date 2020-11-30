@@ -15,8 +15,7 @@ export default function printGameResult(gameResult) {
   if (gameResult === '정답') {
     printCorrectAnswer($result);
     return true;
-  } else {
-    printInCorrectAnswer($result, gameResult);
-    return false;
   }
+  printInCorrectAnswer($result, gameResult);
+  return false;
 }
