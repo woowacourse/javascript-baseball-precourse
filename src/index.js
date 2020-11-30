@@ -1,18 +1,18 @@
-import numberGenerator from "./numberGenerator.js";
+import getRandomNums from "./randomNums.js";
 import isValidNumber from "./numberValidator.js";
 
 const $userInput = document.querySelector("#user-input");
 const $submitBtn = document.querySelector("#submit");
 const $result = document.querySelector("#result");
 
-let computerInputNumbers = new numberGenerator();
+let computerInputNumbers = getRandomNums();
 const CORRECT = "🎉 정답을 맞추셨습니다. 🎉";
 
 export default function BaseballGame() {
-  const restart = () => {
+  const onRestartHandler = () => {
     $userInput.value = "";
     $result.innerHTML = "";
-    computerInputNumbers = new numberGenerator();
+    computerInputNumbers = getRandomNums();
   };
 
   const getResult = (text) => {
@@ -26,7 +26,7 @@ export default function BaseballGame() {
       <button id="game-restart-button">게임 재시작</button>`;
 
     const $restart = $result.querySelector("#game-restart-button");
-    $restart.addEventListener("click", restart);
+    $restart.addEventListener("click", onRestartHandler);
   };
 
   const getHint = (computerInputNumbers, userInputNumbers) => {
@@ -59,7 +59,7 @@ export default function BaseballGame() {
       : getHint(computerInputNumbers, userInputNumbers);
   };
 
-  const handleUserInputSubmit = () => {
+  const onUserInputSubmitHandler = () => {
     const userInputNumbers = $userInput.value
       .split("")
       .map((value) => parseInt(value));
@@ -69,7 +69,7 @@ export default function BaseballGame() {
     getResult(result);
   };
 
-  $submitBtn.addEventListener("click", handleUserInputSubmit);
+  $submitBtn.addEventListener("click", onUserInputSubmitHandler);
 }
 
 new BaseballGame();
