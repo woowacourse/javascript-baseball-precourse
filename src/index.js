@@ -1,6 +1,4 @@
 export default function BaseballGame() {
-  this.computerInputNumbers;
-
   const inputText = document.querySelector('#user-input');
   const submitBtn = document.querySelector('#submit');
   const resultDiv = document.querySelector('#result');
@@ -30,13 +28,6 @@ export default function BaseballGame() {
   this.setComputerNum = () => {
     const computerNum = this.getRandomNumber();
     this.computerInputNumbers = computerNum.join('');
-  };
-
-  // 키보드 입력시
-  this.checkNumeric = e => {
-    if (e.keyCode < 49 || e.keyCode > 57) {
-      e.preventDefault();
-    }
   };
 
   // 키보드 입력이 숫자만 허용
