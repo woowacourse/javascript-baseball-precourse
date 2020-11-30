@@ -11,6 +11,14 @@ export default function BaseballGame() {
     return createBallStrikeMessage(ball, strike);
   };
   
+  // newGame
+  this.newGame = function() {
+    this.computer = createRandomNumber();
+    this.user = null;
+
+    clearResultMessage();
+  };
+
   // end
   this.end = function() {
     disableSubmitButton();
@@ -61,6 +69,8 @@ export default function BaseballGame() {
     this.newGame();
   };
 
+  // constructor
+  this.newGame();
 } // function BaseballGame() end
 
 // play
@@ -141,6 +151,25 @@ function clearResultMessage() {
   while (result.firstChild) {
     result.removeChild(result.firstChild);
   }
+}
+
+// checking errors
+function isCapableNumber(numArray) {
+  if (numArray.length !== 3) {
+    return false;
+  }
+  const numSet = new Set(numArray);
+  return (numSet.size === numArray.length) && !numSet.has(0);
+}
+
+function isWrongValue(number) {
+  if (isNaN(parseInt(number))) {
+    return true;
+  }
+  if (!isCapableNumber(splitNumbers(number))) {
+    return true;
+  }
+  return false;
 }
 
 new BaseballGame();
