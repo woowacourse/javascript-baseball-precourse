@@ -38,6 +38,29 @@ export default function BaseballGame() {
     if (this.computer == this.user) this.end();
   };
 
+  // resetButton
+  this.addResetButton = function() {
+    const result = document.getElementById('result');
+    const resetButton = this.createResetButton();
+    resetButton.addEventListener('click', (e) => {
+      this.resetButtonClickEvents(e.target);
+    });
+    result.appendChild(resetButton);
+  };
+
+  this.createResetButton = function() {
+    const resetButton = document.createElement('button');
+    resetButton.type = 'button';
+    resetButton.innerHTML = '게임 재시작';
+    resetButton.id = 'game-restart-button';
+    return resetButton;
+  };
+
+  this.resetButtonClickEvents = function() {
+    submitButton.disabled = false;
+    this.newGame();
+  };
+
 } // function BaseballGame() end
 
 // play
