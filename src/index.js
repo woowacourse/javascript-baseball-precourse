@@ -33,15 +33,45 @@ export function validateInput(userInputNumbers) {
 export default function BaseballGame() {
   const submitButton = document.querySelector("#submit");
   this.computerNumbers = createRandomNums();
-  // console.log(this.computerNumbers);
+  console.log(this.computerNumbers);
+  this.balls = 0;
+  this.strikes = 0;
+  this.compareNumber = function (
+    computerNumber,
+    userNumber,
+    computerIndex,
+    userIndex
+  ) {
+    if (computerNumber === userNumber) {
+      if (computerIndex === userIndex) {
+        this.strikes += 1;
+      } else {
+        this.balls += 1;
+      }
+    }
+  };
+
   this.play = function (computerInputNumbers, userInputNumbers) {
+    for (const [i, computerNumber] of computerInputNumbers
+      .split("")
+      .entries()) {
+      for (const [j, userNumber] of userInputNumbers.split("").entries()) {
+        this.compareNumber(computerNumber, userNumber, i, j);
+      }
+    }
+    console.log(this.balls, this.strikes);
+
     return "결과 값 String";
   };
 
   submitButton.addEventListener("click", () => {
     const userInput = document.querySelector("#user-input");
+    this.balls = 0;
+    this.strikes = 0;
+    userInput.focus();
 
     if (validateInput(userInput.value)) {
+      const gameResult = this.play(this.computerNumbers, userInput.value);
     } else {
       userInput.value = "";
       userInput.focus();
