@@ -9,6 +9,7 @@
   - getComputerInputNumbers : \_computerInputNumbers getter (구현)
   - countStrikeBall : 컴퓨터 입력 값, 사용자의 입력 값을 받아 일치 여부 판단하여 스트라이크 개수, 볼 개수 객체로 반환(구현)
   - play : 컴퓨터 입력 값, 사용자의 입력 값을 받아 스트라이크, 볼, 낫싱, 정답 관련 String 반환(구현)
+  
 - BaseballGameView class (View)
 
   - init : 생성자로 만든 userInputSubmitButton에 handleUserInputSubmit를 바인딩하여 이벤트 리스너 연결 (구현)
@@ -18,6 +19,7 @@
   - validUserInputNumbers : exception handling function들로 user input이 정상적인 입력인지 검증(구현)
   - handleUserInputSubmit : 입력한 숫자 제출 이벤트 핸들링 (구현)
   - handleReStartClick : 재시작 버튼 클릭 이벤트 핸들링 (구현)
+  
 - userinput exception handling function
 
   - isNumber : user input이 1~9까지의 숫자로 이루어져 있는가 판별 (구현)
@@ -28,11 +30,14 @@
 ## 이슈 및 느낀 점
 
 - Browser CORS 에러
+
   - 모듈시스템을 활용하고 싶었다. 그러나, local의 자원을 받아오는데도, CORS 에러가 생겨 자원을 불러오지 못했다.
   - type을 module로 설정한 <script> 태그가 포함된 HTML 파일을 로컬에서 로드할 경우 자바스크립트 모듈 보안 요구사항에 따라 CORS 오류가 발생한다.
   - 처음엔, http-server를 설치해 서버를 만들고 그 위에 올려서 해결했으나, 깔끔하게 느껴지지 않았다.
   - 결국, js 번들러 webpack 설치 후 bundle.js를 만든 후 사용하여 해결하였다.
+  
 - 숫자야구 내부 기능과 DOM 관련 기능 간 강한 의존성(강결합)
+  
   - 짜다 보니, 처음엔 BaseballGame 클래스에 숫자 야구 내부 기능과 DOM을 관련 기능들이 섞여 있었다.
   - 가독성이 떨어졌고 기능 간 강한 의존성이 발생해 난잡하게 느껴졌다.
   - 일단 내부 기능, DOM 조작 기능별로 함수를 만들어 나누었다. 그런데도 많은 기능, 책임을 져 비대한 함수를 다시 최대한 나누었다.(모듈화)
