@@ -10,6 +10,8 @@ export default function BaseballGame() {
   inputText.addEventListener('keydown', e => {
     if (e.keyCode === 13) {
       this.integrateFunction(inputText.value);
+    } else if (e.keyCode !== 8) {
+      this.checkNumeric(e);
     }
   });
 
@@ -29,6 +31,20 @@ export default function BaseballGame() {
     const computerNum = this.getRandomNumber();
     this.computerInputNumbers = computerNum.join('');
     console.log(this.computerInputNumbers);
+  };
+
+  // 키보드 입력시
+  this.checkNumeric = e => {
+    if (e.keyCode < 49 || e.keyCode > 57) {
+      e.preventDefault();
+    }
+  };
+
+  // 키보드 입력이 숫자만 허용
+  this.checkNumeric = e => {
+    if (e.keyCode < 49 || e.keyCode > 57) {
+      e.preventDefault();
+    }
   };
 
   // 중복 값이 있는지 확인
