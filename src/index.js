@@ -10,7 +10,9 @@ export default function BaseballGame() {
 }
 
 const findLocation = (target, nums) => {
-  return -1;
+  const numArray = nums.split("");
+  const idx = numArray.findIndex((num) => num === target);
+  return idx;
 };
 
 const compareNums = (computerNum, inputNum) => {
