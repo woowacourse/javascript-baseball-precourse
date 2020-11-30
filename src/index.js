@@ -5,8 +5,14 @@ export default function BaseballGame() {
   const $submitBtn = document.querySelector("button");
   const $result = document.querySelector("#result");
 
-  const computerInputNumbers = new numberGenerator();
+  let computerInputNumbers = new numberGenerator();
   const CORRECT = "🎉 정답을 맞추셨습니다. 🎉";
+
+  const restart = () => {
+    $userInput.value = "";
+    $result.innerHTML = "";
+    computerInputNumbers = new numberGenerator();
+  };
 
   const getResult = (text) => {
     if (text !== CORRECT) {
@@ -16,7 +22,10 @@ export default function BaseballGame() {
 
     $result.innerHTML = `<p><strong>${text}</strong></p>
       <span>게임을 새로 시작하겠습니까?</span>
-      <button id="restart">게임 재시작</button>`;
+      <button id="game-restart-button">게임 재시작</button>`;
+
+    const $restart = $result.querySelector("#game-restart-button");
+    $restart.addEventListener("click", restart);
   };
 
   const getHint = (computerInputNumbers, userInputNumbers) => {
@@ -32,7 +41,7 @@ export default function BaseballGame() {
       }
     });
 
-    if (strike === 0 && ball === 0) `낫싱`;
+    if (strike === 0 && ball === 0) hint = `낫싱`;
     else {
       hint =
         `${ball === 0 ? "" : `${ball}볼`} ` +
