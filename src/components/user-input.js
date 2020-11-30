@@ -39,11 +39,18 @@ class UserInput extends Component {
 
     return (
       !isNaN(inputNumber) &&
-      input.length === 3 &&
-      inputNumber >= MIN3DIGIT &&
-      input.indexOf('0') === -1 &&
+      this.is3DigitPositiveInteger(inputNumber) &&
+      !this.hasZero(input) &&
       !hasDuplicateCharacter(input)
     );
+  }
+
+  is3DigitPositiveInteger(number) {
+    return number.toString().length === 3 && number >= MIN3DIGIT;
+  }
+
+  hasZero(string) {
+    return string.indexOf('0') !== -1;
   }
 
   alertByCase = input => {
@@ -52,10 +59,10 @@ class UserInput extends Component {
     if (isNaN(inputNumber)) {
       errors.push(NAN_MESSAGE);
     } else {
-      if (input.indexOf('0') !== -1) {
+      if (this.hasZero(input)) {
         errors.push(HAS_ZERO_MESSAGE);
       }
-      if (input.length !== 3 || inputNumber < MIN3DIGIT) {
+      if (!this.is3DigitPositiveInteger(inputNumber)) {
         errors.push(WRONG_NUMBER_MESSAGE);
       }
       if (hasDuplicateCharacter(input)) {
