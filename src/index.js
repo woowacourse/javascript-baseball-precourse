@@ -70,12 +70,9 @@ export default class BaseballGame {
   renderResultHTML(userInputNumbers, result) {
     const resultBox = document.getElementById("result");
     const resultHTML = `<div>${userInputNumbers} <br><b>${result}</b></div><hr>`;
+    const endingHTML = `<div>게임을 새로 시작하시겠습니까? <button id="game-restart-button" data-action="restart">게임 재시작</button></div>`;
     resultBox.innerHTML += resultHTML;
-    if (this.isEnded) {
-      const endingHTML =
-        "게임을 새로 시작하시겠습니까? <button id='game-restart-button'>게임 재시작</button>";
-      resultBox.innerHTML += endingHTML;
-    }
+    if (this.isEnded) resultBox.innerHTML += endingHTML;
   }
 
   //* 게임 결과 초기화 메서드
@@ -91,18 +88,14 @@ export default class BaseballGame {
     else submitButton.disabled = true; //종료시 비활성화
   }
 
-  //* 재시작 버튼 핸들러 메서드
-  handleRestartButton() {
-    const restartButton = document.getElementById("game-restart-button");
-    if (restartButton) {
-      restartButton.addEventListener("click", this.handleSubmitButton);
-      restartButton.addEventListener("click", this.resetResultHTML);
-      restartButton.addEventListener("click", this.init);
-    }
+  //* 재시작 이벤트 메서드
+  restart() {
+    const initGame = this.init();
+    const resetResult = this.resetResultHTML();
+    const toggleOnSubmit = this.handleSubmitButton();
   }
 
-  //* 게임 조작 메서드
-  handle = () => {
+  run = () => {
     const computerInputNumbers = this.computerInputNumbers; // 컴퓨터 입력값
     const userInputNumbers = this.getUserInputNumbers(); // 사용자 입력값
     const isValid = validateUserInput(userInputNumbers); // 사용자 입력값 검사
@@ -110,16 +103,19 @@ export default class BaseballGame {
 
     const result = this.play(computerInputNumbers, userInputNumbers); // 게임 진행
     const resultElement = this.renderResultHTML(userInputNumbers, result); // 게임 결과 출력
-    if (this.isEnded) {
-      const handleSubmit = this.handleSubmitButton();
-      const handleRestart = this.handleRestartButton(this.init);
-    }
+    if (this.isEnded) this.handleSubmitButton();
+  };
+
+  //* 메뉴 클릭
+  onClick = (event) => {
+    const action = event.target.dataset.action;
+    if (action) this[action]();
   };
 }
 
 const initGame = () => {
   const game = new BaseballGame();
-  const submitButton = document.getElementById("submit");
-  submitButton.addEventListener("click", game.handle);
+  document.addEventListener("click", (event) => game.onClick(event));
 };
+
 initGame();
