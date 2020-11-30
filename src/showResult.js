@@ -22,9 +22,7 @@ function isThreeStrike(ball, strike) {
 }
 
 function isOnlyStrike(ball, strike) {
-    if (strike === 1 && ball === 0) {
-        return `${strike}스트라이크`;
-    } else if (strike === 2 && ball === 0) {
+    if ((strike === 1 && ball === 0) || (strike === 2 && ball === 0)) {
         return `${strike}스트라이크`;
     }
 }
