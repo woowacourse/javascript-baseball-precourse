@@ -13,6 +13,7 @@ export default class BaseballGameHandler {
   getUserInputNumbers() {
     const userInputNumbers = this.userInputBox.value;
     this.userInputBox.value = "";
+
     return userInputNumbers;
   }
 
@@ -22,7 +23,10 @@ export default class BaseballGameHandler {
       validateDigit(useInputNumbers, this.game.DIGITS) &&
       validateUnique(useInputNumbers) &&
       validateNumber(useInputNumbers);
-    if (!isValid) alert("입력값이 잘못되었습니다. 다시 입력해주세요 :)");
+    if (!isValid) {
+      alert("입력값이 잘못되었습니다. 다시 입력해주세요 :)");
+    }
+
     return isValid;
   }
 
@@ -31,6 +35,7 @@ export default class BaseballGameHandler {
     const resultHTML = `<p>입력: ${userInputNumbers}</p><p><b>${result}</b></p><hr>`;
     this.resultBox.innerHTML += resultHTML;
   }
+
   renderEnd() {
     const resultHTML = `<div>게임을 새로 시작하시겠습니까? <button id="game-restart-button" data-action="restart">게임 재시작</button></div>`;
     this.resultBox.innerHTML += resultHTML;
@@ -39,14 +44,19 @@ export default class BaseballGameHandler {
 
   // 실행 이벤트
   run = () => {
+    const computerInputNumbers = this.game.computerInputNumbers;
     const useInputNumbers = this.getUserInputNumbers();
     const isValid = this.validateUserInput(useInputNumbers);
-    if (!isValid) return;
+    if (!isValid) {
+      return;
+    }
 
-    const computerInputNumbers = this.game.computerInputNumbers;
     const result = this.game.play(computerInputNumbers, useInputNumbers);
+
     const renderResult = this.renderResult(useInputNumbers, result);
-    if (this.game.isEnded) this.renderEnd();
+    if (this.game.isEnded) {
+      this.renderEnd();
+    }
   };
 
   // 재시작 이벤트
@@ -59,7 +69,9 @@ export default class BaseballGameHandler {
   // 버튼 클릭
   onClick = (event) => {
     const action = event.target.dataset.action;
-    if (action) this[action]();
+    if (action) {
+      this[action]();
+    }
   };
 }
 

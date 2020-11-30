@@ -19,8 +19,11 @@ export default class BaseballGame {
     let randomNumbers = "";
     while (randomNumbers.length != this.DIGITS) {
       const number = String(Math.floor(Math.random() * 9) + 1);
-      if (!randomNumbers.includes(number)) randomNumbers += number;
+      if (!randomNumbers.includes(number)) {
+        randomNumbers += number;
+      }
     }
+
     return randomNumbers;
   }
 
@@ -29,27 +32,32 @@ export default class BaseballGame {
     let strikeCount = 0;
     let ballCount = 0;
     for (let i = 0; i < this.DIGITS; i++) {
-      if (computerInputNumbers[i] === userInputNumbers[i]) strikeCount++;
-      else if (computerInputNumbers.includes(userInputNumbers[i])) ballCount++;
+      if (computerInputNumbers[i] === userInputNumbers[i]) {
+        strikeCount++;
+      } else if (computerInputNumbers.includes(userInputNumbers[i])) {
+        ballCount++;
+      }
     }
+
     return { strikeCount, ballCount };
   }
 
   //* 결과 반환 메서드
   play(computerInputNumbers, userInputNumbers) {
-    let result = "";
     const { strikeCount, ballCount } = this.compareNumbers(
       computerInputNumbers,
       userInputNumbers
     );
-    if (strikeCount === this.DIGITS) {
-      this.isEnded = true;
-      result = "🎉 정답을 맞추셨습니다. 🎉";
-      return result;
-    }
+
+    let result = "";
     if (ballCount) result += `${ballCount}볼`;
     if (strikeCount) result += ` ${strikeCount}스트라이크`;
     if (!ballCount && !strikeCount) result = "낫싱";
+    if (strikeCount === this.DIGITS) {
+      this.isEnded = true;
+      result = "🎉 정답을 맞추셨습니다. 🎉";
+    }
+
     return result;
   }
 }
