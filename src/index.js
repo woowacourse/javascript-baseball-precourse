@@ -51,6 +51,21 @@ export default function BaseballGame() {
     }
   };
 
+  this.getResult = function () {
+    let gameResult = "";
+    if (this.balls) {
+      gameResult += `${this.balls}볼 `;
+    }
+    if (this.strikes) {
+      gameResult += `${this.strikes}스트라이크`;
+    }
+    if (!this.strikes && !this.balls) {
+      gameResult += "낫싱";
+    }
+
+    return gameResult;
+  };
+
   this.play = function (computerInputNumbers, userInputNumbers) {
     for (const [i, computerNumber] of computerInputNumbers
       .split("")
@@ -59,19 +74,19 @@ export default function BaseballGame() {
         this.compareNumber(computerNumber, userNumber, i, j);
       }
     }
-    console.log(this.balls, this.strikes);
-
-    return "결과 값 String";
+    return this.getResult();
   };
 
   submitButton.addEventListener("click", () => {
     const userInput = document.querySelector("#user-input");
+    const result = document.querySelector("#result");
     this.balls = 0;
     this.strikes = 0;
     userInput.focus();
 
     if (validateInput(userInput.value)) {
       const gameResult = this.play(this.computerNumbers, userInput.value);
+      result.textContent = gameResult;
     } else {
       userInput.value = "";
       userInput.focus();
