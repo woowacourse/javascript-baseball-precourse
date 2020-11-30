@@ -32,7 +32,14 @@ const compareNums = (computerNum, inputNum) => {
   else return `${ball}볼 ${strike}스트라이크`;
 };
 
-const resetResult = () => {};
+const resetResult = () => {
+  document
+    .getElementById("game-restart-button")
+    .addEventListener("click", function () {
+      document.getElementById("result").innerHTML = "";
+      document.getElementById("user-input").value = "";
+    });
+};
 
 const updateResult = (result) => {
   if (gameData.isSuccess) {
