@@ -1,11 +1,17 @@
 export default function BaseballGame() {
   const inputLen = 3; // 입력받는 숫자의 길이
-  var count = 1;
-  var submitButton = document.getElementById("submit");
-  var randomNum = getRandomNum();
+  const minValue = 123;
+  const maxValue = 987;
+  const randomNum = getRandomNum();
+  let count = 1;
+  let submitButton = document.getElementById("submit");
 
   // 각 자리의 스트라이크, 볼 카운트 측정
-  function checkEachCount(computerInputNumbers, userInputNumbers, compareIndex) {
+  function checkEachCount(
+    computerInputNumbers,
+    userInputNumbers,
+    compareIndex
+  ) {
     let i;
     let userInputNumber;
     let strikeCount = 0;
@@ -14,14 +20,17 @@ export default function BaseballGame() {
     computerInputNumbers = String(computerInputNumbers);
     userInputNumber = String(userInputNumbers[compareIndex]);
 
-    for (i=0; i < inputLen; i++) {
+    for (i = 0; i < inputLen; i++) {
       if (userInputNumber === computerInputNumbers[i] && compareIndex === i) {
         strikeCount++;
-      } else if (userInputNumber === computerInputNumbers[i] && compareIndex !== i) {
+      } else if (
+        userInputNumber === computerInputNumbers[i] &&
+        compareIndex !== i
+      ) {
         ballCount++;
       }
     }
-    
+
     return [strikeCount, ballCount];
   }
 
@@ -34,7 +43,7 @@ export default function BaseballGame() {
     let totalStrikeCount = 0;
     let totalBallCount = 0;
 
-    for (i=0; i < inputLen; i++) {
+    for (i = 0; i < inputLen; i++) {
       result = checkEachCount(computerInputNumbers, userInputNumbers, i);
       strikeCount = result[0];
       ballCount = result[1];
@@ -45,8 +54,8 @@ export default function BaseballGame() {
     return [totalStrikeCount, totalBallCount];
   }
 
-  // 숫자야구 결과를 리턴
-  function play (computerInputNumbers, userInputNumbers) {
+  // 숫자야구 결과를 string으로 리턴하는 함수
+  function play(computerInputNumbers, userInputNumbers) {
     let totalStrikeCount;
     let totalBallCount;
     let answer;
@@ -67,14 +76,14 @@ export default function BaseballGame() {
     }
 
     return result;
-  };
+  }
 
   // 입력받은 숫자의 중복요소를 확인
   function checkEachInput(index, userInputNumbers) {
     let i;
     let result = true;
-    
-    for (i=0; i < inputLen; i++) {
+
+    for (i = 0; i < inputLen; i++) {
       if (i !== index && userInputNumbers[index] === userInputNumbers[i]) {
         result = false;
         break;
@@ -86,16 +95,24 @@ export default function BaseballGame() {
   // 입력받은 값이 조건에 맞는지 확인
   function checkRightInput(userInputNumbers) {
     let i;
-    if (Number(userInputNumbers) === NaN) { // 숫자 외의 입력이 들어온 경우
+    let numUserInput = Number(userInputNumbers);
+
+    // 숫자 외의 입력이 들어온 경우
+    if (
+      numUserInput === NaN ||
+      numUserInput < minValue ||
+      maxValue < numUserInput
+    ) {
       return false;
     }
 
     // 입력 길이가 다른 경우, 특히 '+78'과 같은 입력은 Number로 인식되므로 String을 해주어 길이를 체크한다.
-    if (String(Number(userInputNumbers)).length !== inputLen) {
+    if (String(numUserInput).length !== inputLen) {
       return false;
     }
 
-    for (i=0; i < inputLen; i++) { // 중복 숫자 확인
+    // 중복 숫자 확인
+    for (i = 0; i < inputLen; i++) {
       if (!checkEachInput(i, userInputNumbers)) {
         return false;
       }
@@ -106,29 +123,35 @@ export default function BaseballGame() {
 
   // appendchild를 위한 새로운 Element에 id와 text append
   function makeElement(element, id, text) {
-    var newElement = document.createElement(element);
-    var newElementText = document.createTextNode(text);
+    const newElement = document.createElement(element);
+    const newElementText = document.createTextNode(text);
+
+    // 특정 element에 대한 예외처리
     if (element === "input") {
       newElement.type = "text";
     } else if (element === "hr") {
-      newElement.style = "width: 200px";
+      newElement.style = "width: 225px; margin-bottom: 20px;";
       newElement.align = "left";
     }
+
+    // id가 주어진 경우
     if (id !== "") {
       newElement.id = id;
     }
+
     newElement.appendChild(newElementText);
 
     return newElement;
   }
 
-  function onRestart() { // 게임 재시작
+  // 게임 재시작
+  function onRestart() {
     window.location.reload(); // 새로고침으로 재시작
   }
 
   // 컴퓨터측 random 번호 생성
   function getRandomNum() {
-    var number = [];
+    let number = [];
 
     number[0] = Math.floor(Math.random() * 9) + 1;
     do {
@@ -137,31 +160,39 @@ export default function BaseballGame() {
     do {
       number[2] = Math.floor(Math.random() * 9) + 1;
     } while (number[2] === number[1] || number[2] === number[0]);
-    
+
     return String(number[0]) + String(number[1]) + String(number[2]);
   }
 
   // 사용자가 '확인'을 클릭했을 시 실행되는 함수
   function onSubmit() {
     const appId = document.getElementById("app");
-    const userInputNumbers = document.getElementById('user-input').value;
+    const userInputNumbers = document.getElementById("user-input").value;
 
     if (checkRightInput(userInputNumbers)) {
       const resultId = document.getElementById("result");
-      let result = play(randomNum, userInputNumbers);
+      const result = play(randomNum, userInputNumbers);
 
+      // 정답을 맞춘 경우
       if (result === "3스트라이크") {
-        resultId.appendChild(makeElement("h3", "correct", "🎉정답을 맞추셨습니다!🎉"));
-        resultId.appendChild(makeElement("span", "ask", "게임을 새로 시작하시겠습니까? "));
-        resultId.appendChild(makeElement("button", "game-restart-button", "게임 재시작"));
+        resultId.appendChild(
+          makeElement("h3", "correct", "🎉정답을 맞추셨습니다!🎉")
+        );
+        resultId.appendChild(
+          makeElement("span", "ask", "게임을 새로 시작하시겠습니까? ")
+        );
+        resultId.appendChild(
+          makeElement("button", "game-restart-button", "게임 재시작")
+        );
         const reStartButton = document.getElementById("game-restart-button");
         reStartButton.addEventListener("click", onRestart);
       } else {
+        // 정답을 틀린 경우, html에 새로운 input과 button 추가
         resultId.appendChild(makeElement("h3", "", `${result}`));
-        resultId.appendChild(makeElement("hr", "", ""));
-        document.getElementById('user-input').id = `user-input${count}`;
+        resultId.appendChild(makeElement("hr", "line", ""));
+        document.getElementById("user-input").id = `user-input${count}`;
         resultId.id = `result${count}`;
-        document.getElementById('submit').id = `submit${count}`;
+        document.getElementById("submit").id = `submit${count}`;
         count++;
         appId.appendChild(makeElement("input", "user-input", ""));
         appId.appendChild(makeElement("button", "submit", "확인"));
@@ -171,18 +202,12 @@ export default function BaseballGame() {
         submitButton.addEventListener("click", onSubmit);
       }
     } else {
+      // 조건에 맞지 않은 입력이 들어온 경우
       alert(`1~9까지의 수를 중복없이 ${inputLen}개를 작성해주세요!`);
     }
   }
 
   submitButton.addEventListener("click", onSubmit);
-
 }
-
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
 
 new BaseballGame();
