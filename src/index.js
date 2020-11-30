@@ -11,7 +11,15 @@ export default function BaseballGame() {
 
 const getUserInput = () => {};
 
-const makeComputerInput = () => {};
+const makeComputerInput = () => {
+  const nums = [];
+  let digit = Math.floor(Math.random() * 10);
+  for (let i = 0; i < 3; i++) {
+    while (nums.includes(digit)) digit = Math.floor(Math.random() * 10);
+    nums.push(digit);
+  }
+  return nums.join("");
+};
 
 const init = () => {
   gameData.isSuccess = false;
