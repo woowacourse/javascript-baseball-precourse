@@ -44,7 +44,7 @@ export default function BaseballGame() {
         computerNumbers.push(randomNumber)
       }
     }
-
+    
     return computerNumbers.join("");
   };
 
