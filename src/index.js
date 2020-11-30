@@ -1,7 +1,6 @@
 export default class BaseballGame {
   constructor() {
     this.answerNumbers = this.makeAnswerNumbers();
-    this.userInputNumbers = [];
 
     this.bindSubmitEvent();
   }
@@ -20,8 +19,8 @@ export default class BaseballGame {
     return result;
   };
 
-  setUserInputNumbers = (inputNumber) => {
-    this.userInputNumbers = inputNumber.split("").map((numStr) => parseInt(numStr));
+  parseNumberToArray = (inputNumber) => {
+    return inputNumber.split("").map((numStr) => parseInt(numStr));
   };
 
   isNumber = (item) => {
@@ -32,14 +31,14 @@ export default class BaseballGame {
     return true;
   };
 
-  isIncludeZero = () => {
-    return this.userInputNumbers.includes(0);
+  isIncludeZero = (userInputNumbers) => {
+    return userInputNumbers.includes(0);
   };
 
-  isDuplicate = () => {
-    const setNumbers = new Set(this.userInputNumbers);
+  isDuplicate = (userInputNumbers) => {
+    const setNumbers = new Set(userInputNumbers);
 
-    if (this.userInputNumbers.length !== setNumbers.size) {
+    if (userInputNumbers.length !== setNumbers.size) {
       return true;
     }
 
@@ -77,15 +76,15 @@ export default class BaseballGame {
       return;
     }
 
-    this.setUserInputNumbers(userInput);
+    const userInputNumbers = this.parseNumberToArray(userInput);
 
-    if (this.isIncludeZero() || this.isDuplicate()) {
+    if (this.isIncludeZero(userInputNumbers) || this.isDuplicate(userInputNumbers)) {
       alert(alertMessage);
       this.resetInput();
       return;
     }
 
-    this.renderResult(this.play(this.answerNumbers, this.userInputNumbers));
+    this.renderResult(this.play(this.answerNumbers, userInputNumbers));
   };
 
   bindSubmitEvent = () => {
