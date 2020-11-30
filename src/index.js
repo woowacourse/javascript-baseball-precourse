@@ -1,3 +1,4 @@
+import startGame from './game/startGame.js';
 import getUserInput from './input/getUserInput.js';
 import getGameResult from './game/getGameResult.js';
 import printGameResult from './utils/printGameResult.js';
@@ -16,6 +17,7 @@ function restartGame() {
 }
 
 export default function BaseballGame() {
+  // startGame();
   const $submit = document.querySelector('#submit');
   const computerInputNumbers = getRandomNumbers();
 
@@ -30,15 +32,14 @@ export default function BaseballGame() {
     return getGameResult(computerInputNumbers, userInputNumbers);
   };
 
-  $submit.addEventListener('click', () => {
+  $submit.addEventListener('click', ({ target }) => {
     const userInputNumbers = getUserInput();
 
     if (userInputNumbers) {
       const gameResult = this.play(computerInputNumbers, userInputNumbers);
       done = printGameResult(gameResult);
     }
-
-    if (done) {
+    if (done && target.id === 'game-restart-button') {
       done = false;
       computerInputNumbers.length = 0;
       restartGame();
