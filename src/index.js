@@ -115,6 +115,8 @@ export default function BaseballGame() {
     resultDiv.innerHTML = ''
     resultMessage.removeAttribute('style');
     submitBtn.disabled = false;
+    inputText.value = '';
+    inputText.focus();
   };
 
   // 재시작 버튼 생성
