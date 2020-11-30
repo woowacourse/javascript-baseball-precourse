@@ -100,6 +100,7 @@ play(123, 124); // '2스트라이크'
   - play : 컴퓨터 입력 값, 사용자의 입력 값을 받아 스트라이크, 볼, 낫싱, 정답 관련 String 반환(구현)
   
 - BaseballGameView class (View)
+   - init : 생성자로 만든 userInputSubmitButton에 handleUserInputSubmit를 바인딩하여 이벤트 리스너 연결 (구현)
    - renderResult : 게임 결과를 나타내는 DOM 생성, 렌더 (구현)
    - cleanResult : 게임 결과를 나타내는 DOM 소거 (구현)
    - resetInputNumbers : user input 입력 칸 초기화 (구현)
