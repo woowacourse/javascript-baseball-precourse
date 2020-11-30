@@ -1,13 +1,14 @@
 import numberGenerator from "./numberGenerator.js";
+import isValidNumber from "./numberValidator.js";
+
+const $userInput = document.querySelector("#user-input");
+const $submitBtn = document.querySelector("button");
+const $result = document.querySelector("#result");
+
+let computerInputNumbers = new numberGenerator();
+const CORRECT = "🎉 정답을 맞추셨습니다. 🎉";
 
 export default function BaseballGame() {
-  const $userInput = document.querySelector("#user-input");
-  const $submitBtn = document.querySelector("button");
-  const $result = document.querySelector("#result");
-
-  let computerInputNumbers = new numberGenerator();
-  const CORRECT = "🎉 정답을 맞추셨습니다. 🎉";
-
   const restart = () => {
     $userInput.value = "";
     $result.innerHTML = "";
@@ -29,7 +30,7 @@ export default function BaseballGame() {
   };
 
   const getHint = (computerInputNumbers, userInputNumbers) => {
-    let hint = "";
+    let hint;
     let strike = 0;
     let ball = 0;
 
@@ -61,33 +62,7 @@ export default function BaseballGame() {
     return answer;
   };
 
-  const hasSameNumber = (numberArray) => {
-    const sameIndex = numberArray.filter(
-      (value, index) => value === numberArray[index + 1]
-    );
-    return sameIndex.length !== 0;
-  };
-
-  const isValidNumber = (numberArray) => {
-    if (hasSameNumber(numberArray)) {
-      alert("서로 다른 숫자를 입력해주세요");
-      return false;
-    }
-
-    if (numberArray.indexOf("0") !== -1) {
-      alert("1부터 9까지의 숫자 중에서 입력해주세요");
-      return false;
-    }
-
-    if (numberArray.length !== 3) {
-      alert("숫자 3개를 입력해주세요");
-      return false;
-    }
-
-    return true;
-  };
-
-  const handleUserInputSubmit = (e) => {
+  const handleUserInputSubmit = () => {
     let userInputNumbers = null;
 
     const currentInputNumber = $userInput.value.split("");
