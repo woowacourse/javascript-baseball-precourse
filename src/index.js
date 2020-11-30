@@ -1,5 +1,6 @@
 export default class BaseballGame {
   constructor() {
+    this.NUMBERS_LENGTH = 3;
     this.computerRandomNumbers;
     this.getComputerRandomNumbers();
     this.addClickEventListener();
@@ -10,7 +11,7 @@ export default class BaseballGame {
     // 볼과 스트라이크 수를 담는 배열
     let count = [0, 0];
     for(let i = 0; i < length; i++) {
-      let position = userInputNumbers.indexOf(computerInputNumbers[i]);
+      const position = userInputNumbers.indexOf(computerInputNumbers[i]);
       if(position > -1) {
         const ballOrStrike = position === i ? 1 : 0;
         count[ballOrStrike]++;
@@ -18,7 +19,7 @@ export default class BaseballGame {
     }
     return count;
   }
-  //볼과 스트라이크의 횟수에 따라 결과값을 설정하는 함수
+  // 볼과 스트라이크의 횟수에 따라 결과값을 설정하는 함수
   getResult(count) {
     let result = '';
     if(count[0] > 0) {
@@ -46,8 +47,8 @@ export default class BaseballGame {
   // 3개의 랜덤 숫자를 생성하는 함수
   getComputerRandomNumbers() {
     let result = '';
-    while(result.length < 3) {
-      const tempNum = Math.floor(Math.random() * (10 - 1)) + 1;
+    while(result.length < this.NUMBERS_LENGTH) {
+      const tempNum = Math.floor(Math.random() * 9) + 1;
       if(!result.includes(tempNum)) {
         result += tempNum;
       }
@@ -66,17 +67,19 @@ export default class BaseballGame {
     submit.setAttribute('id', `submit`);
     result.setAttribute('id', `result`);
     submit.append("확인");
+    submit.style.marginLeft = '6px';
     resultText.append("📄 결과");
     gameResult.append(userInput, submit, resultText, result);
     this.addClickEventListener();
   }
-  //게임을 재시작하기 위해서 결과들을 모두 갱신하는 함수
+  // 게임을 재시작하기 위해서 결과들을 모두 초기화하는 함수
   gameRestart() {
     const playResult = document.getElementById('game-result');
     playResult.innerHTML = "";
     this.addGameElements();
     this.getComputerRandomNumbers();
   }
+  // 기존 엘리먼트들의 id속성값을 제거하는 함수
   removeElementsAttribute() {
     const userInput = document.getElementById('user-input');
     const submit = document.getElementById('submit');
@@ -86,12 +89,12 @@ export default class BaseballGame {
     submit.removeAttribute('id');
     result.removeAttribute('id'); 
   }
-  //정답을 못맞췄을때 element들을 재생성하는 함수
+  // 정답을 못 맞췄을때 실행되는 함수
   wrongResult() {
     this.removeElementsAttribute();
     this.addGameElements();
   }
-  //정답을 맞췄을때 element들을 새로 생성하는 함수
+  // 정답을 맞췄을때 엘리먼트들을 새로 생성하는 함수
   correctResult(result) {
     result.innerHTML = `<p><strong>🎉정답을 맞추셨습니다!🎉</strong></p>
                         <span>게임을 새로 시작하시겠습니까?</span>
@@ -111,15 +114,32 @@ export default class BaseballGame {
     }
   }
   // 사용자의 입력값이 조건에 맞는지 확인하는 함수
-  checkUserInputNumbers() {
-    const userInputNumbers = document.getElementById(`user-input`).value;
+  isNumberValid(userInputNumbers) {
+    let isValid = true;
+    const length = userInputNumbers.length;
     const temp = new Set(userInputNumbers);
-    if(userInputNumbers.length != 3 || userInputNumbers.length !== temp.size) {
-      alert('1~9까지의 수를 중복없이 3개를 입력해 주세요😊');
-      document.getElementById(`user-input`).value = '';
+    if(length != this.NUMBERS_LENGTH || length != temp.size) {
+      isValid = false;
+    }
+    for(let i = 0 ; i < this.NUMBERS_LENGTH; i++) {
+      const elem = userInputNumbers[i];
+      if(isNaN(elem) || elem == 0) {
+        isValid = false;
+        break;
+      }
+    }
+    return isValid;
+  }
+  // 사용자의 입력값에 따라 알림창을 띄우거나 게임을 진행하는 함수
+  checkUserInputNumbers() {
+    const userInput = document.getElementById(`user-input`);
+    const userInputNumbers = userInput.value;
+    if(!this.isNumberValid(userInputNumbers)) {
+      alert('1~9까지의 수를 중복없이 3개만 입력해 주세요😊');
+      userInput.value = '';
     }
     else { 
-      console.log(this.computerRandomNumbers, userInputNumbers);
+      console.log(this.computerRandomNumbers);
       this.printResult(this.play(this.computerRandomNumbers, userInputNumbers));
     }
   }
