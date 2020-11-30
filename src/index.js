@@ -50,21 +50,21 @@ export default function BaseballGame() {
 
   // 규칙에 맞는 값인지 확인
   this.validtion = userInput => {
+    const isBlank = inputText.value === '';
     const isNotThree = userInput.length !== 3;
-    const isNotDigit = parseInt(userInput) != userInput;
-    const hasZero = userInput.includes('0');
     const isDuplicate = this.checkDuplicate(userInput);
     let err = '';
 
-    isNotThree ? (err += '숫자 수, ') : null;
-    isNotDigit ? (err += '숫자아닌 값, ') : null;
-    hasZero ? (err += '0 포함, ') : null;
-    isDuplicate ? (err += '중복된 값, ') : null;
-
-    inputText.value = '';
+    if (isBlank) {
+      err += '빈 값, ';
+    } else {
+      isNotThree ? (err += '숫자 수, ') : null;
+      isDuplicate ? (err += '중복된 값, ') : null;
+      inputText.value = '';
+    }
     inputText.focus();
 
-    if (isNotThree || isNotDigit || hasZero || isDuplicate) {
+    if (isBlank || isNotThree || isDuplicate) {
       alert(`입력 값이 규칙에 맞지 않습니다. 다시 입력해주세요.\n(${err.slice(0, -2)})`);
       return false;
     } else {
@@ -102,7 +102,7 @@ export default function BaseballGame() {
   // 재시작 기능
   this.restart = () => {
     this.setComputerNum();
-    resultDiv.innerHTML = ''
+    resultDiv.innerHTML = '';
     resultMessage.removeAttribute('style');
     submitBtn.disabled = false;
     inputText.value = '';
