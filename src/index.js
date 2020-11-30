@@ -2,7 +2,7 @@ import numberGenerator from "./numberGenerator.js";
 import isValidNumber from "./numberValidator.js";
 
 const $userInput = document.querySelector("#user-input");
-const $submitBtn = document.querySelector("button");
+const $submitBtn = document.querySelector("#submit");
 const $result = document.querySelector("#result");
 
 let computerInputNumbers = new numberGenerator();

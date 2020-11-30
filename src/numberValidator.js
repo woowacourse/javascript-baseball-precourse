@@ -16,7 +16,7 @@ export default function isValidNumber(numberArray) {
     return false;
   }
 
-  if (numberArray.indexOf("0") !== -1) {
+  if (numberArray.indexOf(0) !== -1) {
     alert("1부터 9까지의 숫자 중에서 입력해주세요");
     return false;
   }
