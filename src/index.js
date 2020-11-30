@@ -14,7 +14,7 @@ export default class BaseballGame {
     this.NUMBER_DIGITS = 3;
     this.roundData = [];
     this.answer = this.generateAnswer();
-    console.log(`컴퓨터의 랜덤값: ${this.answer}`);
+    // console.log(`컴퓨터의 랜덤값: ${this.answer}`);
   }
 
   generateAnswer() {
@@ -75,12 +75,12 @@ export default class BaseballGame {
 
   onClickSubmitButton() {
     const userInput = this.$userInput.value;
-    console.log(`유저의 입력값: ${userInput}`);
+    // console.log(`유저의 입력값: ${userInput}`);
 
     if (this.isValid(userInput)) {
       const userInputNumbers = Number(userInput);
       const playResult = this.play(this.answer, userInputNumbers);
-      console.log(`힌트: ${playResult}`);
+      // console.log(`힌트: ${playResult}`);
 
       const isUserFoundAnswer = this.answer === userInputNumbers;
       this.$userInput.disabled = isUserFoundAnswer;
@@ -103,7 +103,7 @@ export default class BaseballGame {
     this.$userInput.disabled = false;
     this.setState([]);
     this.answer = this.generateAnswer();
-    console.log(`컴퓨터의 랜덤값: ${this.answer}`);
+    // console.log(`컴퓨터의 랜덤값: ${this.answer}`);
 
     this.$userInput.focus();  
   }
