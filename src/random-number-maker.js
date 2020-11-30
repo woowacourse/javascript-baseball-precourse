@@ -5,7 +5,7 @@ export default function randomNumberMaker(randomNumberLength) {
   let randomNumberArray = [];
 
   while (randomNumberArray.length < randomNumberLength) {
-    let randomNumber = Math.floor((Math.random() * range) + minNum);
+    let randomNumber = Math.floor(Math.random() * range + minNum);
 
     if (!randomNumberArray.includes(randomNumber)) {
       randomNumberArray.push(randomNumber);
