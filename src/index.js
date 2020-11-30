@@ -30,7 +30,6 @@ export default function BaseballGame() {
   this.setComputerNum = () => {
     const computerNum = this.getRandomNumber();
     this.computerInputNumbers = computerNum.join('');
-    console.log(this.computerInputNumbers);
   };
 
   // 키보드 입력시
