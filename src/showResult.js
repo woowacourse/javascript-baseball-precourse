@@ -6,10 +6,13 @@ export default function showResult(ball, strike) {
         ballAndstrike,
         noBallNoStrike,
     ];
-    const everyResult = resultFunctions.map((func) => func(ball, strike));
-    const getResult = everyResult.filter((result) => result !== undefined);
 
-    return getResult;
+    const result = resultFunctions
+        .map((func) => func(ball, strike))
+        .filter((result) => result !== undefined)
+        .toString();
+
+    return result;
 }
 
 function isThreeStrike(ball, strike) {

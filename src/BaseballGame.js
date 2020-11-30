@@ -5,7 +5,7 @@ export default function BaseballGame() {
         let strike = 0;
         let ball = 0;
         for (let i = 0; i < userInputNumbers.length; i++) {
-            if (Number(userInputNumbers[i]) === computerInputNumbers[i]) {
+            if (computerInputNumbers[i] === Number(userInputNumbers[i])) {
                 strike += 1;
             } else if (
                 computerInputNumbers.includes(Number(userInputNumbers[i]))
