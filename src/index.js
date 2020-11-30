@@ -11,6 +11,7 @@ export default class BaseballGame {
   init = () => {
     this.isEnded = false;
     this.computerInputNumbers = this.generateRandomNumbers();
+    console.log(this.computerInputNumbers);
   };
 
   //* 랜덤 값 생성 메서드
@@ -40,12 +41,6 @@ export default class BaseballGame {
       else if (computerInputNumbers.includes(userInputNumbers[i])) ballCount++;
     }
     return { strikeCount, ballCount };
-  }
-
-  //* 종료플래그 설정 메서드
-  checkIsEnded() {
-    this.isEnded = true;
-    return this.isEnded;
   }
 
   //* 게임 실행 메서드
