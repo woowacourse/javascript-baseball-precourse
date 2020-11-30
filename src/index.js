@@ -46,6 +46,15 @@ export default class BaseballGame {
     return false;
   };
 
+  renderResult = (resultMessage) => {
+    const $result = document.querySelector("#result");
+    $result.textContent = resultMessage;
+
+    if (resultMessage === "🎉 정답을 맞추셨습니다! 🎉") {
+      $result.insertAdjacentHTML("beforeend", " <button id='restart'>게임 재시작</button>");
+    }
+  };
+
   checkUserInput = (userInput) => {
     const alertMessage = "1~9까지의 수를 중복없이 3개 작성해주세요";
 
@@ -61,7 +70,7 @@ export default class BaseballGame {
       return;
     }
 
-    console.log(this.play(this.answerNumbers, this.userInputNumbers));
+    this.renderResult(this.play(this.answerNumbers, this.userInputNumbers));
   };
 
   bindEventListener = () => {
