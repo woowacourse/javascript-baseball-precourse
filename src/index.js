@@ -3,7 +3,7 @@ export default class BaseballGame {
     this.answerNumbers = this.makeAnswerNumbers();
     this.userInputNumbers = [];
 
-    this.bindEventListener();
+    this.bindSubmitEvent();
   }
 
   makeAnswerNumbers = () => {
@@ -52,7 +52,20 @@ export default class BaseballGame {
 
     if (resultMessage === "🎉 정답을 맞추셨습니다! 🎉") {
       $result.insertAdjacentHTML("beforeend", " <button id='restart'>게임 재시작</button>");
+      this.bindRestartEvent();
     }
+  };
+
+  bindRestartEvent = () => {
+    document.querySelector("#restart").addEventListener("click", () => {
+      this.answerNumbers = this.makeAnswerNumbers();
+      document.querySelector("#result").innerHTML = "";
+      this.resetInput();
+    });
+  };
+
+  resetInput = () => {
+    document.querySelector("#user-input").value = "";
   };
 
   checkUserInput = (userInput) => {
@@ -60,6 +73,7 @@ export default class BaseballGame {
 
     if (!(userInput.length === 3 && this.isNumber(userInput))) {
       alert(alertMessage);
+      this.resetInput();
       return;
     }
 
@@ -67,13 +81,14 @@ export default class BaseballGame {
 
     if (this.isIncludeZero() || this.isDuplicate()) {
       alert(alertMessage);
+      this.resetInput();
       return;
     }
 
     this.renderResult(this.play(this.answerNumbers, this.userInputNumbers));
   };
 
-  bindEventListener = () => {
+  bindSubmitEvent = () => {
     document
       .querySelector("#submit")
       .addEventListener("click", (e) => this.checkUserInput(document.querySelector("#user-input").value));
