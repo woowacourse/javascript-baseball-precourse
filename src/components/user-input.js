@@ -23,11 +23,10 @@ class UserInput extends Component {
   }
 
   onSubmit(event) {
-    event.preventDefault();
     const input = this.#$userInput.value;
+    event.preventDefault();
     if (this.isValidInput(input)) {
-      const userNumber = parseInt(input, 10);
-      this._props.userNumber.value = userNumber;
+      this._props.userNumber.value = parseInt(input, 10);
     } else {
       this.alertByCase(input);
       this.clearInput();
