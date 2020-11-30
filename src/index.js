@@ -1,13 +1,4 @@
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
-}
+import BaseballGame from './Components/App.js';
+import { ID } from './utils/constants.js';
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
-
-new BaseballGame();
+new BaseballGame(document.getElementById(ID.APP));
