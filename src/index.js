@@ -4,12 +4,19 @@ export default function BaseballGame() {
     let numOfBall = 0;
 
     Array.from(userInputNumbers).forEach((num, idx) => {
-      if (computerInputNumbers.includes(num)) {
-        if (computerInputNumbers.indexOf(num) === idx) {
-          numOfStrike++; // 같은 수가 같은 자리이면
-        } else {
-          numOfBall++; //같은 수가  다른 자리면
-        }
+      if (
+        // 같은 수가 같은 자리이면
+        computerInputNumbers.includes(num) &&
+        computerInputNumbers.indexOf(num) === idx
+      ) {
+        numOfStrike++;
+      } else if (
+        //같은 수가  다른 자리면
+        computerInputNumbers.includes(num) &&
+        computerInputNumbers.indexOf(num) !== idx
+      ) {
+        numOfBall++;
+      } else {
       }
     });
 
@@ -50,7 +57,6 @@ function makeNewNumber() {
       i++;
     }
   }
-  console.log("새로운 숫자: ", newNumber.join(""));
   return newNumber.join("");
 }
 
