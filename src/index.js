@@ -108,13 +108,11 @@ export default function BaseballGame() {
     resultWrapper.innerHTML = "";
 
     computerInputNumbers = this.getComputerInputNumbers();
-    console.log(computerInputNumbers);
   };
   
   submit.addEventListener('click', this.setReadyForPlay);
   restart.addEventListener('click', this.handleRestart);
   let computerInputNumbers = this.getComputerInputNumbers();
-  console.log(computerInputNumbers);
 }
 
 new BaseballGame()
