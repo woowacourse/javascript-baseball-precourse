@@ -38,9 +38,8 @@ export default function BaseballGame() {
 
     const currentInputNumber = $userInput.value.split("");
     if (!isValidNumber(currentInputNumber)) {
-      userInputNumbers = currentInputNumber;
+      userInputNumbers = currentInputNumber.map((value) => parseInt(value));
     }
-    console.log(userInputNumbers);
     $userInput.value = "";
   };
 
