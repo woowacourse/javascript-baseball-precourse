@@ -10,6 +10,7 @@ const playButtonElement = document.getElementById('submit');
 const userInputElement = document.getElementById('user-input');
 const resultElement = document.getElementById('result');
 const gameRestartElement = document.getElementById('game-restart');
+const restartButtonElement = document.getElementById('game-restart-button');
 
 let randomOpponentNumbers = opponent.getRandomNumbers();
 
@@ -24,5 +25,12 @@ const playGame = () => {
     gameRestartElement.style.display = 'block';
   }
 }
+const restartGame = () => {
+  gameRestartElement.style.display = 'none';
+  resultElement.innerText = '';
+  userInputElement.value = '';
+  randomOpponentNumbers = opponent.getRandomNumbers();
+}
 
 playButtonElement.addEventListener('click', playGame);
+restartButtonElement.addEventListener('click', restartGame);
