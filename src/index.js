@@ -48,11 +48,7 @@ export default class BaseballGame {
   }
 
   addEventListeners() {
-    this.$userInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && this.$userInput.value !== "") {
-        this.onClickSubmitButton();
-      };
-    });
+    this.$userInput.addEventListener("keydown", (e) => this.onKeydown(e));
 
     this.$app.addEventListener("click", (e) => {
       if (e.target.id === "submit" && this.$userInput.value !== "") {
@@ -61,6 +57,20 @@ export default class BaseballGame {
         this.onClickGameRestartButton();
       };
     });
+  }
+
+  onKeydown(e) {
+    e.preventDefault();
+
+    const AVAILABLE_DIGITS = "123456789";
+
+    if (AVAILABLE_DIGITS.includes(e.key)) {
+      this.$userInput.value += e.key;
+    } else if (e.key === "Backspace") {
+      this.$userInput.value = this.$userInput.value.slice(0,-1);
+    } else if ( e.key === "Enter" && this.$userInput.value !== "") {
+      this.onClickSubmitButton();
+    };
   }
 
   onClickSubmitButton() {
@@ -181,11 +191,12 @@ export default class BaseballGame {
 
       _returnHTML += this.getRoundResultHTMLString({numRound: arr.length - index, userInput, playResult});
 
-        return _returnHTML;
+      return _returnHTML;
     }).join("");
   }
 
   getAnswerFoundHTMLString() {
+
     return `
       <div>
         <strong>🎉 정답을 맞추셨습니다! 🎉</strong>
@@ -195,10 +206,11 @@ export default class BaseballGame {
         <button id="game-restart-button">게임 재시작</button>
       </div>
       <br>
-      `;
+    `;
   }
 
   getRoundResultHTMLString({numRound, userInput, playResult}) {
+    
     return `
       <div class="result__row-container">
         <div>
@@ -207,7 +219,7 @@ export default class BaseballGame {
         <div class="result__play-result">${playResult}</div>
         <hr>
       </div>
-      `;
+    `;
   }
 }
 
