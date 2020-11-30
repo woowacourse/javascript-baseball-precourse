@@ -2,6 +2,7 @@ import {
   NAN_MESSAGE,
   WRONG_NUMBER_MESSAGE,
   DUPLICATE_NUMBER_MESSAGE,
+  HAS_ZERO_MESSAGE,
 } from '../library/constants/alert-message.js';
 import { MIN3DIGIT } from '../library/constants/number.js';
 import { INITIAL_STATE_NUMBER } from '../library/constants/state.js';
@@ -41,6 +42,7 @@ class UserInput extends Component {
       !isNaN(inputNumber) &&
       input.length === 3 &&
       inputNumber >= MIN3DIGIT &&
+      input.indexOf('0') === -1 &&
       !hasDuplicateCharacter(input)
     );
   }
@@ -51,6 +53,9 @@ class UserInput extends Component {
     if (isNaN(inputNumber)) {
       errors.push(NAN_MESSAGE);
     } else {
+      if (input.indexOf('0') !== -1) {
+        errors.push(HAS_ZERO_MESSAGE);
+      }
       if (input.length !== 3 || inputNumber < MIN3DIGIT) {
         errors.push(WRONG_NUMBER_MESSAGE);
       }
