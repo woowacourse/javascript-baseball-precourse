@@ -74,10 +74,29 @@ export default class BaseballGame {
     return computerInputNumbers.every((num, index) => num === userInputNumbers[index]);
   };
 
+  getNumOfStrike = ({ computerInputNumbers, userInputNumbers }) => {
+    let numOfStrike = 0;
+
+    computerInputNumbers.forEach((num, index) => {
+      if (num === userInputNumbers[index]) {
+        numOfStrike++;
+      }
+    });
+
+    return numOfStrike;
+  };
+
   play(computerInputNumbers, userInputNumbers) {
+    console.log(computerInputNumbers.join(""), userInputNumbers.join(""));
+
     if (this.isCorrectAnswer({ computerInputNumbers, userInputNumbers })) {
       return "🎉 정답을 맞추셨습니다! 🎉";
     }
+
+    const numOfStrike = this.getNumOfStrike({ computerInputNumbers, userInputNumbers });
+    let resultString = "";
+
+    console.log(numOfStrike);
 
     return "error";
   }
