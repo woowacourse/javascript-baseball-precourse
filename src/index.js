@@ -64,6 +64,15 @@ function createBallStrikeMessage(ball, strike) {
   }
 }
 
+function createRandomNumber() {
+  let answerCandidate;
+  do {
+    answerCandidate = Math.floor(Math.random() * 1000);
+  } while (!isCapableNumber(splitNumbers(answerCandidate)));
+
+  return answerCandidate;
+}
+
 // end
 function printEndResult() {
   const result = document.getElementById('result');
