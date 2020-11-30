@@ -1,4 +1,5 @@
-import {BASEBALL_GUIDE as BASEBALL} from './constants.js'
+import { BASEBALL_GUIDE as BASEBALL } from './constants.js'
+import { isDuplicationThreeDigits, getRandomNumber } from './util.js'
 
 export default function BaseballGame() {
   const submit = document.getElementById("submit");
@@ -9,7 +10,6 @@ export default function BaseballGame() {
   const BASEBALL_COUNT = 3;
   const RANDOM_NUM_FROM = 1;
   const RANDOM_NUM_TO = 9;
-
   let inRound = false;
 
   this.play = function (computerInputNumbers, userInputNumbers) {
@@ -44,7 +44,7 @@ export default function BaseballGame() {
     let computerNumbers = [];
 
     while (computerNumbers.length < BASEBALL_COUNT) {
-      let randomNumber = getRandomNumber();
+      let randomNumber = getRandomNumber(RANDOM_NUM_FROM,RANDOM_NUM_TO);
 
       if ( !computerNumbers.includes(randomNumber) ) {
         computerNumbers.push(randomNumber)
@@ -115,18 +115,6 @@ export default function BaseballGame() {
   restart.addEventListener('click', () => this.handleRestart());
   let computerInputNumbers = this.getComputerInputNumbers();
   console.log(computerInputNumbers);
-}
-
-function isDuplicationThreeDigits(numbers) {
-  return (
-    numbers[0] === numbers[1] ||
-    numbers[0] === numbers[2] ||
-    numbers[1] === numbers[2]
-    );
-}
-
-function getRandomNumber() {
-  return Math.floor(Math.random() * 9) + 1;
 }
 
 new BaseballGame()
