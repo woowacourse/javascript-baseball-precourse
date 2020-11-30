@@ -1,0 +1,25 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "es6": true
+    },
+    "extends": [
+        "airbnb-base",
+        "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [ "html"],
+    "rules": {
+        "indent": ["warning", 2],
+        "no-console": "off",
+        "no-alert": "off",
+        "func-names": "off",
+        "no-plusplus":"off",
+        "no-restricted-syntax":"off"
+    
+    }
+}
