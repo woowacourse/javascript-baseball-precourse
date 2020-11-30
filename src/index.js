@@ -1,8 +1,6 @@
 export default class BaseballGame {
   constructor() {
     this.computerRandomNumbers;
-    //element들을 재생성할때 사용하기 위한 변수
-    this.idNum = 0;
     this.getComputerRandomNumbers();
     this.addClickEventListener();
   }
@@ -56,37 +54,42 @@ export default class BaseballGame {
     }
     this.computerRandomNumbers = result;
   }
-  //게임을 재시작하기 위해서 결과들을 모두 갱신하는 함수
-  gameRestart() {
-    const result = document.getElementById('result0');
-    for(let i = this.idNum; i > 0; i--) {
-      const element = document.getElementById(`play${i}`);
-      element.remove();
-    }
-    result.innerHTML = "";
-    this.idNum = 0;
-    this.getComputerRandomNumbers();
-    this.addClickEventListener();
-  }
-  //정답을 못맞췄을때 element들을 재생성하는 함수
-  wrongResult() {
-    const app = document.getElementById('app');
-    this.idNum++;
-    const play = document.createElement('div');
+  // 게임진행을 위해 입력창, 확인버튼, 결과창을 재생성하는 함수
+  addGameElements() {
+    const gameResult = document.getElementById('game-result');
     const userInput = document.createElement('input');
     const submit = document.createElement('button');
     const resultText = document.createElement('h3');
     const result = document.createElement('div');
-    play.setAttribute('id', `play${this.idNum}`);
     userInput.setAttribute('type', 'text');
-    userInput.setAttribute('id', `user-input${this.idNum}`);
-    submit.setAttribute('id', `submit${this.idNum}`);
-    result.setAttribute('id', `result${this.idNum}`);
+    userInput.setAttribute('id', 'user-input');
+    submit.setAttribute('id', `submit`);
+    result.setAttribute('id', `result`);
     submit.append("확인");
-    resultText.append("결과");
-    play.append(userInput, submit, resultText, result);
-    app.append(play);
+    resultText.append("📄 결과");
+    gameResult.append(userInput, submit, resultText, result);
     this.addClickEventListener();
+  }
+  //게임을 재시작하기 위해서 결과들을 모두 갱신하는 함수
+  gameRestart() {
+    const playResult = document.getElementById('game-result');
+    playResult.innerHTML = "";
+    this.addGameElements();
+    this.getComputerRandomNumbers();
+  }
+  removeElementsAttribute() {
+    const userInput = document.getElementById('user-input');
+    const submit = document.getElementById('submit');
+    const result = document.getElementById('result');
+    //submit.removeEventListener('click', this.checkUserInputNumbers);
+    userInput.removeAttribute('id');
+    submit.removeAttribute('id');
+    result.removeAttribute('id'); 
+  }
+  //정답을 못맞췄을때 element들을 재생성하는 함수
+  wrongResult() {
+    this.removeElementsAttribute();
+    this.addGameElements();
   }
   //정답을 맞췄을때 element들을 새로 생성하는 함수
   correctResult(result) {
@@ -98,36 +101,33 @@ export default class BaseballGame {
   }
   // 게임 결과를 화면에 출력하는 함수
   printResult(playResult) {
-    const result = document.getElementById(`result${this.idNum}`);
-    // const submit = document.getElementById(`submit${this.idNum}`);
-    // submit.removeEventListener('click', this.checkUserInputNumbers);
+    const result = document.getElementById(`result`);
     if(playResult === '정답') {
       this.correctResult(result);
     }
     else {
-      result.innerHTML = playResult;
+      result.innerHTML = `<p>${playResult}</p>`;
       this.wrongResult();
     }
   }
   // 사용자의 입력값이 조건에 맞는지 확인하는 함수
   checkUserInputNumbers() {
-    const userInputNumbers = document.getElementById(`user-input${this.idNum}`).value;
+    const userInputNumbers = document.getElementById(`user-input`).value;
     const temp = new Set(userInputNumbers);
     if(userInputNumbers.length != 3 || userInputNumbers.length !== temp.size) {
       alert('1~9까지의 수를 중복없이 3개를 입력해 주세요😊');
-      document.getElementById(`user-input${this.idNum}`).value = '';
+      document.getElementById(`user-input`).value = '';
     }
     else { 
       console.log(this.computerRandomNumbers, userInputNumbers);
-      const result = this.play(this.computerRandomNumbers, userInputNumbers);
-      this.printResult(result);
+      this.printResult(this.play(this.computerRandomNumbers, userInputNumbers));
     }
   }
   //버튼에 클릭 이벤트 리스너를 추가하는 함수
   addClickEventListener() {
-    const submit = document.getElementById(`submit${this.idNum}`);
+    const submit = document.getElementById(`submit`);
     //this바인딩 문제로 화살표 함수 사용
-    submit.addEventListener('click', () => {this.checkUserInputNumbers()}); 
+    submit.addEventListener('click', () => {this.checkUserInputNumbers()});
   }
 }
 
