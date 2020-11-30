@@ -60,19 +60,27 @@ play(123, 124); // '2스트라이크'
 <br>
 
 # 👩‍💻 기능
-1) getComputerInputNumbers(): 컴퓨터의 3자리 수 랜덤으로 생성해 String으로 결과값을 반환하는 함수 
-    - getRandomNumber(): 1-9까지의 난수를 한 개씩 반환하는 함수 
+1) **getComputerInputNumbers()**: 컴퓨터의 3자리 수 랜덤으로 생성해 String으로 결과값을 반환하는 함수 
+    - **getRandomNumber()**: 1-9까지의 난수를 한 개씩 반환하는 함수 
 
-2) setReadyForPlay(): play하기 전, input을 받아서 예외처리 할 수 있도록 전달하는 함수 
-    - checkInputError(): 받은 사용자의 input이 조건에 맞는지 확인하고, 아닐경우 alert로 표시해주는 함수 
-    - isDuplication(): input값에 중복된 값이 존재하는지 boolean 값으로 반환하는 함수 
+2) **setReadyForPlay()**: play하기 전, input을 받아서 예외처리 할 수 있도록 전달하는 함수 
+    - **checkInputError()**: 받은 사용자의 input이 조건에 맞는지 확인하고, 아닐경우 alert로 표시해주는 함수 
+    - **isDuplication()**: input값에 중복된 값이 존재하는지 boolean 값으로 반환하는 함수 
 
-3) startRoundFlow(): input조건의 값이 조건에 알맞아 한 round를 시작해도 될 시에, 한 라운드의 게임을 플레이하고, 결과값을 보여주는 함수 
-    - play(): 컴퓨터와 사용자의 숫자들을 비교해 strike와 ball의 갯수를 판별해 String으로 결과값을 반환하는 함수
-    - judgeResult(): strike와 ball의 갯수들로 결과를 판단해 String으로 반환하는 함수 
+3) **startRoundFlow()**: input조건의 값이 조건에 알맞아 한 round를 시작해도 될 시에, 한 라운드의 게임을 플레이하고, 결과값을 보여주는 함수 
+    - **play()**: 컴퓨터와 사용자의 숫자들을 비교해 strike와 ball의 갯수를 판별해 String으로 결과값을 반환하는 함수
+    - **judgeResult()**: strike와 ball의 갯수들로 결과를 판단해 String으로 반환하는 함수 
 
-4) handleResultHTML(): Hint 또는 정답화면을 화면에 보여줄 함수 
+4) **handleResultHTML()**: Hint 또는 정답화면을 화면에 보여줄 함수 
 
-5) handleRestart(): 재시작 버튼을 눌렀을 경우 게임 초기상태로 다시 돌아가게 만드는 함수 
+5) **handleRestart()**: 재시작 버튼을 눌렀을 경우 게임 초기상태로 다시 돌아가게 만드는 함수 
 
 6) src/constants.js : BaseBallGame에 필요한 모든 string 값 enum형식으로 저장해 놓은 파일
+
+# 고민한 점
+1) js 문법 - js 문법이 익숙치 않아서 초반에 공부를 했었어야 했다.
+2) 함수 분리 - 함수에 원하는 기능이 잘 들어가 있는가, 네이밍은 함수 기능에 충실했는가.
+3) 파일 분리 - 굳이 파일분리를 해야할 것인가 하지 않아도 될 것인가.
+4) 기능 별 commit - 구현 도중 많은 수정들이 생기는데, 기능 별 commit의 기능은 어느정도를 얘기하는 것일까.
+5) this에 대한 고민 - js 문법이 익숙치 않아 생긴 오류. event listener를 달 때 고민함.
+6) 코드 컨벤션 - if문을 이렇게 계속 나열해도 되는 것인가. 이곳에서 return을 해도 되는 것인가. 등
