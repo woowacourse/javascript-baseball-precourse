@@ -11,6 +11,11 @@ const isSameNumber = (numberArrays) => {
 };
 
 export default function isValidNumber(numberArrays) {
+  if (numberArrays.some((value) => isNaN(value))) {
+    alert("숫자만 입력해주세요");
+    return false;
+  }
+
   if (numberArrays.length !== 3) {
     alert("숫자 3개를 입력해주세요");
     return false;
