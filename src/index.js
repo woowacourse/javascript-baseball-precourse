@@ -9,7 +9,22 @@ export default function BaseballGame() {
   };
 }
 
-const getUserInput = () => {};
+const updateResult = (result) => {};
+
+const validateInput = (input) => {
+  return true;
+};
+
+const getUserInput = () => {
+  let userInput = document.getElementById("user-input").value;
+  if (!validateInput(userInput)) {
+    alert("세 자리의 중복 없는 숫자를 다시 입력해주세요.");
+    document.getElementById("user-input").value = "";
+  } else {
+    let result = new BaseballGame().play(gameData.computerNumbers, userInput);
+    updateResult(result);
+  }
+};
 
 const makeComputerInput = () => {
   const nums = [];
