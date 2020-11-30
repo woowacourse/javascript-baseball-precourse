@@ -1,0 +1,31 @@
+{
+  "type": "module",
+  "name": "js-baseball",
+  "version": "1.0.0",
+  "description": "## 🎯 기능 요구사항",
+  "scripts": {
+    "test:main": "jest test/main.spec.js --watch",
+    "test:utils": "jest test/utils.spec.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jho2301/javascript-baseball-precourse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jho2301/javascript-baseball-precourse/issues"
+  },
+  "homepage": "https://github.com/jho2301/javascript-baseball-precourse#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.14.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.0"
+  }
+}
