@@ -1,15 +1,7 @@
 import getUserInput from './input/getUserInput.js';
-import getRandomNumbers from './utils/getRandomNumbers.js';
 import getGameResult from './game/getGameResult.js';
 import printGameResult from './utils/printGameResult.js';
-
-/*
- ** export default function BaseballGame() {
- **  this.play = function (computerInputNumbers, userInputNumbers) {
- **     return "결과 값 String";
- **  };
- ** }
- */
+import getRandomNumbers from './utils/getRandomNumbers.js';
 
 function restartGame() {
   const $result = document.querySelector('#result');
