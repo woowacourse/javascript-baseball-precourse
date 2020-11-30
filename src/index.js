@@ -73,6 +73,12 @@ export default function BaseballGame() {
   this.newGame();
 } // function BaseballGame() end
 
+// submitButton
+function getInputNumbers() {
+  const userInput = document.getElementById('user-input').value;
+  return userInput;
+}
+
 // play
 function splitNumbers(numbers) {
   const numArray = new Array();
