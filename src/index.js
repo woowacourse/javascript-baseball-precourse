@@ -6,10 +6,8 @@ export default function BaseballGame() {
   const resultDiv = document.querySelector('#result');
   const restartDiv = document.querySelector('#restart');
 
-  submitBtn.addEventListener('click', () =>
-    this.integrateFunction(inputText.value)
-  );
-  inputText.addEventListener('keyup', e => {
+  submitBtn.addEventListener('click', () => this.integrateFunction(inputText.value));
+  inputText.addEventListener('keydown', e => {
     if (e.keyCode === 13) {
       this.integrateFunction(inputText.value);
     }
@@ -45,15 +43,23 @@ export default function BaseballGame() {
   };
 
   // 규칙에 맞는 값인지 확인
-  this.checkInput = userInput => {
+  this.validtion = userInput => {
     const isNotThree = userInput.length !== 3;
     const isNotDigit = parseInt(userInput) != userInput;
     const hasZero = userInput.includes('0');
     const isDuplicate = this.checkDuplicate(userInput);
+    let err = '';
+
+    isNotThree ? (err += '숫자 수, ') : null;
+    isNotDigit ? (err += '숫자아닌 값, ') : null;
+    hasZero ? (err += '0 포함, ') : null;
+    isDuplicate ? (err += '중복된 값, ') : null;
+
     inputText.value = '';
     inputText.focus();
+
     if (isNotThree || isNotDigit || hasZero || isDuplicate) {
-      alert('입력 값이 규칙에 맞지 않습니다. 다시 입력해주세요.');
+      alert(`입력 값이 규칙에 맞지 않습니다. 다시 입력해주세요.\n(${err.slice(0, -2)})`);
       return false;
     } else {
       return true;
@@ -78,7 +84,7 @@ export default function BaseballGame() {
 
   // 기능 통합
   this.integrateFunction = userInput => {
-    const checked = this.checkInput(userInput);
+    const checked = this.validtion(userInput);
     if (checked) {
       if (!this.computerInputNumbers) {
         this.setComputerNum();
@@ -126,10 +132,7 @@ export default function BaseballGame() {
   // 결과값 가져오기
   this.play = function (computerInputNumbers, userInputNumbers) {
     let resultString = '';
-    const { strike, ball } = this.compareNumber(
-      computerInputNumbers,
-      userInputNumbers
-    );
+    const { strike, ball } = this.compareNumber(computerInputNumbers, userInputNumbers);
     if (strike === 0 && ball === 0) {
       resultString = '낫싱';
     } else {
