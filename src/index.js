@@ -48,6 +48,8 @@ const compareNums = (computerNum, inputNum) => {
 };
 
 const resetResult = () => {
+  document.getElementById("user-input").value = "";
+
   document
     .getElementById("game-restart-button")
     .addEventListener("click", function () {
@@ -91,9 +93,11 @@ const getUserInput = () => {
     alert("세 자리의 중복 없는 숫자를 다시 입력해주세요.");
     document.getElementById("user-input").value = "";
     document.getElementById("result").innerHTML = "";
+    if (gameData.isSuccess) {
+      init();
+    }
   } else {
     let result = new BaseballGame().play(gameData.computerNumbers, userInput);
-    console.log(result, gameData.computerNumbers);
     updateResult(result);
   }
 };
@@ -115,6 +119,7 @@ const makeComputerInput = () => {
 const init = () => {
   gameData.isSuccess = false;
   gameData.computerNumbers = makeComputerInput();
+
   document.getElementById("submit").addEventListener("click", getUserInput);
 };
 
