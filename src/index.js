@@ -77,16 +77,51 @@ export default function BaseballGame() {
     return this.getResult();
   };
 
+  this.retryGame = function () {
+    // 재시작하기 위한 화면을 그려주는 함수
+    const userInput = document.querySelector("#user-input");
+    const result = document.querySelector("#result");
+    const successNews = document.createElement("h4");
+    const newGamePropal = document.createElement("span");
+    const retryButton = document.createElement("button");
+
+    retryButton.setAttribute("id", "game-restart-button");
+    successNews.textContent = "🎉 정답을 맞추셨습니다 🎉";
+    newGamePropal.innerHTML = "게임을 새로 시작하시겠습니까? ";
+    retryButton.innerHTML = "게임 재시작";
+
+    result.appendChild(successNews);
+    result.appendChild(newGamePropal);
+    result.appendChild(retryButton);
+
+    retryButton.addEventListener("click", () => {
+      // 재시작 버튼을 클릭하면 숫자를 재 셋팅
+      this.computerNumbers = createRandomNums();
+      console.log(this.computerNumbers);
+      userInput.value = "";
+      // 화면들 모두 지워주기
+      result.removeChild(successNews);
+      result.removeChild(newGamePropal);
+      result.removeChild(retryButton);
+    });
+  };
+
   submitButton.addEventListener("click", () => {
+    // 제출할때 마다 strikes와 balls ,result 초기화
     const userInput = document.querySelector("#user-input");
     const result = document.querySelector("#result");
     this.balls = 0;
     this.strikes = 0;
+    result.textContent = "";
     userInput.focus();
 
     if (validateInput(userInput.value)) {
       const gameResult = this.play(this.computerNumbers, userInput.value);
-      result.textContent = gameResult;
+      if (this.strikes === 3) {
+        this.retryGame();
+      } else {
+        result.textContent = gameResult;
+      }
     } else {
       userInput.value = "";
       userInput.focus();
