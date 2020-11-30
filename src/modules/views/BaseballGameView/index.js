@@ -9,10 +9,19 @@ import { text } from '../../../constants';
 // BaseballGameView class (View)
 
 export default class BaseballGameView {
-  constructor(baseballGameModel, resultDiv, userInput) {
+  constructor(baseballGameModel, resultDiv, userInput, userInputSubmitButton) {
     this.baseballGameModel = baseballGameModel;
-    this._resultDiv = resultDiv;
-    this._userInput = userInput;
+    this.resultDiv = resultDiv;
+    this.userInput = userInput;
+    this.userInputSubmitButton = userInputSubmitButton;
+    this.init();
+  }
+
+  init() {
+    this.userInputSubmitButton.addEventListener(
+      'click',
+      this.handleUserInputSubmit.bind(this),
+    );
   }
 
   renderResult(userInputNumbers) {
@@ -22,7 +31,7 @@ export default class BaseballGameView {
     );
 
     if (resultString === text.CORRECT) {
-      this._resultDiv.innerHTML = `
+      this.resultDiv.innerHTML = `
         <strong>
           <p>${resultString}</p>
         </strong>
@@ -36,18 +45,18 @@ export default class BaseballGameView {
         .getElementById('game-restart-button')
         .addEventListener('click', this.handleReStartClick.bind(this));
     } else {
-      this._resultDiv.innerHTML = `
+      this.resultDiv.innerHTML = `
         <p>${resultString}</p>
       `;
     }
   }
 
   cleanResult() {
-    this._resultDiv.innerHTML = '';
+    this.resultDiv.innerHTML = '';
   }
 
   resetUserInputNumbers() {
-    this._userInput.value = '';
+    this.userInput.value = '';
   }
 
   validUserInputNumbers(userInputNumbers) {
@@ -77,7 +86,7 @@ export default class BaseballGameView {
   }
 
   handleUserInputSubmit() {
-    const userInputNumbers = this._userInput.value;
+    const userInputNumbers = this.userInput.value;
     const exception = this.validUserInputNumbers(userInputNumbers);
     if (exception) {
       alert(exception);

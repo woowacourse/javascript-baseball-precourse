@@ -85,10 +85,11 @@ window.addEventListener('DOMContentLoaded', () => {
   const gameModel = new BaseballGame();
   const resultDiv = document.getElementById('result');
   const userInput = document.getElementById('user-input');
-  const gameView = new BaseballGameView(gameModel, resultDiv, userInput);
-  const submitNumButton = document.getElementById('submit');
-  submitNumButton.addEventListener(
-    'click',
-    gameView.handleUserInputSubmit.bind(gameView),
+  const userInputSubmitButton = document.getElementById('submit');
+  const gameView = new BaseballGameView(
+    gameModel,
+    resultDiv,
+    userInput,
+    userInputSubmitButton,
   );
 });
