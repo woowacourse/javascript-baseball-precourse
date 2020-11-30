@@ -1,5 +1,3 @@
-import BaseballGame from '../index.js';
-
 function printCorrectAnswer($result) {
   $result.innerHTML = `<div>
                         <strong>🎉정답입니다🎉</strong>

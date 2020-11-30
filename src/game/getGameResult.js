@@ -23,6 +23,5 @@ export default function getGameResult(computerInputNumbers, userInputNumbers) {
   const strikeCount = getStrikeCount(computerInputNumbers, userInputNumbers);
   const ballCount = getBallCount(computerInputNumbers, userInputNumbers);
 
-  console.log(computerInputNumbers);
   return getResultText(strikeCount, ballCount);
 }
