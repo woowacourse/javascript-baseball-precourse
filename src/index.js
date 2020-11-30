@@ -11,7 +11,8 @@ export default function BaseballGame() {
     let i = 0;
 
     while (i < arrayLength) {
-      const randomNumber = String(Math.floor(Math.random() * 9 + 1))
+      const randomNumber = String(Math.floor(Math.random() * 9 + 1));
+
       if (this.isAvailableNumber(randomNumber, computerInputNumbers)) {
         computerInputNumbers.push(randomNumber);
         i++;
@@ -29,30 +30,30 @@ export default function BaseballGame() {
     const userNumbersSet = new Set(userNumbers);
   
     if (userNumbers.length === arrayLength && userNumbers.length === userNumbersSet.size) {
-      return userNumbers
+      return userNumbers;
     } else {
-      alert("1~9까지의 수를 중복없이 3개 작성해 주세요.")
+      alert("1~9까지의 수를 중복없이 3개 작성해 주세요.");
     }
   };
 
   // 게임 재시작 함수
   this.gameRestart = function(computerInputNumbers) {
-    const gameRestartButton = document.querySelector("#game-restart-button")
+    const gameRestartButton = document.querySelector("#game-restart-button");
     const userInput = document.querySelector("#user-input");
+    let gameRestartText = document.querySelector("#game-restart-text");
 
     gameRestartButton.style.display = 'none';
-    let gameRestartText = document.querySelector("#game-restart-text");
     result.innerText = "🎉정답을 맞추셨습니다! 🎉";
     result.style.fontWeight = "bold";
     gameRestartText.innerText = "게임을 다시 시작하시겠습니까?";
     gameRestartText.style.display = "inline-block";
     gameRestartButton.style.display = 'inline-block';
     gameRestartButton.addEventListener("click", () => {
+      result.innerText = '';
+      gameRestartText.style.display = 'none';
+      gameRestartButton.style.display = 'none';
       computerInputNumbers = [];
       userInput.value = '';
-      gameRestartButton.style.display = 'none';
-      gameRestartText.style.display = 'none';
-      result.innerText = '';
       this.createComputerNumbers();
     }, {once : true});
   };
@@ -96,13 +97,14 @@ export default function BaseballGame() {
   this.init = function() {
     const computerInputNumbers = this.createComputerNumbers();
     const submitButton = document.querySelector("#submit");
-    const gameRestartButton = document.querySelector("#game-restart-button")
+    const gameRestartButton = document.querySelector("#game-restart-button");
+    
     gameRestartButton.style.display = "none";
     submitButton.addEventListener("click", () => {
       const userInputNumbers = this.getUserNumbers();
 
       if (userInputNumbers) {
-        this.play(computerInputNumbers, userInputNumbers)
+        this.play(computerInputNumbers, userInputNumbers);
       }
     });
   };
