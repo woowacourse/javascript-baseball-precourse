@@ -61,7 +61,7 @@ export default class BaseballGame {
       return;
     }
 
-    this.play(this.answerNumbers, this.userInputNumbers);
+    console.log(this.play(this.answerNumbers, this.userInputNumbers));
   };
 
   bindEventListener = () => {
@@ -86,19 +86,33 @@ export default class BaseballGame {
     return numOfStrike;
   };
 
-  play(computerInputNumbers, userInputNumbers) {
-    console.log(computerInputNumbers.join(""), userInputNumbers.join(""));
+  getNumOfBall = ({ computerInputNumbers, userInputNumbers }) => {
+    let numOfBall = 0;
 
+    userInputNumbers.forEach((userNum, index) => {
+      const numIndexInComputerInputNumbers = computerInputNumbers.findIndex((computerNum) => computerNum === userNum);
+
+      if (numIndexInComputerInputNumbers !== -1 && index !== numIndexInComputerInputNumbers) {
+        numOfBall++;
+      }
+    });
+
+    return numOfBall;
+  };
+
+  play(computerInputNumbers, userInputNumbers) {
     if (this.isCorrectAnswer({ computerInputNumbers, userInputNumbers })) {
       return "🎉 정답을 맞추셨습니다! 🎉";
     }
 
+    const numOfBall = this.getNumOfBall({ computerInputNumbers, userInputNumbers });
     const numOfStrike = this.getNumOfStrike({ computerInputNumbers, userInputNumbers });
-    let resultString = "";
 
-    console.log(numOfStrike);
+    if (numOfBall === 0 && numOfStrike === 0) {
+      return "낫싱";
+    }
 
-    return "error";
+    return `${numOfBall > 0 ? `${numOfBall}볼 ` : ""}${numOfStrike > 0 ? `${numOfStrike}스트라이크` : ""}`;
   }
 }
 
