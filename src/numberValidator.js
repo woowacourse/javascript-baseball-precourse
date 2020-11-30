@@ -3,8 +3,6 @@ const hasSameNumber = (numberArray) => {
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   numberArray.forEach((value) => {
-    console.log(value);
-    console.log(numbers.indexOf(value));
     if (numbers.indexOf(value) === -1) answer = true;
     else numbers.splice(numbers.indexOf(value), 1);
   });

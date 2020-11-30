@@ -53,13 +53,10 @@ export default function BaseballGame() {
   };
 
   const play = (computerInputNumbers, userInputNumbers) => {
-    const answer =
-      JSON.stringify(computerInputNumbers) === JSON.stringify(userInputNumbers)
-        ? CORRECT
-        : getHint(computerInputNumbers, userInputNumbers);
-
-    getResult(answer);
-    return answer;
+    return JSON.stringify(computerInputNumbers) ===
+      JSON.stringify(userInputNumbers)
+      ? CORRECT
+      : getHint(computerInputNumbers, userInputNumbers);
   };
 
   const handleUserInputSubmit = () => {
@@ -68,7 +65,8 @@ export default function BaseballGame() {
       .map((value) => parseInt(value));
     if (!isValidNumber(userInputNumbers)) return;
 
-    play(computerInputNumbers, userInputNumbers);
+    const result = play(computerInputNumbers, userInputNumbers);
+    getResult(result);
   };
 
   $submitBtn.addEventListener("click", handleUserInputSubmit);
