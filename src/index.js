@@ -90,6 +90,14 @@ function createRandomNumber() {
   return answerCandidate;
 }
 
+function printPlayResult(message) {
+  clearResultMessage();
+
+  const result = document.getElementById('result');
+  const resultMessage = document.createTextNode(message);
+  result.appendChild(resultMessage);
+}
+
 // end
 function printEndResult() {
   const result = document.getElementById('result');
