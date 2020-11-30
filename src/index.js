@@ -1,128 +1,67 @@
-import { DIGITS, validateUserInput } from "./validate.js";
-export default class BaseballGame {
+import BaseballGame from "./game.js";
+import { validateDigit, validateUnique, validateNumber } from "./validate.js";
+export default class BaseballGameHandler {
   constructor() {
-    this.isEnded = false; //종료 플래그
-    this.computerInputNumbers = ""; // 컴퓨터 입력값
+    this.game = new BaseballGame();
 
-    this.init();
+    this.userInputBox = document.getElementById("user-input");
+    this.resultBox = document.getElementById("result");
+    this.submitButton = document.getElementById("submit");
   }
 
-  //* 초기 설정 메서드
-  init = () => {
-    this.isEnded = false;
-    this.computerInputNumbers = this.generateRandomNumbers();
-    // console.log(this.computerInputNumbers);
-  };
-
-  //* 랜덤 값 생성 메서드
-  generateRandomNumbers() {
-    let randomNumbers = "";
-    while (randomNumbers.length != DIGITS) {
-      const number = String(Math.floor(Math.random() * 9) + 1);
-      if (!randomNumbers.includes(number)) randomNumbers += number;
-    }
-    return randomNumbers;
-  }
-
-  //* 사용자 입력값 반환 메서드
+  // 사용자 입력 받기
   getUserInputNumbers() {
-    const userInputBox = document.getElementById("user-input");
-    const userInputNumbers = userInputBox.value;
-    userInputBox.value = "";
+    const userInputNumbers = this.userInputBox.value;
+    this.userInputBox.value = "";
     return userInputNumbers;
   }
 
-  //* 입력값 비교 메서드
-  compareNumbers(computerInputNumbers, userInputNumbers) {
-    let strikeCount = 0;
-    let ballCount = 0;
-    for (let i = 0; i < DIGITS; i++) {
-      if (computerInputNumbers[i] === userInputNumbers[i]) strikeCount++;
-      else if (computerInputNumbers.includes(userInputNumbers[i])) ballCount++;
-    }
-    return { strikeCount, ballCount };
+  // 사용자 입력 검사
+  validateUserInput(useInputNumbers) {
+    const isValid =
+      validateDigit(useInputNumbers, this.game.DIGITS) &&
+      validateUnique(useInputNumbers) &&
+      validateNumber(useInputNumbers);
+    if (!isValid) alert("입력값이 잘못되었습니다. 다시 입력해주세요 :)");
+    return isValid;
   }
 
-  //* 결과 반환 메서드
-  play(computerInputNumbers, userInputNumbers) {
-    let result = "";
-    const { strikeCount, ballCount } = this.compareNumbers(
-      computerInputNumbers,
-      userInputNumbers
-    );
-    if (strikeCount === DIGITS) {
-      this.isEnded = true;
-      result = "🎉 정답을 맞추셨습니다. 🎉";
-      return result;
-    }
-    if (ballCount) result += `${ballCount}볼`;
-    if (strikeCount) result += ` ${strikeCount}스트라이크`;
-    if (!ballCount && !strikeCount) result = "낫싱";
-    return result;
-  }
-
-  //* 결과 출력 메서드
+  // 결과 출력
   renderResult(userInputNumbers, result) {
-    const resultBox = document.getElementById("result");
     const resultHTML = `<p>입력: ${userInputNumbers}</p><p><b>${result}</b></p><hr>`;
-    resultBox.innerHTML += resultHTML;
+    this.resultBox.innerHTML += resultHTML;
+  }
+  renderEnd() {
+    const resultHTML = `<div>게임을 새로 시작하시겠습니까? <button id="game-restart-button" data-action="restart">게임 재시작</button></div>`;
+    this.resultBox.innerHTML += resultHTML;
+    this.submitButton.disabled = true;
   }
 
-  //* 결과 초기화 메서드
-  resetResult() {
-    const resultBox = document.getElementById("result");
-    resultBox.innerHTML = "";
-  }
-
-  //* 확인 버튼 핸들러 메서드
-  toggleSubmitButton() {
-    const submitButton = document.getElementById("submit");
-    if (submitButton.disabled) submitButton.disabled = false;
-    else submitButton.disabled = true; //종료시 비활성화
-  }
-
-  //* 재시작 버튼 생성 메서드
-  renderRestartButton() {
-    const resultBox = document.getElementById("result");
-    const restartButtonHTML = `<div>게임을 새로 시작하시겠습니까? <button id="game-restart-button" data-action="restart">게임 재시작</button></div>`;
-    resultBox.innerHTML += restartButtonHTML;
-  }
-
-  //* 종료 메서드
-  end = () => {
-    const toggleOffSubmit = this.toggleSubmitButton();
-    const renderRestartButton = this.renderRestartButton();
-  };
-
-  //* 재시작 메서드
-  restart = () => {
-    const initGame = this.init();
-    const resetResult = this.resetResult();
-    const toggleOnSubmit = this.toggleSubmitButton();
-  };
-
-  //* 실행 메서드
+  // 실행 이벤트
   run = () => {
-    const computerInputNumbers = this.computerInputNumbers; // 컴퓨터 입력값
-    const userInputNumbers = this.getUserInputNumbers(); // 사용자 입력값
-    const isValid = validateUserInput(userInputNumbers); // 사용자 입력값 검사
+    const useInputNumbers = this.getUserInputNumbers();
+    const isValid = this.validateUserInput(useInputNumbers);
     if (!isValid) return;
 
-    const result = this.play(computerInputNumbers, userInputNumbers); // 게임 진행
-    const resultElement = this.renderResult(userInputNumbers, result); // 게임 결과 출력
-    if (this.isEnded) this.end(); //게임 종료
+    const computerInputNumbers = this.game.computerInputNumbers;
+    const result = this.game.play(computerInputNumbers, useInputNumbers);
+    const renderResult = this.renderResult(useInputNumbers, result);
+    if (this.game.isEnded) this.renderEnd();
   };
 
-  //* 메뉴 클릭
+  // 재시작 이벤트
+  restart = () => {
+    this.game.init();
+    this.resultBox.innerHTML = "";
+    this.submitButton.disabled = false;
+  };
+
+  // 버튼 클릭
   onClick = (event) => {
     const action = event.target.dataset.action;
     if (action) this[action]();
   };
 }
 
-const initGame = () => {
-  const game = new BaseballGame();
-  document.addEventListener("click", (event) => game.onClick(event));
-};
-
-initGame();
+const gameHandler = new BaseballGameHandler();
+document.addEventListener("click", (event) => gameHandler.onClick(event));

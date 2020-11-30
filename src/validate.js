@@ -1,8 +1,7 @@
-const DIGITS = 3;
-const validateInputDigit = function (input) {
-  return input.length === DIGITS;
+export const validateDigit = function (input, digits) {
+  return input.length === digits;
 };
-const validateInputUnique = function (input) {
+export const validateUnique = function (input) {
   let isValid = true;
   const inputArray = input.split("");
   inputArray.forEach((input, index) => {
@@ -10,7 +9,7 @@ const validateInputUnique = function (input) {
   });
   return isValid;
 };
-const validateInputNumber = function (input) {
+export const validateNumber = function (input) {
   let isValid = true;
   const inputArray = input.split("");
   const validArray = [...Array(9).keys()].map((num) => String(num + 1)); // ["1"..."9"]
@@ -19,13 +18,3 @@ const validateInputNumber = function (input) {
   });
   return isValid;
 };
-
-const validateUserInput = function (input) {
-  const isValid =
-    validateInputDigit(input) &&
-    validateInputUnique(input) &&
-    validateInputNumber(input);
-  if (!isValid) alert("입력값이 잘못되었습니다. 다시 입력해주세요 :)");
-  return isValid;
-};
-export { DIGITS, validateUserInput };
