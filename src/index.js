@@ -19,19 +19,22 @@ function restartGame() {
     if (target.id === 'game-restart-button') {
       $userInput.value = '';
       $result.textContent = '';
-      new BaseballGame();
     }
   });
 }
 
 export default function BaseballGame() {
   const $submit = document.querySelector('#submit');
-
   const computerInputNumbers = getRandomNumbers();
+
   let done = false;
   console.log(computerInputNumbers);
 
   this.play = function (computerInputNumbers, userInputNumbers) {
+    if (computerInputNumbers.length === 0) {
+      computerInputNumbers.push(...getRandomNumbers());
+      console.log(computerInputNumbers);
+    }
     return getGameResult(computerInputNumbers, userInputNumbers);
   };
 
@@ -44,6 +47,8 @@ export default function BaseballGame() {
     }
 
     if (done) {
+      done = false;
+      computerInputNumbers.length = 0;
       restartGame();
     }
   });
