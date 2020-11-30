@@ -11,7 +11,7 @@
 - 위 숫자 야구게임에서 상대방의 역할을 컴퓨터가 한다. 컴퓨터는 1에서 9까지 서로 다른 임의의 수 3개를 선택한다. 게임 플레이어는 컴퓨터가 생각하고 있는 3개의 숫자를 입력하고, 컴퓨터는 입력한 숫자에 대한 결과를 출력한다.
 - 이 같은 과정을 반복해 컴퓨터가 선택한 3개의 숫자를 모두 맞히면 게임이 종료된다.
 - 게임을 종료한 후 게임을 다시 시작할 수 있다.
-- 게임을 종료한 후 id가 `game-restart-button`인 버튼을 클릭함으로써 게임을 다시 시작할 수 있다. 
+- 게임을 종료한 후 id가 `game-restart-button`인 버튼을 클릭함으로써 게임을 다시 시작할 수 있다.
   - `예) <button id="game-restart-button">재시작</button>`
 
 <br>
@@ -87,3 +87,22 @@ play(123, 124); // '2스트라이크'
 - event
   - [이벤트](https://ko.javascript.info/introduction-browser-events)
   - [이벤트 위임](https://ko.javascript.info/event-delegation)
+
+## 기능 목록
+
+- 두 값을 입력 받아 각 자릿수를 비교하는데 같은 자리 같은 숫자면 스트라이크, 같은 자리에는 없지만 숫자가 포함되어 있으면 볼, 스트라이크나 볼이 없으면 낫싱(play(computerInput, userInput))
+- Strike와 Ball의 갯수를 판별해주는 함수 (verdictStrikeOrBall(computerInputstr, userInputStr))
+- ball가 strike 개수를 통해 적절한 message를 만들어주는 함수(makeResultMessage)
+- 입력 값의 각 자릿수가 다른지 검증해주는 함수(validateInput(userInput))
+- 두 인풋에서 에러가 있는지 확인 해주는 함수 (verdictInputError(computerInput, userInput))
+
+- 1부터 9까지 서로 다른 수 3자리를 만드는 함수(makeDiffNumber(length) - length -> 자릿 수)
+- 최대값 최소값을 받아 랜덤한 수를 만들어주는 함수(makeRadomValue(max, min))
+- 랜덤하게 생성된 computerNumbers를 가져오는 함수(getBaseball)
+- 랜덤 값을 다시 만들어주는 함수 (resetRandomBaseball)
+
+- 잘못 입력된 경우 alert을 통해 메시지를 보여주는 함수(showErrorAlert(str))
+- 게임 재시작해주는 함수(restartGame())
+- 사용자의 입력을 전달 해주는 함수 (sendBaseBall(userInput))
+- input Element의 값을 초기화 하고 focus 주는 함수(initValueAndFoucsIn(el) - element 전달)
+- 결과 보여주는 함수 (showResult({message, finished}))
