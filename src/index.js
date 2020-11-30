@@ -21,6 +21,23 @@ export default function BaseballGame() {
     this.addResetButton();
   };
 
+  // submitButton
+  const submitButton = document.getElementById('submit');
+  submitButton.addEventListener('click', (e) => {
+    this.submitButtonClickEvents(e.target);
+  });
+
+  this.submitButtonClickEvents = function() {
+    this.user = getInputNumbers();
+
+    if (isWrongValue(this.user)) {
+      alert(['다시 입력하세요!']);
+      return;
+    }
+    printPlayResult(this.play(this.computer, this.user));
+    if (this.computer == this.user) this.end();
+  };
+
 } // function BaseballGame() end
 
 // play
