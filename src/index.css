@@ -1,0 +1,10 @@
+#restart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#game-restart-button {
+  height: 25px;
+  margin-left: 10px;
+}
