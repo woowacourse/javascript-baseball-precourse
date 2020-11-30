@@ -36,17 +36,20 @@ export default function BaseballGame() {
 
   this.restartPlay = function() {
     state.randomNumber = randomNumberMaker(givenNumberLength);
+    submitButton.disabled = false;
     clearResult(state);
   };
 
   submitButton.addEventListener("click", () => {
     state.userInputValue = userInput();
     this.play(state.randomNumber, state.userInputValue);
-
+    
     if (isGameEnded(state.strikeCount)) {
       makeRestartBtn();
       const gameRestartButton = document.getElementById("game-restart-button");
 
+      submitButton.disabled = true;
+      
       gameRestartButton.addEventListener("click", () => {
         this.restartPlay();
       });
