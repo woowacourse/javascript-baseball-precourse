@@ -1,6 +1,10 @@
+import numberGenerator from "./numberGenerator.js";
+
 export default function BaseballGame() {
   const $userInput = document.querySelector("#user-input");
   const $submitBtn = document.querySelector("#submit");
+
+  const computerInputNumbers = numberGenerator();
 
   const hasSameNumber = (numberArray) => {
     const sameIndex = numberArray.filter(
