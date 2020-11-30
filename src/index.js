@@ -2,6 +2,8 @@
 
 export default function BaseballGame() {
   let computerInputNumbers = 0;
+  const resultContainer = document.getElementById("result");
+  const submitButton = document.getElementById("submit");
 
   const countStrike = function (computerInputNumbers, userInputNumbers) {
     let strikeCnt = 0;
@@ -42,14 +44,13 @@ export default function BaseballGame() {
         "<h3>🎉정답을 맞추셨습니다!🎉</h3>" +
         `<br> 게임을 새로 시작하시겠습니까? <button id = "restart-button">게임 재시작</button>`;
     } else {
-      if (strikes && balls) {
-        resultString = `${balls}볼 ${strikes}스트라이크`;
-      } else if (!strikes && balls) {
-        resultString = `${balls}볼`;
-      } else if (strikes && !balls) {
-        resultString = `${strikes}스트라이크`;
-      } else {
-        resultString = "낫싱";
+      if (balls > 0) {
+        resultString += `${balls}볼 `;
+      }
+      if (strikes > 0) {
+        resultString += `${strikes}스트라이크`;
+      } else if (!balls && !strikes) {
+        resultString += "낫싱";
       }
     }
 
@@ -69,17 +70,24 @@ export default function BaseballGame() {
       }
     }
     computerInputNumbers = parseInt(computerNumber);
+    console.log(computerInputNumbers);
+
     return;
   };
 
-  const startGame = function (userInputNumbers) {
-    let resultString = play(computerInputNumbers, userInputNumbers);
-    showResult(resultString);
+  const startGame = function () {
+    resultContainer.innerHTML = "";
+    getComputerNumber();
   };
 
-  const showResult = function (resultString) {
-    const resultContainer = document.getElementById("result");
+  const showResult = function (userInputNumbers) {
+    let resultString = play(computerInputNumbers, userInputNumbers);
     resultContainer.innerHTML = resultString;
+
+    const restartButton = document.getElementById("restart-button");
+    if (restartButton) {
+      restartButton.addEventListener("click", startGame);
+    }
   };
 
   // 123 ~ 987 사이에 있는 수인지
@@ -104,10 +112,10 @@ export default function BaseballGame() {
   };
 
   const validateInput = function (userInput) {
-    if (!(confirmThreeDigits(userInput) && confirmNoZero(userInput))) {
-      return false;
-    } else {
+    if (confirmThreeDigits(userInput) && confirmNoZero(userInput)) {
       return true;
+    } else {
+      return false;
     }
   };
 
@@ -117,19 +125,17 @@ export default function BaseballGame() {
 
     if (validateInput(userInput)) {
       userInputNumbers = parseInt(userInput, 10);
-      startGame(userInputNumbers);
+      showResult(userInputNumbers);
     }
 
     return;
   };
 
-  getComputerNumber();
-  const submitButton = document.getElementById("submit");
+  startGame();
+
   if (submitButton) {
     submitButton.addEventListener("click", getUserInput);
   }
-
-  console.log(computerInputNumbers);
 }
 
 new BaseballGame();
