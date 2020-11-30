@@ -1,6 +1,6 @@
 import getUserInput from '../input/getUserInput.js';
-import getRandomNumbers from '../utils/getRandomNumbers.js';
 import printGameResult from '../utils/printGameResult.js';
+import getRandomNumbers from '../utils/getRandomNumbers.js';
 
 function resetScreen() {
   const $result = document.querySelector('#result');

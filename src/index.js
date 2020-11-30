@@ -1,6 +1,6 @@
+import playGame from './game/playGame.js';
 import getGameResult from './game/getGameResult.js';
 import getRandomNumbers from './utils/getRandomNumbers.js';
-import playGame from './game/playGame.js';
 
 export default function BaseballGame() {
   const computerInputNumbers = getRandomNumbers();
