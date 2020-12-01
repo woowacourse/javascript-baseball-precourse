@@ -7,12 +7,14 @@ import {
   ERROR_MESSAGE,
   ANSWER_MESSAGE,
   NOTHING_MESSAGE,
-  RESTART_MESSAGE
+  RESTART_MESSAGE,
+  GAME_END_MESSAGE
 } from "./constants.js";
 
 export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = this.getRandomNumberList();
+    this.isGameEnded = false;
 
     this.clickSubmitButton();
   }
@@ -21,7 +23,11 @@ export default class BaseballGame {
     const _submitElement = document.querySelector("#submit");
 
     _submitElement.addEventListener("click", () => {
-      this.startGame();
+      if (!(this.isGameEnded)) {
+        this.startGame();
+      } else {
+        alert(GAME_END_MESSAGE);
+      }
     });
   }
 
@@ -47,6 +53,8 @@ export default class BaseballGame {
     document.querySelector("#user-input").value = "";
 
     this.computerInputNumbers = this.getRandomNumberList();
+    this.isGameEnded = false;
+    
     alert(RESTART_MESSAGE);
   }
 
@@ -126,6 +134,8 @@ export default class BaseballGame {
       if (ballStrikeList[STRIKE_INDEX] === 0) {
         resultString = NOTHING_MESSAGE;
       } else if (ballStrikeList[STRIKE_INDEX] === 3) {
+        this.isGameEnded = true;
+        
         resultString = ANSWER_MESSAGE;
       } else {
         resultString = `${ballStrikeList[STRIKE_INDEX]}스트라이크`;

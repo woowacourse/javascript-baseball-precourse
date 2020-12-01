@@ -13,3 +13,5 @@ export const ANSWER_MESSAGE =
   '<p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button></p>';
 export const NOTHING_MESSAGE = "낫싱";
 export const RESTART_MESSAGE = "게임을 다시 시작합니다.";
+export const GAME_END_MESSAGE = 
+  "게임이 종료되었습니다.\n게임 재시작 버튼을 눌러 게임을 다시 시작할 수 있습니다."
