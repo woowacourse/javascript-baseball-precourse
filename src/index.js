@@ -3,6 +3,8 @@ export default class BaseballGame {
     this.NUMBERS_LENGTH = 3;
     this.computerRandomNumbers;
     this.getComputerRandomNumbers();
+    // 이벤트리스너에서 호출할 함수에 bind를 이용하여 this를 전달하고 해당 함수를 미리 할당해놓음
+    this.checkUserInputNumbers = this.checkUserInputNumbers.bind(this);
     this.addClickEventListener();
   }
   // 볼, 스트라이크의 횟수를 계산하는 함수
@@ -59,48 +61,48 @@ export default class BaseballGame {
   addGameElements() {
     const gameResult = document.getElementById('game-result');
     const userInput = document.createElement('input');
-    const submit = document.createElement('button');
+    const submitBtn = document.createElement('button');
     const resultText = document.createElement('h3');
     const result = document.createElement('div');
     userInput.setAttribute('type', 'text');
     userInput.setAttribute('id', 'user-input');
-    submit.setAttribute('id', `submit`);
+    submitBtn.setAttribute('id', `submit`);
     result.setAttribute('id', `result`);
-    submit.append("확인");
-    submit.style.marginLeft = '6px';
+    submitBtn.append("확인");
+    submitBtn.style.marginLeft = '6px';
     resultText.append("📄 결과");
-    gameResult.append(userInput, submit, resultText, result);
+    gameResult.append(userInput, submitBtn, resultText, result);
     this.addClickEventListener();
   }
   // 게임을 재시작하기 위해서 결과들을 모두 초기화하는 함수
   gameRestart() {
-    const playResult = document.getElementById('game-result');
-    playResult.innerHTML = "";
+    const gameResult = document.getElementById('game-result');
+    gameResult.innerHTML = "";
     this.addGameElements();
     this.getComputerRandomNumbers();
   }
   // 기존 엘리먼트들의 id속성값을 제거하는 함수
-  removeElementsAttribute() {
+  removeElementsId() {
     const userInput = document.getElementById('user-input');
-    const submit = document.getElementById('submit');
+    const submit = document.getElementById(`submit`);
     const result = document.getElementById('result');
-    //submit.removeEventListener('click', this.checkUserInputNumbers);
-    userInput.removeAttribute('id');
+    submit.removeEventListener('click', this.checkUserInputNumbers);
     submit.removeAttribute('id');
+    userInput.removeAttribute('id');
     result.removeAttribute('id'); 
   }
   // 정답을 못 맞췄을때 실행되는 함수
   wrongResult() {
-    this.removeElementsAttribute();
+    this.removeElementsId();
     this.addGameElements();
   }
   // 정답을 맞췄을때 엘리먼트들을 새로 생성하는 함수
   correctResult(result) {
     result.innerHTML = `<p><strong>🎉정답을 맞추셨습니다!🎉</strong></p>
                         <span>게임을 새로 시작하시겠습니까?</span>
-                        <button id="game-restart-button">재시작</button>`;
+                        <button id="game-restart-button">게임 재시작</button>`;
     const gameRestartBtn = document.getElementById('game-restart-button');
-    gameRestartBtn.addEventListener('click', () => {this.gameRestart()});
+    gameRestartBtn.addEventListener('click', this.gameRestart.bind(this));
   }
   // 게임 결과를 화면에 출력하는 함수
   printResult(playResult) {
@@ -145,9 +147,8 @@ export default class BaseballGame {
   }
   //버튼에 클릭 이벤트 리스너를 추가하는 함수
   addClickEventListener() {
-    const submit = document.getElementById(`submit`);
-    //this바인딩 문제로 화살표 함수 사용
-    submit.addEventListener('click', () => {this.checkUserInputNumbers()});
+    const submit = document.getElementById('submit');
+    submit.addEventListener('click', this.checkUserInputNumbers);
   }
 }
 
