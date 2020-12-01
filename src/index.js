@@ -40,6 +40,29 @@ export default class BaseballGame {
     );
   }
 
+  getCountBallAndStrike(computerInputNumbers, userInputNumbers) {
+    const count = {
+      ball: 0,
+      strike: 0,
+    };
+
+    computerInputNumbers.forEach((computerInputNumber, computerNumberIndex) => {
+      const userNumberIndex = userInputNumbers.indexOf(computerInputNumber);
+
+      if (userNumberIndex === -1) {
+        return;
+      }
+
+      if (userNumberIndex === computerNumberIndex) {
+        ++count.strike;
+      } else {
+        ++count.ball;
+      }
+    });
+
+    return count;
+  }
+
   getRandomNumbers(min = 1, max = 9) {
     const numbers = [];
 
