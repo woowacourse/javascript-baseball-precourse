@@ -14,12 +14,12 @@ export default function BaseballGame() {
 
   _button.addEventListener('click', () => {
     PlayIfValid();
-  })
+  });
 
   _input.addEventListener('keypress', (e) => {
     if (e.keyCode === 13)
       PlayIfValid();
-  })
+  });
 
   const PlayIfValid = () => {
     const InputUtils = new HandleInput();
@@ -29,7 +29,7 @@ export default function BaseballGame() {
       let resultMessage = this.play(_answer, userValue);
       DisplayResult(resultMessage);
     }
-  }
+  };
 
 	this.play = function (computerInputNumbers, userInputNumbers) {
     let [ball, strike] = CountBallStrike(computerInputNumbers, userInputNumbers);
@@ -51,7 +51,7 @@ export default function BaseballGame() {
 		  resultMessage = 'success';
   
 	  return resultMessage;
-  }
+  };
 
 	const CountBallStrike = (answer, userValue) => {
 	  let ball = 0;
@@ -65,16 +65,21 @@ export default function BaseballGame() {
     }
 
 	  return [ball, strike];
-	}
+  };
 
-	const DisplayResult = (resultMessage) => {
+	const DisplayResult = async (resultMessage) => {
     const ResultUtils = new HandleResult();
 
-    if (resultMessage === 'success')
-      _answer = ResultUtils.IsCorrect();
+    if (resultMessage === 'success') {
+      const restartButton = ResultUtils.DisplaySuccessMessage();
+      
+      restartButton.addEventListener('click', () => {
+        _answer = _privateInitUtils.InitGame(_resultArea, _input);
+      })
+    }
     else
-      ResultUtils.IsWrong(resultMessage);
-  }
+      ResultUtils.DisplayFailureMessage(resultMessage);
+  };
 }
  
 new BaseballGame();

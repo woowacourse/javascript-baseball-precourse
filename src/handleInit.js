@@ -4,23 +4,22 @@ export default function HandleInit() {
 
     InitGameWindow(resultArea, input);
 
-    console.log(answer);
     return answer;
-  }
+  };
 
   const GenerateAnswer = () => {
     const candidate = OneToNine();
     const answer = PickRandomDigits(candidate);
     
     return answer;
-  }
+  };
 
   const InitGameWindow = (resultArea, input) => {
     resultArea.textContent = '';
     input.value = '';
     input.placeholder = '';
     input.focus();
-  }
+  };
 
   function OneToNine() {
     let candidate = [];
@@ -29,7 +28,7 @@ export default function HandleInit() {
       candidate.push(i);
       
     return candidate;
-  }
+  };
 
   const PickRandomDigits = (candidate) => {
     const answer = [];
@@ -40,5 +39,5 @@ export default function HandleInit() {
     }
 
     return answer;
-  }
+  };
 }

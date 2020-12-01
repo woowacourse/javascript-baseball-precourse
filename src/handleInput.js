@@ -13,7 +13,7 @@ export default class HandleInput {
     this.InputFieldConvenience(input, userValue);
 
     return userValue;
-  }
+  };
   
   CheckInputValidity(number) {
     const notZero = this.NotZero(number);
@@ -27,14 +27,14 @@ export default class HandleInput {
     }
 
     return this.IS_VALID;
-  }
+  };
 
   NotZero(number) {
     if (number.indexOf("0") !== -1)
       return this.IS_NOT_VALID;
 
     return this.IS_VALID;
-  }
+  };
 
   IsNumber(number) {
     for (let i = 0; i < number.length; i++) {
@@ -43,7 +43,7 @@ export default class HandleInput {
     }
 
     return this.IS_VALID;
-  }
+  };
 
   NoOverlap(number) {
     for (let i = 0; i < number.length; i++) {
@@ -52,14 +52,14 @@ export default class HandleInput {
     }
 
     return this.IS_VALID;
-  }
+  };
   
   IsThreeDigits(number) {
 	  if (number.length !== 3)
       return this.IS_NOT_VALID;
 
     return this.IS_VALID;
-  }
+  };
 
   CreateErrorMessage(notZero, isNumber, noOverlap, isThreeDigits) {
     let errorMessage = '';
@@ -78,7 +78,7 @@ export default class HandleInput {
     
     errorMessage += '숫자를 입력해주세요';
     this.AlertErrorMessage(errorMessage);
-  }
+  };
 
   AlertErrorMessage = (errorMessage => alert(errorMessage));
 
@@ -87,5 +87,5 @@ export default class HandleInput {
     input.focus();
     if (userValue !== this.IS_NOT_VALID)
       input.placeholder = userValue;
-  }	
+  };
 }
