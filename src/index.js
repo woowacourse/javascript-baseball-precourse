@@ -1,13 +1,15 @@
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
-}
+import playGame from './game/playGame.js';
+import getGameResult from './game/getGameResult.js';
+import getComputerInput from './input/getComputerInput.js';
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
+export default function BaseballGame() {
+  const computerInputNumbers = getComputerInput();
+
+  this.play = function (computerInputNumbers, userInputNumbers) {
+    return getGameResult(computerInputNumbers, userInputNumbers);
+  };
+
+  playGame(computerInputNumbers, this.play);
+}
 
 new BaseballGame();
