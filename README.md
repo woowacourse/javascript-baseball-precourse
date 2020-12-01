@@ -19,7 +19,7 @@
 <br>
 
 #### 2. `PlayIfValid()`
-  - 사용자 입력값이 유효하면('notValid'가 아니면) 게임 실행
+  - 사용자 입력값이 유효하면 게임 실행
     - `play()`와 `DisplayResult()` 호출
 
 <br>
@@ -44,8 +44,9 @@
 <br>
 
 #### 5. `DisplayResult()` 출력값을 받아 화면에 출력
-  - 결과값이 'success'면 `IsCorrect()` 호출
-  - 아니면 `IsWrong()` 호출
+  - 결과값이 'success'면 `DisplaySuccessMessage()` 호출
+    - 재시작버튼 클릭하면 InitGame()호출하는 이벤트 생성
+  - 아니면 `DisplayFailureMessage()` 호출
 
 <br>
 <br>
@@ -57,9 +58,8 @@
 
 <br>
 
-#### 2. `GenerateAnswer()` 정답 생성 후 리턴
+#### 2. `GenerateAnswer()` 답 생성
   - `OneToNine()` 호출해서 1~9까지 담긴 candidate 배열 생성
-  - `InitGameWindow()` 호출해서 게임화면 초기화
   - `PickRandomDigits()` 호출해서 정답 생성 후 리턴
 
 <br>
@@ -85,18 +85,22 @@
 <br>
 
 ## handleInput.js
+#### 0. 지역변수
+  - this.IS_VALID: 1
+  - this.IS_NOT_VALID: 0
+
 #### 1. `GetInput()` 사용자 입력값 리턴
   - `CheckInputValidity()` 호출해서 인풋값이 유효한지 확인
+    - 인풋이 유효하면 입력값 리턴
+    - 인풋이 유효하지 않으면 'notValid' 리턴
   - `InputFieldConvenience()` 호출
-  - 인풋이 유효하면 입력값 리턴
-  - 인풋이 유효하지 않으면 'notValid' 리턴
 
 <br>
 
 #### 2. `CheckInputValidity()` 사용자 입력값을 받아 유효한지 체크하는 함수
   - 유효성 검사하는 함수들 호출 `NotZero()`, `IsNumber()`, `NoOverlap()`, `IsThreeDigits()`
   - 유효하지 않으면 `CreateErrorMessage()` 호출
-  - 유효하면 'isValid' 리턴
+  - 유효하면 'this.IS__VALID' 리턴
 
 <br>
 
@@ -149,33 +153,18 @@
 <br>
 
 ## handleResult.js
-#### 1. `IsCorrect()` 정답인 경우의 결과창 관리
-  - _blockInput을 true로 전환 후 `BlockBeforeRestart()` 호출
-  - `DisplaySuccessMessage()` 호출해서 정답 결과창 출력
-  - `HandleRestartButton()` 호출해서 재시작버튼 클릭 이벤트 관리
+#### 0. 지역변수
+  - _resultArea
+  - _button
+  - _input
 
-<br>
-
-#### 2. `BlockBeforeRestart()`
-  - _blockInput이 true인 동안 입력이 들어오면 alert('게임을 재시작해주세요')
-  - _blockInput이 false면 리턴 0
-
-<br>
-
-#### 3. `DisplaySuccessMessage()` 정답 결과 메시지 생성 및 출력
+#### 1. `DisplaySuccessMessage()` 정답 결과 메시지 생성 및 출력
   - 결과 메시지 생성해서 결과창에 출력
     - '게임을 새로 시작하시겠습니까?'
     - **🎉 정답을 맞추셨습니다! 🎉**
-  - '게임 재시작' 재시작 버튼 생성
+  - '게임 재시작' 재시작 버튼 생성 후 리턴
 
 <br>
 
-#### 4. `HandleRestartButton()` 재시작 버튼 누르면 재시작
-  - 재시작 버튼 누르면
-    - _blockInput을 false로 전환
-    - `RestartGame()` 호출해서 게임 재시작
-
-<br>
-
-#### 5. `IsWrong()` 오답인 경우의 경과창 관리
+#### 2. `IsWrong()` 오답인 경우의 경과창 관리
   - 결과창에 결과 메시지 출력
