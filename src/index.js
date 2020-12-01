@@ -59,7 +59,11 @@ export default class BaseballGame {
   }
 
   restart() {
-    alert('restart');
+    document.getElementById('game-restart').hidden = true;
+    document.getElementById('user-input').value = '';
+    document.getElementById('result').innerHTML = '';
+
+    this.init();
   }
 
   checkValid(inputNumbers) {
