@@ -56,9 +56,16 @@ export default class BaseballGame {
     this._initValue();
     this._compareInput(computerInputNumbers, userInputNumbers);
 
-    if (!this._strike && !this._ball) return '낫싱';
-    if (!this._strike) return `${this._ball}볼`;
-    if (!this._ball) return `${this._strike}스트라이크`;
+    if (!this._strike && !this._ball) {
+      return '낫싱';
+    }
+    if (!this._strike) {
+      return `${this._ball}볼`;
+    }
+    if (!this._ball) {
+      return `${this._strike}스트라이크`;
+    }
+
     return `${this._ball}볼 ${this._strike}스트라이크`;
   }
 
