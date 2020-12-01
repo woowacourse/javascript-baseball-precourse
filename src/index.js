@@ -89,25 +89,31 @@ export default function BaseballGame() {
 
   this.restart = function() {
     document.getElementById("result").innerHTML = "";
-    this.setAnswer();
+    document.getElementById("submit").value = "";
+    document.getElementById("user-input").value = "";
+
+    return this.setAnswer();
   }
 }
 
 window.open = function() {
   const baseballGame = new BaseballGame();
+  let computerInputNumbers = baseballGame.setAnswer();
 
-  const computerInputNumbers = baseballGame.setAnswer();
-  console.log(computerInputNumbers);
-
-  document.getElementById("submit").onclick = function() {
-    const userInputNumbers = baseballGame.getUserInput();
-    if (baseballGame.checkUserInput(userInputNumbers) === true) {
-      const result = baseballGame.play(computerInputNumbers, userInputNumbers);
-      baseballGame.showResult(result);
-    } else {
-      baseballGame.alertInvalidInputMessage();
+  document.addEventListener('click', function(event) {
+    const id = event.target.id;
+    if (id === "submit") {
+      const userInputNumbers = baseballGame.getUserInput();
+      if (baseballGame.checkUserInput(userInputNumbers) === true) {
+        const result = baseballGame.play(computerInputNumbers, userInputNumbers);
+        baseballGame.showResult(result);
+      } else {
+        baseballGame.alertInvalidInputMessage();
+      }
+    } else if (id === "game-restart-button") {
+      computerInputNumbers = baseballGame.restart();
     }
-  }
+  });
 }
 
 window.open();
