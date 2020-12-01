@@ -20,8 +20,8 @@ function getResultText(strikeCount, ballCount) {
 }
 
 export default function getGameResult(computerInputNumbers, userInputNumbers) {
-  const computerInputArray = computerInputNumbers.toString().split('');
-  const userInputArray = userInputNumbers.toString().split('');
+  const computerInputArray = String(computerInputNumbers).split('');
+  const userInputArray = String(userInputNumbers).split('');
 
   const strikeCount = getStrikeCount(computerInputArray, userInputArray);
   const ballCount = getBallCount(computerInputArray, userInputArray);
