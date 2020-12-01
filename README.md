@@ -87,3 +87,13 @@ play(123, 124); // '2스트라이크'
 - event
   - [이벤트](https://ko.javascript.info/introduction-browser-events)
   - [이벤트 위임](https://ko.javascript.info/event-delegation)
+
+
+<br>
+
+## 🔥 구현할 기능 목록
+- [ ] 중복없는 세자리 숫자 만들기
+- [ ] 유저가 작성한 숫자 유효성 체크하기
+- [ ] 확인버튼 클릭 시 숫자 비교하기
+- [ ] 비교 결과에 따라 alert or 결과물 반영하기
+- [ ] 성공할 경우 재시작 버튼 눌러서 게임 초기화 하기
