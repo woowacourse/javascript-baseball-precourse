@@ -108,18 +108,18 @@ window.open = function() {
 
   document.addEventListener('click', function(event) {
     const id = event.target.id;
-    if (id === "submit") {
+    if (id === 'submit') {
       const userInputNumbers = baseballGame.getUserInput();
       if (baseballGame.checkUserInput(userInputNumbers) === true) {
-        const result = baseballGame.play(computerInputNumbers, userInputNumbers);
-        baseballGame.showResult(result);
+        const res = baseballGame.play(computerInputNumbers, userInputNumbers);
+        baseballGame.showResult(res);
       } else {
         baseballGame.alertInvalidInputMessage();
       }
-    } else if (id === "game-restart-button") {
+    } else if (id === 'game-restart-button') {
       computerInputNumbers = baseballGame.restart();
     }
   });
-}
+};
 
 window.open();
