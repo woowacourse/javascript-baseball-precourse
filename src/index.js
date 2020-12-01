@@ -6,7 +6,8 @@ import {
   BALL_INDEX,
   ERROR_MESSAGE,
   ANSWER_MESSAGE,
-  NOTHING_MESSAGE
+  NOTHING_MESSAGE,
+  RESTART_MESSAGE
 } from "./constants.js";
 
 export default class BaseballGame {
@@ -46,6 +47,7 @@ export default class BaseballGame {
     document.querySelector("#user-input").value = "";
 
     this.computerInputNumbers = this.getRandomNumberList();
+    alert(RESTART_MESSAGE);
   }
 
   printResult(userInputNumbers) {
@@ -89,10 +91,7 @@ export default class BaseballGame {
   }
 
   isNumber(userInputList) {
-    let i;
-
-    i = 0;
-    for (; i < userInputList.length; i++) {
+    for (let i = 0; i < userInputList.length; i++) {
       if (!("1" <= userInputList[i] && userInputList[i] <= "9")) {
         return false;
       }
@@ -114,10 +113,8 @@ export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
     let resultString = "";
     let ballStrikeList = [0, 0];
-    let i;
 
-    i = 0;
-    for (; i < userInputNumbers.length; i++) {
+    for (let i = 0; i < userInputNumbers.length; i++) {
       if (userInputNumbers[i] === computerInputNumbers[i]) {
         ballStrikeList[STRIKE_INDEX] += 1;
       } else if (computerInputNumbers.includes(userInputNumbers[i])) {
