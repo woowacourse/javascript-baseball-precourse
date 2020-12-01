@@ -12,7 +12,6 @@ function init() {
     let stopFlag = false;
 
     let computerInputNumbers = makeComputerNumbers();
-    console.log(computerInputNumbers);
 
     button.addEventListener("click", handleSubmitClick);
     reStartButton.addEventListener("click", reStart);
@@ -61,7 +60,6 @@ function init() {
     function reStart() {
         afterClickSettings("");
         computerInputNumbers = makeComputerNumbers();
-        console.log(computerInputNumbers);
         stopFlag = false;
     }
 }
