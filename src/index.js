@@ -26,6 +26,9 @@ export default class BaseballGame {
     this.userInputNumbers = userInputString.split("")
     const result = document.getElementById("result")
     result.innerHTML = this.play(this.computerInputNumbers, this.userInputNumbers)
+    console.log(this.computerInputNumbers, this.userInputNumbers)
+    const restart = document.getElementById("restart")
+    if (restart) restart.addEventListener("click", () => this.init())
   }
   setBtnEventListener() {
     const submitBtn = document.getElementById("submit")
@@ -34,6 +37,10 @@ export default class BaseballGame {
   init() {
     this.computerInputNumbers = this.createRandomNumbers()
     this.setBtnEventListener()
+    const userInput = document.getElementById("user-input")
+    userInput.value = ""
+    const result = document.getElementById("result")
+    result.innerHTML = ""
   }
   createRandomNumbers() {
     const randomNumbers = []
