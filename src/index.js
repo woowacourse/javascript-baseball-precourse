@@ -59,7 +59,7 @@ export default function BaseballGame() {
   };
 
   // 컴퓨터의 랜덤값과 유저의 입력값 비교 함수
-  this.play = function (computerInputNumbers, userInputNumbers) {
+  this.play = function(computerInputNumbers, userInputNumbers) {
     const arrayLength = 3;
     let result = document.querySelector("#result");
     let ballNumbers = 0;
