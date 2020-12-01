@@ -9,10 +9,12 @@
 ├── index.html
 └── src
     ├── index.js -> 게임을 진행하는 모듈을 호출하는 메인 모듈
+    │
     ├── game -----> 게임 진행과 관련된 모듚을 모아놓은 폴더
     │   ├── playGame.js ---------> 게임을 진행하는 모듈
     │   ├── getGameResult.js ----> 게임 결과를 계산해주는 모듈
     │   └── printGameResult.js --> 게임 결과를 화면에 출력해주는 모듈
+    │
     └── input ----> Computer와 USER의 인풋과 관련된 모듈을 모아놓은 폴더
         ├── getUserInput.js -----> USER에게 인풋을 받는 모듈
         ├── checkValidInput.js --> USER의 인풋이 올바른지 확인하는 모듈
