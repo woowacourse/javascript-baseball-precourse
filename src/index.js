@@ -1,3 +1,5 @@
+const NUMBER_SIZE = 3;
+
 export default class BaseballGame {
     constructor() {
         this.randomNumbers;
@@ -7,6 +9,8 @@ export default class BaseballGame {
         this.confirmBtn = document.querySelector('#submit');
         this.resultSection = document.querySelector('#result');
 
+        this.userInput.addEventListener('keyup', this.handleUserInput);
+
         this.gameInit();
     }
     gameInit() {
@@ -15,7 +19,7 @@ export default class BaseballGame {
 
     setRandomNumber() {
         const candidates = [];
-        while (candidates.length < 3) {
+        while (candidates.length < NUMBER_SIZE) {
             const candidate = Math.floor(Math.random() * 9) + 1;
             if (!candidates.includes(candidate)) {
                 candidates.push(candidate);
@@ -24,8 +28,23 @@ export default class BaseballGame {
         const generatedNumber = candidates.join('');
         this.randomNumbers = generatedNumber;
     }
-    // numberValidator() {}
-    // handleUserInput() {}
+    handleUserInput = (e) => {
+        const { value } = e.target;
+        this.userInputNumbers = value;
+    };
+    numberValidator() {
+        //아닌경우
+        // 길이가 3이 아닐때
+        if (this.userInputNumbers.length !== NUMBER_SIZE) {
+            return false;
+        }
+        // 중복 숫자가 있을때
+        const setNumbers = new Set(this.userInputNumbers);
+        if (setNumbers.size !== NUMBER_SIZE) {
+            return false;
+        }
+        return true;
+    }
     // onConfirmBtnClick() {}
     // showAlert() {}
     // compareNumbers() {}
