@@ -1,6 +1,18 @@
 const NUMBER_SIZE = 3;
 const SUCCESS_MESSAGE = '🎉정답을 맞추셨습니다!🎉';
 const NOTHING_MESSAGE = '낫싱';
+const ALERT_MESSAGE = '유효한 숫자를 입력해주세요!';
+
+const failFoam = (number, message) => `
+<input value=${number}> <button>확인</button>
+<h3>📄 결과</h3>
+<p>${message}</p>`;
+
+const successFoam = (message) =>
+    `
+<p><strong>${message}</strong></p>
+<p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">재시작</button></p>
+`;
 
 export default class BaseballGame {
     constructor() {
@@ -58,6 +70,8 @@ export default class BaseballGame {
                 this.randomNumbers,
                 this.userInputNumbers
             );
+
+            this.appendResult(resultMessage);
         } else {
             this.showAlert();
         }
@@ -81,8 +95,20 @@ export default class BaseballGame {
             strikeCount,
         };
     }
-    showAlert() {}
-    // appendResult() {}
+    showAlert() {
+        alert(ALERT_MESSAGE);
+    }
+    appendResult(message) {
+        console.log(this.randomNumbers);
+        if (message === SUCCESS_MESSAGE) {
+            this.resultSection.innerHTML += successFoam(message);
+        } else {
+            this.resultSection.innerHTML += failFoam(
+                this.userInputNumbers,
+                message
+            );
+        }
+    }
     // onRestartBtnClick() {}
 
     play(computerInputNumbers, userInputNumbers) {
