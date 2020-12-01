@@ -10,15 +10,22 @@ export default function BaseballGame() {
       this.status = 'END';
       return '<h4>🎉정답을 맞추셨습니다!🎉</h4>';
     }
+
     const balls = this.countBalls(computerInputNumbers, userInputNumbers);
     const strikes = this.countStrikes(computerInputNumbers, userInputNumbers);
     if (balls && !strikes) {
       return `<h5>${balls}볼</h5>`;
-    } else if (!balls && strikes) {
+    }
+
+    if (!balls && strikes) {
       return `<h5>${strikes}스트라이크</h5>`;
-    } else if (balls && strikes) {
+    }
+
+    if (balls && strikes) {
       return `<h5>${balls}볼 ${strikes}스트라이크</h5>`;
-    } else if (!balls && !strikes) {
+    }
+
+    if (!balls && !strikes) {
       return `<h5>낫싱</h5>`;
     }
   };
@@ -43,6 +50,7 @@ export default function BaseballGame() {
     if (first !== second && second !== third && third !== first) {
       return true;
     }
+
     return false;
   };
 
@@ -50,11 +58,17 @@ export default function BaseballGame() {
     const userInputNumbers = Number(userInputValue);
     if (userInputValue.includes('0')) {
       return '1에서 9까지의 수만 입력 가능합니다';
-    } else if (isNaN(userInputNumbers)) {
+    }
+
+    if (isNaN(userInputNumbers)) {
       return '숫자만 입력 가능합니다.';
-    } else if (userInputNumbers < 100 || 999 < userInputNumbers) {
+    }
+
+    if (userInputNumbers < 100 || 999 < userInputNumbers) {
       return '세자리 수만 입력 가능합니다.';
-    } else if (!this.isComposedOfDifferentNumber(userInputNumbers)) {
+    }
+
+    if (!this.isComposedOfDifferentNumber(userInputNumbers)) {
       return '서로 다른 숫자로 구성된 수만 입력 가능합니다.';
     }
   };
@@ -100,12 +114,14 @@ export default function BaseballGame() {
     if (this.status === 'END') {
       return;
     }
+
     const userInputValue = userInput.value;
     const notification = this.makeNotificationMessage(userInputValue);
     if (notification) {
       alert(notification);
       return;
     }
+
     const userInputNumbers = Number(userInputValue);
     const results = this.play(this.initComputerInputNumbers, userInputNumbers);
     result.innerHTML = results;
@@ -118,6 +134,7 @@ export default function BaseballGame() {
     if (e.target.tagName !== 'BUTTON') {
       return;
     }
+
     result.innerHTML = '';
     userInput.value = '';
     this.initComputerInputNumbers = this.makeRandomNumbers();
