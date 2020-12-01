@@ -5,18 +5,18 @@ export default function BaseballGame() {
   }
 
   this.setAnswer = function() {
-    let answer = [];
+    let answer = "";
   
     while (answer.length < 3) {
-      let num = this.getRandomInt(1, 9);
+      let num = String(this.getRandomInt(1, 9));
       
       if (answer.indexOf(num) > -1) {
         continue;
       } else {
-        answer.push(num);
+        answer += num;
       }
     }
-    
+
     return answer;
   }
   
@@ -38,11 +38,11 @@ export default function BaseballGame() {
   }
 
   this.countStrikeAndBall = function(computerInputNumbers, userInputNumbers) {
-    const computerNumberArray = String(computerInputNumbers).split("");
-    const userNumberArray = String(userInputNumbers).split("");
+    const computerNumberArray = computerInputNumbers.split("");
+    const userNumberArray = userInputNumbers.split("");
     let strike = 0;
     let ball = 0;
-  
+
     userNumberArray.forEach(x => {
       if (computerNumberArray.indexOf(x) > -1) {
         if (computerNumberArray.indexOf(x) === userNumberArray.indexOf(x)) {
@@ -60,7 +60,7 @@ export default function BaseballGame() {
     let retString = "";
   
     if (strike === 3) {
-      retString = "승리했습니다.";
+      retString = `승리했습니다.`;
     } else if (strike || ball) {
       retString = `${ball ? ball+"볼" : ""}${ball && strike ? " " : ""}${strike ? strike+"스트라이크" : ""}`
     } else {
@@ -83,8 +83,26 @@ export default function BaseballGame() {
   }
 
   this.play = function(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    const {strike, ball} = this.countStrikeAndBall(computerInputNumbers, userInputNumbers);
+    return this.getResult(strike, ball);
   };
 }
 
-new BaseballGame();
+window.open = function() {
+  const baseballGame = new BaseballGame();
+
+  const computerInputNumbers = baseballGame.setAnswer();
+  console.log(computerInputNumbers);
+
+  document.getElementById("submit").onclick = function() {
+    const userInputNumbers = baseballGame.getUserInput();
+    if (baseballGame.checkUserInput(userInputNumbers) === true) {
+      const result = baseballGame.play(computerInputNumbers, userInputNumbers);
+      baseballGame.showResult(result);
+    } else {
+      baseballGame.alertInvalidInputMessage();
+    }
+  }
+}
+
+window.open();
