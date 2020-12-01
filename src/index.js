@@ -19,11 +19,40 @@ export default function BaseballGame() {
     return selectedNum;
   }
 
+  this.validateNum = function(userInputNumbers) {
+    let isValidNum = true;
+    userInputNumbers = Array.from(new Set(userInputNumbers));
+    if (userInputNumbers.length !== 3){
+      isValidNum = false;
+      return isValidNum
+    }
+    userInputNumbers.forEach( val => {
+      if (parseInt(val) < 1 || parseInt(val) > 9){
+        isValidNum = false;
+      }
+    })
+    return isValidNum;
+  }
+
   this.init = function() {
     result.innerHTML = '';
     userInput.value = '';
     computerInputNumbers = this.randomNumGenerator();
   }
+
+  submitBtn.addEventListener("click", () => {
+    const userInputNumbers = userInput.value.split('');
+    const isValid = this.validateNum(userInputNumbers);
+
+    if(isValid){
+
+    }
+    else{
+      alert('잘못된 입력입니다. 다시 입력해주세요.');
+      userInput.value = '';
+    }
+
+  });
 
   this.init();
 }
