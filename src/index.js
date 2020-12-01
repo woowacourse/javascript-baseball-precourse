@@ -1,8 +1,9 @@
 export default function BaseballGame() {
 
+  /* set ComputerInputNumbers */
   this.getRandomInt = function(min, max) {
     return Math.floor(Math.random() * Math.floor(max - min + 1) + min);
-  }
+  };
 
   this.setAnswer = function() {
     let answer = "";
@@ -18,11 +19,17 @@ export default function BaseballGame() {
     }
 
     return answer;
-  }
+  };
   
+  /* get UserInputNumbers */
+  this.getUserInput = function() {
+    return document.getElementById("user-input").value;
+  };
+
+  /* check UserInputNumbers */
   this.isValidNumber = function(userInputNumbers) {
     return /[1-9]{3}/.test(userInputNumbers);
-  }
+  };
 
   this.isDuplicated = function(userInputNumbers) {
     const num = userInputNumbers.split("");
@@ -31,12 +38,17 @@ export default function BaseballGame() {
     });
   
     return isDup;
-  }
+  };
 
   this.checkUserInput = function(userInputNumbers) {
     return (this.isValidNumber(userInputNumbers) && !this.isDuplicated(userInputNumbers));
-  }
+  };
 
+  this.alertInvalidInputMessage = function() {
+    alert("잘못된 입력입니다.\n1-9사이의 세 자리 숫자를 중복없이 입력해 주세요.");
+  };
+
+  /* get the Result of Game */
   this.countStrikeAndBall = function(computerInputNumbers, userInputNumbers) {
     const computerNumberArray = computerInputNumbers.split("");
     const userNumberArray = userInputNumbers.split("");
@@ -54,7 +66,7 @@ export default function BaseballGame() {
     })
   
     return {strike, ball}
-  }
+  };
 
   this.getResult = function(strike, ball) {
     let retString = "";
@@ -68,32 +80,26 @@ export default function BaseballGame() {
     }
   
     return retString;
-  }
-
-  this.getUserInput = function() {
-    return document.getElementById("user-input").value;
-  }
-
-  this.showResult = function(string) {
-    document.getElementById("result").innerHTML = string;
-  }
-
-  this.alertInvalidInputMessage = function() {
-    alert("잘못된 입력입니다.\n1-9사이의 세 자리 숫자를 중복없이 입력해 주세요.");
-  }
+  };
 
   this.play = function(computerInputNumbers, userInputNumbers) {
     const {strike, ball} = this.countStrikeAndBall(computerInputNumbers, userInputNumbers);
     return this.getResult(strike, ball);
   };
 
+  /* show the Result of Game on Window */
+  this.showResult = function(string) {
+    document.getElementById("result").innerHTML = string;
+  };
+
+  /* restart the Game, init values. */
   this.restart = function() {
     document.getElementById("result").innerHTML = "";
     document.getElementById("submit").value = "";
     document.getElementById("user-input").value = "";
 
     return this.setAnswer();
-  }
+  };
 }
 
 window.open = function() {
