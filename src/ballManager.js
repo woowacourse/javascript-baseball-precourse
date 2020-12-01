@@ -77,6 +77,7 @@ function ballAndStrike(computerInputNumbers, userInputNumbers) {
 // 힌트 메시지 생성
 function makeHint(ball, strike) {
   let hint;
+
   if (strike === 3) {
     hint = GAME_SCORE.threeStrike;
   } else if (strike + ball === 0) {

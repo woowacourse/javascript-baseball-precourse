@@ -10,7 +10,7 @@ export default function main() {
   const restart = createElement("div", "게임을 새로 시작하시겠습니까?");
   const restartBtn = createElement("button", "게임 재시작");
 
-  // 숫자 야구 게임 실행
+  // 숫자 야구 게임 생성
   const game = new BaseballGame();
 
   let randomNumber = makeRandomNumber();
