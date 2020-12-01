@@ -1,3 +1,7 @@
+import {
+  InputError, RangeError, LengthError, DuplicationError,
+} from './input-error.js';
+
 export default class BaseballGame {
   constructor(app) {
     this._app = app;
@@ -16,6 +20,24 @@ export default class BaseballGame {
 
   restart() {
     alert('restart');
+  }
+
+  checkValid(inputNumbers) {
+    const regex = /^[1-9]*$/g;
+
+    if (!regex.test(inputNumbers)) {
+      throw new RangeError();
+    } else if (inputNumbers.length !== 3) {
+      throw new LengthError();
+    } else if (this.isDuplicate(inputNumbers)) {
+      throw new DuplicationError();
+    }
+  }
+
+  isDuplicate(inputNumbers) {
+    return inputNumbers.split('').some((number) =>
+      inputNumbers.indexOf(number) !== inputNumbers.lastIndexOf(number),
+    );
   }
 
   getRandomNumbers(min = 1, max = 9) {
