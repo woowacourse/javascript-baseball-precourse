@@ -33,13 +33,20 @@ export default class BaseballGameHandler {
   // 결과 출력
   renderResult(userInputNumbers, result) {
     const resultHTML = `<p>입력: ${userInputNumbers}</p><p><b>${result}</b></p><hr>`;
-    this.resultBox.innerHTML += resultHTML;
+    this.resultBox.insertAdjacentHTML("beforeEnd", resultHTML);
   }
 
   renderEnd() {
     const resultHTML = `<div>게임을 새로 시작하시겠습니까? <button id="game-restart-button" data-action="restart">게임 재시작</button></div>`;
-    this.resultBox.innerHTML += resultHTML;
+    this.resultBox.insertAdjacentHTML("beforeEnd", resultHTML);
     this.submitButton.disabled = true;
+  }
+
+  // 결과 히스토리 초기화
+  resetResult() {
+    while (this.resultBox.firstChild) {
+      this.resultBox.removeChild(this.resultBox.firstChild);
+    }
   }
 
   // 실행 이벤트
@@ -62,7 +69,7 @@ export default class BaseballGameHandler {
   // 재시작 이벤트
   restart = () => {
     this.game.init();
-    this.resultBox.innerHTML = "";
+    this.resetResult();
     this.submitButton.disabled = false;
   };
 
