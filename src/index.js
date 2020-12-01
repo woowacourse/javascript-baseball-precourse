@@ -15,7 +15,22 @@ export default class BaseballGame {
   }
 
   start() {
-    alert('start');
+    try {
+      const userInputNumbers = document.getElementById('user-input').value;
+      const result = this.play(this.computerInputNumbers, userInputNumbers);
+
+      if (this.isEnd) {
+
+      }
+
+      document.getElementById('result').innerHTML = result;
+    } catch (e) {
+      if (e instanceof InputError) {
+        alert(e.cause.message);
+      } else {
+        alert(e.message);
+      }
+    }
   }
 
   play(computerInputNumbers, userInputNumbers) {
