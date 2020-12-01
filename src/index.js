@@ -23,10 +23,13 @@ export default class BaseballGame {
       userInput.value = ""
       return
     }
+    this.userInputNumbers = userInputString.split("")
+    const result = document.getElementById("result")
+    result.innerHTML = this.play(this.computerInputNumbers, this.userInputNumbers)
   }
   setBtnEventListener() {
     const submitBtn = document.getElementById("submit")
-    submitBtn.addEventListener("click", (e) => this.getUserInputNumbers())
+    submitBtn.addEventListener("click", () => this.getUserInputNumbers())
   }
   init() {
     this.computerInputNumbers = this.createRandomNumbers()
@@ -42,7 +45,14 @@ export default class BaseballGame {
     return randomNumbers
   }
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String"
+    const strikeCount = computerInputNumbers.filter((computerNumber, index) => computerNumber === userInputNumbers[index]).length
+    const ballCount = computerInputNumbers.filter((computerNumber, index) => userInputNumbers.indexOf(computerNumber) !== index && userInputNumbers.indexOf(computerNumber) > -1).length
+    if (strikeCount === 3) return `🎉<strong>정답을 맞추셨습니다!</strong>🎉</b></br>게임을 새로 시작하시겠습니까? <button id="restart">재시작</button>`
+    if (strikeCount === 0 && ballCount === 0) return "낫싱"
+    const ballString = ballCount > 0 ? `${ballCount}볼` : ""
+    const strikeString = strikeCount > 0 ? ` ${strikeCount}스트라이크` : ""
+    const resultString = ballString + strikeString
+    return resultString
   }
 }
 
