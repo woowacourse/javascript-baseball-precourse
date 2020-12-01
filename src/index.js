@@ -60,7 +60,7 @@ export default function BaseballGame() {
     let retString = "";
   
     if (strike === 3) {
-      retString = `승리했습니다.`;
+      retString = "승리했습니다. <button id='game-restart-button'>게임 재시작</button>";
     } else if (strike || ball) {
       retString = `${ball ? ball+"볼" : ""}${ball && strike ? " " : ""}${strike ? strike+"스트라이크" : ""}`
     } else {
@@ -75,7 +75,7 @@ export default function BaseballGame() {
   }
 
   this.showResult = function(string) {
-    document.getElementById("result").innerText = string;
+    document.getElementById("result").innerHTML = string;
   }
 
   this.alertInvalidInputMessage = function() {
@@ -86,6 +86,11 @@ export default function BaseballGame() {
     const {strike, ball} = this.countStrikeAndBall(computerInputNumbers, userInputNumbers);
     return this.getResult(strike, ball);
   };
+
+  this.restart = function() {
+    document.getElementById("result").innerHTML = "";
+    this.setAnswer();
+  }
 }
 
 window.open = function() {
