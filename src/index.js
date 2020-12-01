@@ -53,6 +53,14 @@ export default class BaseballGame {
     };
     numberValidator() {
         //아닌경우
+        //입력값이 1~9 가 아닐때
+        const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        for (let i = 0; i < this.userInputNumbers.length; i++) {
+            if (!numbers.includes(this.userInputNumbers[i])) {
+                return false;
+            }
+        }
+
         // 길이가 3이 아닐때
         if (this.userInputNumbers.length !== NUMBER_SIZE) {
             return false;
