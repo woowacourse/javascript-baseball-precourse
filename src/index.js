@@ -2,6 +2,7 @@ export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = []
     this.userInputNumbers = []
+    this.isRestart = false
   }
 
   inputValidation(string) {
@@ -27,8 +28,11 @@ export default class BaseballGame {
     const result = document.getElementById("result")
     result.innerHTML = this.play(this.computerInputNumbers, this.userInputNumbers)
     console.log(this.computerInputNumbers, this.userInputNumbers)
-    const restart = document.getElementById("restart")
-    if (restart) restart.addEventListener("click", () => this.init())
+    const restartBtn = document.getElementById("restart")
+    if (restartBtn) {
+      restartBtn.addEventListener("click", () => this.init())
+      this.isRestart = true
+    }
   }
   setBtnEventListener() {
     const submitBtn = document.getElementById("submit")
@@ -36,7 +40,8 @@ export default class BaseballGame {
   }
   init() {
     this.computerInputNumbers = this.createRandomNumbers()
-    this.setBtnEventListener()
+    if (!this.isRestart) this.setBtnEventListener()
+
     const userInput = document.getElementById("user-input")
     userInput.value = ""
     const result = document.getElementById("result")
@@ -45,9 +50,9 @@ export default class BaseballGame {
   createRandomNumbers() {
     const randomNumbers = []
     while (randomNumbers.length < 3) {
-      const randomNumber = Math.floor(Math.random() * (10 - 1)) + 1
+      const randomNumber = (Math.floor(Math.random() * (10 - 1)) + 1).toString()
       if (randomNumbers.indexOf(randomNumber) !== -1) continue
-      randomNumbers.push(randomNumber.toString())
+      randomNumbers.push(randomNumber)
     }
     return randomNumbers
   }
