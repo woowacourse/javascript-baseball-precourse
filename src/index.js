@@ -104,11 +104,11 @@ export default class BaseballGame {
 
     return reStartButton.addEventListener(
       'click',
-      this._gameReStart.bind(this),
+      this._onGameReStart.bind(this),
     );
   }
 
-  _gameReStart() {
+  _onGameReStart() {
     const userInput = document.body.querySelector('#user-input');
     const resultDiv = document.body.querySelector('#result');
 

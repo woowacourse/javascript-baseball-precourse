@@ -5,7 +5,7 @@ const submitButton = baseballWrapper.querySelector('#submit');
 const userInput = baseballWrapper.querySelector('#user-input');
 const game = new BaseballGame();
 
-const submitUserInput = () => {
+const onSubmitUserInput = () => {
   const {runningGame, answer} = game;
   if (!runningGame) {
     return alert('게임을 재시작해주세요.');
@@ -18,4 +18,4 @@ const submitUserInput = () => {
   return game.showResultOnScreen(resultText);
 };
 
-submitButton.addEventListener('click', submitUserInput);
+submitButton.addEventListener('click', onSubmitUserInput);
