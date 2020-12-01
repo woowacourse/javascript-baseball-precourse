@@ -40,6 +40,24 @@ export default class BaseballGame {
     );
   }
 
+  getResultMessage({ball, strike}) {
+    let resultMessage;
+
+    if (strike === 3) {
+      resultMessage = '<b>🎉 정답을 맞추셨습니다! 🎉</b>';
+    } else if (ball === 0 && strike === 0) {
+      resultMessage = '낫싱';
+    } else if (ball > 0 && strike > 0) {
+      resultMessage = `${ball}볼 ${strike}스트라이크`;
+    } else if (ball > 0) {
+      resultMessage = `${ball}볼`;
+    } else {
+      resultMessage = `${strike}스트라이크`;
+    }
+
+    return resultMessage;
+  }
+
   getCountBallAndStrike(computerInputNumbers, userInputNumbers) {
     const count = {
       ball: 0,
