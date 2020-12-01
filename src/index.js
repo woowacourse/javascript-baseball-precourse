@@ -7,6 +7,8 @@ export default function BaseballGame() {
   const MIN_NUM = 1;
   const NUM_LENGTH = 3;
   let computerInputNumbers = [];
+  let userInputNumbers = [];
+
 
   this.generateRandomNum = function () {
     let selectedNum = new Array();
@@ -21,7 +23,8 @@ export default function BaseballGame() {
     return selectedNum;
   }
 
-  this.validateNum = function(userInputNumbers) {
+  this.validateUserInput = function() {
+    userInputNumbers = userInput.value.split('');
     let isValid = true;
     userInputNumbers = Array.from(new Set(userInputNumbers));
     if (userInputNumbers.length !== NUM_LENGTH){
@@ -29,7 +32,12 @@ export default function BaseballGame() {
       return isValid
     }
     userInputNumbers.forEach( val => {
-      if (parseInt(val) < MIN_NUM || parseInt(val) > MAX_NUM){
+      let valToInt = parseInt(val);
+      // 숫자가 아닌 입력인 경우
+      if (isNaN(valToInt)){
+        isValid = false;
+      }
+      if (valToInt < MIN_NUM || valToInt > MAX_NUM){
         isValid = false;
       }
     })
@@ -93,8 +101,7 @@ export default function BaseballGame() {
   }
 
   submitBtn.addEventListener("click", () => {
-    const userInputNumbers = userInput.value.split('');
-    const isValid = this.validateNum(userInputNumbers);
+    const isValid = this.validateUserInput();
 
     if(isValid){
       const hints = this.play(computerInputNumbers, userInputNumbers);
