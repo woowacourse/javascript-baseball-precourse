@@ -2,16 +2,19 @@ const NUMBER_SIZE = 3;
 const SUCCESS_MESSAGE = '🎉정답을 맞추셨습니다!🎉';
 const NOTHING_MESSAGE = '낫싱';
 const ALERT_MESSAGE = '유효한 숫자를 입력해주세요!';
+const RESTART_ID = 'game-restart-button';
 
 const failFoam = (number, message) => `
+<div class ="divider"></div>
 <input value=${number}> <button>확인</button>
 <h3>📄 결과</h3>
-<p>${message}</p>`;
+<p>${message}</p>
+`;
 
 const successFoam = (message) =>
     `
 <p><strong>${message}</strong></p>
-<p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">재시작</button></p>
+<p>게임을 새로 시작하시겠습니까? <button id=${RESTART_ID}>재시작</button></p>
 `;
 
 export default class BaseballGame {
@@ -30,6 +33,7 @@ export default class BaseballGame {
     }
     gameInit() {
         this.setRandomNumber();
+        this.resultSection.innerHTML = '';
     }
 
     setRandomNumber() {
@@ -99,9 +103,10 @@ export default class BaseballGame {
         alert(ALERT_MESSAGE);
     }
     appendResult(message) {
-        console.log(this.randomNumbers);
         if (message === SUCCESS_MESSAGE) {
             this.resultSection.innerHTML += successFoam(message);
+            const restartBtn = document.querySelector(`#${RESTART_ID}`);
+            this.setOnClick(restartBtn, this.onRestartBtnClick);
         } else {
             this.resultSection.innerHTML += failFoam(
                 this.userInputNumbers,
@@ -109,7 +114,14 @@ export default class BaseballGame {
             );
         }
     }
-    // onRestartBtnClick() {}
+
+    setOnClick = (target, onClick) => {
+        target.addEventListener('click', onClick);
+    };
+
+    onRestartBtnClick = () => {
+        this.gameInit();
+    };
 
     play(computerInputNumbers, userInputNumbers) {
         let result = '';
