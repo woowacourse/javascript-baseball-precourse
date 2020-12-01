@@ -43,6 +43,7 @@ const endGame = (e) => {
   `;
 
   e.target.closest('#app').append(container);
+  window.idx = -1;
 }
 
 const submitNums = (e) => {

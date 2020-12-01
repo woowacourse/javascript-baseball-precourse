@@ -28,7 +28,7 @@
     - 1부터 9까지의 숫자로만 이루어져 있는가
     - 정확히 3개의 숫자가 입력되었는가
     - 중복되는 숫자는 없는가
-  - 입력이 유효할 경우 true를 반환, flase를 반환
+  - 입력이 유효할 경우 true를 반환, 아니면 flase를 반환
 
 - 볼이 있는지 확인
   - countBalls(컴퓨터의 값, 유저의 입력) 메서드로 구현
@@ -45,7 +45,7 @@
   - addNewInput 함수로 구현
   
 - 게임 종료 메시지와 함께 재시간 버튼 추가
-  - endGame 함수로 
+  - endGame 함수로 구현
   
 - button(id=submit) click 이벤트
   - 입력 값 유효성 확인
@@ -57,11 +57,13 @@
 
 - button(id=game-restart-button) click 이벤트
   - 화면 초기화
-  - comNum을 새로운 3자리 랜덤 값으로 
+  - comNum을 새로운 3자리 랜덤 값으로 초기화
 
 \+ 추가 기능
   1. 새로운 입력 폼이 추가될 시 해당 폼에 포커스
   2. enter입력으로 submit button과 같은 기능 실행
+    - submit버튼 클릭 이벤트에 대한 로직(onClickSubmitBtn)을 별개의 함수(submitNums)로 분리
+    - 버튼 클릭 이벤트(onClickSubmitBtn)와 엔터키 이벤트(onPressEnter)에서 submitNums 호출
 
 
 <br>
