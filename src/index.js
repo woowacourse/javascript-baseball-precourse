@@ -51,8 +51,8 @@ function init() {
         }
     }
 
-    function afterClickSettings(textContent) {
-        result.textContent = textContent;
+    function afterClickSettings(resultText) {
+        result.textContent = resultText;
         userInput.value = "";
         userInput.focus();
         reStartDiv.textContent = "";
