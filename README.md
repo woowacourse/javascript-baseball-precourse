@@ -1,5 +1,21 @@
 # ⚾ 미션 - 숫자 야구 게임
 
+## 📝 구현할 기능 목록
+
+- 컴퓨터의 랜덤 값 생성
+  - 3자리 숫자 (문자 x)
+  - 각 자리 숫자는 1~9 사이
+  - 숫자는 중복되어 사용될 수 없음
+- 유저의 입력 값 받고 형식에 맞는지 확인
+  - 사용자 입력 값이 유효한지 판정을 위한 조건은 랜덤 값 생성 시 조건과 같음
+  - 사용자 입력 값이 잘못된 경우 alert를 이용해 메시지를 보여준다.
+  - 확인 버튼 클릭 이벤트 등록
+- 랜덤 값과 입력 값 비교하여 힌트 출력 / 정답 시 게임 종료
+- 게임 종료 시 안내 문구와 함께 게임 재시작 버튼 생성
+  - 재시작 버튼 클릭 이벤트 등록
+
+<br>
+
 ## 🎯 기능 요구사항
 
 - 기본적으로 1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 맞추는 게임이다.
@@ -13,12 +29,6 @@
 - 게임을 종료한 후 게임을 다시 시작할 수 있다.
 - 게임을 종료한 후 id가 `game-restart-button`인 버튼을 클릭함으로써 게임을 다시 시작할 수 있다. 
   - `예) <button id="game-restart-button">재시작</button>`
-
-<br>
-
-## 💻 프로그래밍 실행 결과
-
-![baseball_result](https://user-images.githubusercontent.com/50367798/100166088-32473e00-2eff-11eb-9454-5d45e648b37e.jpg)
 
 <br>
 
@@ -65,25 +75,3 @@ play(123, 124); // '2스트라이크'
 
 <br>
 
-## 📝 미션 저장소 및 진행 요구사항
-
-- 저장소를 fork/clone해 시작한다.
-- **기능을 구현하기 전에 README.md 파일에 구현할 기능 목록**을 정리해 추가한다.
-- **git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가**한다.
-- [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서 절차를 따라 미션을 제출한다.
-
-<br>
-
-## 🔗 참고 링크
-
-미션 진행이 어렵다면 아래 링크를 참고한다.
-
-- DOM
-  - [MDN DOM](https://developer.mozilla.org/ko/docs/Web/API/Document_Object_Model/%EC%86%8C%EA%B0%9C)
-- alert
-  - [MDN alert](https://developer.mozilla.org/ko/docs/Web/API/Window/alert)
-- javascript module
-  - [module](https://ko.javascript.info/modules-intro)
-- event
-  - [이벤트](https://ko.javascript.info/introduction-browser-events)
-  - [이벤트 위임](https://ko.javascript.info/event-delegation)
