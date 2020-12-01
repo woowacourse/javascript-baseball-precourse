@@ -76,9 +76,14 @@ export default function BaseballGame() {
 
     if(isValid){
       const resultString = this.play(computerInputNumbers, userInputNumbers);
-      console.log(resultString);
       if (resultString === '정답'){
-
+        result.innerHTML = `🎉 <strong>정답을 맞추셨습니다!</strong> 🎉<br><br>
+        게임을 새로 시작하겠습니까? 
+         <button id="game-restart-button">게임 재시작</button>`
+        const restartBtn = document.querySelector("#game-restart-button");
+        restartBtn.addEventListener("click", () => {
+          this.init();
+        });
       }
       else{
         result.innerHTML = resultString;
