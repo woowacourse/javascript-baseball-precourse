@@ -1,43 +1,45 @@
 export default function BaseballGame() {
   const play = function (computerInputNumbers, userInputNumbers) {
-    let resultString = "";
+    const resultArray = [];
 
     const computerNumberArray = parseNumber(computerInputNumbers);
     const userNumberArray = parseNumber(userInputNumbers);
 
+    const { strikeCount, ballCount } = counter(computerNumberArray, userNumberArray);
+
+    if (ballCount > 0) {
+      resultArray.push(`${ballCount}볼`);
+    }
+
+    if (strikeCount > 0 && strikeCount !== 3) {
+      resultArray.push(`${strikeCount}스트라이크`);
+    }
+
+    if (ballCount === 0 && strikeCount === 0) { 
+      resultArray.push(`낫싱`);
+    }
+
+    if (strikeCount === 3) {
+      resultArray.push(`정답을 맞추셨습니다!<br/>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button>`);
+    }
+
+    // console.log({ ballCount, strikeCount })
+    return resultArray.join(' ');
+  };
+
+  const counter = function (computerNumberArray, userNumberArray) {
     let strikeCount = 0;
     let ballCount = 0;
 
     for (let i = 0; i < 3; i++) {
-      if (computerNumberArray[i] === userNumberArray[i]) strikeCount++;
+      if (computerNumberArray[i] === userNumberArray[i])
+        strikeCount++;
       else if (computerNumberArray.indexOf(userNumberArray[i]) !== -1)
         ballCount++;
-    }
+    } 
 
-    if (ballCount > 0) {
-      resultString += `${ballCount}볼`;
-    }
-
-    if (strikeCount > 0) {
-      resultString +=
-        ballCount > 0
-          ? ` ${strikeCount}스트라이크`
-          : `${strikeCount}스트라이크`;
-    }
-
-    if (ballCount === 0 && strikeCount === 0) {
-      resultString += "낫싱";
-    }
-
-    if (strikeCount === 3) {
-      resultString =
-        "정답을 맞추셨습니다!" +
-        '<br/>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button>';
-    }
-
-    // console.log({ ballCount, strikeCount })
-    return resultString;
-  };
+    return { strikeCount, ballCount };
+  }
 
   const handleClick = function () {
     const value = document.getElementById("user-input").value;
@@ -74,7 +76,7 @@ export default function BaseballGame() {
 }
 
 const getRandomNumber = function () {
-  return Math.floor(Math.random() * Math.floor(9)) + 1;
+  return Math.floor(Math.random() * 9) + 1;
 };
 
 const computingNumber = function () {
