@@ -74,11 +74,11 @@ export default class BaseballGame {
   }
 
   onClickSubmitButton() {
-    const userInput = this.$userInput.value;
+    const userInputString = this.$userInput.value;
     // console.log(`유저의 입력값: ${userInput}`);
 
-    if (this.isValid(userInput)) {
-      const userInputNumbers = Number(userInput);
+    if (this.isValid(userInputString)) {
+      const userInputNumbers = Number(userInputString);
       const playResult = this.play(this.answer, userInputNumbers);
       // console.log(`힌트: ${playResult}`);
 
@@ -86,13 +86,13 @@ export default class BaseballGame {
       this.$userInput.disabled = isUserFoundAnswer;
 
       this.setState([{
-        userInput: userInputNumbers, 
+        userInputNumbers,
         playResult,
         isUserFoundAnswer
       },
       ...this.roundData]);
     } else {
-      alert(`'${userInput}'은(는) 유효한 입력값이 아닙니다. 다시 입력해주세요.`);
+      alert(`'${userInputString}'은(는) 유효한 입력값이 아닙니다. 다시 입력해주세요.`);
     };
 
     this.$userInput.value = "";
@@ -182,14 +182,14 @@ export default class BaseballGame {
 
   render() {
     this.$result.innerHTML = this.roundData.map((data, index, arr) => {
-      const {userInput, playResult, isUserFoundAnswer} = data;
+      const {userInputNumbers, playResult, isUserFoundAnswer} = data;
       let _returnHTML = "";
       
       if (isUserFoundAnswer) {
         _returnHTML = this.getAnswerFoundHTMLString();
       };
 
-      _returnHTML += this.getRoundResultHTMLString({numRound: arr.length - index, userInput, playResult});
+      _returnHTML += this.getRoundResultHTMLString({numRound: arr.length - index, userInputNumbers, playResult});
 
       return _returnHTML;
     }).join("");
@@ -209,12 +209,12 @@ export default class BaseballGame {
     `;
   }
 
-  getRoundResultHTMLString({numRound, userInput, playResult}) {
+  getRoundResultHTMLString({numRound, userInputNumbers, playResult}) {
     
     return `
       <div class="result__row-container">
         <div>
-          <strong>${numRound}라운드: ${userInput}</strong>
+          <strong>${numRound}라운드: ${userInputNumbers}</strong>
         </div>
         <div class="result__play-result">${playResult}</div>
         <hr>
