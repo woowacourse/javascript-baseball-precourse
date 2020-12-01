@@ -1,13 +1,28 @@
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
+export default class BaseballGame {
+  constructor(app) {
+    this._app = app;
+    app.onclick = this.onClick.bind(this);
+  }
+
+  start() {
+    alert('start');
+  }
+
+  restart() {
+    alert('restart');
+  }
+
+  onClick(event) {
+    const targetId = event.target.id;
+
+    if (targetId === 'submit') {
+      this.start();
+    }
+
+    if (targetId === 'game-restart-button') {
+      this.restart();
+    }
+  }
 }
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
-
-new BaseballGame();
+new BaseballGame(document.getElementById('app'));
