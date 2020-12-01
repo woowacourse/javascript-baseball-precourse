@@ -148,4 +148,4 @@ export default function BaseballGame() {
   result.addEventListener('click', this.handleClickRestart);
 }
 
-const a = new BaseballGame();
+new BaseballGame();
