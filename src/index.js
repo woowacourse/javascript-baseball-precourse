@@ -13,19 +13,19 @@ export default function BaseballGame() {
 
     const balls = this.countBalls(computerInputNumbers, userInputNumbers);
     const strikes = this.countStrikes(computerInputNumbers, userInputNumbers);
-    if (balls && !strikes) {
+    if (balls !== 0 && strikes === 0) {
       return `<h5>${balls}볼</h5>`;
     }
 
-    if (!balls && strikes) {
+    if (balls === 0 && strikes !== 0) {
       return `<h5>${strikes}스트라이크</h5>`;
     }
 
-    if (balls && strikes) {
+    if (balls !== 0 && strikes !== 0) {
       return `<h5>${balls}볼 ${strikes}스트라이크</h5>`;
     }
 
-    if (!balls && !strikes) {
+    if (balls === 0 && strikes === 0) {
       return `<h5>낫싱</h5>`;
     }
   };
@@ -145,4 +145,4 @@ export default function BaseballGame() {
   result.addEventListener('click', this.handleClickRestart);
 }
 
-new BaseballGame();
+const a = new BaseballGame();
