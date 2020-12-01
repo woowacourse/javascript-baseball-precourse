@@ -99,10 +99,10 @@ export default class BaseballGame {
     <div id=restart-text>게임을 새로 시작하시겠습니까? </div>`;
     this.runningGame = false;
 
-    return this._reStartButton();
+    return this._createReStartButton();
   }
 
-  _reStartButton() {
+  _createReStartButton() {
     const restartDiv = document.body.querySelector('#restart-text');
     const reStartButton = document.createElement('button');
     reStartButton.id = 'game-restart-button';
