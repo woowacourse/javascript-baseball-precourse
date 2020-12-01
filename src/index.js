@@ -34,6 +34,36 @@ export default function BaseballGame() {
     return isValidNum;
   }
 
+  this.play = function (computerInputNumbers, userInputNumbers) {
+    let OUTPUT = '';
+    let strike = 0;
+    let ball = 0;
+
+    computerInputNumbers.forEach( (item, idx) => {
+      if (userInputNumbers.indexOf(item) === idx){
+        strike++;
+      }
+      else if (userInputNumbers.indexOf(item) !== -1){
+        ball++;
+      }
+    } )
+
+    if (strike === 0 && ball === 0){
+      OUTPUT = '낫싱'
+    }
+    else if (strike === 3){
+      OUTPUT = '정답'
+    }
+    else if (ball && strike){
+      OUTPUT += `${ball}볼 ${strike}스트라이크`;
+    }
+    else{
+      ball ? OUTPUT += `${ball}볼` : OUTPUT += `${strike}스트라이크`;
+    }
+
+    return OUTPUT;
+  };
+
   this.init = function() {
     result.innerHTML = '';
     userInput.value = '';
@@ -45,6 +75,14 @@ export default function BaseballGame() {
     const isValid = this.validateNum(userInputNumbers);
 
     if(isValid){
+      const resultString = this.play(computerInputNumbers, userInputNumbers);
+      console.log(resultString);
+      if (resultString === '정답'){
+
+      }
+      else{
+        result.innerHTML = resultString;
+      }
 
     }
     else{
