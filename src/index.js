@@ -1,4 +1,6 @@
 const NUMBER_SIZE = 3;
+const SUCCESS_MESSAGE = '🎉정답을 맞추셨습니다!🎉';
+const NOTHING_MESSAGE = '낫싱';
 
 export default class BaseballGame {
     constructor() {
@@ -10,6 +12,7 @@ export default class BaseballGame {
         this.resultSection = document.querySelector('#result');
 
         this.userInput.addEventListener('keyup', this.handleUserInput);
+        this.confirmBtn.addEventListener('click', this.onConfirmBtnClick);
 
         this.gameInit();
     }
@@ -45,15 +48,64 @@ export default class BaseballGame {
         }
         return true;
     }
-    // onConfirmBtnClick() {}
-    // showAlert() {}
-    // compareNumbers() {}
+    clearUserInput() {
+        this.userInput.value = '';
+    }
+    onConfirmBtnClick = () => {
+        const availability = this.numberValidator();
+        if (availability) {
+            const resultMessage = this.play(
+                this.randomNumbers,
+                this.userInputNumbers
+            );
+        } else {
+            this.showAlert();
+        }
+        this.clearUserInput();
+    };
+
+    compareNumbers(firstNumbers, secondNumbers) {
+        let ballCount = 0;
+        let strikeCount = 0;
+        for (let i = 0; i < firstNumbers.length; i++) {
+            if (firstNumbers.includes(secondNumbers[i])) {
+                ballCount++;
+            }
+            if (firstNumbers[i] === secondNumbers[i]) {
+                strikeCount++;
+                ballCount--;
+            }
+        }
+        return {
+            ballCount,
+            strikeCount,
+        };
+    }
+    showAlert() {}
     // appendResult() {}
     // onRestartBtnClick() {}
-    // gameInit() {}
 
     play(computerInputNumbers, userInputNumbers) {
-        return '결과 값 String';
+        let result = '';
+        const { ballCount, strikeCount } = this.compareNumbers(
+            computerInputNumbers,
+            userInputNumbers
+        );
+        if (strikeCount === NUMBER_SIZE) {
+            result = SUCCESS_MESSAGE;
+            return result;
+        }
+        if (strikeCount === 0 && ballCount === 0) {
+            result = NOTHING_MESSAGE;
+            return result;
+        }
+        if (ballCount !== 0) {
+            result += `${ballCount}볼 `;
+        }
+        if (strikeCount !== 0) {
+            result += `${strikeCount}스트라이크`;
+        }
+        return result;
     }
 }
 
