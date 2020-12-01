@@ -18,6 +18,31 @@ export default class BaseballGame {
     alert('start');
   }
 
+  play(computerInputNumbers, userInputNumbers) {
+    try {
+      this.checkValid(userInputNumbers);
+
+      const count = this.getCountBallAndStrike(
+          computerInputNumbers,
+          userInputNumbers,
+      );
+
+      if (count.strike === 3) {
+        this.isEnd = true;
+      }
+
+      return this.getResultMessage(count);
+    } catch (e) {
+      if (e instanceof RangeError ||
+          e instanceof LengthError ||
+          e instanceof DuplicationError) {
+        throw new InputError('Input Error', e);
+      } else {
+        throw e;
+      }
+    }
+  }
+
   restart() {
     alert('restart');
   }
