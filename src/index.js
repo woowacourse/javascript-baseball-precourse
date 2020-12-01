@@ -19,7 +19,6 @@ export default function BaseballGame() {
       }
     }
     computerInputNumbers = parseInt(computerNumber);
-    console.log(computerInputNumbers);
 
     return;
   };
