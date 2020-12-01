@@ -38,7 +38,7 @@ export default class HandleInput {
 
   IsNumber(number) {
     for (let i = 0; i < number.length; i++) {
-		  if (!(number[i] >= 1 && number[i] <= 9))
+		  if (!(number[i] >= 0 && number[i] <= 9))
         return this.IS_NOT_VALID;
     }
 

@@ -4,6 +4,7 @@ export default function HandleInit() {
 
     InitGameWindow(resultArea, input);
 
+    console.log(answer);
     return answer;
   };
 
