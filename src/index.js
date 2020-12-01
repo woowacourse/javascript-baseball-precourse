@@ -20,7 +20,7 @@ export default class BaseballGame {
       const result = this.play(this.computerInputNumbers, userInputNumbers);
 
       if (this.isEnd) {
-
+        document.getElementById('game-restart').hidden = false;
       }
 
       document.getElementById('result').innerHTML = result;
