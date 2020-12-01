@@ -1,6 +1,3 @@
-import getBallCount from './getBallCount.js';
-import getStrikeCount from './getStrikeCount.js';
-
 function getGameResultText(strikeCount, ballCount) {
   if (strikeCount === 3) {
     return '정답';
@@ -19,12 +16,33 @@ function getGameResultText(strikeCount, ballCount) {
   }
 }
 
+function getBallCount(computerInputNumbers, userInputNumbers) {
+  return userInputNumbers.reduce((acc, currentValue, index) => {
+    if (
+      currentValue !== computerInputNumbers[index] &&
+      computerInputNumbers.includes(currentValue)
+    ) {
+      return acc + 1;
+    }
+    return acc;
+  }, 0);
+}
+
+function getStrikeCount(computerInputNumbers, userInputNumbers) {
+  return computerInputNumbers.reduce((acc, currentValue, index) => {
+    if (currentValue === userInputNumbers[index]) {
+      return acc + 1;
+    }
+    return acc;
+  }, 0);
+}
+
 export default function getGameResult(computerInputNumbers, userInputNumbers) {
   const computerInputArray = String(computerInputNumbers).split('');
   const userInputArray = String(userInputNumbers).split('');
 
-  const strikeCount = getStrikeCount(computerInputArray, userInputArray);
   const ballCount = getBallCount(computerInputArray, userInputArray);
+  const strikeCount = getStrikeCount(computerInputArray, userInputArray);
 
   return getGameResultText(strikeCount, ballCount);
 }
