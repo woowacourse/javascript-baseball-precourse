@@ -28,7 +28,7 @@ export default function BaseballGame() {
 
   /* check UserInputNumbers */
   this.isValidNumber = function(userInputNumbers) {
-    return /[1-9]{3}/.test(userInputNumbers);
+    return (userInputNumbers.length === 3) && (/[1-9]{3}/.test(userInputNumbers));
   };
 
   this.isDuplicated = function(userInputNumbers) {
