@@ -1,6 +1,6 @@
 import getUserInput from '../input/getUserInput.js';
 import printGameResult from './printGameResult.js';
-import getRandomNumbers from '../input/getRandomNumbers.js';
+import getComputerInput from '../input/getComputerInput.js';
 
 function resetScreen() {
   const $result = document.querySelector('#result');
@@ -25,7 +25,7 @@ export default function playGame(computerInputNumbers, play) {
   $result.addEventListener('click', ({ target }) => {
     if (target.id === 'game-restart-button') {
       resetScreen();
-      computerInputNumbers = getRandomNumbers();
+      computerInputNumbers = getComputerInput();
     }
   });
 }

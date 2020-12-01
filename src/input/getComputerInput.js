@@ -5,7 +5,7 @@ function getRandomNumber() {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-export default function getRandomNumbers() {
+export default function getComputerInput() {
   const answer = new Set();
   while ([...answer].length < 3) {
     answer.add(getRandomNumber());
