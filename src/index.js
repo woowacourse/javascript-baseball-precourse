@@ -8,25 +8,25 @@ export default function BaseballGame() {
   this.play = (computerInputNumbers, userInputNumbers) => {
     if (computerInputNumbers === userInputNumbers) {
       this.status = 'END';
-      return '<h4>🎉정답을 맞추셨습니다!🎉</h4>';
+      return '🎉정답을 맞추셨습니다!🎉';
     }
 
     const balls = this.countBalls(computerInputNumbers, userInputNumbers);
     const strikes = this.countStrikes(computerInputNumbers, userInputNumbers);
     if (balls !== 0 && strikes === 0) {
-      return `<h5>${balls}볼</h5>`;
+      return `${balls}볼`;
     }
 
     if (balls === 0 && strikes !== 0) {
-      return `<h5>${strikes}스트라이크</h5>`;
+      return `${strikes}스트라이크`;
     }
 
     if (balls !== 0 && strikes !== 0) {
-      return `<h5>${balls}볼 ${strikes}스트라이크</h5>`;
+      return `${balls}볼 ${strikes}스트라이크`;
     }
 
     if (balls === 0 && strikes === 0) {
-      return `<h5>낫싱</h5>`;
+      return `낫싱`;
     }
   };
 
@@ -124,10 +124,13 @@ export default function BaseballGame() {
 
     const userInputNumbers = Number(userInputValue);
     const results = this.play(this.initComputerInputNumbers, userInputNumbers);
-    result.innerHTML = results;
     if (this.status === 'END') {
+      result.innerHTML = `<p><strong>${results}<strong/><p/>`;
       this.addRestart();
+      return;
     }
+
+    result.innerHTML = `<p>${results}<p/>`;
   };
 
   this.handleClickRestart = e => {
