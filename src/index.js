@@ -4,7 +4,7 @@ export default function BaseballGame() {
     let computerInputNumbers = [];
 
     const setAnswer = () => {
-        let generateRandNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3);
+        let generateRandNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
         return generateRandNumbers;
     };
     computerInputNumbers = setAnswer();
