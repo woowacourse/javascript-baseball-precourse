@@ -3,7 +3,7 @@
 */
 export default class BaseballGame {
     constructor() {
-        console.log(this.getComputerNumbers());
+        console.log(this.replaceToNumberArray("777"));
     }
 
     isUserInputVerify(userInputNumber) {
@@ -16,6 +16,18 @@ export default class BaseballGame {
     getComputerNumbers() {
         const uniqueThreeNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
         return uniqueThreeNumbers;
+    }
+
+    replaceToNumberArray(userInputNumber) {
+        const userNumbers = userInputNumber.split("");
+
+        let resultNumbers = [];
+        userNumbers.forEach((value) => {
+            if (isNaN(value) === true) return false;
+            resultNumbers.push(Number(value));
+        });
+
+        return resultNumbers;
     }
 
     play(computerInputNumbers, userInputNumbers) {}
