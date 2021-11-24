@@ -12,5 +12,10 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
+        "no-console": "off",
+        "no-alert": "off",
+        "import/extensions": [
+            "off",
+        ]
     }
 };
