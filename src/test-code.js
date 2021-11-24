@@ -4,7 +4,13 @@
 export default class BaseballGame {
     constructor() {
         this.$resultText = document.getElementById("result");
+        this.$submitButton = document.getElementById("submit");
+        this.$userInput = document.getElementById("user-input");
+
         this.init();
+        this.$submitButton.addEventListener("click", (event) => {
+            this.onSubmitButtonClick(event);
+        });
     }
 
     init() {
@@ -69,6 +75,21 @@ export default class BaseballGame {
 
         return combineTexts.join(" ");
     }
+
+    onSubmitButtonClick(event) {
+        event.preventDefault();
+        const isValid = this.isUserInputVerify(this.$userInput.value);
+        if (isValid === false) {
+            alert("숫자를 정확히 입력해주세요.\n(중복 없는 1~9 사이의 숫자 3개)");
+        }
+
+        const userInputNumbers = this.replaceToNumberArray(this.$userInput.value);
+        const resultText = this.play(this.playerState.computerNumbers, userInputNumbers);
+
+        this.renderGameResult(resultText);
+    }
+
+    renderGameResult(resultText) {}
 }
 
 new BaseballGame();
