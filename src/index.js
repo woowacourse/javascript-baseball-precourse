@@ -158,7 +158,7 @@ export default class BaseballGame {
   };
 
   generateResultMessage = (strike, ball) => {
-    if (strike === 3) {
+    if (strike === BASEBALL_NUMBER_LENGTH) {
       return this.generateCorrectMessage();
     }
 
