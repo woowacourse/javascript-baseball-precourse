@@ -56,7 +56,7 @@ export default class User {
             const val = this.getUserInputValue();
             const validVal = val
                                 .replace(/[^1-9]/g, '')
-                                .slice(0, 3);
+                                .slice(0, ANSWER_LENGTH);
             
             this.setUserInputValue(validVal);
         });
