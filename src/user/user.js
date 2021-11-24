@@ -51,8 +51,8 @@ const checkInputMethods = [
 
 export default class User {
     constructor() {
-        this.input = document.getElementById('user-input');
-        this.input.addEventListener('keyup', () => {
+        this.$input = document.getElementById('user-input');
+        this.$input.addEventListener('keyup', () => {
             const val = this.getUserInputValue();
             const validVal = val
                                 .replace(/[^1-9]/g, '')
@@ -71,10 +71,10 @@ export default class User {
     }
 
     getUserInputValue() {
-        return this.input.value;
+        return this.$input.value;
     }
 
     setUserInputValue(val) {
-        this.input.value = val;
+        this.$input.value = val;
     }
 }
