@@ -57,14 +57,14 @@ export default class BaseballGame {
     }
 
     play(computerInputNumbers, userInputNumbers) {
-        const gameResult = this.getMatchGameResult(computerInputNumbers, userInputNumbers);
+        this.playerState = this.getMatchGameResult(computerInputNumbers, userInputNumbers);
 
-        if (gameResult.strike === 3) return "🎉정답을 맞추셨습니다!🎉";
-        else if (gameResult.strike === 0 && gameResult.ball === 0) return "낫싱";
+        if (this.playerState.strike === 3) return "🎉정답을 맞추셨습니다!🎉";
+        else if (this.playerState.strike === 0 && this.playerState.ball === 0) return "낫싱";
 
         let combineTexts = [];
-        if (gameResult.ball > 0) combineTexts.push(`${gameResult.ball}볼`);
-        if (gameResult.strike > 0) combineTexts.push(`${gameResult.strike}스트라이크`);
+        if (this.playerState.ball > 0) combineTexts.push(`${this.playerState.ball}볼`);
+        if (this.playerState.strike > 0) combineTexts.push(`${this.playerState.strike}스트라이크`);
 
         return combineTexts.join(" ");
     }
