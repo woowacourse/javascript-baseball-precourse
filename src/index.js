@@ -22,4 +22,11 @@ function generateThreeDigitsNumber() {
 
 // main
 const answer = generateThreeDigitsNumber();
-console.log(answer);
+const form = document.querySelector('form');
+const userInput = document.querySelector('#user-input');
+const result = document.querySelector('#result');
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    result.textContent = userInput.value;
+});
