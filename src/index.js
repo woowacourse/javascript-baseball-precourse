@@ -21,7 +21,6 @@ export default class BaseballGame {
         this.inputForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const userInputVal = this.user.getUserInputValue();
-
             if (!this.user.checkInputValid(userInputVal)) return;
 
             const result = this.play(this.computer.getAnswer(), userInputVal);
