@@ -12,7 +12,7 @@ export function getComputerInput() {
     function isDuplicated(number) {
       return randomNumbers.find((element) => element === number);
     }
-    console.log(randomNumbers);
+    
     return randomNumbers;
   }
   
