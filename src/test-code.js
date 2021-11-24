@@ -3,7 +3,7 @@
 */
 export default class BaseballGame {
     constructor() {
-        console.log(this.isUserInputVerify("012"));
+        console.log(this.getComputerNumbers());
     }
 
     isUserInputVerify(userInputNumber) {
@@ -11,6 +11,11 @@ export default class BaseballGame {
         const isThreeNumber = /^[1-9]{3}$/g.test(userInputNumber);
 
         return isThreeNumber && isUniqueWord;
+    }
+
+    getComputerNumbers() {
+        const uniqueThreeNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+        return uniqueThreeNumbers;
     }
 
     play(computerInputNumbers, userInputNumbers) {}
