@@ -11,6 +11,7 @@ export default class BaseballGame {
         this.playerState = {
             computerNumbers: this.getComputerNumbers(),
             isGameDisable: false,
+            latestGameResult: { strike: 0, ball: 0 },
         };
 
         this.$resultText.style.display = "none";
