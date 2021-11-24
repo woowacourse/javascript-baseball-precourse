@@ -3,7 +3,7 @@
 */
 export default class BaseballGame {
     constructor() {
-        console.log(this.getMatchGameResult([7, 1, 2], [7, 1, 2]));
+        console.log(this.play([6, 9, 3], [7, 1, 2]));
     }
 
     isUserInputVerify(userInputNumber) {
@@ -44,7 +44,18 @@ export default class BaseballGame {
         return gameResult;
     }
 
-    play(computerInputNumbers, userInputNumbers) {}
+    play(computerInputNumbers, userInputNumbers) {
+        const gameResult = this.getMatchGameResult(computerInputNumbers, userInputNumbers);
+
+        if (gameResult.strike === 3) return "🎉정답을 맞추셨습니다!🎉";
+        else if (gameResult.strike === 0 && gameResult.ball === 0) return "낫싱";
+
+        let combineTexts = [];
+        if (gameResult.ball > 0) combineTexts.push(`${gameResult.ball}볼`);
+        if (gameResult.strike > 0) combineTexts.push(`${gameResult.strike}스트라이크`);
+
+        return combineTexts.join(" ");
+    }
 }
 
 new BaseballGame();
