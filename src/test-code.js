@@ -3,7 +3,7 @@
 */
 export default class BaseballGame {
     constructor() {
-        this.$resultText = document.getElementById("result");
+        this.$result = document.getElementById("result");
         this.$submitButton = document.getElementById("submit");
         this.$userInput = document.getElementById("user-input");
 
@@ -20,8 +20,8 @@ export default class BaseballGame {
             latestTry: { strike: 0, ball: 0 },
         };
 
-        this.$resultText.style.display = "none";
-        this.$resultText.innerText = "";
+        this.$result.style.display = "none";
+        this.$result.innerText = "";
     }
 
     isUserInputVerify(userInputNumber) {
@@ -63,8 +63,8 @@ export default class BaseballGame {
     }
 
     play(computerInputNumbers, userInputNumbers) {
-        let gameResult = this.playerState.latestTry;
-        gameResult = this.getMatchGameResult(computerInputNumbers, userInputNumbers);
+        this.playerState.latestTry = this.getMatchGameResult(computerInputNumbers, userInputNumbers);
+        const gameResult = this.playerState.latestTry;
 
         if (gameResult.strike === 3) return "🎉정답을 맞추셨습니다!🎉";
         else if (gameResult.strike === 0 && gameResult.ball === 0) return "낫싱";
@@ -81,6 +81,7 @@ export default class BaseballGame {
         const isValid = this.isUserInputVerify(this.$userInput.value);
         if (isValid === false) {
             alert("숫자를 정확히 입력해주세요.\n(중복 없는 1~9 사이의 숫자 3개)");
+            return false;
         }
 
         const userInputNumbers = this.replaceToNumberArray(this.$userInput.value);
@@ -88,8 +89,6 @@ export default class BaseballGame {
 
         this.renderGameResult(resultText);
     }
-
-    renderGameResult(resultText) {}
 }
 
 new BaseballGame();
