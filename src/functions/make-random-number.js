@@ -1,4 +1,4 @@
-import { RANGE_MIN, RANGE_MAX, NUMBER_LENGTH } from "../constants/game-rule.js";
+import { RANGE_MIN, RANGE_MAX, NUMBER_LENGTH } from '../constants/game-rule.js';
 
 export default function makeRandomNumber() {
   let randomNumberArray = [];
