@@ -10,6 +10,8 @@ export default class BaseballGame {
       computerInputNumbers,
       userInputNumbers
     );
+    const gameResultMessage = this.generateResultMessage(strike, ball);
+    console.log(gameResultMessage);
   };
 
   setEvent = () => {
@@ -117,6 +119,39 @@ export default class BaseballGame {
 
   showAlertMessage = (message) => {
     alert(message);
+  };
+
+  generateResultMessage = (strike, ball) => {
+    if (strike === 3) {
+      return this.generateCorrectMessage();
+    }
+
+    return this.generateHintMessage(strike, ball);
+  };
+
+  generateCorrectMessage = () => {
+    return `
+      <div>
+        <strong>🎉정답을 맞추셨습니다🎉</strong>
+        <span>게임을 새로 시작하시겠습니까?</span>
+        <button id="game-restart-button">게임 재시작</button>
+      </div>
+    `;
+  };
+
+  generateHintMessage = (strike, ball) => {
+    if (!strike && !ball) {
+      return "낫싱";
+    }
+    if (!strike && ball) {
+      return `${ball}볼`;
+    }
+    if (strike && !ball) {
+      return `${strike}스트라이크`;
+    }
+    if (strike && ball) {
+      return `${ball}볼 ${strike}스트라이크`;
+    }
   };
 }
 
