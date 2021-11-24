@@ -9,9 +9,15 @@ export default class BaseballGame {
         this.app = document.getElementById('app');
         this.inputForm = document.getElementById('input-form');
         this.resultBox = document.getElementById('result');
+        this.restartButton = document.getElementById('game-restart-button');
     }
 
     init() {
+        this.triggerSubmitEvent();
+        this.triggerRestartEvent();
+    }
+
+    triggerSubmitEvent() {
         this.inputForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const userInputVal = this.user.getUserInputValue();
@@ -24,6 +30,15 @@ export default class BaseballGame {
             } else {
                 this.resultBox.innerText = result;
             }
+        });
+    }
+
+    triggerRestartEvent() {
+        this.restartButton.addEventListener('click', () => {
+            this.user.setUserInputValue('');
+            this.computer.setAnswer(this.computer.generateAnswer());
+            this.resultBox.innerText = '';
+            this.app.classList.remove(CORRECT_SIGNAL);
         });
     }
 

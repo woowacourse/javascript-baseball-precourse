@@ -63,4 +63,8 @@ export default class User {
     getUserInputValue() {
         return this.input.value;
     }
+
+    setUserInputValue(val) {
+        this.input.value = val;
+    }
 }
