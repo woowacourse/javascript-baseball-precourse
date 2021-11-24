@@ -3,9 +3,9 @@
 
 ### 컴퓨터가 값을 생성하기 
 
-[ ] 1 ~ 9 사이의 서로 다른 임의의 수를 3개 random하게 선택한다 
+[X] 1 ~ 9 사이의 서로 다른 임의의 수를 3개 random하게 선택한다 
 
-[ ] 숫자를 random하게 생성할때에는 Random.pickNumberInRange를 사용한다 
+[X] 숫자를 random하게 생성할때에는 Random.pickNumberInRange를 사용한다 
 
 [ ] 컴퓨터가 생성한 값은 유저가 게임을 끝낼때까지 동일하게 유지한다 
 
