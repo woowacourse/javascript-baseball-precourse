@@ -3,6 +3,7 @@
 */
 export default class BaseballGame {
     constructor() {
+        this.$resultText = document.getElementById("result");
         this.init();
     }
 
@@ -11,6 +12,9 @@ export default class BaseballGame {
             computerNumbers: this.getComputerNumbers(),
             isGameDisable: false,
         };
+
+        this.$resultText.style.display = "none";
+        this.$resultText.innerText = "";
     }
 
     isUserInputVerify(userInputNumber) {
