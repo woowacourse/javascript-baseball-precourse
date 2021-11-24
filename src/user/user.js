@@ -53,15 +53,14 @@ export default class User {
     }
 
     /**
+     * @param {string} 유저 입력값
      * @returns {bool} 유저 입력값이 올바른지 여부
      */
-    checkInputValid() {
-        const val = this.userInputValue;
-
+    checkInputValid(val) {
         return this.checkInputMethods.every((checkInputMethod) => checkInputMethod(val));
     }
 
-    get userInputValue() {
+    getUserInputValue() {
         return this.input.value;
     }
 }

@@ -1,8 +1,8 @@
-import { ANSWER_RANGE } from './asset/constant.js';
+import { ANSWER_RANGE } from '../asset/constant.js';
 
 export default class Computer {
     constructor() {
-        this.answer;
+        this.answer = this.generateAnswer();
     }
 
     /**
@@ -10,11 +10,11 @@ export default class Computer {
      * @brief 정답과 유저 입력값을 비교해서 스트라이크, 볼 카운트 리턴
      * @returns {object}
      */
-    getStrikeBallCnt(userInput) {
-        return [...answer].reduce((m, val, index) => {
+    getStrikeBallCnt(computerVal, userInput) {
+        return [...computerVal].reduce((m, val, index) => {
             if (val === userInput[index]) {
                 m.strikeCnt++;
-            } else if (answer.includes(userInput[index])) {
+            } else if (computerVal.includes(userInput[index])) {
                 m.ballCnt++;
             }
 
@@ -31,5 +31,13 @@ export default class Computer {
         }
 
         return [...ret].join('');
+    }
+
+    getAnswer() {
+        return this.answer;
+    }
+
+    setAnswer(val) {
+        this.answer = val;
     }
 }
