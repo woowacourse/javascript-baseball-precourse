@@ -1,4 +1,5 @@
 import { NUM } from "./constants.js";
+import { isValidUserInput } from "./valid.js";
 
 export default class BaseballGame {
   constructor() {
@@ -34,7 +35,13 @@ export default class BaseballGame {
 
   getUserNumber(e) {
     e.preventDefault();
-    const userNumbers = this.$userInput.value;
+    const userNumbers = this.$userInput.value
+      .split("")
+      .map((num) => Number(num));
+
+    if (!isValidUserInput(userNumbers)) {
+      return;
+    }
 
     return userNumbers;
   }
