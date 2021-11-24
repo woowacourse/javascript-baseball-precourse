@@ -90,7 +90,11 @@ export default class BaseballGame {
     }
 
     onRetryButtonClick(event) {
-        console.log(event);
+        this.init();
+
+        this.$userInput.value = "";
+        this.$userInput.removeAttribute("disabled");
+        this.$submitButton.removeAttribute("disabled");
     }
 
     renderGameResult(resultText) {
@@ -100,18 +104,12 @@ export default class BaseballGame {
             return false;
         }
 
-        const $retryElement = this.createRetryElement();
+        const $resultFragment = document.createDocumentFragment();
 
         const $correctText = document.createElement("H4");
         $correctText.innerText = resultText;
-        $retryElement.prepend($correctText);
 
-        this.$result.innerText = "";
-        this.$result.append($retryElement);
-    }
-
-    createRetryElement() {
-        const $resultFragment = document.createDocumentFragment();
+        $resultFragment.append($correctText);
 
         const $retryWrap = document.createElement("DIV");
         $retryWrap.innerText = "게임을 새로 시작하시겠습니까? ";
@@ -123,7 +121,12 @@ export default class BaseballGame {
         $retryWrap.append($retryButton);
 
         $resultFragment.append($retryWrap);
-        return $resultFragment;
+
+        this.$result.innerText = "";
+        this.$result.append($resultFragment);
+
+        this.$userInput.setAttribute("disabled", "");
+        this.$submitButton.setAttribute("disabled", "");
     }
 }
 
