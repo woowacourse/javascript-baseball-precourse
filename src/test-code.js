@@ -3,15 +3,14 @@
 */
 export default class BaseballGame {
     constructor() {
-        console.log(this.isUserInputVerify("122"));
+        console.log(this.isUserInputVerify("012"));
     }
 
     isUserInputVerify(userInputNumber) {
-        const isThreeLength = userInputNumber.length === 3;
         const isUniqueWord = [...new Set(userInputNumber.split(""))].length === 3;
-        const isOnlyNumber = isNaN(userInputNumber) === false;
+        const isThreeNumber = /^[1-9]{3}$/g.test(userInputNumber);
 
-        return isThreeLength && isUniqueWord && isOnlyNumber;
+        return isThreeNumber && isUniqueWord;
     }
 
     play(computerInputNumbers, userInputNumbers) {}
