@@ -3,9 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <title>숫자 야구 게임</title>
+    <style>
+      .restart-announce {
+        display: flex;
+        margin-top: 15px;
+      }
+
+      .restart-announce p {
+        margin: 0;
+        margin-right: 10px;
+      }
+
+      .app .correct-box,
+      .app.correct #result {
+        display: none;
+      }
+
+      .app:not(.correct) #result,
+      .app.correct .correct-box {
+        display: block;
+      }
+    </style>
   </head>
   <body>
-    <div id="app">
+    <div id="app" class="app">
       <h1>⚾ 숫자 야구 게임</h1>
       <p>
         <strong>1~9까지의 수</strong>를 중복없이
@@ -19,6 +40,13 @@
       </form>
       <h3>📄 결과</h3>
       <div id="result">1볼 1스트라이크</div>
+      <div class="correct-box">
+          <strong>🎉정답을 맞추셨습니다!🎉</strong>
+          <div class="restart-announce">
+            <p>게임을 새로 시작하시겠습니까?</p>
+            <button type="button" id="game-restart-button">게임 재시작</button>
+          </div>
+      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@woowacourse/mission-utils@1.0.1/dist/mission-utils.min.js"></script>
     <script type="module" src="src/index.js"></script>

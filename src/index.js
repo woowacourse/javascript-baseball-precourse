@@ -5,6 +5,7 @@ export default class BaseballGame {
     constructor() {
         this.user = new User();
         this.computer = new Computer();
+        this.app = document.getElementById('app');
         this.inputForm = document.getElementById('input-form');
         this.resultBox = document.getElementById('result');
     }
@@ -17,9 +18,8 @@ export default class BaseballGame {
             if (!this.user.checkInputValid(userInputVal)) return;
 
             const result = this.play(this.computer.getAnswer(), userInputVal);
-
             if (result == 'correct') {
-
+                this.app.classList.add('correct');
             } else {
                 this.resultBox.innerText = result;
             }
