@@ -1,5 +1,7 @@
+import { getComputerInput } from "./utils/getComputerInput.js";
 import { getUserInput } from "./utils/getUserInput.js";
 import { getValidatedInput } from "./utils/getValidatedInput.js";
+import { gameCount } from "./utils/gameCount.js";
 export default function BaseballGame() {
     this.play = function (computerInputNumbers, userInputNumbers) {
       return "결과 값 String";
@@ -10,6 +12,8 @@ export default function BaseballGame() {
     button.addEventListener('click', (e) => {
       e.preventDefault();
       getValidatedInput(userInput)
+      getComputerInput();
+      gameCount();
     })
    
   }
