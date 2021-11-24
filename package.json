@@ -2,9 +2,14 @@
   "name": "javascript-baseball-precourse",
   "version": "1.0.0",
   "description": "우아한테크코스 프리코스 숫자 야구 게임 미션",
-  "dependencies": {},
   "devDependencies": {
-    "cypress": "8.7.0"
+    "cypress": "8.7.0",
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "2.4.1"
   },
   "scripts": {
     "test": "cypress run --browser chrome"
