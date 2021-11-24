@@ -6,7 +6,7 @@ export default class User {
         this.checkInputMethods = [
             // empty 체크
             (val) => {
-                if (!val) {
+                if (val === '') {
                     alert(USER_INPUT_ERROR_MSG.REQUIRE);
                     return false;
                 }

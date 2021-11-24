@@ -22,6 +22,27 @@ export default class Computer {
         }, { ballCnt: 0, strikeCnt: 0 });
     }
 
+    /**
+     * @param {int} strikeCnt 스트라이크 개수
+     * @param {int} ballCnt 볼 개수
+     * @returns {string} 안내말
+     */
+    getAnnouncement(strikeCnt, ballCnt) {
+        let ret;
+
+        if (strikeCnt > 0 && ballCnt > 0) {
+            ret = `${ballCnt}볼 ${strikeCnt}스트라이크`;
+        } else if (ballCnt > 0) {
+            ret = `${ballCnt}볼`;
+        } else if (strikeCnt > 0) {
+            ret = `${strikeCnt}스트라이크`;
+        } else {
+            ret = '낫싱';
+        }
+        
+        return ret;
+    }
+
     // 정답 생성
     generateAnswer() {
         const ret = new Set();

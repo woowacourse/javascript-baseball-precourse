@@ -6,18 +6,23 @@ export default class BaseballGame {
         this.user = new User();
         this.computer = new Computer();
         this.inputForm = document.getElementById('input-form');
+        this.resultBox = document.getElementById('result');
     }
 
     init() {
         this.inputForm.addEventListener('submit', (e) => {
             e.preventDefault();
-
             const userInputVal = this.user.getUserInputValue();
 
-            // 유저 입력값이 유효하지 않을 때
             if (!this.user.checkInputValid(userInputVal)) return;
 
-            this.play(this.computer.getAnswer(), userInputVal);
+            const result = this.play(this.computer.getAnswer(), userInputVal);
+
+            if (result == 'correct') {
+
+            } else {
+                this.resultBox.innerText = result;
+            }
         });
     }
 
@@ -28,7 +33,13 @@ export default class BaseballGame {
      * @return {string}
      */
     play(computerInputNumbers, userInputNumbers) {
-        console.log(this.computer.getStrikeBallCnt(computerInputNumbers, userInputNumbers));
+        const { strikeCnt, ballCnt } = this.computer.getStrikeBallCnt(computerInputNumbers, userInputNumbers);
+
+        if (strikeCnt == 3) {
+            return 'correct';
+        }
+
+        return this.computer.getAnnouncement(strikeCnt, ballCnt)
     }
 }
 
