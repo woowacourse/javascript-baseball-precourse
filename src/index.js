@@ -1,4 +1,22 @@
+import { NUMBER_RANGE_MIN, NUMBER_RANGE_MAX } from "./config.js";
 import { validateInput } from "./validation.js";
+
+const generateRandomNumbers = () => {
+  const numberSet = new Set();
+
+  while (numberSet.size < 3) {
+    const newNumber = MissionUtils.Random.pickNumberInRange(
+      NUMBER_RANGE_MIN,
+      NUMBER_RANGE_MAX
+    );
+
+    if (!numberSet.has(newNumber)) {
+      numberSet.add(newNumber);
+    }
+  }
+
+  return [...numberSet].join('');
+};
 
 const handleSubmitForm = (e) => {
   e.preventDefault();
@@ -16,7 +34,7 @@ const handleClickSubmitButton = () => {
     return;
   }
 
-  console.log("play");
+  console.log(generateRandomNumbers());
 };
 
 const initEventListener = () => {
@@ -26,7 +44,5 @@ const initEventListener = () => {
     .querySelector("#submit")
     .addEventListener("click", handleClickSubmitButton);
 };
-
-export default initEventListener;
 
 initEventListener();
