@@ -1,4 +1,8 @@
-import { BASEBALL_NUMBER_LENGTH, randomNumberRange } from "./util/constant.js";
+import {
+  BASEBALL_NUMBER_LENGTH,
+  DOMS,
+  randomNumberRange,
+} from "./util/constant.js";
 
 export default class BaseballGame {
   constructor() {
@@ -17,11 +21,9 @@ export default class BaseballGame {
   };
 
   setEvent = () => {
-    const $userInputForm = document.querySelector("form");
-    $userInputForm.addEventListener("submit", this.onSubmitHandler);
+    DOMS.$userInputForm.addEventListener("submit", this.onSubmitHandler);
 
-    const $result = document.querySelector("#result");
-    $result.addEventListener("click", this.restartGame);
+    DOMS.$result.addEventListener("click", this.restartGame);
   };
 
   restartGame = (event) => {
@@ -41,20 +43,17 @@ export default class BaseballGame {
   };
 
   resetUserInput = () => {
-    const $userInput = document.querySelector("#user-input");
-    $userInput.value = "";
-    $userInput.focus();
+    DOMS.$userInput.value = "";
+    DOMS.$userInput.focus();
   };
 
   resetResult = () => {
-    const $result = document.querySelector("#result");
-    $result.innerHTML = "";
+    DOMS.$result.innerHTML = "";
   };
 
   onSubmitHandler = (event) => {
     event.preventDefault();
-    const $userInput = document.querySelector("#user-input");
-    const userInputNumbers = $userInput.value;
+    const userInputNumbers = DOMS.$userInput.value;
     const alertMessage = this.generateAlertMessage(userInputNumbers);
 
     if (alertMessage) {
@@ -193,8 +192,7 @@ export default class BaseballGame {
   };
 
   printResultMessage = (message) => {
-    const $result = document.querySelector("#result");
-    $result.innerHTML = message;
+    DOMS.$result.innerHTML = message;
   };
 }
 
