@@ -1,3 +1,5 @@
+import { BASEBALL_NUMBER_LENGTH, randomNumberRange } from "./util/constant.js";
+
 export default class BaseballGame {
   constructor() {
     this.answerNumber = this.generateAnswerNumber();
@@ -62,7 +64,7 @@ export default class BaseballGame {
   };
 
   isThreeDigit = (num) => {
-    return num.length === 3;
+    return num.length === BASEBALL_NUMBER_LENGTH;
   };
 
   isWithZero = (num) => {
@@ -75,13 +77,13 @@ export default class BaseballGame {
 
   isDuplicatedNumber = (num) => {
     const checkDuplicateNumberSet = new Set(num);
-    return checkDuplicateNumberSet.size !== 3;
+    return checkDuplicateNumberSet.size !== BASEBALL_NUMBER_LENGTH;
   };
 
   generateAnswerNumber = () => {
     let randomNumber = MissionUtils.Random.pickNumberInRange(
-      111,
-      999
+      randomNumberRange.MIN,
+      randomNumberRange.MAX
     ).toString();
 
     if (
