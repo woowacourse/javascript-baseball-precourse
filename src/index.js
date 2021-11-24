@@ -14,7 +14,24 @@ export default class BaseballGame {
   onSubmitHandler = (event) => {
     event.preventDefault();
     const $userInput = document.querySelector("#user-input");
-    console.log($userInput.value);
+    const value = $userInput.value;
+  };
+
+  isThreeDigit = (num) => {
+    return num.length === 3;
+  };
+
+  isWithZero = (num) => {
+    return num.match(/0/);
+  };
+
+  isValidNumber = (num) => {
+    return num.match(/\D/);
+  };
+
+  isDuplicatedNumber = (num) => {
+    const checkDuplicateNumberSet = new Set(num);
+    return checkDuplicateNumberSet.size !== 3;
   };
 }
 
