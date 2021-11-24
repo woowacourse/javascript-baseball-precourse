@@ -57,7 +57,7 @@ export default class BaseballGame {
     }
 
     play(computerInputNumbers, userInputNumbers) {
-        const gameResult = this.playerState.latestTry;
+        let gameResult = this.playerState.latestTry;
         gameResult = this.getMatchGameResult(computerInputNumbers, userInputNumbers);
 
         if (gameResult.strike === 3) return "🎉정답을 맞추셨습니다!🎉";
