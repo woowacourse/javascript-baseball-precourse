@@ -1,7 +1,6 @@
 export default class BaseballGame {
   constructor() {
     this.answerNumber = this.generateAnswerNumber();
-    console.log(this.answerNumber);
     this.setEvent();
   }
 
@@ -17,6 +16,36 @@ export default class BaseballGame {
   setEvent = () => {
     const $userInputForm = document.querySelector("form");
     $userInputForm.addEventListener("submit", this.onSubmitHandler);
+
+    const $result = document.querySelector("#result");
+    $result.addEventListener("click", this.restartGame);
+  };
+
+  restartGame = (event) => {
+    if (event.target.id === "game-restart-button") {
+      this.resetGame();
+    }
+  };
+
+  setAnswerNumber = () => {
+    this.answerNumber = this.generateAnswerNumber();
+  };
+
+  resetGame = () => {
+    this.setAnswerNumber();
+    this.resetUserInput();
+    this.resetResult();
+  };
+
+  resetUserInput = () => {
+    const $userInput = document.querySelector("#user-input");
+    $userInput.value = "";
+    $userInput.focus();
+  };
+
+  resetResult = () => {
+    const $result = document.querySelector("#result");
+    $result.innerHTML = "";
   };
 
   onSubmitHandler = (event) => {
