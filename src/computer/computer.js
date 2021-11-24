@@ -1,4 +1,4 @@
-import { ANSWER_RANGE } from '../asset/constant.js';
+import { ANSWER_RANGE, ANSWER_LENGTH } from '../asset/constant.js';
 
 export default class Computer {
     constructor() {
@@ -47,8 +47,8 @@ export default class Computer {
     generateAnswer() {
         const ret = new Set();
 
-        while (ret.size < 3) {
-            ret.add(MissionUtils.Random.pickNumberInRange(ANSWER_RANGE.MIN, ANSWER_RANGE.MAX));
+        while (ret.size < ANSWER_LENGTH) {
+            ret.add(MissionUtils.Random.pickNumberInRange(ANSWER_RANGE.min, ANSWER_RANGE.max));
         }
 
         return [...ret].join('');

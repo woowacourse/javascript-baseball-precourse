@@ -1,4 +1,4 @@
-import { USER_INPUT_ERROR_MSG } from '../asset/constant.js';
+import { USER_INPUT_ERROR_MSG, ANSWER_LENGTH } from '../asset/constant.js';
 
 export default class User {
     constructor() {
@@ -7,7 +7,7 @@ export default class User {
             // empty 체크
             (val) => {
                 if (val === '') {
-                    alert(USER_INPUT_ERROR_MSG.REQUIRE);
+                    alert(USER_INPUT_ERROR_MSG.require);
                     return false;
                 }
 
@@ -16,7 +16,7 @@ export default class User {
             // 숫자 체크
             (val) => {
                 if (!Number(val)) {
-                    alert(USER_INPUT_ERROR_MSG.NUMBER);
+                    alert(USER_INPUT_ERROR_MSG.number);
                     return false;
                 }
 
@@ -24,8 +24,8 @@ export default class User {
             },
             // 길이 체크
             (val) => {
-                if (val.length != 3) {
-                    alert(USER_INPUT_ERROR_MSG.LENGTH);
+                if (val.length != ANSWER_LENGTH) {
+                    alert(USER_INPUT_ERROR_MSG.length);
                     return false;
                 }
 
@@ -34,7 +34,7 @@ export default class User {
             // 1 ~ 9 범위 체크 (0이 없어야함)
             (val) => {
                 if (val.includes(0)) {
-                    alert(USER_INPUT_ERROR_MSG.RANGE);
+                    alert(USER_INPUT_ERROR_MSG.range);
                     return false;
                 }
 
@@ -42,8 +42,8 @@ export default class User {
             },
             // 중복 체크
             (val) => {
-                if (new Set(val).size < 3) {
-                    alert(USER_INPUT_ERROR_MSG.OVERLAP);
+                if (new Set(val).size < ANSWER_LENGTH) {
+                    alert(USER_INPUT_ERROR_MSG.overlap);
                     return false;
                 }
 

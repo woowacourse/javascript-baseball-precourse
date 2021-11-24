@@ -1,5 +1,6 @@
 import User from './user/user.js';
 import Computer from './computer/computer.js';
+import { ANSWER_LENGTH, CORRECT_SIGNAL } from './asset/constant.js';
 
 export default class BaseballGame {
     constructor() {
@@ -18,8 +19,8 @@ export default class BaseballGame {
             if (!this.user.checkInputValid(userInputVal)) return;
 
             const result = this.play(this.computer.getAnswer(), userInputVal);
-            if (result == 'correct') {
-                this.app.classList.add('correct');
+            if (result == CORRECT_SIGNAL) {
+                this.app.classList.add(CORRECT_SIGNAL);
             } else {
                 this.resultBox.innerText = result;
             }
@@ -35,8 +36,8 @@ export default class BaseballGame {
     play(computerInputNumbers, userInputNumbers) {
         const { strikeCnt, ballCnt } = this.computer.getStrikeBallCnt(computerInputNumbers, userInputNumbers);
 
-        if (strikeCnt == 3) {
-            return 'correct';
+        if (strikeCnt == ANSWER_LENGTH) {
+            return CORRECT_SIGNAL;
         }
 
         return this.computer.getAnnouncement(strikeCnt, ballCnt)
