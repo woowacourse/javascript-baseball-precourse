@@ -12,7 +12,7 @@ export default class BaseballGame {
       userInputNumbers
     );
     const gameResultMessage = this.generateResultMessage(strike, ball);
-    this.printResultMessage(gameResultMessage);
+    return gameResultMessage;
   };
 
   setEvent = () => {
@@ -60,7 +60,11 @@ export default class BaseballGame {
       this.showAlertMessage(alertMessage);
       return;
     }
-    this.play(this.answerNumber.split(""), userInputNumbers.split(""));
+    const gameResultMessage = this.play(
+      this.answerNumber.split(""),
+      userInputNumbers.split("")
+    );
+    this.printResultMessage(gameResultMessage);
   };
 
   isThreeDigit = (num) => {
@@ -81,19 +85,17 @@ export default class BaseballGame {
   };
 
   generateAnswerNumber = () => {
-    let randomNumber = MissionUtils.Random.pickNumberInRange(
-      randomNumberRange.MIN,
-      randomNumberRange.MAX
-    ).toString();
-
-    if (
-      this.isDuplicatedNumber(randomNumber) ||
-      this.isWithZero(randomNumber)
-    ) {
-      return this.generateAnswerNumber();
+    const randomNumberSet = new Set();
+    while (randomNumberSet.size < BASEBALL_NUMBER_LENGTH) {
+      randomNumberSet.add(
+        MissionUtils.Random.pickNumberInRange(
+          randomNumberRange.MIN,
+          randomNumberRange.MAX
+        )
+      );
     }
 
-    return randomNumber;
+    return [...randomNumberSet].join("");
   };
 
   caculateStrikeAndBall = (computerInputNumbers, userInputNumbers) => {
@@ -173,16 +175,16 @@ export default class BaseballGame {
   };
 
   generateHintMessage = (strike, ball) => {
-    if (!strike && !ball) {
+    if (strike === 0 && ball === 0) {
       return "낫싱";
     }
-    if (!strike && ball) {
+    if (strike === 0 && ball > 0) {
       return `${ball}볼`;
     }
-    if (strike && !ball) {
+    if (strike > 0 && ball === 0) {
       return `${strike}스트라이크`;
     }
-    if (strike && ball) {
+    if (strike > 0 && ball > 0) {
       return `${ball}볼 ${strike}스트라이크`;
     }
   };
