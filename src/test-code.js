@@ -8,9 +8,7 @@ export default class BaseballGame {
         this.$userInput = document.getElementById("user-input");
 
         this.init();
-        this.$submitButton.addEventListener("click", (event) => {
-            this.onSubmitButtonClick(event);
-        });
+        this.$submitButton.addEventListener("click", (event) => this.onSubmitButtonClick(event));
     }
 
     init() {
@@ -81,6 +79,7 @@ export default class BaseballGame {
         const isValid = this.isUserInputVerify(this.$userInput.value);
         if (isValid === false) {
             alert("숫자를 정확히 입력해주세요.\n(중복 없는 1~9 사이의 숫자 3개)");
+            this.$userInput.focus();
             return false;
         }
 
@@ -88,6 +87,43 @@ export default class BaseballGame {
         const resultText = this.play(this.playerState.computerNumbers, userInputNumbers);
 
         this.renderGameResult(resultText);
+    }
+
+    onRetryButtonClick(event) {
+        console.log(event);
+    }
+
+    renderGameResult(resultText) {
+        this.$result.style.display = "block";
+        if (this.playerState.latestTry.strike !== 3) {
+            this.$result.innerText = resultText;
+            return false;
+        }
+
+        const $retryElement = this.createRetryElement();
+
+        const $correctText = document.createElement("H4");
+        $correctText.innerText = resultText;
+        $retryElement.prepend($correctText);
+
+        this.$result.innerText = "";
+        this.$result.append($retryElement);
+    }
+
+    createRetryElement() {
+        const $resultFragment = document.createDocumentFragment();
+
+        const $retryWrap = document.createElement("DIV");
+        $retryWrap.innerText = "게임을 새로 시작하시겠습니까? ";
+
+        const $retryButton = document.createElement("BUTTON");
+        $retryButton.id = "game-restart-button";
+        $retryButton.innerText = "재시작";
+        $retryButton.addEventListener("click", (event) => this.onRetryButtonClick(event));
+        $retryWrap.append($retryButton);
+
+        $resultFragment.append($retryWrap);
+        return $resultFragment;
     }
 }
 
