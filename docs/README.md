@@ -42,26 +42,45 @@
 ### 🛠 환경 설정
 > 일관성 있는 코드를 위해 ESLint, Prettier를 설정하고 Airbnb 스타일을 적용한 뒤 추가적인 규칙을 정의합니다.
 
-- [ ] 1. 의존성 라이브러리를 설치하고 Linter를 설정합니다.
+- [x] ~~1. 의존성 라이브러리를 설치하고 Linter를 설정합니다.~~/ 완료
+
+<br>
+
+> [완료 커밋 링크](https://github.com/InSeong-So/javascript-baseball-precourse/commit/ce29522d79a9be3d1acd227ccb72ff2774853939)
 
 <br>
 
 ### 🛠 입력 이벤트
 > 키보드의 입력 이벤트가 발생되는 시점에 처리할 기능을 구현합니다.
 
-- [ ] 1. input `user-input`의 입력 이벤트에 따른 동작을 설정합니다.
-- [ ] 2. [keypress 이벤트는 deprecated](https://developer.mozilla.org/en-US/docs/Web/API/Document/keypress_event) 되었으므로 keydown 이벤트로 처리합니다.
+- [x] ~~1. input `user-input`의 입력 이벤트에 따른 동작을 설정합니다.~~
+- [x] ~~2. [keypress 이벤트는 deprecated](https://developer.mozilla.org/en-US/docs/Web/API/Document/keypress_event) 되었으므로 keydown 이벤트로 처리합니다.~~
+
+**변경사항**
+- input 이벤트는 필요가 없었으므로 최대한 버튼 클릭 이벤트에서 처리하도록 변경하였습니다.
+- MaxLength 속성을 추가로 기입합니다. 테스트 코드를 확인하니 최대 4자리가 입력되어 MaxLength를 `정해진 길이 * 2 까지만` 허용했습니다.
 
 <br>
 
 ### 🛠 확인 이벤트
 > 확인 버튼이 클릭되는 시점에 처리할 기능을 구현합니다.
 
-- [ ] 1. button `submit`의 클릭 이벤트에 따른 동작을 설정합니다.
-- [ ] 2. 옳지 못한 값(3자리 숫자를 제외한 다른 타입과 문자)에 대한 예외를 처리합니다.
-- [ ] 3. 2번의 확장입니다. 입력 받는 데이터는 text 형태이므로 문자를 숫자로 치환합니다.
-- [ ] 4. 입력된 3자리 숫자가 중복 되었는지 확인합니다.
+- [x] ~~1. button `submit`의 클릭 이벤트에 따른 동작을 설정합니다.~~/ 완료
+- [x] ~~2. 옳지 못한 값(3자리 숫자를 제외한 다른 타입과 문자)에 대한 예외를 처리합니다.~~/ 완료
+- [x] ~~3. 2번의 확장입니다. 입력 받는 데이터는 text 형태이므로 문자를 숫자로 치환합니다.~~/ 취소
+- [x] ~~4. 입력된 3자리 숫자가 중복 되었는지 확인합니다.~~/ 완료
 - [ ] 5. 구현한 기능을 리팩토링합니다.
+
+**추가사항**
+
+- [x] 버튼 클릭시 기존 이벤트(submit)를 취소합니다.
+
+**변경사항**
+- 3번 항목은 문자열로 비교하므로 구현하지 않습니다.
+
+<br>
+
+> [완료 커밋 링크](https://github.com/InSeong-So/javascript-baseball-precourse/commit/d8dcdf008bea15dc1c8568216be7c20b3b4b2741)
 
 <br>
 
