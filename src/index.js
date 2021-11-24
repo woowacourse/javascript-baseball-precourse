@@ -1,7 +1,9 @@
 export default class BaseballGame {
   constructor() {
+    this.answerNumber = this.generateAnswerNumber();
     this.setEvent();
   }
+
   play = (computerInputNumbers, userInputNumbers) => {
     return "";
   };
@@ -15,6 +17,7 @@ export default class BaseballGame {
     event.preventDefault();
     const $userInput = document.querySelector("#user-input");
     const value = $userInput.value;
+    console.log(this.answerNumber);
   };
 
   isThreeDigit = (num) => {
@@ -32,6 +35,22 @@ export default class BaseballGame {
   isDuplicatedNumber = (num) => {
     const checkDuplicateNumberSet = new Set(num);
     return checkDuplicateNumberSet.size !== 3;
+  };
+
+  generateAnswerNumber = () => {
+    let randomNumber = MissionUtils.Random.pickNumberInRange(
+      111,
+      999
+    ).toString();
+
+    if (
+      this.isDuplicatedNumber(randomNumber) ||
+      this.isWithZero(randomNumber)
+    ) {
+      return this.generateAnswerNumber();
+    }
+
+    return randomNumber;
   };
 }
 
