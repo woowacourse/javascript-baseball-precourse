@@ -1,10 +1,10 @@
 ## 구현할 기능 목록
 
 ### 사용자 숫자 입력
-- [ ] `submit` 버튼을 클릭했을 때 페이지를 새로고침하지 않도록 form의 submit 이벤트에 `preventDefault`를 추가한다.
-- [ ] `submit` 버튼의 클릭 이벤트에 대해 이벤트 리스너를 등록한다.
-- [ ] `submit` 버튼을 클릭하면 `user-input`의 value를 받는다.
-- [ ] `user-input`의 value를 받을 때 양 공백을 trim한다.
+- [x] `submit` 버튼을 클릭했을 때 페이지를 새로고침하지 않도록 form의 submit 이벤트에 `preventDefault`를 추가한다.
+- [x] `submit` 버튼의 클릭 이벤트에 대해 이벤트 리스너를 등록한다.
+- [x] `submit` 버튼을 클릭하면 `user-input`의 value를 받는다.
+- [x] `user-input`의 value를 받을 때 양 공백을 trim한다.
 
 ### 입력값 유효성 검증
 - [ ] 사용자 입력값이 **3자리인지** 검사한다.
