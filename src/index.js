@@ -68,8 +68,8 @@ export default class BaseballGame {
     this.printResultMessage(gameResultMessage);
   };
 
-  isThreeDigit = (num) => {
-    return num.length === BASEBALL_NUMBER_LENGTH;
+  isNotThreeDigit = (num) => {
+    return num.length !== BASEBALL_NUMBER_LENGTH;
   };
 
   isWithZero = (num) => {
@@ -142,7 +142,7 @@ export default class BaseballGame {
   generateAlertMessage = (userInputNumbers) => {
     if (this.isValidNumber(userInputNumbers)) {
       return "숫자만 입력해주세요";
-    } else if (!this.isThreeDigit(userInputNumbers)) {
+    } else if (this.isNotThreeDigit(userInputNumbers)) {
       return "3자리수의 숫자를 입력해주세요";
     } else if (this.isDuplicatedNumber(userInputNumbers)) {
       return "중복되지 않은 숫자들로 입력해주세요";
