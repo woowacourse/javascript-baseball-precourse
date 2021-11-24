@@ -10,7 +10,6 @@ export default class BaseballGame {
       computerInputNumbers,
       userInputNumbers
     );
-    console.log(strike, ball);
   };
 
   setEvent = () => {
@@ -21,8 +20,14 @@ export default class BaseballGame {
   onSubmitHandler = (event) => {
     event.preventDefault();
     const $userInput = document.querySelector("#user-input");
-    const userInputNumber = $userInput.value;
-    this.play(this.answerNumber.split(""), userInputNumber.split(""));
+    const userInputNumbers = $userInput.value;
+    const alertMessage = this.generateAlertMessage(userInputNumbers);
+
+    if (alertMessage) {
+      this.showAlertMessage(alertMessage);
+      return;
+    }
+    this.play(this.answerNumber.split(""), userInputNumbers.split(""));
   };
 
   isThreeDigit = (num) => {
@@ -94,6 +99,24 @@ export default class BaseballGame {
     });
 
     return ballCnt;
+  };
+
+  generateAlertMessage = (userInputNumbers) => {
+    if (this.isValidNumber(userInputNumbers)) {
+      return "숫자만 입력해주세요";
+    } else if (!this.isThreeDigit(userInputNumbers)) {
+      return "3자리수의 숫자를 입력해주세요";
+    } else if (this.isDuplicatedNumber(userInputNumbers)) {
+      return "중복되지 않은 숫자들로 입력해주세요";
+    } else if (this.isWithZero(userInputNumbers)) {
+      return "1 ~ 9사이의 숫자로 입력해주세요";
+    }
+
+    return "";
+  };
+
+  showAlertMessage = (message) => {
+    alert(message);
   };
 }
 
