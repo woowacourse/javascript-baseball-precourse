@@ -20,6 +20,10 @@ function generateThreeDigitsNumber() {
     return result;
 }
 
+function isCorrectInput(input) {
+    return input.length === 3 && Number(input) && isCorrectAnswerNumber(Number(input));
+}
+
 // main
 const answer = generateThreeDigitsNumber();
 const form = document.querySelector('form');
@@ -28,5 +32,11 @@ const result = document.querySelector('#result');
 
 form.addEventListener("submit", function(e) {
     e.preventDefault();
-    result.textContent = userInput.value;
+    if(isCorrectInput(userInput.value)){
+        result.textContent = userInput.value;
+    }
+    else {
+        userInput.value = '';
+        alert('1 ~ 9까지 수를 중복없이 3개 입력해주세요:D');
+    }
 });
