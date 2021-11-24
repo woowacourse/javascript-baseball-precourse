@@ -1,0 +1,1 @@
+console.log(MissionUtils.Random.pickNumberInRange(123,987));
