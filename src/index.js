@@ -3,12 +3,18 @@ import { NUM } from "./constants.js";
 export default class BaseballGame {
   constructor() {
     this.dom();
+    this.addEvent();
     this.getComputerNumber();
   }
 
   dom() {
+    this.$userForm = document.querySelector("form");
     this.$userInput = document.querySelector("#user-input");
     this.$result = document.querySelector("#result");
+  }
+
+  addEvent() {
+    this.$userForm.addEventListener("submit", this.getUserNumber.bind(this));
   }
 
   getComputerNumber() {
@@ -24,6 +30,13 @@ export default class BaseballGame {
     }
 
     return computerNumbers;
+  }
+
+  getUserNumber(e) {
+    e.preventDefault();
+    const userNumbers = this.$userInput.value;
+
+    return userNumbers;
   }
 
   play(computerInputNumbers, userInputNumbers) {
