@@ -60,12 +60,20 @@ input을 초기화
 ├── package-lock.json
 ├── package.json
 ├── README.md
+├── docs
+│   ├── README.md
 └── src
     ├── index.js 
     ├── constants
     │   ├── alert-message.js // alert 메시지 모음
     │   ├── game-rule.js // 게임 내 규칙에 사용되는 상수 모음
     │   ├── initial-state.js // 초기 컴퓨터 난수, 사용자 입력 값
-    │   ├── result-message.js // 출력 결과 메시지 모음
-    └── 
+    │   └── result-message.js // 출력 결과 메시지 모음
+    │
+    ├── functions
+    │   ├── check-user-input-valid.js // 유저 입력이 올바른지 판별하고, 올바르지 않다면 alert를 호출하는 함수
+    │   └── make-random-number.js // 컴퓨터가 난수를 만들어 저장하는 함수
+    │
+    └── state
+        └── index.js // 유저 입력, 컴퓨터 난수, 볼 개수, 스트라이크 개수 저장할 상태
 ```
