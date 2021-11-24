@@ -30,15 +30,21 @@ export default class BaseballGame {
     }
 
     getComputerNumbers() {
+        /*
         let allowNumbers = Array.from({ length: 9 }, (value, index) => index + 1);
         let resultNumbers = [];
 
         for (let i = 0; i < 3; i++) {
             const randomNumber = MissionUtils.Random.pickNumberInRange(0, allowNumbers.length - 1);
             resultNumbers.push(allowNumbers.splice(randomNumber, 1)[0]);
+        }*/
+
+        let resultNumbers = new Set();
+        while (resultNumbers.size < 3) {
+            resultNumbers.add(MissionUtils.Random.pickNumberInRange(1, 9));
         }
 
-        return resultNumbers;
+        return [...resultNumbers];
     }
 
     replaceToNumberArray(userInputNumber) {
