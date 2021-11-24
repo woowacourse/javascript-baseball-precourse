@@ -40,10 +40,15 @@ export default class BaseballGame {
       .map((num) => Number(num));
 
     if (!isValidUserInput(userNumbers)) {
+      this.clearInput();
       return;
     }
 
     return userNumbers;
+  }
+
+  clearInput() {
+    this.$userInput.value = "";
   }
 
   play(computerInputNumbers, userInputNumbers) {
