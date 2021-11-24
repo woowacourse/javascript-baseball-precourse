@@ -3,7 +3,14 @@
 */
 export default class BaseballGame {
     constructor() {
-        console.log(this.play([6, 9, 3], [7, 1, 2]));
+        this.init();
+    }
+
+    init() {
+        this.playerState = {
+            computerNumbers: this.getComputerNumbers(),
+            isGameDisable: false,
+        };
     }
 
     isUserInputVerify(userInputNumber) {
