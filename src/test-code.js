@@ -3,7 +3,7 @@
 */
 export default class BaseballGame {
     constructor() {
-        console.log(this.replaceToNumberArray("777"));
+        console.log(this.getMatchGameResult([7, 1, 2], [7, 1, 2]));
     }
 
     isUserInputVerify(userInputNumber) {
@@ -28,6 +28,20 @@ export default class BaseballGame {
         });
 
         return resultNumbers;
+    }
+
+    getMatchGameResult(computerInputNumbers, userInputNumbers) {
+        const gameState = {
+            strike: 0,
+            ball: 0,
+        };
+
+        userInputNumbers.forEach((userNumber, userNumberIndex) => {
+            if (userNumber === computerInputNumbers[userNumberIndex]) gameState.strike++;
+            else if (computerInputNumbers.indexOf(userNumber) > -1) gameState.ball++;
+        });
+
+        return gameState;
     }
 
     play(computerInputNumbers, userInputNumbers) {}
