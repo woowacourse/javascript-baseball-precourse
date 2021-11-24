@@ -11,7 +11,7 @@ export default class BaseballGame {
         this.playerState = {
             computerNumbers: this.getComputerNumbers(),
             isGameDisable: false,
-            latestGameResult: { strike: 0, ball: 0 },
+            latestTry: { strike: 0, ball: 0 },
         };
 
         this.$resultText.style.display = "none";
@@ -57,14 +57,15 @@ export default class BaseballGame {
     }
 
     play(computerInputNumbers, userInputNumbers) {
-        this.playerState = this.getMatchGameResult(computerInputNumbers, userInputNumbers);
+        const gameResult = this.playerState.latestTry;
+        gameResult = this.getMatchGameResult(computerInputNumbers, userInputNumbers);
 
-        if (this.playerState.strike === 3) return "🎉정답을 맞추셨습니다!🎉";
-        else if (this.playerState.strike === 0 && this.playerState.ball === 0) return "낫싱";
+        if (gameResult.strike === 3) return "🎉정답을 맞추셨습니다!🎉";
+        else if (gameResult.strike === 0 && gameResult.ball === 0) return "낫싱";
 
         let combineTexts = [];
-        if (this.playerState.ball > 0) combineTexts.push(`${this.playerState.ball}볼`);
-        if (this.playerState.strike > 0) combineTexts.push(`${this.playerState.strike}스트라이크`);
+        if (gameResult.ball > 0) combineTexts.push(`${gameResult.ball}볼`);
+        if (gameResult.strike > 0) combineTexts.push(`${gameResult.strike}스트라이크`);
 
         return combineTexts.join(" ");
     }
