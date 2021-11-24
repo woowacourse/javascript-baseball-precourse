@@ -4,7 +4,7 @@ export function getComputerInput() {
     while (i < 3) {
       const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!isDuplicated(randomNum)) {
-        randomNumbers.push(randomNum);
+        computerInput.push(randomNum);
         i++;
       }
     }
@@ -12,7 +12,6 @@ export function getComputerInput() {
     function isDuplicated(number) {
       return computerInput.find((element) => element === number);
     }
-    
     return computerInput;
   }
   
