@@ -6,7 +6,7 @@
 ## ✔️ 구현할 기능 목록 (기능 별)
 
 1. `MissionUtils` 라이브러리 사용하여, 랜덤한 세자리 숫자 `computerInputNumbers` 가져오는 함수생성.
-2. 유저의 입력값을 가져오는 `getUserInput` 함수 생성.
+2. 유저의 입력값을 가져오는 `getUserInput` 함수 생성
 3. 유저의 입력값이 유효한지 검사하는 `getValidatedInput` 함수 생성.
 4. 유저 입력값 `userInputNumbers` 와 컴퓨터 입력값 `computerInputNumbers` 비교해 `strikeCount`, `BallCount` 구하는
    `gameCount` 함수 생성.
