@@ -24,7 +24,7 @@ export default class BaseballGame {
             if (!this.user.checkInputValid(userInputVal)) return;
 
             const result = this.play(this.computer.getAnswer(), userInputVal);
-            if (result == CORRECT_SIGNAL) {
+            if (result === CORRECT_SIGNAL) {
                 this.app.classList.add(CORRECT_SIGNAL);
             } else {
                 this.resultBox.innerText = result;
@@ -50,7 +50,7 @@ export default class BaseballGame {
     play(computerInputNumbers, userInputNumbers) {
         const { strikeCnt, ballCnt } = this.computer.getStrikeBallCnt(computerInputNumbers, userInputNumbers);
 
-        if (strikeCnt == ANSWER_LENGTH) {
+        if (strikeCnt === ANSWER_LENGTH) {
             return CORRECT_SIGNAL;
         }
 
