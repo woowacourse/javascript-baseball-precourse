@@ -12,6 +12,7 @@ export default class BaseballGame {
       userInputNumbers
     );
     const gameResultMessage = this.generateResultMessage(strike, ball);
+
     return gameResultMessage;
   };
 
@@ -81,6 +82,7 @@ export default class BaseballGame {
 
   isDuplicatedNumber = (num) => {
     const checkDuplicateNumberSet = new Set(num);
+
     return checkDuplicateNumberSet.size !== BASEBALL_NUMBER_LENGTH;
   };
 
@@ -103,6 +105,7 @@ export default class BaseballGame {
       computerInputNumbers,
       userInputNumbers
     );
+
     const ball = this.calculateBallCount(
       computerInputNumbers,
       userInputNumbers
