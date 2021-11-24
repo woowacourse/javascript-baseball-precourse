@@ -31,17 +31,17 @@ export default class BaseballGame {
     }
 
     getMatchGameResult(computerInputNumbers, userInputNumbers) {
-        const gameState = {
+        const gameResult = {
             strike: 0,
             ball: 0,
         };
 
         userInputNumbers.forEach((userNumber, userNumberIndex) => {
-            if (userNumber === computerInputNumbers[userNumberIndex]) gameState.strike++;
-            else if (computerInputNumbers.indexOf(userNumber) > -1) gameState.ball++;
+            if (userNumber === computerInputNumbers[userNumberIndex]) gameResult.strike++;
+            else if (computerInputNumbers.indexOf(userNumber) > -1) gameResult.ball++;
         });
 
-        return gameState;
+        return gameResult;
     }
 
     play(computerInputNumbers, userInputNumbers) {}
