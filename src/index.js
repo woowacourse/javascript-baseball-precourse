@@ -1,4 +1,5 @@
 import { state } from './state.js';
+import { USER_INPUT, SUBMIT_BUTTON } from './constants/html-doms.js';
 import makeRandomNumber from './functions/make-random-number.js';
 import checkUserInputValid from './functions/check-user-input-valid.js';
 import setBallStrike from './functions/set-ball-strike.js';
@@ -7,7 +8,6 @@ import makeResultMessage from './functions/make-result-message.js'
 import makeResultDom from './functions/make-result-dom.js';
 
 export default function BaseballGame() {
-  const submitButton = document.getElementById('submit');
   state.computerInput = makeRandomNumber();
 
   this.play = function (computerInput, userInput) {
@@ -17,12 +17,10 @@ export default function BaseballGame() {
     return resultMessage;
   };
 
-  submitButton.addEventListener('click', () => {
-    const userInput = document.getElementById('user-input').value;
-    state.userInput = parseInt(userInput);
+  SUBMIT_BUTTON.addEventListener('click', () => {
+    state.userInput = parseInt(USER_INPUT.value);
     initBallStrikeCount();
-    if (checkUserInputValid(userInput)) {
-      console.log(state.userInput, state.computerInput)
+    if (checkUserInputValid(USER_INPUT.value)) {
       const resultMessage = this.play(state.computerInput, state.userInput);
       makeResultDom(resultMessage);
     } 
