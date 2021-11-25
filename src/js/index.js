@@ -77,18 +77,16 @@ export default function BaseballGame() {
   const renderResult = result => {
     $('#result').innerHTML = result;
     if (result === '🎉**정답을 맞추셨습니다**🎉') {
-        $('#result').innerHTML = `<strong>${result}</strong><br /><br />`;
-        const template = () => {
-          return `
+      $('#result').innerHTML = `<strong>${result}</strong><br /><br />`;
+      const template = () => `
             <div id="game-restart-box">
               <span id="game-restart-message">게임을 새로 시작하시겠습니까?<span>
               <button class="button" id="game-restart-button">게임 재시작</button>
             <div>
           `;
-        };
-        $('#result').innerHTML += template();
+      $('#result').innerHTML += template();
+    }
   };
-
   this.play = function (computerInputNumbers, userInputNumbers) {
     const ballAndStrike = getStrikeAndBall();
     console.log(computerInputNumbers, userInputNumbers);
@@ -106,6 +104,16 @@ export default function BaseballGame() {
     }
     return `${ballAndStrike[0]}볼 ${ballAndStrike[1]}스트라이크`;
   };
+  this.init = () => {
+    getComputerInputNumbers();
+    $('#user-input').value = '';
+    $('#result').innerHTML = '';
+    if ($('#game-restart-box') !== null) {
+      console.log('work');
+      $('#game-restart-box').remove();
+      baseballGame = new BaseballGame();
+    }
+  };
 
   $('#base-ball-game-form').addEventListener('submit', e => {
     e.preventDefault();
@@ -114,13 +122,18 @@ export default function BaseballGame() {
       renderResult(result);
     }
   });
-
   $('#user-input').addEventListener('keydown', e => {
     if (e.key === 'Enter' && getUserInputNumbers()) {
       const result = baseballGame.play(computerInputNumbers, userInputNumbers);
       renderResult(result);
     }
   });
+  $('#app').addEventListener('click', e => {
+    if (e.target.classList.contains('button')) {
+      baseballGame.init();
+    }
+  });
 }
 
 let baseballGame = new BaseballGame();
+baseballGame.init();
