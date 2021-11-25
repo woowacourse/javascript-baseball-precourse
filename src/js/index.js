@@ -21,6 +21,13 @@ export default function BaseballGame() {
   const getUserInputNumbers = () => {
     const userInputValue = $('#user-input').value;
   };
+  const checkUserInputNumbersCount = userInputValue => {
+    if (userInputValue.length !== 3) {
+      alert('잘못된 값을 입력하셨습니다.');
+      return true;
+    }
+    return false;
+  };
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     return '결과 값 String';
