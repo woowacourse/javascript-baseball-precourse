@@ -1,11 +1,16 @@
 import { state } from '../state.js';
 
 export default function setBallStrike(computerInput, userInput) {
-  for (let i = 0; i < computerInput.length; i += 1) {
-    if (userInput.includes(computerInput[i]) && userInput.indexOf(computerInput[i]) === i) {
-      state.strikeCount++;
-    } else if (userInput.includes(computerInput[i])) {
-      state.ballCount++;
+  const computerInputString = computerInput.toString();
+  const userInputString = userInput.toString();
+  for (let i = 0; i < computerInputString.length; i += 1) {
+    if (
+      userInputString.includes(computerInputString[i]) &&
+      userInputString.indexOf(computerInputString[i]) === i
+    ) {
+      state.strikeCount += 1;
+    } else if (userInputString.includes(computerInputString[i])) {
+      state.ballCount += 1;
     }
   }
 }

@@ -3,6 +3,7 @@ import makeRandomNumber from './functions/make-random-number.js';
 import checkUserInputValid from './functions/check-user-input-valid.js';
 import setBallStrike from './functions/set-ball-strike.js';
 import initialBallStrikeCount from './functions/initial-ball-strike-count.js';
+import makeResultMessage from './functions/make-result-message.js'
 
 export default function BaseballGame() {
   const submitButton = document.getElementById('submit');
@@ -10,6 +11,9 @@ export default function BaseballGame() {
 
   this.play = function (computerInput, userInput) {
     setBallStrike(computerInput, userInput);
+    const resultMessage = makeResultMessage();
+    
+    return resultMessage;
   };
 
   submitButton.addEventListener('click', () => {
