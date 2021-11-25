@@ -1,7 +1,7 @@
 import { state } from './state/index.js';
 import { USER_INPUT, SUBMIT_BUTTON } from './constants/html-doms.js';
-import { makeResultMessage, makeResultDom } from './functions/result.js';
-import { isUserInputValid } from './functions/userInput.js';
+import { makeResultMessage, makeResultDom } from './functions/game-result.js';
+import { isUserInputValid } from './functions/user-input.js';
 
 export default function BaseballGame() {
   state.makeRandomNumber();
