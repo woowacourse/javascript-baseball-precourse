@@ -1,4 +1,4 @@
-import { state } from './state.js';
+import { state } from './state/index.js';
 import { USER_INPUT, SUBMIT_BUTTON } from './constants/html-doms.js';
 import { makeRandomNumber, checkUserInputValid } from './functions/input.js';
 import { setBallStrike, initBallStrikeCount } from './functions/ball-strike.js';

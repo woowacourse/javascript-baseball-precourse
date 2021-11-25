@@ -1,4 +1,4 @@
-import { state } from '../state.js';
+import { state } from '../state/index.js';
 import { RESTART_MESSAGE, NOTHING_MESSAGE, CLEAR_MESSAGE } from '../constants/result-message.js';
 import { RESULT_DIV, SUBMIT_BUTTON, USER_INPUT } from '../constants/html-doms.js';
 import { initBallStrikeCount } from './ball-strike.js';
@@ -54,9 +54,9 @@ export function makeResultDom(resultMessage) {
 }
 
 export default function restartGameSetting() {
-    initBallStrikeCount();
-    initUserComputerInput();
-    state.computerInput = makeRandomNumber();
-    RESULT_DIV.innerHTML = '';
-    USER_INPUT.value = '';
-  }
+  initBallStrikeCount();
+  initUserComputerInput();
+  state.computerInput = makeRandomNumber();
+  RESULT_DIV.innerHTML = '';
+  USER_INPUT.value = '';
+}

@@ -1,4 +1,4 @@
-import { state } from '../state.js';
+import { state } from '../state/index.js';
 import { RANGE_MIN, RANGE_MAX, NUMBER_LENGTH } from '../constants/game-rule.js';
 import {
   NOT_NUMERIC_MESSAGE,
