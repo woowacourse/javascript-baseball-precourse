@@ -37,7 +37,12 @@ export default function BaseballGame() {
             else if (userInputNumbers[i] == computerInputNumbers[(i + 1) % 3] || userInputNumbers[i] == computerInputNumbers[(i + 2) % 3]) BallCnt++;
         }
         //console.log(`${StrikeCnt}스트라이크, ${BallCnt}볼`);
-        return [StrikeCnt, BallCnt];
+        let Strike = StrikeCnt;
+        let Ball = BallCnt;
+        return {
+            Strike: Strike,
+            Ball: Ball
+        };
     }
 
     $form.addEventListener('submit', (event) => {
@@ -48,7 +53,10 @@ export default function BaseballGame() {
         if (!checkInput(userInputNumbers)) return;
         else {
             console.log(userInputNumbers);
-            console.log(CountStrikeAndBall(userInputNumbers));
+            //console.log(CountStrikeAndBall(userInputNumbers));
+            let Strike_Ball = CountStrikeAndBall(userInputNumbers);
+            console.log(`${Strike_Ball.Strike}스트라이크, ${Strike_Ball.Ball}볼`);
+
         }
     });
 
