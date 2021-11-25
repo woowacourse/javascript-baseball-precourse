@@ -8,10 +8,14 @@ export default function BaseballGame() {
 
     const setAnswer = () => {
         let generateRandNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-        return generateRandNumbers;
+        computerInputNumbers = generateRandNumbers
+        console.log(computerInputNumbers);
+        return computerInputNumbers;
     };
-    computerInputNumbers = setAnswer();
-    console.log(computerInputNumbers);
+    setAnswer();
+
+    //computerInputNumbers = setAnswer();
+
 
     // checkout Input
     const checkInput = userInputNumbers => {
@@ -48,6 +52,7 @@ export default function BaseballGame() {
     // Hint 제공
     const Hint = Strike_Ball => {
         if (Strike_Ball.Strike === 3) {
+            $result.innerHTML = '<p id="result_txt"><Strong> 정답을 맞추셨습니다 <Strong /> <br/></p>';
             endGame();
         }
         else if (Strike_Ball.Strike === 0 && Strike_Ball.Ball === 0) {
@@ -62,9 +67,17 @@ export default function BaseballGame() {
 
     //endGame, resetGame
     const endGame = () => {
-        $result.innerHTML = '<Strong> 정답을 맞추셨습니다 <Strong /> <br/>';
-        $result.innerHTML += `게임을 새로 시작하시겠습니까?`
-        $result.innerHTML += `<button id="game-restart-button" onclick="resetGame_button();">재시작</button>`
+        $result.innerHTML += `<p id="endGame_txt">게임을 새로 시작하시겠습니까?<button id="game-restart-button">재시작</button></p>`;
+        let Game_Restart_Button = document.querySelector('#game-restart-button');
+        let Result_Txt = document.querySelector('#result_txt');
+        let EndGame_Txt = document.querySelector('#endGame_txt');
+        Game_Restart_Button.onclick = () => {
+            BallCnt = 0;
+            StrikeCnt = 0;
+            $result.removeChild(Result_Txt);
+            $result.removeChild(EndGame_Txt);
+            setAnswer();
+        }
     }
 
     $form.addEventListener('submit', (event) => {
@@ -81,7 +94,5 @@ export default function BaseballGame() {
             Hint(Strike_Ball);
         }
     });
-
 }
-
 BaseballGame();
