@@ -50,11 +50,9 @@ export default class BaseballGame {
     play(computerInputNumbers, userInputNumbers) {
         const { strikeCnt, ballCnt } = this.computer.getStrikeBallCnt(computerInputNumbers, userInputNumbers);
 
-        if (strikeCnt === ANSWER_LENGTH) {
-            return CORRECT_SIGNAL;
-        }
+        if (strikeCnt === ANSWER_LENGTH) return CORRECT_SIGNAL;
 
-        return this.computer.getAnnouncement(strikeCnt, ballCnt)
+        return this.computer.getAnnouncement(strikeCnt, ballCnt);
     }
 }
 
