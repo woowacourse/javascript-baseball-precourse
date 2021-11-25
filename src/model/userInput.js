@@ -1,3 +1,5 @@
+import { RESULT_CODE } from "../constants.js";
+
 function isThreeLength(word) {
     return word.trim().length === 3;
 }
@@ -17,11 +19,11 @@ export default class UserInputModel {
     }
 
     get checkInputValid() {
-        if (!isThreeLength(this.userValue)) return "오류1";
-        else if (!isUniqueWord(this.userValue)) return "오류2";
-        else if (!isNumberRange(this.userValue)) return "오류2";
+        if (!isThreeLength(this.userValue)) return RESULT_CODE.ERROR_USERINPUT_LENGTH;
+        else if (!isNumberRange(this.userValue)) return RESULT_CODE.ERROR_USERINPUT_NUMBER_RANGE;
+        else if (!isUniqueWord(this.userValue)) return RESULT_CODE.ERROR_USERINPUT_UNIQUE_WORD;
 
-        return "성공";
+        return RESULT_CODE.DONE_USERINPUT_VALID;
     }
 
     get toNumberArray() {
