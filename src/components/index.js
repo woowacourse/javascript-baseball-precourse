@@ -5,14 +5,20 @@ import { BASEBALL, EMPTY } from '../constants/index.js';
 const { pickNumberInRange } = MissionUtils.Random;
 
 export default class BaseballGame {
-  constructor(state) {
+  constructor(element, state) {
     const { digit, exclude, start, end } = isNumberObject(state);
 
+    this.$element = element;
     this.digit = digit;
     this.exclude = exclude;
     this.start = start;
     this.end = end;
 
+    this.initGame();
+  }
+
+  initGame() {
+    this.$element.innerHTML = EMPTY;
     this.computerInputNumbers = this.getRandomNumbers(this.start, this.end);
   }
 
@@ -47,6 +53,18 @@ export default class BaseballGame {
     else if (STRIKE + BALL === this.exclude) result = BASEBALL.NOTING;
     else result = `${BALL ? `${BALL}볼` : EMPTY} ${STRIKE ? `${STRIKE}스트라이크` : EMPTY}`.trim();
 
-    console.log(result);
+    this.render(result);
+  }
+
+  render(sentence) {
+    let resultText = `<p>${sentence}</p>`;
+
+    if (sentence === BASEBALL.WIN) {
+      resultText = `
+      <p>🎉<strong>정답을 맞추셨습니다</strong>🎉</p>
+      <p>게임을 새로 시작하시겠습니까? <button id="restart">게임 재시작</button></p>`;
+    }
+
+    this.$element.innerHTML = resultText;
   }
 }

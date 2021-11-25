@@ -5,8 +5,9 @@ import { BASEBALL, EMPTY } from './constants/index.js';
 
 const $input = $('#user-input');
 const $button = $('#submit');
+const $div = $('#result');
 
-const game = new BaseballGame({
+const game = new BaseballGame($div, {
   digit: BASEBALL.DIGIT,
   exclude: BASEBALL.ZERO,
   start: BASEBALL.START,
@@ -25,4 +26,11 @@ $button.addEventListener('click', event => {
     return;
   }
   game.play(value);
+});
+
+$div.addEventListener('click', ({ target }) => {
+  if (!target.matches('#restart')) return;
+  $input.value = EMPTY;
+  $input.focus();
+  game.initGame();
 });
