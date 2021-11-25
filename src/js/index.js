@@ -18,9 +18,6 @@ export default function BaseballGame() {
       }
     }
   };
-  const getUserInputNumbers = () => {
-    const userInputValue = $('#user-input').value;
-  };
   const checkUserInputNumbersCount = userInputValue => {
     if (userInputValue.length !== 3) {
       alert('잘못된 값을 입력하셨습니다.');
@@ -48,6 +45,21 @@ export default function BaseballGame() {
       userInputValueArray.push(parseInt(userInputValue[i]));
     }
     return false;
+  };
+  const getUserInputNumbers = () => {
+    const userInputValue = $('#user-input').value;
+    if (
+      checkUserInputNumbersCount(userInputValue) ||
+      checkUserInputNumbersContainNotNumber(userInputValue) ||
+      checkUserInputNumbersContainDuplicateNumbers(userInputValue)
+    ) {
+      return;
+    }
+    userInputNumbers = [];
+    for (let i = 0; i < 3; i++) {
+      userInputNumbers.push(parseInt(userInputValue[i]));
+    }
+    return true;
   };
 
   this.play = function (computerInputNumbers, userInputNumbers) {
