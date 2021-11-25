@@ -74,6 +74,10 @@ export default function BaseballGame() {
     const result = [ball, strike];
     return result;
   };
+  const renderResult = result => {
+    $('#result').innerHTML = result;
+  };
+
   this.play = function (computerInputNumbers, userInputNumbers) {
     const ballAndStrike = getStrikeAndBall();
     console.log(computerInputNumbers, userInputNumbers);
@@ -96,12 +100,14 @@ export default function BaseballGame() {
     e.preventDefault();
     if (getUserInputNumbers()) {
       const result = baseballGame.play(computerInputNumbers, userInputNumbers);
+      renderResult(result);
     }
   });
 
   $('#user-input').addEventListener('keydown', e => {
     if (e.key === 'Enter' && getUserInputNumbers()) {
       const result = baseballGame.play(computerInputNumbers, userInputNumbers);
+      renderResult(result);
     }
   });
 }
