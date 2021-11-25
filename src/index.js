@@ -29,7 +29,7 @@ $button.addEventListener('click', event => {
 });
 
 $div.addEventListener('click', ({ target }) => {
-  if (!target.matches('#restart')) return;
+  if (!target.matches('#game-restart-button')) return;
   $input.value = EMPTY;
   $input.focus();
   game.initGame();
