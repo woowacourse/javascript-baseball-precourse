@@ -15,4 +15,8 @@ export default class Computer {
 
         return [...numbers];
     }
+
+    getAnswer() {
+        return this.answer;
+    }
 }
