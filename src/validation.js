@@ -14,7 +14,7 @@ const isNumber = (input) => {
 
 const isUnique = (input) => input.length === new Set(input).size;
 
-const validateInput = (input) => {
+export const validateInput = (input) => {
   let result = true;
   const message = [];
 
@@ -38,5 +38,3 @@ const validateInput = (input) => {
     message: message.join(" "),
   };
 };
-
-export { validateInput };
