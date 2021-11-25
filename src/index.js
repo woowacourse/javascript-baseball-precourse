@@ -2,14 +2,15 @@ export default class BaseballGame {
 
     // 중복없이 랜덤한 3자리수 정답 생성
     makeRandomAnswer() {
-        const MIN = 1;
-        const MAX = 9;
         const randomAnswer = [];
-        let temp = [];
+        let usedNumbers = [];
 
-        temp = MissionUtils.Random.pickUniqueNumbersInRange(MIN, MAX, 3); 
-        for(let i = 0; i < 3; i++) {
-            randomAnswer.push(temp[i]);
+        while(randomAnswer.length < 3) {
+            const pickedNum = MissionUtils.Random.pickNumberInRange(1, 9);
+            if(!usedNumbers.includes(pickedNum)) {
+                randomAnswer.push(pickedNum);
+                usedNumbers.push(pickedNum);
+            }
         }
         return randomAnswer;
     }
