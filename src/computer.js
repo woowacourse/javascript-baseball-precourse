@@ -1,4 +1,4 @@
-import { GAME_RULE } from "./constants";
+import { GAME_RULE } from "./constants.js";
 
 export default class Computer {
     constructor() {
