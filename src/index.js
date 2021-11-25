@@ -1,6 +1,7 @@
 import getComputerInputNumbers from "./utils/getComputerInputNumbers.js";
 import getScore from "./utils/getScore.js";
 import { validateUserInputNumbers } from "./utils/validation.js";
+import RestartBlock from "./components/RestartBlock.js";
 
 const initialState = {
   computerInputNumbers: getComputerInputNumbers(),
@@ -17,15 +18,18 @@ export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     console.log("play----------", computerInputNumbers, userInputNumbers);
 
-    const { balls, strikes, resultText, isSuccess } = getScore(
+    const { resultText, isSuccess } = getScore(
       computerInputNumbers,
       userInputNumbers
     );
-    console.log(balls, strikes, resultText, isSuccess);
+    console.log(resultText, isSuccess);
     if (isSuccess) {
-      // TODO 정답시 결과값 노출
+      RestartBlock(resultBlock);
+      return resultText;
     }
+
     resultBlock.innerHTML = resultText;
+    return resultText;
   };
 
   const onHandleSubmit = (e) => {
