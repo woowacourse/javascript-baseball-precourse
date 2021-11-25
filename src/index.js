@@ -6,8 +6,7 @@ export default class BaseballGame {
   constructor() {
     this.dom();
     this.addEvent();
-    this.$result.innerHTML = "";
-    this.computerInput = this.getComputerNumber();
+    this.init();
   }
 
   dom() {
@@ -18,6 +17,13 @@ export default class BaseballGame {
 
   addEvent() {
     this.$userForm.addEventListener("submit", this.getUserNumber.bind(this));
+  }
+
+  init() {
+    this.computerInput = this.getComputerNumber();
+    this.$result.innerHTML = "";
+    this.$userInput.focus();
+    this.clearInput();
   }
 
   getComputerNumber() {
@@ -55,6 +61,7 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
+    console.log(computerInputNumbers, userInputNumbers);
     let strike = 0;
     let ball = 0;
 
@@ -105,6 +112,7 @@ export default class BaseballGame {
     );
     const restartButton = createMyElement("button", "게임 재시작");
     const restartContainer = document.createElement("div");
+    restartButton.addEventListener("click", this.init.bind(this));
     restartContainer.append(restartText, restartButton);
     this.$result.append(guideText, restartContainer);
   }
