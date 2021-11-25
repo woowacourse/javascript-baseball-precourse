@@ -28,6 +28,16 @@ export default function BaseballGame() {
     }
     return false;
   };
+  const checkUserInputNumbersContainNotNumber = userInputValue => {
+    const num = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    for (let i = 0; i < 3; i++) {
+      if (!num.includes(parseInt(userInputValue[i]))) {
+        alert('잘못된 값을 입력하셨습니다.');
+        return true;
+      }
+    }
+    return false;
+  };
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     return '결과 값 String';
