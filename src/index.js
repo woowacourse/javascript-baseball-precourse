@@ -16,7 +16,69 @@ export default function BaseballGame() {
 
     computerNumber = number;
   };
+
+  // 3자리 숫자인지 확인
+  const checkLengthThree = number => {
+    if (number.length !== 3) {
+      alert("세자리의 수를 입력해주세요.");
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  // 중복된 숫자 사용했는지 확인
+  const checkOverlap = number => {
+    if (
+      number[0] === number[1] ||
+      number[1] === number[2] ||
+      number[0] === number[2]
+    ) {
+      alert("중복없는 세자리의 수를 입력해주세요.");
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  // 1~9의 숫자인지 확인
+  const checkValidNumber = number => {
+    let i = 0;
+    for (; i < 3; i++) {
+      if (number[i] < "1" || number[i] > "9") {
+        alert("1~9까지의 수를 입력해주세요.");
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  // 사용자가 입력한 수가 유효한지 확인
+  const checkUserNumber = number => {
+    if (checkLengthThree(number)) {
+      return false;
+    } else if (checkOverlap(number)) {
+      return false;
+    } else if (checkValidNumber(number)) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  // 사용자로부터 입력받기
+  const getUserNumber = () => {
+    let userNumber = document.getElementById("user-input").value;
+
+    if (checkUserNumber(userNumber)) {
+      return userNumber;
+    }
+  };
+
   getComputerNumber();
+  const submitButton = document.getElementById("submit");
+  submitButton.addEventListener("click", getUserNumber);
 }
 
 new BaseballGame();
