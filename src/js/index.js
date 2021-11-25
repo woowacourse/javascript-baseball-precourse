@@ -1,7 +1,7 @@
 export default function BaseballGame() {
   let computerInputNumbers = [];
+  let userInputNumbers = [];
   const $ = selector => document.querySelector(selector);
-  const userInputNumbers = [];
   const MIN_NUM = 1;
   const MAX_NUM = 9;
   const NUM_COUNT = 3;
