@@ -1,5 +1,7 @@
+import getComputerInputNumbers from "./utils/getComputerInputNumbers.js";
+
 const initialState = {
-  computerInputNumbers: MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3),
+  computerInputNumbers: getComputerInputNumbers(),
   userInputNumbers: [],
   balls: 0,
   strikes: 0,
@@ -7,6 +9,7 @@ const initialState = {
 
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
+    console.log("play----------", computerInputNumbers, userInputNumbers);
     return "결과 값 String";
   };
 }
