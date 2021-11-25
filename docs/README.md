@@ -12,12 +12,12 @@ TODO userInputNumbers 생성
 TODO play 구현
 -[X] 같은 수, 같은 자리 카운트해서 strike 변수에 갯수 담기 
 -[X] 같은 수, 다른 자리 카운트 ball 변수에 갯수 담기
--[] strike, ball 갯S에 따른 결과를 문자열로 반환 
-    -[] strike, ball 둘 다 0일 경우 `낫싱` 반환
-    -[] strike가 3인 경우 `🎉**정답을 맞추셨습니다**🎉` 반환
-    -[] strike만 1이상이고 3이 아닌 경우 `${stirke}스트라이크` 반환
-    -[] ball만 1이상인 경우 `${ball}볼` 반환
-    -[] strike, ball 둘 다 1이상인 경우 `${ball}볼 ${strike}스트라이크` 반환
+-[X] strike, ball 갯수에 따른 결과를 문자열로 반환 
+    -[X] strike, ball 둘 다 0일 경우 `낫싱` 반환
+    -[X] strike가 3인 경우 `🎉**정답을 맞추셨습니다**🎉` 반환
+    -[X] strike만 1이상이고 3이 아닌 경우 `${stirke}스트라이크` 반환
+    -[X] ball만 1이상인 경우 `${ball}볼` 반환
+    -[X] strike, ball 둘 다 1이상인 경우 `${ball}볼 ${strike}스트라이크` 반환
 
 TODO renderResult 구현
 -[] 컴퓨터는 입력한 숫자에 대한 결과를 출력한다.

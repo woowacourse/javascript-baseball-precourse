@@ -76,7 +76,20 @@ export default function BaseballGame() {
   };
   this.play = function (computerInputNumbers, userInputNumbers) {
     const ballAndStrike = getStrikeAndBall();
-    return '결과 값 String';
+    console.log(computerInputNumbers, userInputNumbers);
+    if (ballAndStrike[0] === 0 && ballAndStrike[1] === 0) {
+      return '낫싱';
+    }
+    if (ballAndStrike[1] === 3) {
+      return '🎉**정답을 맞추셨습니다**🎉';
+    }
+    if (ballAndStrike[0] === 0) {
+      return `${ballAndStrike[1]}스트라이크`;
+    }
+    if (ballAndStrike[1] === 0) {
+      return `${ballAndStrike[0]}볼`;
+    }
+    return `${ballAndStrike[0]}볼 ${ballAndStrike[1]}스트라이크`;
   };
 
   $('#base-ball-game-form').addEventListener('submit', e => {
