@@ -75,7 +75,7 @@ export default class BaseballGame {
     return num.match(/0/);
   };
 
-  isValidNumber = (num) => {
+  isNotValidNumber = (num) => {
     return num.match(/\D/);
   };
 
