@@ -12,3 +12,4 @@ export const generateComputerInputNumbers = () => {
 };
 
 const isValidLength = () => $userInput.value.length === 3;
+const isNumbers = () => !isNaN(Number($userInput.value));
