@@ -1,3 +1,5 @@
+import util from './util.js';
+
 let computerInputNumbers = [];
 
 init();
@@ -5,5 +7,5 @@ init();
 function init() {
   document.querySelector('h3').style.display = 'none';
   document.querySelector('#result').innerText = '';
-  computerInputNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  computerInputNumbers = util.pickUniqueThreeNumbers();
 }
