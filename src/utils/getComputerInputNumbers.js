@@ -6,8 +6,8 @@ const getComputerInputNumbers = () => {
     if (!result.includes(randomNumber)) result.push(randomNumber);
   }
 
-  console.log("computerInputNumbers :", result);
-  return result;
+  console.log("computerInputNumbers :", Number(result.join("")));
+  return Number(result.join(""));
 };
 
 export default getComputerInputNumbers;

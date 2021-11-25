@@ -1,4 +1,5 @@
 import getComputerInputNumbers from "./utils/getComputerInputNumbers.js";
+import getScore from "./utils/getScore.js";
 import { validateUserInputNumbers } from "./utils/validation.js";
 
 const initialState = {
@@ -14,7 +15,12 @@ export default function BaseballGame() {
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     console.log("play----------", computerInputNumbers, userInputNumbers);
-    return "결과 값 String";
+
+    const { balls, strikes, resultText, isSuccess } = getScore(
+      computerInputNumbers,
+      userInputNumbers
+    );
+    console.log(balls, strikes, resultText, isSuccess);
   };
 
   const onHandleSubmit = (e) => {
@@ -28,8 +34,7 @@ export default function BaseballGame() {
       return;
     }
 
-    this.play(initialState.computerInputNumbers, value.split(""));
-    console.log("success", value);
+    this.play(initialState.computerInputNumbers, Number(value));
   };
 
   submitBtn.addEventListener("click", onHandleSubmit);
