@@ -2,6 +2,8 @@ export default function BaseballGame() {
     const $form = document.querySelector('form');
     const $input = document.querySelector('#user-input');
     let computerInputNumbers = [];
+    let StrikeCnt = 0;
+    let BallCnt = 0;
 
     const setAnswer = () => {
         let generateRandNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
@@ -26,12 +28,28 @@ export default function BaseballGame() {
         }
         return true;
     };
+    // checkScore
+    const CountStrikeAndBall = userInputNumbers => {
+        StrikeCnt = 0;
+        BallCnt = 0;
+        for (let i = 0; i < userInputNumbers.length; i++) {
+            if (userInputNumbers[i] == computerInputNumbers[i]) StrikeCnt++;
+            else if (userInputNumbers[i] == computerInputNumbers[(i + 1) % 3] || userInputNumbers[i] == computerInputNumbers[(i + 2) % 3]) BallCnt++;
+        }
+        //console.log(`${StrikeCnt}스트라이크, ${BallCnt}볼`);
+        return [StrikeCnt, BallCnt];
+    }
 
     $form.addEventListener('submit', (event) => {
         event.preventDefault(); // 제출 시 초기화 되는 것 방지
         const userInputNumbers = $input.value;
-        console.log(userInputNumbers);
-        checkInput(userInputNumbers);
+        //console.log(userInputNumbers);
+        //checkInput(userInputNumbers);
+        if (!checkInput(userInputNumbers)) return;
+        else {
+            console.log(userInputNumbers);
+            console.log(CountStrikeAndBall(userInputNumbers));
+        }
     });
 
 }
