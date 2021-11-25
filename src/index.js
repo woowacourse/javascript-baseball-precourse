@@ -1,6 +1,6 @@
 import Computer from './computer.js';
 import User from './user.js';
-import { GAME_RULE, NOTHING, RESTART_BUTTON_TEXT, RESTART_TEXT, SUCCESS } from './constants.js';
+import { GAME_RULE, RESULT_TEXT, RESTART_TEXT } from './constants.js';
 import { calcResult } from './calcResult.js';
 
 export default class BaseballGame {
@@ -32,11 +32,13 @@ export default class BaseballGame {
 
         this.$resultArea.textContent = result;
 
-        if (result === SUCCESS) {
-            const restartText = document.createTextNode(RESTART_TEXT);
+        if (result === RESULT_TEXT.success) {
+            const { text, buttonText } = RESTART_TEXT;
+
+            const restartText = document.createTextNode(text);
             
             const restartButton = document.createElement('button');
-            restartButton.innerHTML = RESTART_BUTTON_TEXT;
+            restartButton.innerHTML = buttonText;
             restartButton.setAttribute('id', 'game-restart-button');
             restartButton.addEventListener('click', () => {
                 this.restartGame();
@@ -67,18 +69,19 @@ export default class BaseballGame {
     }
 
     play(computerInputNumbers, userInputNumbers) {
-        const { strike, ball } = calcResult(computerInputNumbers, userInputNumbers);
+        const { strikeCnt, ballCnt } = calcResult(computerInputNumbers, userInputNumbers);
+        const { ball, strike, nothing, success } = RESULT_TEXT;
 
         let result = '';
 
-        if (strike === GAME_RULE.answerLength) {
-            result = SUCCESS;
+        if (strikeCnt === GAME_RULE.answerLength) {
+            result = success;
         }
-        else if (strike === 0 && ball === 0) {
-            result = NOTHING;
+        else if (strikeCnt === 0 && ballCnt === 0) {
+            result = nothing;
         }
         else {
-            result = `${ball}볼 ${strike}스트라이크`;
+            result = `${ballCnt}${ball} ${strikeCnt}${strike}`;
         }
 
         return result;

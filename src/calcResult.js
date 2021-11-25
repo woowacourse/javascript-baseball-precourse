@@ -2,16 +2,16 @@ import { GAME_RULE } from "./constants.js";
 
 export const calcResult = (computerInputNumbers, userInputNumbers) => {
     const result = {
-        strike: 0,
-        ball: 0
+        strikeCnt: 0,
+        ballCnt: 0
     };
 
     for (let i = 0; i < GAME_RULE.answerLength; i++) {
         if (computerInputNumbers[i] === userInputNumbers[i]) {
-            result.strike++;
+            result.strikeCnt++;
         }
         else if (computerInputNumbers.includes(userInputNumbers[i])) {
-            result.ball++;
+            result.ballCnt++;
         }
     }
 
