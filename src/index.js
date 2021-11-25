@@ -8,7 +8,7 @@ import { caculateStrikeAndBall } from "./util/calculate.js";
 import {
   generateAlertMessage,
   generateResultMessage,
-} from "./util/generateMessage.js";
+} from "./util/generate-message.js";
 
 export default class BaseballGame {
   constructor() {

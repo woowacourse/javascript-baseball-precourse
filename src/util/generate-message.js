@@ -3,7 +3,7 @@ import {
   isInvalidNumber,
   isWithZero,
   isNotThreeDigit,
-} from "./checkValid.js";
+} from "./check-valid.js";
 import { BASEBALL_NUMBER_LENGTH } from "../constant/index.js";
 
 export const generateAlertMessage = (userInputNumbers) => {
