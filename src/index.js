@@ -61,7 +61,6 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    console.log(computerInputNumbers, userInputNumbers);
     let strike = 0;
     let ball = 0;
 
