@@ -1,4 +1,4 @@
-import { BASEBALL, ERROR_MESSAGES } from '../constants/index.js';
+import { BASEBALL, EMPTY, ERROR_MESSAGES } from '../constants/index.js';
 
 export const $ = selector => document.querySelector(selector);
 
@@ -9,7 +9,7 @@ export const isNumber = value => !Number.isNaN(+value);
 export const isIncludes = (value, target) => value.includes(target);
 
 export const isDuplicateLetter = value => {
-  const target = value.split('');
+  const target = value.split(EMPTY);
   const converted = new Set(target);
   return target.length !== converted.size;
 };
