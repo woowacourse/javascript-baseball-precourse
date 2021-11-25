@@ -48,7 +48,7 @@ export default function BaseballGame() {
     // Hint 제공
     const Hint = Strike_Ball => {
         if (Strike_Ball.Strike === 3) {
-            $result.innerText = '정답입니다';
+            endGame();
         }
         else if (Strike_Ball.Strike === 0 && Strike_Ball.Ball === 0) {
             $result.innerText = '낫싱';
@@ -58,6 +58,13 @@ export default function BaseballGame() {
             else if (Strike_Ball.Ball === 0) $result.innerText = `${Strike_Ball.Strike}스트라이크`;
             else $result.innerText = `${Strike_Ball.Ball}볼 ${Strike_Ball.Strike}스트라이크`;
         }
+    }
+
+    //endGame, resetGame
+    const endGame = () => {
+        $result.innerHTML = '<Strong> 정답을 맞추셨습니다 <Strong /> <br/>';
+        $result.innerHTML += `게임을 새로 시작하시겠습니까?`
+        $result.innerHTML += `<button id="game-restart-button" onclick="resetGame_button();">재시작</button>`
     }
 
     $form.addEventListener('submit', (event) => {
