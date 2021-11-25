@@ -1,6 +1,10 @@
 /* eslint-disable func-names */
 import { validateInput } from "./validation.js";
-import { NUMBER_RANGE_MIN, NUMBER_RANGE_MAX } from "./config.js";
+import {
+  NUMBER_RANGE_MIN,
+  NUMBER_RANGE_MAX,
+  RESULT_NOTHING,
+} from "./config.js";
 
 function BaseballGame() {
   this.generateRandomNumbers = function () {
@@ -25,8 +29,9 @@ function BaseballGame() {
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     const result = this.compareNumbers(computerInputNumbers, userInputNumbers);
+    const resultString = this.generateResultString(result);
 
-    return result;
+    return resultString;
   };
 
   this.playWithGeneratedNumber = function (userInputNumbers) {
@@ -48,6 +53,24 @@ function BaseballGame() {
     }
 
     return { ballCount, strikeCount };
+  };
+
+  this.generateResultString = function ({ ballCount, strikeCount }) {
+    const resultString = [];
+
+    if (ballCount) {
+      resultString.push(`${ballCount}볼`);
+    }
+
+    if (strikeCount) {
+      resultString.push(`${strikeCount}스트라이크`);
+    }
+
+    if (ballCount === 0 && strikeCount === 0) {
+      resultString.push(RESULT_NOTHING);
+    }
+
+    return resultString.join(" ");
   };
 }
 
