@@ -10,3 +10,9 @@ export const GAME = {
     "MAX_NUMBER": 9,
     "NUM_LEN" : 3
 };
+
+export const COUNT = {
+    "STRIKE": "스트라이크",
+    "BALL": "볼",
+    "NO_COUNT": "낫싱" 
+}
