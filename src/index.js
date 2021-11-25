@@ -8,7 +8,7 @@ export default class BaseballGame {
     this.submitButtonEl.addEventListener('click', this.isUserInputCheck);
   }
 
-  isUserInputDuplicate = () => {
+  isNotUserInputDuplicate = () => {
     const userInputSet = new Set(this.userInputEl.value.split(''));
     if ([...userInputSet].length !== this.userInputEl.value.length)
       return false;
@@ -23,7 +23,7 @@ export default class BaseballGame {
   };
 
   isUserInputCheck = () => {
-    return this.isUserInputDuplicate() && this.isUserInputNumberRange();
+    return this.isNotUserInputDuplicate() && this.isUserInputNumberRange();
   };
 
   play(computerInputNumbers, userInputNumbers) {
