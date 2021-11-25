@@ -1,5 +1,6 @@
 import { NUM } from "./constants.js";
 import { isValidUserInput } from "./valid.js";
+import { createMyElement } from "./utils.js";
 
 export default class BaseballGame {
   constructor() {
@@ -97,13 +98,12 @@ export default class BaseballGame {
   }
 
   displayRestartButton() {
-    const guideText = document.createElement("span");
-    guideText.innerText = "🎉 정답을 맞추셨습니다! 🎉";
-    const restartButton = document.createElement("button");
-    restartButton.innerText = "게임 재시작";
-    const restartText = document.createElement("span");
-    restartText.innerText = "게임을 새로 시작하시겠습니까?";
-
+    const guideText = createMyElement("span", "🎉 정답을 맞추셨습니다! 🎉");
+    const restartText = createMyElement(
+      "span",
+      "게임을 새로 시작하시겠습니까?"
+    );
+    const restartButton = createMyElement("button", "게임 재시작");
     const restartContainer = document.createElement("div");
     restartContainer.append(restartText, restartButton);
     this.$result.append(guideText, restartContainer);
