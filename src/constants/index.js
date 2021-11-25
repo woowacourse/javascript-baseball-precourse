@@ -3,7 +3,11 @@ export const BASEBALL = Object.freeze({
   ZERO: 0,
   START: 1,
   END: 9,
+  WIN: '승리',
+  NOTING: '낫싱',
 });
+
+export const EMPTY = '';
 
 export const ERROR_MESSAGES = Object.freeze({
   'not-enough-value': `입력 값을 확인해주세요.\n필요 자리수 : ${BASEBALL.DIGIT}`,
