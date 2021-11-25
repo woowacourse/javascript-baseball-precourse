@@ -1,6 +1,8 @@
 export default function BaseballGame() {
   let computerNumber = "";
   const hint = document.getElementById("result");
+  const userInput = document.getElementById("user-input");
+  const submitButton = document.getElementById("submit");
 
   const getComputerNumber = () => {
     let number = "";
@@ -70,10 +72,12 @@ export default function BaseballGame() {
 
   // 사용자로부터 입력받기
   const getUserNumber = () => {
-    let userNumber = document.getElementById("user-input").value;
+    let userNumber = userInput.value;
 
     if (checkUserNumber(userNumber)) {
       return userNumber;
+    } else {
+      return "unvalid";
     }
   };
 
@@ -132,15 +136,34 @@ export default function BaseballGame() {
     return result;
   };
 
+  const addResetFunction = () => {
+    const resetButton = document.getElementById("game-restart-button");
+    resetButton.addEventListener("click", resetGame);
+  };
+
   const showResult = () => {
     let userNumber = getUserNumber();
     let result = play(userNumber, computerNumber);
+    if (userNumber === "unvalid") return;
 
-    hint.innerHTML = result;
+    if (result === "3스트라이크") {
+      hint.innerHTML = `
+        <div>🎉정답을 맞추셨습니다!🎉<div>
+        게임을 새로 시작하시겠습니까?<button id="game-restart-button">게임 재시작</button>
+      `;
+      addResetFunction();
+    } else {
+      hint.innerHTML = result;
+    }
   };
 
-  getComputerNumber();
-  const submitButton = document.getElementById("submit");
+  const resetGame = () => {
+    getComputerNumber();
+    hint.innerHTML = "";
+    userInput.value = "";
+  };
+
+  resetGame();
   submitButton.addEventListener("click", showResult);
 }
 
