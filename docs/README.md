@@ -76,8 +76,8 @@ input을 초기화
     │   └── result-message.js // 출력 결과 메시지 모음
     │
     ├── functions
-    │   ├── userInput.js // 유저 입력이 올바른지 판별, 판별하기 위해 필요한 기능 모음
-    │   └── gameResult.js // 입력에 따른 출력메시지, DOM 생성, 재시작에 필요한 기능 모음
+    │   ├── user-input.js // 유저 입력이 올바른지 판별, 판별하기 위해 필요한 기능 모음
+    │   └── game-esult.js // 입력에 따른 출력메시지, DOM 생성, 재시작에 필요한 기능 모음
     │
     └── state
         └── index.js // 유저 입력, 컴퓨터 난수, 볼 개수, 스트라이크 개수를 관리하는 state
