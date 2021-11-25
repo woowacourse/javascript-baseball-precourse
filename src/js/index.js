@@ -61,18 +61,36 @@ export default function BaseballGame() {
     }
     return true;
   };
-
+  const getStrikeAndBall = () => {
+    let strike = 0;
+    let ball = 0;
+    for (let i = 0; i < 3; i++) {
+      if (userInputNumbers[i] === computerInputNumbers[i]) {
+        strike++;
+      } else if (computerInputNumbers.includes(userInputNumbers[i])) {
+        ball++;
+      }
+    }
+    const result = [ball, strike];
+    return result;
+  };
   this.play = function (computerInputNumbers, userInputNumbers) {
+    const ballAndStrike = getStrikeAndBall();
     return '결과 값 String';
   };
 
   $('#base-ball-game-form').addEventListener('submit', e => {
     e.preventDefault();
-    getUserInputNumbers();
+    if (getUserInputNumbers()) {
+      const result = baseballGame.play(computerInputNumbers, userInputNumbers);
+    }
   });
+
   $('#user-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      getUserInputNumbers();
+    if (e.key === 'Enter' && getUserInputNumbers()) {
+      const result = baseballGame.play(computerInputNumbers, userInputNumbers);
     }
   });
 }
+
+let baseballGame = new BaseballGame();
