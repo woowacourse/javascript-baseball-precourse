@@ -1,3 +1,12 @@
 export default function createComputerInputNumbers() {
-  return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  const selectedNumber = [];
+
+  while (selectedNumber.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!selectedNumber.includes(number)) {
+      selectedNumber.push(number);
+    }
+  }
+
+  return selectedNumber;
 }
