@@ -4,8 +4,9 @@ export default class BaseballGame {
       '',
     );
     this.userInputEl = document.querySelector('#user-input');
+    this.resultEl = document.querySelector('#result');
     this.submitButtonEl = document.querySelector('#submit');
-    this.submitButtonEl.addEventListener('click', this.isUserInputCheck);
+    this.submitButtonEl.addEventListener('click', this.submitButtonHandle);
   }
 
   isNotUserInputDuplicate = () => {
@@ -57,7 +58,35 @@ export default class BaseballGame {
     return [strikeCount, ballCount];
   };
 
+  submitButtonHandle = () => {
+    if (this.isUserInputCheck()) {
+      this.resultEl.innerHTML = this.printResult(this.compareAnswer());
+      this.userInputEl.value = '';
+    } else {
+      alert('1 ~ 9의 중복되지 않는 숫자 3자리를 입력하세요!');
+      this.userInputEl.value = '';
+    }
+  };
+
+  printResult = ([strikeCount, ballCount]) => {
+    let printText = '';
+    if (ballCount !== 0) {
+      printText += `${ballCount}볼`;
+    }
+    if (ballCount !== 0 && strikeCount !== 0) {
+      printText += ' ';
+    }
+    if (strikeCount !== 0) {
+      printText += `${strikeCount}스트라이크`;
+    }
+    if (ballCount === 0 && strikeCount === 0) {
+      printText += '낫싱';
+    }
+    return printText;
+  };
+
   play(computerInputNumbers, userInputNumbers) {
     return '결과 값 String';
   }
 }
+new BaseballGame();
