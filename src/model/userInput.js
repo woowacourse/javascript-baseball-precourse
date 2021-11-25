@@ -1,4 +1,4 @@
-import { RESULT_CODE } from "../constants.js";
+import { RESULT_CODE, ERROR_MESSAGE } from "../constants.js";
 
 function isThreeLength(word) {
     return word.trim().length === 3;
@@ -27,6 +27,10 @@ export default class UserInputModel {
     }
 
     get toNumberArray() {
+        if (!isNumberRange(this.userValue)) {
+            throw new Error(ERROR_MESSAGE.DEV_ONLY_NUMBER_STRING);
+        }
+
         const wordLists = this.userValue.split("");
         const resultArray = [];
 

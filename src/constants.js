@@ -5,3 +5,7 @@ export const RESULT_CODE = {
 
     DONE_USERINPUT_VALID: Symbol("유저 입력값 검증 성공"),
 };
+
+export const ERROR_MESSAGE = {
+    DEV_ONLY_NUMBER_STRING: "유저 입력 값에 1~9 사이가 아닌 값이 입력되었음",
+};
