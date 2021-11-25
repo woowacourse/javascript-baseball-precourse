@@ -1,4 +1,4 @@
-import { pickRandomNumbers } from "./utils.js";
+import { pickRandomNumbers, isValidInputNumbers } from "./utils.js";
 
 export default function BaseballGame() {
     let computerInputNumbers = pickRandomNumbers();
@@ -19,6 +19,10 @@ export default function BaseballGame() {
         event.preventDefault();
         const userInputNumbers = $userInput.value;
         console.log(userInputNumbers);
+        if (!isValidInputNumbers(userInputNumbers)) {
+            $userInput.value = "";
+            return;
+        }
     }
 
     $submitButton.addEventListener("click", handleInputNumbers);
