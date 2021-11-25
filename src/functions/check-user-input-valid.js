@@ -1,4 +1,3 @@
-import { state } from '../state/index.js';
 import { NUMBER_LENGTH } from '../constants/game-rule.js';
 import {
   NOT_NUMERIC_MESSAGE,
@@ -10,10 +9,11 @@ import {
 export function isNumeric(str) {
   let flag = true;
   for (let i = 0; i < str.length; i++) {
-    if(isNaN(parseInt(str[i]))){
-      flag=false;
+    if (isNaN(parseInt(str[i]))) {
+      flag = false;
     }
   }
+
   return flag;
 }
 
