@@ -44,15 +44,23 @@ export default class BaseballGame {
 
             this.$resultArea.appendChild(restartText);
             this.$resultArea.appendChild(restartButton);
+
+            // 재시작 버튼을 누르기 전까지는 input을 건드릴 수 없음
+            document.getElementById('user-input').readOnly = true;
         }
     }
 
     restartGame() {
         // user-input 초기화
-        document.getElementById('user-input').value = '';
+        const $userInput = document.getElementById('user-input');
+
+        $userInput.value = null;
+        $userInput.readOnly = false;
         this.user.setUserInputNumbers([]);
+        
         // result 초기화
         this.$resultArea.innerHTML = '';
+        
         // 새로운 번호 생성
         this.computer = new Computer();
     }
