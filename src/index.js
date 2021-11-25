@@ -5,7 +5,7 @@ export default class BaseballGame {
   constructor() {
     this.dom();
     this.addEvent();
-    this.getComputerNumber();
+    this.computerInput = this.getComputerNumber();
   }
 
   dom() {
@@ -44,7 +44,7 @@ export default class BaseballGame {
       return;
     }
 
-    return userNumbers;
+    this.play(this.computerInput, userNumbers);
   }
 
   clearInput() {
@@ -52,7 +52,18 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    let strike = 0;
+    let ball = 0;
+
+    for (let i = 0; i < NUM.MAX_LENGTH; i++) {
+      if (computerInputNumbers.indexOf(userInputNumbers[i]) === i) {
+        strike++;
+        continue;
+      }
+      if (computerInputNumbers.includes(userInputNumbers[i])) {
+        ball++;
+      }
+    }
   }
 }
 
