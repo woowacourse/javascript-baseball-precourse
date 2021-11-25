@@ -1,10 +1,10 @@
 import UserInputModel from "./model/userInput.js";
+import GameRuleModel from "./model/gameRules.js";
 
 export default class BaseballGame {
     constructor() {
-        const test = new UserInputModel("321");
-        console.log(test.checkInputValid);
-        console.log(test.toNumberArray);
+        const test = new GameRuleModel();
+        console.log(test.answer);
     }
 
     play(computerInputNumbers, userInputNumbers) {}
