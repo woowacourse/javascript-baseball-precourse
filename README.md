@@ -41,6 +41,7 @@
     * 입력이 올바르지 못하면 alert으로 알림
 
 3. 정답 확인
+  * Strike, Ball 갯수 확인
   3-1 : Computer = User
     * 게임 종료
     * 재시작 버튼 노출
