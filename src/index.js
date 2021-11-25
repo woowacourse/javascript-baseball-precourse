@@ -1,5 +1,4 @@
-import createComputerInputNumbers from './createComputerInputNumbers';
-import validateInput from './validateInput';
+import countStrikeAndBall from './countStrikeAndBall';
 
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
@@ -7,12 +6,13 @@ export default function BaseballGame() {
   };
 }
 
-// 기능 2 테스트
-console.log(validateInput(''));
-console.log(validateInput('1'));
-console.log(validateInput('12'));
-console.log(validateInput('1234'));
-console.log(validateInput('11d'));
-console.log(validateInput('019'));
-console.log(validateInput('112'));
-console.log(validateInput('123'));
+// 기능 3 테스트
+console.log(countStrikeAndBall([1, 2, 3], [1, 2, 3]));
+console.log(countStrikeAndBall([1, 2, 3], [4, 5, 6]));
+console.log(countStrikeAndBall([1, 2, 3], [3, 4, 5]));
+console.log(countStrikeAndBall([1, 2, 3], [4, 3, 2]));
+console.log(countStrikeAndBall([1, 2, 3], [3, 1, 2]));
+console.log(countStrikeAndBall([1, 2, 3], [1, 4, 5]));
+console.log(countStrikeAndBall([1, 2, 3], [1, 3, 4]));
+console.log(countStrikeAndBall([1, 2, 3], [1, 3, 2]));
+console.log(countStrikeAndBall([1, 2, 3], [1, 2, 4]));
