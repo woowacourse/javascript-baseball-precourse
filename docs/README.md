@@ -13,11 +13,19 @@
 - 사용자가 잘못된 값을 입력한 경우 `alert`으로 에러 메시지를 보여주고, 다시 입력할 수 있게 한다.
 
 
-
 ## 기능 요구사항 분석
 
-- 1~9 까지의 숫자 3개를 Random하게 생성(Random.pickNumberInRange 사용할 것)
+- 1~9 까지의 숫자 3개를 Random하게 생성
+    - Random.pickNumberInRange 사용
+    - set을 사용해 서로 다른 숫자로 이루어진 수 생성
+
 - 플레이어로부터 입력 받기 (3개의 숫자가 아닐 시 alert)
+    - 유저의 입력값이 올바른지 확인
+        - 0이 있을 경우 error
+        - 숫자가 아닐 경우 error
+        - 길이가 3이 아닐 경우 error
+        - 중복된 숫자가 있을 경우 error
+
 - 야구 점수 계산
     - ball 갯수만 판별
     - Strike 갯수만 판별
