@@ -7,5 +7,5 @@ export const RESULT_CODE = {
 };
 
 export const ERROR_MESSAGE = {
-    DEV_ONLY_NUMBER_STRING: "유저 입력 값에 1~9 사이가 아닌 값이 입력되었음",
+    DEV_ONLY_NUMBER_STRING: "유저 입력 값에 1~9 사이가 아닌 값이 전달되었음",
 };
