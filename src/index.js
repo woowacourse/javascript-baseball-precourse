@@ -16,45 +16,10 @@ export default class BaseballGame {
     this.setEvent();
   }
 
-  play = (computerInputNumbers, userInputNumbers) => {
-    const { strike, ball } = caculateStrikeAndBall(
-      computerInputNumbers,
-      userInputNumbers
-    );
-    const gameResultMessage = generateResultMessage(strike, ball);
-
-    return gameResultMessage;
-  };
-
   setEvent = () => {
     DOMS.$userInputForm.addEventListener("submit", this.onSubmitHandler);
 
     DOMS.$result.addEventListener("click", this.restartGame);
-  };
-
-  restartGame = (event) => {
-    if (event.target.id === "game-restart-button") {
-      this.resetGame();
-    }
-  };
-
-  setAnswerNumber = () => {
-    this.answerNumber = this.generateAnswerNumber();
-  };
-
-  resetGame = () => {
-    this.setAnswerNumber();
-    this.resetUserInput();
-    this.resetResult();
-  };
-
-  resetUserInput = () => {
-    DOMS.$userInput.value = "";
-    DOMS.$userInput.focus();
-  };
-
-  resetResult = () => {
-    DOMS.$result.innerHTML = "";
   };
 
   onSubmitHandler = (event) => {
@@ -73,6 +38,20 @@ export default class BaseballGame {
     this.printResultMessage(gameResultMessage);
   };
 
+  play = (computerInputNumbers, userInputNumbers) => {
+    const { strike, ball } = caculateStrikeAndBall(
+      computerInputNumbers,
+      userInputNumbers
+    );
+    const gameResultMessage = generateResultMessage(strike, ball);
+
+    return gameResultMessage;
+  };
+
+  setAnswerNumber = () => {
+    this.answerNumber = this.generateAnswerNumber();
+  };
+
   generateAnswerNumber = () => {
     const randomNumberSet = new Set();
     while (randomNumberSet.size < BASEBALL_NUMBER_LENGTH) {
@@ -85,6 +64,27 @@ export default class BaseballGame {
     }
 
     return [...randomNumberSet].join("");
+  };
+
+  restartGame = (event) => {
+    if (event.target.id === "game-restart-button") {
+      this.resetGame();
+    }
+  };
+
+  resetGame = () => {
+    this.setAnswerNumber();
+    this.resetUserInput();
+    this.resetResult();
+  };
+
+  resetUserInput = () => {
+    DOMS.$userInput.value = "";
+    DOMS.$userInput.focus();
+  };
+
+  resetResult = () => {
+    DOMS.$result.innerHTML = "";
   };
 
   showAlertMessage = (message) => {
