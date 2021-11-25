@@ -5,6 +5,7 @@ export default class BaseballGame {
     );
     this.userInputEl = document.querySelector('#user-input');
     this.resultEl = document.querySelector('#result');
+    this.appEl = document.querySelector('#app');
     this.submitButtonEl = document.querySelector('#submit');
     this.submitButtonEl.addEventListener('click', this.submitButtonHandle);
   }
@@ -87,13 +88,29 @@ export default class BaseballGame {
 
   resultText = ([strikeCount, ballCount]) => {
     if (strikeCount === 3) {
-      return '🎉 정답을 맞추셨습니다! 🎉';
+      this.createRestartText();
+      this.createRestartButton();
+      return '🎉 정답을 맞추셨습니다! 🎉 ';
     }
     return this.notAnswerText(strikeCount, ballCount);
+  };
+
+  createRestartText = () => {
+    const reStartTextEl = document.createElement('span');
+    reStartTextEl.innerHTML = '게임을 새로 시작하시겠습니까? ';
+    this.appEl.appendChild(reStartTextEl);
+  };
+
+  createRestartButton = () => {
+    const reStartButtonEl = document.createElement('button');
+    reStartButtonEl.id = 'game-restart-button';
+    reStartButtonEl.innerHTML = '재시작';
+    this.appEl.appendChild(reStartButtonEl);
   };
 
   play(computerInputNumbers, userInputNumbers) {
     return '결과 값 String';
   }
 }
+
 new BaseballGame();
