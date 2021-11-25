@@ -16,13 +16,11 @@ export default function BaseballGame() {
     const userInput = document.getElementById('user-input').value;
     const userInputArray = userInput.split('').map(x => parseInt(x));
     const userInputSet = [...new Set(userInputArray)];
-    state.userInput = userInputArray;
+    state.userInput = parseInt(userInput);
     initialBallStrikeCount();
     if (checkUserInputValid(userInput, userInputArray, userInputSet)) {
       const resultMessage = this.play(state.computerInput, state.userInput);
-    } else {
-      alert('올바르지 않은 입력 정보');
-    }
+    } 
   });
 }
 

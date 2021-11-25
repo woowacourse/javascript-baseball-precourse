@@ -23,7 +23,7 @@ export default function checkUserInputValid(userInput, userInputArray, userInput
     alert(LENGTH_NOT_MATCH_MESSAGE);
   } else if (userInputArray.length !== userInputSet.length) {
     alert(ALREADY_EXIST_MESSAGE);
-  } else if (userInputArray.includes('0')) {
+  } else if (userInputArray.includes(0)) {
     alert(OUT_OF_RANGE_MESSAGE);
   } else if (!isNumeric(userInput)) {
     alert(NOT_NUMERIC_MESSAGE);
