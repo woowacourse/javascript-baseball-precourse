@@ -14,3 +14,4 @@ export const generateComputerInputNumbers = () => {
 const isValidLength = () => $userInput.value.length === 3;
 const isNumbers = () => !isNaN(Number($userInput.value));
 const isOverlap = () => new Set($userInput.value).size !== 3;
+const isContainZero = () => $userInput.value.includes('0');
