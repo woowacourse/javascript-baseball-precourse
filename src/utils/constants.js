@@ -3,8 +3,8 @@ export const ALERT_TEXT = '쓰여 있는 조건에 맞게 입력해주세요';
 export const GAME_RULE = {
     answerLength: 3,
     answerRange: {
-        min: 1,
-        max: 9
+        minNum: 1,
+        maxNum: 9
     }
 };
 
@@ -17,5 +17,6 @@ export const RESULT_TEXT = {
 
 export const RESTART_TEXT = {
     text: '게임을 새로 시작하시겠습니까?',
-    buttonText: '게임 재시작'
+    buttonText: '게임 재시작',
+    buttonId: 'game-restart-button'
 };
