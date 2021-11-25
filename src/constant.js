@@ -9,3 +9,5 @@ export const ERR_MESSAGE = {
     NUMBERS_LENGTH: "3자리의 숫자를 입력해주세요.",
     NOT_DUPLICATED: "서로 다른 숫자를 입력해주세요.",
 };
+
+export const ANSWER = "3스트라이크";

@@ -1,4 +1,8 @@
-import { compareInputNumbers } from "./play.js";
+import {
+    compareInputNumbers,
+    makeResultString,
+    showResultString,
+} from "./play.js";
 import { pickRandomNumbers, isValidInputNumbers } from "./utils.js";
 
 export default function BaseballGame() {
@@ -17,7 +21,7 @@ export default function BaseballGame() {
             computerInputNumbers,
             userInputNumbers
         );
-        return;
+        return makeResultString(comparedResult);
     };
 
     function handleInputNumbers(event) {
@@ -29,6 +33,8 @@ export default function BaseballGame() {
             return;
         }
         const resultString = this.play(computerInputNumbers, userInputNumbers);
+        console.log(resultString);
+        showResultString(resultString, $resultDiv, $resetButton);
     }
 
     $submitButton.addEventListener("click", handleInputNumbers.bind(this));
