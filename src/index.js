@@ -1,5 +1,6 @@
 export default function BaseballGame() {
   let computerNumber = "";
+  const hint = document.getElementById("result");
 
   const getComputerNumber = () => {
     let number = "";
@@ -113,9 +114,34 @@ export default function BaseballGame() {
     return count;
   };
 
+  const play = (userNumber, computerNumber) => {
+    let result = "";
+    const ball = countBall(userNumber, computerNumber);
+    const strike = countStrike(userNumber, computerNumber);
+
+    if (ball > 0) {
+      result += `${ball}볼 `;
+    }
+    if (strike > 0) {
+      result += `${strike}스트라이크`;
+    }
+    if (ball === 0 && strike === 0) {
+      result = "낫싱";
+    }
+
+    return result;
+  };
+
+  const showResult = () => {
+    let userNumber = getUserNumber();
+    let result = play(userNumber, computerNumber);
+
+    hint.innerHTML = result;
+  };
+
   getComputerNumber();
   const submitButton = document.getElementById("submit");
-  submitButton.addEventListener("click", getUserNumber);
+  submitButton.addEventListener("click", showResult);
 }
 
 new BaseballGame();
