@@ -52,14 +52,6 @@ const checkInputMethods = [
 export default class User {
     constructor() {
         this.$input = document.getElementById('user-input');
-        this.$input.addEventListener('keyup', () => {
-            const val = this.getUserInputValue();
-            const validVal = val
-                                .replace(/[^1-9]/g, '')
-                                .slice(0, ANSWER_LENGTH);
-            
-            this.setUserInputValue(validVal);
-        });
     }
 
     /**
