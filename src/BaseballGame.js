@@ -72,4 +72,8 @@ export default function BaseballGame() {
 
     return resultString.join(" ");
   };
+
+  this.restart = function() {
+    this.computerNumbers = this.generateRandomNumbers();
+  }
 }

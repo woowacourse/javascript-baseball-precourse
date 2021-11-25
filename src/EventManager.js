@@ -41,6 +41,12 @@ export default function EventManager() {
 
       this.$resultDiv.innerHTML = correctMessageTemplate;
       this.$resultDiv.appendChild(this.$gameRestartButton);
+
+      $on(this.$gameRestartButton, "click", () => {
+        baseballGame.restart();
+        this.$resultDiv.innerHTML = "";
+        this.$userInput.value = "";
+      });
     } else {
       this.$resultDiv.innerHTML = resultString;
     }
