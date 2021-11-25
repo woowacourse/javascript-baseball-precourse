@@ -40,6 +40,23 @@ export default class BaseballGame {
     );
   };
 
+  compareAnswer = () => {
+    let strikeCount = 0;
+    let ballCount = 0;
+    this.userInputEl.value.split('').forEach((element, index) => {
+      if (this.answer.indexOf(element) === index) {
+        strikeCount += 1;
+      }
+      if (
+        this.answer.indexOf(element) !== index &&
+        this.answer.indexOf(element) !== -1
+      ) {
+        ballCount += 1;
+      }
+    });
+    return [strikeCount, ballCount];
+  };
+
   play(computerInputNumbers, userInputNumbers) {
     return '결과 값 String';
   }
