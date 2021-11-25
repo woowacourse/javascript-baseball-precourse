@@ -5,8 +5,8 @@ export default class BaseballGame {
   constructor() {
     this.dom();
     this.addEvent();
-    this.computerInput = this.getComputerNumber();
     this.$result.innerHTML = "";
+    this.computerInput = this.getComputerNumber();
   }
 
   dom() {
@@ -89,7 +89,24 @@ export default class BaseballGame {
   }
 
   displayResult(text) {
+    if (text === "정답") {
+      this.$result.innerHTML = "";
+      return this.displayRestartButton();
+    }
     this.$result.innerHTML = text;
+  }
+
+  displayRestartButton() {
+    const guideText = document.createElement("span");
+    guideText.innerText = "🎉 정답을 맞추셨습니다! 🎉";
+    const restartButton = document.createElement("button");
+    restartButton.innerText = "게임 재시작";
+    const restartText = document.createElement("span");
+    restartText.innerText = "게임을 새로 시작하시겠습니까?";
+
+    const restartContainer = document.createElement("div");
+    restartContainer.append(restartText, restartButton);
+    this.$result.append(guideText, restartContainer);
   }
 }
 
