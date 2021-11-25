@@ -1,4 +1,4 @@
-import { COMPUTER_NUMBERS, ERR_MESSAGE } from "./contact.js";
+import { COMPUTER_NUMBERS, ERR_MESSAGE } from "./constant.js";
 
 export function pickRandomNumbers() {
     const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
@@ -13,10 +13,10 @@ export function isValidInputNumbers(userInputNumbers) {
     if (isNaN(userInputNumbers)) {
         return alert(ERR_MESSAGE.JUST_NUMBERS);
     }
-    if (userInputNumbers.length !== 3) {
+    if (userInputNumbers.length !== COMPUTER_NUMBERS.LENGTH) {
         return alert(ERR_MESSAGE.NUMBERS_LENGTH);
     }
-    if (new Set(userInputNumbers).size !== 3) {
+    if (new Set(userInputNumbers).size !== COMPUTER_NUMBERS.LENGTH) {
         return alert(ERR_MESSAGE.NOT_DUPLICATED);
     }
     return true;

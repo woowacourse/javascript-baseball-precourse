@@ -1,3 +1,4 @@
+import { compareInputNumbers } from "./play.js";
 import { pickRandomNumbers, isValidInputNumbers } from "./utils.js";
 
 export default function BaseballGame() {
@@ -12,7 +13,11 @@ export default function BaseballGame() {
     $resetButton.id = "game-restart-button";
 
     this.play = function (computerInputNumbers, userInputNumbers) {
-        return "결과 값 String";
+        const comparedResult = compareInputNumbers(
+            computerInputNumbers,
+            userInputNumbers
+        );
+        return;
     };
 
     function handleInputNumbers(event) {
@@ -23,9 +28,10 @@ export default function BaseballGame() {
             $userInput.value = "";
             return;
         }
+        const resultString = this.play(computerInputNumbers, userInputNumbers);
     }
 
-    $submitButton.addEventListener("click", handleInputNumbers);
+    $submitButton.addEventListener("click", handleInputNumbers.bind(this));
 }
 
 new BaseballGame();
