@@ -1,5 +1,5 @@
-import createComputerInputNumbers from './createComputerInputNumbers.js';
-import validateInput from './validateInput.js';
+import createComputerInputNumbers from './createComputerInputNumbers';
+import validateInput from './validateInput';
 
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
