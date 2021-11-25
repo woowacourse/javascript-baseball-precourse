@@ -128,13 +128,13 @@
 > play 메서드를 통해 게임을 실행하고 결과를 확인합니다.
 
 **사전 정의**
-- [ ] 1. 입력 값과 비교하여 결과(스트라이크와 볼, 낫싱)를 체크합니다.
-- [ ] 2. 구현한 기능을 리팩토링합니다.
+- [x] ~~1. 입력 값과 비교하여 결과(스트라이크와 볼, 낫싱)를 체크합니다.~~/ 완료
+- [x] ~~2. 구현한 기능을 리팩토링합니다.~~/ 완료
 
 **추가 사항**
-- [ ] 볼은 다른 자리에 동일한 값을 체크합니다.
-- [ ] 스트라이크는 동일한 자리에 동일한 값을 체크합니다.
-- [ ] 공백 문자열도 상수 처리합니다.
+- [x] ~~볼은 다른 자리에 동일한 값을 체크합니다.~~/ 완료
+- [x] ~~스트라이크는 동일한 자리에 동일한 값을 체크합니다.~~/ 완료
+- [x] ~~공백 문자열도 상수 처리합니다.~~/ 완료
 
 **변경 사항**
 - input #user-input의 값이 예외 처리되면 게임이 시작되지 않아야 하므로 조건문을 통해 return 처리합니다.
@@ -142,7 +142,14 @@
 <br>
 
 > 기본
-> - [커밋 링크]()
+> - [커밋 링크 1](https://github.com/InSeong-So/javascript-baseball-precourse/commit/5734e0cd18a04deee1769e453e1b27116b3b048c)
+> - [커밋 링크 2](https://github.com/InSeong-So/javascript-baseball-precourse/commit/1085caca892bc6b6d0e7194adafbbb1636d79e10)
+
+<br>
+
+> 리팩토링 및 추가사항
+> - [상수 변경 링크 1](https://github.com/InSeong-So/javascript-baseball-precourse/commit/b879f61a977adc1189e4432f7833f3f5fca5118c)
+> - [상수 변경 링크 2](https://github.com/InSeong-So/javascript-baseball-precourse/commit/5d8d5b474b7719d0892f79ee59102c5d86ad08b3)
 
 <br>
 
