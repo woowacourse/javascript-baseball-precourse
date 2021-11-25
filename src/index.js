@@ -4,6 +4,7 @@ export default function BaseballGame() {
   const userInput = document.getElementById("user-input");
   const submitButton = document.getElementById("submit");
 
+  // 컴퓨터 난수 생성
   const getComputerNumber = () => {
     let number = "";
     let checkUseNumber = new Array(10).fill(false);
@@ -44,19 +45,6 @@ export default function BaseballGame() {
     }
   };
 
-  // 1~9의 숫자인지 확인
-  const checkValidNumber = number => {
-    let i = 0;
-    for (; i < 3; i++) {
-      if (number[i] < "1" || number[i] > "9") {
-        alert("1~9까지의 수를 입력해주세요.");
-        return true;
-      }
-    }
-
-    return false;
-  };
-
   // 사용자가 입력한 수가 유효한지 확인
   const checkUserNumber = number => {
     if (checkLengthThree(number)) {
@@ -68,6 +56,19 @@ export default function BaseballGame() {
     } else {
       return true;
     }
+  };
+
+  // 1~9의 숫자인지 확인
+  const checkValidNumber = number => {
+    let i = 0;
+    for (; i < 3; i++) {
+      if (number[i] < "1" || number[i] > "9") {
+        alert("1~9까지의 수를 입력해주세요.");
+        return true;
+      }
+    }
+
+    return false;
   };
 
   // 사용자로부터 입력받기
@@ -109,7 +110,6 @@ export default function BaseballGame() {
   const countBall = (userNumber, computerNumber) => {
     let count = 0;
     let i;
-    let j;
     for (i = 0; i < 3; i++) {
       if (isBall(userNumber, computerNumber, i)) {
         count++;
@@ -136,11 +136,13 @@ export default function BaseballGame() {
     return result;
   };
 
+  // 재시작 기능 추가
   const addResetFunction = () => {
     const resetButton = document.getElementById("game-restart-button");
     resetButton.addEventListener("click", resetGame);
   };
 
+  // 힌트 제공
   const showResult = () => {
     let userNumber = getUserNumber();
     let result = play(userNumber, computerNumber);
@@ -157,6 +159,7 @@ export default function BaseballGame() {
     }
   };
 
+  // 게임 재시작(난수 재생성, 힌트 및 입력 초기화)
   const resetGame = () => {
     getComputerNumber();
     hint.innerHTML = "";
