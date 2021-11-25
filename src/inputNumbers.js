@@ -1,4 +1,4 @@
-import { $userInput, $submit } from './constants.js';
+import { $userInput } from './constants.js';
 
 export const generateComputerInputNumbers = () => {
   const arr = [];
