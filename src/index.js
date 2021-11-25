@@ -2,7 +2,7 @@ import { state } from './state.js';
 import makeRandomNumber from './functions/make-random-number.js';
 import checkUserInputValid from './functions/check-user-input-valid.js';
 import setBallStrike from './functions/set-ball-strike.js';
-import initialBallStrikeCount from './functions/initial-ball-strike-count.js';
+import initBallStrikeCount from './functions/initial-ball-strike-count.js';
 import makeResultMessage from './functions/make-result-message.js'
 import makeResultDom from './functions/make-result-dom.js';
 
@@ -20,8 +20,9 @@ export default function BaseballGame() {
   submitButton.addEventListener('click', () => {
     const userInput = document.getElementById('user-input').value;
     state.userInput = parseInt(userInput);
-    initialBallStrikeCount();
+    initBallStrikeCount();
     if (checkUserInputValid(userInput)) {
+      console.log(state.userInput, state.computerInput)
       const resultMessage = this.play(state.computerInput, state.userInput);
       makeResultDom(resultMessage);
     } 
