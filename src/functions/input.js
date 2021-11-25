@@ -31,12 +31,12 @@ export function checkUserInputValid(userInput) {
   let isValid = false;
   if (userInput.length != NUMBER_LENGTH) {
     alert(LENGTH_NOT_MATCH_MESSAGE);
+  } else if (!checkNumeric(userInput)) {
+    alert(NOT_NUMERIC_MESSAGE);
   } else if (checkDuplication(userInput)) {
     alert(ALREADY_EXIST_MESSAGE);
   } else if (userInput.includes(0)) {
     alert(OUT_OF_RANGE_MESSAGE);
-  } else if (!checkNumeric(userInput)) {
-    alert(NOT_NUMERIC_MESSAGE);
   } else {
     isValid = true;
   }

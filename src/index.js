@@ -8,9 +8,8 @@ export default function BaseballGame() {
   state.computerInput = makeRandomNumber();
   this.play = function (computerInput, userInput) {
     setBallStrike(computerInput, userInput);
-    const resultMessage = makeResultMessage();
 
-    return resultMessage;
+    return makeResultMessage();
   };
   SUBMIT_BUTTON.addEventListener('click', event => {
     event.preventDefault();

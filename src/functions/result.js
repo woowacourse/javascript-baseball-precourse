@@ -22,6 +22,14 @@ export function makeResultMessage() {
   return resultMessage;
 }
 
+export function restartGameSetting() {
+  initBallStrikeCount();
+  initUserComputerInput();
+  state.computerInput = makeRandomNumber();
+  RESULT_DIV.innerHTML = '';
+  USER_INPUT.value = '';
+}
+
 export function makeRestartButton() {
   const restartButton = document.createElement('button');
   restartButton.innerText = '게임 재시작';
@@ -51,12 +59,4 @@ export function makeResultDom(resultMessage) {
     SUBMIT_BUTTON.disabled = true;
     makeRestartComponent();
   }
-}
-
-export default function restartGameSetting() {
-  initBallStrikeCount();
-  initUserComputerInput();
-  state.computerInput = makeRandomNumber();
-  RESULT_DIV.innerHTML = '';
-  USER_INPUT.value = '';
 }
