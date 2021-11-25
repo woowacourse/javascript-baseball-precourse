@@ -1,6 +1,5 @@
 export default class GameController {
-  constructor(model, view) {
-    this.model = model;
+  constructor(view) {
     this.view = view;
     this.computerInputNumbers;
     this.userInputNumbers;
@@ -15,6 +14,7 @@ export default class GameController {
 
   init() {
     this.view.clearResult();
+    this.view.activateForm();
     this.makeNewAnswer();
   }
 
@@ -31,7 +31,7 @@ export default class GameController {
   }
 
   createVictoryNotice() {
-    const container = document.createElement('div');
+    const victoryNoticeBox = document.createElement('div');
     const victoryText = document.createElement('h4');
     victoryText.innerText = '🎉정답을 맞추셨습니다!🎉';
     const askText = document.createElement('span');
@@ -40,10 +40,11 @@ export default class GameController {
     restartButton.innerText = '게임 재시작';
     restartButton.id = 'game-restart-button';
     restartButton.addEventListener('click', this.init.bind(this));
-    container.appendChild(victoryText);
-    container.appendChild(askText);
-    container.appendChild(restartButton);
-    this.view.renderVictory(container);
+    victoryNoticeBox.appendChild(victoryText);
+    victoryNoticeBox.appendChild(askText);
+    victoryNoticeBox.appendChild(restartButton);
+    this.view.deactivateForm();
+    this.view.renderVictory(this.computerInputNumbers, victoryNoticeBox);
   }
 
   makeNewAnswer() {
