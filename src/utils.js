@@ -1,12 +1,20 @@
 import { COMPUTER_NUMBERS, ERR_MESSAGE } from './constant.js';
 
+/* eslint-disable no-undef */
+const { pickNumberInRange } = MissionUtils.Random;
+
 export function pickRandomNumbers() {
-  const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
-    COMPUTER_NUMBERS.MIN_NUMBER,
-    COMPUTER_NUMBERS.MAX_NUMBER,
-    COMPUTER_NUMBERS.LENGTH
-  );
-  return randomNumbers.join('');
+  const randomNumbers = new Set();
+
+  while (randomNumbers.size < COMPUTER_NUMBERS.LENGTH) {
+    randomNumbers.add(
+      pickNumberInRange(
+        COMPUTER_NUMBERS.MIN_NUMBER,
+        COMPUTER_NUMBERS.MAX_NUMBER
+      )
+    );
+  }
+  return [...randomNumbers].join('');
 }
 
 export function isValidInputNumbers(userInputNumbers) {
