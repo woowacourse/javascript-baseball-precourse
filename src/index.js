@@ -31,7 +31,18 @@ export default class BaseballGame {
     const strike = calcStrike(randomNums, inputNums);
     $result.innerHTML = `${ball}볼 ${strike}스트라이크`;
   }
-  calcBall(randomNums, inputNums) {}
+  calcBall(randomNums, inputNums) {
+    let ball = 0;
+    for (let i = 0; i < randomNums.length; i++) {
+      if (
+        randomNums.includes(inputNums[i]) &&
+        randomNums[i] !== randomNums[i]
+      ) {
+        ball++;
+      }
+    }
+    return ball > 0 ? `${ball}볼` : "";
+  }
 
   calcStrike(randomNums, inputNums) {}
 }
