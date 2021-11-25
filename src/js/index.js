@@ -38,6 +38,17 @@ export default function BaseballGame() {
     }
     return false;
   };
+  const checkUserInputNumbersContainDuplicateNumbers = userInputValue => {
+    const userInputValueArray = [];
+    for (let i = 0; i < 3; i++) {
+      if (userInputValueArray.includes(parseInt(userInputValue[i]))) {
+        alert('잘못된 값을 입력하셨습니다.');
+        return true;
+      }
+      userInputValueArray.push(parseInt(userInputValue[i]));
+    }
+    return false;
+  };
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     return '결과 값 String';
