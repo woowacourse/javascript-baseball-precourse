@@ -1,3 +1,5 @@
+import { BASEBALL_NUMBER_LENGTH } from "../constant/index.js";
+
 export const isNotThreeDigit = (num) => {
   return num.length !== BASEBALL_NUMBER_LENGTH;
 };
