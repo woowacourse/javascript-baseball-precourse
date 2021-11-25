@@ -7,14 +7,11 @@ import { pickRandomNumbers, isValidInputNumbers } from './utils.js';
 
 export default function BaseballGame() {
   let computerInputNumbers = pickRandomNumbers();
-  console.log(computerInputNumbers);
 
   const $userInput = document.getElementById('user-input');
   const $submitButton = document.getElementById('submit');
   const $resultDiv = document.getElementById('result');
   const $restartButton = document.createElement('button');
-  $restartButton.innerHTML = '게임 재시작';
-  $restartButton.id = 'game-restart-button';
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     const comparedResult = compareInputNumbers(
@@ -24,6 +21,12 @@ export default function BaseballGame() {
     return makeResultString(comparedResult);
   };
 
+  function createRestartButton() {
+    $restartButton.innerHTML = '게임 재시작';
+    $restartButton.id = 'game-restart-button';
+    $resultDiv.appendChild($restartButton);
+  }
+
   function handleInputNumbers(event) {
     event.preventDefault();
     const userInputNumbers = $userInput.value;
@@ -31,8 +34,11 @@ export default function BaseballGame() {
       $userInput.value = '';
       return;
     }
+
     const resultString = this.play(computerInputNumbers, userInputNumbers);
-    showResultString(resultString, $resultDiv, $restartButton);
+    if (showResultString(resultString, $resultDiv)) {
+      createRestartButton();
+    }
   }
 
   function handleRestart() {

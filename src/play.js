@@ -31,7 +31,6 @@ export function compareInputNumbers(computerInputNumbers, userInputNumbers) {
 
 export function makeResultString(comparedResult) {
   const resultArray = [];
-
   if (comparedResult.ball) {
     resultArray.push(`${comparedResult.ball}볼`);
   }
@@ -44,15 +43,14 @@ export function makeResultString(comparedResult) {
   return resultArray.join(' ');
 }
 
-export function showResultString(resultString, $resultDiv, $restartButton) {
+export function showResultString(resultString, $resultDiv) {
   if (resultString === ANSWER) {
     $resultDiv.innerHTML = `
         🎉 <b>정답을 맞추셨습니다!</b> 🎉
         <br>
         게임을 새로 시작하시겠습니까?
       `;
-    $resultDiv.appendChild($restartButton);
-    return;
+    return true;
   }
   $resultDiv.innerHTML = resultString;
 }
