@@ -1,4 +1,4 @@
-export const state = {
+export let state = {
   userInput:0,
   computerInput:0,
   ballCount: 0,

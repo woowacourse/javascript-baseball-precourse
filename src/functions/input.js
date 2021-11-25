@@ -1,4 +1,5 @@
-import { NUMBER_LENGTH } from '../constants/game-rule.js';
+import { state } from '../state.js';
+import { RANGE_MIN, RANGE_MAX, NUMBER_LENGTH } from '../constants/game-rule.js';
 import {
   NOT_NUMERIC_MESSAGE,
   LENGTH_NOT_MATCH_MESSAGE,
@@ -6,10 +7,11 @@ import {
   OUT_OF_RANGE_MESSAGE,
 } from '../constants/alert-message.js';
 
-export function checkNumeric(str) {
+function checkNumeric(str) {
   let isNumeric = true;
   for (let i = 0; i < str.length; i++) {
-    if (isNaN(parseInt(str[i]))) { // 문자라면
+    if (isNaN(parseInt(str[i]))) {
+      // 문자라면
       isNumeric = false;
     }
   }
@@ -17,15 +19,15 @@ export function checkNumeric(str) {
   return isNumeric;
 }
 
-export function checkDuplication(userInput) {
+function checkDuplication(userInput) {
   const userInputArray = userInput.split('').map(x => parseInt(x));
   const userInputSet = [...new Set(userInputArray)];
   const isDuplicated = !(userInputArray.length === userInputSet.length);
-  
-  return isDuplicated
+
+  return isDuplicated;
 }
 
-export default function checkUserInputValid(userInput) {
+export function checkUserInputValid(userInput) {
   let isValid = false;
   if (userInput.length != NUMBER_LENGTH) {
     alert(LENGTH_NOT_MATCH_MESSAGE);
@@ -40,4 +42,21 @@ export default function checkUserInputValid(userInput) {
   }
 
   return isValid;
+}
+
+export function initUserComputerInput() {
+  state.userInput = 0;
+  state.computerInput = 0;
+}
+
+export function makeRandomNumber() {
+  let randomNumberString = '';
+  while (randomNumberString.length < NUMBER_LENGTH) {
+    const randomNumber = MissionUtils.Random.pickNumberInRange(RANGE_MIN, RANGE_MAX);
+    if (!randomNumberString.includes(randomNumber)) {
+      randomNumberString += randomNumber;
+    }
+  }
+
+  return parseInt(randomNumberString);
 }
