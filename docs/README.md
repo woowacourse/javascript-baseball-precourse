@@ -79,7 +79,7 @@
 - [x] ~~공백이거나 정해진 자리수가 아니라면 예외 처리합니다.~~/ 완료
 - [x] ~~예외가 발생하면 input #user-input을 비웁니다.~~/ 완료
 - [x] ~~버튼 이벤트가 종료되면 input #user-input에 포커싱합니다.~~/ 완료
-- [ ] 0은 허용되지 않으므로 예외 처리합니다.
+- [x] ~~0은 허용되지 않으므로 예외 처리합니다.~~/ 완료
 
 **변경 사항**
 - 3번 항목은 문자열로 비교하므로 구현하지 않습니다.
@@ -94,6 +94,7 @@
 > 리팩토링 및 추가사항
 >- [커밋 링크 2](https://github.com/InSeong-So/javascript-baseball-precourse/commit/9c06232476a00b8f3cdb84bc6ec9b16be3bfd013)
 >- [커밋 링크 3](https://github.com/InSeong-So/javascript-baseball-precourse/commit/24914a9c5dac25bf1fdc0cb638e887f8bf85c080)
+>- [커밋 링크 4](https://github.com/InSeong-So/javascript-baseball-precourse/commit/4ded3a7176f7cbf620e897424b9f60894b666bb1)
 
 <br>
 
@@ -103,6 +104,13 @@
 **사전 정의**
 - [ ] 1. MissionUtils 라이브러리를 의존하는 컴포넌트를 작성합니다.
 - [ ] 2. 인자로 자리수를 입력 받아 컴퓨터 랜덤 값을 설정합니다.
+
+**추가 사항**
+- [ ] 중복되지 않는 랜덤 값을 인자로 받은 자리수까지 이어 타겟 넘버를 생성합니다.
+- [ ] MissionUtils.Random.pickNumberInRange 함수의 인자를 설정할 수 있게 수정합니다.
+- [ ] 생성자 함수의 파라미터로 자리수, 시작 숫자, 종료 숫자를 받을 수 있게 작성합니다.
+- [ ] 입력받은 상태 값을 검증하는 함수를 작성합니다.
+- [ ] 조건에 맞게 상수 값을 리팩토링 합니다.
 
 <br>
 
