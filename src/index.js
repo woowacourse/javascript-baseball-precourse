@@ -27,24 +27,32 @@ export default class BaseballGame {
       $result.innerHTML = `정답입니다.`;
       return;
     }
-    const ball = calcBall(randomNums, inputNums);
-    const strike = calcStrike(randomNums, inputNums);
-    $result.innerHTML = `${ball}볼 ${strike}스트라이크`;
+    const ball = this.calcBall(randomNums, inputNums);
+    const strike = this.calcStrike(randomNums, inputNums);
+    const countMessage =
+      `${ball} ${strike}` === " " ? "낫싱" : `${ball} ${strike}`;
+    $result.innerHTML = countMessage;
   }
   calcBall(randomNums, inputNums) {
     let ball = 0;
     for (let i = 0; i < randomNums.length; i++) {
-      if (
-        randomNums.includes(inputNums[i]) &&
-        randomNums[i] !== randomNums[i]
-      ) {
+      // indent를 1로 만드는 법?
+      if (randomNums.includes(inputNums[i]) && randomNums[i] !== inputNums[i]) {
         ball++;
       }
     }
     return ball > 0 ? `${ball}볼` : "";
   }
 
-  calcStrike(randomNums, inputNums) {}
+  calcStrike(randomNums, inputNums) {
+    let strike = 0;
+    for (let i = 0; i < randomNums.length; i++) {
+      if (randomNums[i] === inputNums[i]) {
+        strike++;
+      }
+    }
+    return strike > 0 ? `${strike}스트라이크` : "";
+  }
 }
 
 const game = new BaseballGame();
