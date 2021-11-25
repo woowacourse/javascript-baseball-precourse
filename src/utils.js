@@ -5,7 +5,6 @@ const { pickNumberInRange } = MissionUtils.Random;
 
 export function pickRandomNumbers() {
   const randomNumbers = new Set();
-
   while (randomNumbers.size < COMPUTER_NUMBERS.LENGTH) {
     randomNumbers.add(
       pickNumberInRange(

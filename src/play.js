@@ -1,12 +1,28 @@
 import { ANSWER } from './constant.js';
 
+function includesNumber(computerInputNumbers, userInputNumber) {
+  if (computerInputNumbers.includes(userInputNumber)) {
+    return true;
+  }
+  return false;
+}
+
+function sameNumber(computerInputNumber, userInputNumber) {
+  if (computerInputNumber === userInputNumber) {
+    return true;
+  }
+  return false;
+}
+
 export function compareInputNumbers(computerInputNumbers, userInputNumbers) {
   let ball = 0;
   let strike = 0;
   for (let i = 0; i < computerInputNumbers.length; i++) {
-    if (computerInputNumbers[i] === userInputNumbers[i]) {
+    if (sameNumber(computerInputNumbers[i], userInputNumbers[i])) {
       strike += 1;
-    } else if (computerInputNumbers.includes(userInputNumbers[i])) {
+      continue;
+    }
+    if (includesNumber(computerInputNumbers, userInputNumbers[i])) {
       ball += 1;
     }
   }

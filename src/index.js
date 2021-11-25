@@ -27,13 +27,11 @@ export default function BaseballGame() {
   function handleInputNumbers(event) {
     event.preventDefault();
     const userInputNumbers = $userInput.value;
-    console.log(userInputNumbers);
     if (!isValidInputNumbers(userInputNumbers)) {
       $userInput.value = '';
       return;
     }
     const resultString = this.play(computerInputNumbers, userInputNumbers);
-    console.log(resultString);
     showResultString(resultString, $resultDiv, $restartButton);
   }
 
