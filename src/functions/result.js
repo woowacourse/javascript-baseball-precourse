@@ -1,8 +1,6 @@
 import { state } from '../state/index.js';
 import { RESTART_MESSAGE, NOTHING_MESSAGE, CLEAR_MESSAGE } from '../constants/result-message.js';
 import { RESULT_DIV, SUBMIT_BUTTON, USER_INPUT } from '../constants/html-doms.js';
-import { initBallStrikeCount } from './ball-strike.js';
-import { initUserComputerInput, makeRandomNumber } from './input.js';
 
 export function makeResultMessage() {
   let resultMessage = '';
@@ -23,17 +21,19 @@ export function makeResultMessage() {
 }
 
 export function restartGameSetting() {
-  initBallStrikeCount();
-  initUserComputerInput();
-  state.computerInput = makeRandomNumber();
+  state.initBallStrike();
+  state.initUserInput();
+  state.makeRandomNumber();
   RESULT_DIV.innerHTML = '';
   USER_INPUT.value = '';
 }
 
 export function makeRestartButton() {
   const restartButton = document.createElement('button');
+
   restartButton.innerText = '게임 재시작';
   restartButton.id = 'game-restart-button';
+
   restartButton.addEventListener('click', event => {
     event.preventDefault();
     SUBMIT_BUTTON.disabled = false;
@@ -47,7 +47,7 @@ export function makeRestartComponent() {
   const divTag = document.createElement('div');
   const restartButton = makeRestartButton();
 
-  divTag.innerText = RESTART_MESSAGE;
+  divTag.innerHTML = RESTART_MESSAGE;
 
   divTag.appendChild(restartButton);
   RESULT_DIV.appendChild(divTag);
