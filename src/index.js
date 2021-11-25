@@ -1,8 +1,14 @@
 import {
   BASEBALL_NUMBER_LENGTH,
   DOMS,
-  randomNumberRange,
-} from "./util/constant.js";
+  ANSWER_RANGE,
+} from "./constant/index.js";
+import {
+  isDuplicatedNumber,
+  isInvalidNumber,
+  isWithZero,
+  isNotThreeDigit,
+} from "./util/checkValid.js";
 
 export default class BaseballGame {
   constructor() {
@@ -67,31 +73,13 @@ export default class BaseballGame {
     this.printResultMessage(gameResultMessage);
   };
 
-  isNotThreeDigit = (num) => {
-    return num.length !== BASEBALL_NUMBER_LENGTH;
-  };
-
-  isWithZero = (num) => {
-    return num.match(/0/);
-  };
-
-  isNotValidNumber = (num) => {
-    return num.match(/\D/);
-  };
-
-  isDuplicatedNumber = (num) => {
-    const checkDuplicateNumberSet = new Set(num);
-
-    return checkDuplicateNumberSet.size !== BASEBALL_NUMBER_LENGTH;
-  };
-
   generateAnswerNumber = () => {
     const randomNumberSet = new Set();
     while (randomNumberSet.size < BASEBALL_NUMBER_LENGTH) {
       randomNumberSet.add(
         MissionUtils.Random.pickNumberInRange(
-          randomNumberRange.MIN,
-          randomNumberRange.MAX
+          ANSWER_RANGE.MIN,
+          ANSWER_RANGE.MAX
         )
       );
     }
@@ -139,13 +127,13 @@ export default class BaseballGame {
   };
 
   generateAlertMessage = (userInputNumbers) => {
-    if (this.isValidNumber(userInputNumbers)) {
+    if (isInvalidNumber(userInputNumbers)) {
       return "숫자만 입력해주세요";
-    } else if (this.isNotThreeDigit(userInputNumbers)) {
+    } else if (isNotThreeDigit(userInputNumbers)) {
       return "3자리수의 숫자를 입력해주세요";
-    } else if (this.isDuplicatedNumber(userInputNumbers)) {
+    } else if (isDuplicatedNumber(userInputNumbers)) {
       return "중복되지 않은 숫자들로 입력해주세요";
-    } else if (this.isWithZero(userInputNumbers)) {
+    } else if (isWithZero(userInputNumbers)) {
       return "1 ~ 9사이의 숫자로 입력해주세요";
     }
 
