@@ -33,24 +33,28 @@ export default class BaseballGame {
         this.$resultArea.textContent = result;
 
         if (result === RESULT_TEXT.success) {
-            const { text, buttonText } = RESTART_TEXT;
-
-            const restartText = document.createTextNode(text);
-            
-            const restartButton = document.createElement('button');
-            restartButton.innerHTML = buttonText;
-            restartButton.setAttribute('id', 'game-restart-button');
-            restartButton.addEventListener('click', () => {
-                this.restartGame();
-            });
-
-            this.$resultArea.appendChild(document.createElement('br'));
-            this.$resultArea.appendChild(restartText);
-            this.$resultArea.appendChild(restartButton);
+            this.showRestartArea();
 
             // 재시작 버튼을 누르기 전까지는 input을 건드릴 수 없음
             document.getElementById('user-input').readOnly = true;
         }
+    }
+
+    showRestartArea() {
+        const { text, buttonText } = RESTART_TEXT;
+
+        const restartText = document.createTextNode(text);
+            
+        const restartButton = document.createElement('button');
+        restartButton.innerHTML = buttonText;
+        restartButton.setAttribute('id', 'game-restart-button');
+        restartButton.addEventListener('click', () => {
+            this.restartGame();
+        });
+
+        this.$resultArea.appendChild(document.createElement('br'));
+        this.$resultArea.appendChild(restartText);
+        this.$resultArea.appendChild(restartButton);
     }
 
     restartGame() {
