@@ -1,4 +1,5 @@
 import getComputerInputNumbers from './game/getComputerInputNumbers.js';
+import getUserInputNumbers from './game/getUserInputNumbers.js';
 
 export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
@@ -11,6 +12,7 @@ function main() {
   const baseballGame = new BaseballGame();
   const computerInputNumbers = getComputerInputNumbers();
   baseballGame.play(computerInputNumbers);
+  getUserInputNumbers();
 }
 
 main();
