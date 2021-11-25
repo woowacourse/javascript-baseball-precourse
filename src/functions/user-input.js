@@ -6,6 +6,7 @@ import {
   OUT_OF_RANGE_MESSAGE,
 } from '../constants/alert-message.js';
 
+// 주어진 문자열이 모두 숫자인지 검사
 function isNumeric(str) {
   let isNumber = true;
   let i;
@@ -18,6 +19,7 @@ function isNumeric(str) {
   return isNumber;
 }
 
+// 주어진 문자열에 중복이 있는지 검사
 function isDuplication(userInput) {
   const userInputArray = userInput.split('').map(x => parseInt(x));
   const userInputSet = [...new Set(userInputArray)];
@@ -26,6 +28,7 @@ function isDuplication(userInput) {
   return isDuplicated;
 }
 
+// 유저 입력에 문제가 없는지 검사
 export function isUserInputValid(userInput) {
   let isValid = false;
   if (userInput.length != NUMBER_LENGTH) {

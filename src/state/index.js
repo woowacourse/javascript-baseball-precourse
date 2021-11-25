@@ -13,6 +13,7 @@ export const state = {
     state.ballCount = 0;
     state.strikeCount = 0;
   },
+  // computerInput, userInput에 따라 볼, 스트라이크 개수 설정
   setBallStrike(computerInput, userInput) {
     const computerInputString = computerInput.toString();
     const userInputString = userInput.toString();
@@ -31,6 +32,7 @@ export const state = {
   setUserInput(userInputValue){
     state.userInput = userInputValue;
   },
+  // 주어진 범위 내의 무작위 난수를 중복없이 만듬
   makeRandomNumber() {
     let randomNumberString = '';
     while (randomNumberString.length < NUMBER_LENGTH) {
