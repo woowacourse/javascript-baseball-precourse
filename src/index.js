@@ -5,9 +5,6 @@ import RestartBlock from "./components/RestartBlock.js";
 
 const initialState = {
   computerInputNumbers: getComputerInputNumbers(),
-  userInputNumbers: [],
-  balls: 0,
-  strikes: 0,
 };
 
 export default function BaseballGame() {
@@ -16,15 +13,23 @@ export default function BaseballGame() {
   const resultBlock = document.querySelector("#result");
 
   this.play = function (computerInputNumbers, userInputNumbers) {
-    console.log("play----------", computerInputNumbers, userInputNumbers);
+    console.log(
+      `play--- >> computerInputNumbers: ${computerInputNumbers} userInputNumbers: ${userInputNumbers}`
+    );
 
     const { resultText, isSuccess } = getScore(
       computerInputNumbers,
       userInputNumbers
     );
-    console.log(resultText, isSuccess);
+
     if (isSuccess) {
-      RestartBlock(resultBlock);
+      const resetCallback = () => {
+        initialState.computerInputNumbers = getComputerInputNumbers();
+        resultBlock.innerHTML = "";
+        userInput.value = "";
+      };
+
+      RestartBlock(resultBlock, resetCallback);
       return resultText;
     }
 
