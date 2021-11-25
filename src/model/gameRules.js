@@ -17,4 +17,16 @@ export default class GameRuleModel {
 
         return [...resultNumbers];
     }
+
+    getGameHint(userNumberArray) {
+        const computerNumbers = this.answer;
+
+        let strikeCount = (ballCount = 0);
+        userNumberArray.forEach((value, index) => {
+            if (value === computerNumbers[index]) strikeCount++;
+            else if (computerNumbers.includes(value)) ballCount++;
+        });
+
+        return { strike: strikeCount, ball: ballCount };
+    }
 }
