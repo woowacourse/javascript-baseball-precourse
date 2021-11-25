@@ -10,20 +10,25 @@ export default class BaseballGame {
 
   isNotUserInputDuplicate = () => {
     const userInputSet = new Set(this.userInputEl.value.split(''));
-    if ([...userInputSet].length !== this.userInputEl.value.length)
+    if ([...userInputSet].length !== this.userInputEl.value.length) {
       return false;
+    }
     return true;
   };
 
   isUserInputNumberRange = () => {
-    for (let i = 0; i < this.userInputEl.value.length; i += 1)
-      if (this.userInputEl.value[i] < '1' || this.userInputEl.value[i] > '9')
+    for (let i = 0; i < this.userInputEl.value.length; i += 1) {
+      if (this.userInputEl.value[i] < '1' || this.userInputEl.value[i] > '9') {
         return false;
+      }
+    }
     return true;
   };
 
   isUserInputNumberLength = () => {
-    if (this.userInputEl.value.length === 3) return true;
+    if (this.userInputEl.value.length === 3) {
+      return true;
+    }
     return false;
   };
 
