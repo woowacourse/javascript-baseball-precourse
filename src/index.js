@@ -4,6 +4,7 @@ import checkUserInputValid from './functions/check-user-input-valid.js';
 import setBallStrike from './functions/set-ball-strike.js';
 import initialBallStrikeCount from './functions/initial-ball-strike-count.js';
 import makeResultMessage from './functions/make-result-message.js'
+import makeResultDom from './functions/make-result-dom.js';
 
 export default function BaseballGame() {
   const submitButton = document.getElementById('submit');
@@ -22,6 +23,7 @@ export default function BaseballGame() {
     initialBallStrikeCount();
     if (checkUserInputValid(userInput)) {
       const resultMessage = this.play(state.computerInput, state.userInput);
+      makeResultDom(resultMessage);
     } 
   });
 }
