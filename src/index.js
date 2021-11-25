@@ -1,6 +1,7 @@
 export default function BaseballGame() {
     const $form = document.querySelector('form');
     const $input = document.querySelector('#user-input');
+    const $result = document.querySelector('#result');
     let computerInputNumbers = [];
     let StrikeCnt = 0;
     let BallCnt = 0;
@@ -44,6 +45,20 @@ export default function BaseballGame() {
             Ball: Ball
         };
     }
+    // Hint 제공
+    const Hint = Strike_Ball => {
+        if (Strike_Ball.Strike === 3) {
+            $result.innerText = '정답입니다';
+        }
+        else if (Strike_Ball.Strike === 0 && Strike_Ball.Ball === 0) {
+            $result.innerText = '낫싱';
+        }
+        else {
+            if (Strike_Ball.Strike === 0) $result.innerText = `${Strike_Ball.Ball}볼`;
+            else if (Strike_Ball.Ball === 0) $result.innerText = `${Strike_Ball.Strike}스트라이크`;
+            else $result.innerText = `${Strike_Ball.Ball}볼 ${Strike_Ball.Strike}스트라이크`;
+        }
+    }
 
     $form.addEventListener('submit', (event) => {
         event.preventDefault(); // 제출 시 초기화 되는 것 방지
@@ -56,7 +71,7 @@ export default function BaseballGame() {
             //console.log(CountStrikeAndBall(userInputNumbers));
             let Strike_Ball = CountStrikeAndBall(userInputNumbers);
             console.log(`${Strike_Ball.Strike}스트라이크, ${Strike_Ball.Ball}볼`);
-
+            Hint(Strike_Ball);
         }
     });
 
