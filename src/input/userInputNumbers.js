@@ -1,4 +1,4 @@
-import { $userInput } from './constants.js';
+import { $userInput } from '../constants.js';
 
 const isValidLength = () => $userInput.value.length === 3;
 const isNumbers = () => !isNaN(Number($userInput.value));
