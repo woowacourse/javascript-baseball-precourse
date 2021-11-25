@@ -6,6 +6,7 @@ export default class Computer {
     }
 
     /**
+     * @param {string} computerVal 컴퓨터가 생각하는 정답
      * @param {string} userInput 유저 입력값
      * @brief 정답과 유저 입력값을 비교해서 스트라이크, 볼 카운트 리턴
      * @returns {object}

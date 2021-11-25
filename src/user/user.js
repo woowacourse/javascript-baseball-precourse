@@ -1,7 +1,7 @@
 import { USER_INPUT_ERROR_MSG, ANSWER_LENGTH } from '../asset/constant.js';
 
 // 입력값 체크 함수들
-const checkInputMethods = [
+const checkInputFunctions = [
     // empty 체크
     (val) => {
         if (val === '') {
@@ -59,7 +59,7 @@ export default class User {
      * @returns {bool} 유저 입력값이 올바른지 여부
      */
     checkInputValid(val) {
-        return checkInputMethods.every((checkInputMethod) => checkInputMethod(val));
+        return checkInputFunctions.every((checkInputFunction) => checkInputFunction(val));
     }
 
     getUserInputValue() {
