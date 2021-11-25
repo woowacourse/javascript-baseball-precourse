@@ -62,7 +62,7 @@ input을 초기화
 ├── package.json
 ├── README.md
 ├── docs
-│   ├── README.md
+│   └── README.md
 └── src
     ├── index.js 
     ├── constants
@@ -72,11 +72,11 @@ input을 초기화
     │   └── result-message.js // 출력 결과 메시지 모음
     │
     ├── functions
-    │   ├── check-user-input-valid.js // 유저 입력이 올바른지 판별하고, 올바르지 않다면 alert를 호출하는 함수
-    │   └── make-random-number.js // 컴퓨터가 난수를 만들어 저장하는 함수
+    │   ├── userInput.js // 유저 입력이 올바른지 판별, 판별하기 위해 필요한 기능 모음
+    │   └── result.js // 입력에 따른 출력메시지, DOM 생성, 재시작에 필요한 기능 모음
     │
     └── state
-        └── index.js // 유저 입력, 컴퓨터 난수, 볼 개수, 스트라이크 개수 저장할 상태
+        └── index.js // 유저 입력, 컴퓨터 난수, 볼 개수, 스트라이크 개수를 관리하는 state
 ```
 
 <details>
