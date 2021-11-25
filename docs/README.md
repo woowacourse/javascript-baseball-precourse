@@ -6,6 +6,7 @@
 ## 1️⃣ 사용한 라이브러리와 버전
 ### 🗃 랜덤 라이브러리
 - `@woowacourse/mission-utils`: 1.0.1
+  - CDN으로 로드
 
 <br>
 
@@ -41,7 +42,7 @@
 
 <div align=center>
 
-<img src="./img/flow.jpg" width="800">
+<img src="./images/flow.jpg" width="800">
 
 </div>
 
@@ -194,7 +195,10 @@
 │  README.md
 │  
 ├─docs
-│      README.md
+│  │  README.md
+│  │  
+│  └─images
+│         flow.jpg
 │      
 ├─images
 │      baseball_icon.png
