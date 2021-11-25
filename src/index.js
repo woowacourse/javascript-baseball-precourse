@@ -31,6 +31,30 @@ export default class BaseballGame {
         const result = this.play(this.computer.getAnswer(), this.user.getUserInputNumbers());
 
         this.$resultArea.textContent = result;
+
+        if (result === SUCCESS) {
+            const restartText = document.createTextNode(RESTART_TEXT);
+            
+            const restartButton = document.createElement('button');
+            restartButton.setAttribute('value', RESTART_BUTTON_TEXT);
+            restartButton.setAttribute('id', 'game-restart-button');
+            restartButton.addEventListener('click', () => {
+                this.restartGame();
+            });
+
+            this.$resultArea.appendChild(restartText);
+            this.$resultArea.appendChild(restartButton);
+        }
+    }
+
+    restartGame() {
+        // user-input 초기화
+        document.getElementById('user-input').value = '';
+        this.user.setUserInputNumbers([]);
+        // result 초기화
+        this.$resultArea.innerHTML = '';
+        // 새로운 번호 생성
+        this.computer = new Computer();
     }
 
     play(computerInputNumbers, userInputNumbers) {
