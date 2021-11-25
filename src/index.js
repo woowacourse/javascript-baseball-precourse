@@ -36,12 +36,13 @@ export default class BaseballGame {
             const restartText = document.createTextNode(RESTART_TEXT);
             
             const restartButton = document.createElement('button');
-            restartButton.setAttribute('value', RESTART_BUTTON_TEXT);
+            restartButton.innerHTML = RESTART_BUTTON_TEXT;
             restartButton.setAttribute('id', 'game-restart-button');
             restartButton.addEventListener('click', () => {
                 this.restartGame();
             });
 
+            this.$resultArea.appendChild(document.createElement('br'));
             this.$resultArea.appendChild(restartText);
             this.$resultArea.appendChild(restartButton);
 
