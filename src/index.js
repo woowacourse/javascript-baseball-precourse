@@ -6,6 +6,7 @@ export default class BaseballGame {
     this.dom();
     this.addEvent();
     this.computerInput = this.getComputerNumber();
+    this.$result.innerHTML = "";
   }
 
   dom() {
@@ -44,7 +45,8 @@ export default class BaseballGame {
       return;
     }
 
-    this.play(this.computerInput, userNumbers);
+    const playResult = this.play(this.computerInput, userNumbers);
+    this.displayResult(playResult);
   }
 
   clearInput() {
@@ -64,6 +66,30 @@ export default class BaseballGame {
         ball++;
       }
     }
+
+    return this.getResultText(strike, ball);
+  }
+
+  getResultText(strike, ball) {
+    let text = "";
+    if (strike === 0 && ball === 0) {
+      text = "낫싱";
+    }
+    if (ball > 0) {
+      text += `${ball}볼 `;
+    }
+    if (strike > 0) {
+      text += `${strike}스트라이크`;
+    }
+    if (strike === NUM.MAX_LENGTH) {
+      text = "정답";
+    }
+
+    return text;
+  }
+
+  displayResult(text) {
+    this.$result.innerHTML = text;
   }
 }
 
