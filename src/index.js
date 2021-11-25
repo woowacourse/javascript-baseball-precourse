@@ -18,11 +18,9 @@ export default function BaseballGame() {
 
   submitButton.addEventListener('click', () => {
     const userInput = document.getElementById('user-input').value;
-    const userInputArray = userInput.split('').map(x => parseInt(x));
-    const userInputSet = [...new Set(userInputArray)];
     state.userInput = parseInt(userInput);
     initialBallStrikeCount();
-    if (checkUserInputValid(userInput, userInputArray, userInputSet)) {
+    if (checkUserInputValid(userInput)) {
       const resultMessage = this.play(state.computerInput, state.userInput);
     } 
   });
