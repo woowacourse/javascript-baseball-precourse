@@ -22,8 +22,17 @@ export default class BaseballGame {
     return true;
   };
 
+  isUserInputNumberLength = () => {
+    if (this.userInputEl.value.length === 3) return true;
+    return false;
+  };
+
   isUserInputCheck = () => {
-    return this.isNotUserInputDuplicate() && this.isUserInputNumberRange();
+    return (
+      this.isNotUserInputDuplicate() &&
+      this.isUserInputNumberRange() &&
+      this.isUserInputNumberLength()
+    );
   };
 
   play(computerInputNumbers, userInputNumbers) {
