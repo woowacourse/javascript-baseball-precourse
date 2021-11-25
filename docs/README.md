@@ -8,10 +8,7 @@
    - Math.random() 사용 X
    - MissionUtils 라이브러리의 Random.pickNumberInRange 사용
 
-2. 확인 버튼을 클릭 했을 때, user의 input값을 가져와 input값이 입력조건에 맞는지 체크
-
-   - String으로 입력된 user의 input값을 Number 배열로 변환
-   - map() 함수 활용
+2. 확인 버튼을 클릭 했을 때, user의 input값 가져오기
 
 3. user의 input값이 입력조건에 맞지 않을 경우 Alert 메세지 출력
 
