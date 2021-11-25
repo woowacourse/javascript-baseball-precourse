@@ -1,3 +1,5 @@
+import { $userInput, $submit } from './constants.js';
+
 export const generateComputerInputNumbers = () => {
   const arr = [];
   while (arr.length < 3) {
@@ -8,3 +10,5 @@ export const generateComputerInputNumbers = () => {
   }
   return arr.join('');
 };
+
+const isValidLength = () => $userInput.value.length === 3;
