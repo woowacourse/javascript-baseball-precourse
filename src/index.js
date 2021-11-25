@@ -76,6 +76,43 @@ export default function BaseballGame() {
     }
   };
 
+  // 스트라이크 갯수 확인
+  const countStrike = (userNumber, computerNumber) => {
+    let count = 0;
+    let i = 0;
+    for (; i < 3; i++) {
+      if (userNumber[i] === computerNumber[i]) {
+        count++;
+      }
+    }
+    return count;
+  };
+
+  // 해당 인덱스의 수가 볼인지 확인
+  const isBall = (userNumber, computerNumber, index) => {
+    let i = 0;
+    for (; i < 3; i++) {
+      if (i === index) continue;
+      if (userNumber[index] === computerNumber[i]) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  // 볼 갯수 확인
+  const countBall = (userNumber, computerNumber) => {
+    let count = 0;
+    let i;
+    let j;
+    for (i = 0; i < 3; i++) {
+      if (isBall(userNumber, computerNumber, i)) {
+        count++;
+      }
+    }
+    return count;
+  };
+
   getComputerNumber();
   const submitButton = document.getElementById("submit");
   submitButton.addEventListener("click", getUserNumber);
