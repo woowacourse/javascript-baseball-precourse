@@ -12,6 +12,7 @@ const initialState = {
 export default function BaseballGame() {
   const userInput = document.querySelector("#user-input");
   const submitBtn = document.querySelector("#submit");
+  const resultBlock = document.querySelector("#result");
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     console.log("play----------", computerInputNumbers, userInputNumbers);
@@ -21,6 +22,10 @@ export default function BaseballGame() {
       userInputNumbers
     );
     console.log(balls, strikes, resultText, isSuccess);
+    if (isSuccess) {
+      // TODO 정답시 결과값 노출
+    }
+    resultBlock.innerHTML = resultText;
   };
 
   const onHandleSubmit = (e) => {
@@ -31,6 +36,7 @@ export default function BaseballGame() {
     if (isError) {
       window.alert(message);
       userInput.value = "";
+      resultBlock.innerHTML = "";
       return;
     }
 
