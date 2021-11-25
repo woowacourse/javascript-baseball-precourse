@@ -1,4 +1,4 @@
-import { BASEBALL_DIGIT, ZERO_NUMBER, ERROR_MESSAGES } from '../constants/index.js';
+import { BASEBALL, ERROR_MESSAGES } from '../constants/index.js';
 
 export const $ = selector => document.querySelector(selector);
 
@@ -19,9 +19,17 @@ export const setErrorMessage = type =>
   alert(ERROR_MESSAGES[type]);
 
 export const isInValid = value => {
-  if (isCorrectLength(value, BASEBALL_DIGIT)) return !setErrorMessage('not-enough-value');
+  if (isCorrectLength(value, BASEBALL.DIGIT)) return !setErrorMessage('not-enough-value');
   if (!isNumber(value)) return !setErrorMessage('invalid-value');
-  if (isIncludes(value, ZERO_NUMBER)) return !setErrorMessage('included-zero');
+  if (isIncludes(value, BASEBALL.ZERO)) return !setErrorMessage('included-zero');
   if (isDuplicateLetter(value)) return !setErrorMessage('is-duplicated-value');
   return false;
+};
+
+export const isNumberObject = state => {
+  const newState = Object.assign(state);
+  Object.keys(newState).forEach(key => {
+    if (!isNumber(newState[key])) newState[key] = BASEBALL[key.toUpperCase()];
+  });
+  return newState;
 };
