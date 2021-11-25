@@ -7,12 +7,16 @@ export default class BaseballGame {
   }
 
   setComputerNumber() {
-    let computerInputNumbers = '';
-    for (let i = 0; i < 3; i++) {
-      computerInputNumbers += MissionUtils.Random.pickNumberInRange(1, 9);
+    let computerInputNumbers = [];
+    let randomNumber;
+    while (computerInputNumbers.length < 3) {
+      randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computerInputNumbers.includes(randomNumber)) {
+        computerInputNumbers.push(randomNumber);
+      }
     }
-    console.log(`computerInput: ${computerInputNumbers}`);
-    return computerInputNumbers;
+    console.log(`computerInput: ${computerInputNumbers.join('')}`);
+    return computerInputNumbers.join('');
   }
 }
 
