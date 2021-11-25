@@ -18,8 +18,21 @@ export default function BaseballGame() {
       }
     }
   };
+  const getUserInputNumbers = () => {
+    const userInputValue = $('#user-input').value;
+  };
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     return '결과 값 String';
   };
+
+  $('#base-ball-game-form').addEventListener('submit', e => {
+    e.preventDefault();
+    getUserInputNumbers();
+  });
+  $('#user-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      getUserInputNumbers();
+    }
+  });
 }
