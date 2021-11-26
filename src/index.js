@@ -8,7 +8,14 @@ export default class BaseballGame {
     this.computerInputNumbers = [];
     this.$submit = document.querySelector('#submit');
     this.$userInput = document.querySelector('#user-input');
-    this.result = '';
+    this.hintMessage = '';
+    this.correctMessage = `
+    <b>🎉 정답을 맞추셨습니다! 🎉</b>
+    <br/ >
+    <br/ >
+    게임을 새로 시작하시겠습니까?
+    <button id='game-restart-button'>게임 재시작</button>
+    `;
   }
 
   initializeUserInput() {
@@ -34,10 +41,12 @@ export default class BaseballGame {
       computerInputNumbers,
       userInputNumbers,
     );
-    const message = compareInputNumbers.main();
-    const getResultMessage = new GetResultMessage(message);
-    this.result = getResultMessage.main();
-    return this.result;
+    this.hintMessage = compareInputNumbers.main();
+    if (this.hintMessage === '3스트라이크') {
+      return;
+    }
+    console.log(this.hintMessage);
+    return this.hintMessage;
   }
 
   main() {
