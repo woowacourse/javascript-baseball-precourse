@@ -13,6 +13,14 @@ export default class BaseballGame {
         this.$submitButton.addEventListener('click', this.getUserInputNum.bind(this));
     }
 
+    //사용자로부터 입력받은 값 확인
+    getUserInputNum(e) {
+        e.preventDefault();//다시 실행되는거 방지
+        const userInputNum = this.$userInput.value;
+        
+        return userInputNum;
+    }
+
     // 중복없이 랜덤한 3자리수 정답 생성
     makeRandomAnswer() {
         const randomAnswer = [];
