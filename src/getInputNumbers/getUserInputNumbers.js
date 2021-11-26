@@ -1,3 +1,5 @@
+import { NUMBER, STRING } from '../constant';
+
 export default class GetUserInputNumbers {
   constructor($userInput) {
     this.userInputs = $userInput.value;
@@ -19,7 +21,10 @@ export default class GetUserInputNumbers {
     for (let i = 0; i < this.userInputs.length; i += 1) {
       const userInput = this.userInputs[i];
       const userInputAsciiCodeNumber = userInput.charCodeAt();
-      if (userInputAsciiCodeNumber <= 48 || userInputAsciiCodeNumber > 57) {
+      if (
+        userInputAsciiCodeNumber <= NUMBER.ZERO_ASCII_CODE ||
+        userInputAsciiCodeNumber > NUMBER.NINE_ASCII_CODE
+      ) {
         return false;
       }
     }
@@ -28,7 +33,7 @@ export default class GetUserInputNumbers {
 
   isRightLength() {
     // userInput.length 체크
-    if (this.userInputs.length !== 3) {
+    if (this.userInputs.length !== NUMBER.LENGTH) {
       return false;
     }
     return true;
@@ -40,7 +45,7 @@ export default class GetUserInputNumbers {
     }
 
     this.isNotDuplicate();
-    if (this.userInputNumbers.length !== 3) {
+    if (this.userInputNumbers.length !== NUMBER.LENGTH) {
       return false;
     }
     return true;
@@ -48,7 +53,7 @@ export default class GetUserInputNumbers {
 
   main() {
     if (!this.checkTheRightUserInput()) {
-      return '공백 없이 중복되지 않는 숫자 3개를 입력해주세요!';
+      return STRING.ALERT_MESSAGE;
     }
 
     return this.userInputNumbers.map((string) => Number(string));

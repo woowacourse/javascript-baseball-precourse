@@ -1,4 +1,5 @@
 import CompareInputNumbers from './compareInputNumbers.js';
+import { STRING } from './constant.js';
 import getComputerInputNumbers from './getInputNumbers/getComputerInputNumbers.js';
 import GetUserInputNumbers from './getInputNumbers/getUserInputNumbers.js';
 
@@ -9,13 +10,7 @@ export default class BaseballGame {
     this.$userInput = document.querySelector('#user-input');
     this.$result = document.querySelector('#result');
     this.hintMessage = '';
-    this.correctMessage = `
-    <b>🎉 정답을 맞추셨습니다! 🎉</b>
-    <br/ >
-    <br/ >
-    게임을 새로 시작하시겠습니까?
-    <button id='game-restart-button'>게임 재시작</button>
-    `;
+    this.correctMessage = STRING.CORRECT_MESSAGE;
   }
 
   initializeUserInput() {
@@ -52,7 +47,7 @@ export default class BaseballGame {
       userInputNumbers,
     );
     this.hintMessage = compareInputNumbers.main();
-    if (this.hintMessage !== '3스트라이크') {
+    if (this.hintMessage !== STRING.THREE_STRIKE) {
       this.$result.textContent = this.hintMessage;
       return this.hintMessage;
     }
