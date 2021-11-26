@@ -38,8 +38,7 @@ const showWinResult = () => {
   `;
 };
 
-const showHintResult = (computerInputNumbers, userInputNumbers) => {
-  const gameResult = getGameResult(computerInputNumbers, userInputNumbers);
+const showHintResult = (gameResult) => {
   $result.textContent = gameResult;
 };
 
@@ -49,7 +48,7 @@ const showGameResult = (computerInputNumbers, userInputNumbers) => {
     showWinResult();
     return;
   }
-  showHintResult(computerInputNumbers, userInputNumbers);
+  showHintResult(gameResult);
 };
 
 export default showGameResult;
