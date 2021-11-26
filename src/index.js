@@ -1,6 +1,6 @@
 import CompareInputNumbers from './compareInputNumbers.js';
 import getComputerInputNumbers from './getInputNumbers/getComputerInputNumbers.js';
-import getUserInputNumbers from './getInputNumbers/getUserInputNumbers.js';
+import GetUserInputNumbers from './getInputNumbers/getUserInputNumbers.js';
 
 export default class BaseballGame {
   constructor() {
@@ -26,7 +26,8 @@ export default class BaseballGame {
   submitClickEvent() {
     this.$submit.addEventListener('click', (event) => {
       event.preventDefault();
-      const userInputNumbers = getUserInputNumbers(this.$userInput);
+      const getUserInputNumbers = new GetUserInputNumbers(this.$userInput);
+      const userInputNumbers = getUserInputNumbers.main();
       if (typeof userInputNumbers === 'string') {
         this.initializeUserInput();
         alert('공백 없이 중복되지 않는 숫자 3개를 입력해주세요!');
