@@ -30,7 +30,7 @@ export const userInputException = (userInputNumbers) => {
 };
 
 const checkDigitsRangeCorrect = (userInputNumbers) => {
-  const isCorrect = true;
+  let isCorrect = true;
 
   userInputNumbers.split('').forEach((element) => {
     if (Number(element) < 1) {
