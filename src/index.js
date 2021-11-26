@@ -15,8 +15,12 @@ export default function BaseballGame() {
   };
 
   this.play = function (computerInputNumbers, userInputNumbers) {
+    const scoreBoard = { ball: 0, strike: 0 };
+
     console.log(computerInputNumbers);
     console.log(userInputNumbers);
+    console.log(scoreBoard);
+
     //return '결과 값 String';
   };
 
