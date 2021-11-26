@@ -52,3 +52,29 @@
       * 같은 수가 같은 자리에 있는 경우 : 스트라이크
       * 같은 수가 다른 자리에 있는 경우 : 볼
       * 같은 수가 없는 경우 : 낫싱 
+
+## 11월 26일 이후 작업 사항
+  play(computerInputNumbers, userInputNumbers){
+    let result = '';
+    result = Hint(computerInputNumbers, userInputNumbers);
+    return result;
+  }
+  * play() 작성
+  * Hint() 수정
+  * 작성한 대로 안되면 다시 수정하기
+
+
+  $form.addEventListener('submit', (event) => {
+    if (!checkInput(userInputNumbers)) return;
+    else {
+      play(computerInputNumbers, userInputNumbers);
+    }
+  }
+  
+
+++ import 문을 이용해 스크립트를 모듈화하고 불러올 수 있게 만든다.
+1. 상수를 따로 묶어 만들고 export
+2. 메소드를 따로 만들고 export
+3. index.js에서 1, 2번에서 만든 모듈을 import해서 코드 간소화
+
+
