@@ -11,11 +11,11 @@ export default class userInputView {
         this.setDisable(false);
     }
 
-    setDisable(isDisable) {
-        if (isDisable === true) {
+    setDisable(isDisabled) {
+        if (isDisabled === true) {
             this.$userInput.setAttribute("disabled", "");
             this.$submitButton.setAttribute("disabled", "");
-        } else if (isDisable === false) {
+        } else if (isDisabled === false) {
             this.$userInput.removeAttribute("disabled");
             this.$submitButton.removeAttribute("disabled");
         }
