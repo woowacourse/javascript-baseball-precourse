@@ -1,4 +1,4 @@
-const generateComputerInputNumbers = () => {
+const getComputerInputNumbers = () => {
   const arr = [];
   while (arr.length < 3) {
     const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -9,4 +9,4 @@ const generateComputerInputNumbers = () => {
   return arr.join('');
 };
 
-export default generateComputerInputNumbers;
+export default getComputerInputNumbers;
