@@ -9,9 +9,10 @@ export default function checkValidNum(userInputNum){
     if ([...setUserInput].length !== userInputNum.length){
         return false 
     }
-    //1~9사이의 숫자를 입력하지 않았을 때 (=0을 입력했을 때)
+    //1~9사이의 숫자를 입력하지 않았을 때 (=0을 입력했을 때), 알파벳을 입력했을 때 
+    let numArry = [1,2,3,4,5,6,7,8,9];
     for(let i =0; i < userInputNum.length; i ++){
-        if(Number(userInputNum[i]) === 0 ){
+        if(!numArry.includes(Number(userInputNum[i])) ){
             return false;
         }
     }
