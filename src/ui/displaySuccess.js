@@ -1,5 +1,5 @@
 import {
-  MSG_SUCCESS, MSG_RESTART, RESTART_BUTTON_ID, ACTION_RESTART,
+  MSG_SUCCESS, MSG_RESTART, ID_RESTART_BUTTON, ACTION_RESTART,
 } from './consts.js';
 
 function displaySuccess(parent) {
@@ -10,7 +10,7 @@ function displaySuccess(parent) {
   typography.innerText = MSG_RESTART;
 
   const button = document.createElement('button');
-  button.id = RESTART_BUTTON_ID;
+  button.id = ID_RESTART_BUTTON;
   button.textContent = '게임 재시작';
   button.dataset.action = ACTION_RESTART;
 

@@ -13,6 +13,7 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'no-tabs': 'off',
+    'no-new': 'off',
     'import/extensions': 'off',
   },
 };
