@@ -1,26 +1,10 @@
 import { getUserNumber, resetUserInput } from "./user.js";
+import { getComputerNumber } from "./computer.js";
 
 export default function BaseballGame() {
   let computerNumber = "";
   const hint = document.getElementById("result");
   const submitButton = document.getElementById("submit");
-
-  // 컴퓨터 난수 생성
-  const getComputerNumber = () => {
-    let number = "";
-    let checkUseNumber = new Array(10).fill(false);
-
-    while (number.length < 3) {
-      const newNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-
-      if (checkUseNumber[newNumber]) continue;
-
-      checkUseNumber[newNumber] = true;
-      number += newNumber.toString();
-    }
-
-    computerNumber = number;
-  };
 
   // 스트라이크 갯수 확인
   const countStrike = (userNumber, computerNumber) => {
@@ -101,7 +85,7 @@ export default function BaseballGame() {
 
   // 게임 재시작(난수 재생성, 힌트 및 입력 초기화)
   const resetGame = () => {
-    getComputerNumber();
+    computerNumber = getComputerNumber();
     resetUserInput();
     hint.innerHTML = "";
   };
