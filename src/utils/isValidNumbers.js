@@ -1,5 +1,5 @@
 import utils from './utils.js';
-import { ERROR } from './constants.js';
+import { ERROR } from '../constants.js';
 
 const isValidNumbers = (userInput) => {
   if (!utils.isThreeDigitUniqueNumbers(userInput)) {

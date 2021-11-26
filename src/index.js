@@ -1,8 +1,9 @@
-import utils from './utils.js';
-import isValidNumbers from './isValidNumbers.js';
+import utils from './utils/utils.js';
+import DOMUtils from './utils/DOMUtils.js';
+import isValidNumbers from './utils/isValidNumbers.js';
 
-const userInputForm = document.querySelector('form');
-const userInput = document.querySelector('#user-input');
+const userInputForm = DOMUtils.getElement('form');
+const userInput = DOMUtils.getElement('#user-input');
 let computerInputNumbers = [];
 
 init();
@@ -13,7 +14,8 @@ userInputForm.addEventListener('submit', (e) => {
 });
 
 function init() {
-  document.querySelector('h3').style.display = 'none';
-  document.querySelector('#result').innerText = '';
+  DOMUtils.setElementId('h3', 'resultTitle');
+  DOMUtils.hideElement('#resultTitle');
+  DOMUtils.initElementValue('#result');
   computerInputNumbers = utils.pickUniqueThreeNumbers();
 }

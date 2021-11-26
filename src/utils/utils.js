@@ -3,7 +3,7 @@ import {
   START_NUMBER,
   END_NUMBER,
   THREE_UNIQUE_NUMBERS_REGEX,
-} from './constants.js';
+} from '../constants.js';
 
 const utils = {
   pickUniqueThreeNumbers: () => {
