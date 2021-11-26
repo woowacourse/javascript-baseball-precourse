@@ -11,7 +11,8 @@ export default function BaseballGame() {
   };
 
   const printError = () => {
-    console.log("숫자 잘못 입력");
+    alert("입력값이 잘못되었습니다. 1~9까지의 수를 중복없이 3개 작성해주세요.");
+    $("#user-input").value = '';
   }
 
   const printResult = () => {
@@ -33,12 +34,6 @@ export default function BaseballGame() {
     e.preventDefault();
   })
   $("#submit").addEventListener("click", isVaildNum);
-  $("#user-input").addEventListener("keypress", e => {
-    if (e.key !== 'Enter') {
-      return;
-    }
-    isVaildNum();
-  });
 } 
 
 new BaseballGame();
