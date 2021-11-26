@@ -15,7 +15,7 @@ input 필드나 결과에 있는 값을 모두 빈칸으로 만들어준다.
 
 - 컴퓨터의 랜덤 값은 [MissionUtils 라이브러리](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)의 Random.pickNumberInRange를 사용해 구한다.
 
-## [ ] 기능 2: USER가 입력한 값을 확인
+## [✅] 기능 2: USER가 입력한 값을 확인
 
 사용자가 잘못된 입력 값을 작성한 경우 `alert`을 이용해 메시지를 보여주고, 재입력할 수 있게 한다.
 
