@@ -23,4 +23,9 @@ export default class BaseballGame {
         let [strikes, balls] = judgeNumber(this.computerNumber, userInputNumber);
         return resultMessages(strikes, balls);
     }
+
+    replay() {
+        this.computerNumber = [];
+        this.setComputerNumber();
+    }
 }
