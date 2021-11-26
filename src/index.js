@@ -1,8 +1,18 @@
 import getBallCount from './utils/getBallCount.js';
 import getStrikeCount from './utils/getStrikeCount.js';
+import removeChildren from './utils/removeChildren.js';
+import generateComputerInput from './library/generateComputerInput.js';
 import { STR_SUCCESS, STR_NOTHING } from './consts.js';
 
 export default class BaseballGame {
+  constructor(app, input, container) {
+    this.app = app;
+    this.input = input;
+    this.container = container;
+
+    this.computerInput = generateComputerInput();
+  }
+
   static play(computerInputNumbers, userInputNumbers) {
     if (computerInputNumbers === userInputNumbers) return STR_SUCCESS;
 
@@ -16,5 +26,13 @@ export default class BaseballGame {
     if (strike) result += `${strike}스트라이크`;
 
     return result;
+  }
+
+  restart(e) {
+    e.preventDefault();
+
+    removeChildren(this.container);
+    this.computerInput = generateComputerInput();
+    this.input.value = '';
   }
 }
