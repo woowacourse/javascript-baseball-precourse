@@ -1,4 +1,5 @@
 import { $userInput, $result } from "./constants/constants.js";
+import compareAnswers from "./game/compareAnswers.js";
 import playGame from "./game/playGame.js";
 import makeAnswer from "./makeAnswer.js";
 
@@ -11,7 +12,7 @@ export default function BaseballGame() {
   };
 
   this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    return compareAnswers(computerInputNumbers, userInputNumbers);
   };
 
   reset();
