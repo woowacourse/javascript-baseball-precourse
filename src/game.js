@@ -16,21 +16,35 @@ export const compareInputWithAnswer = (
     ball: 0,
   };
 
-  computerInputNumbers.split('').forEach((element) => {
-    if (userInputNumbers.includes(element)) {
-      result.ball += 1;
-    }
-  });
-
-  for (let index = 0; index < computerInputNumbers.length; index++) {
-    if (computerInputNumbers[index] === userInputNumbers[index]) {
-      result.strike += 1;
-    }
-  }
-
+  result.ball = getBallCount(computerInputNumbers, userInputNumbers);
+  result.strike = getStrikeCount(computerInputNumbers, userInputNumbers);
   result.ball -= result.strike;
 
   return result;
+};
+
+const getBallCount = (computerInputNumbers, userInputNumbers) => {
+  let ballCount = 0;
+
+  computerInputNumbers.split('').forEach((element) => {
+    if (userInputNumbers.includes(element)) {
+      ballCount += 1;
+    }
+  });
+
+  return ballCount;
+};
+
+const getStrikeCount = (computerInputNumbers, userInputNumbers) => {
+  let strikeCount = 0;
+
+  for (let index = 0; index < computerInputNumbers.length; index++) {
+    if (computerInputNumbers[index] === userInputNumbers[index]) {
+      strikeCount += 1;
+    }
+  }
+
+  return strikeCount;
 };
 
 export const getHintString = (result) => {
