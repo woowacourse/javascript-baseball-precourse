@@ -1,3 +1,15 @@
+function isNotDuplicate(userInputs) {
+  // userInput이 중복되는 숫자가 있는지 체크
+  const userInputNumbers = [];
+  for (let i = 0; i < userInputs.length; i += 1) {
+    const userInput = userInputs[i];
+    if (!userInputNumbers.includes(userInput)) {
+      userInputNumbers.push(userInput);
+    }
+  }
+  return userInputNumbers;
+}
+
 function isRightNumber(userInputs) {
   // userInput이 1~9 사이 숫자인지 체크
   for (let i = 0; i < userInputs.length; i += 1) {
@@ -20,8 +32,14 @@ function isRightLength(userInputs) {
 
 function checkTheRightUserInput(userInputs) {
   if (!isRightLength(userInputs) || !isRightNumber(userInputs)) {
-    console.log('공백 없이 중복되지 않는 숫자 3개를 입력해주세요!');
+    return false;
   }
+
+  const userInputNumbers = isNotDuplicate(userInputs);
+  if (userInputNumbers.length !== 3) {
+    return false;
+  }
+  return userInputNumbers;
 }
 
 export default function getUserInputNumbers() {
@@ -31,6 +49,11 @@ export default function getUserInputNumbers() {
   $submit.addEventListener('click', (event) => {
     event.preventDefault();
     const userInputs = $userInput.value;
-    checkTheRightUserInput(userInputs);
+    const userInputNumbers = checkTheRightUserInput(userInputs);
+    if (!userInputNumbers) {
+      console.log('공백 없이 중복되지 않는 숫자 3개를 입력해주세요!');
+    } else {
+      console.log(userInputNumbers.map((string) => Number(string)));
+    }
   });
 }
