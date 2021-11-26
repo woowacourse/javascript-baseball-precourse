@@ -25,10 +25,13 @@ const submitButton = document.getElementById('submit');
 
 submitButton.addEventListener('click', (e) => {
   e.preventDefault();
+  setResultTextToHint();
+});
 
+const setResultTextToHint = () => {
   const result = document.getElementById('result');
   result.innerHTML =
     '<h4>' +
     baseballGame.play(baseballGame.computerAnswer, getUserInput()) +
     '</h4>';
-});
+};
