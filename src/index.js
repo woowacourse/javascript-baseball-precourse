@@ -2,20 +2,31 @@ import utils from './utils/utils.js';
 import DOMUtils from './utils/DOMUtils.js';
 import isValidNumbers from './utils/isValidNumbers.js';
 
-const userInputForm = DOMUtils.getElement('form');
-const userInput = DOMUtils.getElement('#user-input');
-let computerInputNumbers = [];
+export default function BaseballGame() {
+  const userInputForm = DOMUtils.getElement('form');
+  const userInput = DOMUtils.getElement('#user-input');
+  let computerInputNumbers = [];
 
-init();
+  this.init = function () {
+    DOMUtils.setElementId('h3', 'resultTitle');
+    DOMUtils.hideElement('#resultTitle');
+    DOMUtils.initElementValue('#result');
+    computerInputNumbers = utils.pickUniqueThreeNumbers();
+  };
 
-userInputForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  isValidNumbers(userInput) && console.log('모든 조건 통과');
-});
+  this.play = function (computerInputNumbers, userInputNumbers) {
+    console.log(computerInputNumbers);
+    console.log(userInputNumbers);
+    //return '결과 값 String';
+  };
 
-function init() {
-  DOMUtils.setElementId('h3', 'resultTitle');
-  DOMUtils.hideElement('#resultTitle');
-  DOMUtils.initElementValue('#result');
-  computerInputNumbers = utils.pickUniqueThreeNumbers();
+  this.init();
+
+  userInputForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    isValidNumbers(userInput) &&
+      this.play(computerInputNumbers, utils.stringToNumArray(userInput.value));
+  });
 }
+
+new BaseballGame();

@@ -25,6 +25,9 @@ const utils = {
   initValue: (element) => {
     element.value = '';
   },
+  stringToNumArray: (string) => {
+    return string.split('').map((num) => Number(num));
+  },
 };
 
 export default utils;
