@@ -10,7 +10,7 @@ function getGameHintText(ball, strike) {
     return textJoinArray.join(" ");
 }
 
-export default class gameRuleView {
+export default class GameManagerView {
     constructor($resultWrap) {
         this.$result = $resultWrap;
 

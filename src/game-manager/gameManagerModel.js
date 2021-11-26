@@ -1,4 +1,4 @@
-export default class GameRuleModel {
+export default class GameManagerModel {
     constructor() {
         this.init();
     }
