@@ -15,7 +15,6 @@ function isNumberRange(word) {
 export default class UserInputModel {
     constructor(userInputNumber) {
         this.userValue = String(userInputNumber);
-        this.isValidCheck = false;
     }
 
     get checkInputValid() {
