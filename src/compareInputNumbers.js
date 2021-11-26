@@ -4,6 +4,23 @@ export default class CompareInputNumbers {
     this.userInputNumbers = userInputNumbers;
     this.strikeCount = 0;
     this.ballCount = 0;
+    this.resultMessage = '';
+  }
+
+  getResultMessage() {
+    if (this.strikeCount === 0 && this.ballCount === 0) {
+      this.resultMessage = '낫싱';
+      return;
+    }
+    if (this.ballCount === 0 && this.strikeCount > 0) {
+      this.resultMessage = `${this.strikeCount}스트라이크`;
+      return;
+    }
+    if (this.strikeCount === 0 && this.ballCount > 0) {
+      this.resultMessage = `${this.ballCount}볼`;
+      return;
+    }
+    this.resultMessage = `${this.ballCount}볼 ${this.strikeCount}스트라이크`;
   }
 
   checkTheStrikeCount() {
@@ -27,8 +44,10 @@ export default class CompareInputNumbers {
   main() {
     this.checkTheStrikeCount();
     this.checkTheBallCount();
+    this.getResultMessage();
     console.log(this.computerInputNumbers);
     console.log(this.userInputNumbers);
     console.log(this.strikeCount, this.ballCount);
+    console.log(this.resultMessage);
   }
 }
