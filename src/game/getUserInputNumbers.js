@@ -1,5 +1,15 @@
-function checkTheRightUserInput(userInput) {
-  console.log(userInput);
+function isRightLength(userInputs) {
+  // userInput.length 체크
+  if (userInputs.length !== 3) {
+    return false;
+  }
+  return true;
+}
+
+function checkTheRightUserInput(userInputs) {
+  if (!isRightLength(userInputs)) {
+    console.log('공백 없이 중복되지 않는 숫자 3개를 입력해주세요!');
+  }
 }
 
 export default function getUserInputNumbers() {
@@ -8,7 +18,7 @@ export default function getUserInputNumbers() {
 
   $submit.addEventListener('click', (event) => {
     event.preventDefault();
-    const userInput = $userInput.value;
-    checkTheRightUserInput(userInput);
+    const userInputs = $userInput.value;
+    checkTheRightUserInput(userInputs);
   });
 }
