@@ -3,7 +3,7 @@ export default class BaseballGame {
     this.computerInputNumbers = this.setComputerNumber();
     this.userInputText = document.querySelector('#user-input');
     this.submitButton = document.querySelector('#submit');
-    this.gameResult = document.querySelector('#result');
+    this.gameResultContainer = document.querySelector('#result');
 
     this.submitButton.addEventListener('click', () => this.startGame());
   }
@@ -21,14 +21,28 @@ export default class BaseballGame {
     return computerInputNumbers.join('');
   }
 
-  isValidNumber(inputValue) {
-    if (inputValue.length !== 3) {
+  isDuplicated(userInputNumbers) {
+    const numberArray = userInputNumbers.split('');
+    let flag = false;
+    numberArray.forEach(element => {
+      if (numberArray.indexOf(element) !== numberArray.lastIndexOf(element)) {
+        flag = true;
+      }
+    });
+    return flag;
+  }
+
+  isValidNumber(userInputNumbers) {
+    if (userInputNumbers.length !== 3) {
       return false;
     }
-    if (isNaN(inputValue)) {
+    if (isNaN(userInputNumbers)) {
       return false;
     }
-    if (inputValue.includes('0')) {
+    if (userInputNumbers.includes('0')) {
+      return false;
+    }
+    if (this.isDuplicated(userInputNumbers)) {
       return false;
     }
     return true;
@@ -79,20 +93,57 @@ export default class BaseballGame {
     return [strike, ball];
   }
 
+  getGameResultText(strikeCount, ballCount) {
+    let gameResult = [];
+    if (ballCount) {
+      gameResult.push(`${ballCount}볼`);
+    }
+    if (strikeCount) {
+      gameResult.push(`${strikeCount}스트라이크`);
+    }
+    if (ballCount === 0 && strikeCount === 0) {
+      gameResult.push(`낫싱`);
+    }
+    return gameResult.join(' ');
+  }
+
   play(computerInputNumbers, userInputNumbers) {
     console.log(`${this.computerInputNumbers} vs. ${userInputNumbers}`);
     const [strikeCount, ballCount] = this.countStrikeAndBall(userInputNumbers);
-    console.log(`${ballCount}볼 ${strikeCount}스트라이크`);
-    return '결과 값 String';
+    const gameResult = this.getGameResultText(strikeCount, ballCount);
+    console.log(gameResult);
+    return gameResult;
+  }
+
+  createHtmlRetryItem() {
+    return `
+    <p><strong>🎉 정답을 맞추셨습니다! 🎉</strong></p>
+    <p>게임을 새로 시작하시겠습니까? <button id="retry">게임 재시작</button></p>
+    `;
+  }
+
+  gameEnd() {
+    this.gameResultContainer.innerHTML = this.createHtmlRetryItem();
+    const retryButton = document.querySelector('#retry');
+    retryButton.addEventListener('click', () => console.log(`retry`));
+  }
+
+  showGameResult(gameResult) {
+    if (gameResult === '3스트라이크') {
+      this.gameEnd();
+      return;
+    }
+    this.gameResultContainer.innerHTML = `${gameResult}`;
   }
 
   startGame() {
     const userInputNumbers = this.getUserInput();
+    this.setUserInputClean();
     if (userInputNumbers == null) {
       return;
     }
-    this.play(this.computerInputNumbers, userInputNumbers);
-    this.setUserInputClean();
+    const gameResult = this.play(this.computerInputNumbers, userInputNumbers);
+    this.showGameResult(gameResult);
   }
 }
 
