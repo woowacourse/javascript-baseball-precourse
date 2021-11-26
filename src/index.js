@@ -4,7 +4,7 @@ import GameRuleModel from "./model/gameRules.js";
 export default class BaseballGame {
     constructor() {
         const test = new GameRuleModel();
-        console.log(test.answer);
+        console.log(test.answer, test.getGameHint([1, 2, 3]));
     }
 
     play(computerInputNumbers, userInputNumbers) {}
