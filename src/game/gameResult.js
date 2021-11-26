@@ -30,3 +30,10 @@ const getGameResult = (computerInputNumbers, userInputNumbers) => {
   if (strikeCounts && !ballCounts) return `${strikeCounts}스트라이크`;
   if (strikeCounts && ballCounts) return `${ballCounts}볼 ${strikeCounts}스트라이크`;
 };
+
+const showWinResult = () => {
+  $result.innerHTML = `
+    <h3>🎉 정답을 맞추셨습니다. 🎉</h3>
+    <p>게임을 새로 시작하시겠습니까?<button id="game-restart-button">재시작</button></p>
+  `;
+};
