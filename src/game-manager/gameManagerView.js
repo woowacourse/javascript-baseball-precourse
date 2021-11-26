@@ -1,11 +1,12 @@
 import { combineElement, createElement } from "../utils.js";
+import { RESULT_TEXT } from "../constants.js";
 
 function getGameHintText(ball, strike) {
-    if (ball === 0 && strike === 0) return "낫싱";
+    if (ball === 0 && strike === 0) return RESULT_TEXT.GAME_HINT_NOTHING;
 
     const textJoinArray = [];
-    if (ball > 0) textJoinArray.push(`${ball}볼`);
-    if (strike > 0) textJoinArray.push(`${strike}스트라이크`);
+    if (ball > 0) textJoinArray.push(ball + RESULT_TEXT.GAME_HINT_BALL);
+    if (strike > 0) textJoinArray.push(strike + RESULT_TEXT.GAME_HINT_STRIKE);
 
     return textJoinArray.join(" ");
 }
@@ -32,10 +33,10 @@ export default class GameManagerView {
     }
 
     renderGameRetry() {
-        const $correctText = createElement("H4", "🎉정답을 맞추셨습니다!🎉");
+        const $correctText = createElement("H4", RESULT_TEXT.GAME_OVER_HEADER);
 
-        const $retryWrap = createElement("DIV", "게임을 새로 시작하시겠습니까? ");
-        const $retryButton = createElement("BUTTON", "재시작");
+        const $retryWrap = createElement("DIV", RESULT_TEXT.GAME_OVER_CONTENT);
+        const $retryButton = createElement("BUTTON", RESULT_TEXT.GAME_OVER_BUTTON);
 
         $retryButton.id = "game-restart-button";
         $retryWrap.append($retryButton);

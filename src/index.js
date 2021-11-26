@@ -20,43 +20,40 @@ export default class BaseballGame {
         $sumbitButton.addEventListener("click", this.onSubmitClick.bind(this));
     }
 
-    userInputAlert(ERROR_CODE) {
-        switch (ERROR_CODE) {
-            case RESULT_CODE.ERROR_USERINPUT_LENGTH:
-                alert("3글자로 입력하여주세요.\n(1~9 숫자, 중복 없는 수 3자리)");
-                break;
-
-            case RESULT_CODE.ERROR_USERINPUT_NUMBER_RANGE:
-                alert("1에서 9 사이의 숫자만 입력할 수 있습니다.\n(1~9 숫자, 중복 없는 수 3자리)");
-                break;
-
-            case RESULT_CODE.ERROR_USERINPUT_UNIQUE_WORD:
-                alert("중복된 숫자가 있습니다.\n(1~9 숫자, 중복 없는 수 3자리)");
-                break;
-        }
-
-        this.userInputView.setFocus();
-    }
-
     isUserInputVaild() {
         this.userInputModel.setValue($("#user-input").value);
         const CHECK_RESULT = this.userInputModel.checkInputValid;
 
         if (CHECK_RESULT === RESULT_CODE.DONE_USERINPUT_VALID) return true;
 
-        this.userInputAlert(CHECK_RESULT);
+        this.userInputView.showErrorAlert(CHECK_RESULT);
+        this.userInputView.setFocus();
         return false;
     }
 
     onSubmitClick(event) {
         event.preventDefault();
-
         if (!this.isUserInputVaild()) return false;
-        this.play(this.gameManagerModel.computerNumbers, this.userInputModel.toNumberArray);
+        const userNumbers = this.userInputModel.toNumberArray;
+        const gameResult = this.gameManagerModel.getGameHint(userNumbers);
+
+        const isGameOver = this.gameManagerModel.isGameOver(gameResult);
+        if (isGameOver === false) {
+            this.gameManagerView.renderGameHint(gameResult);
+            return;
+        }
+
+        this.gameManagerView.renderGameRetry();
+        this.userInputView.setDisable(true);
+
+        $("#game-restart-button").addEventListener("click", this.onRetryClick.bind(this));
     }
 
-    play(computerInputNumbers, userInputNumbers) {
-        console.log(computerInputNumbers, userInputNumbers);
+    onRetryClick(event) {
+        this.userInputView.init();
+
+        this.gameManagerView.init();
+        this.gameManagerModel.init();
     }
 }
 

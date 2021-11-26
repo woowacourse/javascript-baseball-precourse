@@ -31,4 +31,8 @@ export default class GameManagerModel {
 
         return result;
     }
+
+    isGameOver(gameResult) {
+        return gameResult.strike === 3;
+    }
 }
