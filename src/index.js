@@ -1,6 +1,6 @@
 import { $ } from "./utils.js";
 import { checkUserInputVaild, getNumberArray } from "./userInput.js";
-import GameManager from "./gameManager.js";
+import { gameManager } from "./gameManager.js";
 import { errorMessage, resultRender } from "./render.js";
 import { RESULT_CODE } from "./constants.js";
 
@@ -8,7 +8,9 @@ const $userInput = $("#user-input");
 const $submitButton = $("#submit");
 
 export default class BaseballGame {
-    constructor() {}
+    constructor() {
+        this.computerNumbers = gameManager.generateNumberArray;
+    }
 
     play(computerInputNumbers, userInputNumbers) {
         return "결과 값 String";

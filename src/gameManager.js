@@ -1,4 +1,4 @@
-export default class GameManager {
+class GameManager {
     get generateNumberArray() {
         const randomUtils = MissionUtils.Random.pickNumberInRange;
 
@@ -26,3 +26,5 @@ export default class GameManager {
         return result;
     }
 }
+
+export const gameManager = new GameManager();
