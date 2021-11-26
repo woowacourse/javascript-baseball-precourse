@@ -1,3 +1,5 @@
+import ApplyToTemplate from './templates/applyToTemplate.js';
+
 export default class CompareInputNumbers {
   constructor(computerInputNumbers, userInputNumbers) {
     this.computerInputNumbers = computerInputNumbers;
@@ -45,9 +47,7 @@ export default class CompareInputNumbers {
     this.checkTheStrikeCount();
     this.checkTheBallCount();
     this.getResultMessage();
-    console.log(this.computerInputNumbers);
-    console.log(this.userInputNumbers);
-    console.log(this.strikeCount, this.ballCount);
-    console.log(this.resultMessage);
+    const applyToTemplate = new ApplyToTemplate(this.resultMessage);
+    applyToTemplate.main();
   }
 }
