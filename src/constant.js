@@ -16,3 +16,7 @@ export const COUNT = {
     "BALL": "볼",
     "NO_COUNT": "낫싱" 
 }
+
+export const FONT = {
+    "WEIGHT_BOLD": 700
+}
