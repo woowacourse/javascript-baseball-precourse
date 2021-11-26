@@ -96,16 +96,26 @@ export default class BaseballGame {
   };
 
   createRestartText = () => {
-    const reStartTextEl = document.createElement('span');
-    reStartTextEl.innerHTML = '게임을 새로 시작하시겠습니까? ';
-    this.appEl.appendChild(reStartTextEl);
+    this.restartTextEl = document.createElement('span');
+    this.restartTextEl.innerHTML = '게임을 새로 시작하시겠습니까? ';
+    this.appEl.appendChild(this.restartTextEl);
   };
 
   createRestartButton = () => {
-    const reStartButtonEl = document.createElement('button');
-    reStartButtonEl.id = 'game-restart-button';
-    reStartButtonEl.innerHTML = '재시작';
-    this.appEl.appendChild(reStartButtonEl);
+    this.restartButtonEl = document.createElement('button');
+    this.restartButtonEl.id = 'game-restart-button';
+    this.restartButtonEl.innerHTML = '재시작';
+    this.restartButtonEl.addEventListener('click', this.restartButtonHandle);
+    this.appEl.appendChild(this.restartButtonEl);
+  };
+
+  restartButtonHandle = () => {
+    this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join(
+      '',
+    );
+    this.resultEl.innerHTML = '';
+    this.restartTextEl.remove();
+    this.restartButtonEl.remove();
   };
 
   play(computerInputNumbers, userInputNumbers) {
