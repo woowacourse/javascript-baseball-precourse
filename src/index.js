@@ -11,6 +11,7 @@ import { getRandomNumber, isValidInput } from './number.js';
 const $userInput = $('#user-input');
 const $submit = $('#submit');
 const $form = $('form');
+const $result = $('#result');
 
 function BaseballGame() {
   this.randomNumber;
@@ -18,6 +19,7 @@ function BaseballGame() {
     [BALL]: 0,
     [STRIKE]: 0,
   };
+  this.gameOver = false;
 
   this.init = () => {
     initEventListener();
@@ -28,6 +30,7 @@ function BaseballGame() {
     clearScore();
     setScore(computerInputNumbers, userInputNumbers);
     const message = makeMessage();
+    renderMessage(message);
   };
 
   const setScore = (computerInputNumbers, userInputNumbers) => {
@@ -44,6 +47,7 @@ function BaseballGame() {
       return '낫싱';
     }
     if (this.score[STRIKE] === VALID_NUMBER_LENGTH) {
+      this.gameOver = true;
       return '🎉정답을 맞추셨습니다!🎉';
     }
     return makeBallStrikeMessage();
@@ -58,6 +62,13 @@ function BaseballGame() {
     this.score[BALL] = 0;
     this.score[STRIKE] = 0;
   };
+
+  const renderMessage = (message) => {
+    $result.innerHTML = this.gameOver
+      ? `<p class=box>${message}</p> <p>게임을 새로 시작하시겠습니까? <button id=game-restart-button>재시작</button></p>`
+      : `<p class=box>${message}</p>`;
+  };
+
   const setUserInput = () => {
     const userInput = getUserInput();
     if (!isValidInput(userInput)) {
