@@ -4,6 +4,7 @@ import {
   MIN_RANDOM_NUMBER,
   BALL,
   STRIKE,
+  VALID_NUMBER_LENGTH,
 } from './constants/index.js';
 import { getRandomNumber, isValidInput } from './number.js';
 
@@ -26,6 +27,7 @@ function BaseballGame() {
   this.play = (computerInputNumbers, userInputNumbers) => {
     clearScore();
     setScore(computerInputNumbers, userInputNumbers);
+    const message = makeMessage();
   };
 
   const setScore = (computerInputNumbers, userInputNumbers) => {
@@ -36,7 +38,21 @@ function BaseballGame() {
         this.score[BALL] += 1;
       }
     });
-    console.log(this.score);
+  };
+  const makeMessage = () => {
+    if (this.score[BALL] === 0 && this.score[STRIKE] === 0) {
+      return '낫싱';
+    }
+    if (this.score[STRIKE] === VALID_NUMBER_LENGTH) {
+      return '🎉정답을 맞추셨습니다!🎉';
+    }
+    return makeBallStrikeMessage();
+  };
+  const makeBallStrikeMessage = () => {
+    return Object.entries(this.score)
+      .filter(([scoreName, score]) => score)
+      .map(([scoreName, score]) => `${score}${scoreName}`)
+      .join(' ');
   };
   const clearScore = () => {
     this.score[BALL] = 0;
