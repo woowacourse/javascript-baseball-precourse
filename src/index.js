@@ -45,7 +45,9 @@ export default function BaseballGame() {
       return;
   }
   const restartGame = () => {
-
+    this.gameInfoObject.computerInputNumbers = getComputerNumbers();
+    $('#result').innerText = '';
+    $('#user-input').value = '';
   }
   const addResetButtonListener = () => {
     $('#game-restart-button').addEventListener("click", restartGame);
