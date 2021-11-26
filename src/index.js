@@ -1,5 +1,5 @@
-import getComputerInputNumbers from './game/getComputerInputNumbers.js';
-import getUserInputNumbers from './game/getUserInputNumbers.js';
+import getComputerInputNumbers from './getInputNumbers/getComputerInputNumbers.js';
+import getUserInputNumbers from './getInputNumbers/getUserInputNumbers.js';
 
 export default class BaseballGame {
   constructor() {
