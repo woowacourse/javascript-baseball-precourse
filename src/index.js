@@ -17,8 +17,25 @@ export default class BaseballGame {
     getUserInputNum(e) {
         e.preventDefault();//다시 실행되는거 방지
         const userInputNum = this.$userInput.value;
+        this.checkUserInputNum(userInputNum);
         
         return userInputNum;
+    }
+
+    //사용자로부터 입력받은 값 검사
+    checkUserInputNum(userInputNum) {
+        if(isNaN(userInputNum)) {
+            return alert("숫자만 입력해주세요!");
+        }
+        if(userInputNum.length !== 3) {
+            return alert("3자리의 수를 입력해주세요!");
+        }
+        if(new Set(userInputNum).size !== 3) {
+            return alert("서로 다른 숫자를 입력해주세요!");
+        }
+        if(userInputNum.includes(0)){
+            return alert("각 자리가 1~9인 수를 입력해주세요!");
+        }
     }
 
     // 중복없이 랜덤한 3자리수 정답 생성
