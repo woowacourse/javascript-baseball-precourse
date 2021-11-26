@@ -1,4 +1,5 @@
 import { $userInput, $result } from "./constants/constants.js";
+import playGame from "./game/playGame.js";
 import makeAnswer from "./makeAnswer.js";
 
 export default function BaseballGame() {
@@ -6,6 +7,7 @@ export default function BaseballGame() {
     $userInput.value = "";
     $result.innerText = "";
     const answer = makeAnswer();
+    playGame(answer, this.play);
   };
 
   this.play = function (computerInputNumbers, userInputNumbers) {
