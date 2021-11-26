@@ -1,7 +1,13 @@
+import {
+  threeLengthError,
+  overlapError,
+  unvalidInputError,
+} from "./constant.js";
+
 // 3자리 숫자인지 확인
 const checkLengthThree = number => {
   if (number.length !== 3) {
-    alert("세자리의 수를 입력해주세요.");
+    alert(threeLengthError);
     return true;
   } else {
     return false;
@@ -15,7 +21,7 @@ const checkOverlap = number => {
     number[1] === number[2] ||
     number[0] === number[2]
   ) {
-    alert("중복없는 세자리의 수를 입력해주세요.");
+    alert(overlapError);
     return true;
   } else {
     return false;
@@ -27,7 +33,7 @@ const checkValidNumber = number => {
   let i = 0;
   for (; i < 3; i++) {
     if (number[i] < "1" || number[i] > "9") {
-      alert("1~9까지의 수를 입력해주세요.");
+      alert(unvalidInputError);
       return true;
     }
   }
