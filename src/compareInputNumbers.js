@@ -14,8 +14,6 @@ export default class CompareInputNumbers {
         this.strikeCount += 1;
       }
     });
-
-    return this.strikeCount;
   }
 
   checkTheBallCount() {
@@ -24,13 +22,11 @@ export default class CompareInputNumbers {
         this.ballCount += 1;
       }
     });
-
-    return this.ballCount;
   }
 
   main() {
-    this.strikeCount = this.checkTheStrikeCount();
-    this.ballCount = this.checkTheBallCount();
+    this.checkTheStrikeCount();
+    this.checkTheBallCount();
     console.log(this.computerInputNumbers);
     console.log(this.userInputNumbers);
     console.log(this.strikeCount, this.ballCount);
