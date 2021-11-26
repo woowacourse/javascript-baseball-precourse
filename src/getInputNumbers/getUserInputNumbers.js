@@ -1,4 +1,4 @@
-import { NUMBER, STRING } from '../constant';
+import { NUMBER, STRING } from '../constant.js';
 
 export default class GetUserInputNumbers {
   constructor($userInput) {

@@ -1,4 +1,4 @@
-import { NUMBER } from '../constant';
+import { NUMBER } from '../constant.js';
 
 export default function getComputerInputNumbers() {
   const computerInputList = [];
