@@ -1,0 +1,18 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "globals": { "_": true },
+  "plugins": ["import"],
+  "extends": ["airbnb-base", "prettier"], // 체크할 규칙
+  "rules": {
+    // extends의 규칙 중, 수정할 사항 또는 추가 옵션 기재
+    "no-console": "warn",
+    "no-unused-vars": "warn"
+  }
+}
