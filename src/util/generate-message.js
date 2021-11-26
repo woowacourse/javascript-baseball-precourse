@@ -4,17 +4,21 @@ import {
   isWithZero,
   isNotThreeDigit,
 } from "./check-valid.js";
-import { BASEBALL_NUMBER_LENGTH } from "../constant/index.js";
+import {
+  ALERT_MESSAGE,
+  BASEBALL_NUMBER_LENGTH,
+  CORRECT_MESSAGE_TEMPLETE,
+} from "../constant/index.js";
 
 export const generateAlertMessage = (userInputNumbers) => {
   if (isInvalidNumber(userInputNumbers)) {
-    return "숫자만 입력해주세요";
+    return ALERT_MESSAGE.ONLY_NUMBER;
   } else if (isNotThreeDigit(userInputNumbers)) {
-    return "3자리수의 숫자를 입력해주세요";
+    return ALERT_MESSAGE.ONLY_THREE_DIGIT;
   } else if (isDuplicatedNumber(userInputNumbers)) {
-    return "중복되지 않은 숫자들로 입력해주세요";
+    return ALERT_MESSAGE.ONLY_NON_DUPLICATED_NUMBER;
   } else if (isWithZero(userInputNumbers)) {
-    return "1 ~ 9사이의 숫자로 입력해주세요";
+    return ALERT_MESSAGE.NOT_INCLUDED_ZERO;
   }
 
   return "";
@@ -29,15 +33,7 @@ export const generateResultMessage = (strike, ball) => {
 };
 
 const generateCorrectMessage = () => {
-  return `
-    <div>
-      <div>
-        <strong>🎉정답을 맞추셨습니다🎉</strong>
-      </div>
-      <span>게임을 새로 시작하시겠습니까?</span>
-      <button id="game-restart-button">게임 재시작</button>
-    </div>
-  `;
+  return CORRECT_MESSAGE_TEMPLETE;
 };
 
 const generateHintMessage = (strike, ball) => {
