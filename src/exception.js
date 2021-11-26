@@ -21,6 +21,7 @@ const alertToUser = (userInputNumbers) => {
   else if (!checkDigitsRangeCorrect(userInputNumbers)) alert(OUT_RANGE_ALERT);
   else if (isDuplicated(userInputNumbers)) alert(DUPLICATED_NUMBER_ALERT);
   else return false;
+
   return true;
 };
 
@@ -42,5 +43,6 @@ const isDuplicated = (userInputNumbers) => {
   if (removeDuplicates.size === 3) {
     return false;
   }
+
   return true;
 };

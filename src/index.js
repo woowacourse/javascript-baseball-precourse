@@ -13,6 +13,7 @@ export default class BaseballGame {
     if (userInputException(userInputNumbers)) {
       return '';
     }
+
     return getHintString(
       compareInputWithAnswer(computerInputNumbers, userInputNumbers)
     );
