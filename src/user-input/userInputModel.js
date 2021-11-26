@@ -13,7 +13,7 @@ function isNumberRange(word) {
 }
 
 export default class UserInputModel {
-    constructor(userInputNumber) {
+    setValue(userInputNumber) {
         this.userValue = String(userInputNumber);
     }
 

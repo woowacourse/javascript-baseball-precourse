@@ -4,7 +4,7 @@ export default class GameManagerModel {
     }
 
     init() {
-        this.answer = this.generateNumberArray;
+        this.computerNumbers = this.generateNumberArray;
     }
 
     get generateNumberArray() {
@@ -19,7 +19,7 @@ export default class GameManagerModel {
     }
 
     getGameHint(userNumberArray) {
-        const computerNumbers = this.answer;
+        const computerNumbers = this.computerNumbers;
         const result = {
             strike: 0,
             ball: 0,
