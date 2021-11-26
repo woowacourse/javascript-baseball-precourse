@@ -10,7 +10,7 @@ export default class BaseballGame {
     this.submitButtonEl.addEventListener('click', this.submitButtonHandle);
   }
 
-  isNotUserInputDuplicate = () => {
+  isDifferentUserInput = () => {
     const userInputSet = new Set(this.userInputEl.value.split(''));
     if ([...userInputSet].length !== this.userInputEl.value.length) {
       return false;
@@ -18,7 +18,7 @@ export default class BaseballGame {
     return true;
   };
 
-  isUserInputNumberRange = () => {
+  isUserInputWithinRange = () => {
     for (let i = 0; i < this.userInputEl.value.length; i += 1) {
       if (this.userInputEl.value[i] < '1' || this.userInputEl.value[i] > '9') {
         return false;
@@ -27,18 +27,18 @@ export default class BaseballGame {
     return true;
   };
 
-  isUserInputNumberLength = () => {
+  isCorrectUserInputLength = () => {
     if (this.userInputEl.value.length === 3) {
       return true;
     }
     return false;
   };
 
-  isUserInputCheck = () => {
+  isAllCorrectUserInput = () => {
     return (
-      this.isNotUserInputDuplicate() &&
-      this.isUserInputNumberRange() &&
-      this.isUserInputNumberLength()
+      this.isDifferentUserInput() &&
+      this.isUserInputWithinRange() &&
+      this.isCorrectUserInputLength()
     );
   };
 
@@ -60,7 +60,7 @@ export default class BaseballGame {
   };
 
   submitButtonHandle = () => {
-    if (this.isUserInputCheck()) {
+    if (this.isAllCorrectUserInput()) {
       this.resultEl.innerHTML = this.resultText(this.compareAnswer());
       this.userInputEl.value = '';
     } else {
