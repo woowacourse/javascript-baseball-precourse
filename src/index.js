@@ -1,3 +1,4 @@
+import CompareInputNumbers from './compareInputNumbers.js';
 import getComputerInputNumbers from './getInputNumbers/getComputerInputNumbers.js';
 import getUserInputNumbers from './getInputNumbers/getUserInputNumbers.js';
 
@@ -6,8 +7,7 @@ export default class BaseballGame {
     this.computerInputNumbers = [];
     this.$submit = document.querySelector('#submit');
     this.$userInput = document.querySelector('#user-input');
-    this.submitClickEvent();
-    this.main();
+    this.result = '';
   }
 
   initializeUserInput() {
@@ -24,18 +24,26 @@ export default class BaseballGame {
         alert('공백 없이 중복되지 않는 숫자 3개를 입력해주세요!');
         return;
       }
-      console.log(this.computerInputNumbers);
-      console.log(userInputNumbers);
+      this.play(this.computerInputNumbers, userInputNumbers);
     });
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    return '결과 값 String';
+    const compareInputNumbers = new CompareInputNumbers(
+      computerInputNumbers,
+      userInputNumbers,
+    );
+    compareInputNumbers.main();
+
+    this.result = '결과 값 String';
+    return this.result;
   }
 
   main() {
     this.computerInputNumbers = getComputerInputNumbers();
+    this.submitClickEvent();
   }
 }
 
-new BaseballGame();
+const baseballGame = new BaseballGame();
+baseballGame.main();
