@@ -1,7 +1,7 @@
 # 🎯 기능 구현 목록  
 
 **1. 정답 생성 기능**
-  - [ ] `MissionUtils` 라이브러리의 `Random.pickNumberInRange`를 사용하여, 1~9 사이의 서로 다른 임의의 수 3개를 랜덤으로 생성한다. 
+  - [x] `MissionUtils` 라이브러리의 `Random.pickNumberInRange`를 사용하여, 1~9 사이의 서로 다른 임의의 수 3개를 랜덤으로 생성한다. 
 
 **2. input에 입력한 값이 유효한지 체크하는 기능**
   - [ ] 플레이어가 input에 3개의 숫자를 입력한 후, 확인 버튼을 누른다. 
