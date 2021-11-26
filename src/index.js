@@ -1,13 +1,21 @@
 import BaseballGame from "./baseballgame.js";
 import validateNumber from "./validateNumber.js";
 
+const baseballGame = new BaseballGame();
+
 function playGame() {
     const userInput = document.getElementById("user-input");
-    alert(validateNumber(userInput.value));
+    let resultString;
+
+    if(validateNumber(userInput.value)) {
+        resultString = baseballGame.play(userInput.value);
+        alert(resultString);
+    }else{
+        alert("잘못된 값을 입력하였습니다!");
+    }
 }
 
 function init() {
-    const baseballGame = new BaseballGame();
     const submitButton = document.getElementById("submit");
 
     baseballGame.setComputerNumber();
