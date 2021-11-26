@@ -32,9 +32,8 @@ export default function BaseballGame() {
   const playGame = () => {
       //유저가 입력한 값 받아오기
       this.gameInfoObject.userInputNumbers = getUserNumbers($('#user-input').value);
-      if(this.gameInfoObject.userInputNumbers !== ""){
+      if(this.gameInfoObject.userInputNumbers !== false){
         let compareResult = this.play(this.gameInfoObject.computerInputNumbers, this.gameInfoObject.userInputNumbers);
-        console.log(compareResult, this.gameInfoObject.computerInputNumbers, this.gameInfoObject.userInputNumbers)
         if(compareResult == 'gameEnd'){
           printGameEndResult();
           addResetButtonListener();
@@ -44,14 +43,17 @@ export default function BaseballGame() {
       }
       return;
   }
+
   const restartGame = () => {
     this.gameInfoObject.computerInputNumbers = getComputerNumbers();
     $('#result').innerText = '';
     $('#user-input').value = '';
   }
+
   const addResetButtonListener = () => {
     $('#game-restart-button').addEventListener("click", restartGame);
   }
+
   const initEventListener = () => {
     $('#user-input-form').addEventListener("submit",(e) =>{
       e.prevetDefault();
