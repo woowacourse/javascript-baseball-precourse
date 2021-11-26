@@ -118,6 +118,25 @@ export default function BaseballGame() {
       calculateDuplicatedNum(Number1, Number2) - calStrike(Number1, Number2)
     );
   }
+
+  /* Print Result */
+  function printBallStrike(ball, strike) {
+    if (ball == 0 && strike == 0) {
+      return '낫싱';
+    } else if (ball !== 0 && strike == 0) {
+      return `${ball}볼`;
+    } else if (ball == 0 && strike !== 0) {
+      return `${strike}스트라이크`;
+    } else {
+      return `${ball}볼 ${strike}스트라이크`;
+    }
+  }
+
+  function play(computerInputNumbers, userInputNumbers) {
+    const strike = calStrike(computerInputNumbers, userInputNumbers);
+    const ball = calBall(computerInputNumbers, userInputNumbers);
+    return printBallStrike(ball, strike);
+  }
 }
 
 new BaseballGame();
