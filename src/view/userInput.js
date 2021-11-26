@@ -3,8 +3,6 @@ export default class userInputView {
         this.$userInput = $userInput;
         this.$submitButton = $submitButton;
 
-        console.log(this.$userInput, this.$submitButton);
-
         this.init();
     }
 
