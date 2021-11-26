@@ -1,4 +1,17 @@
 export default class BaseballGame {
+    
+    //생성자
+    constructor() {
+        this.$submitButton = document.getElementById("submit");
+        this.$userInput = document.getElementById("user-input");
+        this.answer = this.makeRandomAnswer(); //정답 생성 배열로 나옴
+        this.addEvent();
+    }
+
+    //이벤트 리스너 추가
+    addEvent() {
+        this.$submitButton.addEventListener('click', this.getUserInputNum.bind(this));
+    }
 
     // 중복없이 랜덤한 3자리수 정답 생성
     makeRandomAnswer() {
@@ -19,3 +32,5 @@ export default class BaseballGame {
         return "결과 값 String";
     }
 }
+
+new BaseballGame();
