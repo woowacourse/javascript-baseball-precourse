@@ -1,4 +1,6 @@
 import UserInputModel from "./model/userInput.js";
+import UserInputView from "./view/userInput.js";
+
 import GameRuleModel from "./model/gameRules.js";
 
 export default class BaseballGame {
