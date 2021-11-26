@@ -1,3 +1,9 @@
+function uniqueNumberPush(computerNumber, randomNumber) {
+    if(!computerNumber.includes(randomNumber)) {
+        computerNumber.push(randomNumber);
+    }
+}
+
 export default class BaseballGame {
     constructor() {
         this.computerNumber = [];
@@ -6,7 +12,7 @@ export default class BaseballGame {
     setComputerNumber() {
         while(this.computerNumber.length < 3) {
             const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-            if(!this.computerNumber.includes(randomNumber)) this.computerNumber.push(randomNumber);
+            uniqueNumberPush(this.computerNumber, randomNumber);
         }
     }
 }
