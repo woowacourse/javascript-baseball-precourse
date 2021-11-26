@@ -18,8 +18,7 @@ export default class BaseballGame {
 
   setEvent = () => {
     DOMS.$userInputForm.addEventListener("submit", this.onSubmitHandler);
-
-    DOMS.$result.addEventListener("click", this.restartGame);
+    DOMS.$result.addEventListener("click", this.setResetGameEvent);
   };
 
   onSubmitHandler = (event) => {
@@ -66,7 +65,7 @@ export default class BaseballGame {
     return [...randomNumberSet].join("");
   };
 
-  restartGame = (event) => {
+  setResetGameEvent = (event) => {
     if (event.target.id === "game-restart-button") {
       this.resetGame();
     }
