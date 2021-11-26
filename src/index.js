@@ -2,6 +2,7 @@ import {$} from './dom/dom.js';
 import getComputerNumbers from "./modules/getComputerNumbers.js";
 import getUserNumbers from './modules/getUserNumbers.js';
 import getPlayResultCount from './modules/getPlayResultCount.js';
+import getResultString from './modules/getResultString.js';
 
 export default function BaseballGame() {
   //user가 입력한 값과, 컴퓨터가 생성한 값들을 담을 객체
@@ -20,16 +21,8 @@ export default function BaseballGame() {
       const result = getPlayResultCount(computerInputNumbers, userInputNumbers);
       const ballCount = result[0];
       const strikeCount = result[1];
-      if(ballCount === 0 && strikeCount === 0){
-        return "낫싱"
-      }
-      if(ballCount !== 0 && strikeCount !== 0){
-        return `${ballCount}볼 ${strikeCount}스트라이크`;
-      }
-      if(ballCount !== 0 && strikeCount === 0){
-        return `${ballCount}볼`;
-      }
-      return `${strikeCount}스트라이크`;
+      //ballCount와 strikeCount에 따른 결과값을 String타입의 데이터로 반환한다
+      return getResultString(ballCount,strikeCount);
   };
 
   const playGame = () => {
@@ -37,7 +30,7 @@ export default function BaseballGame() {
       this.gameInfoObject.userInputNumbers = getUserNumbers($('#user-input').value);
       if(this.gameInfoObject.userInputNumbers !== ""){
         let compareResult = this.play(this.gameInfoObject.computerInputNumbers, this.gameInfoObject.userInputNumbers);
-        console.log(compareResult,this.gameInfoObject.computerInputNumbers, this.gameInfoObject.userInputNumbers);
+        console.log(compareResult, this.gameInfoObject.computerInputNumbers, this.gameInfoObject.userInputNumbers);
       }
       return;
   }
