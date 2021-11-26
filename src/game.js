@@ -54,6 +54,7 @@ export const createRestart = () => {
   const app = document.getElementById('app');
   const restartDiv = document.createElement('div');
   const restartButton = document.createElement('button');
+  restartButton.setAttribute('id', 'game-restart-button');
   restartButton.textContent = RESTART_BUTTON_TEXT;
   restartButton.addEventListener('click', (e) => {
     window.location.reload();
