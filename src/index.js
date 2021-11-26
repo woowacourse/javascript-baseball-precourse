@@ -27,13 +27,13 @@ export default class BaseballGame {
     this.$submit.addEventListener('click', (event) => {
       event.preventDefault();
       const getUserInputNumbers = new GetUserInputNumbers(this.$userInput);
-      const userInputNumbers = getUserInputNumbers.main();
-      if (typeof userInputNumbers === 'string') {
+      const userInput = getUserInputNumbers.main();
+      if (typeof userInput === 'string') {
         this.initializeUserInput();
-        alert('공백 없이 중복되지 않는 숫자 3개를 입력해주세요!');
+        alert(userInput);
         return;
       }
-      this.play(this.computerInputNumbers, userInputNumbers);
+      this.play(this.computerInputNumbers, userInput);
     });
   }
 
