@@ -21,7 +21,6 @@ export default class BaseballGame {
 
 const baseballGame = new BaseballGame();
 
-//submit
 const submitButton = document.getElementById('submit');
 
 submitButton.addEventListener('click', (e) => {
