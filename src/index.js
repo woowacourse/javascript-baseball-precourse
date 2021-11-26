@@ -56,6 +56,7 @@ export default class BaseballGame {
     reset(){
       this.targetNumber = generateTargetNumber();
       this.render(emptyElement());
+      this.$input.value = "";
       this.$resetButton.removeEventListener('click',this.reset.bind(this));
     }
 

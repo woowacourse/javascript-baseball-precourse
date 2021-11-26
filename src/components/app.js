@@ -2,10 +2,10 @@ import { FONT } from "../constant.js";
 
 export const resultElement = count => {
     const $result = document.createElement('div');
-    $result.id = "result";
     const textNode = document.createTextNode(count);
+
+    $result.id = "result";
     $result.appendChild(textNode);
-    
     return $result;
 }
 
