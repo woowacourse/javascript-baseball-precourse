@@ -44,11 +44,11 @@ export default function BaseballGame() {
       }
       return;
   }
-  
+  const restartGame = () => {
+
+  }
   const addResetButtonListener = () => {
-    $('#game-restart-button').addEventListener("click", () =>{
-      console.log('restart버튼 눌러짐')
-    })
+    $('#game-restart-button').addEventListener("click", restartGame);
   }
   const initEventListener = () => {
     $('#user-input-form').addEventListener("submit",(e) =>{
