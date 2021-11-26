@@ -4,15 +4,26 @@ import getUserInputNumbers from './game/getUserInputNumbers.js';
 export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = [];
+    this.$submit = document.querySelector('#submit');
+    this.$userInput = document.querySelector('#user-input');
     this.submitClickEvent();
     this.main();
   }
 
+  initializeUserInput() {
+    this.$userInput.value = '';
+    this.$userInput.focus();
+  }
+
   submitClickEvent() {
-    const $submit = document.querySelector('#submit');
-    $submit.addEventListener('click', (event) => {
+    this.$submit.addEventListener('click', (event) => {
       event.preventDefault();
-      const userInputNumbers = getUserInputNumbers();
+      const userInputNumbers = getUserInputNumbers(this.$userInput);
+      if (typeof userInputNumbers === 'string') {
+        this.initializeUserInput();
+        alert('공백 없이 중복되지 않는 숫자 3개를 입력해주세요!');
+        return;
+      }
       console.log(this.computerInputNumbers);
       console.log(userInputNumbers);
     });

@@ -42,8 +42,7 @@ function checkTheRightUserInput(userInputs) {
   return userInputNumbers;
 }
 
-export default function getUserInputNumbers() {
-  const $userInput = document.querySelector('#user-input');
+export default function getUserInputNumbers($userInput) {
   const userInputs = $userInput.value;
   const userInputNumbers = checkTheRightUserInput(userInputs);
 
