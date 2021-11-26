@@ -7,5 +7,12 @@ const submitButton = document.getElementById('submit');
 submitButton.addEventListener('click', event =>{
     event.preventDefault();
     const userInput = document.getElementById('user-input').value;
-    console.log(userInput);
+    
+    if(game.isValid(userInput)){
+        alert("유효한 값");
+        //TODO: compare two numbers
+        
+    } else{
+        alert("잘못된 값을 입력하셨습니다.");
+    }
 })
