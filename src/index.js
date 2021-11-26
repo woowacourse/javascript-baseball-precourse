@@ -1,4 +1,7 @@
 export default function BaseballGame() {
+  const hint = document.getElementById('result');
+  document.getElementById('game-restart-button').style.display = 'None';
+
   /* pickThreeDigitRandomNumber(); */
   function isSetLengthUnderThree(setA) {
     if (setA.size < 3) {
@@ -30,9 +33,14 @@ export default function BaseballGame() {
   const submitButton = document.getElementById('submit');
   submitButton.addEventListener('click', submitButtonOn);
 
-  //TODO if result is 3 Strike expose replay button
   function submitButtonOn() {
     let usernumber = getUserNum();
+    const result = play(computerInputNumbers, usernumber);
+    if (result !== '3스트라이크') {
+      hint.innerHTML = result;
+    } else {
+      document.getElementById('game-restart-button').style.display = '';
+    }
   }
 
   function getUserNum() {
