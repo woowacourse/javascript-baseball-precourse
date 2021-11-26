@@ -43,9 +43,9 @@
 
 [완료 커밋](https://github.com/leegwae/javascript-baseball-precourse/commit/72698bcd8cbcf89e6d568de592a212a07aa748d3)
 
-- [ ] 컴퓨터의 랜덤 값을 생성한다.
-  - [ ] ~~dependency 추가: [`mission-utils`](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)~~
-  - [ ] CDN을 사용한다.
+- [x] 컴퓨터의 랜덤 값을 생성한다.
+  - [x] ~~dependency 추가: [`mission-utils`](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)~~
+  - [x] CDN을 사용한다.
 
 
 
