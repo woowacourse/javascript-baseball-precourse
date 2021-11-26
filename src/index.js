@@ -1,4 +1,4 @@
-import util from './util.js';
+import utils from './utils.js';
 import isValidNumbers from './isValidNumbers.js';
 
 const userInputForm = document.querySelector('form');
@@ -9,11 +9,11 @@ init();
 
 userInputForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  isValidNumbers(userInput);
+  isValidNumbers(userInput) && console.log('모든 조건 통과');
 });
 
 function init() {
   document.querySelector('h3').style.display = 'none';
   document.querySelector('#result').innerText = '';
-  computerInputNumbers = util.pickUniqueThreeNumbers();
+  computerInputNumbers = utils.pickUniqueThreeNumbers();
 }

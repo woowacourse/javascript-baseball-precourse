@@ -1,9 +1,17 @@
-import util from './util.js';
+import utils from './utils.js';
+import { ERROR } from './constants.js';
 
 const isValidNumbers = (userInput) => {
-  if (!util.isThreeDigitUniqueNumbers(userInput)) {
+  if (!utils.isThreeDigitUniqueNumbers(userInput)) {
     alert(ERROR.REQUIRE_THREE_UNIQUE_NUMBERS);
-    util.initValue(element);
+    utils.initValue(userInput);
+    return false;
+  } else if (!utils.isDuplicateNumbers(userInput)) {
+    alert(ERROR.REQUIRE_NOT_DUPLICATE_NUMBERS);
+    utils.initValue(userInput);
+    return false;
+  } else {
+    return true;
   }
 };
 
