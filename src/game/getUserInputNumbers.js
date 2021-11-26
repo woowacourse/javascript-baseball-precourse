@@ -44,16 +44,12 @@ function checkTheRightUserInput(userInputs) {
 
 export default function getUserInputNumbers() {
   const $userInput = document.querySelector('#user-input');
-  const $submit = document.querySelector('#submit');
+  const userInputs = $userInput.value;
+  const userInputNumbers = checkTheRightUserInput(userInputs);
 
-  $submit.addEventListener('click', (event) => {
-    event.preventDefault();
-    const userInputs = $userInput.value;
-    const userInputNumbers = checkTheRightUserInput(userInputs);
-    if (!userInputNumbers) {
-      console.log('공백 없이 중복되지 않는 숫자 3개를 입력해주세요!');
-    } else {
-      console.log(userInputNumbers.map((string) => Number(string)));
-    }
-  });
+  if (!userInputNumbers) {
+    return '공백 없이 중복되지 않는 숫자 3개를 입력해주세요!';
+  }
+
+  return userInputNumbers.map((string) => Number(string));
 }
