@@ -6,7 +6,7 @@ import { RESULT_DIV, SUBMIT_BUTTON, USER_INPUT } from '../constants/html-doms.js
 function restartGameSetting() {
   state.initBallStrike();
   state.initUserInput();
-  state.makeRandomNumber();
+  state.setComputerInput();
   RESULT_DIV.innerHTML = '';
   USER_INPUT.value = '';
 }

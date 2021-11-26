@@ -33,7 +33,7 @@ export const state = {
     state.userInput = userInputValue;
   },
   // 주어진 범위 내의 무작위 난수를 중복없이 만듬
-  makeRandomNumber() {
+  setComputerInput() {
     let randomNumberString = '';
     while (randomNumberString.length < NUMBER_LENGTH) {
       const randomNumber = MissionUtils.Random.pickNumberInRange(RANGE_MIN, RANGE_MAX);

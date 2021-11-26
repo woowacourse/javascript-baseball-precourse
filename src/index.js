@@ -4,7 +4,7 @@ import { makeResultMessage, makeResultDom } from './functions/game-result.js';
 import { isUserInputValid } from './functions/user-input.js';
 
 export default function BaseballGame() {
-  state.makeRandomNumber();
+  state.setComputerInput();
   this.play = function (computerInput, userInput) {
     state.setBallStrike(computerInput, userInput);
 
