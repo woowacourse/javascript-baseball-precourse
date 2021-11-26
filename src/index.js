@@ -29,6 +29,7 @@ function BaseballGame() {
   this.play = (computerInputNumbers, userInputNumbers) => {
     clearScore();
     setScore(computerInputNumbers, userInputNumbers);
+    this.gameOver = false;
     const message = makeMessage();
     renderMessage(message);
   };
@@ -72,7 +73,7 @@ function BaseballGame() {
   const setUserInput = () => {
     const userInput = getUserInput();
     if (!isValidInput(userInput)) {
-      $userInput.value = '';
+      clearInput();
       $userInput.focus();
       alert('서로 다른 3자리 수를 입력해 주세요.');
       return;
@@ -84,9 +85,28 @@ function BaseballGame() {
   const setRandomNumber = () => {
     this.randomNumber = getRandomNumber(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
   };
+
+  const restartGame = () => {
+    clearInput();
+    resultClear();
+    this.gameOver = false;
+    setRandomNumber();
+  };
+  const clearInput = () => {
+    $userInput.value = '';
+  };
+  const resultClear = () => {
+    $result.innerHTML = '';
+  };
   const initEventListener = () => {
     $form.addEventListener('submit', (e) => e.preventDefault());
     $submit.addEventListener('click', setUserInput);
+    $result.addEventListener('click', (e) => {
+      if (e.target.id === 'game-restart-button') {
+        restartGame();
+        return;
+      }
+    });
   };
 }
 const game = new BaseballGame();
