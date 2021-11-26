@@ -6,7 +6,9 @@
 
 ## 개발환경 설정하기
 
-- [ ] eslint 설정: airbnb convetion을 사용한다.
+[완료 커밋](https://github.com/leegwae/javascript-baseball-precourse/commit/22c0a5642b70d66bf291e97519120e0aa999b8f3)
+
+- [x] eslint 설정: airbnb convetion을 사용한다.
 
 
 
