@@ -1,13 +1,13 @@
 import CompareInputNumbers from './compareInputNumbers.js';
 import getComputerInputNumbers from './getInputNumbers/getComputerInputNumbers.js';
 import getUserInputNumbers from './getInputNumbers/getUserInputNumbers.js';
-import GetResultMessage from './getResultMessage.js';
 
 export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = [];
     this.$submit = document.querySelector('#submit');
     this.$userInput = document.querySelector('#user-input');
+    this.$result = document.querySelector('#result');
     this.hintMessage = '';
     this.correctMessage = `
     <b>🎉 정답을 맞추셨습니다! 🎉</b>
@@ -36,17 +36,27 @@ export default class BaseballGame {
     });
   }
 
+  gameRestartClickEvent() {
+    const $gameRestartButton = document.querySelector('#game-restart-button');
+    $gameRestartButton.addEventListener('click', () => {
+      this.initializeUserInput();
+      this.$result.innerHTML = '';
+      this.computerInputNumbers = getComputerInputNumbers();
+    });
+  }
+
   play(computerInputNumbers, userInputNumbers) {
     const compareInputNumbers = new CompareInputNumbers(
       computerInputNumbers,
       userInputNumbers,
     );
     this.hintMessage = compareInputNumbers.main();
-    if (this.hintMessage === '3스트라이크') {
-      return;
+    if (this.hintMessage !== '3스트라이크') {
+      this.$result.textContent = this.hintMessage;
+      return this.hintMessage;
     }
-    console.log(this.hintMessage);
-    return this.hintMessage;
+    this.$result.innerHTML = this.correctMessage;
+    this.gameRestartClickEvent();
   }
 
   main() {
