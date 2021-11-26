@@ -1,6 +1,7 @@
 import CompareInputNumbers from './compareInputNumbers.js';
 import getComputerInputNumbers from './getInputNumbers/getComputerInputNumbers.js';
 import getUserInputNumbers from './getInputNumbers/getUserInputNumbers.js';
+import GetResultMessage from './getResultMessage.js';
 
 export default class BaseballGame {
   constructor() {
@@ -33,9 +34,9 @@ export default class BaseballGame {
       computerInputNumbers,
       userInputNumbers,
     );
-    compareInputNumbers.main();
-
-    this.result = '결과 값 String';
+    const message = compareInputNumbers.main();
+    const getResultMessage = new GetResultMessage(message);
+    this.result = getResultMessage.main();
     return this.result;
   }
 
