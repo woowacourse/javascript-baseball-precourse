@@ -13,7 +13,6 @@ export default class BaseballGame {
       this.$input = document.getElementById("user-input");
       this.$resetButton = null;
       this.bindEvents();
-      console.log(this.targetNumber)
     }
 
     bindEvents(){
@@ -55,7 +54,9 @@ export default class BaseballGame {
     }
 
     reset(){
+      this.targetNumber = generateTargetNumber();
       this.render(emptyElement());
+      this.$resetButton.removeEventListener('click',this.reset.bind(this));
     }
 
 }
