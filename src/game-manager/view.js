@@ -1,3 +1,5 @@
+import { combineElement, createElement } from "../utils.js";
+
 function getGameHintText(ball, strike) {
     if (ball === 0 && strike === 0) return "낫싱";
 
@@ -6,20 +8,6 @@ function getGameHintText(ball, strike) {
     if (strike > 0) textJoinArray.push(`${strike}스트라이크`);
 
     return textJoinArray.join(" ");
-}
-
-function createElement(tagName, tagText) {
-    const $create = document.createElement(tagName);
-    $create.innerText = tagText;
-
-    return $create;
-}
-
-function combineElement(elements) {
-    const $fragment = document.createDocumentFragment();
-    elements.forEach((element) => $fragment.append(element));
-
-    return $fragment;
 }
 
 export default class gameRuleView {
