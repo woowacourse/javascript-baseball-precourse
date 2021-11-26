@@ -3,6 +3,8 @@ import getComputerNumbers from "./modules/getComputerNumbers.js";
 import getUserNumbers from './modules/getUserNumbers.js';
 import getPlayResultCount from './modules/getPlayResultCount.js';
 import getResultString from './modules/getResultString.js';
+import printGamePlayResult from './modules/printGamePlayResult.js';
+import printGameEndResult from './modules/printGameEndResult.js';
 
 export default function BaseballGame() {
   //user가 입력한 값과, 컴퓨터가 생성한 값들을 담을 객체
@@ -25,22 +27,36 @@ export default function BaseballGame() {
       return getResultString(ballCount,strikeCount);
   };
 
+  
+
   const playGame = () => {
       //유저가 입력한 값 받아오기
       this.gameInfoObject.userInputNumbers = getUserNumbers($('#user-input').value);
       if(this.gameInfoObject.userInputNumbers !== ""){
         let compareResult = this.play(this.gameInfoObject.computerInputNumbers, this.gameInfoObject.userInputNumbers);
-        console.log(compareResult, this.gameInfoObject.computerInputNumbers, this.gameInfoObject.userInputNumbers);
+        console.log(compareResult, this.gameInfoObject.computerInputNumbers, this.gameInfoObject.userInputNumbers)
+        if(compareResult == 'gameEnd'){
+          printGameEndResult();
+          addResetButtonListener();
+        }else if(compareResult !== 'gameEnd'){
+          printGamePlayResult(compareResult);
+        }
       }
       return;
   }
   
+  const addResetButtonListener = () => {
+    $('#game-restart-button').addEventListener("click", () =>{
+      console.log('restart버튼 눌러짐')
+    })
+  }
   const initEventListener = () => {
     $('#user-input-form').addEventListener("submit",(e) =>{
       e.prevetDefault();
     })
     //user가 submit버튼 클릭시 playGame 함수 실행 
     $('#submit').addEventListener("click", playGame);
+    
   }
 }
 
