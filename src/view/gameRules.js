@@ -3,7 +3,7 @@ function getGameHintText(ball, strike) {
 
     const textJoinArray = [];
     if (ball > 0) textJoinArray.push(`${ball}볼`);
-    if (strike > 0) textJoinArray.push(`${strike}볼`);
+    if (strike > 0) textJoinArray.push(`${strike}스트라이크`);
 
     return textJoinArray.join(" ");
 }

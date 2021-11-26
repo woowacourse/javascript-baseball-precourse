@@ -4,9 +4,9 @@ import UserInputView from "./view/userInput.js";
 import GameRuleModel from "./model/gameRules.js";
 import GameRuleView from "./view/gameRules.js";
 
-export default class BaseballGame {
-    constructor() {}
+import { RESULT_CODE } from "./constants.js";
 
+export default class BaseballGame {
     play(computerInputNumbers, userInputNumbers) {}
 }
 
