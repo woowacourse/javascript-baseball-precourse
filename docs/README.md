@@ -63,14 +63,16 @@
 
 ### 결과 표시하기
 
-- [ ] 비교 결과에 따라 `result` 엘리먼트의 내용을 바꾼다.
-  - [ ] 성공이 아니면 결과 값 문자열을 넣는다.
-  - [ ] 성공이라면 다음과 같이 화면에 표시한다.
-    - [ ] `button` 태그는 `game-restart-button` id를 가진다.
+[완료 커밋](https://github.com/leegwae/javascript-baseball-precourse/commit/ed1bf6e614af6eb7286d88edcf7670a81537d93d)
+
+- [x] 비교 결과에 따라 `result` 엘리먼트의 내용을 바꾼다.
+  - [x] 성공이 아니면 결과 값 문자열을 넣는다.
+  - [x] 성공이라면 다음과 같이 화면에 표시한다.
+    - [x] `button` 태그는 `game-restart-button` id를 가진다.
 
 ![result_success](result_success.PNG)
 
-- [ ] `game-restart-button` button 엘리먼트를 누르면 게임을 재시작한다.
+- [x] `game-restart-button` button 엘리먼트를 누르면 게임을 재시작한다.
 
 
 
