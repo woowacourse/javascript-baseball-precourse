@@ -1,4 +1,11 @@
-import { BALL, STRIKE, NOTHING, WIN } from './constants.js';
+import {
+  BALL,
+  STRIKE,
+  NOTHING,
+  WIN,
+  RESTART_BUTTON_TEXT,
+  RESTART_TEXT,
+} from './constants.js';
 
 export const compareInputWithAnswer = (
   computerInputNumbers,
@@ -38,6 +45,24 @@ export const getHintString = (result) => {
   } else if (ball === 0 && strike === 0) {
     return NOTHING;
   } else {
+    createRestart();
     return WIN;
   }
+};
+
+export const createRestart = () => {
+  const app = document.getElementById('app');
+  const restartDiv = document.createElement('div');
+  const restartButton = document.createElement('button');
+  restartButton.textContent = RESTART_BUTTON_TEXT;
+  restartButton.addEventListener('click', (e) => {
+    window.location.reload();
+  });
+
+  const restartText = document.createTextNode(RESTART_TEXT);
+
+  restartDiv.appendChild(restartText);
+  restartDiv.appendChild(restartButton);
+
+  app.appendChild(restartDiv);
 };
