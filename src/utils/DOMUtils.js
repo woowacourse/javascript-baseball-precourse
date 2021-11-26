@@ -11,6 +11,9 @@ const DOMUtils = {
   initElementValue: (element) => {
     return (DOMUtils.getElement(element).innerText = '');
   },
+  initValue: (element) => {
+    element.value = '';
+  },
 };
 
 export default DOMUtils;
