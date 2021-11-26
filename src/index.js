@@ -28,6 +28,9 @@ export default class BaseballGame {
     if (isNaN(inputValue)) {
       return false;
     }
+    if (inputValue.includes('0')) {
+      return false;
+    }
     return true;
   }
 
@@ -44,13 +47,51 @@ export default class BaseballGame {
     this.userInputText.value = '';
   }
 
+  isStrike(target, idx) {
+    if (this.computerInputNumbers.includes(target)) {
+      if (this.computerInputNumbers.indexOf(target) === idx) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isBall(target, idx) {
+    if (this.computerInputNumbers.includes(target)) {
+      if (this.computerInputNumbers.indexOf(target) !== idx) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  countStrikeAndBall(userInputNumbers) {
+    let strike = 0;
+    let ball = 0;
+    for (let i = 0; i < userInputNumbers.length; i++) {
+      if (this.isStrike(userInputNumbers[i], i)) {
+        strike++;
+      }
+      if (this.isBall(userInputNumbers[i], i)) {
+        ball++;
+      }
+    }
+    return [strike, ball];
+  }
+
   play(computerInputNumbers, userInputNumbers) {
-    console.log(`${computerInputNumbers} vs. ${userInputNumbers}`);
+    console.log(`${this.computerInputNumbers} vs. ${userInputNumbers}`);
+    const [strikeCount, ballCount] = this.countStrikeAndBall(userInputNumbers);
+    console.log(`${ballCount}볼 ${strikeCount}스트라이크`);
     return '결과 값 String';
   }
 
   startGame() {
-    this.play(this.computerInputNumbers, this.getUserInput());
+    const userInputNumbers = this.getUserInput();
+    if (userInputNumbers == null) {
+      return;
+    }
+    this.play(this.computerInputNumbers, userInputNumbers);
     this.setUserInputClean();
   }
 }
