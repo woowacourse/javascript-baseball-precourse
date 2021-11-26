@@ -42,3 +42,14 @@ const showHintResult = (computerInputNumbers, userInputNumbers) => {
   const gameResult = getGameResult(computerInputNumbers, userInputNumbers);
   $result.textContent = gameResult;
 };
+
+const showGameResult = (computerInputNumbers, userInputNumbers) => {
+  const gameResult = getGameResult(computerInputNumbers, userInputNumbers);
+  if (gameResult === '종료') {
+    showWinResult();
+    return;
+  }
+  showHintResult(computerInputNumbers, userInputNumbers);
+};
+
+export default showGameResult;
