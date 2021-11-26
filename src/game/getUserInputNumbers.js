@@ -1,3 +1,15 @@
+function isRightNumber(userInputs) {
+  // userInput이 1~9 사이 숫자인지 체크
+  for (let i = 0; i < userInputs.length; i += 1) {
+    const userInput = userInputs[i];
+    const userInputAsciiCodeNumber = userInput.charCodeAt();
+    if (userInputAsciiCodeNumber <= 48 || userInputAsciiCodeNumber > 57) {
+      return false;
+    }
+  }
+  return true;
+}
+
 function isRightLength(userInputs) {
   // userInput.length 체크
   if (userInputs.length !== 3) {
@@ -7,7 +19,7 @@ function isRightLength(userInputs) {
 }
 
 function checkTheRightUserInput(userInputs) {
-  if (!isRightLength(userInputs)) {
+  if (!isRightLength(userInputs) || !isRightNumber(userInputs)) {
     console.log('공백 없이 중복되지 않는 숫자 3개를 입력해주세요!');
   }
 }
