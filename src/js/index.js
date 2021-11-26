@@ -9,8 +9,7 @@ export default function BaseballGame() {
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     const ballStrike = getStrikeAndBall(computerInputNumbers, userInputNumbers);
-    const ball = ballStrike[0];
-    const strike = ballStrike[1];
+    const [ball, strike] = ballStrike;
     console.log(computerInputNumbers, userInputNumbers);
     return getResultString(ball, strike);
   };
@@ -19,13 +18,12 @@ export default function BaseballGame() {
     $('#user-input').value = '';
     $('#result').innerHTML = '';
     if ($('#game-restart-box') !== null) {
-      console.log('work');
       $('#game-restart-box').remove();
       baseballGame = new BaseballGame();
     }
   };
 
-  $('#base-ball-game-form').addEventListener('submit', function (e) {
+  $('#base-ball-game-form').addEventListener('submit', e => {
     e.preventDefault();
     userInputNumbers = getUserInputNumbers(userInputNumbers);
     if (userInputNumbers !== undefined) {
@@ -33,7 +31,7 @@ export default function BaseballGame() {
       renderResult(result);
     }
   });
-  $('#app').addEventListener('click', function (e) {
+  $('#app').addEventListener('click', e => {
     if (e.target.classList.contains('button')) {
       baseballGame.init();
     }

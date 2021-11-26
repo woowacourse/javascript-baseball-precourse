@@ -9,20 +9,20 @@ export const checkUserInputNumbersCount = userInputValue => {
 
 export const checkUserInputNumbersContainNotNumber = userInputValue => {
   const num = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  for (let i = 0; i < NUM_COUNT; i++) {
-    if (!num.includes(parseInt(userInputValue[i]))) {
+  for (let i = 0; i < NUM_COUNT; i += 1) {
+    if (!num.includes(parseInt(userInputValue[i], 10))) {
       return true;
     }
   }
 };
 
 export const checkUserInputNumbersContainDuplicateNumbers = userInputValue => {
-  let userInputValueArray = [];
-  for (let i = 0; i < NUM_COUNT; i++) {
-    if (userInputValueArray.includes(parseInt(userInputValue[i]))) {
+  const userInputValueArray = [];
+  for (let i = 0; i < NUM_COUNT; i += 1) {
+    if (userInputValueArray.includes(parseInt(userInputValue[i], 10))) {
       return true;
     }
-    userInputValueArray.push(parseInt(userInputValue[i]));
+    userInputValueArray.push(parseInt(userInputValue[i], 10));
   }
 };
 
@@ -33,11 +33,11 @@ export const getUserInputNumbers = userInputNumbers => {
     checkUserInputNumbersContainNotNumber(userInputValue) ||
     checkUserInputNumbersContainDuplicateNumbers(userInputValue)
   ) {
-    alert('잘못된 값을 입력하셨습니다.');
+    window.alert('잘못된 값을 입력하셨습니다.');
   } else {
     userInputNumbers = [];
-    for (let i = 0; i < NUM_COUNT; i++) {
-      userInputNumbers.push(parseInt(userInputValue[i]));
+    for (let i = 0; i < NUM_COUNT; i += 1) {
+      userInputNumbers.push(parseInt(userInputValue[i], 10));
     }
     return userInputNumbers;
   }

@@ -4,7 +4,7 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['google', 'airbnb'],
+  extends: ['google', 'airbnb', 'plugin:prettier/recommended'],
   rules: {
     'linebreak-style': ['error', 'windows'],
   },
