@@ -14,8 +14,16 @@
 
 ## 숫자 야구 게임
 
+### 컴퓨터의 랜덤 값 생성하기
+
+[완료 커밋](https://github.com/leegwae/javascript-baseball-precourse/commit/72698bcd8cbcf89e6d568de592a212a07aa748d3)
+
 - [ ] 컴퓨터의 랜덤 값을 생성한다.
-  - [ ] dependency 추가: [`mission-utils`](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)
+  - [ ] ~~dependency 추가: [`mission-utils`](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)~~
+  - [ ] CDN을 사용한다.
+
+
+
 - [ ] `user-input` input 엘리먼트의 값을 초기화한다. 또한 입력을 유도하도록 포커스한다.
 - [ ] `result` div 엘리먼트의 내용을 비도록 초기화한다.
 - [ ] 버튼을 누르면 사용자의 입력 값을 제시된 형식을 만족하는지 검사한다. ([참고- 사용자의 입력 값 검사하기](#사용자의-입력-값-검사하기))
