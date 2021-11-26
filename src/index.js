@@ -1,11 +1,10 @@
+import { $userInput, $result } from "./constants/constants.js";
 import makeAnswer from "./makeAnswer.js";
 
 export default function BaseballGame() {
   const reset = () => {
-    const userInput = document.getElementById("user-input");
-    const result = document.getElementById("result");
-    userInput.value = "";
-    result.innerText = "";
+    $userInput.value = "";
+    $result.innerText = "";
     const answer = makeAnswer();
   };
 
