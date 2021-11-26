@@ -64,20 +64,27 @@ export const getHintString = (result) => {
   }
 };
 
-export const createRestart = () => {
+const createRestart = () => {
   const app = document.getElementById('app');
+
   const restartDiv = document.createElement('div');
+  const restartText = document.createTextNode(RESTART_TEXT);
+  const restartButton = createRestartButton();
+
+  restartDiv.appendChild(restartText);
+  restartDiv.appendChild(restartButton);
+
+  app.appendChild(restartDiv);
+};
+
+const createRestartButton = () => {
   const restartButton = document.createElement('button');
+
   restartButton.setAttribute('id', 'game-restart-button');
   restartButton.textContent = RESTART_BUTTON_TEXT;
   restartButton.addEventListener('click', (e) => {
     window.location.reload();
   });
 
-  const restartText = document.createTextNode(RESTART_TEXT);
-
-  restartDiv.appendChild(restartText);
-  restartDiv.appendChild(restartButton);
-
-  app.appendChild(restartDiv);
+  return restartButton;
 };
