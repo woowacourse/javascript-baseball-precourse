@@ -1,8 +1,8 @@
-import { checkUserInputVaild, getNumberArray } from "./userInputChecker.js";
-import { gameRules } from "./gameRules.js";
-import { errorMessage, resultRender } from "./resultRenderer.js";
 import { RESULT_CODE } from "../data/constants.js";
 import { $userInput } from "../data/elements.js";
+import { gameRules } from "./gameRules.js";
+import { checkUserInputVaild, getNumberArray } from "./userInputChecker.js";
+import { errorMessage, resultRender } from "./resultRenderer.js";
 
 export default class BaseballGame {
     constructor() {
@@ -27,7 +27,7 @@ export default class BaseballGame {
         const computerNumbers = this.computerNumbers;
 
         const playResult = this.play(userNumbers, computerNumbers);
-        this.drawResult(playResult);
+        this.draw(playResult);
     }
 
     play(computerInputNumbers, userInputNumbers) {
@@ -38,7 +38,7 @@ export default class BaseballGame {
         return gameHintText;
     }
 
-    drawResult(playResult) {
+    draw(playResult) {
         if (this.gameOver === false) {
             resultRender.gameHint(playResult);
             return false;
