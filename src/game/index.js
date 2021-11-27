@@ -77,4 +77,8 @@ export default class BaseballGame {
 
       return {isFinished, output};
     }
+
+    restart(){
+      this.computerNumbers = this.genRandomNumbers();
+    }
 }
