@@ -66,12 +66,27 @@ export default class BaseballGame {
             return "🎉 정답을 맞추셨습니다! 🎉";
         }
 
+        const numStrike = this.countStrike(computerInputNumbers, userInputNumbers);
+
         return "결과 값 String";
     }
 
     //사용자로부터 입력받은 값이 정답과 같은지 검사
     isCorrect(computerInputNumbers, userInputNumbers) {
         return computerInputNumbers.every((element, index) => element.toString() === userInputNumbers[index]);
+    }
+
+    //스트라이크 개수 검사
+    countStrike(computerInputNumbers, userInputNumbers) {
+        let numStrike = 0;
+
+        computerInputNumbers.forEach((element, index) => {
+            if(element.toString() === userInputNumbers[index]) {
+                numStrike++;
+            }
+        });
+        
+        return numStrike;
     }
 }
 
