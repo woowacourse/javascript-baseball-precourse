@@ -1,25 +1,47 @@
+import { ANSWER } from '../constants.js';
+
 const DOMUtils = {
-  getElement: (element) => {
-    return document.querySelector(element);
+  getElement: (selectors) => {
+    return document.querySelector(selectors);
   },
-  setElementId: (element, idValue) => {
-    return (document.querySelector(element).id = idValue);
+  setElementId: (selectors, idValue) => {
+    return (document.querySelector(selectors).id = idValue);
   },
-  hideElement: (element) => {
-    return (DOMUtils.getElement(element).style.display = 'none');
+  hideElement: (selectors) => {
+    return (DOMUtils.getElement(selectors).style.display = 'none');
   },
-  showElement: (element) => {
-    return (DOMUtils.getElement(element).style.display = '');
+  showElement: (selectors) => {
+    return (DOMUtils.getElement(selectors).style.display = '');
   },
-  initElementValue: (element) => {
-    return (DOMUtils.getElement(element).innerText = '');
+  setElementValue: (selectors, text = '') => {
+    return (DOMUtils.getElement(selectors).innerText = text);
+  },
+  removeElement: (selectors) => {
+    const element = DOMUtils.getElement(selectors);
+    element.parentNode.removeChild(element);
   },
   initValue: (element) => {
     element.value = '';
   },
-  showResult: (string) => {
-    DOMUtils.showElement('#resultTitle');
-    DOMUtils.getElement('#result').innerText = string;
+  showResult: (text) => {
+    DOMUtils.showElement('#result-title');
+    DOMUtils.setElementValue('#result');
+    DOMUtils.isRightAnswer(text);
+  },
+  isRightAnswer: (text) => {
+    return text === ANSWER.RIGHT
+      ? DOMUtils.showGameOver(text)
+      : DOMUtils.setElementValue('#result', text);
+  },
+  showGameOver: (text) => {
+    DOMUtils.getElement('#result').insertAdjacentHTML('afterbegin', `<h4>${text}</h4>`);
+    DOMUtils.getElement('#result').insertAdjacentHTML(
+      'afterend',
+      `<div id="game-restart-message">
+            게임을 새로 시작하시겠습니까? 
+            <button id="game-restart-button">게임 재시작</button>
+        </div>`
+    );
   },
 };
 

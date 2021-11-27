@@ -4,15 +4,16 @@ import isValidNumbers from './utils/isValidNumbers.js';
 import { NUMBER, POINT, ANSWER } from './constants.js';
 
 export default function BaseballGame() {
-  const userInputForm = DOMUtils.getElement('form');
   const userInput = DOMUtils.getElement('#user-input');
   let computerInputNumbers = [];
 
   this.init = function () {
-    DOMUtils.setElementId('h3', 'resultTitle');
-    DOMUtils.hideElement('#resultTitle');
-    DOMUtils.initElementValue('#result');
+    DOMUtils.setElementId('h3', 'result-title');
+    DOMUtils.hideElement('#result-title');
+    DOMUtils.setElementValue('#result');
+    DOMUtils.setElementValue('#user-input');
     computerInputNumbers = utils.pickUniqueThreeNumbers();
+    userInput.focus();
   };
 
   this.isBallOrStrike = function (scoreBoard) {
@@ -40,17 +41,27 @@ export default function BaseballGame() {
         : (scoreBoard.ball += POINT.ONE));
   };
 
+  this.restartEventListener = function () {
+    const gameRestart = DOMUtils.getElement('#game-restart-button');
+    gameRestart.addEventListener('click', (e) => {
+      e.preventDefault();
+      DOMUtils.removeElement('#game-restart-message');
+      this.init();
+    });
+  };
+
   this.play = function (computerInputNumbers, userInputNumbers) {
     const scoreBoard = { ball: POINT.ZERO, strike: POINT.ZERO };
 
     userInputNumbers.forEach((number, index) => this.setScoreBoard(scoreBoard, number, index));
 
-    console.log(computerInputNumbers);
-    console.log(userInputNumbers);
-    console.log(scoreBoard);
+    // console.log(computerInputNumbers);
+    // console.log(userInputNumbers);
+    // console.log(scoreBoard);
 
     if (scoreBoard.strike === NUMBER.DIGIT) {
       DOMUtils.showResult(ANSWER.RIGHT);
+      this.restartEventListener();
     } else if (scoreBoard.ball === POINT.ZERO && scoreBoard.strike === POINT.ZERO) {
       DOMUtils.showResult(ANSWER.NOTHING);
     } else {
@@ -60,10 +71,11 @@ export default function BaseballGame() {
 
   this.init();
 
-  userInputForm.addEventListener('submit', (e) => {
+  DOMUtils.getElement('form').addEventListener('submit', (e) => {
     e.preventDefault();
     isValidNumbers(userInput) &&
       this.play(computerInputNumbers, utils.stringToNumArray(userInput.value));
+    userInput.focus();
   });
 }
 
