@@ -3,9 +3,7 @@ import { checkUserInputVaild, getNumberArray } from "./userInput.js";
 import { gameManager } from "./gameManager.js";
 import { errorMessage, resultRender } from "./render.js";
 import { RESULT_CODE, RESULT_TEXT } from "./constants.js";
-
-const $userInput = $("#user-input");
-const $submitButton = $("#submit");
+import { $userInput, $submit } from "./elements.js";
 
 export default class BaseballGame {
     constructor() {
@@ -17,12 +15,6 @@ export default class BaseballGame {
         this.gameOver = false;
 
         resultRender.init();
-
-        $userInput.value = "";
-        $userInput.focus();
-
-        $userInput.removeAttribute("disabled");
-        $submitButton.removeAttribute("disabled");
     }
 
     play(computerInputNumbers, userInputNumbers) {
@@ -40,22 +32,18 @@ export default class BaseballGame {
 
     drawResult(playResult) {
         if (this.gameOver === false) {
-            $userInput.focus();
             resultRender.gameHint(playResult);
             return false;
         }
 
         resultRender.gameRetry(($retryButton) => {
-            $userInput.setAttribute("disabled", "");
-            $submitButton.setAttribute("disabled", "");
-
             $retryButton.addEventListener("click", this.init.bind(this));
         });
     }
 }
 
 const baseballGame = new BaseballGame();
-$submitButton.addEventListener("click", onClickSubmitButton);
+$submit.addEventListener("click", onClickSubmitButton);
 
 function onClickSubmitButton(event) {
     event.preventDefault();
@@ -63,7 +51,6 @@ function onClickSubmitButton(event) {
     const checkVaildCode = checkUserInputVaild($userInput.value);
     if (checkVaildCode !== RESULT_CODE.DONE_USERINPUT_VALID) {
         errorMessage(checkVaildCode);
-        $userInput.focus();
         return false;
     }
 

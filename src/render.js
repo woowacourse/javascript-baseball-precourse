@@ -1,5 +1,6 @@
 import { $, createElement, combineElement } from "./utils.js";
 import { RESULT_CODE, RESULT_TEXT, ALERT_MESSAGE } from "./constants.js";
+import { $result, $userInput, $submit } from "./elements.js";
 
 export function errorMessage(erroCode) {
     let alertText = "";
@@ -8,6 +9,7 @@ export function errorMessage(erroCode) {
     else if (erroCode === RESULT_CODE.ERROR_USERINPUT_NUMBER_RANGE) alertText = ALERT_MESSAGE.ERROR_USERINPUT_NUMBER_RANGE;
 
     alert(alertText);
+    $userInput.focus();
 }
 
 class ResultRender {
@@ -16,13 +18,26 @@ class ResultRender {
     }
 
     init() {
-        this.$result = $("#result");
-        this.$result.style.display = "none";
+        $result.style.display = "none";
+        $result.innerHTML = "";
+
+        $userInput.value = "";
+        $userInput.focus();
+
+        this.setInputDisable(false);
+    }
+
+    setInputDisable(isDisabled) {
+        if (isDisabled === true) {
+            $userInput.setAttribute("disabled", "");
+            $submit.setAttribute("disabled", "");
+        } else if (isDisabled === false) {
+            $userInput.removeAttribute("disabled");
+            $submit.removeAttribute("disabled");
+        }
     }
 
     setContent($content) {
-        const $result = this.$result;
-
         $result.innerHTML = "";
         $result.append($content);
         $result.style.display = "block";
@@ -31,6 +46,8 @@ class ResultRender {
     gameHint(resultText) {
         const $text = createElement("P", resultText);
         this.setContent($text);
+
+        $userInput.focus();
     }
 
     gameRetry(callback) {
@@ -43,6 +60,7 @@ class ResultRender {
 
         const $fragment = combineElement([$correctText, $retryWrap]);
         this.setContent($fragment);
+        this.setInputDisable(true);
 
         callback($retryButton);
     }
