@@ -1,6 +1,9 @@
 import BaseballGame from "./BaseballGame.js";
-import { GAME_RESULT_STATE } from "./constants.js";
-import { checkDuplicationNumbers, checkThreeDigitNumbers } from "./utils.js";
+import { ERROR_MESSAGE, GAME_CONFIG, GAME_RESULT_STATE } from "./constants.js";
+import {
+  checkDuplicationNumbers,
+  checkOnlyNumberOfDigitsInRange,
+} from "./utils.js";
 
 const BaseballGameStarter = new BaseballGame();
 
@@ -27,12 +30,18 @@ const bindGameRestartEvent = () => {
 
 submitButton.addEventListener("click", (event) => {
   event.preventDefault();
+  const { MIN_NUMBER, MAX_NUMBER, LENGTH } = GAME_CONFIG;
 
-  if (
-    !checkThreeDigitNumbers(userInputNumbers.value) ||
-    checkDuplicationNumbers(userInputNumbers.value)
-  ) {
-    alert("1~9까지의 수를 중복없이 3개 입력해주세요.");
+  const isThreeDigitsNumbers = !checkOnlyNumberOfDigitsInRange(
+    MIN_NUMBER,
+    MAX_NUMBER,
+    LENGTH,
+    userInputNumbers.value
+  );
+  const isDuplicationNumbers = checkDuplicationNumbers(userInputNumbers.value);
+
+  if (isThreeDigitsNumbers || isDuplicationNumbers) {
+    alert(ERROR_MESSAGE.INPUT_ERROR);
     userInputNumbers.value = "";
     userInputNumbers.focus();
     return;

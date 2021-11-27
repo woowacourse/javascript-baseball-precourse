@@ -1,9 +1,11 @@
-import { GAME_CONFIG } from "./constants.js";
-
-export function checkThreeDigitNumbers(number) {
-  const { MIN_NUMBER, MAX_NUMBER, LENGTH } = GAME_CONFIG;
+export function checkOnlyNumberOfDigitsInRange(
+  minNumber,
+  maxNumber,
+  length,
+  number
+) {
   const regex = new RegExp(
-    String.raw`^[${MIN_NUMBER}-${MAX_NUMBER}]{${LENGTH}}$`
+    String.raw`^[${minNumber}-${maxNumber}]{${length}}$`
   );
   return regex.test(number);
 }
