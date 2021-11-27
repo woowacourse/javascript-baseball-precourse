@@ -5,6 +5,7 @@ const BaseballGameStarter = new BaseballGame();
 
 const submitButton = document.querySelector("#submit");
 const userInputNumbers = document.querySelector("#user-input");
+const gameResult = document.querySelector('#result');
 
 submitButton.addEventListener("click", (event) => {
   event.preventDefault();
@@ -19,6 +20,6 @@ submitButton.addEventListener("click", (event) => {
     return;
   }
 
-  const result = BaseballGameStarter.play(userInputNumbers.value);
+  const template = BaseballGameStarter.play(userInputNumbers.value);
+  gameResult.innerHTML = template;
 });
-

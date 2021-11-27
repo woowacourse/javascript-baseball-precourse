@@ -3,3 +3,9 @@ export const GAME_CONFIG = {
   MAX_NUMBER: 9,
   LENGTH: 3,
 };
+
+export const GAME_RESULT_STATE = {
+  CORRECT: "CORRECT",
+  PARTIAL_CORRECT: "PARTIAL_CORRECT",
+  NOTHING: "NOTHING",
+};

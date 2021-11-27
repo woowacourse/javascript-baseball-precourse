@@ -1,8 +1,9 @@
-import { GAME_CONFIG } from "./constants.js";
+import { GAME_CONFIG, GAME_RESULT_STATE } from "./constants.js";
 
 export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = this.createComputerNumbers();
+    this.template = new Template();
   }
 
   play(userInputNumbers) {
@@ -10,7 +11,7 @@ export default class BaseballGame {
       this.computerInputNumbers,
       userInputNumbers
     );
-    return checkResults;
+    return this.getResult(checkResults);
   }
 
   createComputerNumbers() {
@@ -40,5 +41,37 @@ export default class BaseballGame {
       });
     });
     return result;
+  }
+
+  getResult(gameResult) {
+    const { strike, ball } = gameResult;
+
+    if (strike === GAME_CONFIG.LENGTH) {
+      return this.template.getCorrectMessage();
+    } else if (!strike && !ball) {
+      return this.template.getNothingMessage();
+    } else {
+      return this.template.getPartialCorrectMessage(strike, ball);
+    }
+  }
+}
+
+class Template {
+  getCorrectMessage() {
+    return `<p>🎉 정답을 맞추셨습니다! 🎉</p>
+      <div>
+        게임을 새로 시작하시겠습니까?
+        <button id="game-restart-button">게임 재시작</button>
+      </div>`;
+  }
+
+  getNothingMessage() {
+    return `<p>낫싱</p>`;
+  }
+
+  getPartialCorrectMessage(strike, ball) {
+    return `<p>${ball ? ball + "볼 " : ""}${
+      strike ? strike + "스트라이크" : ""
+    }</p>`;
   }
 }
