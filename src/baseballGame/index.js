@@ -1,7 +1,7 @@
 import { RESULT_CODE } from "../data/constants.js";
 import { $userInput } from "../data/elements.js";
 import { gameRules } from "./gameRules.js";
-import { checkUserInputVaild, getNumberArray } from "./userInputChecker.js";
+import { checkUserInputVaild, getNumberArray } from "./userInputCheck.js";
 import { errorMessage, gameRender } from "./gameRender.js";
 
 export default class BaseballGame {
