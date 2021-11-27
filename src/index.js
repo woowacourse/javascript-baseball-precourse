@@ -1,7 +1,6 @@
 import { $ } from "./utils/index.js";
-import { USER_INPUT_ALERT } from "./libs/constant.js";
 import Computer from "./computer/computer.js";
-const NUMBER_LENGTH = 3;
+import User from "./user/user.js";
 
 const $userInput = $("#user-input");
 const $submit = $("#submit");
@@ -9,62 +8,13 @@ const $result = $("#result");
 const $correctResult = $("#correct-result");
 const $restartButton = $("#game-restart-button");
 
-const InputCheckMethods = [
-  (value) => {
-    if (value == "") {
-      alert(USER_INPUT_ALERT.blank);
-      return false;
-    }
-    return true;
-  },
-  (value) => {
-    if (!Number(value) && Number(value) !== 0) {
-      alert(USER_INPUT_ALERT.notNumber);
-      return false;
-    }
-    return true;
-  },
-  (value) => {
-    if (value.includes("0")) {
-      alert(USER_INPUT_ALERT.removeZero);
-      return false;
-    }
-    return true;
-  },
-  (value) => {
-    if (new Set(value).size !== NUMBER_LENGTH) {
-      alert(USER_INPUT_ALERT.overlap);
-      return false;
-    }
-    return true;
-  },
-];
-
 export default class BaseballGame {
   constructor() {
     this.computer = new Computer();
+    this.user = new User();
   }
-
-  // user
-  isInputValid(userInputNumbers) {
-    return InputCheckMethods.every((InputCheckMethod) =>
-      InputCheckMethod(userInputNumbers)
-    );
-  }
-  makeVisible($) {
-    if ($ === "$result") {
-      $result.style.display = "block";
-      $correctResult.style.display = "none";
-      return;
-    }
-    if ($ === "$correctResult") {
-      $result.style.display = "none";
-      $correctResult.style.display = "block";
-    }
-  }
-
   play(computerInputNumbers, userInputNumbers) {
-    if (!this.isInputValid(userInputNumbers)) {
+    if (!this.user.isInputValid(userInputNumbers)) {
       return;
     }
     if (computerInputNumbers === userInputNumbers) {
@@ -98,6 +48,17 @@ export default class BaseballGame {
       }
     }
     return strike > 0 ? `${strike}스트라이크` : "";
+  }
+  makeVisible($) {
+    if ($ === "$result") {
+      $result.style.display = "block";
+      $correctResult.style.display = "none";
+      return;
+    }
+    if ($ === "$correctResult") {
+      $result.style.display = "none";
+      $correctResult.style.display = "block";
+    }
   }
 }
 

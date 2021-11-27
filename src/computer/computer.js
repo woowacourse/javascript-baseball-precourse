@@ -1,3 +1,5 @@
+import { NUMBER_LENGTH } from "../libs/constant";
+
 export default class Computer {
   generateRandomNumbers() {
     let answer = [];
