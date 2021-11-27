@@ -1,5 +1,5 @@
-import { getUserInput } from "./getUserInput.js";
-import { getComputerInput } from "./getComputerInput.js";
+import { getUserInput } from './getUserInput.js';
+import { getComputerInput } from './getComputerInput.js';
 
 const computerInputValue = getComputerInput();
 export function gameCount(computerInput, userInput) {
@@ -7,9 +7,9 @@ export function gameCount(computerInput, userInput) {
   let ballCount = 0;
   computerInput = computerInputValue;
   userInput = getUserInput()
-    .split("")
+    .split('')
     .map((num) => Number(num));
-  console.log(computerInput)
+  console.log(computerInput);
   for (let i = 0; i < userInput.length; i++) {
     if (userInput[i] === computerInput[i]) {
       strikeCount++;
@@ -17,6 +17,6 @@ export function gameCount(computerInput, userInput) {
       ballCount++;
     }
   }
-  
+
   return [strikeCount, ballCount];
 }

@@ -1,5 +1,5 @@
 export function getComputerInput() {
-  let computerInput = [];
+  const computerInput = [];
   let i = 0;
   while (i < 3) {
     const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
