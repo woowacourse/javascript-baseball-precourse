@@ -10,7 +10,7 @@ export default class BaseballGame {
     }
 
     init() {
-        this.computerNumbers = gameRules.generateNumberArray;
+        this.computerNumbers = gameRules.getComputerNumbers;
         this.gameOver = false;
 
         gameRender.init();

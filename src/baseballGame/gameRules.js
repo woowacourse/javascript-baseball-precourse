@@ -1,7 +1,7 @@
 import { RESULT_TEXT } from "../data/constants.js";
 
 class GameRules {
-    get generateNumberArray() {
+    get getComputerNumbers() {
         const randomUtils = MissionUtils.Random.pickNumberInRange;
 
         const resultNumbers = new Set();
