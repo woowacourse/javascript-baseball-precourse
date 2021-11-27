@@ -15,7 +15,7 @@ const countStrike = (computerAnswer, userAnswer) => {
   return strike;
 };
 
-export default function compareAnswers(computerAnswer, userAnswer) {
+export default function gameResult(computerAnswer, userAnswer) {
   const strike = countStrike(computerAnswer, userAnswer);
   const ball = countBall(computerAnswer, userAnswer) - strike;
 

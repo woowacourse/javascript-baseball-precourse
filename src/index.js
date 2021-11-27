@@ -1,5 +1,5 @@
 import { $userInput, $result } from "./constants/constants.js";
-import compareAnswers from "./game/compareAnswers.js";
+import compareAnswers from "./game/gameResult.js";
 import playGame from "./game/playGame.js";
 import makeAnswer from "./game/makeAnswer.js";
 
