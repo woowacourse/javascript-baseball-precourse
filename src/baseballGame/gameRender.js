@@ -30,10 +30,10 @@ class GameRender {
         $userInput.value = "";
         $userInput.focus();
 
-        this.setInputDisable(false);
+        this.setFormDisable(false);
     }
 
-    setInputDisable(isDisabled) {
+    setFormDisable(isDisabled) {
         if (isDisabled === true) {
             $userInput.setAttribute("disabled", "");
             $submit.setAttribute("disabled", "");
@@ -66,7 +66,7 @@ class GameRender {
 
         const $fragment = combineElement([$correctText, $retryWrap]);
         this.setContent($fragment);
-        this.setInputDisable(true);
+        this.setFormDisable(true);
 
         if (typeof callback === "function") callback($retryButton);
     }
