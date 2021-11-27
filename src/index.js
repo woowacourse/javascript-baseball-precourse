@@ -91,9 +91,8 @@ export default function BaseballGame() {
 
   $("#input-form").addEventListener("submit", e => {
     e.preventDefault();
+    isVaildNum();
   })
-  
-  $("#submit").addEventListener("click", isVaildNum);
 
   $("#result").addEventListener("click", e => {
     if (e.target.id === "game-restart-button") {
