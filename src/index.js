@@ -13,12 +13,11 @@ export default function BaseballGame() {
     return usernumber;
   }
 
-//strike ball 낫싱 판단
+  //strike,ball,낫싱 판단
   const getHint=(computerInputNumbers, userInputNumbers)=>{
     let strikeCount=0;
     let ballCount=0;
-    userInputNumbers.forEach((num,index)=>{
-      
+    userInputNumbers.forEach((num,index)=>{      
       if(num==computerInputNumbers[index]){
         strikeCount++;
       }
@@ -26,11 +25,10 @@ export default function BaseballGame() {
         ballCount++;
       }
     }
-    )
-    
+    )   
     return [strikeCount,ballCount];
   }
-//결과 화면에 출력
+  //결과 화면에 출력
   const getResult=(answer)=>{
     if(answer=="정답"){
       result.innerHTML=getAnswer;
@@ -49,29 +47,24 @@ export default function BaseballGame() {
   const play = function (computerInputNumbers, userInputNumbers) {
     let [strike,ball]=getHint(computerInputNumbers,userInputNumbers);
     let answer="";
-    if (strike>0){answer+=`${strike}스트라이크 `}  
-    if (ball>0){answer+=`${ball}볼`}
+    if (ball>0){answer+=`${ball}볼 `}
+    if (strike>0){answer+=`${strike}스트라이크`}  
     if (ball === 0 && strike === 0) {answer= "낫싱";}
     if (strike==3){answer="정답"}
-    console.log(strike)
     return answer;
     };
   
   btnSubmit.addEventListener("click",()=>{
-      let usernumber=getUserNumber();
-      let valid=validateUser(usernumber);
+      let userNumber=getUserNumber();
+      let valid=validateUser(userNumber);
       if (valid==''){
-        getResult(play(computerInputNumbers,usernumber))
+        getResult(play(computerInputNumbers,userNumber))
       }else{
         alert(valid)
       }
       
     })
-
-
-  const init=()=>{
-    resetValue();  
-  }  
+  
   const resetValue=()=>{
     result.innerHTML='';
     userInput.value='';
@@ -79,7 +72,7 @@ export default function BaseballGame() {
     console.log(computerInputNumbers);
   }
   
-  init();
+  resetValue();
 }
 
 BaseballGame();
