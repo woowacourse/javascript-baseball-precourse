@@ -1,4 +1,5 @@
 import BaseballGame from "./BaseballGame.js";
+import { checkDuplicationNumbers, checkThreeDigitNumbers } from "./utils.js";
 
 const BaseballGameStarter = new BaseballGame();
 
@@ -18,5 +19,6 @@ submitButton.addEventListener("click", (event) => {
     return;
   }
 
-  BaseBallGameStarter.play(userInputNumbers.value);
+  const result = BaseballGameStarter.play(userInputNumbers.value);
 });
+

@@ -5,7 +5,13 @@ export default class BaseballGame {
     this.computerInputNumbers = this.createComputerNumbers();
   }
 
-  play(userInputNumbers) {}
+  play(userInputNumbers) {
+    const checkResults = this.checkResult(
+      this.computerInputNumbers,
+      userInputNumbers
+    );
+    return checkResults;
+  }
 
   createComputerNumbers() {
     const uniqueNumberSet = new Set();
@@ -18,5 +24,21 @@ export default class BaseballGame {
       );
     }
     return Array.from(uniqueNumberSet).join("");
+  }
+
+  checkResult(computerInputNumbers, userInputNumbers) {
+    let result = {
+      strike: 0,
+      ball: 0,
+    };
+    computerInputNumbers.split("").forEach((comValue, comIndex) => {
+      userInputNumbers.split("").forEach((userValue, userIndex) => {
+        if (comValue === userValue) {
+          if (comIndex === userIndex) result.strike++;
+          else result.ball++;
+        }
+      });
+    });
+    return result;
   }
 }
