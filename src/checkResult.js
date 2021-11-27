@@ -30,9 +30,9 @@ export function setResultText(result) {
   } else if (result.strike === 0) {
     resultText = `${result.ball}볼`;
   } else if (result.ball === 0) {
-    resultText = `${result.strike} 스트라이크`;
+    resultText = `${result.strike}스트라이크`;
   } else if (result.strike > 0 && result.ball > 0) {
-    resultText = `${result.ball}볼 ${result.strike} 스트라이크`;
+    resultText = `${result.ball}볼 ${result.strike}스트라이크`;
   }
   
   return resultText
