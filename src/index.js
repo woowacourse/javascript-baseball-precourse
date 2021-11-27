@@ -69,6 +69,10 @@ export default class BaseballGame {
         const numStrike = this.countStrike(computerInputNumbers, userInputNumbers);
         const numBall = this.countBall(computerInputNumbers, userInputNumbers);
 
+        if(numStrike === 0 && numBall === 0) {
+            return "낫싱";
+        }
+
         return "결과 값 String";
     }
 
