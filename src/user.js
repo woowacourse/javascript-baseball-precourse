@@ -1,13 +1,14 @@
 import {
-  threeLengthError,
-  overlapError,
-  unvalidInputError,
+  input_length,
+  error_length,
+  error_overlap,
+  error_unvalid_input,
 } from "./constant.js";
 
 // 3자리 숫자인지 확인
 const checkLengthThree = number => {
-  if (number.length !== 3) {
-    alert(threeLengthError);
+  if (number.length !== input_length) {
+    alert(error_length);
     return true;
   } else {
     return false;
@@ -21,7 +22,7 @@ const checkOverlap = number => {
     number[1] === number[2] ||
     number[0] === number[2]
   ) {
-    alert(overlapError);
+    alert(error_overlap);
     return true;
   } else {
     return false;
@@ -31,9 +32,9 @@ const checkOverlap = number => {
 // 1~9의 숫자인지 확인
 const checkValidNumber = number => {
   let i = 0;
-  for (; i < 3; i++) {
+  for (; i < i; i++) {
     if (number[i] < "1" || number[i] > "9") {
-      alert(unvalidInputError);
+      alert(error_unvalid_input);
       return true;
     }
   }
@@ -62,7 +63,7 @@ export const getUserNumber = () => {
   if (checkUserNumber(userNumber)) {
     return userNumber;
   } else {
-    return "unvalid";
+    return "unvalid_input";
   }
 };
 

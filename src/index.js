@@ -1,6 +1,6 @@
 import { getUserNumber, resetUserInput } from "./user.js";
 import { getComputerNumber } from "./computer.js";
-import { result_answer } from "./constant.js";
+import { input_length, result_answer } from "./constant.js";
 
 export default function BaseballGame() {
   let computerNumber = "";
@@ -21,7 +21,6 @@ export default function BaseballGame() {
     if (ball === 0 && strike === 0) {
       result = "낫싱";
     }
-
     return result;
   };
 
@@ -36,7 +35,7 @@ export default function BaseballGame() {
   this.countStrike = (userNumber, computerNumber) => {
     let count = 0;
     let i = 0;
-    for (; i < 3; i++) {
+    for (; i < input_length; i++) {
       if (userNumber[i] === computerNumber[i]) {
         count++;
       }
@@ -47,7 +46,7 @@ export default function BaseballGame() {
   // 해당 인덱스의 수가 볼인지 확인
   this.isBall = (userNumber, computerNumber, index) => {
     let i = 0;
-    for (; i < 3; i++) {
+    for (; i < input_length; i++) {
       if (i === index) continue;
       if (userNumber[index] === computerNumber[i]) {
         return true;
@@ -60,7 +59,7 @@ export default function BaseballGame() {
   this.countBall = (userNumber, computerNumber) => {
     let count = 0;
     let i = 0;
-    for (; i < 3; i++) {
+    for (; i < input_length; i++) {
       if (this.isBall(userNumber, computerNumber, i)) {
         count++;
       }
@@ -78,7 +77,7 @@ export default function BaseballGame() {
   this.showResult = () => {
     let userNumber = getUserNumber();
     let result = this.play(userNumber, computerNumber);
-    if (userNumber === "unvalid") return;
+    if (userNumber === "unvalid_input") return;
 
     if (result === "3스트라이크") {
       hint.innerHTML = result_answer;
