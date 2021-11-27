@@ -37,3 +37,13 @@ export function setResultText(result) {
   
   return resultText
 }
+
+export function showRestartGameButton(resultText) {
+  const restartButton = document.getElementById("game-restart-button")
+  if (resultText === "🎉정답을 맞추셨습니다!🎉") { 
+    restartButton.style.display = "block";
+  }
+  restartButton.addEventListener('click', () => {
+    window.location.reload()
+  })
+}
