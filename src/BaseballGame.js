@@ -43,16 +43,30 @@ export default class BaseballGame {
     return result;
   }
 
+  restartGame() {
+    this.computerInputNumbers = this.createComputerNumbers();
+  }
+
   getResult(gameResult) {
     const { strike, ball } = gameResult;
 
+    let result = {
+      template: ``,
+      status: "",
+    };
+
     if (strike === GAME_CONFIG.LENGTH) {
-      return this.template.getCorrectMessage();
+      result.template = this.template.getCorrectMessage();
+      result.status = GAME_RESULT_STATE.CORRECT;
     } else if (!strike && !ball) {
-      return this.template.getNothingMessage();
+      result.template = this.template.getNothingMessage();
+      result.status = GAME_RESULT_STATE.NOTHING;
     } else {
-      return this.template.getPartialCorrectMessage(strike, ball);
+      result.template = this.template.getPartialCorrectMessage(strike, ball);
+      result.status = GAME_RESULT_STATE.PARTIAL_CORRECT;
     }
+
+    return result;
   }
 }
 

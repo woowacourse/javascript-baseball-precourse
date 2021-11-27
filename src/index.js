@@ -1,4 +1,5 @@
 import BaseballGame from "./BaseballGame.js";
+import { GAME_RESULT_STATE } from "./constants.js";
 import { checkDuplicationNumbers, checkThreeDigitNumbers } from "./utils.js";
 
 const BaseballGameStarter = new BaseballGame();
@@ -6,6 +7,17 @@ const BaseballGameStarter = new BaseballGame();
 const submitButton = document.querySelector("#submit");
 const userInputNumbers = document.querySelector("#user-input");
 const gameResult = document.querySelector('#result');
+
+const bindGameRestartEvent = () => {
+  const gameRestartButton = document.querySelector("#game-restart-button");
+
+  gameRestartButton.addEventListener("click", () => {
+    BaseballGameStarter.restartGame();
+    gameResult.innerHTML = "";
+    userInputNumbers.value = "";
+    userInputNumbers.focus();
+  });
+};
 
 submitButton.addEventListener("click", (event) => {
   event.preventDefault();
@@ -20,6 +32,8 @@ submitButton.addEventListener("click", (event) => {
     return;
   }
 
-  const template = BaseballGameStarter.play(userInputNumbers.value);
+  const { template, status } = BaseballGameStarter.play(userInputNumbers.value);
   gameResult.innerHTML = template;
+  if (status === GAME_RESULT_STATE.CORRECT) bindGameRestartEvent();
+  else userInputNumbers.focus();
 });
