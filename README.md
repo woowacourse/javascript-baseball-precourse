@@ -63,7 +63,7 @@
 
 ### 2. 구현할 기능 목록
 
-- [ ] 컴퓨터가 가지는 서로 다른 3자리의 랜덤 숫자 생성하는 기능 | `createComputerNumbers`
+- [x] 컴퓨터가 가지는 서로 다른 3자리의 랜덤 숫자 생성하는 기능 | `createComputerNumbers`
 - [ ] 결과 문구를 clear하는 기능 | `clearResult`
 - [ ] 사용자 입력창을 clear하는 기능 | `clearUserInput`
 
