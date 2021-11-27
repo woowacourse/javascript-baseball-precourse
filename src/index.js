@@ -100,8 +100,8 @@ export default function BaseballGame() {
   
   this.play = (computerInputNumbers, userInputNumbers) => {
     let result = '';
-    const ballCount = getBallCount(String(computerInputNumbers), String(userInputNumbers));
-    const strikeCount = getStrikeCount(String(computerInputNumbers), String(userInputNumbers));
+    const ballCount = getBallCount(computerInputNumbers, userInputNumbers);
+    const strikeCount = getStrikeCount(computerInputNumbers, userInputNumbers);
 
     if (strikeCount === 3) return BASEBALL.ANSWER;
     if (strikeCount === 0 && ballCount == 0) return BASEBALL.NOTHING;
