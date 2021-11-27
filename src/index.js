@@ -1,13 +1,22 @@
 export default class BaseballGame {
   constructor() {
-    this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join(
-      '',
-    );
+    this.answer = this.getAnswer();
     this.userInputEl = document.querySelector('#user-input');
     this.resultEl = document.querySelector('#result');
     this.appEl = document.querySelector('#app');
     this.submitButtonEl = document.querySelector('#submit');
     this.submitButtonBinding();
+  }
+
+  getAnswer() {
+    const answer = [];
+    while (answer.length < 3) {
+      const num = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (answer.indexOf(num) === -1) {
+        answer.push(num);
+      }
+    }
+    return answer.join('');
   }
 
   isDifferentUserInput(userInputNumbers) {
@@ -76,7 +85,7 @@ export default class BaseballGame {
     });
   }
 
-  notAnswerText(strikeCount, ballCount) {
+  strikeBallText(strikeCount, ballCount) {
     let printText = '';
     if (ballCount !== 0) {
       printText += `${ballCount}볼`;
@@ -99,7 +108,7 @@ export default class BaseballGame {
       this.createRestartButton();
       return '🎉 정답을 맞추셨습니다! 🎉 ';
     }
-    return this.notAnswerText(strikeCount, ballCount);
+    return this.strikeBallText(strikeCount, ballCount);
   }
 
   createRestartSpan() {
@@ -126,8 +135,13 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    return '결과 값 String';
+    if (this.isCorrectUserInput(userInputNumbers)) {
+      return this.resultText(
+        this.compareAnswer(computerInputNumbers, userInputNumbers),
+      );
+    }
+    alert('1 ~ 9의 중복되지 않는 숫자 3자리를 입력하세요!');
   }
 }
 
-new BaseballGame();
+const baseball = new BaseballGame();
