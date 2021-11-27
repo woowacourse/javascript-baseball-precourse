@@ -13,8 +13,19 @@ export default function BaseballGame() {
   };
 
 
-  const printError = () => {
-    alert("입력값이 잘못되었습니다. 1~9까지의 수를 중복없이 3개 작성해주세요.");
+  const printError = (userInput) => {
+    if(userInput.has(NaN)) {
+      alert("잘못 입력하였습니다❗️ 숫자를 입력하세요.");
+    }
+    else if((userInput.size !== 3) && ($("#user-input").value.length ===3)) {
+      alert("잘못 입력하였습니다❗️ 중복되지 않는 숫자를 입력하세요.");
+    }
+    else if(userInput.has(0)) {
+      alert("잘못 입력하였습니다❗️ 0을 제외한 1~9까지의 수만 입력하세요.");
+    }
+    else if(userInput.size !== 3) {
+      alert("잘못 입력하였습니다❗️ 3개의 숫자를 입력하세요.");
+    }
     $("#user-input").value = '';
   }
 
@@ -72,8 +83,9 @@ export default function BaseballGame() {
   const isVaildNum = () => {
     //유효하지 않은 경우 (에러메시지)
     const userInput = new Set([...$("#user-input").value.split('').map(num => Number(num))]);
-    if(userInput.has(0) || userInput.size !== 3) {
-      printError();
+    
+    if(userInput.has(0) || userInput.size !== 3 || userInput.has(NaN)) {
+      printError(userInput);
       return;
     }
 
