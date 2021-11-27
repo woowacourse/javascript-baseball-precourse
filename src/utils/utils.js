@@ -1,17 +1,10 @@
-import {
-  DIGIT_NUMBER,
-  START_NUMBER,
-  END_NUMBER,
-  THREE_UNIQUE_NUMBERS_REGEX,
-} from '../constants.js';
+import { NUMBER, THREE_UNIQUE_NUMBERS_REGEX } from '../constants.js';
 
 const utils = {
   pickUniqueThreeNumbers: () => {
     let result = new Set();
-    while (result.size < DIGIT_NUMBER) {
-      result.add(
-        MissionUtils.Random.pickNumberInRange(START_NUMBER, END_NUMBER)
-      );
+    while (result.size < NUMBER.DIGIT) {
+      result.add(MissionUtils.Random.pickNumberInRange(NUMBER.START, NUMBER.END));
     }
     return Array.from(result);
   },

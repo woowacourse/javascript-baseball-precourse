@@ -67,3 +67,37 @@
   - 함수(또는 메소드)가 한 가지 일만 잘 하도록 구현한다.
 
 <br>
+
+# 🤔 고민했던 부분
+
+### `constants.js` 최적화를 어떻게 하지
+
+```javascript
+//처음의 방식은 하나씩 export 해서 쓰기
+export const DIGIT_NUMBER = 3;
+export const START_NUMBER = 1;
+export const END_NUMBER = 9;
+
+//최적화 방식은 객체로 변환하기
+export const NUMBER = {
+  DIGIT: 3,
+  START: 1,
+  END: 9,
+};
+
+//나머지 객체들도 큰 범주가 눈에 띄이면 객체로 변환해주었다
+//POINT(게임 점수), ANSWER(게임 결과를 보여주는 문장)
+```
+
+```javascript
+// 매개변수가 있는 상수는 사용 불가 (ReferenceError: scoreBoard is not defined)
+export const ANSWER = {
+  RIGHT: '🎉 정답을 맞추셨습니다! 🎉',
+  NOTHING: '낫싱',
+  N_BALL_N_STRIKE: `${scoreBoard.ball}볼 ${scoreBoard.strike}스트라이크`,
+  N_BALL: `${scoreBoard.ball}볼`,
+  N_STRIKE:`${scoreBoard.strike}스트라이크`
+};
+
+//마땅한 방법을 찾지 못해서 매개변수(scoreBoard)가 들어간 부분은 삭제하였다.
+```
