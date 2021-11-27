@@ -1,38 +1,41 @@
 export default class GameView {
-  constructor() {
-    this.resultSection = document.getElementById('result');
-    this.userInput = document.getElementById('user-input');
-    this.submitButton = document.getElementById('submit');
+  constructor({ $resultSection, $userInput, $submitButton }) {
+    this.$resultSection = $resultSection;
+    this.$userInput = $userInput;
+    this.$submitButton = $submitButton;
   }
 
   renderResult(result) {
-    this.resultSection.innerHTML = result;
+    this.$resultSection.innerHTML = result;
   }
 
   renderVictory(answer, victoryNoticeBox) {
-    this.userInput.placeholder = answer;
+    this.$userInput.placeholder = answer;
     this.clearResult();
-    this.resultSection.append(victoryNoticeBox);
+    this.$resultSection.append(victoryNoticeBox);
   }
 
   alertWrongInput(alertMessage) {
     alert(alertMessage);
-    this.clearResult();
   }
 
   clearResult() {
-    this.resultSection.innerHTML = '';
+    this.$resultSection.innerHTML = '';
+  }
+
+  clearInputBox() {
+    this.$userInput.value = '';
   }
 
   activateForm() {
-    this.userInput.removeAttribute('disabled');
-    this.submitButton.removeAttribute('disabled');
-    this.userInput.placeholder = '';
-    this.userInput.focus();
+    this.$userInput.removeAttribute('disabled');
+    this.$submitButton.removeAttribute('disabled');
+    this.$userInput.placeholder = '';
+    this.$userInput.focus();
   }
 
   deactivateForm() {
-    this.userInput.setAttribute('disabled', true);
-    this.submitButton.setAttribute('disabled', true);
+    this.$userInput.setAttribute('disabled', true);
+    this.$submitButton.setAttribute('disabled', true);
   }
 }
