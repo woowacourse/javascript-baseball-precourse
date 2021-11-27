@@ -1,21 +1,26 @@
 import {BASEBALL} from "./constants.js"
 
 export default function BaseballGame() {
-  let computerInputNumbers = '';
+  const submitBtn = document.getElementById("submit");
+  const userInput = document.getElementById('user-input');
+  const resultDiv = document.getElementById('result');
 
   const getComputerNum = () => {
     let numList = new Array();
+    let comNum = ''
 
     while (numList.length < 3) {
       const num = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!numList.includes(num)) {
         numList.push(num);
-        computerInputNumbers += String(num);
+        comNum += String(num);
       }
     }
 
-    return computerInputNumbers
+    return comNum;
   };
+
+  let computerInputNumbers = getComputerNum();
 
   //check 1- 숫자인지 확인
   const checktype = num => {
@@ -61,21 +66,15 @@ export default function BaseballGame() {
     return true;
   }
 
-
   // 사용자 수 입력받기
   const getUserNum = () => {
-    const userInputNumbers = document.getElementById("user-input").value;
+    const userInputNumbers = userInput.value;
 
     if (checkNum(userInputNumbers)){
       return userInputNumbers;
     }
-    document.getElementById("user-input").autofocus;
+    userInput.autofocus;
   }
-
-  const submitBtn = document.getElementById("submit");
-  submitBtn.addEventListener("click", getUserNum);
-
-  getComputerNum();
 
    // get Ball
    const getBallCount = (computerNum, userNum) => {
@@ -112,6 +111,8 @@ export default function BaseballGame() {
 
     return result;
   }
+
+  submitBtn.addEventListener("click", startGame);
 }
 
 new BaseballGame();
