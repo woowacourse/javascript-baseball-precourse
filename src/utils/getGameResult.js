@@ -1,30 +1,29 @@
-const getResultState = (balls, strikes) => {
+const getResultState = ({ balls, strikes, isGameClear }) => {
   const resultState = {
     balls,
     strikes,
     resultText: `${balls}볼 ${strikes}스트라이크`,
-    isGameClear: false,
+    isGameClear,
   };
 
-  if (strikes === 3) {
-    resultState.resultText = `3스트라이크`;
-    resultState.isGameClear = true;
-    return resultState;
-  }
   if (balls === 0 && strikes === 0) {
     resultState.resultText = `낫싱`;
     return resultState;
   }
-  if (balls === 0) resultState.resultText = `${strikes}스트라이크`;
-  if (strikes === 0) resultState.resultText = `${balls}볼`;
+  if (balls === 0) {
+    resultState.resultText = `${strikes}스트라이크`;
+    return resultState;
+  }
+  if (strikes === 0) {
+    resultState.resultText = `${balls}볼`;
+    return resultState;
+  }
 
   return resultState;
 };
 
 const getGameResult = (computerInputNumbers, userInputNumbers) => {
   const isGameClear = computerInputNumbers === userInputNumbers;
-  if (isGameClear) return getResultState(0, 3);
-
   const computerInputNumbersArr = String(computerInputNumbers).split("");
   const userInputNumbersArr = String(userInputNumbers).split("");
   let balls = 0;
@@ -40,7 +39,7 @@ const getGameResult = (computerInputNumbers, userInputNumbers) => {
     }
   }
 
-  return getResultState(balls, strikes);
+  return getResultState({ balls, strikes, isGameClear });
 };
 
 export default getGameResult;
