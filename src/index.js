@@ -133,7 +133,16 @@ export default function BaseballGame() {
     }
   }
 
+  const restartGame = () => {
+    restartDiv.style.visibility = "hidden";
+    userInput.value = '';
+    resultDiv.innerText = '';
+
+    computerInputNumbers = getComputerNum();
+  }
+
   submitBtn.addEventListener("click", startGame);
+  restartBtn.addEventListener("click", restartGame);
 }
 
 new BaseballGame();
