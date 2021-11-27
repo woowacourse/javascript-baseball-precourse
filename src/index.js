@@ -1,3 +1,6 @@
+import { DIGIT } from "./constants.js";
+import UserInput from "./UserInput.js";
+
 export default class BaseballGame {
     constructor() {
         this.setDOM();
@@ -5,7 +8,6 @@ export default class BaseballGame {
     }
 
     setDOM() {
-        this.userInput = document.querySelector('#user-input');
         this.resultGuide = document.querySelector('#result');
         this.restartGuide = document.querySelector('#restart');
         this.submitButton = document.querySelector('#submit');
@@ -14,18 +16,14 @@ export default class BaseballGame {
 
     initGame() {
         this.computerNumbers = this.createComputerNumbers();
-        this.clearResult();
-        this.clearUserInput();
+        this.clearResultGuide();
+        UserInput.clearUserInput();
         this.hideRestartGuide();
         console.log(this.computerNumbers);
     }
 
-    clearResult() {
+    clearResultGuide() {
         this.resultGuide.innerHTML = '';
-    }
-
-    clearUserInput() {
-        this.userInput.value = '';
     }
 
     hideRestartGuide() {
