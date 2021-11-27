@@ -3,8 +3,13 @@ const MAX_NUMBER_IN_RANGE = 9;
 
 const LENGTH_NUMBERS = 3;
 
+const ELEMENT_ID_USER_INPUT = 'user-input';
+const ELEMENT_ID_RESULT = 'result';
+
 export {
     MIN_NUMBER_IN_RANGE,
     MAX_NUMBER_IN_RANGE,
     LENGTH_NUMBERS,
+    ELEMENT_ID_USER_INPUT,
+    ELEMENT_ID_RESULT
 };
