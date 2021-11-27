@@ -4,6 +4,9 @@ export default class BaseballGame {
 
   constructor() {
     this.$userInput = document.getElementById('user-input');
+    this.$submitButton = document.getElementById('submit');
+    this.computerNumbers = this.generateComputerRandomNumber();
+    this.onSubmit();
   }
 
   play(computerInputNumbers, userInputNumbers) {
@@ -43,5 +46,19 @@ export default class BaseballGame {
   resetInputValue() {
     this.$userInput.value = '';
     this.$userInput.focus();
+  }
+
+  onSubmit() {
+    this.$submitButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const resultCode = this.verifyInputNumber(this.$userInput.value);
+      if (resultCode !== VERIFIED_CODE.VERIFIED) {
+        this.showErrorMessage(resultCode);
+        this.resetInputValue();
+      } else {
+        this.play(this.computerNumbers, this.$userInput.value);
+      }
+    });
   }
 }
