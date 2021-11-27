@@ -31,7 +31,7 @@ const InputCheckMethods = [
     return true;
   },
   (value) => {
-    if (new Set(value).size < NUMBER_LENGTH) {
+    if (new Set(value).size !== NUMBER_LENGTH) {
       alert(USER_INPUT_ALERT.overlap);
       return false;
     }
