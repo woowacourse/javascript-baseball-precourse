@@ -9,6 +9,13 @@ export default class Baseballgame {
     };
   }
 
+  init() {
+    this.game = {
+      strike: 0,
+      ball: 0
+    };
+  }
+
   validate(userInputNumbers) {
     if (new Set(userInputNumbers).size !== 3) return false;
     if (Number.isNaN(userInputNumbers)) return false;
@@ -16,11 +23,7 @@ export default class Baseballgame {
     return true;
   }
 
-  play(computerInputNumbers, userInputNumbers) {
-    // computer가 425일 때, user가 123이면 {개수} 스트라이크
-    this.game.strike = 0;
-    this.game.ball = 0;
-
+  countStrikeBall(computerInputNumbers, userInputNumbers) {
     for (let i = 0; i < 3; i++) {
       if (computerInputNumbers[i] === userInputNumbers[i]) {
         this.game.strike++;
@@ -32,10 +35,22 @@ export default class Baseballgame {
         this.game.ball++;
       }
     }
-    this.render();
+    return [this.game.strike, this.game.ball];
   }
 
-  render() {
-    console.log({ strike: this.game.strike, ball: this.game.ball });
+  play(computerInputNumbers, userInputNumbers) {
+    this.init();
+    [this.game.strike, this.game.ball] = this.countStrikeBall(
+      computerInputNumbers,
+      userInputNumbers
+    );
+
+    if (this.game.strike === 3) return '정답';
+    if (this.game.strike || this.game.ball) {
+      const ball = this.game.ball ? `${this.game.ball}볼 ` : '';
+      const strike = this.game.strike ? `${this.game.strike}스트라이크 ` : '';
+      return ball + strike;
+    }
+    return '낫싱';
   }
 }
