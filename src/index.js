@@ -9,9 +9,9 @@ submitButton.addEventListener('click', event =>{
     const userInput = document.getElementById('user-input').value;
     
     if(game.isValid(userInput)){
-        alert("유효한 값");
-        //TODO: compare two numbers
-        
+        // 유저 입력 값 & 생성된 값 비교
+        const {output, isFinished} = game.compareInput(userInput);
+        console.log(output, isFinished);
     } else{
         alert("잘못된 값을 입력하셨습니다.");
     }
