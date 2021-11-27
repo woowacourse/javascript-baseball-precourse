@@ -6,5 +6,6 @@
   // Prettier
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "liveServer.settings.multiRootWorkspaceName": "javascript-baseball-precourse"
 }
