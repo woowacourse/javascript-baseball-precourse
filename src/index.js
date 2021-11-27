@@ -33,11 +33,7 @@ export default class BaseballGame {
     for (const [number, index] of computerInputHashMap.entries()) {
       if (userInputHashMap.has(number)) {
         const userInputIndex = userInputHashMap.get(number);
-        if (index === userInputIndex) {
-          strike += 1;
-        } else {
-          ball += 1;
-        }
+        index === userInputIndex ? (strike += 1) : (ball += 1);
       }
     }
 
