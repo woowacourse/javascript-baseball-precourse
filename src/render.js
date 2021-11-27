@@ -21,7 +21,7 @@ class ResultRender {
     }
 
     setContent($content) {
-        const $result = this.result;
+        const $result = this.$result;
 
         $result.innerHTML = "";
         $result.append($content);
