@@ -40,13 +40,13 @@ export default class BaseballGame {
         }
       }
     }
+
     if (strike === BASEBALL_RULE.DIGITS) return GAME_RESULT.END;
     if (!strike && !ball) return GAME_RESULT.NOTHING;
     if (strike && ball)
       return `${ball}${GAME_RESULT.BALL} ${strike}${GAME_RESULT.STRIKE}`;
-    return ball
-      ? `${ball}${GAME_RESULT.BALL}`
-      : `${strike}${GAME_RESULT.STRIKE}`;
+    if (ball) return `${ball}${GAME_RESULT.BALL}`;
+    return `${strike}${GAME_RESULT.STRIKE}`;
   }
 
   handleSubmit() {
