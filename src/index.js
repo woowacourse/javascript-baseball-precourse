@@ -58,10 +58,22 @@ export default class BaseballGame {
     this.renderResult(result);
   }
 
+  restartGame() {
+    this.inputElem.value = '';
+    this.resultElem.removeChild(this.resultElem.firstChild);
+    this.answer = generateRandomNumber();
+  }
+
   renderResult(result) {
     if (this.resultElem.hasChildNodes())
       this.resultElem.removeChild(this.resultElem.firstChild);
     this.resultElem.appendChild(createElement('div', result));
+    if (result === GAME_RESULT.END) {
+      const restartBtn = document.getElementById('restart');
+      restartBtn.addEventListener('click', () => {
+        this.restartGame();
+      });
+    }
   }
 }
 
