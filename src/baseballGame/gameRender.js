@@ -12,7 +12,7 @@ export function errorMessage(erroCode) {
     $userInput.focus();
 }
 
-class ResultRender {
+class GameRender {
     constructor() {
         this.init();
     }
@@ -66,4 +66,4 @@ class ResultRender {
     }
 }
 
-export const resultRender = new ResultRender();
+export const gameRender = new GameRender();

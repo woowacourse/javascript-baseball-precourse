@@ -2,7 +2,7 @@ import { RESULT_CODE } from "../data/constants.js";
 import { $userInput } from "../data/elements.js";
 import { gameRules } from "./gameRules.js";
 import { checkUserInputVaild, getNumberArray } from "./userInputChecker.js";
-import { errorMessage, resultRender } from "./resultRenderer.js";
+import { errorMessage, gameRender } from "./gameRender.js";
 
 export default class BaseballGame {
     constructor() {
@@ -13,7 +13,7 @@ export default class BaseballGame {
         this.computerNumbers = gameRules.generateNumberArray;
         this.gameOver = false;
 
-        resultRender.init();
+        gameRender.init();
     }
 
     start() {
@@ -39,11 +39,11 @@ export default class BaseballGame {
 
     draw(playResult) {
         if (this.gameOver === false) {
-            resultRender.gameHint(playResult);
+            gameRender.gameHint(playResult);
             return false;
         }
 
-        resultRender.gameRetry(($retryButton) => {
+        gameRender.gameRetry(($retryButton) => {
             $retryButton.addEventListener("click", this.init.bind(this));
         });
     }
