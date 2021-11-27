@@ -1,8 +1,8 @@
 import { RESULT_MESSAGE } from "./constant.js";
 
 export function checkResult(computerInputNumbers, userValidNumber) {
-  const checkStrikeBall = setStrikeBall(computerInputNumbers, userValidNumber)
-  const resultText = setResultText(checkStrikeBall)
+  const checkStrikeBall = setStrikeBall(computerInputNumbers, userValidNumber);
+  const resultText = setResultText(checkStrikeBall);
   
   return resultText;
 }
@@ -11,7 +11,7 @@ function setStrikeBall(cNumber, uNumber) {
   const result = {
     "strike": 0,
     "ball": 0
-  }
+  };
   for (let i = 0; i < cNumber.length; i++) {
     if (cNumber[i] === uNumber[i]) {
       result.strike++;
@@ -41,11 +41,11 @@ export function setResultText(result) {
 }
 
 export function showRestartGameButton(resultText) {
-  const restartButton = document.getElementById("game-restart-button")
+  const restartButton = document.getElementById("game-restart-button");
   if (resultText === RESULT_MESSAGE.success) { 
     restartButton.style.display = "block";
   }
   restartButton.addEventListener('click', () => {
-    window.location.reload()
+    window.location.reload();
   })
 }
