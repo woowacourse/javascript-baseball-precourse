@@ -1,7 +1,7 @@
 import { $userInput, $result } from "./constants/constants.js";
 import compareAnswers from "./game/compareAnswers.js";
 import playGame from "./game/playGame.js";
-import makeAnswer from "./makeAnswer.js";
+import makeAnswer from "./game/makeAnswer.js";
 
 export default function BaseballGame() {
   const reset = () => {
