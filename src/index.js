@@ -15,7 +15,7 @@ export default function BaseballGame() {
     resultDiv.textContent = resultText
 
     return resultText;
-  };
+  }
 }
 
 setNumber();

@@ -1,3 +1,5 @@
+import { ERROR_MESSAGE } from "./constant.js";
+
 export function checkNumber(uNumber) {
   let check = true;
   const stringuNumber = String(uNumber)
@@ -11,7 +13,7 @@ export function checkNumber(uNumber) {
 
 function checkLegnth(uNumber, check) {
   if (uNumber.length !== 3) {
-    alert ("3개 수를 입력해주세요")
+    alert (ERROR_MESSAGE.inputThreeNumber)
     check = false;
   }
   
@@ -21,7 +23,7 @@ function checkLegnth(uNumber, check) {
 function checkOverlap(uNumber, check) {
   const _uNumberSet = new Set(uNumber.split(''))
   if (uNumber.length !== _uNumberSet.size) {
-    alert ("중복없이 입력해주세요")
+    alert (ERROR_MESSAGE.inputSameNumber)
     check = false;
   }
 
@@ -31,7 +33,7 @@ function checkOverlap(uNumber, check) {
 function checkZero(uNumber, check) {
   for (let num of uNumber) {
     if (num === "0") {
-      alert ("0은 포함할 수 없습니다")
+      alert (ERROR_MESSAGE.imputZeroNumber)
       check = false;
       break;
     }

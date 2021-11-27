@@ -1,8 +1,10 @@
+import { RESULT_MESSAGE } from "./constant.js";
+
 export function checkResult(computerInputNumbers, userValidNumber) {
   const checkStrikeBall = setStrikeBall(computerInputNumbers, userValidNumber)
   const resultText = setResultText(checkStrikeBall)
   
-  return resultText
+  return resultText;
 }
 
 function setStrikeBall(cNumber, uNumber) {
@@ -24,23 +26,23 @@ function setStrikeBall(cNumber, uNumber) {
 export function setResultText(result) {
   let resultText;
   if (result.strike === 3) {
-    resultText = "🎉정답을 맞추셨습니다!🎉";
+    resultText = RESULT_MESSAGE.success;
   } else if (result.strike === 0 && result.ball === 0) {
-    resultText = "낫싱";
+    resultText = RESULT_MESSAGE.fail;
   } else if (result.strike === 0) {
-    resultText = `${result.ball}볼`;
+    resultText = `${result.ball}${RESULT_MESSAGE.ball}`;
   } else if (result.ball === 0) {
-    resultText = `${result.strike}스트라이크`;
+    resultText = `${result.strike}${RESULT_MESSAGE.strike}`;
   } else if (result.strike > 0 && result.ball > 0) {
-    resultText = `${result.ball}볼 ${result.strike}스트라이크`;
+    resultText = `${result.ball}${RESULT_MESSAGE.ball} ${result.strike}${RESULT_MESSAGE.strike}`;
   }
   
-  return resultText
+  return resultText;
 }
 
 export function showRestartGameButton(resultText) {
   const restartButton = document.getElementById("game-restart-button")
-  if (resultText === "🎉정답을 맞추셨습니다!🎉") { 
+  if (resultText === RESULT_MESSAGE.success) { 
     restartButton.style.display = "block";
   }
   restartButton.addEventListener('click', () => {
