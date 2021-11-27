@@ -32,10 +32,9 @@ export default class BaseballGame {
 
     play(computerInputNumbers, userInputNumbers) {
         const gameResult = gameRules.getGameResult(computerInputNumbers, userInputNumbers);
-        const gameHintText = gameRules.getGameHintText(gameResult.strike, gameResult.ball);
 
         if (gameResult.strike === 3) this.gameOver = true;
-        return gameHintText;
+        return gameRules.getGameHintText(gameResult.strike, gameResult.ball);
     }
 
     draw(playResult) {
