@@ -59,7 +59,7 @@ export default class BaseballGame {
         return randomAnswer;
     }
 
-    //나중에 함수로 분리
+    //play
     play(computerInputNumbers, userInputNumbers) {
         
         if(this.isCorrect(computerInputNumbers, userInputNumbers)){
@@ -67,6 +67,7 @@ export default class BaseballGame {
         }
 
         const numStrike = this.countStrike(computerInputNumbers, userInputNumbers);
+        const numBall = this.countBall(computerInputNumbers, userInputNumbers);
 
         return "결과 값 String";
     }
@@ -87,6 +88,19 @@ export default class BaseballGame {
         });
         
         return numStrike;
+    }
+
+    //볼 개수 검사
+    countBall(computerInputNumbers, userInputNumbers) {
+        let numBall = 0;
+
+        computerInputNumbers.forEach((element, index) => {
+            if(userInputNumbers.includes(element) && element.toString() !== userInputNumbers[index]) {
+                numBall++;
+            }
+        });
+
+        return numBall;
     }
 }
 
