@@ -1,3 +1,7 @@
 export const createAnswer = () => {
-  return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  const computerAnwer = new Set();
+  while(computerAnwer.size < 3) {
+    computerAnwer.add(MissionUtils.Random.pickNumberInRange(1, 9));
+  }
+  return [...computerAnwer];
 };

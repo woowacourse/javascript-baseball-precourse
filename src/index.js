@@ -1,5 +1,5 @@
 import { $ } from "./utils/dom.js"
-import {createAnswer} from "./createAnswer.js"
+import { createAnswer } from "./createAnswer.js"
 
 export default function BaseballGame() {
   let computerNumber = createAnswer(); 
