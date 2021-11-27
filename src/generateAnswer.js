@@ -11,7 +11,7 @@ export default function generateAnswer() {
   }
 
   // return generated as int
-  return numberString * 1;
+  return numberString;
 }
 
 // helper function: generate single digit unique integer

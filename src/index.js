@@ -1,5 +1,6 @@
 import generateAnswer from "./generateAnswer.js";
 import validateInput from "./validateInput.js";
+import compareValues from "./compareValues.js";
 
 // define game class
 export default class BaseballGame {
@@ -10,7 +11,16 @@ export default class BaseballGame {
 
   // define play method
   play(computerInputNumbers, userInputNumbers) {
+    // if input is invalid, end function
     if (!validateInput(userInputNumbers)) return;
+
+    // compare answer and input
+    const [ball, strike] = compareValues(
+      computerInputNumbers,
+      userInputNumbers
+    );
+
+    console.log(ball, strike);
   }
 }
 
