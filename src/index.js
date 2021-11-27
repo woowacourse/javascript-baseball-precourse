@@ -17,7 +17,7 @@ export default class BaseballGame {
     this.$userInput.focus();
   }
 
-  submitClickEvent() {
+  onSubmitClickEvent() {
     this.$submit.addEventListener('click', event => {
       event.preventDefault();
       const getUserInputNumbers = new GetUserInputNumbers(this.$userInput);
@@ -33,7 +33,7 @@ export default class BaseballGame {
     });
   }
 
-  gameRestartClickEvent() {
+  onGameRestartClickEvent() {
     const $gameRestartButton = document.querySelector('#game-restart-button');
     $gameRestartButton.addEventListener('click', () => {
       this.initializeUserInput();
@@ -55,12 +55,12 @@ export default class BaseballGame {
     }
 
     this.$result.innerHTML = STRING.CORRECT_MESSAGE;
-    this.gameRestartClickEvent();
+    this.onGameRestartClickEvent();
   }
 
   main() {
     this.computerInputNumbers = getComputerInputNumbers();
-    this.submitClickEvent();
+    this.onSubmitClickEvent();
   }
 }
 
