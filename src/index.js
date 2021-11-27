@@ -10,17 +10,22 @@ let randomNumber = 0;
 let userInputNumbers = 0;
 const BG = new Baseballgame();
 
+const init = () => {
+  $result.textContent = '';
+};
+
 const render = () => {
   const gameResult = BG.play(randomNumber, userInputNumbers);
   if (gameResult === '정답') {
-    console.log('정답');
+    $result.innerHTML = `정답을 맞췄습니다. 
+    재시작하시겠습니까? <button id="game-restart-button">재시작</button>`;
   } else {
     $result.textContent = gameResult;
   }
 };
 
 const createRandomNumber = () => {
-  $result.textContent = '';
+  init();
   const randomNumberList = Array.from({ length: 1000 }, (_v, i) => String(i))
     .filter(number => new Set(number).size === 3 && !number.match(/[0]/))
     .map(number => Number(number));
@@ -39,4 +44,10 @@ $submit.addEventListener('click', e => {
     return;
   }
   render();
+});
+
+window.addEventListener('click', e => {
+  if (e.target.id !== 'game-restart-button') return;
+  init();
+  createRandomNumber();
 });
