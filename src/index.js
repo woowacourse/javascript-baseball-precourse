@@ -1,7 +1,7 @@
 import getComputerInputNumbers from "./utils/getComputerInputNumbers.js";
 import getGameResult from "./utils/getGameResult.js";
 import { validateUserInputNumbers } from "./utils/validation.js";
-import RestartContainer from "./components/RestartContainer.js";
+import ResultContainer from "./components/ResultContainer.js";
 
 export default function BaseballGame() {
   const initialState = {
@@ -10,16 +10,15 @@ export default function BaseballGame() {
 
   const userInput = document.querySelector("#user-input");
   const submitBtn = document.querySelector("#submit");
-  const resultBlock = document.querySelector("#result");
 
   const resetUI = () => {
-    resultBlock.innerHTML = "";
+    ResultContainer({ resultText: "" });
     userInput.value = "";
   };
 
   const onClickRestartCallback = () => {
     initialState.computerInputNumbers = getComputerInputNumbers();
-    resetUI();
+    userInput.value = "";
   };
 
   this.play = function (computerInputNumbers, userInputNumbers) {
@@ -28,12 +27,8 @@ export default function BaseballGame() {
       userInputNumbers
     );
 
-    if (isGameClear) {
-      RestartContainer(resultBlock, onClickRestartCallback);
-      return resultText;
-    }
+    ResultContainer({ isGameClear, resultText, onClickRestartCallback });
 
-    resultBlock.innerHTML = resultText;
     return resultText;
   };
 
