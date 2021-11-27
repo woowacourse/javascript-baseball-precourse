@@ -10,6 +10,14 @@ export const RESULT_MESSAGE = Object.freeze({
   THREE_DIGIT: '3자리 수를 입력해주세요.',
 });
 
+export const VERIFIED_CODE = Object.freeze({
+  VERIFIED: 'VERIFIED',
+  ZERO_INCLUDED: 'ZERO_INCLUDED',
+  NOT_A_NUMBER: 'NOT_A_NUMBER',
+  NUMBER_DUPLICATED: 'NUMBER_DUPLICATED',
+  THREE_DIGIT: 'THREE_DIGIT',
+})
+
 export const NUMBER_RULES = Object.freeze({
   MIN_NUMBER: 1,
   MAX_NUMBER: 9,
