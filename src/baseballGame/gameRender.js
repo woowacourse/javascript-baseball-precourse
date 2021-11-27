@@ -2,8 +2,8 @@ import { $, createElement, combineElement } from "../utils.js";
 import { RESULT_CODE, RESULT_TEXT, ALERT_MESSAGE } from "../data/constants.js";
 import { $result, $userInput, $submit } from "../data/elements.js";
 
-export function errorMessage(ERROR_TYPE) {
-    switch (ERROR_TYPE) {
+export function errorMessage(resultCode) {
+    switch (resultCode) {
         case RESULT_CODE.ERROR_USERINPUT_LENGTH:
             alert(ALERT_MESSAGE.USERINPUT_LENGTH);
             break;
