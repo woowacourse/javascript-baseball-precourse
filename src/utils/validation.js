@@ -1,3 +1,5 @@
+import { USER_INPUT_MAX_LENGTH_THREE } from "./constants.js";
+
 export const validateUserInputNumbers = (userInput) => {
   console.log("userInput :", userInput);
   const validateForm = {
@@ -18,7 +20,10 @@ export const validateUserInputNumbers = (userInput) => {
   }
 
   const uniqueUserInputs = new Set(userInput.split(""));
-  if (userInput.length !== 3 || userInput.length !== uniqueUserInputs.size) {
+  if (
+    userInput.length !== USER_INPUT_MAX_LENGTH_THREE ||
+    userInput.length !== uniqueUserInputs.size
+  ) {
     validateForm.isError = true;
     validateForm.errorMessage = `"${userInput}"은 올바른 값이 아닙니다. 1~9까지 서로 다른 임의의 숫자 3개를 입력해 주세요`;
     return validateForm;

@@ -1,0 +1,3 @@
+export const USER_INPUT_MAX_LENGTH_THREE = 3;
+export const COMPUTER_INPUT_MIN_NUMBER = 1;
+export const COMPUTER_INPUT_MAX_NUMBER = 9;
