@@ -1,12 +1,12 @@
-import { BASEBALL_RULL } from './constants.js';
+import { BASEBALL_RULE } from './constants.js';
 
 export const generateRandomNumber = () => {
   const numberSet = new Set();
-  while (numberSet.size < BASEBALL_RULL.DIGITS) {
+  while (numberSet.size < BASEBALL_RULE.DIGITS) {
     numberSet.add(
       MissionUtils.Random.pickNumberInRange(
-        BASEBALL_RULL.MIN,
-        BASEBALL_RULL.MAX
+        BASEBALL_RULE.MIN,
+        BASEBALL_RULE.MAX
       )
     );
   }
@@ -19,8 +19,8 @@ const hasZero = (target) => {
 
 const isValidLength = (target) => {
   return (
-    target.length === BASEBALL_RULL.DIGITS &&
-    new Set(target.split('')).size === BASEBALL_RULL.DIGITS
+    target.length === BASEBALL_RULE.DIGITS &&
+    new Set(target.split('')).size === BASEBALL_RULE.DIGITS
   );
 };
 

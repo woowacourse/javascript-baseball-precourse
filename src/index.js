@@ -4,12 +4,14 @@ import {
   isNotValidInput,
   convertToHashMap,
 } from './utils.js';
-import { BASEBALL_RULL, GAME_RESULT, MESSAGE } from './constants.js';
+import { BASEBALL_RULE, GAME_RESULT, MESSAGE } from './constants.js';
+import { createElement } from './dom.js';
 
 export default class BaseballGame {
   constructor() {
     this.inputElem = document.getElementById('user-input');
     this.submitBtn = document.getElementById('submit');
+    this.resultElem = document.getElementById('result');
     this.answer = generateRandomNumber();
     this.init();
   }
@@ -29,8 +31,8 @@ export default class BaseballGame {
     const userInputHashMap = convertToHashMap(userInputNumbers);
 
     for (const [number, index] of computerInputHashMap.entries()) {
-      const userInputIndex = userInputHashMap.get(number);
-      if (userInputIndex) {
+      if (userInputHashMap.has(number)) {
+        const userInputIndex = userInputHashMap.get(number);
         if (index === userInputIndex) {
           strike += 1;
         } else {
@@ -38,7 +40,7 @@ export default class BaseballGame {
         }
       }
     }
-    if (strike === BASEBALL_RULL.DIGITS) return GAME_RESULT.END;
+    if (strike === BASEBALL_RULE.DIGITS) return GAME_RESULT.END;
     if (!strike && !ball) return GAME_RESULT.NOTHING;
     if (strike && ball)
       return `${ball}${GAME_RESULT.BALL} ${strike}${GAME_RESULT.STRIKE}`;
@@ -53,6 +55,13 @@ export default class BaseballGame {
       return alert(MESSAGE.NOT_VALID_INPUT);
     }
     const result = this.play(this.answer, userInput);
+    this.renderResult(result);
+  }
+
+  renderResult(result) {
+    if (this.resultElem.hasChildNodes())
+      this.resultElem.removeChild(this.resultElem.firstChild);
+    this.resultElem.appendChild(createElement('div', result));
   }
 }
 
