@@ -1,8 +1,6 @@
 import { $, createElement, combineElement } from "./utils.js";
 import { RESULT_CODE, RESULT_TEXT, ALERT_MESSAGE } from "./constants.js";
 
-const $result = $("#result");
-
 export function errorMessage(erroCode) {
     let alertText = "";
     if (erroCode === RESULT_CODE.ERROR_USERINPUT_LENGTH) alertText = ALERT_MESSAGE.ERROR_USERINPUT_LENGTH;
@@ -14,15 +12,25 @@ export function errorMessage(erroCode) {
 
 class ResultRender {
     constructor() {
-        $result.style.display = "none";
+        this.init();
+    }
+
+    init() {
+        this.$result = $("#result");
+        this.$result.style.display = "none";
+    }
+
+    setContent($content) {
+        const $result = this.result;
+
+        $result.innerHTML = "";
+        $result.append($content);
+        $result.style.display = "block";
     }
 
     gameHint(resultText) {
         const $text = createElement("P", resultText);
-
-        $result.innerText = "";
-        $result.append($text);
-        $result.style.display = "block";
+        this.setContent($text);
     }
 
     gameRetry() {
@@ -33,9 +41,8 @@ class ResultRender {
         $retryButton.id = "game-restart-button";
         $retryWrap.append($retryButton);
 
-        $result.innerText = "";
-        $result.append(combineElement([$correctText, $retryWrap]));
-        $result.style.display = "block";
+        const $fragment = combineElement([$correctText, $retryWrap]);
+        this.setContent($fragment);
     }
 }
 
