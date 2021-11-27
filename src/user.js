@@ -17,16 +17,16 @@ const checkLengthThree = number => {
 
 // 중복된 숫자 사용했는지 확인
 const checkOverlap = number => {
-  if (
-    number[0] === number[1] ||
-    number[1] === number[2] ||
-    number[0] === number[2]
-  ) {
-    alert(error_overlap);
-    return true;
-  } else {
-    return false;
+  let numberArray = number.split("");
+
+  let i = 0;
+  for (; i < input_length; i++) {
+    if (numberArray.filter(num => num === number[i]).length >= 2) {
+      alert(error_overlap);
+      return true;
+    }
   }
+  return false;
 };
 
 // 1~9의 숫자인지 확인

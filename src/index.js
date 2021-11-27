@@ -8,20 +8,21 @@ export default function BaseballGame() {
   const submitButton = document.getElementById("submit");
 
   this.play = (userNumber, computerNumber) => {
-    let result = "";
-    const ball = this.countBall(userNumber, computerNumber);
-    const strike = this.countStrike(userNumber, computerNumber);
-
-    if (ball > 0) {
-      result += `${ball}볼`;
-    }
-    if (strike > 0) {
-      result += `${strike}스트라이크`;
-    }
-    if (ball === 0 && strike === 0) {
-      result = "낫싱";
-    }
+    const [ball, strike] = this.countResult(userNumber, computerNumber);
+    const result = this.resultMessage(ball, strike);
     return result;
+  };
+
+  this.resultMessage = (ball, strike) => {
+    if (ball === 0 && strike === 0) {
+      return "낫싱";
+    } else if (ball > 0 && strike > 0) {
+      return `${ball}볼 ${strike}스트라이크`;
+    } else if (ball > 0) {
+      return `${ball}볼`;
+    } else if (strike > 0) {
+      return `${strike}스트라이크`;
+    }
   };
 
   // 게임 재시작(난수 재생성, 힌트 및 입력 초기화)
@@ -31,40 +32,20 @@ export default function BaseballGame() {
     hint.innerHTML = "";
   };
 
-  // 스트라이크 갯수 확인
-  this.countStrike = (userNumber, computerNumber) => {
-    let count = 0;
+  // 볼, 스트라이크 갯수 확인
+  this.countResult = (userNumber, computerNumber) => {
+    let ball = 0;
+    let strike = 0;
+
     let i = 0;
     for (; i < input_length; i++) {
       if (userNumber[i] === computerNumber[i]) {
-        count++;
+        strike++;
+      } else if (computerNumber.indexOf(userNumber[i]) != -1) {
+        ball++;
       }
     }
-    return count;
-  };
-
-  // 해당 인덱스의 수가 볼인지 확인
-  this.isBall = (userNumber, computerNumber, index) => {
-    let i = 0;
-    for (; i < input_length; i++) {
-      if (i === index) continue;
-      if (userNumber[index] === computerNumber[i]) {
-        return true;
-      }
-    }
-    return false;
-  };
-
-  // 볼 갯수 확인
-  this.countBall = (userNumber, computerNumber) => {
-    let count = 0;
-    let i = 0;
-    for (; i < input_length; i++) {
-      if (this.isBall(userNumber, computerNumber, i)) {
-        count++;
-      }
-    }
-    return count;
+    return [ball, strike];
   };
 
   // 재시작 기능 추가

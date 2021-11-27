@@ -2,17 +2,15 @@ import { input_length } from "./constant.js";
 
 // 컴퓨터 난수 생성
 export const getComputerNumber = () => {
-  let number = "";
-  let checkUseNumber = new Array(10).fill(false);
+  let number = [];
 
   while (number.length < input_length) {
-    const newNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+    const randNumber = MissionUtils.Random.pickNumberInRange(1, 9);
 
-    if (checkUseNumber[newNumber]) continue;
+    if (number.includes(randNumber)) continue;
 
-    checkUseNumber[newNumber] = true;
-    number += newNumber.toString();
+    number.push(randNumber);
   }
 
-  return number;
+  return number.join("").toString();
 };
