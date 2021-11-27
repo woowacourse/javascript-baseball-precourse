@@ -14,6 +14,20 @@ const InputCheckMethods = [
     }
     return true;
   },
+  (value) => {
+    if (!Number(value)) {
+      alert(USER_INPUT_ALERT.notNumber);
+      return false;
+    }
+    return true;
+  },
+  (value) => {
+    if (value.inclues("0")) {
+      alert(USER_INPUT_ALERT.removeZero);
+      return false;
+    }
+    return true;
+  },
 ];
 
 export default class BaseballGame {

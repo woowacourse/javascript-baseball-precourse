@@ -1,3 +1,5 @@
 export const USER_INPUT_ALERT = {
   blank: "입력값이 없습니다.",
+  notNumber: "숫자를 입력해주세요.",
+  removeZero: "1~9까지의 숫자로 채워주세요.",
 };
