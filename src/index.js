@@ -21,6 +21,9 @@ export default class BaseballGame {
       this.makeVisible("$correctResult");
       return;
     }
+    this.printCountMessage(computerInputNumbers, userInputNumbers);
+  }
+  printCountMessage(computerInputNumbers, userInputNumbers) {
     const ball = this.calcBall(computerInputNumbers, userInputNumbers);
     const strike = this.calcStrike(computerInputNumbers, userInputNumbers);
     const countMessage =
@@ -51,6 +54,7 @@ export default class BaseballGame {
   }
   makeVisible($) {
     if ($ === "$result") {
+      $result.innerText = "";
       $result.style.display = "block";
       $correctResult.style.display = "none";
       return;

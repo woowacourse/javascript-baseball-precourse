@@ -1,4 +1,4 @@
-import { NUMBER_LENGTH } from "../libs/constant";
+import { NUMBER_LENGTH } from "../libs/constant.js";
 
 export default class Computer {
   generateRandomNumbers() {
