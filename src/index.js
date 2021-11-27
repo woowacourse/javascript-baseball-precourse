@@ -26,6 +26,7 @@ export default function BaseballGame() {
       alert("잘못 입력하였습니다❗️ 3개의 숫자를 입력하세요.");
     }
     $("#user-input").value = '';
+    $("#result").innerHTML = '';
   }
 
   const printResult = (computerInputNumbers, userInputNumbers) => {
