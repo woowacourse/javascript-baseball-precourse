@@ -67,11 +67,10 @@
   - 컴퓨터가 가지는 3자리 숫자를 새로 지정하고
   - 결과 문구, 사용자 입력창의 value를 clear하고
   - 재시작 안내 문구를 숨김
-
 - [x] 컴퓨터가 가지는 서로 다른 3자리의 랜덤 숫자 생성하는 기능 | `createComputerNumbers`
-- [x] 결과 문구를 clear하는 기능 | `clearResultGuide`
 - [x] 사용자 입력창을 clear하는 기능 | `clear - UserInput`
-- [x] 재시작 안내 문구를 숨기는 기능 | `hideRestartGuide`
+- [x] 결과 문구를 clear하는 기능 | `clearResult - Guide`
+- [x] 재시작 안내 문구를 숨기는 기능 | `hideRestart - Guide`
 - [x] 사용자가 입력한 숫자의 정답 비교 결과를 사용자가 확인할 수 있도록 하는 기능 | `checkAnswer`
   - 사용자 입력 값을 가져와 잘못된 값인지 확인하고,
   - 잘못된 경우
@@ -90,7 +89,7 @@
   - 문자열 형태로 결과를 return함
   - [x] 두 숫자를 비교하여 볼의 수를 카운트하는 기능 | `getNumberOfBalls`
   - [x] 두 숫자를 비교하여 스트라이크의 수를 카운트하는 기능 | `getNumberOfStrikes`
-- [x] 결과 문구를 띄우는 기능 | `printResultGuide`
-- [x] 재시작 안내 문구를 띄우는 기능 | `showRestartGuide`
+- [x] 결과 문구를 띄우는 기능 | `printResult - Guide`
+- [x] 재시작 안내 문구를 띄우는 기능 | `showRestart - Guide`
   - 재시작 버튼을 누르면 게임을 다시 시작할 수 있도록 함.
 
