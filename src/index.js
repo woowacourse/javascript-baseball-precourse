@@ -4,9 +4,9 @@ import displayResult from "./game/displayResult.js";
 
 const baseballGame = new BaseballGame();
 const submitButton = document.getElementById("submit");
+const userInput = document.getElementById("user-input");
 
 function playGame() {
-    const userInput = document.getElementById("user-input");
     let resultString = "", state = true;
 
     if(validateInputNumber(userInput.value)) {
@@ -15,6 +15,7 @@ function playGame() {
         addReplayEvent(state);
     }else{
         alert("잘못된 값을 입력하였습니다!");
+        clearUserInput();
     }
 }
 
@@ -24,6 +25,7 @@ function replayGame() {
     baseballGame.replay();
     replayButton.removeEventListener("click", replayGame);
     displayResult("초기화");
+    clearUserInput();
 }
 
 function addReplayEvent(state) {
@@ -31,6 +33,10 @@ function addReplayEvent(state) {
         const replayButton = document.getElementById("game-restart-button");
         replayButton.addEventListener("click", replayGame);
     }
+}
+
+function clearUserInput() {
+    userInput.value = "";
 }
 
 function init() {
