@@ -6,6 +6,8 @@ export default class BaseballGame {
         this.$userInput = document.getElementById("user-input");
         this.answer = this.makeRandomAnswer(); //정답 생성 배열로 나옴
         this.addEvent();
+
+        // console.log(this.answer);
     }
 
     //이벤트 리스너 추가
@@ -22,6 +24,7 @@ export default class BaseballGame {
         return userInputNum;
     }
 
+    //나중에 함수로 분리
     //사용자로부터 입력받은 값 검사
     checkUserInputNum(userInputNum) {
         if(isNaN(userInputNum)) {
@@ -36,6 +39,9 @@ export default class BaseballGame {
         if(userInputNum.includes(0)){
             return alert("각 자리가 1~9인 수를 입력해주세요!");
         }
+
+        //play 실행
+        this.play(this.answer, userInputNum);
     }
 
     // 중복없이 랜덤한 3자리수 정답 생성
@@ -53,8 +59,19 @@ export default class BaseballGame {
         return randomAnswer;
     }
 
-    play(ComputerInputNumbers, userInputNumbers) {      
+    //나중에 함수로 분리
+    play(computerInputNumbers, userInputNumbers) {
+        
+        if(this.isCorrect(computerInputNumbers, userInputNumbers)){
+            return "🎉 정답을 맞추셨습니다! 🎉";
+        }
+
         return "결과 값 String";
+    }
+
+    //사용자로부터 입력받은 값이 정답과 같은지 검사
+    isCorrect(computerInputNumbers, userInputNumbers) {
+        return computerInputNumbers.every((element, index) => element.toString() === userInputNumbers[index]);
     }
 }
 
