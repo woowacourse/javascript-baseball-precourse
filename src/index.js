@@ -1,5 +1,6 @@
 import { $ } from "./utils/index.js";
 import { USER_INPUT_ALERT } from "./libs/constant.js";
+import Computer from "./computer/computer.js";
 const NUMBER_LENGTH = 3;
 
 const $userInput = $("#user-input");
@@ -40,19 +41,11 @@ const InputCheckMethods = [
 ];
 
 export default class BaseballGame {
-  generateRandomNumbers() {
-    let answer = [];
-    while (answer.length < NUMBER_LENGTH) {
-      this.addRandomNum(answer);
-    }
-    return answer.join("");
+  constructor() {
+    this.computer = new Computer();
   }
-  addRandomNum(answer) {
-    const randomNum = String(MissionUtils.Random.pickNumberInRange(1, 9));
-    if (answer.length === 0 || !answer.includes(randomNum)) {
-      answer.push(randomNum);
-    }
-  }
+
+  // user
   isInputValid(userInputNumbers) {
     return InputCheckMethods.every((InputCheckMethod) =>
       InputCheckMethod(userInputNumbers)
@@ -69,6 +62,7 @@ export default class BaseballGame {
       $correctResult.style.display = "block";
     }
   }
+
   play(computerInputNumbers, userInputNumbers) {
     if (!this.isInputValid(userInputNumbers)) {
       return;
@@ -109,7 +103,7 @@ export default class BaseballGame {
 
 const game = new BaseballGame();
 
-let computerInputNumbers = game.generateRandomNumbers();
+let computerInputNumbers = game.computer.generateRandomNumbers();
 console.log(`computerInputNumbers`, computerInputNumbers);
 $submit.addEventListener("click", onAnswerSubmit);
 
@@ -124,5 +118,5 @@ function onRestart(e) {
   e.preventDefault();
   $userInput.value = "";
   game.makeVisible("$result");
-  computerInputNumbers = game.generateRandomNumbers();
+  computerInputNumbers = game.computer.generateRandomNumbers();
 }
