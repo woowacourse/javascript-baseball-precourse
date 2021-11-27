@@ -1,6 +1,5 @@
 import { VALIDATE_MESSAGES } from './constants.js';
 import createComputerInputNumbers from './createComputerInputNumbers.js';
-import countStrikeAndBall from './countStrikeAndBall.js';
 import getResultMessage from './getResultMessage.js';
 import validateInput from './validateInput.js';
 
@@ -19,7 +18,7 @@ export default function BaseballGame() {
   };
 
   this.play = (computerInputNumbers, userInputNumbers) => {
-    return getResultMessage(countStrikeAndBall(computerInputNumbers, userInputNumbers));
+    return getResultMessage(computerInputNumbers, userInputNumbers);
   };
 
   const getUserInputNumbers = () => {
