@@ -1,0 +1,45 @@
+{
+    "env": {
+      "browser": true,
+      "es2021": true,
+      "node": true
+    },
+    "extends": ["airbnb-base", "plugin:prettier/recommended"],
+    "plugins": ["prettier"],
+    "parserOptions": {
+      "ecmaVersion": 12
+    },
+    "rules": {
+      "prettier/prettier": "off",
+      "no-new": "off",
+      "class-methods-use-this": "off",
+      "import/extensions": "off",
+      "import/no-named-as-default": "off",
+      "no-underscore-dangle": "off",
+      "no-console": "warn",
+      "no-alert": "off",
+      "no-plusplus": "off",
+      "no-shadow": "off",
+      "no-undef":"off",
+      "vars-on-top": "off",
+      "comma-dangle": "off",
+      "func-names": "off",
+      "prefer-template": "off",
+      "no-nested-ternary": "off",
+      "max-classes-per-file": "off",
+      "consistent-return": "off",
+      "no-restricted-syntax": ["off", "ForOfStatement"],
+      "no-param-reassign": ["error", { "props": false }],
+      "no-unused-expressions": [
+        "error",
+        {
+          "allowTernary": true,
+          "allowShortCircuit": true,
+          "allowTaggedTemplates": true
+        }
+      ],
+      "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+      "import/prefer-default-export": "off",
+      "no-use-before-define": "off"
+    }
+  }
