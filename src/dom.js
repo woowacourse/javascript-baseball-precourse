@@ -2,7 +2,7 @@ export const $ = (id) => {
   return document.getElementById(id);
 };
 
-export const createElement = (type, innerHTML) => {
+export const createElement = (innerHTML, type = 'div') => {
   const element = document.createElement(type);
   element.innerHTML = innerHTML;
   return element;
