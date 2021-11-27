@@ -1,18 +1,16 @@
-// on submit button click function
-export default function handleInputSubmit() {
-  // get user input value
-  let input = document.querySelector("#user-input");
-  let inputValue = input.value;
-
+// input validation function
+export default function validateInput(inputValue) {
   // validate input and alert if not valid
-  if (!validateInput(inputValue)) {
+  if (!checkValidNum(inputValue)) {
     alert("입력 값의 형식이 올바르지 않습니다.\n다시 입력해주세요.");
-    input.value = "";
+    return false;
   }
+
+  return true;
 }
 
-// input validation function
-function validateInput(value) {
+// check value if valid
+function checkValidNum(value) {
   // screen for duplicate and value length
   const valueSet = new Set(value.split(""));
   if (valueSet.size !== 3 || value.length !== 3) return false;
