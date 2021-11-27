@@ -1,0 +1,10 @@
+const MIN_NUMBER_IN_RANGE = 1;
+const MAX_NUMBER_IN_RANGE = 9;
+
+const LENGTH_NUMBERS = 3;
+
+export {
+    MIN_NUMBER_IN_RANGE,
+    MAX_NUMBER_IN_RANGE,
+    LENGTH_NUMBERS,
+};
