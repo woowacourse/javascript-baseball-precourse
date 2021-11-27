@@ -1,12 +1,20 @@
+import { $ } from "./utils/index.js";
+import { USER_INPUT_ALERT } from "./libs/constant.js";
 const NUMBER_LENGTH = 3;
-
-const $ = (selector) => {
-  return document.querySelector(selector);
-};
 
 const $userInput = $("#user-input");
 const $submit = $("#submit");
 const $result = $("#result");
+
+const InputCheckMethods = [
+  (value) => {
+    if (val == "") {
+      alert(USER_INPUT_ALERT.blank);
+      return false;
+    }
+    return true;
+  },
+];
 
 export default class BaseballGame {
   generateRandomNumbers() {
@@ -22,44 +30,47 @@ export default class BaseballGame {
       answer.push(randomNum);
     }
   }
-  checkAnswer(randomNums, inputNums) {
-    if (randomNums === inputNums) {
+  isValid(userInputNumbers) {
+    // 중복되는 값이 없는지 검사
+    // 1-9가 맞는지 검사
+    // 3자리가 맞는지 검사
+  }
+  play(computerInputNumbers, userInputNumbers) {
+    if (!isValid(userInputNumbers)) {
+      return;
+    }
+    if (computerInputNumbers === userInputNumbers) {
       $result.innerHTML = `정답입니다.`;
       return;
     }
-    const ball = this.calcBall(randomNums, inputNums);
-    const strike = this.calcStrike(randomNums, inputNums);
+    const ball = this.calcBall(computerInputNumbers, userInputNumbers);
+    const strike = this.calcStrike(computerInputNumbers, userInputNumbers);
     const countMessage =
       `${ball} ${strike}` === " " ? "낫싱" : `${ball} ${strike}`;
     $result.innerHTML = countMessage;
   }
-  calcBall(randomNums, inputNums) {
+  calcBall(computerInputNumbers, userInputNumbers) {
     let ball = 0;
-    for (let i = 0; i < randomNums.length; i++) {
+    for (let i = 0; i < computerInputNumbers.length; i++) {
       // indent를 1로 만드는 법?
-      if (randomNums.includes(inputNums[i]) && randomNums[i] !== inputNums[i]) {
+      if (
+        computerInputNumbers.includes(userInputNumbers[i]) &&
+        computerInputNumbers[i] !== userInputNumbers[i]
+      ) {
         ball++;
       }
     }
     return ball > 0 ? `${ball}볼` : "";
   }
-
-  calcStrike(randomNums, inputNums) {
-    let strike = 0;
-    for (let i = 0; i < randomNums.length; i++) {
-      if (randomNums[i] === inputNums[i]) {
-        strike++;
-      }
-    }
-    return strike > 0 ? `${strike}스트라이크` : "";
-  }
 }
 
 const game = new BaseballGame();
 
-const randomNums = game.generateRandomNumbers();
-console.log(`randomNums`, randomNums);
-$submit.addEventListener("click", (e) => {
+const computerInputNumbers = game.generateRandomNumbers();
+console.log(`computerInputNumbers`, computerInputNumbers);
+$submit.addEventListener("click", onAnswerSubmit);
+
+function onAnswerSubmit(e) {
   e.preventDefault();
-  game.checkAnswer(randomNums, $userInput.value);
-});
+  game.play(computerInputNumbers, $userInput.value);
+}
