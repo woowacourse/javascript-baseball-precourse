@@ -1,4 +1,10 @@
 import { generateRandomNumbers } from "./init.js";
+import { checkUserInputValue } from "./check.js";
+
+const userInput = document.getElementById("user-input");
+const buttonSubmit = document.getElementById("submit");
+
+const userInputValue = null;
 
 export default function BaseballGame() {
   const setRandomNumbers = generateRandomNumbers();
@@ -10,10 +16,9 @@ export default function BaseballGame() {
   console.log(setRandomNumbers);
 }
 
-const buttonSubmit = document.getElementById("submit");
-
 buttonSubmit.addEventListener("click", (e) => {
-  console.log("hi");
+  e.preventDefault();
+  console.log(checkUserInputValue(userInput.value));
 });
 
 new BaseballGame();
