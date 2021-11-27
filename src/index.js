@@ -32,4 +32,11 @@ export default class BaseballGame {
     return VERIFIED_CODE.VERIFIED;
   }
 
+  showErrorMessage(resultCode) {
+    if (resultCode === VERIFIED_CODE.VERIFIED) {
+      return;
+    }
+    
+    alert(RESULT_MESSAGE[resultCode]);
+  }
 }
