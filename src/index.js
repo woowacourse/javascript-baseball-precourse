@@ -31,7 +31,7 @@ function BaseballGame() {
     setScore(computerInputNumbers, userInputNumbers);
     this.gameOver = false;
     const message = makeMessage();
-    renderMessage(message);
+    renderResultMessage(message);
   };
 
   const setScore = (computerInputNumbers, userInputNumbers) => {
@@ -67,7 +67,7 @@ function BaseballGame() {
     this.score[STRIKE] = 0;
   };
 
-  const renderMessage = (message) => {
+  const renderResultMessage = (message) => {
     $result.innerHTML = this.gameOver
       ? `<p class=box>${message}</p> <p>게임을 새로 시작하시겠습니까? <button id=game-restart-button>재시작</button></p>`
       : `<p class=box>${message}</p>`;

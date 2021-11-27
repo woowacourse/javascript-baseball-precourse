@@ -15,7 +15,7 @@ export const getRandomNumber = (MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER) => {
   return randomNumberArray.join('');
 };
 export const isValidInput = (input) => {
-  if (!isThreeDigitInteger(input)) {
+  if (!isValidLengthInteger(input)) {
     return false;
   }
   if (input.includes(0)) {
@@ -27,7 +27,7 @@ export const isValidInput = (input) => {
 
   return true;
 };
-const isThreeDigitInteger = (input) => {
+const isValidLengthInteger = (input) => {
   if (input.length !== VALID_NUMBER_LENGTH) {
     return false;
   }
