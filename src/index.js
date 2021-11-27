@@ -1,4 +1,4 @@
-import { setNumber } from './setNumber.js.js'
+import { setNumber } from './setNumber.js'
 import { checkNumber } from './checkValid.js'
 import { checkResult, showRestartGameButton } from './checkResult.js';
 
