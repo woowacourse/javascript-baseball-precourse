@@ -7,8 +7,7 @@ export default function playGame(computerAnswer, play) {
     const userAnswer = validUserInput();
     if (userAnswer) {
       const gameResult = play(computerAnswer, userAnswer);
-      if (gameResult === "정답") {
-      } else $result.textContent = gameResult;
+      $result.innerHTML = gameResult;
     }
   });
 }
