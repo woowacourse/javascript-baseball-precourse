@@ -12,23 +12,33 @@ class BaseballGame {
 
     eventRegister() {
         $checkButton.addEventListener('click', (ev) => this.checkAnswer(ev));
+        $inputElement.addEventListener('change', ({target}) => this.textChange(target));
         $resultElement.addEventListener('click', ({target}) => {
             if(!target.matches('#game-restart-button')) return;
             this.init();
         })
     };
 
+    play(computerInputNumbers, userInputNumbers) {
+        const { ball, strike } = countResult(userInputNumbers, computerInputNumbers);
+        return getHint(ball, strike);
+    }
     setResultElementText(text) { $resultElement.innerHTML = text; }
+    textChange(target) { this.input = target.value; }
+
+    init() {
+        this.answer = getComputerNumbers();
+        this.input = '';
+        this.gameExit = false;
+
+        this.setResultElementText(this.input);
+        $inputElement.value = '';
+    }
 
     gameClear() {
         this.setResultElementText(answerDocument);
         this.gameExit = true;
     }
-
-    play(computerInputNumbers, userInputNumbers) {
-        const { ball, strike } = countResult(userInputNumbers, computerInputNumbers);
-        return getHint(ball, strike);
-    };
 
     checkAnswer(ev) {
         ev.preventDefault(); ev.stopPropagation();
@@ -40,15 +50,6 @@ class BaseballGame {
         else if(this.input === this.answer) this.gameClear();
         else this.setResultElementText(this.play(this.answer, this.input));
     }
-    init() {
-        this.answer = getComputerNumbers();
-        this.input = '';
-        this.gameExit = false;
-
-        this.setResultElementText(this.input);
-        $inputElement.value = '';
-    }
-
 }
 
 export default new BaseballGame();
