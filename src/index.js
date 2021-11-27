@@ -19,7 +19,7 @@ export default class BaseballGame {
   }
 
   submitClickEvent() {
-    this.$submit.addEventListener('click', (event) => {
+    this.$submit.addEventListener('click', event => {
       event.preventDefault();
       const getUserInputNumbers = new GetUserInputNumbers(this.$userInput);
       const userInput = getUserInputNumbers.main();

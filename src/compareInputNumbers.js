@@ -34,7 +34,7 @@ export default class CompareInputNumbers {
   }
 
   checkTheBallCount() {
-    this.userInputNumbers.forEach((userNumber) => {
+    this.userInputNumbers.forEach(userNumber => {
       if (this.computerInputNumbers.includes(userNumber)) {
         this.ballCount += 1;
       }

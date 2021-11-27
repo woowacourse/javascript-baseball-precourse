@@ -56,6 +56,6 @@ export default class GetUserInputNumbers {
       return STRING.ALERT_MESSAGE;
     }
 
-    return this.userInputNumbers.map((string) => Number(string));
+    return this.userInputNumbers.map(string => Number(string));
   }
 }
