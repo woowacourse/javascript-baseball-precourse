@@ -33,3 +33,11 @@ export const isNotValidInput = (input) => {
 export const parseInput = (input) => {
   return String(parseInt(input.trim(), 10));
 };
+
+export const convertToHashMap = (input) => {
+  const hashMap = new Map();
+  input.split('').forEach((number, index) => {
+    hashMap.set(number, index);
+  });
+  return hashMap;
+};
