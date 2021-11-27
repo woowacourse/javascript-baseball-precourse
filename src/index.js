@@ -21,14 +21,15 @@ export default class BaseballGame {
       this.makeVisible("$correctResult");
       return;
     }
-    this.printCountMessage(computerInputNumbers, userInputNumbers);
-  }
-  printCountMessage(computerInputNumbers, userInputNumbers) {
     const ball = this.calcBall(computerInputNumbers, userInputNumbers);
     const strike = this.calcStrike(computerInputNumbers, userInputNumbers);
-    const countMessage =
-      `${ball} ${strike}` === " " ? "낫싱" : `${ball} ${strike}`;
-    $result.innerHTML = countMessage;
+    $result.innerHTML = this.printCountMessage(ball, strike);
+  }
+  printCountMessage(ball, strike) {
+    if (ball || strike) {
+      return `${ball} ${strike}`;
+    }
+    return "낫싱";
   }
   calcBall(computerInputNumbers, userInputNumbers) {
     let ball = 0;
