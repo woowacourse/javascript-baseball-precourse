@@ -1,5 +1,6 @@
 export default function BaseballGame() {
   const hint = document.getElementById('result');
+  document.getElementById('result').style.display = 'None';
   document.getElementById('game-restart-button').style.display = 'None';
 
   /* pickThreeDigitRandomNumber(); */
@@ -34,10 +35,11 @@ export default function BaseballGame() {
   submitButton.addEventListener('click', submitButtonOn);
 
   function submitButtonOn() {
-    let usernumber = getUserNum();
-    const result = play(computerInputNumbers, usernumber);
+    let userInputNumbers = getUserNum();
+    const result = play(computerInputNumbers, userInputNumbers); //need to 손보기
     if (result !== '3스트라이크') {
       hint.innerHTML = result;
+      hint.style.display = '';
     } else {
       document.getElementById('game-restart-button').style.display = '';
     }
@@ -128,7 +130,7 @@ export default function BaseballGame() {
   }
 
   /* Print Result */
-  function printBallStrike(ball, strike) {
+  function returnBallStrike(ball, strike) {
     if (ball == 0 && strike == 0) {
       return '낫싱';
     } else if (ball !== 0 && strike == 0) {
@@ -143,7 +145,7 @@ export default function BaseballGame() {
   function play(computerInputNumbers, userInputNumbers) {
     const strike = calStrike(computerInputNumbers, userInputNumbers);
     const ball = calBall(computerInputNumbers, userInputNumbers);
-    return printBallStrike(ball, strike);
+    return returnBallStrike(ball, strike);
   }
 }
 

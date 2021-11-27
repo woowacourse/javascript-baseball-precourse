@@ -4,10 +4,10 @@
   "description": "우아한테크코스 프리코스 숫자 야구 게임 미션",
   "type": "module",
   "dependencies": {
-    "@woowacourse/mission-utils": "^1.0.1"
+    "@woowacourse/mission-utils": "^1.0.1",
+    "cypress": "^9.1.0"
   },
   "devDependencies": {
-    "cypress": "8.7.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.1",
     "eslint-config-prettier": "^8.3.0",
@@ -16,9 +16,12 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "jest": "^27.3.1",
     "prettier": "2.5.0"
   },
   "scripts": {
+    "hi": "echo hi!",
+    "test2": "cypress run test2.js",
     "test": "cypress run --browser chrome"
   },
   "repository": {
