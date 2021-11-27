@@ -4,10 +4,11 @@ export default class BaseballGame {
     constructor() {
         this.$submitButton = document.getElementById("submit");
         this.$userInput = document.getElementById("user-input");
+        this.$result = document.getElementById("result");
         this.answer = this.makeRandomAnswer(); //정답 생성 배열로 나옴
         this.addEvent();
 
-        // console.log(this.answer);
+        console.log(this.answer);
     }
 
     //이벤트 리스너 추가
@@ -41,7 +42,7 @@ export default class BaseballGame {
         }
 
         //play 실행
-        this.play(this.answer, userInputNum);
+        this.showResultSentence(this.play(this.answer, userInputNum));
     }
 
     // 중복없이 랜덤한 3자리수 정답 생성
@@ -116,6 +117,11 @@ export default class BaseballGame {
         if(numStrike === 0 && numBall === 0) {
             return "낫싱";
         }
+    }
+
+    //결과 문장 출력
+    showResultSentence(resultSentence) {
+        this.$result.textContent = resultSentence;
     }
 }
 
