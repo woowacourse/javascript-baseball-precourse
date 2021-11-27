@@ -12,19 +12,20 @@ export default class BaseballGame {
         this.restartGuide = document.querySelector('#restart');
         document.querySelector('#submit').addEventListener("click", (e) => {
             e.preventDefault();
-            this.checkAnswer();
+            if ( !this.isGameOver ) this.checkAnswer();
         });
         document.querySelector('#game-restart-button').addEventListener("click", () => { this.initGame(); });
     }
 
     initGame() {
         this.computerNumbers = this.createComputerNumbers();
+        this.isGameOver = false;
         UserInput.clear();
         this.clearResultGuide();
         this.hideRestartGuide();
         console.log(this.computerNumbers);
     }
-    
+
     clearResultGuide() {
         this.resultGuide.innerHTML = '';
     }
@@ -53,7 +54,6 @@ export default class BaseballGame {
 
     checkAnswer() {
         const userInputNumbers = UserInput.getNumbers();
-        console.log(userInputNumbers, UserInput.isValid(userInputNumbers));
         if ( !UserInput.isValid(userInputNumbers) ) {
             alert(ERROR_MESSAGE);
             UserInput.clear();
@@ -61,8 +61,10 @@ export default class BaseballGame {
         }
         const result = this.play(this.computerNumbers, userInputNumbers);
         this.printResultGuide(result);
-        if ( this.isCorrectAnswer(result) )
+        if ( this.isCorrectAnswer(result) ) {
+            this.isGameOver = true;
             this.showRestartGuide();
+        }
     }
 
     isCorrectAnswer(result) {
