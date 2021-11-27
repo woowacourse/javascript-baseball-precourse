@@ -1,10 +1,4 @@
-import { NUMBER_LENGTH } from '../constants/game-rule.js';
-import {
-  NOT_NUMERIC_MESSAGE,
-  LENGTH_NOT_MATCH_MESSAGE,
-  ALREADY_EXIST_MESSAGE,
-  OUT_OF_RANGE_MESSAGE,
-} from '../constants/alert-message.js';
+import { GAME_RULE, ALERT_MESSAGE } from '../constants/index.js';
 
 // 주어진 문자열이 모두 숫자인지 검사
 function isNumeric(str) {
@@ -31,14 +25,14 @@ function isDuplication(userInput) {
 // 유저 입력에 문제가 없는지 검사
 export function isUserInputValid(userInput) {
   let isValid = false;
-  if (userInput.length != NUMBER_LENGTH) {
-    alert(LENGTH_NOT_MATCH_MESSAGE);
+  if (userInput.length != GAME_RULE.numberLength) {
+    alert(ALERT_MESSAGE.lengthNotMatch);
   } else if (!isNumeric(userInput)) {
-    alert(NOT_NUMERIC_MESSAGE);
+    alert(ALERT_MESSAGE.notNumeric);
   } else if (isDuplication(userInput)) {
-    alert(ALREADY_EXIST_MESSAGE);
+    alert(ALERT_MESSAGE.alreadyExist);
   } else if (userInput.includes(0)) {
-    alert(OUT_OF_RANGE_MESSAGE);
+    alert(ALERT_MESSAGE.outOfRange);
   } else {
     isValid = true;
   }

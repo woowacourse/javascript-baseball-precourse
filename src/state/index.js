@@ -1,4 +1,4 @@
-import { NUMBER_LENGTH, RANGE_MAX, RANGE_MIN } from '../constants/game-rule.js';
+import { GAME_RULE } from '../constants/index.js';
 
 export const state = {
   userInput: 0,
@@ -29,14 +29,14 @@ export const state = {
       }
     }
   },
-  setUserInput(userInputValue){
+  setUserInput(userInputValue) {
     state.userInput = userInputValue;
   },
   // 주어진 범위 내의 무작위 난수를 중복없이 만듬
   setComputerInput() {
     let randomNumberString = '';
-    while (randomNumberString.length < NUMBER_LENGTH) {
-      const randomNumber = MissionUtils.Random.pickNumberInRange(RANGE_MIN, RANGE_MAX);
+    while (randomNumberString.length < GAME_RULE.numberLength) {
+      const randomNumber = MissionUtils.Random.pickNumberInRange(GAME_RULE.rangeMin, GAME_RULE.rangeMax,);
       if (!randomNumberString.includes(randomNumber)) {
         randomNumberString += randomNumber;
       }

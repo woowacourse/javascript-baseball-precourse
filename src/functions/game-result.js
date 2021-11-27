@@ -1,5 +1,5 @@
 import { state } from '../state/index.js';
-import { RESTART_MESSAGE, NOTHING_MESSAGE, CLEAR_MESSAGE } from '../constants/result-message.js';
+import { RESULT_MESSAGE } from '../constants/index.js';
 import { RESULT_DIV, SUBMIT_BUTTON, USER_INPUT } from '../constants/html-doms.js';
 
 // 게임 재시작 전에 필요한 세팅
@@ -32,7 +32,7 @@ function makeRestartComponent() {
   const divTag = document.createElement('div');
   const restartButton = makeRestartButton();
 
-  divTag.innerHTML = RESTART_MESSAGE;
+  divTag.innerHTML = RESULT_MESSAGE.restart;
 
   divTag.appendChild(restartButton);
   RESULT_DIV.appendChild(divTag);
@@ -57,10 +57,10 @@ export function makeResultMessage() {
     resultMessage += `${state.strikeCount}스트라이크`;
   }
   if (state.ballCount === 0 && state.strikeCount === 0) {
-    resultMessage = NOTHING_MESSAGE;
+    resultMessage = RESULT_MESSAGE.nothing;
   }
   if (state.strikeCount === 3) {
-    resultMessage = CLEAR_MESSAGE;
+    resultMessage = RESULT_MESSAGE.clear;
   }
 
   return resultMessage;
