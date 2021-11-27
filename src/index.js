@@ -1,7 +1,7 @@
-import CompareInputNumbers from './compareInputNumbers.js';
+import CompareInputNumbers from './CompareInputNumbers.js';
 import { STRING } from './constant.js';
 import getComputerInputNumbers from './getInputNumbers/getComputerInputNumbers.js';
-import GetUserInputNumbers from './getInputNumbers/getUserInputNumbers.js';
+import GetUserInputNumbers from './getInputNumbers/GetUserInputNumbers.js';
 
 export default class BaseballGame {
   constructor() {
