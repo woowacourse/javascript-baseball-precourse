@@ -4,7 +4,7 @@ export default class UserInput {
         return document.querySelector('#user-input');
     }
 
-    static clearUserInput() {
+    static clear() {
         this.USER_INPUT_ELEM.value = '';
     }
 

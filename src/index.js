@@ -1,4 +1,4 @@
-import { CORRECT_ANSWER_MESSAGE, DIGIT, NOTHING_MESSAGE } from "./constants.js";
+import { CORRECT_ANSWER_MESSAGE, DIGIT, ERROR_MESSAGE, NOTHING_MESSAGE } from "./constants.js";
 import UserInput from "./UserInput.js";
 
 export default class BaseballGame {
@@ -14,17 +14,17 @@ export default class BaseballGame {
             e.preventDefault();
             this.checkAnswer();
         });
-        document.querySelector('#game-restart-button').addEventListener("click", this.initGame);
+        document.querySelector('#game-restart-button').addEventListener("click", () => { this.initGame(); });
     }
 
     initGame() {
         this.computerNumbers = this.createComputerNumbers();
+        UserInput.clear();
         this.clearResultGuide();
-        UserInput.clearUserInput();
         this.hideRestartGuide();
         console.log(this.computerNumbers);
     }
-
+    
     clearResultGuide() {
         this.resultGuide.innerHTML = '';
     }
@@ -54,6 +54,11 @@ export default class BaseballGame {
     checkAnswer() {
         const userInputNumbers = UserInput.getNumbers();
         console.log(userInputNumbers, UserInput.isValid(userInputNumbers));
+        if ( !UserInput.isValid(userInputNumbers) ) {
+            alert(ERROR_MESSAGE);
+            UserInput.clear();
+            this.clearResultGuide();
+        }
         const result = this.play(this.computerNumbers, userInputNumbers);
         this.printResultGuide(result);
         if ( this.isCorrectAnswer(result) )

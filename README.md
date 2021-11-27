@@ -70,9 +70,9 @@
 
 - [x] 컴퓨터가 가지는 서로 다른 3자리의 랜덤 숫자 생성하는 기능 | `createComputerNumbers`
 - [x] 결과 문구를 clear하는 기능 | `clearResultGuide`
-- [x] 사용자 입력창을 clear하는 기능 | `clearUserInput`
+- [x] 사용자 입력창을 clear하는 기능 | `clear - UserInput`
 - [x] 재시작 안내 문구를 숨기는 기능 | `hideRestartGuide`
-- [ ] 사용자가 입력한 숫자의 정답 비교 결과를 사용자가 확인할 수 있도록 하는 기능 | `checkAnswer`
+- [x] 사용자가 입력한 숫자의 정답 비교 결과를 사용자가 확인할 수 있도록 하는 기능 | `checkAnswer`
   - 사용자 입력 값을 가져와 잘못된 값인지 확인하고,
   - 잘못된 경우
     - `alert`로 에러 메시지 띄우고
