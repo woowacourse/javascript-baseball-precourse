@@ -1,4 +1,5 @@
 import { CORRECT_ANSWER_MESSAGE, DIGIT, ERROR_MESSAGE, NOTHING_MESSAGE } from "./constants.js";
+import Guide from "./Guide.js";
 import UserInput from "./UserInput.js";
 
 export default class BaseballGame {
@@ -8,38 +9,22 @@ export default class BaseballGame {
     }
 
     setDOM() {
-        this.resultGuide = document.querySelector('#result');
-        this.restartGuide = document.querySelector('#restart');
         document.querySelector('#submit').addEventListener("click", (e) => {
             e.preventDefault();
             if ( !this.isGameOver ) this.checkAnswer();
         });
-        document.querySelector('#game-restart-button').addEventListener("click", () => { this.initGame(); });
+        document.querySelector('#game-restart-button').addEventListener("click", () => {
+            this.initGame(); 
+        });
     }
 
     initGame() {
         this.computerNumbers = this.createComputerNumbers();
         this.isGameOver = false;
         UserInput.clear();
-        this.clearResultGuide();
-        this.hideRestartGuide();
+        Guide.clearResult();
+        Guide.hideRestart();
         console.log(this.computerNumbers);
-    }
-
-    clearResultGuide() {
-        this.resultGuide.innerHTML = '';
-    }
-
-    printResultGuide(result) {
-        this.resultGuide.innerHTML = result;
-    }
-
-    hideRestartGuide() {
-        this.restartGuide.hidden = true;
-    }
-
-    showRestartGuide() {
-        this.restartGuide.hidden = false;
     }
 
     createComputerNumbers() {
@@ -57,18 +42,14 @@ export default class BaseballGame {
         if ( !UserInput.isValid(userInputNumbers) ) {
             alert(ERROR_MESSAGE);
             UserInput.clear();
-            this.clearResultGuide();
+            Guide.clearResult();
         }
         const result = this.play(this.computerNumbers, userInputNumbers);
-        this.printResultGuide(result);
-        if ( this.isCorrectAnswer(result) ) {
+        Guide.printResult(result);
+        if ( result.includes('정답') ) {
             this.isGameOver = true;
-            this.showRestartGuide();
+            Guide.showRestart();
         }
-    }
-
-    isCorrectAnswer(result) {
-        return result.includes('정답');
     }
 
     play(computerInputNumbers, userInputNumbers) {
@@ -92,7 +73,7 @@ export default class BaseballGame {
 
     getNumberOfStrikes(computerInputNumbers, userInputNumbers) {
         return computerInputNumbers.filter((number, index) => {
-            return number === userInputNumbers[index]
+            return number === userInputNumbers[index];
         }).length;
     }
 }
