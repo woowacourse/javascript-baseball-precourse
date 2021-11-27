@@ -80,6 +80,28 @@ export default function BaseballGame() {
   submitBtn.addEventListener("click", getUserNum);
 
   getComputerNum();
+
+   // get Ball
+   const getBallCount = (computerNum, userNum) => {
+    let ball = 0;
+    for (let i = 0; i < 3; i++){
+      if (computerNum[i] != userNum[i] && computerNum.includes(userNum[i])) {
+        ball += 1;
+      }
+    }
+    return ball;
+  }
+
+  //get Strike
+  const getStrikeCount = (computerNum, userNum) => {
+    let strike = 0;
+    for (let i = 0; i < 3; i++){
+      if (computerNum[i] == userNum[i]) {
+        strike += 1;
+      }
+    }
+    return strike;
+  }
 }
 
 new BaseballGame();
