@@ -60,8 +60,7 @@ export default class BaseballGame {
     }
 
     //play
-    play(computerInputNumbers, userInputNumbers) {
-        
+    play(computerInputNumbers, userInputNumbers) {       
         if(this.isCorrect(computerInputNumbers, userInputNumbers)){
             return "🎉 정답을 맞추셨습니다! 🎉";
         }
@@ -69,11 +68,7 @@ export default class BaseballGame {
         const numStrike = this.countStrike(computerInputNumbers, userInputNumbers);
         const numBall = this.countBall(computerInputNumbers, userInputNumbers);
 
-        if(numStrike === 0 && numBall === 0) {
-            return "낫싱";
-        }
-
-        return "결과 값 String";
+        return this.makeResultSentence(numStrike, numBall);
     }
 
     //사용자로부터 입력받은 값이 정답과 같은지 검사
@@ -105,6 +100,22 @@ export default class BaseballGame {
         });
 
         return numBall;
+    }
+
+    //결과 문장 생성
+    makeResultSentence(numStrike, numBall) {
+        if(numStrike > 0 && numBall === 0) {
+            return `${numStrike}스트라이크`;
+        }
+        if(numStrike === 0 && numBall > 0) {
+            return `${numBall}볼`;
+        }
+        if(numStrike > 0 && numBall > 0) {
+            return `${numBall}볼 ${numStrike}스트라이크`;
+        }
+        if(numStrike === 0 && numBall === 0) {
+            return "낫싱";
+        }
     }
 }
 
