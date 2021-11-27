@@ -3,14 +3,9 @@ function isThreeDigitInput(input) {
 }
 
 function isOneToNineNumber(input) {
-  let ret = true;
-
-  input.forEach((element) => {
-    if (Number.isNaN(element) || element < 1 || element > 9) {
-      ret = false;
-    }
+  return !input.some((element) => {
+    return Number.isNaN(element) || element < 1 || element > 9;
   });
-  return ret;
 }
 
 function isNoDuplicatedNumber(input) {
