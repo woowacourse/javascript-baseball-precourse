@@ -1,3 +1,5 @@
+import { RESULT_TEXT } from "./constants.js";
+
 class GameManager {
     get generateNumberArray() {
         const randomUtils = MissionUtils.Random.pickNumberInRange;
@@ -24,6 +26,16 @@ class GameManager {
 
         if (result.strike === 3) result.end = true;
         return result;
+    }
+
+    getGameHintText(strike, ball) {
+        if (ball === 0 && strike === 0) return RESULT_TEXT.GAME_HINT_NOTHING;
+
+        const textJoinArray = [];
+        if (ball > 0) textJoinArray.push(ball + RESULT_TEXT.GAME_HINT_BALL);
+        if (strike > 0) textJoinArray.push(strike + RESULT_TEXT.GAME_HINT_STRIKE);
+
+        return textJoinArray.join(" ");
     }
 }
 

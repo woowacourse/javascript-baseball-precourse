@@ -19,15 +19,10 @@ export default class BaseballGame {
 
     play(computerInputNumbers, userInputNumbers) {
         const gameResult = gameManager.getGameResult(computerInputNumbers, userInputNumbers);
-        if (gameResult.ball === 0 && gameResult.strike === 0) return RESULT_TEXT.GAME_HINT_NOTHING;
-
-        const textJoinArray = [];
-        if (gameResult.ball > 0) textJoinArray.push(gameResult.ball + RESULT_TEXT.GAME_HINT_BALL);
-        if (gameResult.strike > 0) textJoinArray.push(gameResult.strike + RESULT_TEXT.GAME_HINT_STRIKE);
+        const gameHintText = gameManager.getGameHintText(gameResult.strike, gameResult.ball);
 
         if (gameResult.strike === 3) this.gameOver = true;
-
-        return textJoinArray.join(" ");
+        return gameHintText;
     }
 
     drawResult(playResult) {
