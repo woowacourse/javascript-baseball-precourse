@@ -1,17 +1,19 @@
+import { Messages } from "../constants/constants.js";
+
 export default function resultMessages(strikes, balls) {
-    let messages;
+    let msg;
 
     if(strikes === 0 && balls === 0) {
-        messages = "낫싱";
+        msg = Messages.nothing;
     }else if(strikes === 3) {
-        messages = "🎉 정답을 맞추셨습니다! 🎉";
+        msg = Messages.correct;
     }else if(strikes === 0) {
-        messages = balls + "볼";
+        msg = balls + Messages.ball;
     }else if(balls === 0) {
-        messages = strikes + "스트라이크";
+        msg = strikes + Messages.strike;
     }else {
-        messages = balls + "볼 " + strikes + "스트라이크";
+        msg = balls + Messages.ball + " " + strikes + Messages.strike;
     }
 
-    return messages;
+    return msg;
 }

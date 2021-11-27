@@ -7,7 +7,7 @@ const submitButton = document.getElementById("submit");
 
 function playGame() {
     const userInput = document.getElementById("user-input");
-    let resultString, state = true;
+    let resultString = "", state = true;
 
     if(validateInputNumber(userInput.value)) {
         resultString = baseballGame.play(userInput.value);
