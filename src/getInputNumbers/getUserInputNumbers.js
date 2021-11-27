@@ -28,6 +28,7 @@ export default class GetUserInputNumbers {
         return false;
       }
     }
+
     return true;
   }
 
@@ -36,6 +37,7 @@ export default class GetUserInputNumbers {
     if (this.userInputs.length !== NUMBER.LENGTH) {
       return false;
     }
+
     return true;
   }
 
@@ -48,6 +50,7 @@ export default class GetUserInputNumbers {
     if (this.userInputNumbers.length !== NUMBER.LENGTH) {
       return false;
     }
+
     return true;
   }
 

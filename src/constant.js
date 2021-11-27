@@ -7,6 +7,8 @@ export const NUMBER = {
 };
 
 export const STRING = {
+  THREE_STRIKE: '3스트라이크',
+  ALERT_MESSAGE: '공백 없이 중복되지 않는 숫자(1 ~ 9) 3개를 입력해주세요!',
   CORRECT_MESSAGE: `
   <b>🎉 정답을 맞추셨습니다! 🎉</b>
   <br/ >
@@ -14,6 +16,4 @@ export const STRING = {
   게임을 새로 시작하시겠습니까?
   <button id='game-restart-button'>게임 재시작</button>
   `,
-  THREE_STRIKE: '3스트라이크',
-  ALERT_MESSAGE: '공백 없이 중복되지 않는 숫자(1 ~ 9) 3개를 입력해주세요!',
 };

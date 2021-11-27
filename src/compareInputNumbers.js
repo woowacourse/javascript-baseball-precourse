@@ -4,23 +4,22 @@ export default class CompareInputNumbers {
     this.userInputNumbers = userInputNumbers;
     this.strikeCount = 0;
     this.ballCount = 0;
-    this.resultMessage = '';
   }
 
   getResultMessage() {
-    if (this.strikeCount === 0 && this.ballCount === 0) {
-      this.resultMessage = '낫싱';
-      return;
-    }
     if (this.ballCount === 0 && this.strikeCount > 0) {
-      this.resultMessage = `${this.strikeCount}스트라이크`;
-      return;
+      return `${this.strikeCount}스트라이크`;
     }
+
     if (this.strikeCount === 0 && this.ballCount > 0) {
-      this.resultMessage = `${this.ballCount}볼`;
-      return;
+      return `${this.ballCount}볼`;
     }
-    this.resultMessage = `${this.ballCount}볼 ${this.strikeCount}스트라이크`;
+
+    if (this.strikeCount > 0 && this.ballCount > 0) {
+      return `${this.ballCount}볼 ${this.strikeCount}스트라이크`;
+    }
+
+    return '낫싱';
   }
 
   checkTheStrikeCount() {
@@ -44,7 +43,7 @@ export default class CompareInputNumbers {
   main() {
     this.checkTheStrikeCount();
     this.checkTheBallCount();
-    this.getResultMessage();
-    return this.resultMessage;
+
+    return this.getResultMessage();
   }
 }

@@ -26,8 +26,10 @@ export default class BaseballGame {
       if (typeof userInput === 'string') {
         this.initializeUserInput();
         alert(userInput);
+
         return;
       }
+
       this.play(this.computerInputNumbers, userInput);
     });
   }
@@ -49,8 +51,10 @@ export default class BaseballGame {
     this.hintMessage = compareInputNumbers.main();
     if (this.hintMessage !== STRING.THREE_STRIKE) {
       this.$result.textContent = this.hintMessage;
+
       return this.hintMessage;
     }
+
     this.$result.innerHTML = this.correctMessage;
     this.gameRestartClickEvent();
   }

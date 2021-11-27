@@ -2,7 +2,6 @@ import { NUMBER } from '../constant.js';
 
 export default function getComputerInputNumbers() {
   const computerInputList = [];
-
   while (computerInputList.length !== NUMBER.LENGTH) {
     const randomNumber = MissionUtils.Random.pickNumberInRange(
       NUMBER.RANDOM_START,
@@ -13,5 +12,6 @@ export default function getComputerInputNumbers() {
       computerInputList.push(randomNumber);
     }
   }
+
   return computerInputList;
 }
