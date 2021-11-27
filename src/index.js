@@ -56,10 +56,8 @@ export default function BaseballGame() {
   // check All
   const checkNum = num => {
     if (checktype(num) || checkLen(num) || checkOnetoNine(num) || checkDuplication(num)){
-      console.log("조건 불만족");
       return false;
     }
-    console.log("조건 만족");
     return true;
   }
 
@@ -68,9 +66,7 @@ export default function BaseballGame() {
   const getUserNum = () => {
     const userInputNumbers = document.getElementById("user-input").value;
 
-    console.log(userInputNumbers);
     if (checkNum(userInputNumbers)){
-      console.log("반환");
       return userInputNumbers;
     }
     document.getElementById("user-input").autofocus;
@@ -101,6 +97,20 @@ export default function BaseballGame() {
       }
     }
     return strike;
+  }
+  
+  //get Result Text
+  const getResult = (computerNum, userNum) => {
+    let result = '';
+    const ballCount = getBallCount(String(computerNum), String(userNum));
+    const strikeCount = getStrikeCount(String(computerNum), String(userNum));
+
+    if (strikeCount === 3) return BASEBALL.ANSWER;
+    if (strikeCount === 0 && ballCount == 0) return BASEBALL.NOTHING;
+    if (ballCount != 0) result += `${ballCount}${BASEBALL.BALL} `;
+    if (strikeCount != 0) result += `${strikeCount}${BASEBALL.STRIKE}`;
+
+    return result;
   }
 }
 
