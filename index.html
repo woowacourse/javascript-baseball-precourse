@@ -13,12 +13,16 @@
         올바른 예) 139 <br />
         틀린 예) 122
       </p>
-      <form>
+      <div>
         <input type="text" id="user-input" />
         <button id="submit">확인</button>
-      </form>
+      </div>
       <h3>📄 결과</h3>
       <div id="result">1볼 1스트라이크</div>
+      <div id="restart" style="visibility: hidden;">
+        <strong id = "restart-text">게임을 새로 시작하시겠습니까?</strong>
+        <button id = "game-restart-button">게임 재시작</button>
+      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@woowacourse/mission-utils@1.0.1/dist/mission-utils.min.js"></script>
     <script type="module" src="src/index.js"></script>

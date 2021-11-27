@@ -8,5 +8,4 @@ export const BASEBALL = {
   ALERT_ONE_TO_NINE: '1~9까지의 숫자를 입력해주세요.',
   ALERT_DUPLICATION: '중복 없이 3개의 숫자를 입력해주세요.',
   ANSWER: '🎉 정답을 맞추셨습니다! 🎉',
-  RESTART: '게임을 새로 시작하시겠습니까?',
 };
