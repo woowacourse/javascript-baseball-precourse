@@ -9,7 +9,7 @@ function isDuplicate(inputNumber) {
     return firstDigit === secondDigit || secondDigit === thirdDigit || thirdDigit === firstDigit;
 }
 
-export default function validateNumber(inputNumbers) {
+export default function validateInputNumber(inputNumbers) {
     if(!Number.isInteger(Number(inputNumbers))) return false;
     if(!isThreeDigits(inputNumbers)) return false;
     return !isDuplicate(inputNumbers);

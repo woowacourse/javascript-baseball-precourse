@@ -1,6 +1,6 @@
-import BaseballGame from "./baseballgame.js";
-import validateNumber from "./validateNumber.js";
-import displayResult from "./displayResult.js";
+import BaseballGame from "./game/baseballGame.js";
+import validateInputNumber from "./utils/validateInputNumber.js";
+import displayResult from "./game/displayResult.js";
 
 const baseballGame = new BaseballGame();
 const submitButton = document.getElementById("submit");
@@ -9,7 +9,7 @@ function playGame() {
     const userInput = document.getElementById("user-input");
     let resultString, state = true;
 
-    if(validateNumber(userInput.value)) {
+    if(validateInputNumber(userInput.value)) {
         resultString = baseballGame.play(userInput.value);
         state = displayResult(resultString);
         addReplayEvent(state);

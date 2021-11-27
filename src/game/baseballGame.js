@@ -1,4 +1,4 @@
-import judgeNumber from "./judgeNumber.js";
+import judgeInputNumber from "../utils/judgeInputNumber.js";
 import resultMessages from "./resultMessages.js";
 
 function uniqueNumberPush(computerNumber, randomNumber) {
@@ -8,7 +8,7 @@ function uniqueNumberPush(computerNumber, randomNumber) {
 }
 
 function generateNumber(computerNumber) {
-    while(this.computerNumber.length < 3) {
+    while(computerNumber.length < 3) {
         const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
         uniqueNumberPush(computerNumber, randomNumber);
     }
@@ -24,7 +24,7 @@ export default class BaseballGame {
     }
 
     play(userInputNumber) {
-        let [strikes, balls] = judgeNumber(this.computerNumber, userInputNumber);
+        let [strikes, balls] = judgeInputNumber(this.computerNumber, userInputNumber);
         return resultMessages(strikes, balls);
     }
 
