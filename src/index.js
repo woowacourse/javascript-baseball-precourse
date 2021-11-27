@@ -7,8 +7,6 @@ export default class BaseballGame {
         this.$result = document.getElementById("result");
         this.answer = this.makeRandomAnswer(); //정답 생성 배열로 나옴
         this.addEvent();
-
-        console.log(this.answer);
     }
 
     //이벤트 리스너 추가
@@ -126,7 +124,19 @@ export default class BaseballGame {
         if(resultSentence.includes("정답")) {
             const newContent = '<br><br><div><span>게임을 새로 시작하시겠습니까?  </span><button id="game-restart-button">게임 재시작</button></div>';
             this.$result.insertAdjacentHTML("beforeend", newContent);
+            this.addRestartEvent();
         }
+    }
+
+    //나중에 함수로 분리
+    //게임 재시작 이벤트 추가
+    addRestartEvent() {
+        this.$restart = document.getElementById("game-restart-button");
+        this.$restart.addEventListener('click', () => {
+            this.$userInput.value = "";
+            this.$result.innerHTML = "";
+            this.answer = this.makeRandomAnswer();
+        });
     }
 }
 
