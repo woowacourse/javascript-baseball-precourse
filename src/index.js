@@ -4,6 +4,8 @@ export default function BaseballGame() {
   const submitBtn = document.getElementById("submit");
   const userInput = document.getElementById('user-input');
   const resultDiv = document.getElementById('result');
+  const restartDiv = document.getElementById('restart');
+  const restartBtn = document.getElementById('game-restart-button');
 
   const getComputerNum = () => {
     let numList = new Array();
@@ -116,10 +118,20 @@ export default function BaseballGame() {
     let result = '';
     
     if (userNum != '') {
+      console.log(computerInputNumbers);
       result = this.play(computerInputNumbers, userNum);
     }
+    showResult(result)
     return result;
   };
+
+  const showResult = result => {
+    resultDiv.innerHTML = result;
+
+    if (result == BASEBALL.ANSWER) {
+      restartDiv.style.visibility = "visible";
+    }
+  }
 
   submitBtn.addEventListener("click", startGame);
 }
