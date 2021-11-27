@@ -1,4 +1,3 @@
-import { DIGIT } from "./constants.js";
 import UserInput from "./UserInput.js";
 
 export default class BaseballGame {
@@ -10,7 +9,10 @@ export default class BaseballGame {
     setDOM() {
         this.resultGuide = document.querySelector('#result');
         this.restartGuide = document.querySelector('#restart');
-        document.querySelector('#submit').addEventListener("click", this.checkAnswer);
+        document.querySelector('#submit').addEventListener("click", (e) => {
+            e.preventDefault();
+            this.checkAnswer();
+        });
         document.querySelector('#game-restart-button').addEventListener("click", this.initGame);
     }
 
@@ -41,12 +43,13 @@ export default class BaseballGame {
     }
 
     checkAnswer() {
-        console.log(UserInput.getUserInputNumbers());
+        const userInputNumbers = UserInput.getNumbers();
+        console.log(userInputNumbers, UserInput.isValid(userInputNumbers));
     }
 
     play(computerInputNumbers, userInputNumbers) {
       return "결과 값 String";
     }
-  }
+}
 
-  new BaseballGame();
+new BaseballGame();
