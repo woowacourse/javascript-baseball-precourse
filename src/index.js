@@ -2,8 +2,7 @@ import { $ } from "./utils/dom.js"
 
 export default function BaseballGame() {
   const createAnswer = () => {
-    const answerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    return answerNumber;
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   };
 
   let computerNumber = createAnswer();
