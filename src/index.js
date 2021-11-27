@@ -19,8 +19,6 @@ export default function BaseballGame() {
   };
 
   this.play = (computerInputNumbers, userInputNumbers) => {
-    console.log(computerInputNumbers);
-    console.log(userInputNumbers);
     return getResultMessage(countStrikeAndBall(computerInputNumbers, userInputNumbers));
   };
 
@@ -44,9 +42,42 @@ export default function BaseballGame() {
         return;
       }
 
-      const hint = this.play(this.computerInputNumbers, this.userInputNumbers);
-      $result.innerText = hint;
+      const resultMessage = this.play(this.computerInputNumbers, this.userInputNumbers);
+      showResult(resultMessage);
     });
+  };
+
+  const showSuccess = () => {
+    const message = document.createElement('span');
+    message.appendChild(document.createTextNode('🎉정답을 맞추셨습니다!🎉'));
+    message.appendChild(document.createElement('br'));
+
+    const button = document.createElement('button');
+    button.appendChild(document.createTextNode('게임 재시작'));
+    button.setAttribute('id', 'game-restart-button');
+    button.addEventListener('click', restart);
+
+    $result.innerHTML = '';
+    $result.appendChild(message);
+    $result.appendChild(button);
+  };
+
+  const showHint = (hint) => {
+    $result.innerText = hint;
+  };
+
+  const showResult = (resultMessage) => {
+    if (resultMessage === '3스트라이크') {
+      return showSuccess();
+    }
+
+    return showHint(resultMessage);
+  };
+
+  const restart = () => {
+    this.computerInputNumbers = createComputerInputNumbers();
+    $userInput.value = '';
+    $result.innerHTML = '';
   };
 }
 
