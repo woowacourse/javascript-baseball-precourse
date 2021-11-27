@@ -1,10 +1,7 @@
 import { $ } from "./utils/dom.js"
+import {createAnswer} from "./createAnswer.js"
 
 export default function BaseballGame() {
-  const createAnswer = () => {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-  };
-
   let computerNumber = createAnswer(); 
   
   this.play = (computerInputNumbers, userInputNumbers) => {
@@ -15,14 +12,11 @@ export default function BaseballGame() {
   const printError = (userInput) => {
     if(userInput.has(NaN)) {
       alert("잘못 입력하였습니다❗️ 숫자를 입력하세요.");
-    }
-    else if((userInput.size !== 3) && ($("#user-input").value.length ===3)) {
+    } else if((userInput.size !== 3) && ($("#user-input").value.length ===3)) {
       alert("잘못 입력하였습니다❗️ 중복되지 않는 숫자를 입력하세요.");
-    }
-    else if(userInput.has(0)) {
+    } else if(userInput.has(0)) {
       alert("잘못 입력하였습니다❗️ 0을 제외한 1~9까지의 수만 입력하세요.");
-    }
-    else if(userInput.size !== 3) {
+    } else if(userInput.size !== 3) {
       alert("잘못 입력하였습니다❗️ 3개의 숫자를 입력하세요.");
     }
     $("#user-input").value = '';

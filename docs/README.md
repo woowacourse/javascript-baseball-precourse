@@ -43,7 +43,7 @@
 - [x] createAnswer 지역변수 없애고 바로 return 
 - [x] printResult 함수 리팩터링(분리)
 - [x] 최대한 const로 할 수 있는 방법 (reduce 메소드 활용하여 카운팅함, 코드가 더 길어짐... 이경우에는 let이 나을지? 고민해보기)
-- [x] refactor: form태그 이벤트를 활용해 click과 enter기능 통합 
+- [x] form태그 이벤트를 활용해 click과 enter기능 통합 
 - [] 파일 분리 
 - [] computerNumber 리팩터링 (다른 모듈로 분리함)
 - [] 리드미 참고해서 리팩터링 추가!
