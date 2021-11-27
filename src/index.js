@@ -2,15 +2,15 @@ import {generateTargetNumber} from './utils/targetNumber.js';
 import { inputNumberValidator } from './Validators/NumberValidator.js';
 import { resultElement,successElement, emptyElement } from './components/app.js';
 import { caculateBallCount, countToString, combineCount } from './utils/ballCount.js';
-import { COUNT } from './constant.js';
+import { COUNT,DOM_ID } from './constant.js';
 
 export default class BaseballGame {
 
     constructor(){
       this.targetNumber = generateTargetNumber();
-      this.$app = document.getElementById("app");
-      this.$submitButton = document.getElementById("submit");
-      this.$input = document.getElementById("user-input");
+      this.$app = document.getElementById(DOM_ID.APP);
+      this.$submitButton = document.getElementById(DOM_ID.SUBMIT);
+      this.$input = document.getElementById(DOM_ID.INPUT);
       this.$resetButton = null;
       this.bindEvents();
     }
@@ -27,7 +27,7 @@ export default class BaseballGame {
       }
       const userInputNumbers = this.$input.value.split('').map(Number);
       const count = this.play(this.targetNumber,userInputNumbers);
-      if(count==="3스트라이크"){
+      if(count===COUNT.SUCCESS){
         this.render(successElement())
         return this.activateResetButtton();
       }
@@ -49,7 +49,7 @@ export default class BaseballGame {
     }
 
     activateResetButtton(){
-      this.$resetButton = document.getElementById("game-restart-button");
+      this.$resetButton = document.getElementById(DOM_ID.RESET);
       this.$resetButton.addEventListener('click',this.reset.bind(this));
     }
 

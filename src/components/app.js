@@ -1,25 +1,25 @@
-import { FONT } from "../constant.js";
+import { FONT,DOM_ID,COUNT } from "../constant.js";
 
 export const resultElement = count => {
     const $result = document.createElement('div');
     const textNode = document.createTextNode(count);
 
-    $result.id = "result";
+    $result.id = DOM_ID.RESULT;
     $result.appendChild(textNode);
     return $result;
 }
 
 export const successElement = () => {
     const $success = document.createElement('div');
-    const textNode = document.createTextNode("🎉정답을 맞추셨습니다!🎉");
+    const textNode = document.createTextNode(COUNT.SUCCESS_TEXT);
     const $resetButton = document.createElement('button');
-    const textNodeButton = document.createTextNode("게임 재시작");
+    const textNodeButton = document.createTextNode(COUNT.RESTART);
 
     $success.appendChild(textNode);
     $resetButton.appendChild(textNodeButton);
     $success.appendChild($resetButton);
-    $success.id = "result";
-    $resetButton.id = "game-restart-button";
+    $success.id = DOM_ID.RESULT;
+    $resetButton.id = DOM_ID.RESET;
     $success.style.fontWeight = FONT.WEIGHT_BOLD;
     return $success;
 }
@@ -27,7 +27,7 @@ export const successElement = () => {
 
 export const emptyElement = () =>{
     const $empty = document.createElement('div');
-    $empty.id = "result";
+    $empty.id = DOM_ID.RESULT;
 
     return $empty;
 }

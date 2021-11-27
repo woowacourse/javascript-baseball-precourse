@@ -14,9 +14,20 @@ export const GAME = {
 export const COUNT = {
     "STRIKE": "스트라이크",
     "BALL": "볼",
-    "NO_COUNT": "낫싱" 
+    "NO_COUNT": "낫싱" ,
+    "SUCCESS" : "3스트라이크",
+    "RESTART": "게임 재시작",
+    "SUCCESS_TEXT": "🎉정답을 맞추셨습니다!🎉"
 }
 
 export const FONT = {
     "WEIGHT_BOLD": 700
+}
+
+export const DOM_ID = {
+    "APP": "app",
+    "SUBMIT": "submit",
+    "INPUT": "user-input",
+    "RESULT": "result",
+    "RESET": "game-restart-button" 
 }
