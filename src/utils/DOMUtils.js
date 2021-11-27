@@ -1,6 +1,13 @@
 import { ANSWER } from '../constants.js';
 
 const DOMUtils = {
+  init: () => {
+    DOMUtils.setElementId('h3', 'result-title');
+    DOMUtils.hideElement('#result-title');
+    DOMUtils.setElementValue('#result');
+    DOMUtils.initValue('#user-input');
+    DOMUtils.getElement('#user-input').focus();
+  },
   getElement: (selectors) => {
     return document.querySelector(selectors);
   },
@@ -20,8 +27,8 @@ const DOMUtils = {
     const element = DOMUtils.getElement(selectors);
     element.parentNode.removeChild(element);
   },
-  initValue: (element) => {
-    element.value = '';
+  initValue: (selectors) => {
+    DOMUtils.getElement(selectors).value = '';
   },
   showResult: (text) => {
     DOMUtils.showElement('#result-title');

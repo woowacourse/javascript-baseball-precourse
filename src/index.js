@@ -4,19 +4,14 @@ import isValidNumbers from './utils/isValidNumbers.js';
 import { NUMBER, POINT, ANSWER } from './constants.js';
 
 export default function BaseballGame() {
-  const userInput = DOMUtils.getElement('#user-input');
   let computerInputNumbers = [];
 
-  this.init = function () {
-    DOMUtils.setElementId('h3', 'result-title');
-    DOMUtils.hideElement('#result-title');
-    DOMUtils.setElementValue('#result');
-    DOMUtils.setElementValue('#user-input');
+  const init = () => {
+    DOMUtils.init();
     computerInputNumbers = utils.pickUniqueThreeNumbers();
-    userInput.focus();
   };
 
-  this.isBallOrStrike = function (scoreBoard) {
+  const isBallOrStrike = (scoreBoard) => {
     if (scoreBoard.ball > POINT.ZERO && scoreBoard.strike > POINT.ZERO) {
       DOMUtils.showResult(`${scoreBoard.ball}볼 ${scoreBoard.strike}스트라이크`);
     } else if (scoreBoard.ball > POINT.ZERO && scoreBoard.strike === POINT.ZERO) {
@@ -26,34 +21,34 @@ export default function BaseballGame() {
     }
   };
 
-  this.isIndexSame = (number, index) => {
+  const isIndexSame = (number, index) => {
     return computerInputNumbers.indexOf(number) === index;
   };
 
-  this.isIncludeNumber = (number) => {
+  const isIncludeNumber = (number) => {
     return computerInputNumbers.includes(number);
   };
 
-  this.setScoreBoard = function (scoreBoard, number, index) {
-    this.isIncludeNumber(number) &&
-      (this.isIndexSame(number, index)
+  const setScoreBoard = (scoreBoard, number, index) => {
+    isIncludeNumber(number) &&
+      (isIndexSame(number, index)
         ? (scoreBoard.strike += POINT.ONE)
         : (scoreBoard.ball += POINT.ONE));
   };
 
-  this.restartEventListener = function () {
+  const restartEventListener = () => {
     const gameRestart = DOMUtils.getElement('#game-restart-button');
     gameRestart.addEventListener('click', (e) => {
       e.preventDefault();
       DOMUtils.removeElement('#game-restart-message');
-      this.init();
+      init();
     });
   };
 
-  this.play = function (computerInputNumbers, userInputNumbers) {
+  const play = (computerInputNumbers, userInputNumbers) => {
     const scoreBoard = { ball: POINT.ZERO, strike: POINT.ZERO };
 
-    userInputNumbers.forEach((number, index) => this.setScoreBoard(scoreBoard, number, index));
+    userInputNumbers.forEach((number, index) => setScoreBoard(scoreBoard, number, index));
 
     // console.log(computerInputNumbers);
     // console.log(userInputNumbers);
@@ -61,22 +56,25 @@ export default function BaseballGame() {
 
     if (scoreBoard.strike === NUMBER.DIGIT) {
       DOMUtils.showResult(ANSWER.RIGHT);
-      this.restartEventListener();
+      restartEventListener();
     } else if (scoreBoard.ball === POINT.ZERO && scoreBoard.strike === POINT.ZERO) {
       DOMUtils.showResult(ANSWER.NOTHING);
     } else {
-      this.isBallOrStrike(scoreBoard);
+      isBallOrStrike(scoreBoard);
     }
   };
 
-  this.init();
-
-  DOMUtils.getElement('form').addEventListener('submit', (e) => {
+  const checkValidNumbers = (e) => {
     e.preventDefault();
-    isValidNumbers(userInput) &&
-      this.play(computerInputNumbers, utils.stringToNumArray(userInput.value));
+    const userInput = DOMUtils.getElement('#user-input');
+    if (!isValidNumbers(userInput)) return;
+    play(computerInputNumbers, utils.stringToNumArray(userInput.value));
     userInput.focus();
-  });
+  };
+
+  init();
+
+  DOMUtils.getElement('form').addEventListener('submit', checkValidNumbers);
 }
 
 new BaseballGame();
