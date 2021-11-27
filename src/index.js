@@ -6,6 +6,7 @@ const $userInput = $("#user-input");
 const $submit = $("#submit");
 const $result = $("#result");
 const $correctResult = $("#correct-result");
+const $restartButton = $("#game-restart-button");
 
 const InputCheckMethods = [
   (value) => {
@@ -57,13 +58,23 @@ export default class BaseballGame {
       InputCheckMethod(userInputNumbers)
     );
   }
+  makeVisible($) {
+    if ($ === "$result") {
+      $result.style.display = "block";
+      $correctResult.style.display = "none";
+      return;
+    }
+    if ($ === "$correctResult") {
+      $result.style.display = "none";
+      $correctResult.style.display = "block";
+    }
+  }
   play(computerInputNumbers, userInputNumbers) {
     if (!this.isInputValid(userInputNumbers)) {
       return;
     }
     if (computerInputNumbers === userInputNumbers) {
-      $result.style.display = "none";
-      $correctResult.style.display = "block";
+      this.makeVisible("$correctResult");
       return;
     }
     const ball = this.calcBall(computerInputNumbers, userInputNumbers);
@@ -98,11 +109,20 @@ export default class BaseballGame {
 
 const game = new BaseballGame();
 
-const computerInputNumbers = game.generateRandomNumbers();
+let computerInputNumbers = game.generateRandomNumbers();
 console.log(`computerInputNumbers`, computerInputNumbers);
 $submit.addEventListener("click", onAnswerSubmit);
 
 function onAnswerSubmit(e) {
   e.preventDefault();
   game.play(computerInputNumbers, $userInput.value);
+}
+
+$restartButton.addEventListener("click", onRestart);
+
+function onRestart(e) {
+  e.preventDefault();
+  $userInput.value = "";
+  game.makeVisible("$result");
+  computerInputNumbers = game.generateRandomNumbers();
 }
