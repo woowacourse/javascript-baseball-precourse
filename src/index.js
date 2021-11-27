@@ -1,3 +1,4 @@
+import { CORRECT_ANSWER_MESSAGE, DIGIT, NOTHING_MESSAGE } from "./constants.js";
 import UserInput from "./UserInput.js";
 
 export default class BaseballGame {
@@ -17,7 +18,8 @@ export default class BaseballGame {
     }
 
     initGame() {
-        this.computerNumbers = this.createComputerNumbers();
+        this.computerNumbers = [1, 2, 3];
+        // this.computerNumbers = this.createComputerNumbers();
         this.clearResultGuide();
         UserInput.clearUserInput();
         this.hideRestartGuide();
@@ -45,10 +47,32 @@ export default class BaseballGame {
     checkAnswer() {
         const userInputNumbers = UserInput.getNumbers();
         console.log(userInputNumbers, UserInput.isValid(userInputNumbers));
+        console.log(this.play(this.computerNumbers, userInputNumbers));
     }
 
     play(computerInputNumbers, userInputNumbers) {
-      return "결과 값 String";
+        const numberOfBalls = this.getNumberOfBalls(computerInputNumbers, userInputNumbers);
+        const numberOfStrikes = this.getNumberOfStrikes(computerInputNumbers, userInputNumbers);
+        if (numberOfBalls === 0 && numberOfStrikes === 0) return NOTHING_MESSAGE;
+        if (numberOfStrikes === DIGIT) return CORRECT_ANSWER_MESSAGE;
+
+        let result = '';
+        if (numberOfBalls) result += `${numberOfBalls}볼 `;
+        if (numberOfStrikes) result += `${numberOfStrikes}스트라이크`;
+        return result;
+    }
+
+    getNumberOfBalls(computerInputNumbers, userInputNumbers) {
+        return computerInputNumbers.filter((number, index) => {
+            const indexOfUserInputNumber = userInputNumbers.indexOf(number);
+            return indexOfUserInputNumber !== -1 && indexOfUserInputNumber !== index;
+        }).length;
+    }
+
+    getNumberOfStrikes(computerInputNumbers, userInputNumbers) {
+        return computerInputNumbers.filter((number, index) => {
+            return number === userInputNumbers[index]
+        }).length;
     }
 }
 

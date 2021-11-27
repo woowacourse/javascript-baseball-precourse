@@ -85,11 +85,11 @@
   - [x] 입력이 세 자리 숫자인지 확인 | `isThreeDigit - UserInput`
   - [x] 입력이 각 자리 숫자가 제시된 숫자 범위 1~9에 속하는지 확인 | `isRangeCorrect - UserInput`
   - [x] 입력이 각 자리 숫자가 중복되지 않는지 확인 | `isNotDuplicated - UserInput`
-- [ ] 두 숫자를 비교하여 볼과 스트라이크의 수를 카운트하는 기능 | `play`
+- [x] 두 숫자를 비교하여 볼과 스트라이크의 수를 카운트하는 기능 | `play`
   - 볼과 스트라이크의 수를 세고
   - 문자열 형태로 결과를 return함
-  - [ ] 두 숫자를 비교하여 볼의 수를 카운트하는 기능 | `getNumberOfBalls`
-  - [ ] 두 숫자를 비교하여 스트라이크의 수를 카운트하는 기능 | `getNumberOfStrikes`
+  - [x] 두 숫자를 비교하여 볼의 수를 카운트하는 기능 | `getNumberOfBalls`
+  - [x] 두 숫자를 비교하여 스트라이크의 수를 카운트하는 기능 | `getNumberOfStrikes`
 - [ ] 결과 문구를 띄우는 기능 | `printResult`
 - [ ] 재시작 안내 문구를 띄우는 기능 | `showRestartGuide`
   - 재시작 버튼을 누르면 게임을 다시 시작할 수 있도록 함.
