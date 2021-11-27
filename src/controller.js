@@ -1,8 +1,12 @@
+import { getStrikeNumber, getBallNumber } from './utilOfPlay.js';
+
 export default class GameController {
   constructor(model, view) {
     this.model = model;
     this.view = view;
   }
+
+  static ruleRangeNumber = 3;
 
   app() {
     document
@@ -17,35 +21,29 @@ export default class GameController {
     this.makeNewAnswer();
   }
 
-  play() {
-    let valueOfStrike = 0;
-    let valueOfBall = 0;
-    const computerInputNumbers = this.model.getComputerInputNumbers();
-    const userInputNumbers = this.model.getUserInputNumbers();
+  play(computerInputNumbers, userInputNumbers) {
+    const valueOfStrike = getStrikeNumber(
+      GameController.ruleRangeNumber,
+      computerInputNumbers,
+      userInputNumbers
+    );
+    const valueOfBall = getBallNumber(
+      GameController.ruleRangeNumber,
+      computerInputNumbers,
+      userInputNumbers,
+      valueOfStrike
+    );
 
-    for (let i = 0; i < 3; i++) {
-      if (computerInputNumbers[i] === userInputNumbers[i]) {
-        valueOfStrike++;
-      }
+    if (valueOfStrike === 0 && valueOfBall === 0) {
+      return '낫싱';
     }
-
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        if (computerInputNumbers[i] === userInputNumbers[j]) {
-          valueOfBall++;
-        }
-      }
+    if (valueOfStrike === 0 && valueOfBall !== 0) {
+      return `${valueOfBall}볼`;
     }
-
-    valueOfBall -= valueOfStrike;
-
-    return valueOfStrike === 0 && valueOfBall === 0
-      ? '낫싱'
-      : valueOfStrike === 0 && valueOfBall !== 0
-      ? `${valueOfBall}볼`
-      : valueOfStrike !== 0 && valueOfBall === 0
-      ? `${valueOfStrike}스트라이크`
-      : `${valueOfBall}볼 ${valueOfStrike}스트라이크`;
+    if (valueOfStrike !== 0 && valueOfBall === 0) {
+      return `${valueOfStrike}스트라이크`;
+    }
+    return `${valueOfBall}볼 ${valueOfStrike}스트라이크`;
   }
 
   getSubmitFromForm() {
@@ -56,7 +54,7 @@ export default class GameController {
 
   makeNewAnswer() {
     let value = '';
-    while (value.length < 3) {
+    while (value.length < GameController.ruleRangeNumber) {
       const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!value.includes(randomNumber)) {
         value += randomNumber;
@@ -69,15 +67,14 @@ export default class GameController {
   submitHandler(e) {
     e.preventDefault();
     this.getSubmitFromForm();
+    const computerInputNumbers = this.model.getComputerInputNumbers();
+    const userInputNumbers = this.model.getUserInputNumbers();
     if (this.checkWrongInput() === true) {
-      if (
-        this.model.getComputerInputNumbers() ===
-        this.model.getUserInputNumbers()
-      ) {
+      if (computerInputNumbers === userInputNumbers) {
         this.sendVictoryNotice();
         return true;
       }
-      this.view.renderResult(this.play());
+      this.view.renderResult(this.play(computerInputNumbers, userInputNumbers));
     }
   }
 
@@ -91,30 +88,34 @@ export default class GameController {
 
   checkWrongInput() {
     const userInputNumbers = this.model.getUserInputNumbers();
-
     if (
       isNaN(userInputNumbers) ||
-      userInputNumbers.length !== 3 ||
+      userInputNumbers.length !== GameController.ruleRangeNumber ||
       userInputNumbers.includes('0')
     ) {
       this.view.alertWrongInput(
-        '입력된 값이 3개의 숫자가 아니거나 0이 포함됐습니다. 중복없이 1~9 사이의 3개의 수를 입력해주세요'
+        `입력된 값 '${userInputNumbers}'은 ${GameController.ruleRangeNumber}개의 숫자가 아니거나 0이 포함됐습니다. 중복없이 1~9 사이의 ${GameController.ruleRangeNumber}개의 수를 입력해주세요`
       );
-      this.view.clearResult();
       return false;
     }
 
-    for (let i = 0; i < 3; i++) {
-      for (let j = i + 1; j < 3; j++) {
-        if (userInputNumbers[i] === userInputNumbers[j]) {
-          this.view.alertWrongInput(
-            '입력된 값에 중복된 숫자가 있습니다. 중복없이 3개의 수를 입력해주세요'
-          );
-          return false;
-        }
+    for (let i = 0; i < GameController.ruleRangeNumber; i++) {
+      if (this.checkDuplicatedNumbers(i, userInputNumbers) === false) {
+        return false;
       }
     }
     return true;
+  }
+
+  checkDuplicatedNumbers(i, userInputNumbers) {
+    for (let j = i + 1; j < GameController.ruleRangeNumber; j++) {
+      if (userInputNumbers[i] === userInputNumbers[j]) {
+        this.view.alertWrongInput(
+          `입력된 값 ${userInputNumbers}에 중복된 숫자가 있습니다. 중복없이 ${GameController.ruleRangeNumber}개의 수를 입력해주세요.`
+        );
+        return false;
+      }
+    }
   }
 
   getVictoryNoticeBox() {

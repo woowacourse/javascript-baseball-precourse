@@ -16,6 +16,7 @@ export default class GameView {
   }
 
   alertWrongInput(alertMessage) {
+    this.clearInputBox();
     alert(alertMessage);
   }
 
