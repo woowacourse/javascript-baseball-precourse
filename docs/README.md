@@ -36,7 +36,10 @@
 - [x] input창을 공백으로 만든다. 
 
 # 리팩토링 
+- [x] play 메서드 만들어서 게임 진행 (리드미 참고)
 - [] createAnswer 지역변수 없애고 바로 return 
 - [] printResult 함수 리팩터링(분리)
 - [] computerNumber 리팩터링 
 - [] 최대한 const로 할 수 있는 방법 
+- [] 에러별 메시지 출력 다르게
+- [] 리드미 참고해서 리팩터링 추가!

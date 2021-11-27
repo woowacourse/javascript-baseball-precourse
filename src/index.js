@@ -9,7 +9,7 @@ export default function BaseballGame() {
   let computerNumber = createAnswer();
   
   this.play = (computerInputNumbers, userInputNumbers) => {
-    return "결과 값 String";  
+    printResult(computerInputNumbers, userInputNumbers);
   };
 
 
@@ -18,9 +18,8 @@ export default function BaseballGame() {
     $("#user-input").value = '';
   }
 
-  const printResult = () => {
-    console.log(computerNumber);
-    const [strike, ball] = countAnswer();
+  const printResult = (computerInputNumbers, userInputNumbers) => {
+    const [strike, ball] = countAnswer(computerInputNumbers, userInputNumbers);
 
     if(strike && ball) {
       $("#result").innerText = `${ball}볼 ${strike}스트라이크`;
@@ -51,9 +50,9 @@ export default function BaseballGame() {
     }
   }
 
-  const countAnswer = () => {
-    const [comNum1, comNum2, comNum3] = computerNumber;
-    const [userNum1, userNum2, userNum3] = [...new Set($("#user-input").value.split('').map(num => Number(num)))];
+  const countAnswer = (computerInputNumbers, userInputNumbers) => {
+    const [comNum1, comNum2, comNum3] = computerInputNumbers;
+    const [userNum1, userNum2, userNum3] = [...userInputNumbers];
 
     // 스트라이크 수 
     let strike = 0;
@@ -79,7 +78,7 @@ export default function BaseballGame() {
     }
 
     //유효한 경우 (결과 출력)
-    printResult();
+    this.play(computerNumber, userInput);
   };
 
   const restartGame = () => {
