@@ -1,4 +1,4 @@
-const RestartContainer = ({ resultContainer, onClickRestartCallback }) => {
+const RestartContainer = ({ resultContainer, onClickGameRestartCallback }) => {
   resultContainer.innerHTML = `<div id='restart-container'>
       <p><strong>🎉 정답을 맞추셨습니다! 🎉</strong></p>
       <span>게임을 새로 시작하시겠습니까?</span>
@@ -7,7 +7,7 @@ const RestartContainer = ({ resultContainer, onClickRestartCallback }) => {
 
   const restartBtn = document.querySelector("#game-restart-button");
   restartBtn.addEventListener("click", () => {
-    onClickRestartCallback();
+    onClickGameRestartCallback();
     resultContainer.innerHTML = "";
   });
 };

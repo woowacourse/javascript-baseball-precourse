@@ -16,7 +16,7 @@ export default function BaseballGame() {
     userInput.value = "";
   };
 
-  const onClickRestartCallback = () => {
+  const onClickGameRestartCallback = () => {
     initialState.computerInputNumbers = getComputerInputNumbers();
     userInput.value = "";
   };
@@ -27,7 +27,7 @@ export default function BaseballGame() {
       userInputNumbers
     );
 
-    ResultContainer({ isGameClear, resultText, onClickRestartCallback });
+    ResultContainer({ isGameClear, resultText, onClickGameRestartCallback });
 
     return resultText;
   };

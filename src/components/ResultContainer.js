@@ -3,12 +3,12 @@ import RestartContainer from "./RestartContainer.js";
 const ResultContainer = ({
   isGameClear = false,
   resultText,
-  onClickRestartCallback,
+  onClickGameRestartCallback,
 }) => {
   const resultContainer = document.querySelector("#result");
 
   return isGameClear
-    ? RestartContainer({ resultContainer, onClickRestartCallback })
+    ? RestartContainer({ resultContainer, onClickGameRestartCallback })
     : (resultContainer.innerHTML = resultText);
 };
 
