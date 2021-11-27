@@ -1,11 +1,12 @@
 const strikeOrBall = (output) =>{
     let resultText = "";
-    if(output[1] > 0){
-        resultText += `${output[1]}스트라이크 `    
-    }
     if(output[2] > 0){
-        resultText += `${output[2]}볼`
+        resultText += `${output[2]}볼 `
     }
+    if(output[1] > 0){
+        resultText += `${output[1]}스트라이크`    
+    }
+    
     result.innerHTML = resultText;
 }
 
@@ -34,7 +35,7 @@ const ParseResult = (isFinished, output, game) => {
     } else {
         // 낫씽인지 스트라이크 혹은 볼인지 확인
         if(output[0]){
-            result.innerHTML = "낫씽";
+            result.innerHTML = "낫싱";
         } else {
             strikeOrBall(output);
         }

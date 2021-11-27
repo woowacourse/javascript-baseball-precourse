@@ -5,7 +5,21 @@ export default class BaseballGame {
 
     // 랜덤한 3자리 숫자 생성 메서드
     genRandomNumbers() {
-      return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3); 
+      let count = 0;
+      let numbers = [];
+      let numPool = new Array(10);
+      while(count < 3){
+        const pickedNumber = MissionUtils.Random.pickNumberInRange(1,9);
+        if(numPool[pickedNumber] === true){
+          continue;
+        } else {
+          numbers.push(pickedNumber);
+          numPool[pickedNumber] = true;
+          count++;
+        }
+      }
+
+      return numbers;
     }
 
     // 유저 입력값 유효성 체크 메서드
