@@ -4,7 +4,7 @@ import { gameRules } from "./gameRules.js";
 import { checkUserInputVaild, getNumberArray } from "./userInputCheck.js";
 import { errorMessage, gameRender } from "./gameRender.js";
 
-export default class BaseballGame {
+class BaseballGame {
     constructor() {
         this.init();
     }
