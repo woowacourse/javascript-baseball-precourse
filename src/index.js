@@ -98,11 +98,10 @@ export default function BaseballGame() {
     return strike;
   }
   
-  //get Result Text
-  const getResult = (computerNum, userNum) => {
+  this.play = (computerInputNumbers, userInputNumbers) => {
     let result = '';
-    const ballCount = getBallCount(String(computerNum), String(userNum));
-    const strikeCount = getStrikeCount(String(computerNum), String(userNum));
+    const ballCount = getBallCount(String(computerInputNumbers), String(userInputNumbers));
+    const strikeCount = getStrikeCount(String(computerInputNumbers), String(userInputNumbers));
 
     if (strikeCount === 3) return BASEBALL.ANSWER;
     if (strikeCount === 0 && ballCount == 0) return BASEBALL.NOTHING;
@@ -110,8 +109,8 @@ export default function BaseballGame() {
     if (strikeCount != 0) result += `${strikeCount}${BASEBALL.STRIKE}`;
 
     return result;
-  }
-
+  };
+  
   submitBtn.addEventListener("click", startGame);
 }
 
