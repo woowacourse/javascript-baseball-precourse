@@ -1,3 +1,6 @@
+import { RETRY_MESSAGE } from "../assets/constant.js";
+import { $app } from "../assets/domElement.js";
+
 export function countStrike(computerInputNumbers, userInputNumbers) {
   var numOfStrike = 0;
   const computerInputNumberArr = String(computerInputNumbers).split("");
@@ -32,5 +35,12 @@ export function countBall(computerInputNumbers, userInputNumbers) {
 }
 
 export function win() {
-  console.log("승리");
+  const span = document.createElement("span");
+  span.innerText = RETRY_MESSAGE;
+  const button = document.createElement("button");
+  button.id = "game-restart-button";
+  button.innerText = "게임 재시작";
+
+  $app.appendChild(span);
+  $app.appendChild(button);
 }
