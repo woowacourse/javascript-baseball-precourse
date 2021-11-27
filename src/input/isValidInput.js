@@ -1,3 +1,7 @@
+export const THREE_DIGIT_ERR = 1;
+export const ONE_TO_NINE_ERR = 2;
+export const DUPLICATE_ERR = 3;
+
 function isThreeDigitInput(input) {
   return input.length === 3;
 }
@@ -19,13 +23,13 @@ function isNoDuplicatedNumber(input) {
 
 export default function isValidInput(input) {
   if (!isThreeDigitInput(input)) {
-    return false;
+    return THREE_DIGIT_ERR;
   }
   if (!isOneToNineNumber(input)) {
-    return false;
+    return ONE_TO_NINE_ERR;
   }
   if (!isNoDuplicatedNumber(input)) {
-    return false;
+    return DUPLICATE_ERR;
   }
-  return true;
+  return false;
 }
