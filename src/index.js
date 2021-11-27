@@ -9,7 +9,7 @@ export default function BaseballGame() {
   const resetButton = document.getElementById("game-restart-button");
 
   // 볼, 스트라이크 갯수 확인
-  this.countResult = (userNumber, computerNumber) => {
+  this.countResult = (computerNumber, userNumber) => {
     let result = [0, 0];
     let i = 0;
     for (; i < input_length; i++) {
@@ -38,8 +38,8 @@ export default function BaseballGame() {
     return result;
   };
 
-  this.play = (userNumber, computerNumber) => {
-    const [ball, strike] = this.countResult(userNumber, computerNumber);
+  this.play = (computerNumber, userNumber) => {
+    const [ball, strike] = this.countResult(computerNumber, userNumber);
     const result = this.resultMessage(ball, strike);
 
     return result;
@@ -62,7 +62,7 @@ export default function BaseballGame() {
     let userNumber = getUserNumber();
     if (userNumber === "unvalid_input") return;
 
-    let result = this.play(userNumber, computerNumber);
+    let result = this.play(computerNumber, userNumber);
     if (result === "3스트라이크") {
       hint.innerHTML = result_answer;
       this.addRestartButton();
