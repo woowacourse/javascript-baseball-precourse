@@ -19,7 +19,36 @@ export default function BaseballGame() {
   }
 
   const printResult = () => {
+    console.log(computerNumber);
     const [strike, ball] = countAnswer();
+
+    if(strike && ball) {
+      $("#result").innerText = `${ball}볼 ${strike}스트라이크`;
+      return;
+    }
+    if(!strike && ball) {
+      $("#result").innerText = `${ball}볼`;
+      return;
+    }
+    if(strike === 3) {
+      $("#result").innerHTML = 
+      `<strong>🎉 정답을 맞추셨습니다! 🎉</strong>
+      <p id="restart">
+        <span id="restart-message">게임을 새로 시작하시겠습니까?</span>
+        <button id="game-restart-button">게임 재시작</button>
+      </p>` 
+      return;
+    }
+
+    if(!ball && strike) {
+      $("#result").innerText = `${strike}스트라이크`;
+      return; 
+    }
+
+    if(!strike && !ball) {
+      $("#result").innerText = "낫싱";
+      return;
+    }
   }
 
   const countAnswer = () => {
