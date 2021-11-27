@@ -5,6 +5,7 @@ const NUMBER_LENGTH = 3;
 const $userInput = $("#user-input");
 const $submit = $("#submit");
 const $result = $("#result");
+const $correctResult = $("#correct-result");
 
 const InputCheckMethods = [
   (value) => {
@@ -61,7 +62,8 @@ export default class BaseballGame {
       return;
     }
     if (computerInputNumbers === userInputNumbers) {
-      $result.innerHTML = `정답입니다.`;
+      $result.style.display = "none";
+      $correctResult.style.display = "block";
       return;
     }
     const ball = this.calcBall(computerInputNumbers, userInputNumbers);
