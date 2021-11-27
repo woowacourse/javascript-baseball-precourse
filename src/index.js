@@ -10,8 +10,8 @@ export default class BaseballGame {
     setDOM() {
         this.resultGuide = document.querySelector('#result');
         this.restartGuide = document.querySelector('#restart');
-        this.submitButton = document.querySelector('#submit');
-        this.restartButton = document.querySelector('#game-restart-button');
+        document.querySelector('#submit').addEventListener("click", this.checkAnswer);
+        document.querySelector('#game-restart-button').addEventListener("click", this.initGame);
     }
 
     initGame() {
@@ -38,6 +38,10 @@ export default class BaseballGame {
                 computerNumbers.push(curNum);
         }
         return computerNumbers;
+    }
+
+    checkAnswer() {
+        console.log(UserInput.getUserInputNumbers());
     }
 
     play(computerInputNumbers, userInputNumbers) {

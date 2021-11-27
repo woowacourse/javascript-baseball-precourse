@@ -69,7 +69,7 @@
   - 재시작 안내 문구를 숨김
 
 - [x] 컴퓨터가 가지는 서로 다른 3자리의 랜덤 숫자 생성하는 기능 | `createComputerNumbers`
-- [x] 결과 문구를 clear하는 기능 | `clearResult`
+- [x] 결과 문구를 clear하는 기능 | `clearResultGuide`
 - [x] 사용자 입력창을 clear하는 기능 | `clearUserInput`
 - [x] 재시작 안내 문구를 숨기는 기능 | `hideRestartGuide`
 - [ ] 사용자가 입력한 숫자의 정답 비교 결과를 사용자가 확인할 수 있도록 하는 기능 | `checkAnswer`
@@ -80,10 +80,10 @@
   - 잘못되지 않은 경우
     - 컴퓨터 숫자와 사용자 입력 숫자 비교하여 결과 문구 띄우기
     - 정답인 경우 재시작 안내 문구 띄우기
-- [ ] 사용자의 현재 입력 값을 저장하는 기능 | `getUserInputNumbers`
+- [x] 사용자의 현재 입력 값을 가져오는 기능 | `getUserInputNumbers`
 - [ ] 사용자의 입력 값이 잘못된 값인지 확인하여 true/false로 return | `isUserInputValid`
-  - [ ] 입력이 세 자리의 숫자인지 확인 | `isThreeDigit`
-  - [ ] 입력이 각 자리 숫자가 제시된 숫자 범위 1~9에 속하는지 확인 | `isInDigitRange`
+  - [ ] 입력이 세 자리 숫자인지 확인 | `isThreeDigit`
+  - [ ] 입력이 각 자리 숫자가 제시된 숫자 범위 1~9에 속하는지 확인 | `isRangeCorrect`
   - [ ] 입력이 각 자리 숫자가 중복되지 않는지 확인 | `isNotDuplicated`
 - [ ] 두 숫자를 비교하여 볼과 스트라이크의 수를 카운트하는 기능 | `play`
   - 볼과 스트라이크의 수를 세고
