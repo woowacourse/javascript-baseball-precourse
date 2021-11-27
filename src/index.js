@@ -5,7 +5,7 @@ export default function BaseballGame() {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   };
 
-  let computerNumber = createAnswer();
+  let computerNumber = createAnswer(); 
   
   this.play = (computerInputNumbers, userInputNumbers) => {
     printResult(computerInputNumbers, userInputNumbers);
@@ -50,17 +50,21 @@ export default function BaseballGame() {
     const [comNum1, comNum2, comNum3] = computerInputNumbers;
     const [userNum1, userNum2, userNum3] = [...userInputNumbers];
 
-    // 스트라이크 수 
-    let strike = 0;
-    [comNum1, comNum2, comNum3].forEach((num, i) => {
-      if(num === [userNum1, userNum2, userNum3][i]) strike += 1;
-    });
+    // strike 수 
+    const strike = [comNum1, comNum2, comNum3].reduce((acc, num, i) => {
+      if(num === [userNum1, userNum2, userNum3][i]) {
+        acc += 1;
+      }
+      return acc;
+    }, 0);
 
-    // 볼 수 
-    let ball = 0;
-    [comNum1, comNum2, comNum3].forEach((num, i) => {
-      if(([userNum1, userNum2, userNum3].indexOf(num) !== i) && ([userNum1, userNum2, userNum3].indexOf(num) !== -1)) ball += 1;
-    });
+    // ball 수 
+    const ball = [comNum1, comNum2, comNum3].reduce((acc, num, i) => {
+      if(([userNum1, userNum2, userNum3].indexOf(num) !== i) && ([userNum1, userNum2, userNum3].indexOf(num) !== -1)) {
+        acc += 1;
+      }
+      return acc;
+    }, 0);
 
     return [strike, ball];
   }
