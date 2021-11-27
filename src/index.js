@@ -6,7 +6,7 @@ export default function BaseballGame() {
     return answerNumber;
   };
 
-  const computerNumber = createAnswer();
+  let computerNumber = createAnswer();
   
   this.play = (computerInputNumbers, userInputNumbers) => {
     return "결과 값 String";  
@@ -80,11 +80,25 @@ export default function BaseballGame() {
 
     //유효한 경우 (결과 출력)
     printResult();
-  }
+  };
+
+  const restartGame = () => {
+    computerNumber = createAnswer();
+    $("#result").innerHTML = '';
+    $("#user-input").value = '';
+  };
+
   $("#input-form").addEventListener("submit", e => {
     e.preventDefault();
   })
+  
   $("#submit").addEventListener("click", isVaildNum);
+
+  $("#result").addEventListener("click", e => {
+    if (e.target.id === "game-restart-button") {
+      restartGame();
+    }
+  });
 } 
 
 new BaseballGame();
