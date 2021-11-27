@@ -18,8 +18,7 @@ export default class BaseballGame {
     }
 
     initGame() {
-        this.computerNumbers = [1, 2, 3];
-        // this.computerNumbers = this.createComputerNumbers();
+        this.computerNumbers = this.createComputerNumbers();
         this.clearResultGuide();
         UserInput.clearUserInput();
         this.hideRestartGuide();
@@ -30,8 +29,16 @@ export default class BaseballGame {
         this.resultGuide.innerHTML = '';
     }
 
+    printResultGuide(result) {
+        this.resultGuide.innerHTML = result;
+    }
+
     hideRestartGuide() {
         this.restartGuide.hidden = true;
+    }
+
+    showRestartGuide() {
+        this.restartGuide.hidden = false;
     }
 
     createComputerNumbers() {
@@ -47,7 +54,14 @@ export default class BaseballGame {
     checkAnswer() {
         const userInputNumbers = UserInput.getNumbers();
         console.log(userInputNumbers, UserInput.isValid(userInputNumbers));
-        console.log(this.play(this.computerNumbers, userInputNumbers));
+        const result = this.play(this.computerNumbers, userInputNumbers);
+        this.printResultGuide(result);
+        if ( this.isCorrectAnswer(result) )
+            this.showRestartGuide();
+    }
+
+    isCorrectAnswer(result) {
+        return result.includes('정답');
     }
 
     play(computerInputNumbers, userInputNumbers) {
