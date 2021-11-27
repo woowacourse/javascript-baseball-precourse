@@ -8,6 +8,12 @@ const submitButton = document.querySelector("#submit");
 const userInputNumbers = document.querySelector("#user-input");
 const gameResult = document.querySelector('#result');
 
+userInputNumbers.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    submitButton.click();
+  }
+});
+
 const bindGameRestartEvent = () => {
   const gameRestartButton = document.querySelector("#game-restart-button");
 
