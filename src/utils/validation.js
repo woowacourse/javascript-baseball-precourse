@@ -1,7 +1,6 @@
 import { USER_INPUT_MAX_LENGTH_THREE } from "./constants.js";
 
 export const validateUserInputNumbers = (userInput) => {
-  console.log("userInput :", userInput);
   const validateForm = {
     isError: false,
     errorMessage: ``,
