@@ -11,7 +11,7 @@ export default class BaseballGame {
 
     init() {
         this.computerNumbers = gameRules.getComputerNumbers;
-        this.gameOver = false;
+        this.isGameComplate = false;
 
         gameRender.init();
     }
@@ -32,13 +32,13 @@ export default class BaseballGame {
 
     play(computerInputNumbers, userInputNumbers) {
         const gameResult = gameRules.getGameResult(computerInputNumbers, userInputNumbers);
+        this.isGameComplate = gameResult.isGameComplate;
 
-        if (gameResult.strike === 3) this.gameOver = true;
         return gameRules.getGameHintText(gameResult.strike, gameResult.ball);
     }
 
     draw(playResult) {
-        if (this.gameOver === false) {
+        if (this.isGameComplate === false) {
             gameRender.gameHint(playResult);
             return false;
         }

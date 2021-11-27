@@ -14,7 +14,7 @@ class GameRules {
 
     getGameResult(computerValues, userValues) {
         const result = {
-            end: false,
+            isGameComplate: false,
             strike: 0,
             ball: 0,
         };
@@ -24,7 +24,7 @@ class GameRules {
             else if (computerValues.includes(value)) result.ball++;
         });
 
-        if (result.strike === 3) result.end = true;
+        if (result.strike === 3) result.isGameComplate = true;
         return result;
     }
 
