@@ -1,5 +1,6 @@
 export default function BaseballGame() {
   const btnSubmit=document.querySelector('#submit');
+  
   const userInput = document.querySelector("#user-input");
   const result = document.querySelector("#result");
   let computerInputNumbers=[];
@@ -67,8 +68,12 @@ export default function BaseballGame() {
 //결과 화면에 출력
 const getResult=(answer)=>{
   if(answer=="정답"){
-    result.innerHTML='<strong>정답입니다</strong>'
-
+    result.innerHTML='<strong>정답입니다</strong>게임을 새로 시작하시겠습니까?<button id="game-restart-button">게임 재시작</button>'
+    //재시작버튼
+    const btnRestart=document.querySelector('#game-restart-button');
+    btnRestart.addEventListener("click",()=>{
+    resetValue();
+  })
   }
   else{
     result.innerHTML=answer
@@ -115,13 +120,13 @@ const getResult=(answer)=>{
 
   const init=()=>{
     resetValue();
-    computerInputNumbers=generateComNumber();
     console.log(computerInputNumbers);
     
   }  
   const resetValue=()=>{
     result.innerHTML='';
     userInput.value='';
+    computerInputNumbers=generateComNumber();
   }
   
   init();
