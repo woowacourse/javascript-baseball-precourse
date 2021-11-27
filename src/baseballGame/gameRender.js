@@ -68,7 +68,7 @@ class GameRender {
         this.setContent($fragment);
         this.setInputDisable(true);
 
-        callback($retryButton);
+        if (typeof callback === "function") callback($retryButton);
     }
 }
 
