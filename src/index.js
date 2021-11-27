@@ -1,14 +1,17 @@
 import { $ } from "./utils/dom.js"
 
 export default function BaseballGame() {
-  this.play = (computerInputNumbers, userInputNumbers) => {
-    return "결과 값 String";  
-  };
-
   const createAnswer = () => {
     const answerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
     return answerNumber;
   };
+
+  const computerNumber = createAnswer();
+  
+  this.play = (computerInputNumbers, userInputNumbers) => {
+    return "결과 값 String";  
+  };
+
 
   const printError = () => {
     alert("입력값이 잘못되었습니다. 1~9까지의 수를 중복없이 3개 작성해주세요.");
@@ -16,7 +19,26 @@ export default function BaseballGame() {
   }
 
   const printResult = () => {
-    console.log("숫자 제대로 입력");
+    const [strike, ball] = countAnswer();
+  }
+
+  const countAnswer = () => {
+    const [comNum1, comNum2, comNum3] = computerNumber;
+    const [userNum1, userNum2, userNum3] = [...new Set($("#user-input").value.split('').map(num => Number(num)))];
+
+    // 스트라이크 수 
+    let strike = 0;
+    [comNum1, comNum2, comNum3].forEach((num, i) => {
+      if(num === [userNum1, userNum2, userNum3][i]) strike += 1;
+    });
+
+    // 볼 수 
+    let ball = 0;
+    [comNum1, comNum2, comNum3].forEach((num, i) => {
+      if(([userNum1, userNum2, userNum3].indexOf(num) !== i) && ([userNum1, userNum2, userNum3].indexOf(num) !== -1)) ball += 1;
+    });
+
+    return [strike, ball];
   }
 
   const isVaildNum = () => {
