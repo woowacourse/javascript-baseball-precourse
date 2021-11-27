@@ -1,4 +1,4 @@
-import { RESULT_CODE, ERROR_MESSAGE } from "./constants.js";
+import { RESULT_CODE, ERROR_MESSAGE } from "../data/constants.js";
 
 function isThreeLegnth(value) {
     return value.trim().length === 3;

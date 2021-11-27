@@ -1,6 +1,6 @@
-import { RESULT_TEXT } from "./constants.js";
+import { RESULT_TEXT } from "../data/constants.js";
 
-class GameManager {
+class GameRules {
     get generateNumberArray() {
         const randomUtils = MissionUtils.Random.pickNumberInRange;
 
@@ -39,4 +39,4 @@ class GameManager {
     }
 }
 
-export const gameManager = new GameManager();
+export const gameRules = new GameRules();

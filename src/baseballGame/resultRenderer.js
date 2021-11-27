@@ -1,6 +1,6 @@
-import { $, createElement, combineElement } from "./utils.js";
-import { RESULT_CODE, RESULT_TEXT, ALERT_MESSAGE } from "./constants.js";
-import { $result, $userInput, $submit } from "./elements.js";
+import { $, createElement, combineElement } from "../utils.js";
+import { RESULT_CODE, RESULT_TEXT, ALERT_MESSAGE } from "../data/constants.js";
+import { $result, $userInput, $submit } from "../data/elements.js";
 
 export function errorMessage(erroCode) {
     let alertText = "";
