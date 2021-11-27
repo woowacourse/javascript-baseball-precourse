@@ -1,5 +1,10 @@
+import { setNumber } from './setNumber.js.js'
+import { checkNumber } from './checkValid.js'
+
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
+    const resultDiv = document.getElementById("result")
+    const userValidNumber = checkNumber(userInputNumbers);console.log(computerInputNumbers, userValidNumber)  };
 }
+
+setNumber();
