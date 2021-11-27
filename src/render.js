@@ -12,7 +12,7 @@ export function errorMessage(erroCode) {
     alert(alertText);
 }
 
-export class resultRender {
+class ResultRender {
     constructor(gameResult = {}) {
         this.result = gameResult;
     }
@@ -33,7 +33,9 @@ export class resultRender {
         $retryButton.id = "game-restart-button";
         $retryWrap.append($retryButton);
 
-        $result.append(combineElement([$correctText, $resultWrap]));
+        $result.append(combineElement([$correctText, $retryWrap]));
         $result.style.display = "block";
     }
 }
+
+export const resultRender = new ResultRender();
