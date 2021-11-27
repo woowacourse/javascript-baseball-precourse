@@ -2,7 +2,11 @@
 
 ## 🕹️ 작동 결과
 
-![내 결과](../images/my_result.gif)
+<center>
+    <img src="../images/my_result.gif" alt="내 결과">
+</center>
+
+
 
 ## 💁‍♂️ 기능 목록
 
