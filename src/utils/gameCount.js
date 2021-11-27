@@ -9,7 +9,6 @@ export function gameCount(computerInput, userInput) {
   userInput = getUserInput()
     .split('')
     .map((num) => Number(num));
-  console.log(computerInput);
   for (let i = 0; i < userInput.length; i++) {
     if (userInput[i] === computerInput[i]) {
       strikeCount++;
