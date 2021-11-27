@@ -21,7 +21,7 @@ export const RESULT_TEXT = {
 };
 
 export const ALERT_MESSAGE = {
-    ERROR_USERINPUT_LENGTH: "3글자로 입력하여주세요.\n(1~9 숫자, 중복 없는 수 3자리)",
-    ERROR_USERINPUT_NUMBER_RANGE: "1에서 9 사이의 숫자만 입력할 수 있습니다.\n(1~9 숫자, 중복 없는 수 3자리)",
-    ERROR_USERINPUT_UNIQUE_WORD: "중복된 숫자가 있습니다.\n(1~9 숫자, 중복 없는 수 3자리)",
+    USERINPUT_LENGTH: "3글자로 입력하여주세요.\n(1~9 숫자, 중복 없는 수 3자리)",
+    USERINPUT_NUMBER_RANGE: "1에서 9 사이의 숫자만 입력할 수 있습니다.\n(1~9 숫자, 중복 없는 수 3자리)",
+    USERINPUT_UNIQUE_WORD: "중복된 숫자가 있습니다.\n(1~9 숫자, 중복 없는 수 3자리)",
 };
