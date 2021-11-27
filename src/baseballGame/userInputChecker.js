@@ -1,7 +1,7 @@
 import { RESULT_CODE, ERROR_MESSAGE } from "../data/constants.js";
 
 function isThreeLegnth(value) {
-    return value.trim().length === 3;
+    return value.length === 3;
 }
 
 function isUniqueWord(value) {
