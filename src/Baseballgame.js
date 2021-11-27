@@ -48,7 +48,7 @@ export default class Baseballgame {
     if (this.game.strike === 3) return '정답';
     if (this.game.strike || this.game.ball) {
       const ball = this.game.ball ? `${this.game.ball}볼 ` : '';
-      const strike = this.game.strike ? `${this.game.strike}스트라이크 ` : '';
+      const strike = this.game.strike ? `${this.game.strike}스트라이크` : '';
       return ball + strike;
     }
     return '낫싱';

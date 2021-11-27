@@ -6,11 +6,12 @@ const $submit = document.querySelector('#submit');
 const $userInput = document.querySelector('#user-input');
 const $result = document.querySelector('#result');
 
-let randomNumber = 0;
+let randomNumber = '';
 let userInputNumbers = 0;
 const BG = new Baseballgame();
 
 const init = () => {
+  randomNumber = '';
   $result.textContent = '';
 };
 
@@ -26,11 +27,14 @@ const render = () => {
 
 const createRandomNumber = () => {
   init();
-  const randomNumberList = Array.from({ length: 1000 }, (_v, i) => String(i))
-    .filter(number => new Set(number).size === 3 && !number.match(/[0]/))
-    .map(number => Number(number));
-  randomNumber =
-    MissionUtils.Random.pickNumberInList(randomNumberList).toString();
+
+  while (randomNumber.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!randomNumber.includes(number)) {
+      randomNumber += number;
+    }
+  }
+
   console.log('randomNumber: ', randomNumber);
 };
 
