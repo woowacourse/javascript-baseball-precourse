@@ -1,4 +1,5 @@
 import { BASEBALL_RULL } from './constants.js';
+
 export const generateRandomNumber = () => {
   const numberSet = new Set();
   while (numberSet.size < BASEBALL_RULL.DIGITS) {
@@ -10,4 +11,25 @@ export const generateRandomNumber = () => {
     );
   }
   return [...numberSet].join('');
+};
+
+const hasZero = (target) => {
+  return target.indexOf('0') !== -1;
+};
+
+const isValidLength = (target) => {
+  return (
+    target.length === BASEBALL_RULL.DIGITS &&
+    new Set(target.split('')).size === BASEBALL_RULL.DIGITS
+  );
+};
+
+export const isNotValidInput = (input) => {
+  return (
+    !input || !isValidLength(input) || hasZero(input) || Number.isNaN(+input)
+  );
+};
+
+export const parseInput = (input) => {
+  return String(parseInt(input.trim(), 10));
 };
