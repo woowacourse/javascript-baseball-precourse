@@ -8,21 +8,21 @@ const $result = $("#result");
 
 const InputCheckMethods = [
   (value) => {
-    if (val == "") {
+    if (value == "") {
       alert(USER_INPUT_ALERT.blank);
       return false;
     }
     return true;
   },
   (value) => {
-    if (!Number(value)) {
+    if (!Number(value) && Number(value) !== 0) {
       alert(USER_INPUT_ALERT.notNumber);
       return false;
     }
     return true;
   },
   (value) => {
-    if (value.inclues("0")) {
+    if (value.includes("0")) {
       alert(USER_INPUT_ALERT.removeZero);
       return false;
     }
@@ -51,13 +51,13 @@ export default class BaseballGame {
       answer.push(randomNum);
     }
   }
-  isValid(userInputNumbers) {
-    // 중복되는 값이 없는지 검사
-    // 1-9가 맞는지 검사
-    // 3자리가 맞는지 검사
+  isInputValid(userInputNumbers) {
+    return InputCheckMethods.every((InputCheckMethod) =>
+      InputCheckMethod(userInputNumbers)
+    );
   }
   play(computerInputNumbers, userInputNumbers) {
-    if (!isValid(userInputNumbers)) {
+    if (!this.isInputValid(userInputNumbers)) {
       return;
     }
     if (computerInputNumbers === userInputNumbers) {
@@ -82,6 +82,15 @@ export default class BaseballGame {
       }
     }
     return ball > 0 ? `${ball}볼` : "";
+  }
+  calcStrike(computerInputNumbers, userInputNumbers) {
+    let strike = 0;
+    for (let i = 0; i < computerInputNumbers.length; i++) {
+      if (computerInputNumbers[i] === userInputNumbers[i]) {
+        strike++;
+      }
+    }
+    return strike > 0 ? `${strike}스트라이크` : "";
   }
 }
 
