@@ -36,7 +36,10 @@ export const state = {
   setComputerInput() {
     let randomNumberString = '';
     while (randomNumberString.length < GAME_RULE.numberLength) {
-      const randomNumber = MissionUtils.Random.pickNumberInRange(GAME_RULE.rangeMin, GAME_RULE.rangeMax,);
+      const randomNumber = MissionUtils.Random.pickNumberInRange(
+        GAME_RULE.rangeMin,
+        GAME_RULE.rangeMax,
+      );
       if (!randomNumberString.includes(randomNumber)) {
         randomNumberString += randomNumber;
       }

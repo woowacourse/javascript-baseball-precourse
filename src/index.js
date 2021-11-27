@@ -1,7 +1,8 @@
 import { state } from './state/index.js';
-import { USER_INPUT, SUBMIT_BUTTON } from './constants/html-doms.js';
-import { makeResultMessage, makeResultDom } from './functions/game-result.js';
-import { isUserInputValid } from './functions/user-input.js';
+import { SUBMIT_BUTTON } from './constants/html-doms.js';
+import { makeResultMessage } from './functions/game-result.js';
+
+import { onSubmitClick } from './functions/add-submit-event.js';
 
 export default function BaseballGame() {
   state.setComputerInput();
@@ -11,15 +12,7 @@ export default function BaseballGame() {
     return makeResultMessage();
   };
 
-  SUBMIT_BUTTON.addEventListener('click', event => {
-    event.preventDefault();
-    state.setUserInput(parseInt(USER_INPUT.value));
-    state.initBallStrike();
-    if (isUserInputValid(USER_INPUT.value)) {
-      const resultMessage = this.play(state.computerInput, state.userInput);
-      makeResultDom(resultMessage);
-    }
-  });
+  SUBMIT_BUTTON.addEventListener('click', event => onSubmitClick(event, this.play));
 }
 
 new BaseballGame();
