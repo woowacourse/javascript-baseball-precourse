@@ -1,25 +1,20 @@
 export default class Guide {
-    static get RESULT_ELEM() {
-        return document.querySelector('#result');
-    }
+  static RESULT_ELEM = document.querySelector('#result');
+  static RESTART_ELEM = document.querySelector('#restart');
 
-    static get RESTART_ELEM() {
-        return document.querySelector('#restart');
-    }
+  static clearResult() {
+    this.RESULT_ELEM.innerHTML = '';
+  }
 
-    static clearResult() {
-        this.RESULT_ELEM.innerHTML = '';
-    }
+  static printResult(contents) {
+    this.RESULT_ELEM.innerHTML = contents;
+  }
 
-    static printResult(contents) {
-        this.RESULT_ELEM.innerHTML = contents;
-    }
+  static hideRestart() {
+    this.RESTART_ELEM.hidden = true;
+  }
 
-    static hideRestart() {
-        this.RESTART_ELEM.hidden = true;
-    }
-
-    static showRestart() {
-        this.RESTART_ELEM.hidden = false;
-    }
+  static showRestart() {
+    this.RESTART_ELEM.hidden = false;
+  }
 }
