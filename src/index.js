@@ -14,8 +14,27 @@ export default function BaseballGame() {
     computerInputNumbers = utils.pickUniqueThreeNumbers();
   };
 
+  this.isIndexSame = (number, index) => {
+    return computerInputNumbers.indexOf(number) === index;
+  };
+
+  this.isIncludeNumber = (number) => {
+    return computerInputNumbers.includes(number);
+  };
+
+  this.setScoreBoard = function (scoreBoard, number, index) {
+    this.isIncludeNumber(number) &&
+      (this.isIndexSame(number, index)
+        ? (scoreBoard.strike += 1)
+        : (scoreBoard.ball += 1));
+  };
+
   this.play = function (computerInputNumbers, userInputNumbers) {
     const scoreBoard = { ball: 0, strike: 0 };
+
+    userInputNumbers.forEach((number, index) =>
+      this.setScoreBoard(scoreBoard, number, index)
+    );
 
     console.log(computerInputNumbers);
     console.log(userInputNumbers);
