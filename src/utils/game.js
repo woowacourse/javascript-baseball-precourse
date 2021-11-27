@@ -40,7 +40,9 @@ export function win() {
   const button = document.createElement("button");
   button.id = "game-restart-button";
   button.innerText = "게임 재시작";
-
+  button.addEventListener("click", () => {
+    location.reload();
+  });
   $app.appendChild(span);
   $app.appendChild(button);
 }
