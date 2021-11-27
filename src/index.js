@@ -16,7 +16,7 @@ submitButton.addEventListener('click', event =>{
     if(game.isValid(userInput)){
         // 유저 입력 값 & 생성된 값 비교
         const {isFinished, output} = game.compareInput(userInput);
-        ParseResult(isFinished, output);
+        ParseResult(isFinished, output, game);
     } else{
         alert("잘못된 값을 입력하셨습니다.");
     }
