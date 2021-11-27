@@ -10,7 +10,6 @@ export default class BaseballGame {
     this.$userInput = document.querySelector('#user-input');
     this.$result = document.querySelector('#result');
     this.hintMessage = '';
-    this.correctMessage = STRING.CORRECT_MESSAGE;
   }
 
   initializeUserInput() {
@@ -55,7 +54,7 @@ export default class BaseballGame {
       return this.hintMessage;
     }
 
-    this.$result.innerHTML = this.correctMessage;
+    this.$result.innerHTML = STRING.CORRECT_MESSAGE;
     this.gameRestartClickEvent();
   }
 
