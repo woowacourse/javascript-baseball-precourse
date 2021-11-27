@@ -7,16 +7,20 @@ function uniqueNumberPush(computerNumber, randomNumber) {
     }
 }
 
+function generateNumber(computerNumber) {
+    while(this.computerNumber.length < 3) {
+        const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+        uniqueNumberPush(computerNumber, randomNumber);
+    }
+}
+
 export default class BaseballGame {
     constructor() {
         this.computerNumber = [];
     }
 
     setComputerNumber() {
-        while(this.computerNumber.length < 3) {
-            const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-            uniqueNumberPush(this.computerNumber, randomNumber);
-        }
+        generateNumber(this.computerNumber);
     }
 
     play(userInputNumber) {
