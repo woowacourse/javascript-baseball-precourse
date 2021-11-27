@@ -1,4 +1,4 @@
-import { VALIDATE_MESSAGES } from './constants';
+import { VALIDATE_MESSAGES } from './constants.js';
 
 function validateLength(input) {
   if (input.length !== 3) {
