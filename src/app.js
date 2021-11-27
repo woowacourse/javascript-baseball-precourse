@@ -1,4 +1,4 @@
-import { baseballGame } from "./baseballGame/controller.js";
+import { baseballGame } from "./baseballGame/index.js";
 import { $submit } from "./data/elements.js";
 
 $submit.addEventListener("click", onClickSubmitButton);
