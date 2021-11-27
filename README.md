@@ -63,10 +63,15 @@
 
 ### 2. 구현할 기능 목록
 
-- [x] 컴퓨터가 가지는 서로 다른 3자리의 랜덤 숫자 생성하는 기능 | `createComputerNumbers`
-- [ ] 결과 문구를 clear하는 기능 | `clearResult`
-- [ ] 사용자 입력창을 clear하는 기능 | `clearUserInput`
+- [x] 게임을 초기화하는 기능 | `initGame`
+  - 컴퓨터가 가지는 3자리 숫자를 새로 지정하고
+  - 결과 문구, 사용자 입력창의 value를 clear하고
+  - 재시작 안내 문구를 숨김
 
+- [x] 컴퓨터가 가지는 서로 다른 3자리의 랜덤 숫자 생성하는 기능 | `createComputerNumbers`
+- [x] 결과 문구를 clear하는 기능 | `clearResult`
+- [x] 사용자 입력창을 clear하는 기능 | `clearUserInput`
+- [x] 재시작 안내 문구를 숨기는 기능 | `hideRestartGuide`
 - [ ] 사용자가 입력한 숫자의 정답 비교 결과를 사용자가 확인할 수 있도록 하는 기능 | `checkAnswer`
   - 사용자 입력 값을 가져와 잘못된 값인지 확인하고,
   - 잘못된 경우
@@ -88,8 +93,4 @@
 - [ ] 결과 문구를 띄우는 기능 | `printResult`
 - [ ] 재시작 안내 문구를 띄우는 기능 | `showRestartGuide`
   - 재시작 버튼을 누르면 게임을 다시 시작할 수 있도록 함.
-- [ ] 게임을 재시작하는 하는 기능 | `restart`
-  - 컴퓨터가 가지는 3자리 숫자를 새로 지정하고
-  - 결과 문구, 사용자 입력창의 value를 clear하고
-  - 재시작 안내 문구를 숨김
-- [ ] 재시작 안내 문구를 숨기는 기능 | `hideRestartGuide`
+

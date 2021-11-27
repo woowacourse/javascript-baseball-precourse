@@ -1,11 +1,35 @@
 export default class BaseballGame {
     constructor() {
-        this.init();
+        this.setDOM();
+        this.initGame();
     }
 
-    init() {
+    setDOM() {
+        this.userInput = document.querySelector('#user-input');
+        this.resultGuide = document.querySelector('#result');
+        this.restartGuide = document.querySelector('#restart');
+        this.submitButton = document.querySelector('#submit');
+        this.restartButton = document.querySelector('#game-restart-button');
+    }
+
+    initGame() {
         this.computerNumbers = this.createComputerNumbers();
+        this.clearResult();
+        this.clearUserInput();
+        this.hideRestartGuide();
         console.log(this.computerNumbers);
+    }
+
+    clearResult() {
+        this.resultGuide.innerHTML = '';
+    }
+
+    clearUserInput() {
+        this.userInput.value = '';
+    }
+
+    hideRestartGuide() {
+        this.restartGuide.hidden = true;
     }
 
     createComputerNumbers() {
@@ -23,5 +47,4 @@ export default class BaseballGame {
     }
   }
 
-  
   new BaseballGame();
