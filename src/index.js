@@ -30,15 +30,6 @@ export default function BaseballGame() {
 
   const printResult = (computerInputNumbers, userInputNumbers) => {
     const [strike, ball] = countAnswer(computerInputNumbers, userInputNumbers);
-
-    if(strike && ball) {
-      $("#result").innerText = `${ball}볼 ${strike}스트라이크`;
-      return;
-    }
-    if(!strike && ball) {
-      $("#result").innerText = `${ball}볼`;
-      return;
-    }
     if(strike === 3) {
       $("#result").innerHTML = 
       `<strong>🎉 정답을 맞추셨습니다! 🎉</strong>
@@ -48,16 +39,11 @@ export default function BaseballGame() {
       </p>` 
       return;
     }
-
-    if(!ball && strike) {
-      $("#result").innerText = `${strike}스트라이크`;
-      return; 
-    }
-
     if(!strike && !ball) {
       $("#result").innerText = "낫싱";
       return;
     }
+    $("#result").innerText = `${ball? ball + '볼' : ''} ${strike? strike + '스트라이크' : ''}`;
   }
 
   const countAnswer = (computerInputNumbers, userInputNumbers) => {

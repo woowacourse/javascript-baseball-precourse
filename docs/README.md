@@ -40,7 +40,7 @@
 - [x] play 메서드 만들어서 게임 진행 (리드미 참고)
 - [x] 에러별 메시지 출력 다르게
 - [x] createAnswer 지역변수 없애고 바로 return 
-- [] printResult 함수 리팩터링(분리)
+- [x] printResult 함수 리팩터링(분리)
 - [] computerNumber 리팩터링 
 - [] 최대한 const로 할 수 있는 방법 
 - [] else if 최대한 줄이기 (switch?)
