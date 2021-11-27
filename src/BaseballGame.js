@@ -5,7 +5,7 @@ export default class BaseballGame {
     this.computerInputNumbers = this.createComputerNumbers();
   }
 
-  play() {}
+  play(userInputNumbers) {}
 
   createComputerNumbers() {
     const uniqueNumberSet = new Set();
