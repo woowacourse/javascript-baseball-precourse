@@ -5,7 +5,7 @@ export default function BaseballGame() {
   const btnSubmit=document.querySelector('#submit');
   const userInput = document.querySelector("#user-input");
   const result = document.querySelector("#result");
-  const getAnswer='<strong>정답입니다</strong><br>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button>';
+  const getAnswer='<strong>🎉정답을 맞추셨습니다!🎉</strong><br>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button>';
   let computerInputNumbers=[];
 
   //유저가 입력한 수 가져오기
