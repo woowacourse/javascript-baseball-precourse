@@ -5,13 +5,13 @@ import {
   convertToHashMap,
 } from './utils.js';
 import { BASEBALL_RULE, GAME_RESULT, MESSAGE } from './constants.js';
-import { createElement } from './dom.js';
+import { $, createElement, removeFirstChild, replaceChild } from './dom.js';
 
 export default class BaseballGame {
   constructor() {
-    this.inputElem = document.getElementById('user-input');
-    this.submitBtn = document.getElementById('submit');
-    this.resultElem = document.getElementById('result');
+    this.inputElem = $('user-input');
+    this.submitBtn = $('submit');
+    this.resultElem = $('result');
     this.answer = generateRandomNumber();
     this.init();
   }
@@ -60,16 +60,14 @@ export default class BaseballGame {
 
   restartGame() {
     this.inputElem.value = '';
-    this.resultElem.removeChild(this.resultElem.firstChild);
+    removeFirstChild(this.resultElem);
     this.answer = generateRandomNumber();
   }
 
   renderResult(result) {
-    if (this.resultElem.hasChildNodes())
-      this.resultElem.removeChild(this.resultElem.firstChild);
-    this.resultElem.appendChild(createElement('div', result));
+    replaceChild(this.resultElem, createElement('div', result));
     if (result === GAME_RESULT.END) {
-      const restartBtn = document.getElementById('restart');
+      const restartBtn = $('restart');
       restartBtn.addEventListener('click', () => {
         this.restartGame();
       });
