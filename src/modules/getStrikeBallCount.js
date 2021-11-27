@@ -18,9 +18,8 @@ function getBollCount(computerInputNumbers, userInputNumbers){
     return bollCount;
 }
 
-export default function getPlayResultCount(computerInputNumbers, userInputNumbers){
-    let strikeCount = getStrikeCount(computerInputNumbers,userInputNumbers);
-    let bollCount = getBollCount(computerInputNumbers,userInputNumbers);
-    return [bollCount, strikeCount]
-
+export default function getStrikeBallCount(computerInputNumbers, userInputNumbers){
+    const strikeCount = getStrikeCount(computerInputNumbers,userInputNumbers);
+    const bollCount = getBollCount(computerInputNumbers,userInputNumbers);
+    return [bollCount, strikeCount]; 
 }

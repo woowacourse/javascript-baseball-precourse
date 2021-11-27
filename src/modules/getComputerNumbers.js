@@ -1,14 +1,14 @@
 export default function getComputerNumbers(){
-    let computerInputNumbersArry = [];
-    while (computerInputNumbersArry.length !== 3){
-        if(computerInputNumbersArry.length === 3){
+    let checkComputerNumbers = [];
+    while (checkComputerNumbers.length !== 3){
+        if(checkComputerNumbers.length === 3){
             break
         }
         let num = MissionUtils.Random.pickNumberInRange(1,9);
-        if (!computerInputNumbersArry.includes(num)){
-            computerInputNumbersArry.push(num);
+        if (!checkComputerNumbers.includes(num)){
+            checkComputerNumbers.push(num);
         }
     }
     
-    return computerInputNumbersArry;
+    return checkComputerNumbers;
 }

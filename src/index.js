@@ -1,8 +1,8 @@
 import {$} from './dom/dom.js';
 import getComputerNumbers from "./modules/getComputerNumbers.js";
 import getUserNumbers from './modules/getUserNumbers.js';
-import getPlayResultCount from './modules/getPlayResultCount.js';
-import getResultString from './modules/getResultString.js';
+import getStrikeBallCount from './modules/getStrikeBallCount.js';
+import getPlayGameResultString from './modules/getPlayGameResultString.js';
 import printGamePlayResult from './modules/printGamePlayResult.js';
 import printGameEndResult from './modules/printGameEndResult.js';
 
@@ -13,27 +13,27 @@ export default function BaseballGame() {
     userInputNumbers: [],
   }
   
-  //init 초기화 작업 
+  //브라우저 처음 열 때에 컴퓨터 값 생성 + event들 등록  
   this.init = () => {
     this.gameInfoObject.computerInputNumbers = getComputerNumbers();
     initEventListener();
   }
   
+  
   this.play = function (computerInputNumbers, userInputNumbers) {    
-      const result = getPlayResultCount(computerInputNumbers, userInputNumbers);
+      const result = getStrikeBallCount(computerInputNumbers, userInputNumbers);
       const ballCount = result[0];
       const strikeCount = result[1];
-      //ballCount와 strikeCount에 따른 결과값을 String타입의 데이터로 반환한다
-      return getResultString(ballCount,strikeCount);
+      return getPlayGameResultString(ballCount,strikeCount);
   };
 
   
 
   const playGame = () => {
-      //유저가 입력한 값 받아오기
       this.gameInfoObject.userInputNumbers = getUserNumbers($('#user-input').value);
+      //유저가 입력한 값이 유효할 때에만 다음 단계 함수들 진행
       if(this.gameInfoObject.userInputNumbers !== false){
-        let compareResult = this.play(this.gameInfoObject.computerInputNumbers, this.gameInfoObject.userInputNumbers);
+        const compareResult = this.play(this.gameInfoObject.computerInputNumbers, this.gameInfoObject.userInputNumbers);
         if(compareResult == 'gameEnd'){
           printGameEndResult();
           addResetButtonListener();
@@ -50,17 +50,16 @@ export default function BaseballGame() {
     $('#user-input').value = '';
   }
 
-  const addResetButtonListener = () => {
-    $('#game-restart-button').addEventListener("click", restartGame);
-  }
-
   const initEventListener = () => {
     $('#user-input-form').addEventListener("submit",(e) =>{
       e.prevetDefault();
     })
-    //user가 submit버튼 클릭시 playGame 함수 실행 
     $('#submit').addEventListener("click", playGame);
     
+  }
+
+  const addResetButtonListener = () => {
+    $('#game-restart-button').addEventListener("click", restartGame);
   }
 }
 
