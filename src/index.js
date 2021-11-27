@@ -36,7 +36,12 @@ export default class BaseballGame {
     if (resultCode === VERIFIED_CODE.VERIFIED) {
       return;
     }
-    
+
     alert(RESULT_MESSAGE[resultCode]);
+  }
+
+  resetInputValue() {
+    this.$userInput.value = '';
+    this.$userInput.focus();
   }
 }
