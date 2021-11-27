@@ -1,4 +1,4 @@
-import { VALIDATE_MESSAGES } from './constants.js';
+import { VALIDATE_MESSAGES, SUCCESS_RESULT_MESSAGE } from './constants.js';
 import createComputerInputNumbers from './createComputerInputNumbers.js';
 import getResultMessage from './getResultMessage.js';
 import validateInput from './validateInput.js';
@@ -66,7 +66,7 @@ export default function BaseballGame() {
   };
 
   const showResult = (resultMessage) => {
-    if (resultMessage === '3스트라이크') {
+    if (resultMessage === SUCCESS_RESULT_MESSAGE) {
       return showSuccess();
     }
 

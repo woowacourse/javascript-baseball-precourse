@@ -1,7 +1,7 @@
-import { VALIDATE_MESSAGES } from './constants.js';
+import { VALIDATE_MESSAGES, NUMBERS_LENGTH, NUMBERS_RANGE } from './constants.js';
 
 function validateLength(input) {
-  if (input.length !== 3) {
+  if (input.length !== NUMBERS_LENGTH) {
     return false;
   }
 
@@ -9,8 +9,8 @@ function validateLength(input) {
 }
 
 function validateRange(input) {
-  for (let index = 0; index < input.length; index++) {
-    if (input[index] < '1' || input[index] > '9') {
+  for (let index = 0; index < NUMBERS_LENGTH; index++) {
+    if (input[index] < NUMBERS_RANGE.min.toString() || input[index] > NUMBERS_RANGE.toString()) {
       return false;
     }
   }
@@ -21,7 +21,7 @@ function validateRange(input) {
 function validateDuplication(input) {
   const usedNumber = {};
 
-  for (let index = 0; index < input.length; index++) {
+  for (let index = 0; index < NUMBERS_LENGTH; index++) {
     if (usedNumber[input[index]]) {
       return false;
     }
