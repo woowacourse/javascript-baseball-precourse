@@ -1,5 +1,6 @@
-import generateComNumber from './computer.js'
-import validateUser from './validate.js'
+import generateComNumber from './computer.js';
+import validateUser from './validate.js';
+import getHint from './hint.js';
 export default function BaseballGame() {
   const btnSubmit=document.querySelector('#submit');
   const userInput = document.querySelector("#user-input");
@@ -12,22 +13,7 @@ export default function BaseballGame() {
     let usernumber=userInput.value.split('').map(Number);
     return usernumber;
   }
-
-  //strike,ball,낫싱 판단
-  const getHint=(computerInputNumbers, userInputNumbers)=>{
-    let strikeCount=0;
-    let ballCount=0;
-    userInputNumbers.forEach((num,index)=>{      
-      if(num==computerInputNumbers[index]){
-        strikeCount++;
-      }
-      else if(computerInputNumbers.includes(num)){
-        ballCount++;
-      }
-    }
-    )   
-    return [strikeCount,ballCount];
-  }
+  
   //결과 화면에 출력
   const getResult=(answer)=>{
     if(answer=="정답"){
@@ -39,7 +25,7 @@ export default function BaseballGame() {
      })
    }
   else{
-    result.innerHTML=answer
+    result.innerHTML=answer;
   }
 
 }
@@ -47,10 +33,10 @@ export default function BaseballGame() {
   const play = function (computerInputNumbers, userInputNumbers) {
     let [strike,ball]=getHint(computerInputNumbers,userInputNumbers);
     let answer="";
-    if (ball>0){answer+=`${ball}볼 `}
-    if (strike>0){answer+=`${strike}스트라이크`}  
-    if (ball === 0 && strike === 0) {answer= "낫싱";}
-    if (strike==3){answer="정답"}
+    if (ball>0){answer+=`${ball}볼 `};
+    if (strike>0){answer+=`${strike}스트라이크`};  
+    if (ball === 0 && strike === 0) {answer= "낫싱"};
+    if (strike==3){answer="정답"};
     return answer;
     };
   
@@ -58,9 +44,9 @@ export default function BaseballGame() {
       let userNumber=getUserNumber();
       let valid=validateUser(userNumber);
       if (valid==''){
-        getResult(play(computerInputNumbers,userNumber))
+        getResult(play(computerInputNumbers,userNumber));
       }else{
-        alert(valid)
+        alert(valid);
       }
       
     })
@@ -69,10 +55,9 @@ export default function BaseballGame() {
     result.innerHTML='';
     userInput.value='';
     computerInputNumbers=generateComNumber();
-    console.log(computerInputNumbers);
+    console.log(`Guess ${computerInputNumbers}!`);
   }
   
   resetValue();
 }
-
-BaseballGame();
+new BaseballGame();
