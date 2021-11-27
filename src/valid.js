@@ -13,6 +13,11 @@ export function isThreeDigitsNumber(checkValue) {
 export function checkUserInputValue(userInputValue) {
   if (!isThreeDigitsNumber(userInputValue)) return false;
   const userInputValueArray = userInputValue.split("");
+  var isThereZero = false;
+  userInputValueArray.map((item) => {
+    if (item === "0") isThereZero = true;
+  });
+  if (isThereZero) return false;
   if (
     userInputValueArray[0] !== userInputValueArray[1] &&
     userInputValueArray[0] !== userInputValueArray[2] &&
