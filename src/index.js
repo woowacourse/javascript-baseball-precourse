@@ -15,21 +15,14 @@ export default class BaseballGame {
     init() {
         this.computerNumbers = gameManager.generateNumberArray;
         this.gameOver = false;
-    }
 
-    onClickSubmitButton(event) {
-        event.preventDefault();
+        resultRender.init();
 
-        const checkVaildCode = checkUserInputVaild($userInput.value);
-        if (checkVaildCode !== RESULT_CODE.DONE_USERINPUT_VALID) {
-            errorMessage(checkVaildCode);
-            return false;
-        }
+        $userInput.value = "";
+        $userInput.focus();
 
-        const userNumbers = getNumberArray($userInput.value);
-        const playResult = this.play(userNumbers, this.computerNumbers);
-
-        this.drawResult(playResult);
+        $userInput.removeAttribute("disabled");
+        $submitButton.removeAttribute("disabled");
     }
 
     play(computerInputNumbers, userInputNumbers) {
@@ -47,16 +40,36 @@ export default class BaseballGame {
 
     drawResult(playResult) {
         if (this.gameOver === false) {
+            $userInput.focus();
             resultRender.gameHint(playResult);
             return false;
         }
 
-        $userInput.setAttribute("disabled", "");
-        $submitButton.setAttribute("disabled", "");
+        resultRender.gameRetry(($retryButton) => {
+            $userInput.setAttribute("disabled", "");
+            $submitButton.setAttribute("disabled", "");
 
-        resultRender.gameRetry();
+            $retryButton.addEventListener("click", this.init.bind(this));
+        });
     }
 }
 
 const baseballGame = new BaseballGame();
-$submitButton.addEventListener("click", baseballGame.onClickSubmitButton.bind(baseballGame));
+$submitButton.addEventListener("click", onClickSubmitButton);
+
+function onClickSubmitButton(event) {
+    event.preventDefault();
+
+    const checkVaildCode = checkUserInputVaild($userInput.value);
+    if (checkVaildCode !== RESULT_CODE.DONE_USERINPUT_VALID) {
+        errorMessage(checkVaildCode);
+        $userInput.focus();
+        return false;
+    }
+
+    const userNumbers = getNumberArray($userInput.value);
+    const computerNumbers = baseballGame.computerNumbers;
+
+    const playResult = baseballGame.play(userNumbers, computerNumbers);
+    baseballGame.drawResult(playResult);
+}

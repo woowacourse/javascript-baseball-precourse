@@ -33,7 +33,7 @@ class ResultRender {
         this.setContent($text);
     }
 
-    gameRetry() {
+    gameRetry(callback) {
         const $correctText = createElement("H4", RESULT_TEXT.GAME_OVER_HEADER);
         const $retryWrap = createElement("DIV", RESULT_TEXT.GAME_OVER_CONTENT);
 
@@ -43,6 +43,8 @@ class ResultRender {
 
         const $fragment = combineElement([$correctText, $retryWrap]);
         this.setContent($fragment);
+
+        callback($retryButton);
     }
 }
 
