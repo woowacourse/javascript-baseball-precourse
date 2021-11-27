@@ -110,7 +110,17 @@ export default function BaseballGame() {
 
     return result;
   };
-  
+
+  const startGame = () => {
+    let userNum = getUserNum();
+    let result = '';
+    
+    if (userNum != '') {
+      result = this.play(computerInputNumbers, userNum);
+    }
+    return result;
+  };
+
   submitBtn.addEventListener("click", startGame);
 }
 
