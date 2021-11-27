@@ -44,15 +44,18 @@ function BaseballGame() {
     });
   };
   const makeMessage = () => {
-    if (this.score[BALL] === 0 && this.score[STRIKE] === 0) {
+    if (isNothing()) {
       return '낫싱';
     }
-    if (this.score[STRIKE] === VALID_NUMBER_LENGTH) {
+    if (isAnswer()) {
       this.gameOver = true;
       return '🎉정답을 맞추셨습니다!🎉';
     }
     return makeBallStrikeMessage();
   };
+  const isNothing = () => this.score[BALL] === 0 && this.score[STRIKE] === 0;
+  const isAnswer = () => this.score[STRIKE] === VALID_NUMBER_LENGTH;
+
   const makeBallStrikeMessage = () => {
     return Object.entries(this.score)
       .filter(([scoreName, score]) => score)
