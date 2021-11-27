@@ -1,35 +1,35 @@
 import getComputerInputNumbers from "./utils/getComputerInputNumbers.js";
-import getScore from "./utils/getScore.js";
+import getGameResult from "./utils/getGameResult.js";
 import { validateUserInputNumbers } from "./utils/validation.js";
-import RestartBlock from "./components/RestartBlock.js";
-
-const initialState = {
-  computerInputNumbers: getComputerInputNumbers(),
-};
+import RestartContainer from "./components/RestartContainer.js";
 
 export default function BaseballGame() {
+  const initialState = {
+    computerInputNumbers: getComputerInputNumbers(),
+  };
+
   const userInput = document.querySelector("#user-input");
   const submitBtn = document.querySelector("#submit");
   const resultBlock = document.querySelector("#result");
 
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    console.log(
-      `play--- >> computerInputNumbers: ${computerInputNumbers} userInputNumbers: ${userInputNumbers}`
-    );
+  const resetUI = () => {
+    resultBlock.innerHTML = "";
+    userInput.value = "";
+  };
 
-    const { resultText, isSuccess } = getScore(
+  const onClickRestartCallback = () => {
+    initialState.computerInputNumbers = getComputerInputNumbers();
+    resetUI();
+  };
+
+  this.play = function (computerInputNumbers, userInputNumbers) {
+    const { resultText, isGameClear } = getGameResult(
       computerInputNumbers,
       userInputNumbers
     );
 
-    if (isSuccess) {
-      const resetCallback = () => {
-        initialState.computerInputNumbers = getComputerInputNumbers();
-        resultBlock.innerHTML = "";
-        userInput.value = "";
-      };
-
-      RestartBlock(resultBlock, resetCallback);
+    if (isGameClear) {
+      RestartContainer(resultBlock, onClickRestartCallback);
       return resultText;
     }
 
@@ -37,22 +37,21 @@ export default function BaseballGame() {
     return resultText;
   };
 
-  const onHandleSubmit = (e) => {
+  const onClickSubmit = (e) => {
     e.preventDefault();
-
     const { value } = userInput;
-    const { isError, message } = validateUserInputNumbers(value);
+    const { isError, errorMessage } = validateUserInputNumbers(value);
+
     if (isError) {
-      window.alert(message);
-      userInput.value = "";
-      resultBlock.innerHTML = "";
+      window.alert(errorMessage);
+      resetUI();
       return;
     }
 
     this.play(initialState.computerInputNumbers, Number(value));
   };
 
-  submitBtn.addEventListener("click", onHandleSubmit);
+  submitBtn.addEventListener("click", onClickSubmit);
 }
 
 new BaseballGame();
