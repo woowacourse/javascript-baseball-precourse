@@ -122,6 +122,11 @@ export default class BaseballGame {
     //결과 문장 출력
     showResultSentence(resultSentence) {
         this.$result.textContent = resultSentence;
+
+        if(resultSentence.includes("정답")) {
+            const newContent = '<br><br><div><span>게임을 새로 시작하시겠습니까?  </span><button id="game-restart-button">게임 재시작</button></div>';
+            this.$result.insertAdjacentHTML("beforeend", newContent);
+        }
     }
 }
 
