@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import Baseballgame from './Baseballgame.js';
 
 const $submit = document.querySelector('#submit');
@@ -11,7 +13,9 @@ const createRandomNumber = () => {
     .filter(number => new Set(number).size === 3 && !number.match(/[0]/))
     .map(number => Number(number));
   // eslint-disable-next-line no-undef
-  randomNumber = MissionUtils.Random.pickNumberInList(randomNumberList);
+  randomNumber =
+    MissionUtils.Random.pickNumberInList(randomNumberList).toString();
+  console.log(randomNumber);
 };
 
 window.addEventListener('.DOMContentLoaded', createRandomNumber());
