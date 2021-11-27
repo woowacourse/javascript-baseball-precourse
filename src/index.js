@@ -1,3 +1,4 @@
+import { getComputerInput, isValidate } from "./lib/utils.js";
 import { BALL, FINISH, NOTHING, PLAIN_TEXT, STRIKE } from "./lib/constants.js";
 class BaseballGameLogic {
   static getKey(com, char, position) {
@@ -49,6 +50,73 @@ class BaseballGameLogic {
     return BaseballGameLogic.convertResultToString(result);
   }
 }
-/**test */
-console.log(BaseballGameLogic.getResult("123", "123"));
-console.log(BaseballGameLogic.getResult("123", "124"));
+export default class BaseballGame extends BaseballGameLogic {
+  constructor() {
+    super();
+
+    this.computer = getComputerInput().toString();
+
+    this.init();
+  }
+  init() {
+    this.initDOM();
+
+    this.initHandler();
+
+    this.restart.addEventListener("click", this.onRestart);
+
+    this.form.addEventListener("submit", this.onSubmit);
+  }
+  initDOM() {
+    this.form = document.querySelector("form");
+
+    this.input = document.querySelector("form input");
+
+    this.result = document.querySelector("#result");
+
+    this.restart = document.createElement("button");
+
+    this.restart.setAttribute("id", "game-restart-button");
+
+    this.restart.textContent = "재시작";
+  }
+  initHandler() {
+    this.onRestart = () => {
+      this.clearGame();
+
+      new BaseballGame();
+    };
+
+    this.onSubmit = (e) => {
+      e.preventDefault();
+
+      const template = this.play(this.computer, this.input.value);
+
+      result.innerHTML = template;
+
+      if (template === FINISH) result.appendChild(this.restart);
+    };
+  }
+  play(computerInputNumbers, userInputNumbers) {
+    if (isValidate(userInputNumbers)) {
+      return BaseballGameLogic.getResult(
+        computerInputNumbers,
+        userInputNumbers
+      );
+    }
+    alert("1~9 까지의 수를 중복없이 3개 입력해주세요.");
+    return PLAIN_TEXT;
+  }
+
+  clearGame() {
+    this.input.value = PLAIN_TEXT;
+
+    this.result.innerHTML = PLAIN_TEXT;
+
+    this.form.removeEventListener("submit", this.onSubmit);
+
+    this.restart.removeEventListener("click", this.onRestart);
+  }
+}
+
+new BaseballGame();
