@@ -43,6 +43,7 @@ export default class BaseballGame {
       alert(ERROR_MESSAGE);
       UserInput.clear();
       Guide.clearResult();
+      return;
     }
     const result = this.play(this.computerNumbers, userInputNumbers);
     Guide.printResult(result);
