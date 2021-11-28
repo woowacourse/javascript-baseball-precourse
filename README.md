@@ -2,8 +2,9 @@
 
 ### 기능 1: 컴퓨터의 정답 생성
 
-- [] 컴퓨터는 1에서 9까지 서로 다른 임의의 자연수 3개를 선택한다.
-- [] 컴퓨터의 랜덤 값은 [MissionUtils 라이브러리](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)의 Random.pickNumberInRange를 사용해 구한다.
+- [x] 컴퓨터는 1에서 9까지 서로 다른 임의의 자연수 3개를 선택한다.
+- [x] MissionUtils 라이브러리 설치하기
+- [x] 컴퓨터의 랜덤 값은 [MissionUtils 라이브러리](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)의 Random.pickNumberInRange를 사용해 구한다.
 
 ### 기능 2: 사용자가 입력한 값 유효성 체크
 
