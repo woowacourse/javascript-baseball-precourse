@@ -24,7 +24,7 @@ export default class BaseballGame {
   init() {
     this.submitBtn.addEventListener('click', (event) => {
       event.preventDefault();
-      this.handleUserInputSubmit();
+      this.onSubmitUserInput();
     });
   }
 
@@ -36,7 +36,7 @@ export default class BaseballGame {
     return getGameResult(strike, ball);
   }
 
-  handleUserInputSubmit() {
+  onSubmitUserInput() {
     const userInput = parseInput(this.inputElem.value);
     if (isNotValidInput(userInput)) {
       return alert(MESSAGE.NOT_VALID_INPUT);
@@ -45,7 +45,7 @@ export default class BaseballGame {
     this.renderResult(result);
   }
 
-  restartGame() {
+  onClickRestartButton() {
     this.inputElem.value = '';
     removeFirstChild(this.resultElem);
     this.answer = generateRandomNumber();
@@ -55,7 +55,7 @@ export default class BaseballGame {
     replaceChild(this.resultElem, createElement(result));
     if (result === GAME_RESULT.END) {
       $('game-restart-button').addEventListener('click', () => {
-        this.restartGame();
+        this.onClickRestartButton();
       });
     }
   }
