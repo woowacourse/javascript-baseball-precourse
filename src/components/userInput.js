@@ -1,6 +1,6 @@
 import { NUMBER_RULE, ERROR_MESSAGE } from "../constants/constants.js";
 
-export default class User {
+export default class UserInput {
   constructor() {
     this.userInput = document.getElementById("user-input");
   }
@@ -38,6 +38,10 @@ export default class User {
     const errorMessage = this.checkValidInput(userInputNumbers);
 
     alert(errorMessage);
+    this.resetUserInput();
+  }
+
+  resetUserInput() {
     this.userInput.value = "";
     this.userInput.focus();
   }
