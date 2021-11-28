@@ -7,7 +7,7 @@ export default class BaseballGame {
     this.resultEl = document.querySelector('#result');
     this.appEl = document.querySelector('#app');
     this.submitButtonEl = document.querySelector('#submit');
-    this.submitButtonBinding();
+    this.bindSubmitButtonEvent();
   }
 
   getAnswer() {
@@ -76,21 +76,17 @@ export default class BaseballGame {
     return [strikeCount, ballCount];
   }
 
-  submitButtonHandle() {
-    if (this.isAllCorrectUserInput(this.userInputEl.value)) {
-      this.resultEl.innerHTML = this.resultText(
-        this.compareAnswer(this.answer, this.userInputEl.value),
-      );
-    } else {
-      alert(Message.error);
-    }
-    this.userInputEl.value = '';
-  }
-
-  submitButtonBinding() {
-    this.submitButtonEl.addEventListener('click', () =>
-      this.submitButtonHandle(),
-    );
+  bindSubmitButtonEvent() {
+    this.submitButtonEl.addEventListener('click', () => {
+      if (this.isAllCorrectUserInput(this.userInputEl.value)) {
+        this.resultEl.innerHTML = this.resultText(
+          this.compareAnswer(this.answer, this.userInputEl.value),
+        );
+      } else {
+        alert(Message.error);
+      }
+      this.userInputEl.value = '';
+    });
   }
 
   strikeBallText(strikeCount, ballCount) {
@@ -129,17 +125,13 @@ export default class BaseballGame {
     this.restartButtonEl = document.createElement('button');
     this.restartButtonEl.id = 'game-restart-button';
     this.restartButtonEl.innerHTML = '재시작';
-    this.restartButtonEl.addEventListener('click', () =>
-      this.restartButtonHandle(),
-    );
+    this.restartButtonEl.addEventListener('click', (e) => {
+      this.answer = this.getAnswer();
+      this.resultEl.innerHTML = '';
+      this.restartTextEl.remove();
+      e.target.remove();
+    });
     this.appEl.appendChild(this.restartButtonEl);
-  }
-
-  restartButtonHandle() {
-    this.answer = this.getAnswer();
-    this.resultEl.innerHTML = '';
-    this.restartTextEl.remove();
-    this.restartButtonEl.remove();
   }
 
   play(computerInputNumbers, userInputNumbers) {
