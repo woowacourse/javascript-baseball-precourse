@@ -14,7 +14,7 @@ export default class BaseballGame {
         this.$submitButton.addEventListener('click', this.submitEvent.bind(this));
     }
 
-    // 사용자로부터 입력받은 값 확인
+    // 확인 버튼 이벤트
     submitEvent(e) {
         e.preventDefault();
         const userInputNum = this.$userInput.value;
@@ -142,6 +142,7 @@ export default class BaseballGame {
         });
     }
 
+    // 게임 재시작 버튼 이벤트
     restartEvent() {
         this.$userInput.value = "";
         this.$result.innerHTML = "";
