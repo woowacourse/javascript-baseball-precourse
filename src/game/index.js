@@ -48,25 +48,42 @@ export default class BaseballGame {
       return true;
     }
 
+    stringifyResult(ball, strike){
+      let message = "";
+
+      if(strike === 3){
+        message = "성공"
+      } else {
+        if(ball){
+          message = `볼 ${ball} `
+        }
+        if(strike){
+          message += `스트라이크 ${strike}`
+        }
+        if(strike === 0 && ball === 0){
+          message = "낫싱"
+        }
+      }
+
+      return message;
+    }
+
     // 유저 입력 값 & 생성된 값 비교 메서드
-    compareInput(input){
-      let strike = 0;
+    play(computerInputNumbers, userInputNumbers){
+      let strike = 0
       let ball = 0;
-      let isNothing = true;
-      let isFinished = false;
-      let output = [];
 
       let userPool = new Array(10);
       let computerPool = new Array(10);
 
       // 스트라이크 확인
       for(let i=0; i<3; i++){
-        console.log(input[i], this.computerNumbers[i]);
-        if(this.computerNumbers[i] === parseInt(input[i])){
+        console.log(computerInputNumbers[i], userInputNumbers[i]);
+        if(computerInputNumbers[i] === parseInt(userInputNumbers[i])){
           strike++;
         } else {
-          userPool[input[i]] = true;
-          computerPool[this.computerNumbers[i]] = true;
+          userPool[userInputNumbers[i]] = true;
+          computerPool[computerInputNumbers[i]] = true;
         }
       }
 
@@ -77,19 +94,12 @@ export default class BaseballGame {
         }
       }
 
-      // 낫씽 확인
-      if(strike > 0 || ball > 0){
-        isNothing = false;
-      }
+      return this.stringifyResult(ball, strike);
+    }
 
-      // 전달 값 정리
-      if(strike === 3){
-        isFinished = true
-      } else {
-        output = [isNothing, strike, ball];
-      }
-
-      return {isFinished, output};
+    receiveInput(input){
+      const message = this.play(this.computerNumbers, input);
+      console.log(message);
     }
 
     restart(){
