@@ -24,7 +24,7 @@ export default class BaseballGame {
   init() {
     this.submitBtn.addEventListener('click', (event) => {
       event.preventDefault();
-      this.handleSubmit();
+      this.handleUserInputSubmit();
     });
   }
 
@@ -36,7 +36,7 @@ export default class BaseballGame {
     return getGameResult(strike, ball);
   }
 
-  handleSubmit() {
+  handleUserInputSubmit() {
     const userInput = parseInput(this.inputElem.value);
     if (isNotValidInput(userInput)) {
       return alert(MESSAGE.NOT_VALID_INPUT);
