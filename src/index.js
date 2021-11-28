@@ -1,21 +1,31 @@
-export default function BaseballGame() {
-  const generateComputerNumber = () => {
-    const computerInputNumbers = [];
+import { generateComputerNumber } from "./components/generateNumber.js";
+import { checkValidInput } from "./components/validation.js";
+import { countStrikeAndBall, getResult } from "./components/playGame.js";
 
-    while (computerInputNumbers.length < 3) {
-      let randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+export default class BaseballGame {
+  constructor() {
+    this.computerInputNumbers = generateComputerNumber();
+    this.userInput = document.getElementById("user-input");
+    this.submitButton = document.getElementById("submit");
+    this.resultDiv = document.getElementById("result");
+  }
 
-      if (!computerInputNumbers.includes(randomNumber)) {
-        computerInputNumbers.push(randomNumber);
-      }
-    }
+  getUserInputNumbers() {
+    return this.userInput.value;
+  }
 
-    return computerInputNumbers.join("");
-  };
+  onClickSubmitButton(event) {
+    event.preventDefault();
+    const userInputNumbers = this.getUserInputNumbers();
+  }
 
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
+  init() {
+    this.submitButton.addEventListener(
+      "click",
+      this.onClickSubmitButton.bind(this)
+    );
+  }
 }
 
-new BaseballGame();
+const baseballGame = new BaseballGame();
+baseballGame.init();
