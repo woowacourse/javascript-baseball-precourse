@@ -52,9 +52,8 @@ export default class BaseballGame {
       return `${strikes}스트라이크`;
     } else if (strikes === 0) {
       return `${balls}볼`;
-    } else {
-      return `${balls}볼 ${strikes}스트라이크`;
     }
+    return `${balls}볼 ${strikes}스트라이크`;
   }
 
   countBalls(computerInputNumbers, userInputNumbers) {
