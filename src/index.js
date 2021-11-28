@@ -27,6 +27,8 @@ export default class BaseballGame {
     initialize() {
         this.$userInput.value = '';
         this.$result.innerHTML = '';
+        this.$userInput.disabled = false;
+        this.$submit.disabled = false;
         this.$userInput.focus();
         this.computer = new Computer();
     }
