@@ -14,9 +14,22 @@ export default class BaseballGame {
     return this.userInput.value;
   }
 
+  alertErrorMessage(userInputNumbers) {
+    const errorMessage = checkValidInput(userInputNumbers);
+
+    alert(errorMessage);
+    this.userInput.value = "";
+    this.userInput.focus();
+  }
+
   onClickSubmitButton(event) {
     event.preventDefault();
     const userInputNumbers = this.getUserInputNumbers();
+
+    if (checkValidInput(userInputNumbers)) {
+      this.alertErrorMessage(userInputNumbers);
+      return;
+    }
   }
 
   init() {
