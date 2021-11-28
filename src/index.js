@@ -1,33 +1,11 @@
+import getComputerNumber from './getComputerNumber.js';
+
 export default function BaseballGame() {
   const hint = document.getElementById('result');
   document.getElementById('result').style.display = 'None';
   document.getElementById('game-restart-button').style.display = 'None';
 
-  /* pickThreeDigitRandomNumber(); */
-  function isSetLengthUnderThree(setA) {
-    if (setA.size < 3) {
-      return true;
-    }
-    return false;
-  }
-
-  function convertSetToString(setA) {
-    let strArray = [];
-    for (let i of setA) {
-      strArray.push(i);
-    }
-    return strArray.join('');
-  }
-
-  function getThreeDigitRandomNumber() {
-    const setA = new Set();
-    while (isSetLengthUnderThree(setA)) {
-      setA.add(MissionUtils.Random.pickNumberInRange(1, 9));
-    }
-    return convertSetToString(setA);
-  }
-
-  const computerInputNumbers = getThreeDigitRandomNumber();
+  const computerInputNumbers = getComputerNumber();
   console.log(computerInputNumbers);
 
   /*get user number*/
