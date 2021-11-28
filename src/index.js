@@ -1,3 +1,4 @@
+import getComputerNumber from "./number/getComputerNumber.js";
 import getUserNumber from "./number/getUserNumber.js";
 import { $ } from "./util/index.js";
 
@@ -10,6 +11,7 @@ export default function BaseballGame() {
 
   $("#submit").addEventListener("click", () => {
     console.log(getUserNumber());
+    console.log(getComputerNumber());
   });
 }
 
