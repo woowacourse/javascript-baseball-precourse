@@ -21,7 +21,7 @@ export const validateUniqueInArray = (array) => {
 
 // 배열의 요소들이 숫자인지 검증하는 함수
 export const validateNumberInArray = (array) => {
-  const isNumberArray = array.map((item) => isNaN(item));
+  const isNumberArray = array.map((item) => Number.isNaN(item));
   return isNumberArray.includes(true) ? false : true;
 };
 
