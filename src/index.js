@@ -14,7 +14,7 @@ export default class BaseballGame {
   }
 
   setEvent = () => {
-    DOMS.$userInputForm.addEventListener("submit", this.onSubmitHandler);
+    DOMS.$userInputForm.addEventListener("submit", this.setUserInputEvent);
     DOMS.$result.addEventListener("click", this.setResetGameEvent);
   };
 
@@ -34,19 +34,6 @@ export default class BaseballGame {
     printResultMessage(gameResultMessage);
   };
 
-  play = (computerInputNumbers, userInputNumbers) => {
-    const { strike, ball } = caculateStrikeAndBall(
-      computerInputNumbers,
-      userInputNumbers
-    );
-
-    return generateResultMessage(strike, ball);
-  };
-
-  setAnswerNumber = () => {
-    this.answerNumber = generateAnswerNumber();
-  };
-
   setResetGameEvent = (event) => {
     if (event.target.id === "game-restart-button") {
       this.resetGame();
@@ -57,6 +44,19 @@ export default class BaseballGame {
     this.setAnswerNumber();
     resetUserInput();
     resetResult();
+  };
+
+  setAnswerNumber = () => {
+    this.answerNumber = generateAnswerNumber();
+  };
+
+  play = (computerInputNumbers, userInputNumbers) => {
+    const { strike, ball } = caculateStrikeAndBall(
+      computerInputNumbers,
+      userInputNumbers
+    );
+
+    return generateResultMessage(strike, ball);
   };
 }
 
