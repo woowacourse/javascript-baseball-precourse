@@ -1,6 +1,4 @@
-export const $ = id => {
-  return document.getElementById(id);
-};
+export const $ = id => document.getElementById(id);
 
 export const createElement = (innerHTML, type = 'div') => {
   const element = document.createElement(type);
