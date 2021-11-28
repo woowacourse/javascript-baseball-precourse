@@ -77,10 +77,11 @@ input을 초기화
     ├── functions
     │   ├── user-input.js // 유저 입력이 올바른지 판별, 판별하기 위해 필요한 기능 모음
     │   ├── add-submit-event.js // 확인 버튼의 클릭 이벤트 함수
+    │   ├── util.js // 난수 생성, 볼 스트라이크 관리 함수 모음
     │   └── game-result.js // 입력에 따른 출력메시지, DOM 생성, 재시작에 필요한 기능 모음
     │
     └── state
-        └── index.js // 유저 입력, 컴퓨터 난수, 볼 개수, 스트라이크 개수를 관리하는 state
+        └── index.js // 유저 입력, 컴퓨터 난수, 볼 개수, 스트라이크 개수의 state
 ```
 
 <details>
