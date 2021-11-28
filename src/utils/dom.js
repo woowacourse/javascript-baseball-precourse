@@ -1,4 +1,4 @@
-export const $ = (id) => {
+export const $ = id => {
   return document.getElementById(id);
 };
 
@@ -8,7 +8,7 @@ export const createElement = (innerHTML, type = 'div') => {
   return element;
 };
 
-export const removeFirstChild = (parent) => {
+export const removeFirstChild = parent => {
   if (!parent.hasChildNodes()) return;
   parent.removeChild(parent.firstChild);
 };

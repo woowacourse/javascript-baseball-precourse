@@ -22,7 +22,7 @@ export default class BaseballGame {
   }
 
   _init() {
-    this._submitBtn.addEventListener('click', (event) => {
+    this._submitBtn.addEventListener('click', event => {
       event.preventDefault();
       this._onSubmitUserInput();
     });

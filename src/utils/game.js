@@ -13,7 +13,7 @@ export const generateRandomNumber = () => {
   return [...numberSet].join('');
 };
 
-const convertToHashMap = (input) => {
+const convertToHashMap = input => {
   const hashMap = new Map();
   input.split('').forEach((number, index) => {
     hashMap.set(number, index);
