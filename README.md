@@ -34,3 +34,4 @@
 
 - `리팩토링` 해보기
 - `예외처리` 해보기
+- 정리 : https://velog.io/@joker77z/WTC-1-Refactoring
