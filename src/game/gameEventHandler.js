@@ -3,10 +3,10 @@ import getUserInput from "../input/getUserInput.js";
 
 export default function gameEventHandler(play) {
   const $userSubmitButton = document.querySelector("#submit");
-  const computerInput = getComputerInput(); //letÀ¸·Î ¹Ù²ã¾ß Àç½ÃÀÛÇÒ ¶§ ÀçÇÒ´çÇÒ ¼ö ÀÖÀ» °ÍÀÌ´Ù
+  const computerInput = getComputerInput(); //letìœ¼ë¡œ ë°”ê¿”ì•¼ ì¬ì‹œì‘í•  ë•Œ ì¬í• ë‹¹í•  ìˆ˜ ìˆì„ ê²ƒì´ë‹¤
 
   $userSubmitButton.addEventListener("click", (event) => {
-    event.preventDefault(); // °³¹ßÀ» À§ÇØ¼­ Àá½Ã ÆäÀÌÁö »õ·Î°íÄ§À» ÀÏ´Ü ¸·¾ÆµÒ
+    event.preventDefault(); // ê°œë°œì„ ìœ„í•´ì„œ ì ì‹œ í˜ì´ì§€ ìƒˆë¡œê³ ì¹¨ì„ ì¼ë‹¨ ë§‰ì•„ë‘ 
     const userInput = getUserInput();
     if (userInput) play(computerInput, userInput);
   });

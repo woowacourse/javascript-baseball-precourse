@@ -3,6 +3,6 @@ function isRightAnswer(computerInput, userInput) {
 }
 
 export default function getGameResult(computerInput, userInput) {
-  if (isRightAnswer(computerInput, userInput)) return "Á¤´ä";
-  return "Ãâ·ÂÇÒ °á°ú¹°";
+  if (isRightAnswer(computerInput, userInput)) return "ì •ë‹µ";
+  return "ì¶œë ¥í•  ê²°ê³¼ë¬¼";
 }
