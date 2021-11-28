@@ -1,9 +1,7 @@
 import { NOTHING_ANSWER, CORRECT_ANSWER } from './result-const.js';
+import { $form, $input, $result } from './html-const.js';
 
 export default function BaseballGame() {
-    const $form = document.querySelector('form');
-    const $input = document.querySelector('#user-input');
-    const $result = document.querySelector('#result');
     let computerInputNumbers = [];
     let StrikeCnt = 0;
     let BallCnt = 0;
