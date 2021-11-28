@@ -21,7 +21,7 @@ const convertToHashMap = (input) => {
   return hashMap;
 };
 
-export const getStrikeAndBall = (computerInputNumbers, userInputNumbers) => {
+export const calculateBaseBall = (computerInputNumbers, userInputNumbers) => {
   let strike = 0;
   let ball = 0;
 
@@ -37,7 +37,7 @@ export const getStrikeAndBall = (computerInputNumbers, userInputNumbers) => {
   return [strike, ball];
 };
 
-export const returnPlayResult = (strike, ball) => {
+export const getGameResult = (strike, ball) => {
   if (strike === BASEBALL_RULE.DIGITS) {
     return GAME_RESULT.END;
   }

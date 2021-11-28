@@ -1,7 +1,7 @@
 import { parseInput, isNotValidInput } from './utils/input.js';
 import {
-  getStrikeAndBall,
-  returnPlayResult,
+  calculateBaseBall,
+  getGameResult,
   generateRandomNumber,
 } from './utils/game.js';
 import {
@@ -29,11 +29,11 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    const [strike, ball] = getStrikeAndBall(
+    const [strike, ball] = calculateBaseBall(
       computerInputNumbers,
       userInputNumbers
     );
-    return returnPlayResult(strike, ball);
+    return getGameResult(strike, ball);
   }
 
   handleSubmit() {
