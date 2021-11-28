@@ -30,5 +30,5 @@ export default function getUserInput() {
   if (alertErrorMessage(isValidInput(userInputArray))) {
     userInput = userInputArray;
   }
-  return userInput?.join("");
+  return Number(userInput?.join(""));
 }

@@ -34,8 +34,8 @@ export default function getGameResult(computerInput, userInput) {
   let strikeCount = "";
 
   if (isRightAnswer(computerInput, userInput)) return ANSWER;
-  ballCount = countBall(computerInput.split(""), userInput.split(""));
-  strikeCount = countStrike(computerInput.split(""), userInput.split(""));
+  ballCount = countBall(String(computerInput).split(""), String(userInput).split(""));
+  strikeCount = countStrike(String(computerInput).split(""), String(userInput).split(""));
   if (ballCount === "" && strikeCount === "") return NOTHING;
   if (ballCount === "" && strikeCount !== "") return strikeCount;
   if (ballCount !== "" && strikeCount === "") return ballCount;

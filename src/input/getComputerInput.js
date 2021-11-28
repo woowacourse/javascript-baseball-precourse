@@ -6,5 +6,5 @@ export default function getComputerInput() {
   while (computerInput.size < INPUT_DIGIT) {
     computerInput.add(window.MissionUtils.Random.pickNumberInRange(1, 9));
   }
-  return [...computerInput].join("");
+  return Number([...computerInput].join(""));
 }
