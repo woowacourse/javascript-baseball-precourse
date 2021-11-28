@@ -1,4 +1,4 @@
-import { INPUT_RULES } from './constants.js';
+import { INPUT_RULES, ERROR_MESSAGE } from './constants.js';
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -10,12 +10,34 @@ function generateRandomNumbers() {
   );
 }
 
+function isValid(input) {
+  const regex = /[^1-9]/g;
+  const notValidChars = input.match(regex);
+  const setString = new Set(input);
+
+  if (input === '') {
+    return false;
+  }
+  if (notValidChars) {
+    return false;
+  }
+  if (input.length !== INPUT_RULES.NUMBER_OF_DIGITS) {
+    return false;
+  }
+  if (setString.size !== input.length) {
+    return false;
+  }
+  return true;
+}
+
 function handleSubmit(e) {
   e.preventDefault();
   const $userInput = $('#user-input');
 
   const currentUserInput = $userInput.value;
-  console.log(currentUserInput);
+  if (!isValid(currentUserInput)) {
+    alert(ERROR_MESSAGE);
+  }
 
   $userInput.value = '';
 }
