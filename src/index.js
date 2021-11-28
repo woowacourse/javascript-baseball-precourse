@@ -1,19 +1,20 @@
 import getComputerNumber from './getComputerNumber.js';
+import getUserNumber from './getUserNumber.js';
 
 export default function BaseballGame() {
   const hint = document.getElementById('result');
   document.getElementById('result').style.display = 'None';
   document.getElementById('game-restart-button').style.display = 'None';
 
+  //make computer num
   const computerInputNumbers = getComputerNumber();
   console.log(computerInputNumbers);
 
-  /*get user number*/
+  //get user num
   const submitButton = document.getElementById('submit');
   submitButton.addEventListener('click', submitButtonOn);
-
   function submitButtonOn() {
-    let userInputNumbers = getUserNum();
+    const userInputNumbers = getUserNumber();
     const result = play(computerInputNumbers, userInputNumbers); //need to 손보기
     if (result !== '3스트라이크') {
       hint.innerHTML = result;
@@ -21,64 +22,6 @@ export default function BaseballGame() {
     } else {
       document.getElementById('game-restart-button').style.display = '';
     }
-  }
-
-  function getUserNum() {
-    let userInput = document.getElementById('user-input').value;
-    if (checkUserInputValid(userInput)) {
-      return userInput;
-    }
-  }
-
-  /*check usernumber condition*/
-  function checkNumberConsistZero(num) {
-    for (let i = 0; i < 3; i++) {
-      if (num[i] == 0) {
-        alert('Please Enter Number Without Zero');
-        return true;
-      }
-    }
-    return false;
-  }
-
-  function checkNumberNotNumber(num) {
-    if (isNaN(num)) {
-      return true;
-    }
-    return false;
-  }
-
-  function checkNumberlenNotThree(num) {
-    if (num.length == 3) {
-      return false;
-    }
-    alert('Please Enter Three digit Number');
-    return true;
-  }
-
-  function checkDigitsInNumberDuplicated(num) {
-    const DigitsInNumberSet = new Set(num);
-    if (DigitsInNumberSet.size == 3) {
-      return false;
-    }
-    alert('Please Enter Numbers without Duplication');
-    return true;
-  }
-
-  function checkUserInputValid(num) {
-    if (checkNumberConsistZero(num)) {
-      return false;
-    }
-    if (checkNumberNotNumber(num)) {
-      return false;
-    }
-    if (checkNumberlenNotThree(num)) {
-      return false;
-    }
-    if (checkDigitsInNumberDuplicated(num)) {
-      return false;
-    }
-    return true;
   }
 
   /* Calculate srike ball */
