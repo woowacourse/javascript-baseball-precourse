@@ -7,8 +7,6 @@ export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = generateComputerNumber();
     this.userInput = new UserInput();
-    this.submitButton = document.getElementById("submit");
-    this.resultDiv = document.getElementById("result");
   }
 
   play(computerInputNumbers, userInputNumbers) {
@@ -19,11 +17,12 @@ export default class BaseballGame {
   }
 
   printResult(result) {
-    this.resultDiv.innerHTML = result;
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = result;
 
     if (result === RESULT_MESSAGE.CORRECT) {
       const restartButton = this.createRestartButton();
-      this.resultDiv.appendChild(restartButton);
+      resultDiv.appendChild(restartButton);
     }
   }
 
@@ -59,10 +58,8 @@ export default class BaseballGame {
   }
 
   init() {
-    this.submitButton.addEventListener(
-      "click",
-      this.onClickSubmitButton.bind(this)
-    );
+    const submitButton = document.getElementById("submit");
+    submitButton.addEventListener("click", this.onClickSubmitButton.bind(this));
   }
 }
 
