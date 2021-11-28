@@ -1,5 +1,6 @@
 import { numArrToNum, pickUniqueNumbersInRange } from "./utils.js";
 import { ANSWER_LENGTH, ELEMENT_IDS } from "./constants.js";
+import Validator from "./validator.js";
 
 export default class BaseballGame {
   constructor() {
@@ -16,6 +17,11 @@ export default class BaseballGame {
 
   handleSubmit() {
     const userInputString = this.$userInput.value;
+    const { result, message } = Validator.isValid(userInputString);
+    if (!result) {
+      alert(message);
+      return;
+    }
   }
 
   generateComputerInputNumbers() {
