@@ -13,7 +13,11 @@ export default class Computer {
     while (randomNumbers.size !== this.NUMBER_LENGTH) {
       randomNumbers.add(MissionUtils.Random.pickNumberInRange(1, 9));
     }
-    return [...randomNumbers];
+    return [...randomNumbers].join("");
+  }
+
+  changeStringToNumberArray(string) {
+    return [...string].map(value => Number(value));
   }
 
   checkValidValue(targetValue) {

@@ -19,12 +19,61 @@ export default class BaseballGame {
     const userInputNumbers = this.user.getInputValue();
     const isValid = this.computer.checkValidValue(userInputNumbers);
     if (isValid) {
-      this.play(this.computerInputNumbers, userInputNumbers);
+      const gameMessage = this.play(
+        this.computerInputNumbers,
+        userInputNumbers
+      );
+      this.printGameMessage(gameMessage);
     }
   }
 
+  countBall(computerInputNumbers, userInputNumbers) {
+    const ball = computerInputNumbers.filter(
+      (number, position) => userInputNumbers[position] === number
+    );
+    return ball.length;
+  }
+
+  countStrike(computerInputNumbers, userInputNumbers) {
+    const strike = computerInputNumbers.filter((number, position) => {
+      const isStrike = userInputNumbers.filter(
+        (userNumber, userPosition) =>
+          userPosition !== position && userNumber === number
+      );
+      return isStrike.length > 0;
+    });
+    return strike.length;
+  }
+
   play(computerInputNumbers, userInputNumbers) {
-    return `string`;
+    const computerInputArray =
+      this.computer.changeStringToNumberArray(computerInputNumbers);
+    const userInputArray =
+      this.computer.changeStringToNumberArray(userInputNumbers);
+    const ballCount = this.countBall(computerInputArray, userInputArray);
+    const strikeCount = this.countStrike(computerInputArray, userInputArray);
+    const gameResultMessage = this.makeGameResultMessage(
+      ballCount,
+      strikeCount
+    );
+    return gameResultMessage;
+  }
+
+  makeGameResultMessage(ballCount, strikeCount) {
+    if (ballCount && strikeCount) {
+      return `${ballCount}볼 ${strikeCount}스트라이크`;
+    }
+    if (ballCount) {
+      return `${ballCount}볼`;
+    }
+    if (strikeCount) {
+      return `${strikeCount}스트라이크`;
+    }
+    return `낫싱`;
+  }
+
+  printGameMessage(gameMessage) {
+    this.computer.resultArea.innerText = gameMessage;
   }
 }
 
