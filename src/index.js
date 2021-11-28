@@ -66,8 +66,8 @@ export default class BaseballGame {
     this.$userInput.focus();
   }
 
-  onSubmit() {
-    this.$submitButton.addEventListener('click', (e) => {
+  submitHandler($element) {
+    $element.addEventListener('click', (e) => {
       e.preventDefault();
       
       const resultCode = this.verifyInputNumber(this.$userInput.value);
