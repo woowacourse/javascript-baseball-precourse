@@ -21,6 +21,12 @@ export default class BaseballGame {
     this.resultDiv.innerHTML = result;
   }
 
+  onClickRestartButton() {
+    this.computerInputNumbers = generateComputerNumber();
+    this.userInput.resetUserInput();
+    this.printResult("");
+  }
+
   onClickSubmitButton(event) {
     event.preventDefault();
     const userInputNumbers = this.userInput.getUserInputNumbers();
