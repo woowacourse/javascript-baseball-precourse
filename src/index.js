@@ -2,7 +2,7 @@ export default class BaseballGame {
   constructor() {
       this.submitButton = document.getElementById('submit');
       this.userInput = document.getElementById('user-input');
-      this.answer = this.randomGenerator();
+      this.computerInputNumbers = this.randomGenerator();
       this.checkButtonPressed();
   }
 
@@ -14,31 +14,66 @@ export default class BaseballGame {
   checkButtonPressed() {
     this.submitButton.addEventListener('click', (e)=>{
       e.preventDefault();
-      const userAnswer = this.userInput.value;
-      const valid = this.checkAnswerValidation(userAnswer);
+      const userInputNumbers = this.userInput.value;
+      const valid = this.checkAnswerValidation(userInputNumbers);
       if (valid) {
-        return userAnswer;
+        this.play(this.computerInputNumbers,userInputNumbers);
       } else {
         alert('잘못된 값을 입력했습니다.');
       }
     });
   }
 
-  checkAnswerValidation(userAnswer) {
-    if (userAnswer.length != 3) {
+  checkAnswerValidation(computerInputNumbers) {
+    if (computerInputNumbers.length !== 3) {
       return false;
     }
-    if (new Set(userAnswer).size != 3){
+    if (new Set(computerInputNumbers).size !== 3){
       return false;
     }
-    if (Number.isNaN(Number(userAnswer))) {
+    if (Number.isNaN(Number(computerInputNumbers))) {
       return false;
     }
-    if (userAnswer.includes(0)) {
+    if (computerInputNumbers.includes(0)) {
       return false;
     }
     return true;
   }
+
+  play(computerInputNumbers, userInputNumbers){
+    const balls = this.countBalls(computerInputNumbers,userInputNumbers);
+    const strikes = this.countStrikes(computerInputNumbers,userInputNumbers);
+    console.log(`balls: ${balls}, strikes: ${strikes}`);
+  }
+
+  countBalls(computerInputNumbers, userInputNumbers){
+    let totalBallCount = 0;
+    totalBallCount = computerInputNumbers.reduce((count, value, index) => {
+      const userInputNumber = Number(userInputNumbers[index]);
+      if(
+        userInputNumber!== value 
+        && userInputNumbers.includes(value)
+      ) {
+        return count + 1;
+      } else {
+          return count;
+      }
+    }, 0);
+    return totalBallCount;
+  }
+
+  countStrikes(computerInputNumbers, userInputNumbers){
+    let totalStrikeCount = 0;
+    totalStrikeCount = computerInputNumbers.reduce((count, value, index) => {
+        const userInputNumber = Number(userInputNumbers[index]);
+        if(userInputNumber === value) {
+            return count + 1;
+        } else {
+            return count;
+        }
+    }, 0);
+    return totalStrikeCount;
+  }
 }
 
-const b = new BaseballGame();
+new BaseballGame();
