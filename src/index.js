@@ -7,6 +7,7 @@ export default function BaseballGame() {
   const restartDiv = document.getElementById('restart');
   const restartBtn = document.getElementById('game-restart-button');
 
+  // 컴퓨터 랜덤숫자 반환
   const getComputerNum = () => {
     let numList = new Array();
     let comNum = '';
@@ -30,7 +31,6 @@ export default function BaseballGame() {
       alert(BASEBALL.ALERT_ONLY_NUM);
       return true;
     }
-    return false;
   };
 
   // check 2- 3자리인지 확인
@@ -39,7 +39,6 @@ export default function BaseballGame() {
       alert(BASEBALL.ALERT_THREE_NUM);
       return true;
     }
-    return false;
   };
 
   // check3 - 숫자 범위 확인 (0 포함 확인)
@@ -48,7 +47,6 @@ export default function BaseballGame() {
       alert(BASEBALL.ALERT_ONE_TO_NINE);
       return true;
     }
-    return false;
   };
 
   // check4 - 숫자 중복 여부 확인
@@ -57,7 +55,6 @@ export default function BaseballGame() {
       alert(BASEBALL.ALERT_DUPLICATION);
       return true;
     }
-    return false;
   };
 
   // check All
@@ -68,8 +65,9 @@ export default function BaseballGame() {
       checkOnetoNine(num) ||
       checkDuplication(num)
     ) {
-      return false;
+      return;
     }
+
     return true;
   };
 
@@ -85,25 +83,30 @@ export default function BaseballGame() {
   // get Ball
   const getBallCount = (computerNum, userNum) => {
     let ball = 0;
-    for (let i = 0; i < 3; i++) {
+    let i;
+    for (i = 0; i < 3; i += 1) {
       if (computerNum[i] !== userNum[i] && computerNum.includes(userNum[i])) {
         ball += 1;
       }
     }
+
     return ball;
   };
 
   // get Strike
   const getStrikeCount = (computerNum, userNum) => {
     let strike = 0;
-    for (let i = 0; i < 3; i++) {
+    let i;
+    for (i = 0; i < 3; i += 1) {
       if (computerNum[i] === userNum[i]) {
         strike += 1;
       }
     }
+
     return strike;
   };
 
+  // play 함수
   this.play = (computerInputNumbers, userInputNumbers) => {
     let result = '';
     const ballCount = getBallCount(computerInputNumbers, userInputNumbers);
@@ -117,6 +120,7 @@ export default function BaseballGame() {
     return result;
   };
 
+  // 게임 결과 렌더링 함수
   const showResult = result => {
     resultDiv.innerHTML = result;
 
@@ -125,6 +129,7 @@ export default function BaseballGame() {
     }
   };
 
+  // 확인 버튼으로 게임 시작
   const startGame = () => {
     let userNum = getUserNum();
     let result = '';
@@ -134,9 +139,11 @@ export default function BaseballGame() {
       result = this.play(computerInputNumbers, userNum);
     }
     showResult(result);
+    
     return result;
   };
 
+  // 게임 재시작 버튼으로 게임 재시작
   const restartGame = () => {
     restartDiv.style.visibility = 'hidden';
     userInput.value = '';
