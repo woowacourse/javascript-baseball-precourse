@@ -47,7 +47,7 @@ const DOMUtils = {
       `<div id="game-restart-message">
             게임을 새로 시작하시겠습니까? 
             <button id="game-restart-button">게임 재시작</button>
-        </div>`
+      </div>`
     );
   },
 };
