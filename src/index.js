@@ -6,16 +6,16 @@ export default class BaseballGame {
         this.$userInput = document.getElementById("user-input");
         this.$result = document.getElementById("result");
         this.answer = this.makeRandomAnswer();
-        this.addEvent();
+        this.addSubmitEvent();
     }
 
     // 이벤트 리스너 추가
-    addEvent() {
-        this.$submitButton.addEventListener('click', this.getUserInputNum.bind(this));
+    addSubmitEvent() {
+        this.$submitButton.addEventListener('click', this.submitEvent.bind(this));
     }
 
     // 사용자로부터 입력받은 값 확인
-    getUserInputNum(e) {
+    submitEvent(e) {
         e.preventDefault();
         const userInputNum = this.$userInput.value;
         this.checkUserInputNum(userInputNum);
@@ -23,7 +23,6 @@ export default class BaseballGame {
         return userInputNum;
     }
 
-    // 나중에 함수로 분리
     // 사용자로부터 입력받은 값 검사
     checkUserInputNum(userInputNum) {
         if(isNaN(userInputNum)) {
@@ -35,7 +34,7 @@ export default class BaseballGame {
         if(new Set(userInputNum).size !== 3) {
             return alert("서로 다른 숫자를 입력해주세요!");
         }
-        if(userInputNum.includes(0)){
+        if(userInputNum.includes(0)) {
             return alert("각 자리가 1~9인 수를 입력해주세요!");
         }
 
@@ -55,12 +54,13 @@ export default class BaseballGame {
                 usedNumbers.push(pickedNum);
             }
         }
+
         return randomAnswers;
     }
 
     // play 함수
     play(computerInputNumbers, userInputNumbers) {       
-        if(this.isCorrect(computerInputNumbers, userInputNumbers)){
+        if(this.isCorrect(computerInputNumbers, userInputNumbers)) {
             return "🎉 정답을 맞추셨습니다! 🎉";
         }
 
@@ -138,10 +138,14 @@ export default class BaseballGame {
     addRestartEvent() {
         this.$restart = document.getElementById("game-restart-button");
         this.$restart.addEventListener('click', () => {
-            this.$userInput.value = "";
-            this.$result.innerHTML = "";
-            this.answer = this.makeRandomAnswer();
+            this.restartEvent();
         });
+    }
+
+    restartEvent() {
+        this.$userInput.value = "";
+        this.$result.innerHTML = "";
+        this.answer = this.makeRandomAnswer();
     }
 }
 
