@@ -11,6 +11,11 @@ export default class BaseballGame {
     };
   }
 
+  init() {
+    this.initResultScreen();
+    this.submitHandler(this.$submitButton);
+  }
+
   play(computerInputNumbers, userInputNumbers) {
     this.computeScore(computerInputNumbers, userInputNumbers);
     this.setResult();
@@ -136,3 +141,6 @@ export default class BaseballGame {
     });
   }
 }
+
+const baseballGame = new BaseballGame();
+baseballGame.init();
