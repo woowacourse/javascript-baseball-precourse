@@ -12,6 +12,7 @@ export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
     let strike = 0;
     let ball = 0;
+    console.log(computerInputNumbers);
 
     [...computerInputNumbers].forEach((computerInputNumber, index) => {
       if (computerInputNumber === userInputNumbers[index]) strike += 1;
