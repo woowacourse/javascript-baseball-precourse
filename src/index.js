@@ -5,10 +5,10 @@ import getUserNumber from "./number/getUserNumber.js";
 import { $ } from "./util/index.js";
 
 export default function BaseballGame() {
-  const computerInputNumbers = getComputerNumber();
+  let computerInputNumbers = getComputerNumber();
 
   this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    return gameResult(computerInputNumbers, userInputNumbers);
   };
 
   $("form").addEventListener("submit", (e) => e.preventDefault());
@@ -16,9 +16,17 @@ export default function BaseballGame() {
   $("#submit").addEventListener("click", () => {
     const userInputNumbers = getUserNumber();
 
+    console.log(computerInputNumbers, userInputNumbers);
+
     if (userInputNumbers) {
-      const game_result = gameResult(computerInputNumbers, userInputNumbers);
+      const game_result = this.play(computerInputNumbers, userInputNumbers);
       gameResultRender(game_result);
+    }
+  });
+
+  $("#result").addEventListener("click", (e) => {
+    if (e.target.id === "game-restart-button") {
+      computerInputNumbers = getComputerNumber();
     }
   });
 }
