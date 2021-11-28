@@ -32,7 +32,7 @@ export function countResult(userNumbers, computerNumbers) {
     return { ball, strike };
 }
 
-export function errorCheck(text) {
+export function checkError(text) {
     if(isNaN(Number(text)) || text.includes('0')) return $inputRangeError;
     if(text.includes('-')) return $negativeNumberError;
     if(text.length !== 3) return $lengthError;
