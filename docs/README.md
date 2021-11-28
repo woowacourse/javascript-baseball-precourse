@@ -69,15 +69,15 @@ input을 초기화
 │   └── README.md
 └── src
     ├── index.js // 게임 시작에 필요한 세팅
+    │
     ├── constants
-    │   ├── alert-message.js // alert 메시지 모음
-    │   ├── game-rule.js // 게임 내 규칙에 사용되는 상수 모음
-    │   ├── initial-state.js // 초기 컴퓨터 난수, 사용자 입력 값
-    │   └── result-message.js // 출력 결과 메시지 모음
+    │   ├── index.js // alert, result 상수 메시지 모음
+    │   └── html-doms.js // html dom 모음
     │
     ├── functions
     │   ├── user-input.js // 유저 입력이 올바른지 판별, 판별하기 위해 필요한 기능 모음
-    │   └── game-esult.js // 입력에 따른 출력메시지, DOM 생성, 재시작에 필요한 기능 모음
+    │   ├── add-submit-event.js // 확인 버튼의 클릭 이벤트 함수
+    │   └── game-result.js // 입력에 따른 출력메시지, DOM 생성, 재시작에 필요한 기능 모음
     │
     └── state
         └── index.js // 유저 입력, 컴퓨터 난수, 볼 개수, 스트라이크 개수를 관리하는 state
