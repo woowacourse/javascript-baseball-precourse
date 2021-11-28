@@ -5,25 +5,23 @@ import returnBallStrike from './convertScoreToString.js';
 
 export default function BaseballGame() {
   const hint = document.getElementById('result');
-  hint.style.display = 'None';
-
   const restartButton = document.getElementById('game-restart-button');
   const restartMent = document.getElementById('game-restart-ment');
+  const submitButton = document.getElementById('submit');
+
+  hint.style.display = 'None';
   restartButton.style.display = 'None';
   restartMent.style.display = 'None';
 
-  //make computer num
   const computerInputNumbers = getComputerNumber();
-  console.log(computerInputNumbers);
-
-  //get user num
-  const submitButton = document.getElementById('submit');
   submitButton.addEventListener('click', submitButtonOn);
 
   function submitButtonOn() {
-    const userInputNumbers = getUserNumber(); //userinputNuber 가 false면 결과 display안해야함
-    const result = play(computerInputNumbers, userInputNumbers); //need to 손보기
-    displayResult(result);
+    const userInputNumbers = getUserNumber();
+    if (!isNaN(userInputNumbers)) {
+      const result = play(computerInputNumbers, userInputNumbers);
+      displayResult(result);
+    }
   }
 
   function play(computerInputNumbers, userInputNumbers) {
@@ -41,6 +39,8 @@ export default function BaseballGame() {
       restartMent.style.display = '';
     }
   }
+
+  console.log(computerInputNumbers);
 }
 
 new BaseballGame();

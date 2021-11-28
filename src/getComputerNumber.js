@@ -1,4 +1,3 @@
-/* pickThreeDigitRandomNumber(); */
 import { RANGE_MIN, RANGE_MAX, NUMBER_LENGTH } from './consts.js';
 
 export default function getComputerNumber() {

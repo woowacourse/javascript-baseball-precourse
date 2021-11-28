@@ -1,7 +1,22 @@
-import { RANGE_MAX, RANGE_MIN, NUMBER_LENGTH } from './consts.js';
+import { NUMBER_LENGTH } from './consts.js';
 
-/*check usernumber condition*/
-export function checkNumberConsistZero(num) {
+export default function checkUserInputValid(num) {
+  if (isNumberHasZero(num)) {
+    return false;
+  }
+  if (isNumTypeIsNumber(num)) {
+    return false;
+  }
+  if (isNumberlenEqualsNumLength(num)) {
+    return false;
+  }
+  if (isNumberDuplicated(num)) {
+    return false;
+  }
+  return true;
+}
+
+function isNumberHasZero(num) {
   for (let i = 0; i < NUMBER_LENGTH; i++) {
     if (num[i] == 0) {
       alert('Please Enter Number Without Zero');
@@ -11,14 +26,15 @@ export function checkNumberConsistZero(num) {
   return false;
 }
 
-export function checkNumberNotNumber(num) {
+function isNumTypeIsNumber(num) {
   if (isNaN(num)) {
+    alert('Please Enter Number');
     return true;
   }
   return false;
 }
 
-export function checkNumberlenEqualsNumLength(num) {
+function isNumberlenEqualsNumLength(num) {
   if (num.length == NUMBER_LENGTH) {
     return false;
   }
@@ -26,27 +42,11 @@ export function checkNumberlenEqualsNumLength(num) {
   return true;
 }
 
-export function checkDigitsInNumberDuplicated(num) {
+function isNumberDuplicated(num) {
   const DigitsInNumberSet = new Set(num);
   if (DigitsInNumberSet.size == NUMBER_LENGTH) {
     return false;
   }
   alert('Please Enter Numbers without Duplication');
-  return true;
-}
-
-export function checkUserInputValid(num) {
-  if (checkNumberConsistZero(num)) {
-    return false;
-  }
-  if (checkNumberNotNumber(num)) {
-    return false;
-  }
-  if (checkNumberlenEqualsNumLength(num)) {
-    return false;
-  }
-  if (checkDigitsInNumberDuplicated(num)) {
-    return false;
-  }
   return true;
 }

@@ -1,4 +1,5 @@
-/* Calculate srike ball */
+import { NUMBER_LENGTH } from './consts.js';
+
 export function calculateDuplicatedNum(Number1, Number2) {
   const a = String(Number1).split('');
   const b = String(Number2).split('');
@@ -6,11 +7,11 @@ export function calculateDuplicatedNum(Number1, Number2) {
   return Intersection.length;
 }
 
-export function calStrike(Number1, Number2) {
-  const a = String(Number1).split('');
-  const b = String(Number2).split('');
+export function calStrike(computerNumber, userNumber) {
+  const a = String(computerNumber).split('');
+  const b = String(userNumber).split('');
   let count = 0;
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < NUMBER_LENGTH; i++) {
     if (a[i] === b[i]) {
       count++;
     }
@@ -18,6 +19,9 @@ export function calStrike(Number1, Number2) {
   return count;
 }
 
-export function calBall(Number1, Number2) {
-  return calculateDuplicatedNum(Number1, Number2) - calStrike(Number1, Number2);
+export function calBall(computerNumber, userNumber) {
+  return (
+    calculateDuplicatedNum(computerNumber, userNumber) -
+    calStrike(computerNumber, userNumber)
+  );
 }

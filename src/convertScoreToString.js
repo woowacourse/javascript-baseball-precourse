@@ -1,4 +1,3 @@
-/* Print Result */
 export default function returnBallStrike(ball, strike) {
   if (ball == 0 && strike == 0) {
     return '낫싱';
