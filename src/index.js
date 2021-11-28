@@ -5,6 +5,10 @@ import {
   validateUniqueInArray,
   validateNumberInArray,
 } from './utils/index.js';
+import {
+  SELECTOR,
+  HINT,
+} from './constants.js';
 
 function BaseballGame () {
   this.answer = pickUniqueThreeNumbers();
@@ -14,22 +18,22 @@ function BaseballGame () {
   };
 
   const initEventListeners = () => {
-    $('form').addEventListener('submit', onSubmitPlayerInput);
-    $('#result').addEventListener('click', onClickRestartButton);
+    $(SELECTOR.FORM).addEventListener('submit', onSubmitPlayerInput);
+    $(SELECTOR.RESULT).addEventListener('click', onClickRestartButton);
   };
 
   const onSubmitPlayerInput = (event) => {
     event.preventDefault();
-    const input = $('#user-input').value;
+    const input = $(SELECTOR.INPUT).value;
     if (!validatePlayerInput(input)) return;
     const result = play(this.answer, input);
-    $('#result').innerHTML = result;
+    $(SELECTOR.RESULT).innerHTML = result;
   };
 
   const onClickRestartButton = (event) => {
-    if (event.target.id === 'game-restart-button') {
-      $('#result').innerHTML = '';
-      $('#user-input').value = '';
+    if (event.target.id === SELECTOR.RESTART_BUTTON) {
+      $(SELECTOR.RESULT).innerHTML = '';
+      $(SELECTOR.INPUT).value = '';
       this.answer = pickUniqueThreeNumbers();
     }
   };
@@ -38,7 +42,7 @@ function BaseballGame () {
     const playerInputArray = changeStringToNumberArray(input);
     if (input.length !== 3 || !validateUniqueInArray(playerInputArray) || !validateNumberInArray(playerInputArray)) {
       alert('입력 값을 확인해주세요');
-      $('#user-input').value = '';
+      $(SELECTOR.INPUT).value = '';
       return false;
     }
     return true;
@@ -47,10 +51,10 @@ function BaseballGame () {
   const play = (computerInputNumberArray, playerInputNumbers) => {
     const playerInputNumberArray = changeStringToNumberArray(playerInputNumbers);
     const { strike, ball } = checkStrikeOrBall(computerInputNumberArray, playerInputNumberArray);
-    const resultStrikeString = strike ? `${strike}스트라이크` : '';
-    const resultBallString = ball ? `${ball}볼` : '';
+    const resultStrikeString = strike ? `${strike}${HINT.STRIKE}` : '';
+    const resultBallString = ball ? `${ball}${HINT.BALL}` : '';
     if (strike === 3) return createGameRestartButtonTemplate();
-    return (!ball && !strike) ? '낫싱' : `${resultBallString} ${resultStrikeString}`;
+    return (!ball && !strike) ? HINT.NOTHING : `${resultBallString} ${resultStrikeString}`;
   };
 
   const checkStrikeOrBall = (computerInputNumberArray, playerInputNumberArray) => {
@@ -72,7 +76,7 @@ function BaseballGame () {
           <strong>🎉 정답을 맞추셨습니다! 🎉</strong>
         </p>
         <span게임을 재시작 하시겠습니까?</span>
-        <button id="game-restart-button">
+        <button id="${SELECTOR.RESTART_BUTTON}">
           게임 재시작
         </button>
       </div>
