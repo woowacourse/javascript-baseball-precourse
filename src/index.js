@@ -7,6 +7,7 @@ import {
 import { generateAnswerNumber } from "./game/generate-answer-number.js";
 import { resetResult, resetUserInput } from "./game/reset-game.js";
 import { printResultMessage } from "./game/print-result.js";
+
 export default class BaseballGame {
   constructor() {
     this.answerNumber = generateAnswerNumber();
