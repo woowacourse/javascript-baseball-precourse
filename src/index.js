@@ -5,6 +5,7 @@ export default class BaseballGame {
       this.computerInputNumbers = this.randomGenerator();
       this.checkButtonPressed();
       this.result = document.getElementById('result');
+      this.isCorrect = false;
   }
 
   randomGenerator() {
@@ -18,7 +19,7 @@ export default class BaseballGame {
       const userInputNumbers = this.userInput.value;
       const valid = this.checkAnswerValidation(userInputNumbers);
       if (valid) {
-        this.play(this.computerInputNumbers,userInputNumbers);
+        this.showResultMessage(this.play(this.computerInputNumbers,userInputNumbers));
       } else {
         alert('잘못된 값을 입력했습니다.');
       }
@@ -48,7 +49,8 @@ export default class BaseballGame {
     if (balls === 0 && strikes === 0) {
       resultText = '낫싱';
     } else if ( strikes === 3 ) {
-      resultText = `<strong>🎉 정답을 맞추셨습니다! 🎉</strong>`
+      resultText = `<strong>🎉 정답을 맞추셨습니다! 🎉<strong>`
+      this.isCorrect = true;
     } else if ( balls === 0 ){
       resultText = `${strikes}스트라이크`;
     } else if ( strikes === 0) {
@@ -56,7 +58,7 @@ export default class BaseballGame {
     } else {
       resultText = `${balls}볼 ${strikes}스트라이크`;
     }
-    this.result.innerHTML = resultText;
+    return resultText;
   }
 
   countBalls(computerInputNumbers, userInputNumbers){
@@ -86,6 +88,37 @@ export default class BaseballGame {
         }
     }, 0);
     return totalStrikeCount;
+  }
+
+  showResultMessage(resultText){
+    this.result.innerHTML = resultText;
+    if (this.isCorrect) {
+      this.isCorrect = false;
+      this.showRestartButton();
+      this.restartButtonPressed();
+    }
+  }
+  
+  showRestartButton(){
+    const appDiv = document.getElementById('app');
+    const newDiv = document.createElement('div');
+    newDiv.setAttribute('id','new-div');
+    newDiv.innerHTML = `
+      </br> 게임을 새로 시작하시겠습니까?
+      <button id="game-restart-button">게임 재시작</button>
+    `;
+    appDiv.appendChild(newDiv);
+  }
+
+  restartButtonPressed() {
+    const restartButton = document.getElementById('game-restart-button');
+    const newDiv = document.getElementById('new-div');
+    restartButton.addEventListener('click', (e) => {
+      this.result.innerHTML = '';
+      this.userInput.value = '';
+      this.computerInputNumbers = this.randomGenerator();
+      newDiv.remove();
+    });
   }
 }
 
