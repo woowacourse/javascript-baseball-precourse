@@ -1,6 +1,7 @@
 import getAnswer from './getAnswer.js';
 import getUserInput from './getUserInput.js';
 import getGameResult from './getGameResult.js';
+import printResult from './printResult.js';
 
 
 //정답값 구하기
@@ -24,6 +25,9 @@ export default function BaseballGame() {
             this.play = function (userInputArray, answerArray) {
                 return getGameResult(userInputArray, answerArray);
             }
+
+            //게임 결과 출력
+            printResult(userInputArray, answerArray, this.play);
         }
     })
 
