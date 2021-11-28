@@ -10,6 +10,10 @@ export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     return gameResult(computerInputNumbers, userInputNumbers);
   };
+  const resetGame = () => {
+    $("#user-input").value = "";
+    $("#result").innerHTML = "";
+  };
 
   $("form").addEventListener("submit", (e) => e.preventDefault());
 
@@ -27,6 +31,7 @@ export default function BaseballGame() {
   $("#result").addEventListener("click", (e) => {
     if (e.target.id === "game-restart-button") {
       computerInputNumbers = getComputerNumber();
+      resetGame();
     }
   });
 }
