@@ -1,5 +1,6 @@
 import getAnswer from './getAnswer.js';
 import getUserInput from './getUserInput.js';
+import getGameResult from './getGameResult.js';
 
 
 //정답값 구하기
@@ -18,9 +19,14 @@ export default function BaseballGame() {
         //유저입력값 가져오기
         if (getUserInput()) {
             const userInputArray = getUserInput();
+
+            //게임결과내기
+            this.play = function (userInputArray, answerArray) {
+                return getGameResult(userInputArray, answerArray);
+            }
         }
     })
-    
+
 }
 
 
