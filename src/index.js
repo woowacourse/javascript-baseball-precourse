@@ -13,6 +13,7 @@ export default class BaseballGame {
 
   play(computerInputNumbers, userInputNumbers) {
     this.computeScore(computerInputNumbers, userInputNumbers);
+    this.resetScore();
   }
 
   generateComputerRandomNumber() {
@@ -45,6 +46,11 @@ export default class BaseballGame {
         this.score.ball = this.score.ball + 1;
       }
     });
+  }
+
+  resetScore() {
+    this.score.strike = 0;
+    this.score.ball = 0;
   }
 
   showErrorMessage(resultCode) {
