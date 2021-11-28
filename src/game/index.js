@@ -7,14 +7,12 @@ export default class BaseballGame {
     genRandomNumbers() {
       let count = 0;
       let numbers = [];
-      let numPool = new Array(10);
       while(count < 3){
         const pickedNumber = MissionUtils.Random.pickNumberInRange(1,9);
-        if(numPool[pickedNumber] === true){
+        if(numbers.includes(pickedNumber)){
           continue;
         } else {
           numbers.push(pickedNumber);
-          numPool[pickedNumber] = true;
           count++;
         }
       }
@@ -48,11 +46,12 @@ export default class BaseballGame {
       return true;
     }
 
+    // 볼, 스트라이크 갯수 문자열화
     stringifyResult(ball, strike){
       let message = "";
 
-      if(strike === 3){
-        message = "성공"
+      if(strike === 0 && ball === 0){
+        message = "낫싱"
       } else {
         if(ball){
           message = `${ball}볼 `
@@ -60,41 +59,48 @@ export default class BaseballGame {
         if(strike){
           message += `${strike}스트라이크`
         }
-        if(strike === 0 && ball === 0){
-          message = "낫싱"
-        }
       }
 
       return message;
     }
 
-    // 유저 입력 값 & 생성된 값 비교 메서드
-    play(computerInputNumbers, userInputNumbers){
-      let strike = 0
-      let ball = 0;
-
-      let userPool = new Array(10);
-      let computerPool = new Array(10);
-
-      // 스트라이크 확인
+    // 스트라이크 확인
+    countStrike(computerInputNumbers, userInputNumbers){
+      let strike = 0;
       for(let i=0; i<3; i++){
-        console.log(computerInputNumbers[i], userInputNumbers[i]);
         if(computerInputNumbers[i] === parseInt(userInputNumbers[i])){
           strike++;
-        } else {
-          userPool[userInputNumbers[i]] = true;
-          computerPool[computerInputNumbers[i]] = true;
         }
       }
 
-      // 볼 확인
-      for(let i=1; i<10; i++){
-        if(userPool[i] === true && computerPool[i] === true){
-          ball++;
+      return strike;
+    }
+
+    // 같은 숫자(볼) 확인
+    countSame(computerInputNumbers, userInputNumbers){
+      let count = 0;
+      for(let i=0; i<3; i++){
+        if(computerInputNumbers.includes(parseInt(userInputNumbers[i]))){
+          count++;
         }
       }
+      
+      return count;
+    }
 
-      return this.stringifyResult(ball, strike);
+    // 유저 입력 값 & 생성된 값 비교 메서드
+    play(computerInputNumbers, userInputNumbers){
+      let strike, ball, message;
+
+      strike = this.countStrike(computerInputNumbers, userInputNumbers);
+      ball = this.countSame(computerInputNumbers, userInputNumbers) - strike;
+      
+      if(strike === 3){
+        message = "성공";
+      }else{
+        message = this.stringifyResult(ball, strike);
+      }
+      return message;
     }
 
     receiveInput(input){
