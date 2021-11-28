@@ -11,6 +11,14 @@ console.log(answerArray);
 const $result = document.querySelector('#result');
 const $userInput = document.querySelector('#user-input');
 
+//리셋
+function restart() {
+    $userInput.value = '';
+    $result.innerHTML = '';
+    answerArray = getAnswer();
+    console.log(answerArray);
+}
+
 export default function BaseballGame() {
 
     const $submit = document.querySelector('#submit');
@@ -28,6 +36,13 @@ export default function BaseballGame() {
 
             //게임 결과 출력
             printResult(userInputArray, answerArray, this.play);
+        }
+    })
+
+    //재시작버튼 클릭시 재시작
+    $result.addEventListener('click', ({ target }) => {
+        if (target.id === 'game-restart-button') {
+            restart();
         }
     })
 
