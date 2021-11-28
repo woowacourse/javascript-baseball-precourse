@@ -18,10 +18,7 @@ const hasZero = (target) => {
 };
 
 const isValidLength = (target) => {
-  return (
-    target.length === BASEBALL_RULE.DIGITS &&
-    new Set(target.split('')).size === BASEBALL_RULE.DIGITS
-  );
+  return new Set(target.split('')).size === BASEBALL_RULE.DIGITS;
 };
 
 export const isNotValidInput = (input) => {
