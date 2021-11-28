@@ -14,10 +14,9 @@
   },
   "rules": {
     "no-unused-vars": "warn",
-    "import/extensions": [
-      {
-        "js": "always"
-      }
-    ]
+    "import/extensions": "off",
+    "no-alert": "off",
+    "no-undef": "off",
+    "consistent-return": "off"
   }
 }
