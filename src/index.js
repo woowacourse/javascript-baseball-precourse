@@ -8,7 +8,6 @@ export default function BaseballGame() {
     printResult(computerInputNumbers, userInputNumbers);
   };
 
-
   const printError = (userInput) => {
     if(userInput.has(NaN)) {
       alert("잘못 입력하였습니다❗️ 숫자를 입력하세요.");
@@ -21,6 +20,26 @@ export default function BaseballGame() {
     }
     $("#user-input").value = '';
     $("#result").innerHTML = '';
+  }
+
+  const countAnswer = (computerInputNumbers, userInputNumbers) => {
+    // strike 수 
+    const strike = computerInputNumbers.reduce((acc, num, i) => {
+      if(num === userInputNumbers[i]) {
+        acc += 1;
+      }
+      return acc;
+    }, 0);
+
+    // ball 수 
+    const ball = computerInputNumbers.reduce((acc, num, i) => {
+      if((userInputNumbers.indexOf(num) !== i) && (userInputNumbers.indexOf(num) !== -1)) {
+        acc += 1;
+      }
+      return acc;
+    }, 0);
+
+    return [strike, ball];
   }
 
   const printResult = (computerInputNumbers, userInputNumbers) => {
@@ -41,29 +60,6 @@ export default function BaseballGame() {
     $("#result").innerText = `${ball? ball + '볼' : ''} ${strike? strike + '스트라이크' : ''}`;
   }
 
-  const countAnswer = (computerInputNumbers, userInputNumbers) => {
-    const [comNum1, comNum2, comNum3] = computerInputNumbers;
-    const [userNum1, userNum2, userNum3] = [...userInputNumbers];
-
-    // strike 수 
-    const strike = [comNum1, comNum2, comNum3].reduce((acc, num, i) => {
-      if(num === [userNum1, userNum2, userNum3][i]) {
-        acc += 1;
-      }
-      return acc;
-    }, 0);
-
-    // ball 수 
-    const ball = [comNum1, comNum2, comNum3].reduce((acc, num, i) => {
-      if(([userNum1, userNum2, userNum3].indexOf(num) !== i) && ([userNum1, userNum2, userNum3].indexOf(num) !== -1)) {
-        acc += 1;
-      }
-      return acc;
-    }, 0);
-
-    return [strike, ball];
-  }
-
   const isVaildNum = () => {
     //유효하지 않은 경우 (에러메시지)
     const userInput = new Set([...$("#user-input").value.split('').map(num => Number(num))]);
@@ -74,7 +70,7 @@ export default function BaseballGame() {
     }
 
     //유효한 경우 (결과 출력)
-    this.play(computerNumber, userInput);
+    this.play(computerNumber, [...userInput]);
   };
 
   const restartGame = () => {
@@ -84,7 +80,6 @@ export default function BaseballGame() {
   };
 
   $("#input-form").addEventListener("submit", e => {
-    console.log($("#user-input").value.length);
     e.preventDefault();
     isVaildNum();
   })
