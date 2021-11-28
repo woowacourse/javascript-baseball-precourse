@@ -31,6 +31,13 @@ const init = () => {
   createRandomNumber();
 };
 
+const validate = userInputNumbers => {
+  if (new Set(userInputNumbers).size !== 3) return false;
+  if (Number.isNaN(userInputNumbers)) return false;
+  if (userInputNumbers.match(/[0]/)) return false;
+  return true;
+};
+
 const render = () => {
   const gameResult = BG.play(randomNumber, userInputNumbers);
   if (gameResult === '정답') {
@@ -48,7 +55,7 @@ window.addEventListener('.DOMContentLoaded', init());
 $submit.addEventListener('click', e => {
   e.preventDefault();
   userInputNumbers = $userInput.value;
-  if (!BG.validate(userInputNumbers)) {
+  if (!validate(userInputNumbers)) {
     window.alert('숫자, 3자리, 0을 제외한 값을 입력해주세요');
     $userInput.focus();
     return;

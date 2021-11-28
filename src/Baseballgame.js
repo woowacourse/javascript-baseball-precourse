@@ -1,6 +1,3 @@
-/* eslint-disable class-methods-use-this */
-// TODO: 11/27 eslint에서 class에 this를 사용하라고 표시.
-
 export default class Baseballgame {
   constructor() {
     this.game = {
@@ -16,13 +13,6 @@ export default class Baseballgame {
     };
   }
 
-  validate(userInputNumbers) {
-    if (new Set(userInputNumbers).size !== 3) return false;
-    if (Number.isNaN(userInputNumbers)) return false;
-    if (userInputNumbers.match(/[0]/)) return false;
-    return true;
-  }
-
   countStrikeBall(computerInputNumbers, userInputNumbers) {
     for (let i = 0; i < 3; i++) {
       if (computerInputNumbers[i] === userInputNumbers[i]) {
@@ -35,15 +25,11 @@ export default class Baseballgame {
         this.game.ball++;
       }
     }
-    return [this.game.strike, this.game.ball];
   }
 
   play(computerInputNumbers, userInputNumbers) {
     this.init();
-    [this.game.strike, this.game.ball] = this.countStrikeBall(
-      computerInputNumbers,
-      userInputNumbers
-    );
+    this.countStrikeBall(computerInputNumbers, userInputNumbers);
 
     if (this.game.strike === 3) return '정답';
     if (this.game.strike || this.game.ball) {
