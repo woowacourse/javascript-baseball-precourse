@@ -18,6 +18,11 @@ export default class BaseballGame {
     let strike = this.getStrike(comNumbersMap, userNumbersMap);
     let ball = this.getBall(comNumbersMap, userNumbersMap);
 
+    if (this.isGameClear(strike)) {
+      this.printGameClear();
+      return;
+    }
+
     this.printGameResult(strike, ball);
   }
 
@@ -113,6 +118,28 @@ export default class BaseballGame {
     }
 
     this.result.innerText = `${ball}볼 ${strike}스트라이크`;
+  }
+
+  isGameClear(countStrike) {
+    if (countStrike !== 3) {
+      return false;
+    }
+    return true;
+  }
+
+  printGameClear() {
+    this.result.innerText =
+      "🎉 정답을 맞추셨습니다!🎉\n게임을 새로 시작하시겠습니까?";
+    let restartBtn = document.createElement("button");
+    restartBtn.setAttribute("id", "game-restart-button");
+    restartBtn.innerText = "게임 재시작";
+
+    restartBtn.onclick = () => {
+      this.answer = this.makeRandomNumbers();
+      this.gameInitializing();
+    };
+
+    this.result.appendChild(restartBtn);
   }
 
   arrayToMap(arr) {
