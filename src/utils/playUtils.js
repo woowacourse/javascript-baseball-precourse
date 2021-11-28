@@ -16,6 +16,8 @@ const playUtils = {
   showScoreToResult: (scoreBoard) => {
     if (scoreBoard.strike === NUMBER.DIGIT) {
       DOMUtils.showResult(ANSWER.RIGHT);
+      DOMUtils.disableElement('#user-input');
+      DOMUtils.disableElement('#submit');
       return true;
     }
     if (!scoreBoard.ball && !scoreBoard.strike) {

@@ -5,9 +5,12 @@ const DOMUtils = {
     DOMUtils.setElementId('h3', 'result-title');
     DOMUtils.hideElement('#result-title');
     DOMUtils.setElementValue('#result');
+    DOMUtils.ableElement('#user-input');
+    DOMUtils.ableElement('#submit');
     DOMUtils.initValue('#user-input');
     DOMUtils.getElement('#user-input').focus();
   },
+
   getElement: (selectors) => document.querySelector(selectors),
 
   setElementId: (selectors, idValue) =>
@@ -18,6 +21,11 @@ const DOMUtils = {
 
   showElement: (selectors) =>
     (DOMUtils.getElement(selectors).style.display = ''),
+
+  disableElement: (selectors) =>
+    (DOMUtils.getElement(selectors).disabled = true),
+
+  ableElement: (selectors) => (DOMUtils.getElement(selectors).disabled = false),
 
   setElementValue: (selectors, text = '') =>
     (DOMUtils.getElement(selectors).innerText = text),
