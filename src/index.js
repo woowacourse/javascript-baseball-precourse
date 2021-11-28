@@ -18,7 +18,7 @@ export default class BaseballGame {
     DOMS.$result.addEventListener("click", this.setResetGameEvent);
   };
 
-  onSubmitHandler = (event) => {
+  setUserInputEvent = (event) => {
     event.preventDefault();
     const userInputNumbers = DOMS.$userInput.value;
     const alertMessage = generateAlertMessage(userInputNumbers);
