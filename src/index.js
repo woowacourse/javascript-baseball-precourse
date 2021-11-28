@@ -53,6 +53,16 @@ export default class BaseballGame {
 
     return true;
   }
+
+  arrayToMap(arr) {
+    let tmp = new Map();
+
+    for (let idx in arr) {
+      tmp.set(Number(arr[idx]), idx);
+    }
+
+    return tmp;
+  }
 }
 
 new BaseballGame();
