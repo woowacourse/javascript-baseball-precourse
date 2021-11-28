@@ -90,15 +90,21 @@ export default class BaseballGame {
         <h4>👍 정답을 맞추셨습니다. 게임을 새로 시작하시겠습니까?</h4>
         <button id="game-restart-button">재시작</button>
         `;
+
+        const restartButton = $('#game-restart-button');
+
+        restartButton.addEventListener('click', () => {
+          $('#user-input').value = '';
+          $('#result').innerHTML = '';
+          this.generateAnswer();
+        });
+        return;
       }
 
-      const restartButton = $('#game-restart-button');
-
-      restartButton.addEventListener('click', () => {
-        $('#user-input').value = '';
-        $('#result').innerHTML = '';
-        this.generateAnswer();
-      });
+      if (!strikes && !balls) $('#result').innerText = '낫싱';
+      else if (!strikes) $('#result').innerText = `${balls}볼`;
+      else if (!balls) $('#result').innerText = `${strikes}스트라이크`;
+      else $('#result').innerText = `${balls}볼 ${strikes}스트라이크`;
     };
 
     compareAnswer(computerInputNumbers, userInputNumbers);
