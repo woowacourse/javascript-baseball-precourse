@@ -1,6 +1,6 @@
-import { generateRandomNumbers, init } from "./utils/init.js";
-import { checkUserInputValue } from "./utils/valid.js";
-import { countStrike, countBall, win } from "./utils/game.js";
+import { generateRandomNumbers, init } from "./modules/init.js";
+import { checkUserInputValue } from "./modules/valid.js";
+import { countStrike, countBall, win } from "./modules/game.js";
 
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "./assets/constant.js";
 import { $buttonSubmit, $userInput, $result } from "./assets/domElement.js";
@@ -8,10 +8,9 @@ import { $buttonSubmit, $userInput, $result } from "./assets/domElement.js";
 export default function BaseballGame() {
   init();
   const computerInputNumbers = generateRandomNumbers();
-  var userInputNumbers = null;
+  let userInputNumbers = null;
 
   this.play = function (computerInputNumbers, userInputNumbers) {
-    console.log(computerInputNumbers, userInputNumbers);
     if (computerInputNumbers === userInputNumbers) {
       win();
       return SUCCESS_MESSAGE;

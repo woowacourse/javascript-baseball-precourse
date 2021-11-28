@@ -2,7 +2,7 @@ import { RETRY_MESSAGE } from "../assets/constant.js";
 import { $app } from "../assets/domElement.js";
 
 export function countStrike(computerInputNumbers, userInputNumbers) {
-  var numOfStrike = 0;
+  let numOfStrike = 0;
   const computerInputNumberArr = String(computerInputNumbers).split("");
   const userInputNumberArr = String(userInputNumbers).split("");
 
@@ -14,7 +14,7 @@ export function countStrike(computerInputNumbers, userInputNumbers) {
 }
 
 export function countBall(computerInputNumbers, userInputNumbers) {
-  var numOfBall = 0;
+  let numOfBall = 0;
   const computerInputNumberArr = String(computerInputNumbers).split("");
   const userInputNumberArr = String(userInputNumbers).split("");
 
