@@ -13,7 +13,7 @@ export default class BaseballGame {
 
   play(computerInputNumbers, userInputNumbers) {
     this.computeScore(computerInputNumbers, userInputNumbers);
-    this.resetScore();
+    this.setResult();
   }
 
   generateComputerRandomNumber() {
@@ -53,6 +53,15 @@ export default class BaseballGame {
     this.score.ball = 0;
   }
 
+  setResult() {
+    if (this.score.strike === NUMBER_RULES.LENGTH) {
+      this.printCorrectResultScreen(this.$result);
+    } else {
+      this.printNotCorrectResultScreen(this.$result, this.score);
+    }
+    this.resetScore();
+  }
+
   showErrorMessage(resultCode) {
     if (resultCode === VERIFIED_CODE.VERIFIED) {
       return;
@@ -64,6 +73,42 @@ export default class BaseballGame {
   resetInputValue() {
     this.$userInput.value = '';
     this.$userInput.focus();
+  }
+
+  initResultScreen() {
+    this.$result.innerHTML = ``;
+  }
+
+  printCorrectResultScreen($result) {
+    this.initResultScreen();
+    
+    const correctText = `
+      <p><strong>🎉정답을 맞추셨습니다!🎉</strong></p>
+      <span>게임을 새로 시작하시겠습니까?</span>
+    `;
+    this.$result.innerHTML = correctText;
+
+    const restartButton = document.createElement('button');
+    restartButton.id = 'game-restart-button';
+    restartButton.innerText = '게임 재시작';
+    this.restartHandler(restartButton);
+    $result.appendChild(restartButton);
+  }
+
+  printNotCorrectResultScreen($result, gameScore) {
+    this.initResultScreen();
+    
+    let resultText = '';
+    if (gameScore.strike === 0 && gameScore.ball === 0) {
+      resultText = RESULT_MESSAGE.NOTHING;
+    } else if (gameScore.strike > 0 && gameScore.ball > 0) {
+      resultText = `${gameScore.ball}${RESULT_MESSAGE.BALL} ${gameScore.strike}${RESULT_MESSAGE.STRIKE}`;
+    } else if (gameScore.strike > 0) {
+      resultText = `${gameScore.strike}${RESULT_MESSAGE.STRIKE}`;
+    } else if (gameScore.ball > 0) {
+      resultText = `${gameScore.ball}${RESULT_MESSAGE.BALL}`;
+    }
+    $result.innerText = resultText;
   }
 
   submitHandler($element) {
