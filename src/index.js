@@ -59,8 +59,8 @@ export default class BaseballGame {
     this.initResultScreen();
     
     const correctText = `
-      <p><strong>🎉정답을 맞추셨습니다!🎉</strong></p>
-      <span>게임을 새로 시작하시겠습니까?</span>
+      <p><strong>${RESULT_MESSAGE.CORRECT}</strong></p>
+      <span>${RESULT_MESSAGE.RESTART}</span>
     `;
     this.$result.innerHTML = correctText;
 
