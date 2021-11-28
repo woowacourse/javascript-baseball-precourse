@@ -4,8 +4,13 @@ import {
   returnPlayResult,
   generateRandomNumber,
 } from './utils/game.js';
+import {
+  $,
+  createElement,
+  removeFirstChild,
+  replaceChild,
+} from './utils/dom.js';
 import { GAME_RESULT, MESSAGE } from './constants.js';
-import { $, createElement, removeFirstChild, replaceChild } from './dom.js';
 
 export default class BaseballGame {
   constructor() {
@@ -49,8 +54,7 @@ export default class BaseballGame {
   renderResult(result) {
     replaceChild(this.resultElem, createElement(result));
     if (result === GAME_RESULT.END) {
-      const restartBtn = $('game-restart-button');
-      restartBtn.addEventListener('click', () => {
+      $('game-restart-button').addEventListener('click', () => {
         this.restartGame();
       });
     }
