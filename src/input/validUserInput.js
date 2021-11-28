@@ -10,5 +10,7 @@ export default function validUserInput() {
     $userInput.value = "";
     $userInput.focus();
     return;
-  } else return $userInput.value;
+  } else {
+    return $userInput.value;
+  }
 }
