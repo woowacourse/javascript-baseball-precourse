@@ -2,10 +2,15 @@ export default class BaseballGame {
   constructor() {
       this.submitButton = document.getElementById('submit');
       this.userInput = document.getElementById('user-input');
-      this.computerInputNumbers = this.randomGenerator();
-      this.checkButtonPressed();
       this.result = document.getElementById('result');
       this.isCorrect = false;
+      this.init();
+  }
+
+  init(){
+    this.result.innerText = '';
+    this.checkButtonPressed();
+    this.computerInputNumbers = this.randomGenerator();
   }
 
   randomGenerator() {
@@ -14,7 +19,7 @@ export default class BaseballGame {
   }
 
   checkButtonPressed() {
-    this.submitButton.addEventListener('click', (e)=>{
+    this.submitButton.addEventListener('click', (e) => {
       e.preventDefault();
       const userInputNumbers = this.userInput.value;
       const valid = this.checkAnswerValidation(userInputNumbers);
@@ -42,7 +47,7 @@ export default class BaseballGame {
     return true;
   }
 
-  play(computerInputNumbers, userInputNumbers){
+  play(computerInputNumbers, userInputNumbers) {
     const balls = this.countBalls(computerInputNumbers,userInputNumbers);
     const strikes = this.countStrikes(computerInputNumbers,userInputNumbers);
     let resultText;
@@ -51,9 +56,9 @@ export default class BaseballGame {
     } else if ( strikes === 3 ) {
       resultText = `<strong>🎉 정답을 맞추셨습니다! 🎉<strong>`
       this.isCorrect = true;
-    } else if ( balls === 0 ){
+    } else if (balls === 0){
       resultText = `${strikes}스트라이크`;
-    } else if ( strikes === 0) {
+    } else if (strikes === 0) {
       resultText = `${balls}볼`;
     } else {
       resultText = `${balls}볼 ${strikes}스트라이크`;
@@ -61,12 +66,12 @@ export default class BaseballGame {
     return resultText;
   }
 
-  countBalls(computerInputNumbers, userInputNumbers){
+  countBalls(computerInputNumbers, userInputNumbers) {
     let totalBallCount = 0;
     totalBallCount = computerInputNumbers.reduce((count, value, index) => {
       const userInputNumber = Number(userInputNumbers[index]);
       if (
-        userInputNumber!== value 
+        userInputNumber !== value 
         && userInputNumbers.includes(value)
       ) {
         return count + 1;
@@ -77,7 +82,7 @@ export default class BaseballGame {
     return totalBallCount;
   }
 
-  countStrikes(computerInputNumbers, userInputNumbers){
+  countStrikes(computerInputNumbers, userInputNumbers) {
     let totalStrikeCount = 0;
     totalStrikeCount = computerInputNumbers.reduce((count, value, index) => {
         const userInputNumber = Number(userInputNumbers[index]);
@@ -90,7 +95,7 @@ export default class BaseballGame {
     return totalStrikeCount;
   }
 
-  showResultMessage(resultText){
+  showResultMessage(resultText) {
     this.result.innerHTML = resultText;
     if (this.isCorrect) {
       this.isCorrect = false;
@@ -99,7 +104,7 @@ export default class BaseballGame {
     }
   }
   
-  showRestartButton(){
+  showRestartButton() {
     const appDiv = document.getElementById('app');
     const newDiv = document.createElement('div');
     newDiv.setAttribute('id','new-div');
