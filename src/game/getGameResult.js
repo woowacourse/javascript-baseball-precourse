@@ -32,7 +32,7 @@ const getGameResultText = (strikeCount, ballCount) => {
   return `${ballCount}볼 ${strikeCount}스트라이크`;
 };
 
-const gameResult = (computerInputNumbers, userInputNumbers) => {
+const getGameResult = (computerInputNumbers, userInputNumbers) => {
   computerInputNumbers = numberToArray(computerInputNumbers);
   userInputNumbers = numberToArray(userInputNumbers);
 
@@ -42,4 +42,4 @@ const gameResult = (computerInputNumbers, userInputNumbers) => {
   return getGameResultText(strikeCount, ballCount);
 };
 
-export default gameResult;
+export default getGameResult;

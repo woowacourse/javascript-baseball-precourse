@@ -1,6 +1,6 @@
 import { $ } from "../util/index.js";
 
-const gameResultRender = (game_result) => {
+const renderGameResult = (game_result) => {
   if (game_result === "정답") {
     $("#result").innerHTML = `
       <div>정답을 맞추셨습니다!</div>
@@ -14,4 +14,4 @@ const gameResultRender = (game_result) => {
   return;
 };
 
-export default gameResultRender;
+export default renderGameResult;
