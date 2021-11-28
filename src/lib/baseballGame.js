@@ -27,4 +27,8 @@ export default class BaseballGame {
       ? `${ball}볼`
       : `${strike}스트라이크`;
   }
+
+  restart() {
+    this.computerInputNumbers = randomThreeNumbers();
+  }
 }

@@ -28,3 +28,11 @@ $submit.onclick = e => {
 
   $userInput.value = '';
 };
+
+$result.onclick = ({ target }) => {
+  if (!target.id === 'game-restart-button') return;
+
+  baseballGame.restart();
+
+  $result.innerHTML = '';
+};
