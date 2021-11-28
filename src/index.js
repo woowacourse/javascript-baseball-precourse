@@ -16,6 +16,8 @@ function BaseballGame () {
     event.preventDefault();
     const input = $('#user-input').value;
     checkPlayerInput(input);
+    const result = play(this.answer, input);
+    $('#result').innerHTML = result;
   };
 
   const checkPlayerInput = (input) => {
@@ -29,6 +31,21 @@ function BaseballGame () {
       $('#user-input').value = '';
       return;
     }
+  };
+
+  const play = (computerInputNumbers, userInputNumbers) => {
+    const playerInputArray = userInputNumbers.split('').map(item => Number(item));
+    let strike = 0, ball = 0;
+    for (let i = 0; i < 3; i += 1) {
+      if (playerInputArray[i] === computerInputNumbers[i]) {
+        strike += 1;
+      } else if (computerInputNumbers.includes(playerInputArray[i])) {
+        ball += 1;
+      }
+    }
+    const resultStrikeString = strike ? `${strike}스트라이크` : '';
+    const resultBallString = ball ? `${ball}볼` : '';
+    return (!ball && !strike) ? '낫싱' : `${resultBallString} ${resultStrikeString}`;
   };
 }
 
