@@ -151,7 +151,6 @@ export default function BaseballGame() {
     let result = '';
 
     if (userNum !== undefined) {
-      console.log(computerInputNumbers);
       result = this.play(computerInputNumbers, userNum);
     }
     showResult(result);
