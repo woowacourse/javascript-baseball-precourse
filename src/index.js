@@ -5,8 +5,12 @@ import returnBallStrike from './convertScoreToString.js';
 
 export default function BaseballGame() {
   const hint = document.getElementById('result');
-  document.getElementById('result').style.display = 'None';
-  document.getElementById('game-restart-button').style.display = 'None';
+  hint.style.display = 'None';
+
+  const restartButton = document.getElementById('game-restart-button');
+  const restartMent = document.getElementById('game-restart-ment');
+  restartButton.style.display = 'None';
+  restartMent.style.display = 'None';
 
   //make computer num
   const computerInputNumbers = getComputerNumber();
@@ -15,21 +19,27 @@ export default function BaseballGame() {
   //get user num
   const submitButton = document.getElementById('submit');
   submitButton.addEventListener('click', submitButtonOn);
+
   function submitButtonOn() {
-    const userInputNumbers = getUserNumber();
+    const userInputNumbers = getUserNumber(); //userinputNuber 가 false면 결과 display안해야함
     const result = play(computerInputNumbers, userInputNumbers); //need to 손보기
-    if (result !== '3스트라이크') {
-      hint.innerHTML = result;
-      hint.style.display = '';
-    } else {
-      document.getElementById('game-restart-button').style.display = '';
-    }
+    displayResult(result);
   }
 
   function play(computerInputNumbers, userInputNumbers) {
     const strike = calStrike(computerInputNumbers, userInputNumbers);
     const ball = calBall(computerInputNumbers, userInputNumbers);
     return returnBallStrike(ball, strike);
+  }
+
+  function displayResult(result) {
+    if (result !== '3스트라이크') {
+      hint.innerHTML = result;
+      hint.style.display = '';
+    } else {
+      restartButton.style.display = '';
+      restartMent.style.display = '';
+    }
   }
 }
 
