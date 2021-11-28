@@ -14,9 +14,16 @@ export default class BaseballGame {
   }
 
   randomGenerator() {
-    const answer = MissionUtils.Random.pickUniqueNumbersInRange(1,9,3);
+    let answer = new Array();
+    while(new Set(answer).size !== 3) {
+      const num = MissionUtils.Random.pickNumberInRange(1,9);
+      if(!answer.includes(num)) {
+        answer.push(num);
+      }
+    }
     return answer;
   }
+/*
 
   checkButtonPressed() {
     this.submitButton.addEventListener('click', (e) => {
@@ -30,7 +37,7 @@ export default class BaseballGame {
       }
     });
   }
-
+  
   checkAnswerValidation(computerInputNumbers) {
     if (computerInputNumbers.length !== 3) {
       return false;
@@ -125,6 +132,6 @@ export default class BaseballGame {
       newDiv.remove();
     });
   }
+  */
 }
-
 new BaseballGame();
