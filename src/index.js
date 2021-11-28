@@ -16,7 +16,7 @@ export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     const comparedResult = compareInputNumbers(
       computerInputNumbers,
-      userInputNumbers
+      userInputNumbers,
     );
     return makeResultString(comparedResult);
   };
