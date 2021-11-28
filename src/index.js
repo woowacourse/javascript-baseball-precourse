@@ -45,7 +45,21 @@ function BaseballGame () {
     }
     const resultStrikeString = strike ? `${strike}스트라이크` : '';
     const resultBallString = ball ? `${ball}볼` : '';
+    if (strike === 3) return createGameRestartButtonTemplate();
     return (!ball && !strike) ? '낫싱' : `${resultBallString} ${resultStrikeString}`;
+  };
+
+  const createGameRestartButtonTemplate = () => {
+    return `
+      <div>
+        <p>
+          <strong>🎉 정답을 맞추셨습니다! 🎉</strong>
+        </p>
+        <button id="game-restart-button">
+          재시작
+        </button>
+      </div>
+    `;
   };
 }
 
