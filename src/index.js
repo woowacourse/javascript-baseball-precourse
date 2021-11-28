@@ -68,7 +68,7 @@ export default function BaseballGame() {
     //유효하지 않은 경우 (에러메시지)
     const userInput = new Set([...$("#user-input").value.split('').map(num => Number(num))]);
     
-    if(userInput.has(0) || userInput.has(NaN) || $("#user-input").value.length) {
+    if(userInput.has(0) || userInput.has(NaN) || $("#user-input").value.length !== 3) {
       printError(userInput);
       return;
     }
