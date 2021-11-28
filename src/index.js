@@ -1,30 +1,30 @@
 export default class BaseballGame {
     
-    //생성자
+    // 생성자
     constructor() {
         this.$submitButton = document.getElementById("submit");
         this.$userInput = document.getElementById("user-input");
         this.$result = document.getElementById("result");
-        this.answer = this.makeRandomAnswer(); //정답 생성 배열로 나옴
+        this.answer = this.makeRandomAnswer();
         this.addEvent();
     }
 
-    //이벤트 리스너 추가
+    // 이벤트 리스너 추가
     addEvent() {
         this.$submitButton.addEventListener('click', this.getUserInputNum.bind(this));
     }
 
-    //사용자로부터 입력받은 값 확인
+    // 사용자로부터 입력받은 값 확인
     getUserInputNum(e) {
-        e.preventDefault();//다시 실행되는거 방지
+        e.preventDefault();
         const userInputNum = this.$userInput.value;
         this.checkUserInputNum(userInputNum);
         
         return userInputNum;
     }
 
-    //나중에 함수로 분리
-    //사용자로부터 입력받은 값 검사
+    // 나중에 함수로 분리
+    // 사용자로부터 입력받은 값 검사
     checkUserInputNum(userInputNum) {
         if(isNaN(userInputNum)) {
             return alert("숫자만 입력해주세요!");
@@ -39,7 +39,7 @@ export default class BaseballGame {
             return alert("각 자리가 1~9인 수를 입력해주세요!");
         }
 
-        //play 실행
+        // play 실행
         this.showResultSentence(this.play(this.answer, userInputNum));
     }
 
@@ -58,7 +58,7 @@ export default class BaseballGame {
         return randomAnswers;
     }
 
-    //play
+    // play 함수
     play(computerInputNumbers, userInputNumbers) {       
         if(this.isCorrect(computerInputNumbers, userInputNumbers)){
             return "🎉 정답을 맞추셨습니다! 🎉";
@@ -70,12 +70,12 @@ export default class BaseballGame {
         return this.makeResultSentence(numStrike, numBall);
     }
 
-    //사용자로부터 입력받은 값이 정답과 같은지 검사
+    // 사용자로부터 입력받은 값이 정답과 같은지 검사
     isCorrect(computerInputNumbers, userInputNumbers) {
         return computerInputNumbers.every((element, index) => element.toString() === userInputNumbers[index]);
     }
 
-    //스트라이크 개수 검사
+    // 스트라이크 개수 검사
     countStrike(computerInputNumbers, userInputNumbers) {
         let numStrike = 0;
 
@@ -88,7 +88,7 @@ export default class BaseballGame {
         return numStrike;
     }
 
-    //볼 개수 검사
+    // 볼 개수 검사
     countBall(computerInputNumbers, userInputNumbers) {
         let numBall = 0;
 
@@ -101,7 +101,7 @@ export default class BaseballGame {
         return numBall;
     }
 
-    //결과 문장 생성
+    // 결과 문장 생성
     makeResultSentence(numStrike, numBall) {
         if(numStrike > 0 && numBall === 0) {
             return `${numStrike}스트라이크`;
@@ -117,7 +117,7 @@ export default class BaseballGame {
         }
     }
 
-    //결과 문장 출력
+    // 결과 문장 출력
     showResultSentence(resultSentence) {
         this.$result.textContent = resultSentence;
 
@@ -134,8 +134,7 @@ export default class BaseballGame {
         }
     }
 
-    //나중에 함수로 분리
-    //게임 재시작 이벤트 추가
+    // 게임 재시작 이벤트 추가
     addRestartEvent() {
         this.$restart = document.getElementById("game-restart-button");
         this.$restart.addEventListener('click', () => {
