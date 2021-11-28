@@ -13,6 +13,9 @@
     - id가 `user-input`인 엘리먼트를 포커스
     - id가 `result`인 엘리먼트의 텍스트를 ''(빈 문자열)로 초기화
     - 컴퓨터의 숫자를 생성하는 함수 호출
+    - id가 `user-input`인 엘리먼트를 활성화(disabled=false)
+    - id가 `submit`인 엘리먼트를 활성화(disabled=false)
+
 
 - [ ]  사용자에게 입력받는 기능 구현
     - id가 `submit`인 엘리먼트에 onclick 이벤트 핸들러 등록
