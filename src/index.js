@@ -16,7 +16,7 @@ function BaseballGame () {
   const onSubmitPlayerInput = (event) => {
     event.preventDefault();
     const input = $('#user-input').value;
-    checkPlayerInput(input);
+    if (!validatePlayerInput(input)) return;
     const result = play(this.answer, input);
     $('#result').innerHTML = result;
   };
@@ -29,7 +29,7 @@ function BaseballGame () {
     }
   };
 
-  const checkPlayerInput = (input) => {
+  const validatePlayerInput = (input) => {
     const set = new Set();
     const isNaNArray = input.split('').map((item) => {
       set.add(item);
@@ -38,8 +38,9 @@ function BaseballGame () {
     if (input.length !== 3 || isNaNArray.includes(true) || set.size !== 3) {
       alert('입력 값을 확인해주세요');
       $('#user-input').value = '';
-      return;
+      return false;
     }
+    return true;
   };
 
   const play = (computerInputNumbers, userInputNumbers) => {
