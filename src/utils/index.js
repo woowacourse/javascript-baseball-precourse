@@ -33,3 +33,7 @@ export const checkSameOrInclude = (array1, array2) => {
   }
   return [same, include];
 };
+
+export const createResultHintString = (count, hint) => (
+  count ? `${count}${hint}` : ''
+);

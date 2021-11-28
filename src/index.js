@@ -5,6 +5,7 @@ import {
   validateUniqueInArray,
   validateNumberInArray,
   checkSameOrInclude,
+  createResultHintString,
 } from './utils/index.js';
 import {
   SELECTOR,
@@ -57,10 +58,10 @@ function BaseballGame () {
   // 게임 시작 함수
   const play = (computerInputNumberArray, playerInputNumberArray) => {
     const [strikeCount, ballCount] = checkSameOrInclude(computerInputNumberArray, playerInputNumberArray);
-    const resultStrikeString = strikeCount ? `${strikeCount}${HINT.STRIKE}` : '';
-    const resultBallString = ballCount ? `${ballCount}${HINT.BALL}` : '';
     if (strikeCount === 3) return createGameRestartButtonTemplate();
-    return (!ballCount && !strikeCount) ? HINT.NOTHING : `${resultBallString} ${resultStrikeString}`;
+    return (!ballCount && !strikeCount)
+      ? HINT.NOTHING
+      : `${createResultHintString(ballCount, HINT.BALL)} ${createResultHintString(strikeCount, HINT.STRIKE)}`;
   };
 
   // 재시작 버튼 템플릿 생성 함수
