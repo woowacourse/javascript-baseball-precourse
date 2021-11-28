@@ -31,10 +31,26 @@ export const parseInput = (input) => {
   return String(parseInt(input.trim(), 10));
 };
 
-export const convertToHashMap = (input) => {
+const convertToHashMap = (input) => {
   const hashMap = new Map();
   input.split('').forEach((number, index) => {
     hashMap.set(number, index);
   });
   return hashMap;
+};
+
+export const getStrikeAndBall = (computerInputNumbers, userInputNumbers) => {
+  let strike = 0;
+  let ball = 0;
+
+  const computerInputHashMap = convertToHashMap(computerInputNumbers);
+  const userInputHashMap = convertToHashMap(userInputNumbers);
+
+  for (const [number, index] of computerInputHashMap.entries()) {
+    if (userInputHashMap.has(number)) {
+      const userInputIndex = userInputHashMap.get(number);
+      index === userInputIndex ? (strike += 1) : (ball += 1);
+    }
+  }
+  return [strike, ball];
 };

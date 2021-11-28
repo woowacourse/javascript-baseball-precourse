@@ -2,7 +2,7 @@ import {
   generateRandomNumber,
   parseInput,
   isNotValidInput,
-  convertToHashMap,
+  getStrikeAndBall,
 } from './utils.js';
 import { BASEBALL_RULE, GAME_RESULT, MESSAGE } from './constants.js';
 import { $, createElement, removeFirstChild, replaceChild } from './dom.js';
@@ -23,20 +23,7 @@ export default class BaseballGame {
     });
   }
 
-  play(computerInputNumbers, userInputNumbers) {
-    let strike = 0;
-    let ball = 0;
-
-    const computerInputHashMap = convertToHashMap(computerInputNumbers);
-    const userInputHashMap = convertToHashMap(userInputNumbers);
-
-    for (const [number, index] of computerInputHashMap.entries()) {
-      if (userInputHashMap.has(number)) {
-        const userInputIndex = userInputHashMap.get(number);
-        index === userInputIndex ? (strike += 1) : (ball += 1);
-      }
-    }
-
+  returnPlayResult(strike, ball) {
     if (strike === BASEBALL_RULE.DIGITS) {
       return GAME_RESULT.END;
     }
@@ -50,6 +37,14 @@ export default class BaseballGame {
       return `${strike}${GAME_RESULT.STRIKE}`;
     }
     return GAME_RESULT.NOTHING;
+  }
+
+  play(computerInputNumbers, userInputNumbers) {
+    const [strike, ball] = getStrikeAndBall(
+      computerInputNumbers,
+      userInputNumbers
+    );
+    return this.returnPlayResult(strike, ball);
   }
 
   handleSubmit() {
