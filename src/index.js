@@ -51,6 +51,7 @@ export default class BaseballGame {
     this.computerInputNumbers = this.generateComputerInputNumbers();
     this.$result.innerHTML = '';
     this.$userInput.value = '';
+    this.enableUserInput();
   }
 
   printGameClearView() {
@@ -64,6 +65,11 @@ export default class BaseballGame {
   disableuUserInput() {
     this.$userInput.disabled = true;
     this.$submitBtn.disabled = true;
+  }
+
+  enableUserInput() {
+    this.$userInput.disabled = false;
+    this.$submitBtn.disabled = false;
   }
 
   generateComputerInputNumbers() {
