@@ -1,12 +1,14 @@
 import { state } from '../state/index.js';
+import { initBallStrike, setComputerInput } from './util.js';
+import { initUserInput } from './user-input.js';
 import { RESULT_MESSAGE } from '../constants/index.js';
 import { RESULT_DIV, SUBMIT_BUTTON, USER_INPUT } from '../constants/html-doms.js';
 
 // 게임 재시작 전에 필요한 세팅
 function restartGameSetting() {
-  state.initBallStrike();
-  state.initUserInput();
-  state.setComputerInput();
+  initBallStrike();
+  initUserInput();
+  setComputerInput();
   RESULT_DIV.innerHTML = '';
   USER_INPUT.value = '';
 }

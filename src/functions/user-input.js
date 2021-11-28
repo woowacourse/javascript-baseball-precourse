@@ -1,4 +1,5 @@
 import { GAME_RULE, ALERT_MESSAGE } from '../constants/index.js';
+import { state } from '../state/index.js';
 
 // 주어진 문자열이 모두 숫자인지 검사
 function isNumeric(str) {
@@ -38,4 +39,12 @@ export function isUserInputValid(userInput) {
   }
 
   return isValid;
+}
+
+export function initUserInput() {
+  state.userInput = 0;
+}
+
+export function setUserInput(userInputValue) {
+  state.userInput = userInputValue;
 }
