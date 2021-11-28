@@ -1,3 +1,5 @@
+import { NumberRules, Message } from './constant.js';
+
 export default class BaseballGame {
   constructor() {
     this.answer = this.getAnswer();
@@ -10,8 +12,11 @@ export default class BaseballGame {
 
   getAnswer() {
     const answer = [];
-    while (answer.length < 3) {
-      const num = MissionUtils.Random.pickNumberInRange(1, 9);
+    while (answer.length < NumberRules.length) {
+      const num = MissionUtils.Random.pickNumberInRange(
+        NumberRules.min,
+        NumberRules.max,
+      );
       if (answer.indexOf(num) === -1) {
         answer.push(num);
       }
@@ -29,7 +34,10 @@ export default class BaseballGame {
 
   isUserInputWithinRange(userInputNumbers) {
     for (let i = 0; i < userInputNumbers.length; i += 1) {
-      if (userInputNumbers[i] < '1' || userInputNumbers[i] > '9') {
+      if (
+        userInputNumbers[i] < `${NumberRules.min}` ||
+        userInputNumbers[i] > `${NumberRules.max}`
+      ) {
         return false;
       }
     }
@@ -43,7 +51,7 @@ export default class BaseballGame {
     return false;
   }
 
-  isCorrectUserInput(userInputNumbers) {
+  isAllCorrectUserInput(userInputNumbers) {
     return (
       this.isDifferentUserInput(userInputNumbers) &&
       this.isUserInputWithinRange(userInputNumbers) &&
@@ -69,20 +77,20 @@ export default class BaseballGame {
   }
 
   submitButtonHandle() {
-    if (this.isCorrectUserInput(this.userInputEl.value)) {
+    if (this.isAllCorrectUserInput(this.userInputEl.value)) {
       this.resultEl.innerHTML = this.resultText(
         this.compareAnswer(this.answer, this.userInputEl.value),
       );
     } else {
-      alert('1 ~ 9의 중복되지 않는 숫자 3자리를 입력하세요!');
+      alert(Message.error);
     }
     this.userInputEl.value = '';
   }
 
   submitButtonBinding() {
-    this.submitButtonEl.addEventListener('click', () => {
-      this.submitButtonHandle();
-    });
+    this.submitButtonEl.addEventListener('click', () =>
+      this.submitButtonHandle(),
+    );
   }
 
   strikeBallText(strikeCount, ballCount) {
@@ -106,7 +114,7 @@ export default class BaseballGame {
     if (strikeCount === 3) {
       this.createRestartSpan();
       this.createRestartButton();
-      return '🎉 정답을 맞추셨습니다! 🎉 ';
+      return Message.success;
     }
     return this.strikeBallText(strikeCount, ballCount);
   }
@@ -121,27 +129,28 @@ export default class BaseballGame {
     this.restartButtonEl = document.createElement('button');
     this.restartButtonEl.id = 'game-restart-button';
     this.restartButtonEl.innerHTML = '재시작';
-    this.restartButtonEl.addEventListener('click', this.restartButtonHandle);
+    this.restartButtonEl.addEventListener('click', () =>
+      this.restartButtonHandle(),
+    );
     this.appEl.appendChild(this.restartButtonEl);
   }
 
   restartButtonHandle() {
-    this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join(
-      '',
-    );
+    this.answer = this.getAnswer();
     this.resultEl.innerHTML = '';
     this.restartTextEl.remove();
     this.restartButtonEl.remove();
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    if (this.isCorrectUserInput(userInputNumbers)) {
+    if (this.isAllCorrectUserInput(userInputNumbers)) {
       return this.resultText(
         this.compareAnswer(computerInputNumbers, userInputNumbers),
       );
     }
-    alert('1 ~ 9의 중복되지 않는 숫자 3자리를 입력하세요!');
+    alert(Message.error);
+    return Message.error;
   }
 }
 
-const baseball = new BaseballGame();
+new BaseballGame();
