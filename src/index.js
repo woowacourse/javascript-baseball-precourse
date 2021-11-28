@@ -1,5 +1,6 @@
 import displaySuccess from './ui/displaySuccess.js';
 import displayText from './ui/displayText.js';
+import formatBallStrike from './utils/formatBallStrike.js';
 import getBallCount from './utils/getBallCount.js';
 import getStrikeCount from './utils/getStrikeCount.js';
 import removeChildren from './utils/removeChildren.js';
@@ -31,11 +32,7 @@ export default class BaseballGame {
 
     if (ball === 0 && strike === 0) return RESULT_NOTHING;
 
-    let result = '';
-    if (ball) result += `${ball}볼 `;
-    if (strike) result += `${strike}스트라이크`;
-
-    return result;
+    return formatBallStrike(ball, strike);
   }
 
   displayResult(result) {
