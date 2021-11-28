@@ -13,6 +13,7 @@ const BG = new Baseballgame();
 const init = () => {
   randomNumber = '';
   $result.textContent = '';
+  $submit.disabled = false;
 };
 
 const render = () => {
@@ -20,6 +21,7 @@ const render = () => {
   if (gameResult === '정답') {
     $result.innerHTML = `정답을 맞췄습니다. 
     재시작하시겠습니까? <button id="game-restart-button">재시작</button>`;
+    $submit.disabled = true;
   } else {
     $result.textContent = gameResult;
   }
@@ -34,8 +36,6 @@ const createRandomNumber = () => {
       randomNumber += number;
     }
   }
-
-  console.log('randomNumber: ', randomNumber);
 };
 
 window.addEventListener('.DOMContentLoaded', createRandomNumber());
