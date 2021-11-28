@@ -19,7 +19,7 @@ export default class UserInput {
   }
 
   static isThreeDigit(numbers) {
-    return numbers.filter((number) => number !== isNaN(number)).length === DIGIT;
+    return numbers.filter((number) => typeof (number) === 'number').length === DIGIT;
   }
 
   static isRangeCorrect(numbers) {
