@@ -25,7 +25,7 @@ export default function isValidInput(input) {
   if (!isThreeDigitInput(input)) {
     return THREE_DIGIT_ERR;
   }
-  if (!isOneToNineNumber(input)) {
+  if (!isOneToNineNumber(input.map((element) => +element))) {
     return ONE_TO_NINE_ERR;
   }
   if (!isNoDuplicatedNumber(input)) {

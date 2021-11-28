@@ -26,10 +26,7 @@ function alertErrorMessage(error) {
 
 export default function getUserInput() {
   let userInput = null;
-  const userInputArray = document
-    .querySelector("#user-input")
-    .value.split("")
-    .map((elem) => +elem);
+  const userInputArray = document.querySelector("#user-input").value.split("");
   if (alertErrorMessage(isValidInput(userInputArray))) {
     userInput = userInputArray;
   }
