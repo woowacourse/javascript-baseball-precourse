@@ -4,6 +4,7 @@ export default class BaseballGame {
       this.userInput = document.getElementById('user-input');
       this.result = document.getElementById('result');
       this.isCorrect = false;
+      this.gameFinished = false;
       this.init();
   }
 
@@ -56,20 +57,18 @@ export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
     const balls = this.countBalls(computerInputNumbers,userInputNumbers);
     const strikes = this.countStrikes(computerInputNumbers,userInputNumbers);
-    let resultText;
     if (balls === 0 && strikes === 0) {
-      resultText = '낫싱';
+      return '낫싱';
     } else if ( strikes === 3 ) {
-      resultText = `<strong>🎉 정답을 맞추셨습니다! 🎉<strong>`
       this.isCorrect = true;
+      return `<strong>🎉 정답을 맞추셨습니다! 🎉<strong>`
     } else if (balls === 0){
-      resultText = `${strikes}스트라이크`;
+      return `${strikes}스트라이크`;
     } else if (strikes === 0) {
-      resultText = `${balls}볼`;
+      return `${balls}볼`;
     } else {
-      resultText = `${balls}볼 ${strikes}스트라이크`;
+      return `${balls}볼 ${strikes}스트라이크`;
     }
-    return resultText;
   }
 
   countBalls(computerInputNumbers, userInputNumbers) {
@@ -103,8 +102,9 @@ export default class BaseballGame {
 
   showResultMessage(resultText) {
     this.result.innerHTML = resultText;
-    if (this.isCorrect) {
+    if (this.isCorrect && !this.gameFinished) {
       this.isCorrect = false;
+      this.gameFinished = true
       this.showRestartButton();
       this.restartButtonPressed();
     }
@@ -129,6 +129,7 @@ export default class BaseballGame {
       this.userInput.value = '';
       this.computerInputNumbers = this.randomGenerator();
       newDiv.remove();
+      this.gameFinished = false;
     });
   }
 }
