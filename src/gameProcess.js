@@ -1,3 +1,4 @@
+import { $inputRangeError, $lengthError, $overlapError } from './constants/index.js';
 
 const { pickNumberInRange } = MissionUtils.Random;
 
@@ -29,4 +30,11 @@ export function countResult(userNumbers, computerNumbers) {
     });
 
     return { ball, strike };
+}
+
+export function errorCheck(text) {
+    if(isNaN(Number(text))) return $inputRangeError;
+    if(text.length !== 3) return $lengthError;
+    if(new Set(text).size !== 3) return $overlapError;
+    return null
 }
