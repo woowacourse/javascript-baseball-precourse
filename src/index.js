@@ -3,6 +3,7 @@ import {
   isNotDuplicateExist,
   isLengthThree,
 } from "./util/validator.js";
+import { $ } from "./util/selector.js";
 
 export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
@@ -14,6 +15,12 @@ export default class BaseballGame {
       return "결과 값 String";
     }
     alert("입력값을 다시 확인해주세요");
+    this.resetInput();
+  }
+
+  resetInput() {
+    const $input = $("#user-input");
+    $input.value = "";
   }
 }
 
