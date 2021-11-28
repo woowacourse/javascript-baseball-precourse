@@ -124,4 +124,15 @@ export default class BaseballGame {
       }
     });
   }
+
+  restartHandler($element) {
+    $element.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      this.resetScore();
+      this.resetInputValue();
+      this.initResultScreen();
+      this.computerNumbers = this.generateComputerRandomNumber();
+    });
+  }
 }
