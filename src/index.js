@@ -1,19 +1,19 @@
 const $ = selector => document.querySelector(selector);
 
 export default class BaseballGame {
-  play(computerInputNumbers, userInputNumbers) {
+  generateAnswer() {
+    const answer = [];
+
+    while (answer.length < 3) {
+      const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!answer.includes(randomNum)) answer.push(randomNum);
+    }
+    return answer.join('');
+  }
+
+  generateUserInput() {
     const userInput = $('#user-input');
     const button = $('#submit');
-
-    const generateAnswer = () => {
-      const answer = [];
-
-      while (answer.length < 3) {
-        const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
-        if (!answer.includes(randomNum)) answer.push(randomNum);
-      }
-      return answer;
-    };
 
     const userInputValidation = value => {
       const validation = {
@@ -29,7 +29,6 @@ export default class BaseballGame {
 
       if (isNaN(Number(value))) {
         validation.isError = true;
-        console.log('isError: ', validation.isError);
         validation.inValidText = '숫자를 입력해주세요.';
         return validation;
       }
@@ -63,14 +62,34 @@ export default class BaseballGame {
         return;
       }
 
-      console.log('값 입력 성공!: ', userInput.value);
-      userInput.value = '';
+      this.play('123', userInput.value);
+
+      return userInput.value;
+    };
+    button.addEventListener('click', handleSubmitUserInput);
+  }
+
+  play(computerInputNumbers, userInputNumbers) {
+    const compareAnswer = (computerInputNumbers, userInputNumbers) => {
+      const computerNums = String(computerInputNumbers).split('');
+      const userNums = String(userInputNumbers).split('');
+
+      let balls = 0;
+      let strikes = 0;
+
+      for (let i = 0; i < computerNums.length; i++) {
+        if (computerNums[i] === userNums[i]) {
+          strikes++;
+          continue;
+        }
+        if (computerNums.includes(userNums[i])) balls++;
+      }
     };
 
-    generateAnswer();
-    button.addEventListener('click', handleSubmitUserInput);
+    compareAnswer(computerInputNumbers, userInputNumbers);
   }
 }
 
 const baseballGame = new BaseballGame();
-baseballGame.play(123, 456);
+baseballGame.generateAnswer();
+baseballGame.generateUserInput();
