@@ -1,11 +1,11 @@
-import playGame from "./game/playGame.js";
+import gameEventHandler from "./game/gameEventHandler.js";
 
 export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     console.log(computerInputNumbers, userInputNumbers);
     // return getGameResult(computerInputNumbers, userInputNumbers);
   };
-  playGame(this.play);
+  gameEventHandler(this.play);
 }
 
 new BaseballGame();
