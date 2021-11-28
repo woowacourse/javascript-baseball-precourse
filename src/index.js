@@ -11,7 +11,13 @@ export default class BaseballGame {
     this.gameInitializing();
   }
 
-  play(computerInputNumbers, userInputNumbers) {}
+  play(computerInputNumbers, userInputNumbers) {
+    let comNumbersMap = this.arrayToMap(computerInputNumbers);
+    let userNumbersMap = this.arrayToMap(userInputNumbers);
+
+    let strike = this.getStrike(comNumbersMap, userNumbersMap);
+    let ball = this.getBall(comNumbersMap, userNumbersMap);
+  }
 
   makeRandomNumbers() {
     let randomNumbers = new Set();
@@ -49,6 +55,48 @@ export default class BaseballGame {
       inputNumbers.has(0)
     ) {
       return false;
+    }
+
+    return true;
+  }
+
+  getStrike(comNumbersMap, userNumbersMap) {
+    let strike = 0;
+    console.log(comNumbersMap);
+    console.log(userNumbersMap);
+
+    for (let num of userNumbersMap.keys()) {
+      console.log("넘버in스트라이크 -" + num);
+      console.log(comNumbersMap.has(num));
+      if (
+        comNumbersMap.has(num) &&
+        comNumbersMap.get(num) === userNumbersMap.get(num)
+      ) {
+        strike++;
+      }
+    }
+
+    return strike;
+  }
+
+  getBall(comNumbersMap, userNumbersMap) {
+    let ball = 0;
+    for (let num of userNumbersMap.keys()) {
+      if (
+        comNumbersMap.has(num) &&
+        comNumbersMap.get(num) !== userNumbersMap.get(num)
+      ) {
+        ball++;
+      }
+    }
+    return ball;
+  }
+
+  isNothing(comNumbersMap, userNumbersMap) {
+    for (let num of userNumbersMap.keys()) {
+      if (comNumbersMap.has(num)) {
+        return false;
+      }
     }
 
     return true;
