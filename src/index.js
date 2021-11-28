@@ -17,6 +17,8 @@ export default class BaseballGame {
 
     let strike = this.getStrike(comNumbersMap, userNumbersMap);
     let ball = this.getBall(comNumbersMap, userNumbersMap);
+
+    this.printGameResult(strike, ball);
   }
 
   makeRandomNumbers() {
@@ -62,12 +64,8 @@ export default class BaseballGame {
 
   getStrike(comNumbersMap, userNumbersMap) {
     let strike = 0;
-    console.log(comNumbersMap);
-    console.log(userNumbersMap);
 
     for (let num of userNumbersMap.keys()) {
-      console.log("넘버in스트라이크 -" + num);
-      console.log(comNumbersMap.has(num));
       if (
         comNumbersMap.has(num) &&
         comNumbersMap.get(num) === userNumbersMap.get(num)
@@ -100,6 +98,21 @@ export default class BaseballGame {
     }
 
     return true;
+  }
+
+  printGameResult(strike, ball) {
+    if (strike === 0 && ball === 0) {
+      this.result.innerText = "낫싱";
+      return;
+    } else if (strike === 0 && ball !== 0) {
+      this.result.innerText = `${ball}볼`;
+      return;
+    } else if (strike !== 0 && ball === 0) {
+      this.result.innerText = `${strike}스트라이크`;
+      return;
+    }
+
+    this.result.innerText = `${ball}볼 ${strike}스트라이크`;
   }
 
   arrayToMap(arr) {
