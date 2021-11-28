@@ -1,5 +1,6 @@
 //Error Message
 export const $lengthError = '세자릿수를 입력해주세요';
+export const $negativeNumberError = '양의 정수를 입력해주세요';
 export const $inputRangeError = '1 ~ 9 범위의 수 세자리를 입력해주세요';
 export const $overlapError = '중복되지 않는 자릿수를 입력해주세요';
 
