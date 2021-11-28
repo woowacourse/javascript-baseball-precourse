@@ -3,11 +3,13 @@ import { NUMBER, POINT, ANSWER } from '../constants.js';
 
 const playUtils = {
   isBallOrStrike: (scoreBoard) => {
-    if (scoreBoard.ball > POINT.ZERO && scoreBoard.strike > POINT.ZERO) {
-      DOMUtils.showResult(`${scoreBoard.ball}볼 ${scoreBoard.strike}스트라이크`);
-    } else if (scoreBoard.ball > POINT.ZERO && scoreBoard.strike === POINT.ZERO) {
+    if (scoreBoard.ball && scoreBoard.strike) {
+      DOMUtils.showResult(
+        `${scoreBoard.ball}볼 ${scoreBoard.strike}스트라이크`
+      );
+    } else if (scoreBoard.ball && !scoreBoard.strike) {
       DOMUtils.showResult(`${scoreBoard.ball}볼`);
-    } else if (scoreBoard.ball === POINT.ZERO && scoreBoard.strike > POINT.ZERO) {
+    } else if (!scoreBoard.ball && scoreBoard.strike) {
       DOMUtils.showResult(`${scoreBoard.strike}스트라이크`);
     }
   },
@@ -16,7 +18,7 @@ const playUtils = {
       DOMUtils.showResult(ANSWER.RIGHT);
       return true;
     }
-    if (scoreBoard.ball === POINT.ZERO && scoreBoard.strike === POINT.ZERO) {
+    if (!scoreBoard.ball && !scoreBoard.strike) {
       DOMUtils.showResult(ANSWER.NOTHING);
       return false;
     }
@@ -25,12 +27,12 @@ const playUtils = {
   },
   isIndexSame: (computerInputNumbers, scoreBoard, number, index) => {
     computerInputNumbers.indexOf(number) === index
-      ? scoreBoard.strike + POINT.ONE
-      : scoreBoard.ball + POINT.ONE;
+      ? (scoreBoard.strike += POINT.ONE)
+      : (scoreBoard.ball += POINT.ONE);
   },
-  isIncludeNumber: (computerInputNumbers, number) => {
-    return computerInputNumbers.includes(number);
-  },
+  isIncludeNumber: (computerInputNumbers, number) =>
+    computerInputNumbers.includes(number),
+
   setScoreBoard: (computerInputNumbers, scoreBoard, number, index) => {
     playUtils.isIncludeNumber(computerInputNumbers, number) &&
       playUtils.isIndexSame(computerInputNumbers, scoreBoard, number, index);

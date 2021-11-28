@@ -8,21 +8,20 @@ const DOMUtils = {
     DOMUtils.initValue('#user-input');
     DOMUtils.getElement('#user-input').focus();
   },
-  getElement: (selectors) => {
-    return document.querySelector(selectors);
-  },
-  setElementId: (selectors, idValue) => {
-    return (document.querySelector(selectors).id = idValue);
-  },
-  hideElement: (selectors) => {
-    return (DOMUtils.getElement(selectors).style.display = 'none');
-  },
-  showElement: (selectors) => {
-    return (DOMUtils.getElement(selectors).style.display = '');
-  },
-  setElementValue: (selectors, text = '') => {
-    return (DOMUtils.getElement(selectors).innerText = text);
-  },
+  getElement: (selectors) => document.querySelector(selectors),
+
+  setElementId: (selectors, idValue) =>
+    (document.querySelector(selectors).id = idValue),
+
+  hideElement: (selectors) =>
+    (DOMUtils.getElement(selectors).style.display = 'none'),
+
+  showElement: (selectors) =>
+    (DOMUtils.getElement(selectors).style.display = ''),
+
+  setElementValue: (selectors, text = '') =>
+    (DOMUtils.getElement(selectors).innerText = text),
+
   removeElement: (selectors) => {
     const element = DOMUtils.getElement(selectors);
     element.parentNode.removeChild(element);
@@ -35,13 +34,15 @@ const DOMUtils = {
     DOMUtils.setElementValue('#result');
     DOMUtils.isRightAnswer(text);
   },
-  isRightAnswer: (text) => {
-    return text === ANSWER.RIGHT
+  isRightAnswer: (text) =>
+    text === ANSWER.RIGHT
       ? DOMUtils.showGameOver(text)
-      : DOMUtils.setElementValue('#result', text);
-  },
+      : DOMUtils.setElementValue('#result', text),
   showGameOver: (text) => {
-    DOMUtils.getElement('#result').insertAdjacentHTML('afterbegin', `<h4>${text}</h4>`);
+    DOMUtils.getElement('#result').insertAdjacentHTML(
+      'afterbegin',
+      `<h4>${text}</h4>`
+    );
     DOMUtils.getElement('#result').insertAdjacentHTML(
       'afterend',
       `<div id="game-restart-message">

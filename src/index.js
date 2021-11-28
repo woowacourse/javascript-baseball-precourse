@@ -9,20 +9,20 @@ export default function BaseballGame() {
 
   const init = () => {
     DOMUtils.init();
-
     computerInputNumbers = utils.pickUniqueThreeNumbers();
   };
 
   const restartGame = (e) => {
     e.preventDefault();
-
     DOMUtils.removeElement('#game-restart-message');
-
     init();
   };
 
   const restartEventListener = () => {
-    DOMUtils.getElement('#game-restart-button').addEventListener('click', restartGame);
+    DOMUtils.getElement('#game-restart-button').addEventListener(
+      'click',
+      restartGame
+    );
   };
 
   const play = (computerInputNumbers, userInputNumbers) => {
@@ -52,4 +52,4 @@ export default function BaseballGame() {
   DOMUtils.getElement('form').addEventListener('submit', checkValidNumbers);
 }
 
-new BaseballGame();
+BaseballGame();

@@ -101,3 +101,4 @@ export const ANSWER = {
 
 //마땅한 방법을 찾지 못해서 매개변수(scoreBoard)가 들어간 부분은 삭제하였다.
 ```
+
