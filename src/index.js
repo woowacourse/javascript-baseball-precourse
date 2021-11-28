@@ -1,6 +1,10 @@
 import { parseInput, isNotValidInput } from './utils/input';
-import { generateRandomNumber, getStrikeAndBall } from './utils/game.js';
-import { BASEBALL_RULE, GAME_RESULT, MESSAGE } from './constants.js';
+import {
+  getStrikeAndBall,
+  returnPlayResult,
+  generateRandomNumber,
+} from './utils/game.js';
+import { GAME_RESULT, MESSAGE } from './constants.js';
 import { $, createElement, removeFirstChild, replaceChild } from './dom.js';
 
 export default class BaseballGame {
@@ -19,28 +23,12 @@ export default class BaseballGame {
     });
   }
 
-  returnPlayResult(strike, ball) {
-    if (strike === BASEBALL_RULE.DIGITS) {
-      return GAME_RESULT.END;
-    }
-    if (strike && ball) {
-      return `${ball}${GAME_RESULT.BALL} ${strike}${GAME_RESULT.STRIKE}`;
-    }
-    if (ball) {
-      return `${ball}${GAME_RESULT.BALL}`;
-    }
-    if (strike) {
-      return `${strike}${GAME_RESULT.STRIKE}`;
-    }
-    return GAME_RESULT.NOTHING;
-  }
-
   play(computerInputNumbers, userInputNumbers) {
     const [strike, ball] = getStrikeAndBall(
       computerInputNumbers,
       userInputNumbers
     );
-    return this.returnPlayResult(strike, ball);
+    return returnPlayResult(strike, ball);
   }
 
   handleSubmit() {

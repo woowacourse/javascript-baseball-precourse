@@ -1,4 +1,4 @@
-import { BASEBALL_RULE } from '../constants.js';
+import { BASEBALL_RULE, GAME_RESULT } from '../constants.js';
 
 export const generateRandomNumber = () => {
   const numberSet = new Set();
@@ -35,4 +35,20 @@ export const getStrikeAndBall = (computerInputNumbers, userInputNumbers) => {
     }
   }
   return [strike, ball];
+};
+
+export const returnPlayResult = (strike, ball) => {
+  if (strike === BASEBALL_RULE.DIGITS) {
+    return GAME_RESULT.END;
+  }
+  if (strike && ball) {
+    return `${ball}${GAME_RESULT.BALL} ${strike}${GAME_RESULT.STRIKE}`;
+  }
+  if (ball) {
+    return `${ball}${GAME_RESULT.BALL}`;
+  }
+  if (strike) {
+    return `${strike}${GAME_RESULT.STRIKE}`;
+  }
+  return GAME_RESULT.NOTHING;
 };
