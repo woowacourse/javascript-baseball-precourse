@@ -16,3 +16,24 @@ export function countStrikeAndBall(computerInputNumbers, userInputNumbers) {
 
   return count;
 }
+
+export function getResult(count) {
+  let result = "";
+
+  if (count.strike === 3) {
+    result = RESULT_MESSAGE.CORRECT;
+    return result;
+  }
+  if (count.strike === 0 && count.ball === 0) {
+    result = RESULT_MESSAGE.NOTHING;
+    return result;
+  }
+  if (count.ball > 0) {
+    result += `${count.ball}${RESULT_MESSAGE.BALL} `;
+  }
+  if (count.strike > 0) {
+    result += `${count.strike}${RESULT_MESSAGE.STRIKE}`;
+  }
+
+  return result;
+}
