@@ -111,11 +111,12 @@ export default class BaseballGame {
     const restartButton = document.getElementById('game-restart-button');
     const newDiv = document.getElementById('new-div');
     restartButton.addEventListener('click', (e) => {
+      this.gameFinished = false;
+      this.isCorrect = false;
       this.result.innerHTML = '';
       this.userInput.value = '';
       this.computerInputNumbers = this.randomGenerator();
       newDiv.remove();
-      this.gameFinished = false;
     });
   }
 }
