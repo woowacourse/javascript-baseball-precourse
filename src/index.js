@@ -1,5 +1,10 @@
-import { pickUniqueThreeNumbers } from './utils/index.js';
 import { $ } from './utils/dom.js';
+import {
+  pickUniqueThreeNumbers,
+  changeStringToNumberArray,
+  validateUniqueInArray,
+  validateNumberInArray,
+} from './utils/index.js';
 
 function BaseballGame () {
   this.answer = pickUniqueThreeNumbers();
@@ -30,12 +35,8 @@ function BaseballGame () {
   };
 
   const validatePlayerInput = (input) => {
-    const set = new Set();
-    const isNaNArray = input.split('').map((item) => {
-      set.add(item);
-      return isNaN(item);
-    });
-    if (input.length !== 3 || isNaNArray.includes(true) || set.size !== 3) {
+    const playerInputArray = changeStringToNumberArray(input);
+    if (input.length !== 3 || !validateUniqueInArray(playerInputArray) || !validateNumberInArray(playerInputArray)) {
       alert('입력 값을 확인해주세요');
       $('#user-input').value = '';
       return false;
@@ -43,20 +44,25 @@ function BaseballGame () {
     return true;
   };
 
-  const play = (computerInputNumbers, userInputNumbers) => {
-    const playerInputArray = userInputNumbers.split('').map(item => Number(item));
-    let strike = 0, ball = 0;
-    for (let i = 0; i < 3; i += 1) {
-      if (playerInputArray[i] === computerInputNumbers[i]) {
-        strike += 1;
-      } else if (computerInputNumbers.includes(playerInputArray[i])) {
-        ball += 1;
-      }
-    }
+  const play = (computerInputNumberArray, playerInputNumbers) => {
+    const playerInputNumberArray = changeStringToNumberArray(playerInputNumbers);
+    const { strike, ball } = checkStrikeOrBall(computerInputNumberArray, playerInputNumberArray);
     const resultStrikeString = strike ? `${strike}스트라이크` : '';
     const resultBallString = ball ? `${ball}볼` : '';
     if (strike === 3) return createGameRestartButtonTemplate();
     return (!ball && !strike) ? '낫싱' : `${resultBallString} ${resultStrikeString}`;
+  };
+
+  const checkStrikeOrBall = (computerInputNumberArray, playerInputNumberArray) => {
+    let strike = 0, ball = 0;
+    for (let i = 0; i < 3; i += 1) {
+      if (playerInputNumberArray[i] === computerInputNumberArray[i]) {
+        strike += 1;
+      } else if (computerInputNumberArray.includes(playerInputNumberArray[i])) {
+        ball += 1;
+      }
+    }
+    return { strike, ball };
   };
 
   const createGameRestartButtonTemplate = () => {
