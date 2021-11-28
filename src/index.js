@@ -6,6 +6,18 @@ const $userInput = document.getElementById('user-input');
 const $submit = document.getElementById('submit');
 const $result = document.getElementById('result');
 
+const isValidate = userInputNumbers => {
+  const numArray = [...userInputNumbers];
+
+  if (
+    numArray.length === 3 &&
+    numArray.every((num, index) => +num >= 1 && +num <= 9 && numArray.indexOf(num) === index)
+  )
+    return true;
+
+  return false;
+};
+
 const renderPlay = result => {
   $result.innerHTML =
     result === '3스트라이크'
@@ -22,6 +34,13 @@ $submit.onclick = e => {
   e.preventDefault();
 
   const userInputNumbers = $userInput.value;
+
+  if (!isValidate(userInputNumbers)) {
+    alert('1~9까지의 수를 중복없이 3개 입력해주세요.');
+    $userInput.value = '';
+    return;
+  }
+
   const result = baseballGame.play(baseballGame.answer, userInputNumbers);
 
   renderPlay(result);
