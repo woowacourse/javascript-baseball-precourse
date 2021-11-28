@@ -25,6 +25,7 @@ export const validateNumberInArray = (array) => {
   return isNumberArray.includes(true) ? false : true;
 };
 
+// 같은 자리에 있는 요소인지 혹은 포함하는 요소인지 확인하는 함수
 export const checkSameOrInclude = (array1, array2) => {
   let same = 0, include = 0;
   for (let i = 0; i < 3; i += 1) {
@@ -34,6 +35,7 @@ export const checkSameOrInclude = (array1, array2) => {
   return [same, include];
 };
 
+// 힌트 문자열을 count에 따라 반환하는 함수
 export const createResultHintString = (count, hint) => (
   count ? `${count}${hint}` : ''
 );

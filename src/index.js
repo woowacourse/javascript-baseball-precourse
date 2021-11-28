@@ -47,6 +47,7 @@ function BaseballGame () {
 
   // 유저 입력값 검증 함수
   const validatePlayerInput = (playerInputArray) => {
+    // 길이가 3이 아닐 때 or 중복된 값이 들어있을 때 or 숫자가 아닌 값이 들어있을 때
     if (playerInputArray.length !== 3 || !validateUniqueInArray(playerInputArray) || !validateNumberInArray(playerInputArray)) {
       alert('입력 값을 확인해주세요');
       $(SELECTOR.INPUT).value = '';
@@ -59,6 +60,7 @@ function BaseballGame () {
   const play = (computerInputNumberArray, playerInputNumberArray) => {
     const [strikeCount, ballCount] = checkSameOrInclude(computerInputNumberArray, playerInputNumberArray);
     if (strikeCount === 3) return createGameRestartButtonTemplate();
+    // 볼도 아니고 스트라이크도 아닐 때
     return (!ballCount && !strikeCount)
       ? HINT.NOTHING
       : `${createResultHintString(ballCount, HINT.BALL)} ${createResultHintString(strikeCount, HINT.STRIKE)}`;
