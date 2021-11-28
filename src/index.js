@@ -9,9 +9,13 @@ const inputArea = document.querySelector("#user-input");
 const inputButton = document.querySelector("#submit");
 const resultArea = document.querySelector("#result");
 const correctDiv = document.querySelector("#correct");
+const restartButton = document.querySelector("#game-restart-button");
 
 // user submit button event listener
 inputButton.addEventListener("click", handleUserInput);
+
+// restart button event listener
+restartButton.addEventListener("click", handleResetButton);
 
 // define game class
 export default class BaseballGame {
@@ -34,6 +38,18 @@ export default class BaseballGame {
     // return result in string format
     return formatResult(ball, strike);
   }
+
+  // define reset method
+  reset() {
+    // generate new answer
+    this.answer = generateAnswer();
+
+    // clear input area
+    inputArea.value = "";
+
+    // hide correct div
+    correctDiv.style.display = "none";
+  }
 }
 
 // handle user input
@@ -49,6 +65,10 @@ function handleUserInput() {
 
   // set hint
   setHint(result, resultArea);
+}
+
+function handleResetButton() {
+  game.reset();
 }
 
 // initiate game
