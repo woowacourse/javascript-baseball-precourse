@@ -7,3 +7,26 @@ export function getComputerNumbers() {
 
     return [...numbers].join('')
 }
+
+export function getHint(ball, strike) {
+    let message = '';
+
+    if(ball)    message += `${ball}볼 `;
+    if(strike)  message += `${strike}스트라이크`;
+    if(!ball && !strike) message = '낫싱';
+
+    return message
+}
+
+export function countResult(userNumbers, computerNumbers) {
+    let ball = 0, strike = 0;
+
+    const userNumbersList = userNumbers.split(''), computerNumberList = computerNumbers.split('');
+
+    computerNumberList.forEach((val, idx) => {
+        if(val === userNumbersList[idx]) strike ++;
+        else if(userNumbersList.includes(val)) ball ++;
+    });
+
+    return { ball, strike };
+}
