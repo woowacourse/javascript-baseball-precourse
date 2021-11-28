@@ -10,6 +10,7 @@ function BaseballGame () {
 
   const initEventListeners = () => {
     $('form').addEventListener('submit', onSubmitPlayerInput);
+    $('#result').addEventListener('click', onClickRestartButton);
   };
 
   const onSubmitPlayerInput = (event) => {
@@ -18,6 +19,14 @@ function BaseballGame () {
     checkPlayerInput(input);
     const result = play(this.answer, input);
     $('#result').innerHTML = result;
+  };
+
+  const onClickRestartButton = (event) => {
+    if (event.target.id === 'game-restart-button') {
+      $('#result').innerHTML = '';
+      $('#user-input').value = '';
+      this.answer = pickUniqueThreeNumbers();
+    }
   };
 
   const checkPlayerInput = (input) => {
