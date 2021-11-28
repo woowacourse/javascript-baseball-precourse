@@ -24,7 +24,7 @@ export default class BaseballGame {
     return answer.join('');
   }
 
-  isDifferentUserInput(userInputNumbers) {
+  isDifferentInputNumber(userInputNumbers) {
     const userInputSet = new Set(userInputNumbers.split(''));
     if (userInputSet.size !== userInputNumbers.length) {
       return false;
@@ -32,7 +32,7 @@ export default class BaseballGame {
     return true;
   }
 
-  isUserInputWithinRange(userInputNumbers) {
+  isInputNumberWithinRange(userInputNumbers) {
     for (let i = 0; i < userInputNumbers.length; i += 1) {
       if (
         userInputNumbers[i] < `${NumberRules.min}` ||
@@ -44,18 +44,18 @@ export default class BaseballGame {
     return true;
   }
 
-  isCorrectUserInputLength(userInputNumbers) {
+  isCorrectInputNumberLength(userInputNumbers) {
     if (userInputNumbers.length === NumberRules.length) {
       return true;
     }
     return false;
   }
 
-  isAllCorrectUserInput(userInputNumbers) {
+  isAllCorrectInputNumber(userInputNumbers) {
     return (
-      this.isDifferentUserInput(userInputNumbers) &&
-      this.isUserInputWithinRange(userInputNumbers) &&
-      this.isCorrectUserInputLength(userInputNumbers)
+      this.isDifferentInputNumber(userInputNumbers) &&
+      this.isInputNumberWithinRange(userInputNumbers) &&
+      this.isCorrectInputNumberLength(userInputNumbers)
     );
   }
 
@@ -77,7 +77,7 @@ export default class BaseballGame {
   }
 
   submitButtonHandle = () => {
-    if (this.isAllCorrectUserInput(this.userInputEl.value)) {
+    if (this.isAllCorrectInputNumber(this.userInputEl.value)) {
       this.resultEl.innerHTML = this.resultText(
         this.compareAnswer(this.answer, this.userInputEl.value),
       );
@@ -137,8 +137,8 @@ export default class BaseballGame {
 
   play(computerInputNumbers, userInputNumbers) {
     if (
-      this.isAllCorrectUserInput(computerInputNumbers) &&
-      this.isAllCorrectUserInput(userInputNumbers)
+      this.isAllCorrectInputNumber(computerInputNumbers) &&
+      this.isAllCorrectInputNumber(userInputNumbers)
     ) {
       return this.resultText(
         this.compareAnswer(computerInputNumbers, userInputNumbers),
