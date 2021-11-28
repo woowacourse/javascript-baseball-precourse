@@ -1,18 +1,15 @@
-import {
-  BASEBALL_NUMBER_LENGTH,
-  DOMS,
-  ANSWER_RANGE,
-} from "./constant/index.js";
-
+import { DOMS } from "./constant/index.js";
 import { caculateStrikeAndBall } from "./util/calculate.js";
 import {
   generateAlertMessage,
   generateResultMessage,
 } from "./util/generate-message.js";
-
+import { generateAnswerNumber } from "./game/generate-answer-number.js";
+import { resetResult, resetUserInput } from "./game/reset-game.js";
+import { printResultMessage } from "./game/print-result.js";
 export default class BaseballGame {
   constructor() {
-    this.answerNumber = this.generateAnswerNumber();
+    this.answerNumber = generateAnswerNumber();
     this.setEvent();
   }
 
@@ -34,7 +31,7 @@ export default class BaseballGame {
       this.answerNumber.split(""),
       userInputNumbers.split("")
     );
-    this.printResultMessage(gameResultMessage);
+    printResultMessage(gameResultMessage);
   };
 
   play = (computerInputNumbers, userInputNumbers) => {
@@ -47,21 +44,7 @@ export default class BaseballGame {
   };
 
   setAnswerNumber = () => {
-    this.answerNumber = this.generateAnswerNumber();
-  };
-
-  generateAnswerNumber = () => {
-    const randomNumberSet = new Set();
-    while (randomNumberSet.size < BASEBALL_NUMBER_LENGTH) {
-      randomNumberSet.add(
-        MissionUtils.Random.pickNumberInRange(
-          ANSWER_RANGE.MIN,
-          ANSWER_RANGE.MAX
-        )
-      );
-    }
-
-    return [...randomNumberSet].join("");
+    this.answerNumber = generateAnswerNumber();
   };
 
   setResetGameEvent = (event) => {
@@ -72,21 +55,8 @@ export default class BaseballGame {
 
   resetGame = () => {
     this.setAnswerNumber();
-    this.resetUserInput();
-    this.resetResult();
-  };
-
-  resetUserInput = () => {
-    DOMS.$userInput.value = "";
-    DOMS.$userInput.focus();
-  };
-
-  resetResult = () => {
-    DOMS.$result.innerHTML = "";
-  };
-
-  printResultMessage = (message) => {
-    DOMS.$result.innerHTML = message;
+    resetUserInput();
+    resetResult();
   };
 }
 
