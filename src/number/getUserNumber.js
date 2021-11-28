@@ -8,7 +8,7 @@ const getUserNumber = () => {
     .map((number) => parseInt(number, 10));
 
   if (checkValidation(userInputNumbers)) {
-    return userInputNumbers.join("");
+    return parseInt(userInputNumbers.join(""), 10);
   }
 };
 

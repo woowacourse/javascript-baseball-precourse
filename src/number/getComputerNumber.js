@@ -9,7 +9,7 @@ const getComputerNumber = () => {
     computerNumbers.add(getRandomNumber(1, 9));
   }
 
-  return Array.from(computerNumbers).join("");
+  return parseInt(Array.from(computerNumbers).join(""), 10);
 };
 
 export default getComputerNumber;
