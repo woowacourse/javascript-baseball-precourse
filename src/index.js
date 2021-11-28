@@ -3,6 +3,8 @@ export default class BaseballGame {
     this.answer = this.makeRandomNumbers();
     this.userInput = document.getElementById("user-input");
     this.result = document.getElementById("result");
+
+    this.gameInitializing();
   }
 
   play(computerInputNumbers, userInputNumbers) {}
@@ -16,6 +18,12 @@ export default class BaseballGame {
 
     return Array.from(randomNumbers);
   }
+
+  gameInitializing() {
+    this.result.innerText = "";
+    document.getElementById("user-input").value = "";
+  }
+
 }
 
 new BaseballGame();
