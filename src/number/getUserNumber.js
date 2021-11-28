@@ -23,6 +23,13 @@ const checkValidation = (userInputNumbers) => {
   if (!isLength) {
     alert("3자리의 수를 입력해주세요");
   }
+
+  const isDuplicated =
+    userInputNumbers.length === new Set(userInputNumbers).size ? true : false;
+
+  if (!isDuplicated) {
+    alert("중복이 없는 서로 다른 숫자를 입력해주세요");
+  }
 };
 
 export default getUserNumber;
