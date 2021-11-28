@@ -1,3 +1,5 @@
+import { checkValidation } from "./validation.js";
+
 export default class BaseballGame {
   constructor() {
       this.submitButton = document.getElementById('submit');
@@ -29,29 +31,13 @@ export default class BaseballGame {
     this.submitButton.addEventListener('click', (e) => {
       e.preventDefault();
       const userInputNumbers = this.userInput.value;
-      const valid = this.checkAnswerValidation(userInputNumbers);
+      const valid = checkValidation(userInputNumbers);
       if (valid) {
         this.showResultMessage(this.play(this.computerInputNumbers,userInputNumbers));
       } else {
         alert('잘못된 값을 입력했습니다.');
       }
     });
-  }
-  
-  checkAnswerValidation(userInputNumbers) {
-    if (userInputNumbers.length !== 3) {
-      return false;
-    }
-    if (new Set(userInputNumbers).size !== 3) {
-      return false;
-    }
-    if (Number.isNaN(Number(userInputNumbers))) {
-      return false;
-    }
-    if (userInputNumbers.includes(0)) {
-      return false;
-    }
-    return true;
   }
 
   play(computerInputNumbers, userInputNumbers) {
