@@ -27,7 +27,7 @@ export default class BaseballGame {
     const alertMessage = generateAlertMessage(userInputNumbers);
 
     if (alertMessage) {
-      this.showAlertMessage(alertMessage);
+      alert(alertMessage);
       return;
     }
     const gameResultMessage = this.play(
@@ -42,9 +42,8 @@ export default class BaseballGame {
       computerInputNumbers,
       userInputNumbers
     );
-    const gameResultMessage = generateResultMessage(strike, ball);
 
-    return gameResultMessage;
+    return generateResultMessage(strike, ball);
   };
 
   setAnswerNumber = () => {
@@ -86,13 +85,9 @@ export default class BaseballGame {
     DOMS.$result.innerHTML = "";
   };
 
-  showAlertMessage = (message) => {
-    alert(message);
-  };
-
   printResultMessage = (message) => {
     DOMS.$result.innerHTML = message;
   };
 }
 
-const game = new BaseballGame();
+new BaseballGame();
