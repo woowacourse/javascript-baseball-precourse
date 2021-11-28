@@ -17,5 +17,6 @@ export const RESULT_MESSAGE = {
   NOTHING: "낫싱",
   BALL: "볼",
   STRIKE: "스트라이크",
-  CORRECT: `<h4>🎉 정답을 맞추셨습니다! 🎉</h4>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button>`,
+  CORRECT: `<h4>🎉 정답을 맞추셨습니다! 🎉</h4><span>게임을 새로 시작하시겠습니까? </span>`,
+  RESTART: "게임 재시작",
 };
