@@ -1,4 +1,4 @@
-import { parseInput, isNotValidInput } from './utils/input';
+import { parseInput, isNotValidInput } from './utils/input.js';
 import {
   getStrikeAndBall,
   returnPlayResult,
