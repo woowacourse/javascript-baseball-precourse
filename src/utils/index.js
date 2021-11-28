@@ -1,3 +1,4 @@
+// 1부터 9까지 3개의 중복되지 않는 수를 뽑는 함수
 export const pickUniqueThreeNumbers = () => {
   const numberSet = new Set();
   while (numberSet.size !== 3) {
@@ -6,16 +7,19 @@ export const pickUniqueThreeNumbers = () => {
   return Array.from(numberSet);
 };
 
+// string으로 된 숫자들을 배열로 리턴하는 함수
 export const changeStringToNumberArray = (string) => {
   return string.split('').map(item => Number(item));
 };
 
+// 배열의 요소들이 중복되지 않는지 검증하는 함수
 export const validateUniqueInArray = (array) => {
   const set = new Set();
   array.map((item) => set.add(item));
   return set.size === 3 ? true : false;
 };
 
+// 배열의 요소들이 숫자인지 검증하는 함수
 export const validateNumberInArray = (array) => {
   const isNumberArray = array.map((item) => isNaN(item));
   return isNumberArray.includes(true) ? false : true;
