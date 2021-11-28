@@ -1,5 +1,5 @@
 import {
-  MSG_SUCCESS, MSG_RESTART, ID_RESTART_BUTTON, ACTION_RESTART,
+  MSG_SUCCESS, MSG_RESTART, ID_RESTART_BUTTON, ACTION_RESTART, BUTTON_TEXT_RESTART,
 } from './consts.js';
 
 function displaySuccess(parent) {
@@ -11,7 +11,7 @@ function displaySuccess(parent) {
 
   const button = document.createElement('button');
   button.id = ID_RESTART_BUTTON;
-  button.textContent = '게임 재시작';
+  button.textContent = BUTTON_TEXT_RESTART;
   button.dataset.action = ACTION_RESTART;
 
   parent.appendChild(heading);

@@ -10,3 +10,5 @@ export const ID_INPUT = 'user-input';
 export const ID_CHECK_BUTTON = 'submit';
 export const ID_RESULT = 'result';
 export const ID_RESTART_BUTTON = 'game-restart-button';
+
+export const BUTTON_TEXT_RESTART = '게임 재시작';
