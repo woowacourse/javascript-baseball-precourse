@@ -77,8 +77,8 @@ function BaseballGame () {
   };
 
   // 재시작 버튼 템플릿 생성 함수
-  const createGameRestartButtonTemplate = () => {
-    return `
+  const createGameRestartButtonTemplate = () => (
+    `
       <div>
         <p>
           <strong>🎉 정답을 맞추셨습니다! 🎉</strong>
@@ -88,8 +88,8 @@ function BaseballGame () {
           게임 재시작
         </button>
       </div>
-    `;
-  };
+    `
+  );
 }
 
 const baseballgame = new BaseballGame();
