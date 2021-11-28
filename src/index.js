@@ -1,8 +1,6 @@
 import Computer from './Computer.js';
+import Validator from './Validator.js';
 import {
-    MIN_NUMBER_IN_RANGE,
-    MAX_NUMBER_IN_RANGE,
-    LENGTH_NUMBERS,
     ELEMENT_ID_USER_INPUT,
     ELEMENT_ID_RESULT,
     ELEMENT_ID_SUBMIT,
@@ -19,6 +17,7 @@ export default class BaseballGame {
         this.$result = document.getElementById(ELEMENT_ID_RESULT);
         this.$submit = document.getElementById(ELEMENT_ID_SUBMIT);
         this.computer = null;
+        this.validator = new Validator();
 
         this.initialize();
         this.enrollSubmitOnclickHandler();
@@ -41,49 +40,13 @@ export default class BaseballGame {
     }
 
     submitUserInput() {
-        if (this.checkIsValidInput(this.$userInput.value)) {
+        if (this.validator.checkIsValidInput(this.$userInput.value)) {
             const result = this.play(this.computer.getComputerNumbers(), this.$userInput.value);
 
             this.displayResult(result);
         } else {
             this.handleException();
         }
-    }
-
-    checkIsValidInput(userInputValue) {
-        let isValid = false;
-
-        if (
-            this.checkLength(userInputValue)
-            && this.checkIsAllValidNumber(userInputValue)
-            && this.checkDuplicatedNumber(userInputValue)
-        ) {
-            isValid = true;
-        }
-
-        return isValid;
-    }
-
-    checkLength(userInputValue) {
-        return userInputValue.length === LENGTH_NUMBERS;
-    }
-
-    checkIsAllValidNumber(userInputValue) {
-        const isAllNaturalNumber = userInputValue.split('').every((e)=>{
-            if (!isNaN(e) && MIN_NUMBER_IN_RANGE <= e && MAX_NUMBER_IN_RANGE >= e) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-
-        return isAllNaturalNumber;
-    }
-
-    checkDuplicatedNumber(userInputNumbers) {
-        const { size } = new Set(userInputNumbers.split(''));
-
-        return size === LENGTH_NUMBERS
     }
 
     handleException() {
