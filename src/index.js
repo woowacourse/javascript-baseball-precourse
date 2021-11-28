@@ -23,6 +23,7 @@ class BaseballGame {
     this.initEventListeners();
   }
 
+  // 재시작 함수
   restart () {
     this.computerInputNumberArray = pickUniqueThreeNumbers();
     $(SELECTOR.RESULT).innerHTML = '';
