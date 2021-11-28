@@ -1,4 +1,5 @@
 import BaseballGame from "./game/index.js";
+import convertResult from "./util/index.js";
 
 // 결과 초기화
 const result = document.getElementById('result');
@@ -13,7 +14,8 @@ submitButton.addEventListener('click', event =>{
     const userInput = document.getElementById('user-input').value;
     
     if(game.isValid(userInput)){
-        game.receiveInput(userInput);
+        const message = game.receiveInput(userInput);
+        convertResult(message,game);
     } else{
         alert("잘못된 값을 입력하셨습니다.");
     }

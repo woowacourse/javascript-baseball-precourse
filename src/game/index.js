@@ -55,10 +55,10 @@ export default class BaseballGame {
         message = "성공"
       } else {
         if(ball){
-          message = `볼 ${ball} `
+          message = `${ball}볼 `
         }
         if(strike){
-          message += `스트라이크 ${strike}`
+          message += `${strike}스트라이크`
         }
         if(strike === 0 && ball === 0){
           message = "낫싱"
@@ -99,7 +99,7 @@ export default class BaseballGame {
 
     receiveInput(input){
       const message = this.play(this.computerNumbers, input);
-      console.log(message);
+      return message;
     }
 
     restart(){
