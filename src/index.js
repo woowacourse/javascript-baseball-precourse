@@ -1,13 +1,13 @@
 import {
   numArrToNum,
   pickUniqueNumbersInRange,
-  numToNumArr
+  numToNumArr,
 } from "./utils.js";
 import {
   ANSWER_LENGTH,
   ELEMENT_IDS,
   GAME_CLEAR_VIEW_HTML,
-  HINTS
+  HINTS,
 } from "./constants.js";
 import Validator from "./validator.js";
 
@@ -111,7 +111,7 @@ export default class BaseballGame {
     const strikes = this.countStrikes(computerNumArr, userNumArr);
     const balls = this.countBalls(computerNumArr, userNumArr);
     const hint = this.getHint(strikes, balls);
-    
+
     return hint;
   }
 }
