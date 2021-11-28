@@ -7,15 +7,25 @@ export default function BaseballGame() {
   this.play = (computerInputNumbers, userInputNumbers) => {
     printResult(computerInputNumbers, userInputNumbers);
   };
+  
+  const isVaildNum = () => {
+    const userInput = $("#user-input").value.split('').map(num => Number(num));
+    if(userInput.includes(0) || userInput.includes(NaN) || userInput.length !== 3 ||  [...new Set(userInput)].length !== 3) {
+      printError(userInput);
+      return;
+    }
+
+    this.play(computerNumber, userInput);
+  };
 
   const printError = (userInput) => {
-    if(userInput.has(NaN)) {
+    if(userInput.includes(NaN)) {
       alert("잘못 입력하였습니다❗️ 숫자를 입력하세요.");
-    } else if((userInput.size !== 3) && ($("#user-input").value.length ===3)) {
+    } else if(([...new Set(userInput)].length !== 3) && ($("#user-input").value.length === 3)) {
       alert("잘못 입력하였습니다❗️ 중복되지 않는 숫자를 입력하세요.");
-    } else if(userInput.has(0)) {
+    } else if(userInput.includes(0)) {
       alert("잘못 입력하였습니다❗️ 0을 제외한 1~9까지의 수만 입력하세요.");
-    } else if($("#user-input").value.length !== 3) {
+    } else if(userInput.length !== 3) {
       alert("잘못 입력하였습니다❗️ 3개의 숫자를 입력하세요.");
     }
     $("#user-input").value = '';
@@ -60,18 +70,6 @@ export default function BaseballGame() {
     $("#result").innerText = `${ball? ball + '볼' : ''} ${strike? strike + '스트라이크' : ''}`;
   }
 
-  const isVaildNum = () => {
-    //유효하지 않은 경우 (에러메시지)
-    const userInput = new Set([...$("#user-input").value.split('').map(num => Number(num))]);
-    
-    if(userInput.has(0) || userInput.has(NaN) || $("#user-input").value.length !== 3) {
-      printError(userInput);
-      return;
-    }
-
-    //유효한 경우 (결과 출력)
-    this.play(computerNumber, [...userInput]);
-  };
 
   const restartGame = () => {
     computerNumber = createAnswer();
