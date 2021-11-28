@@ -1,13 +1,19 @@
 import { numArrToNum, pickUniqueNumbersInRange } from "./utils.js";
-import { ANSWER_LENGTH, ELEMENT_IDS } from "./constants.js";
+import {
+  ANSWER_LENGTH,
+  ELEMENT_IDS,
+  GAME_CLEAR_VIEW_HTML
+} from "./constants.js";
 import Validator from "./validator.js";
 
 export default class BaseballGame {
   constructor() {
-    const { USER_INPUT, SUBMIT } = ELEMENT_IDS;
+    const { USER_INPUT, SUBMIT, RESULT } = ELEMENT_IDS;
     this.computerInputNumbers = this.generateComputerInputNumbers();
     this.$userInput = document.querySelector(`#${USER_INPUT}`);
     this.$submitBtn = document.querySelector(`#${SUBMIT}`);
+    this.$result = document.querySelector(`#${RESULT}`);
+    console.log(this.computerInputNumbers);
     this.registerSubmitEventListener();
   }
 
@@ -22,6 +28,12 @@ export default class BaseballGame {
       alert(message);
       return;
     }
+    const playResult = this.play(this.computerInputNumbers, parseInt(userInputString, 10));
+    if (playResult === undefined) this.printGameClearView();
+  }
+
+  printGameClearView() {
+    this.$result.innerHTML = GAME_CLEAR_VIEW_HTML;
   }
 
   generateComputerInputNumbers() {
@@ -29,6 +41,7 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
+    if (computerInputNumbers === userInputNumbers) return;
     return "결과 값 String";
   }
 }
