@@ -45,7 +45,7 @@ export default class BaseballGame {
   }
 
   isCorrectUserInputLength(userInputNumbers) {
-    if (userInputNumbers.length === 3) {
+    if (userInputNumbers.length === NumberRules.length) {
       return true;
     }
     return false;
