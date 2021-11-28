@@ -1,3 +1,5 @@
+import { NOTHING_ANSWER, CORRECT_ANSWER } from './result-const.js';
+
 export default function BaseballGame() {
     const $form = document.querySelector('form');
     const $input = document.querySelector('#user-input');
@@ -58,11 +60,11 @@ export default function BaseballGame() {
 
     const Hint = Strike_Ball => {
         if (Strike_Ball.Strike === 3) {
-            $result.innerHTML = '<p id="result_txt"><Strong> 정답을 맞추셨습니다 <Strong /> <br/></p>';
+            $result.innerHTML = CORRECT_ANSWER;
             endGame();
         }
         else if (Strike_Ball.Strike === 0 && Strike_Ball.Ball === 0) {
-            $result.innerText = '낫싱';
+            $result.innerText = NOTHING_ANSWER;
         }
         else {
             if (Strike_Ball.Strike === 0) $result.innerText = `${Strike_Ball.Ball}볼`;
