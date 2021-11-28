@@ -7,7 +7,7 @@ export default class BaseballGame {
     this.resultEl = document.querySelector('#result');
     this.appEl = document.querySelector('#app');
     this.submitButtonEl = document.querySelector('#submit');
-    this.bindSubmitButtonEvent();
+    this.submitButtonEl.addEventListener('click', this.submitButtonHandle);
   }
 
   getAnswer() {
@@ -76,18 +76,16 @@ export default class BaseballGame {
     return [strikeCount, ballCount];
   }
 
-  bindSubmitButtonEvent() {
-    this.submitButtonEl.addEventListener('click', () => {
-      if (this.isAllCorrectUserInput(this.userInputEl.value)) {
-        this.resultEl.innerHTML = this.resultText(
-          this.compareAnswer(this.answer, this.userInputEl.value),
-        );
-      } else {
-        alert(Message.error);
-      }
-      this.userInputEl.value = '';
-    });
-  }
+  submitButtonHandle = () => {
+    if (this.isAllCorrectUserInput(this.userInputEl.value)) {
+      this.resultEl.innerHTML = this.resultText(
+        this.compareAnswer(this.answer, this.userInputEl.value),
+      );
+    } else {
+      alert(Message.error);
+    }
+    this.userInputEl.value = '';
+  };
 
   strikeBallText(strikeCount, ballCount) {
     let printText = '';
@@ -110,6 +108,7 @@ export default class BaseballGame {
     if (strikeCount === 3) {
       this.createRestartSpan();
       this.createRestartButton();
+      this.submitButtonEl.removeEventListener('click', this.submitButtonHandle);
       return Message.success;
     }
     return this.strikeBallText(strikeCount, ballCount);
@@ -127,6 +126,8 @@ export default class BaseballGame {
     this.restartButtonEl.innerHTML = '재시작';
     this.restartButtonEl.addEventListener('click', (e) => {
       this.answer = this.getAnswer();
+      this.submitButtonEl.addEventListener('click', this.submitButtonHandle);
+      this.userInputEl.value = '';
       this.resultEl.innerHTML = '';
       this.restartTextEl.remove();
       e.target.remove();
@@ -135,7 +136,10 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    if (this.isAllCorrectUserInput(userInputNumbers)) {
+    if (
+      this.isAllCorrectUserInput(computerInputNumbers) &&
+      this.isAllCorrectUserInput(userInputNumbers)
+    ) {
       return this.resultText(
         this.compareAnswer(computerInputNumbers, userInputNumbers),
       );
