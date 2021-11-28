@@ -12,41 +12,53 @@ import {
   HINT,
 } from './constants.js';
 
-function BaseballGame () {
-  this.computerInputNumberArray = [];
+class BaseballGame {
+  constructor () {
+    this.computerInputNumberArray = [];
+  };
 
   // 초기화 함수
-  this.init = () => {
+  init = () => {
     this.computerInputNumberArray = pickUniqueThreeNumbers();
     $(SELECTOR.RESULT).innerHTML = '';
     $(SELECTOR.INPUT).value = '';
-    initEventListeners();
+    this.initEventListeners();
   };
 
   // 이벤트리스너 초기화 함수
-  const initEventListeners = () => {
-    $(SELECTOR.FORM).addEventListener('submit', onSubmitPlayerInput);
-    $(SELECTOR.RESULT).addEventListener('click', onClickRestartButton);
+  initEventListeners = () => {
+    $(SELECTOR.FORM).addEventListener('submit', this.onSubmitPlayerInput);
+    $(SELECTOR.RESULT).addEventListener('click', this.onClickRestartButton);
   };
 
   // 유저 입력값 제출 함수
-  const onSubmitPlayerInput = (event) => {
+  onSubmitPlayerInput = (event) => {
     event.preventDefault();
     const playerInputNumberArray = changeStringToNumberArray($(SELECTOR.INPUT).value);
-    if (!validatePlayerInput(playerInputNumberArray)) return;
-    const result = play(this.computerInputNumberArray, playerInputNumberArray);
+    if (!this.validatePlayerInput(playerInputNumberArray)) return;
+    const result = this.play(this.computerInputNumberArray, playerInputNumberArray);
     $(SELECTOR.RESULT).innerHTML = result;
   };
 
   // 재시작 버튼 클릭 함수
-  const onClickRestartButton = (event) => {
+  onClickRestartButton = (event) => {
     if (event.target.id === SELECTOR.RESTART_BUTTON) {
       this.init();
     }
   };
 
+  // 게임 시작 함수
+  play = (computerInputNumberArray, playerInputNumberArray) => {
+    const [strikeCount, ballCount] = checkSameOrInclude(computerInputNumberArray, playerInputNumberArray);
+    if (strikeCount === 3) return this.createGameRestartButtonTemplate();
+    // 볼도 아니고 스트라이크도 아닐 때
+    return (!ballCount && !strikeCount)
+      ? HINT.NOTHING
+      : `${createResultHintString(ballCount, HINT.BALL)} ${createResultHintString(strikeCount, HINT.STRIKE)}`;
+  };
+
   // 유저 입력값 검증 함수
-  const validatePlayerInput = (playerInputArray) => {
+  static validatePlayerInput = (playerInputArray) => {
     // 길이가 3이 아닐 때 or 중복된 값이 들어있을 때 or 숫자가 아닌 값이 들어있을 때
     if (playerInputArray.length !== 3 || !validateUniqueInArray(playerInputArray) || !validateNumberInArray(playerInputArray)) {
       alert('입력 값을 확인해주세요');
@@ -56,18 +68,8 @@ function BaseballGame () {
     return true;
   };
 
-  // 게임 시작 함수
-  const play = (computerInputNumberArray, playerInputNumberArray) => {
-    const [strikeCount, ballCount] = checkSameOrInclude(computerInputNumberArray, playerInputNumberArray);
-    if (strikeCount === 3) return createGameRestartButtonTemplate();
-    // 볼도 아니고 스트라이크도 아닐 때
-    return (!ballCount && !strikeCount)
-      ? HINT.NOTHING
-      : `${createResultHintString(ballCount, HINT.BALL)} ${createResultHintString(strikeCount, HINT.STRIKE)}`;
-  };
-
   // 재시작 버튼 템플릿 생성 함수
-  const createGameRestartButtonTemplate = () => (
+  static createGameRestartButtonTemplate = () => (
     `
       <div>
         <p>
