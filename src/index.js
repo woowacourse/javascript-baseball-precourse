@@ -6,7 +6,11 @@ import {
     ELEMENT_ID_USER_INPUT,
     ELEMENT_ID_RESULT,
     ELEMENT_ID_SUBMIT,
+    ELEMENT_ID_GAME_RESTART,
     ALERT_MESSAGE,
+    ANSWER_MESSAGE,
+    RESTART_MESSAGE,
+    RESTART_BUTTON_TEXT,
 } from './constant/index.js';
 
 export default class BaseballGame {
@@ -36,7 +40,9 @@ export default class BaseballGame {
 
     submitUserInput() {
         if (this.checkIsValidInput(this.$userInput.value)) {
-            this.play(this.computer.getComputerNumbers(), this.$userInput.value);
+            const result = this.play(this.computer.getComputerNumbers(), this.$userInput.value);
+
+            this.displayResult(result);
         } else {
             this.handleException();
         }
@@ -123,6 +129,29 @@ export default class BaseballGame {
             result = `${cntStrike}스트라이크`;
         }
         return result;
+    }
+
+    displayResult(result) {
+        if (result === '정답') {
+            this.quitGame();
+            this.generateCorrectResult();
+        } else {
+            this.$result.innerText = result;
+        }
+    }
+
+    generateCorrectResult() {
+        this.$result.innerHTML = `<h3>${ANSWER_MESSAGE}</h3><span>${RESTART_MESSAGE}<button id=${ELEMENT_ID_GAME_RESTART}>${RESTART_BUTTON_TEXT}</button></span>`;
+
+        const $gameRestartButton = document.getElementById(ELEMENT_ID_GAME_RESTART);
+        $gameRestartButton.addEventListener('click', () => {
+            this.initialize();
+        })
+    }
+    
+    quitGame() {
+        this.$submit.disabled = true;
+        this.$userInput.disabled = true;
     }
 }
 
