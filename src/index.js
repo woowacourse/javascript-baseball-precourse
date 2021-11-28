@@ -4,6 +4,7 @@ import {
   changeStringToNumberArray,
   validateUniqueInArray,
   validateNumberInArray,
+  checkSameOrInclude,
 } from './utils/index.js';
 import {
   SELECTOR,
@@ -30,8 +31,7 @@ function BaseballGame () {
   // 유저 입력값 제출 함수
   const onSubmitPlayerInput = (event) => {
     event.preventDefault();
-    const playerInputString = $(SELECTOR.INPUT).value;
-    const playerInputNumberArray = changeStringToNumberArray(playerInputString);
+    const playerInputNumberArray = changeStringToNumberArray($(SELECTOR.INPUT).value);
     if (!validatePlayerInput(playerInputNumberArray)) return;
     const result = play(this.computerInputNumberArray, playerInputNumberArray);
     $(SELECTOR.RESULT).innerHTML = result;
@@ -56,24 +56,11 @@ function BaseballGame () {
 
   // 게임 시작 함수
   const play = (computerInputNumberArray, playerInputNumberArray) => {
-    const { strikeCount, ballCount } = checkStrikeOrBall(computerInputNumberArray, playerInputNumberArray);
+    const [strikeCount, ballCount] = checkSameOrInclude(computerInputNumberArray, playerInputNumberArray);
     const resultStrikeString = strikeCount ? `${strikeCount}${HINT.STRIKE}` : '';
     const resultBallString = ballCount ? `${ballCount}${HINT.BALL}` : '';
     if (strikeCount === 3) return createGameRestartButtonTemplate();
     return (!ballCount && !strikeCount) ? HINT.NOTHING : `${resultBallString} ${resultStrikeString}`;
-  };
-
-  // 스트라이크 or 볼 개수 확인 함수
-  const checkStrikeOrBall = (computerInputNumberArray, playerInputNumberArray) => {
-    let strikeCount = 0, ballCount = 0;
-    for (let i = 0; i < 3; i += 1) {
-      if (playerInputNumberArray[i] === computerInputNumberArray[i]) {
-        strikeCount += 1;
-      } else if (computerInputNumberArray.includes(playerInputNumberArray[i])) {
-        ballCount += 1;
-      }
-    }
-    return { strikeCount, ballCount };
   };
 
   // 재시작 버튼 템플릿 생성 함수
