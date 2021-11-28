@@ -57,7 +57,7 @@ export default class BaseballGame {
     play(computerInputNumbers, userInputNumbers) {
         const [ cntBall, cntStrike ] = this.determineResult(computerInputNumbers, userInputNumbers);
         
-        const result = this.processResult(cntBall, cntStrike);
+        const result = this.convertCntToStringResult(cntBall, cntStrike);
         
         return result;
     }
@@ -79,7 +79,7 @@ export default class BaseballGame {
         return [ cntBall, cntStrike ];
     }
 
-    processResult(cntBall, cntStrike) {
+    convertCntToStringResult(cntBall, cntStrike) {
         let result = '';
 
         if (cntStrike === 3) {
