@@ -1,5 +1,5 @@
-import { setComputerNumber, getUserInput, countStrikeAndBall, getGameResultText } from './game.js';
-import { RETRY_ITEM } from './constant.js';
+import { setComputerNumber, getUserInput, countStrikeAndBall, getGameResultText } from './utils/game.js';
+import { RETRY_ITEM } from './utils/constant.js';
 
 export default class BaseballGame {
   constructor() {
