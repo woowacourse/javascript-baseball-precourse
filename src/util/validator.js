@@ -12,3 +12,7 @@ export const isNotDuplicateExist = (value) => {
   }
   return true;
 };
+
+export const isLengthThree = (value) => {
+  return value.toString().length === 3;
+};
