@@ -1,3 +1,7 @@
 export const pickUniqueThreeNumbers = () => {
-  return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  const numberSet = new Set();
+  while (numberSet.size !== 3) {
+    numberSet.add(MissionUtils.Random.pickNumberInRange(1, 9));
+  }
+  return Array.from(numberSet);
 }
