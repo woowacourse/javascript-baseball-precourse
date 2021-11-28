@@ -28,10 +28,10 @@ export default class BaseballGame {
   verifyInputNumber(userInputValue) {
     if (isNaN(userInputValue)) {
       return VERIFIED_CODE.NOT_A_NUMBER;
+    } else if (userInputValue.length !== NUMBER_RULES.LENGTH) {
+      return VERIFIED_CODE.THREE_DIGIT;
     } else if (userInputValue.includes(0)) {
       return VERIFIED_CODE.ZERO_INCLUDED;
-    } else if (userInputValue.length < NUMBER_RULES.LENGTH) {
-      return VERIFIED_CODE.THREE_DIGIT;
     } else if (new Set(userInputValue).size !== NUMBER_RULES.LENGTH) {
       return VERIFIED_CODE.NUMBER_DUPLICATED;
     }
