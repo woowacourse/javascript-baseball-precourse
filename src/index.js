@@ -64,8 +64,9 @@ function BaseballGame () {
         <p>
           <strong>🎉 정답을 맞추셨습니다! 🎉</strong>
         </p>
+        <span게임을 재시작 하시겠습니까?</span>
         <button id="game-restart-button">
-          재시작
+          게임 재시작
         </button>
       </div>
     `;
