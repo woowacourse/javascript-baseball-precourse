@@ -6,7 +6,7 @@ export function getComputerNumbers() {
     const numbers = new Set();
     while(numbers.size < 3) numbers.add(pickNumberInRange(1, 9));
 
-    return [...numbers].join('')
+    return [...numbers].join('');
 }
 
 export function getHint(ball, strike) {
@@ -16,7 +16,7 @@ export function getHint(ball, strike) {
     if(strike)  message += `${strike}스트라이크`;
     if(!ball && !strike) message = '낫싱';
 
-    return message
+    return message;
 }
 
 export function countResult(userNumbers, computerNumbers) {
@@ -36,5 +36,5 @@ export function errorCheck(text) {
     if(isNaN(Number(text))) return $inputRangeError;
     if(text.length !== 3) return $lengthError;
     if(new Set(text).size !== 3) return $overlapError;
-    return null
+    return null;
 }
