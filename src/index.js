@@ -14,21 +14,21 @@ import { GAME_RESULT, MESSAGE } from './constants.js';
 
 export default class BaseballGame {
   constructor() {
-    this.inputElem = $('user-input');
-    this.submitBtn = $('submit');
-    this.resultElem = $('result');
-    this.answer = generateRandomNumber();
-    this.init();
+    this._inputElem = $('user-input');
+    this._submitBtn = $('submit');
+    this._resultElem = $('result');
+    this._answer = generateRandomNumber();
+    this._init();
   }
 
-  init() {
-    this.submitBtn.addEventListener('click', (event) => {
+  _init() {
+    this._submitBtn.addEventListener('click', (event) => {
       event.preventDefault();
-      this.onSubmitUserInput();
+      this._onSubmitUserInput();
     });
   }
 
-  play(computerInputNumbers, userInputNumbers) {
+  _play(computerInputNumbers, userInputNumbers) {
     const [strike, ball] = calculateBaseBall(
       computerInputNumbers,
       userInputNumbers
@@ -36,26 +36,26 @@ export default class BaseballGame {
     return getGameResult(strike, ball);
   }
 
-  onSubmitUserInput() {
-    const userInput = parseInput(this.inputElem.value);
+  _onSubmitUserInput() {
+    const userInput = parseInput(this._inputElem.value);
     if (isNotValidInput(userInput)) {
       return alert(MESSAGE.NOT_VALID_INPUT);
     }
-    const result = this.play(this.answer, userInput);
-    this.renderResult(result);
+    const result = this._play(this._answer, userInput);
+    this._renderResult(result);
   }
 
-  onClickRestartButton() {
-    this.inputElem.value = '';
-    removeFirstChild(this.resultElem);
-    this.answer = generateRandomNumber();
+  _onClickRestartButton() {
+    this._inputElem.value = '';
+    removeFirstChild(this._resultElem);
+    this._answer = generateRandomNumber();
   }
 
-  renderResult(result) {
-    replaceChild(this.resultElem, createElement(result));
+  _renderResult(result) {
+    replaceChild(this._resultElem, createElement(result));
     if (result === GAME_RESULT.END) {
       $('game-restart-button').addEventListener('click', () => {
-        this.onClickRestartButton();
+        this._onClickRestartButton();
       });
     }
   }
