@@ -1,15 +1,3 @@
-const strikeOrBall = (output) =>{
-    let resultText = "";
-    if(output[2] > 0){
-        resultText += `${output[2]}볼 `
-    }
-    if(output[1] > 0){
-        resultText += `${output[1]}스트라이크`    
-    }
-    
-    result.innerHTML = resultText;
-}
-
 const renderFinish = (game)=> {
     result.innerHTML = "<b>🎉 정답을 맞추셨습니다! 🎉</b><br>"
     const restart = document.createElement("div");
@@ -27,19 +15,14 @@ const renderFinish = (game)=> {
     })
 }
 
-// 결과값을 보여주는 함수
-const ParseResult = (isFinished, output, game) => {
+// 결과값(문자열)을 DOM element로 바꿔주는 함수
+const convertResult = (message, game) => {
     const result = document.getElementById('result');
-    if(isFinished){
+    if(message === "성공"){
         renderFinish(game);
     } else {
-        // 낫씽인지 스트라이크 혹은 볼인지 확인
-        if(output[0]){
-            result.innerHTML = "낫싱";
-        } else {
-            strikeOrBall(output);
-        }
+        result.innerHTML = message;
     }
 };
 
-export default ParseResult;
+export default convertResult;

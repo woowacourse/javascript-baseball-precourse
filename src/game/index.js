@@ -7,14 +7,12 @@ export default class BaseballGame {
     genRandomNumbers() {
       let count = 0;
       let numbers = [];
-      let numPool = new Array(10);
       while(count < 3){
         const pickedNumber = MissionUtils.Random.pickNumberInRange(1,9);
-        if(numPool[pickedNumber] === true){
+        if(numbers.includes(pickedNumber)){
           continue;
         } else {
           numbers.push(pickedNumber);
-          numPool[pickedNumber] = true;
           count++;
         }
       }
@@ -22,21 +20,26 @@ export default class BaseballGame {
       return numbers;
     }
 
-    // 유저 입력값 유효성 체크 메서드
-    isValid(input){
-      // 3자리 숫자(문자열) 인지
-      if(input.length !== 3){
-        return false;
-      }
-      
-      let numberSlice = [];
+    // 3자리 숫자(문자열)인지 확인
+    checkThree(input){
+      return input.length === 3;
+    }
+    
+    // 1~9 범위 안에 있는지 확인
+    checkNoZero(input){
       for(let i=0; i<3; i++){
-        // 1~9 범위 안에 있는지 확인
         if(input.charCodeAt(i) > '9'.charCodeAt(0) || '1'.charCodeAt(0) > input.charCodeAt(i)){
           return false;
         }
+      }
+      return true;
+    }
 
-        // 중복된 숫자인지 확인
+    // 중복된 숫자인지 확인
+    checkDuplicate(input){
+      let numberSlice = [];
+
+      for(let i=0; i<3; i++){
         const pi = parseInt(input[i])
         if(numberSlice[pi]){
           return false;
@@ -48,48 +51,81 @@ export default class BaseballGame {
       return true;
     }
 
-    // 유저 입력 값 & 생성된 값 비교 메서드
-    compareInput(input){
-      let strike = 0;
-      let ball = 0;
-      let isNothing = true;
-      let isFinished = false;
-      let output = [];
-
-      let userPool = new Array(10);
-      let computerPool = new Array(10);
-
-      // 스트라이크 확인
-      for(let i=0; i<3; i++){
-        console.log(input[i], this.computerNumbers[i]);
-        if(this.computerNumbers[i] === parseInt(input[i])){
-          strike++;
-        } else {
-          userPool[input[i]] = true;
-          computerPool[this.computerNumbers[i]] = true;
-        }
+    // 유저 입력값 유효성 체크 메서드
+    isValid(input){
+      if(!this.checkThree(input)){
+        return false;
+      }
+      if(!this.checkNoZero(input)){
+        return false;
+      }
+      if(!this.checkDuplicate(input)){
+        return false;
       }
 
-      // 볼 확인
-      for(let i=1; i<10; i++){
-        if(userPool[i] === true && computerPool[i] === true){
-          ball++;
-        }
-      }
+      return true;
+    }
 
-      // 낫씽 확인
-      if(strike > 0 || ball > 0){
-        isNothing = false;
-      }
+    // 볼, 스트라이크 갯수 문자열화
+    stringifyResult(ball, strike){
+      let message = "";
 
-      // 전달 값 정리
-      if(strike === 3){
-        isFinished = true
+      if(strike === 0 && ball === 0){
+        message = "낫싱"
       } else {
-        output = [isNothing, strike, ball];
+        if(ball){
+          message = `${ball}볼 `
+        }
+        if(strike){
+          message += `${strike}스트라이크`
+        }
       }
 
-      return {isFinished, output};
+      return message;
+    }
+
+    // 스트라이크 확인
+    countStrike(computerInputNumbers, userInputNumbers){
+      let strike = 0;
+      for(let i=0; i<3; i++){
+        if(computerInputNumbers[i] === parseInt(userInputNumbers[i])){
+          strike++;
+        }
+      }
+
+      return strike;
+    }
+
+    // 같은 숫자(볼) 확인
+    countSame(computerInputNumbers, userInputNumbers){
+      let count = 0;
+      for(let i=0; i<3; i++){
+        if(computerInputNumbers.includes(parseInt(userInputNumbers[i]))){
+          count++;
+        }
+      }
+      
+      return count;
+    }
+
+    // 유저 입력 값 & 생성된 값 비교 메서드
+    play(computerInputNumbers, userInputNumbers){
+      let strike, ball, message;
+
+      strike = this.countStrike(computerInputNumbers, userInputNumbers);
+      ball = this.countSame(computerInputNumbers, userInputNumbers) - strike;
+      
+      if(strike === 3){
+        message = "성공";
+      }else{
+        message = this.stringifyResult(ball, strike);
+      }
+      return message;
+    }
+
+    receiveInput(input){
+      const message = this.play(this.computerNumbers, input);
+      return message;
     }
 
     restart(){
