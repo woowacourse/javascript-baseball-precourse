@@ -22,5 +22,5 @@ const isDuplicated = (input) => {
 }
 
 const isNotNumeric = (input) => {
-  return Number.isNaN(input);
+  return ![...input].every(c => '123456789'.includes(c));
 }

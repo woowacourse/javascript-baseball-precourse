@@ -2,7 +2,7 @@ import { isNotValidInput } from './checkValidInput.js';
 import { ERROR_MESSAGE } from './constant.js';
 
 export const setComputerNumber = () => {
-  let computerInputNumbers = [];
+  const computerInputNumbers = [];
   let randomNumber;
   while (computerInputNumbers.length < 3) {
     randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -10,7 +10,6 @@ export const setComputerNumber = () => {
       computerInputNumbers.push(randomNumber);
     }
   }
-  console.log(`computerInput: ${computerInputNumbers.join('')}`); // for debug
   return computerInputNumbers.join('');
 }
 
@@ -19,7 +18,7 @@ export const getUserInput = (userInputText) => {
   setUserInputClean(userInputText);
   if (isNotValidInput(inputValue)) {
     alert(ERROR_MESSAGE);
-    return null;
+    return '';
   }
   return inputValue;
 }
