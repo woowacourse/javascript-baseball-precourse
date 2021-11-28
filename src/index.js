@@ -1,25 +1,13 @@
 import { generateComputerNumber } from "./components/generateNumber.js";
-import { checkValidInput } from "./components/validation.js";
+import UserInput from "./components/userInput.js";
 import { countStrikeAndBall, getResult } from "./components/playGame.js";
 
 export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = generateComputerNumber();
-    this.userInput = document.getElementById("user-input");
+    this.user = new UserInput();
     this.submitButton = document.getElementById("submit");
     this.resultDiv = document.getElementById("result");
-  }
-
-  getUserInputNumbers() {
-    return this.userInput.value;
-  }
-
-  alertErrorMessage(userInputNumbers) {
-    const errorMessage = checkValidInput(userInputNumbers);
-
-    alert(errorMessage);
-    this.userInput.value = "";
-    this.userInput.focus();
   }
 
   play(computerInputNumbers, userInputNumbers) {
@@ -35,10 +23,10 @@ export default class BaseballGame {
 
   onClickSubmitButton(event) {
     event.preventDefault();
-    const userInputNumbers = this.getUserInputNumbers();
+    const userInputNumbers = this.user.getUserInputNumbers();
 
-    if (checkValidInput(userInputNumbers)) {
-      this.alertErrorMessage(userInputNumbers);
+    if (this.user.checkValidInput(userInputNumbers)) {
+      this.user.alertErrorMessage(userInputNumbers);
       return;
     }
 
