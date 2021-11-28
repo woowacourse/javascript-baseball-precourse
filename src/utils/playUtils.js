@@ -15,18 +15,18 @@ const playUtils = {
     if (scoreBoard.strike === NUMBER.DIGIT) {
       DOMUtils.showResult(ANSWER.RIGHT);
       return true;
-    } else if (scoreBoard.ball === POINT.ZERO && scoreBoard.strike === POINT.ZERO) {
+    }
+    if (scoreBoard.ball === POINT.ZERO && scoreBoard.strike === POINT.ZERO) {
       DOMUtils.showResult(ANSWER.NOTHING);
       return false;
-    } else {
-      playUtils.isBallOrStrike(scoreBoard);
-      return false;
     }
+    playUtils.isBallOrStrike(scoreBoard);
+    return false;
   },
   isIndexSame: (computerInputNumbers, scoreBoard, number, index) => {
     computerInputNumbers.indexOf(number) === index
-      ? (scoreBoard.strike += POINT.ONE)
-      : (scoreBoard.ball += POINT.ONE);
+      ? scoreBoard.strike + POINT.ONE
+      : scoreBoard.ball + POINT.ONE;
   },
   isIncludeNumber: (computerInputNumbers, number) => {
     return computerInputNumbers.includes(number);

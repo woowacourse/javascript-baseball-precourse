@@ -4,16 +4,16 @@
     "es2021": true
   },
   "plugins": ["prettier"],
-  "extends": [
-    "airbnb-base",
-    "eslint:recommended",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["airbnb-base", "eslint:recommended", "plugin:prettier/recommended"],
   "parserOptions": {
-    "ecmaVersion": 13,
+    "ecmaVersion": 11,
     "sourceType": "module"
   },
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "max-depth": ["error", 2],
+    //"max-lines-per-function": ["error", 15],
+    "import/extensions": "off",
+    "no-unused-expressions": "off"
   }
 }
