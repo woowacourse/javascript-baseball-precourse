@@ -12,7 +12,7 @@ export const MESSAGE = {
 const RESTART_VIEW = `
   <p>🎉 정답을 맞추셨습니다 🎉</p>
   <span> 게임을 새로 시작하시겠습니까? </span>
-  <button id="restart">게임 재시작</button>
+  <button id="game-restart-button">게임 재시작</button>
 `;
 
 export const GAME_RESULT = {

@@ -70,7 +70,7 @@ export default class BaseballGame {
   renderResult(result) {
     replaceChild(this.resultElem, createElement(result));
     if (result === GAME_RESULT.END) {
-      const restartBtn = $('restart');
+      const restartBtn = $('game-restart-button');
       restartBtn.addEventListener('click', () => {
         this.restartGame();
       });
