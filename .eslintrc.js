@@ -12,6 +12,5 @@ module.exports = {
     'class-methods-use-this': 'off',
     'no-alert': 'off',
     'no-undef': 'off',
-    'prettier/prettier': 'off',
   },
 };
