@@ -23,7 +23,6 @@ export default class BaseballGame {
     }
     return answer;
   }
-/*
 
   checkButtonPressed() {
     this.submitButton.addEventListener('click', (e) => {
@@ -38,17 +37,17 @@ export default class BaseballGame {
     });
   }
   
-  checkAnswerValidation(computerInputNumbers) {
-    if (computerInputNumbers.length !== 3) {
+  checkAnswerValidation(userInputNumbers) {
+    if (userInputNumbers.length !== 3) {
       return false;
     }
-    if (new Set(computerInputNumbers).size !== 3) {
+    if (new Set(userInputNumbers).size !== 3) {
       return false;
     }
-    if (Number.isNaN(Number(computerInputNumbers))) {
+    if (Number.isNaN(Number(userInputNumbers))) {
       return false;
     }
-    if (computerInputNumbers.includes(0)) {
+    if (userInputNumbers.includes(0)) {
       return false;
     }
     return true;
@@ -132,6 +131,6 @@ export default class BaseballGame {
       newDiv.remove();
     });
   }
-  */
 }
+
 new BaseballGame();
