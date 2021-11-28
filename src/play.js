@@ -1,31 +1,30 @@
 import { ANSWER } from './constant.js';
 
-function includesNumber(computerInputNumbers, userInputNumber) {
-  if (computerInputNumbers.includes(userInputNumber)) {
-    return true;
+function getStrikeCount(computerInputNumbers, userInputNumbers) {
+  let strikeCount = 0;
+  for (let i = 0; i < computerInputNumbers.length; i++) {
+    if (computerInputNumbers[i] === userInputNumbers[i]) {
+      strikeCount += 1;
+    }
   }
-  return false;
+  return strikeCount;
 }
-
-function sameNumber(computerInputNumber, userInputNumber) {
-  if (computerInputNumber === userInputNumber) {
-    return true;
+function getBallCount(computerInputNumbers, userInputNumbers) {
+  let ballCount = 0;
+  for (let i = 0; i < computerInputNumbers.length; i++) {
+    if (
+      computerInputNumbers.includes(userInputNumbers[i]) &&
+      computerInputNumbers.indexOf(userInputNumbers[i]) !== i
+    ) {
+      ballCount += 1;
+    }
   }
-  return false;
+  return ballCount;
 }
 
 export function compareInputNumbers(computerInputNumbers, userInputNumbers) {
-  let ball = 0;
-  let strike = 0;
-  for (let i = 0; i < computerInputNumbers.length; i++) {
-    if (sameNumber(computerInputNumbers[i], userInputNumbers[i])) {
-      strike += 1;
-      continue;
-    }
-    if (includesNumber(computerInputNumbers, userInputNumbers[i])) {
-      ball += 1;
-    }
-  }
+  const ball = getBallCount(computerInputNumbers, userInputNumbers);
+  const strike = getStrikeCount(computerInputNumbers, userInputNumbers);
   return { ball, strike };
 }
 
