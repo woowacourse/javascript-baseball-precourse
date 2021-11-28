@@ -1,16 +1,18 @@
 import { NUMBER_RULES, RESULT_MESSAGE, VERIFIED_CODE } from './constants.js';
-
 export default class BaseballGame {
-
   constructor() {
     this.$userInput = document.getElementById('user-input');
     this.$submitButton = document.getElementById('submit');
+    this.$result = document.getElementById('result');
     this.computerNumbers = this.generateComputerRandomNumber();
-    this.onSubmit();
+    this.score = { 
+      ball: 0, 
+      strike: 0,
+    };
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    this.computeScore(computerInputNumbers, userInputNumbers);
   }
 
   generateComputerRandomNumber() {
@@ -33,6 +35,16 @@ export default class BaseballGame {
       return VERIFIED_CODE.NUMBER_DUPLICATED;
     }
     return VERIFIED_CODE.VERIFIED;
+  }
+
+  computeScore(computerInputNumbers, userInputNumbers) {
+    computerInputNumbers.split('').forEach((num, idx) => {
+      if (num === userInputNumbers[idx]) {
+        this.score.strike = this.score.strike + 1;
+      } else if (userInputNumbers.indexOf(num) !== -1) {
+        this.score.ball = this.score.ball + 1;
+      }
+    });
   }
 
   showErrorMessage(resultCode) {
