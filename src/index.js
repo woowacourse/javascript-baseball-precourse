@@ -1,10 +1,11 @@
 import { NUMBER_RULES, RESULT_MESSAGE, VERIFIED_CODE } from './constants.js';
+import { generateComputerRandomNumber, showErrorMessage, verifyInputNumber } from './util.js';
 export default class BaseballGame {
   constructor() {
     this.$userInput = document.getElementById('user-input');
     this.$submitButton = document.getElementById('submit');
     this.$result = document.getElementById('result');
-    this.computerNumbers = this.generateComputerRandomNumber();
+    this.computerNumbers = generateComputerRandomNumber();
     this.score = { 
       ball: 0, 
       strike: 0,
@@ -19,28 +20,6 @@ export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
     this.computeScore(computerInputNumbers, userInputNumbers);
     this.setResult();
-  }
-
-  generateComputerRandomNumber() {
-    const computerNumberList =  new Set();
-
-    while (computerNumberList.size < NUMBER_RULES.LENGTH)
-      computerNumberList.add(MissionUtils.Random.pickNumberInRange(NUMBER_RULES.MIN_NUMBER, NUMBER_RULES.MAX_NUMBER));
-
-    return Array.from(computerNumberList).join('');
-  }
-
-  verifyInputNumber(userInputValue) {
-    if (isNaN(userInputValue)) {
-      return VERIFIED_CODE.NOT_A_NUMBER;
-    } else if (userInputValue.length !== NUMBER_RULES.LENGTH) {
-      return VERIFIED_CODE.THREE_DIGIT;
-    } else if (userInputValue.includes(0)) {
-      return VERIFIED_CODE.ZERO_INCLUDED;
-    } else if (new Set(userInputValue).size !== NUMBER_RULES.LENGTH) {
-      return VERIFIED_CODE.NUMBER_DUPLICATED;
-    }
-    return VERIFIED_CODE.VERIFIED;
   }
 
   computeScore(computerInputNumbers, userInputNumbers) {
@@ -65,14 +44,6 @@ export default class BaseballGame {
       this.printNotCorrectResultScreen(this.$result, this.score);
     }
     this.resetScore();
-  }
-
-  showErrorMessage(resultCode) {
-    if (resultCode === VERIFIED_CODE.VERIFIED) {
-      return;
-    }
-
-    alert(RESULT_MESSAGE[resultCode]);
   }
 
   resetInputValue() {
@@ -120,9 +91,9 @@ export default class BaseballGame {
     $element.addEventListener('click', (e) => {
       e.preventDefault();
       
-      const resultCode = this.verifyInputNumber(this.$userInput.value);
+      const resultCode = verifyInputNumber(this.$userInput.value);
       if (resultCode !== VERIFIED_CODE.VERIFIED) {
-        this.showErrorMessage(resultCode);
+        showErrorMessage(resultCode);
         this.resetInputValue();
       } else {
         this.play(this.computerNumbers, this.$userInput.value);
@@ -137,7 +108,7 @@ export default class BaseballGame {
       this.resetScore();
       this.resetInputValue();
       this.initResultScreen();
-      this.computerNumbers = this.generateComputerRandomNumber();
+      this.computerNumbers = generateComputerRandomNumber();
     });
   }
 }
