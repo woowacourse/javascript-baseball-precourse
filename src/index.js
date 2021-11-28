@@ -7,14 +7,15 @@ export default function BaseballGame() {
     let BallCnt = 0;
 
     const play = (computerInputNumbers, userInputNumbers) => {
+        let result_game_text = '';
         if (!checkInput(userInputNumbers)) return;
         else {
             console.log(userInputNumbers);
             let Strike_Ball = CountStrikeAndBall(computerInputNumbers, userInputNumbers);
-            console.log(`${Strike_Ball.Strike}스트라이크, ${Strike_Ball.Ball}볼`);
             Hint(Strike_Ball);
+            result_game_text = Hint(Strike_Ball);
         };
-        return '결과';
+        return result_game_text;
     };
 
     const setAnswer = () => {
@@ -69,6 +70,7 @@ export default function BaseballGame() {
             else if (Strike_Ball.Ball === 0) $result.innerText = `${Strike_Ball.Strike}스트라이크`;
             else $result.innerText = `${Strike_Ball.Ball}볼 ${Strike_Ball.Strike}스트라이크`;
         };
+        return $result.innerText;
     };
 
     const endGame = () => {
