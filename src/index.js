@@ -4,6 +4,7 @@ export default class BaseballGame {
       this.userInput = document.getElementById('user-input');
       this.computerInputNumbers = this.randomGenerator();
       this.checkButtonPressed();
+      this.result = document.getElementById('result');
   }
 
   randomGenerator() {
@@ -28,7 +29,7 @@ export default class BaseballGame {
     if (computerInputNumbers.length !== 3) {
       return false;
     }
-    if (new Set(computerInputNumbers).size !== 3){
+    if (new Set(computerInputNumbers).size !== 3) {
       return false;
     }
     if (Number.isNaN(Number(computerInputNumbers))) {
@@ -43,14 +44,26 @@ export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers){
     const balls = this.countBalls(computerInputNumbers,userInputNumbers);
     const strikes = this.countStrikes(computerInputNumbers,userInputNumbers);
-    console.log(`balls: ${balls}, strikes: ${strikes}`);
+    let resultText;
+    if (balls === 0 && strikes === 0) {
+      resultText = '낫싱';
+    } else if ( strikes === 3 ) {
+      resultText = `<strong>🎉 정답을 맞추셨습니다! 🎉</strong>`
+    } else if ( balls === 0 ){
+      resultText = `${strikes}스트라이크`;
+    } else if ( strikes === 0) {
+      resultText = `${balls}볼`;
+    } else {
+      resultText = `${balls}볼 ${strikes}스트라이크`;
+    }
+    this.result.innerHTML = resultText;
   }
 
   countBalls(computerInputNumbers, userInputNumbers){
     let totalBallCount = 0;
     totalBallCount = computerInputNumbers.reduce((count, value, index) => {
       const userInputNumber = Number(userInputNumbers[index]);
-      if(
+      if (
         userInputNumber!== value 
         && userInputNumbers.includes(value)
       ) {
@@ -66,7 +79,7 @@ export default class BaseballGame {
     let totalStrikeCount = 0;
     totalStrikeCount = computerInputNumbers.reduce((count, value, index) => {
         const userInputNumber = Number(userInputNumbers[index]);
-        if(userInputNumber === value) {
+        if (userInputNumber === value) {
             return count + 1;
         } else {
             return count;
