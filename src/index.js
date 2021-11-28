@@ -5,7 +5,7 @@ import { countStrikeAndBall, getResult } from "./components/playGame.js";
 export default class BaseballGame {
   constructor() {
     this.computerInputNumbers = generateComputerNumber();
-    this.user = new UserInput();
+    this.userInput = new UserInput();
     this.submitButton = document.getElementById("submit");
     this.resultDiv = document.getElementById("result");
   }
@@ -23,10 +23,10 @@ export default class BaseballGame {
 
   onClickSubmitButton(event) {
     event.preventDefault();
-    const userInputNumbers = this.user.getUserInputNumbers();
+    const userInputNumbers = this.userInput.getUserInputNumbers();
 
-    if (this.user.checkValidInput(userInputNumbers)) {
-      this.user.alertErrorMessage(userInputNumbers);
+    if (this.userInput.checkValidInput(userInputNumbers)) {
+      this.userInput.alertErrorMessage(userInputNumbers);
       return;
     }
 
