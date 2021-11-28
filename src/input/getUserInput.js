@@ -9,22 +9,19 @@ const ONE_TO_NINE_ERR_MSG = "입력 오류! 숫자만 입력해주세요.";
 const DUPLICATE_ERR_MSG = "입력 오류! 중복없는 세 자리 숫자만 입력해주세요.";
 
 function alertErrorMessage(error) {
-  switch (error) {
-    case THREE_DIGIT_ERR: {
-      alert(THREE_DIGIT_ERR_MSG);
-      return false;
-    }
-    case ONE_TO_NINE_ERR: {
-      alert(ONE_TO_NINE_ERR_MSG);
-      return false;
-    }
-    case DUPLICATE_ERR: {
-      alert(DUPLICATE_ERR_MSG);
-      return false;
-    }
-    default:
-      return true;
+  if (error === THREE_DIGIT_ERR) {
+    alert(THREE_DIGIT_ERR_MSG);
+    return false;
   }
+  if (error === ONE_TO_NINE_ERR) {
+    alert(ONE_TO_NINE_ERR_MSG);
+    return false;
+  }
+  if (error === DUPLICATE_ERR) {
+    alert(DUPLICATE_ERR_MSG);
+    return false;
+  }
+  return true;
 }
 
 export default function getUserInput() {
