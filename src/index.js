@@ -1,8 +1,8 @@
 import {
   CORRECT_ANSWER_MESSAGE, DIGIT, ERROR_MESSAGE, NOTHING_MESSAGE,
 } from './constants.js';
-import Guide from './Guide.js';
-import UserInput from './UserInput.js';
+import Guide from './guide.js';
+import UserInput from './user-input.js';
 
 export default class BaseballGame {
   constructor() {

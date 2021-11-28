@@ -1,5 +1,6 @@
 export default class Guide {
   static RESULT_ELEM = document.querySelector('#result');
+
   static RESTART_ELEM = document.querySelector('#restart');
 
   static clearResult() {
