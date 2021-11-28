@@ -16,7 +16,6 @@ function restart() {
     $userInput.value = '';
     $result.innerHTML = '';
     answerArray = getAnswer();
-    console.log(answerArray);
 }
 
 export default function BaseballGame() {
@@ -26,7 +25,7 @@ export default function BaseballGame() {
     //확인 버튼 눌렀을 때
     $submit.addEventListener('click', () => {
         //유저입력값 가져오기
-        if (getUserInput()) {
+        if(getUserInput()) {
             const userInputArray = getUserInput();
 
             //게임결과내기
@@ -41,7 +40,7 @@ export default function BaseballGame() {
 
     //재시작버튼 클릭시 재시작
     $result.addEventListener('click', ({ target }) => {
-        if (target.id === 'game-restart-button') {
+        if(target.id === 'game-restart-button') {
             restart();
         }
     })
