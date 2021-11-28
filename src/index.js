@@ -11,7 +11,7 @@ import {
 } from './constants.js';
 
 function BaseballGame () {
-  this.answer = pickUniqueThreeNumbers();
+  this.computerInputNumberArray = pickUniqueThreeNumbers();
 
   this.init = () => {
     initEventListeners();
@@ -24,9 +24,10 @@ function BaseballGame () {
 
   const onSubmitPlayerInput = (event) => {
     event.preventDefault();
-    const input = $(SELECTOR.INPUT).value;
-    if (!validatePlayerInput(input)) return;
-    const result = play(this.answer, input);
+    const playerInputString = $(SELECTOR.INPUT).value;
+    const playerInputNumberArray = changeStringToNumberArray(playerInputString);
+    if (!validatePlayerInput(playerInputNumberArray)) return;
+    const result = play(this.computerInputNumberArray, playerInputNumberArray);
     $(SELECTOR.RESULT).innerHTML = result;
   };
 
@@ -34,13 +35,12 @@ function BaseballGame () {
     if (event.target.id === SELECTOR.RESTART_BUTTON) {
       $(SELECTOR.RESULT).innerHTML = '';
       $(SELECTOR.INPUT).value = '';
-      this.answer = pickUniqueThreeNumbers();
+      this.computerInputNumberArray = pickUniqueThreeNumbers();
     }
   };
 
-  const validatePlayerInput = (input) => {
-    const playerInputArray = changeStringToNumberArray(input);
-    if (input.length !== 3 || !validateUniqueInArray(playerInputArray) || !validateNumberInArray(playerInputArray)) {
+  const validatePlayerInput = (playerInputArray) => {
+    if (playerInputArray.length !== 3 || !validateUniqueInArray(playerInputArray) || !validateNumberInArray(playerInputArray)) {
       alert('입력 값을 확인해주세요');
       $(SELECTOR.INPUT).value = '';
       return false;
@@ -48,25 +48,24 @@ function BaseballGame () {
     return true;
   };
 
-  const play = (computerInputNumberArray, playerInputNumbers) => {
-    const playerInputNumberArray = changeStringToNumberArray(playerInputNumbers);
-    const { strike, ball } = checkStrikeOrBall(computerInputNumberArray, playerInputNumberArray);
-    const resultStrikeString = strike ? `${strike}${HINT.STRIKE}` : '';
-    const resultBallString = ball ? `${ball}${HINT.BALL}` : '';
-    if (strike === 3) return createGameRestartButtonTemplate();
-    return (!ball && !strike) ? HINT.NOTHING : `${resultBallString} ${resultStrikeString}`;
+  const play = (computerInputNumberArray, playerInputNumberArray) => {
+    const { strikeCount, ballCount } = checkStrikeOrBall(computerInputNumberArray, playerInputNumberArray);
+    const resultStrikeString = strikeCount ? `${strikeCount}${HINT.STRIKE}` : '';
+    const resultBallString = ballCount ? `${ballCount}${HINT.BALL}` : '';
+    if (strikeCount === 3) return createGameRestartButtonTemplate();
+    return (!ballCount && !strikeCount) ? HINT.NOTHING : `${resultBallString} ${resultStrikeString}`;
   };
 
   const checkStrikeOrBall = (computerInputNumberArray, playerInputNumberArray) => {
-    let strike = 0, ball = 0;
+    let strikeCount = 0, ballCount = 0;
     for (let i = 0; i < 3; i += 1) {
       if (playerInputNumberArray[i] === computerInputNumberArray[i]) {
-        strike += 1;
+        strikeCount += 1;
       } else if (computerInputNumberArray.includes(playerInputNumberArray[i])) {
-        ball += 1;
+        ballCount += 1;
       }
     }
-    return { strike, ball };
+    return { strikeCount, ballCount };
   };
 
   const createGameRestartButtonTemplate = () => {

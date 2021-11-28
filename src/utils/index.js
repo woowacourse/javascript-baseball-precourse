@@ -6,8 +6,8 @@ export const pickUniqueThreeNumbers = () => {
   return Array.from(numberSet);
 };
 
-export const changeStringToNumberArray = (input) => {
-  return input.split('').map(item => Number(item));
+export const changeStringToNumberArray = (string) => {
+  return string.split('').map(item => Number(item));
 };
 
 export const validateUniqueInArray = (array) => {
