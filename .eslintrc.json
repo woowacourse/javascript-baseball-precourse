@@ -16,6 +16,8 @@
     "no-unused-vars": "warn",
     "import/prefer-default-export": "off",
     "import/extensions": ["off"],
-    "no-restricted-globals": "off"
+    "no-restricted-globals": "off",
+    "class-methods-use-this": "off",
+    "no-alert": "off"
   }
 }
