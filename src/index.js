@@ -42,6 +42,7 @@ export default class BaseballGame {
   }
 
   gameClear() {
+    this.disableuUserInput();
     this.printGameClearView();
     this.registerRestartEventListener();
   }
@@ -58,6 +59,11 @@ export default class BaseballGame {
 
   printHint(hint) {
     this.$result.innerHTML = hint;
+  }
+
+  disableuUserInput() {
+    this.$userInput.disabled = true;
+    this.$submitBtn.disabled = true;
   }
 
   generateComputerInputNumbers() {
