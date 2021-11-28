@@ -45,17 +45,17 @@ export default class BaseballGame {
 
     // 중복없이 랜덤한 3자리수 정답 생성
     makeRandomAnswer() {
-        const randomAnswer = [];
+        const randomAnswers = [];
         let usedNumbers = [];
 
-        while(randomAnswer.length < 3) {
+        while(randomAnswers.length < 3) {
             const pickedNum = MissionUtils.Random.pickNumberInRange(1, 9);
             if(!usedNumbers.includes(pickedNum)) {
-                randomAnswer.push(pickedNum);
+                randomAnswers.push(pickedNum);
                 usedNumbers.push(pickedNum);
             }
         }
-        return randomAnswer;
+        return randomAnswers;
     }
 
     //play
@@ -122,7 +122,13 @@ export default class BaseballGame {
         this.$result.textContent = resultSentence;
 
         if(resultSentence.includes("정답")) {
-            const newContent = '<br><br><div><span>게임을 새로 시작하시겠습니까?  </span><button id="game-restart-button">게임 재시작</button></div>';
+            const newContent = `
+            <br><br>
+            <div>
+                <span> 게임을 새로 시작하시겠습니까?  </span>
+                <button id="game-restart-button">게임 재시작</button>
+            </div>
+            `;
             this.$result.insertAdjacentHTML("beforeend", newContent);
             this.addRestartEvent();
         }
