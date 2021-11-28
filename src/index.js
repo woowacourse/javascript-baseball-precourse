@@ -8,6 +8,11 @@ export default function BaseballGame() {
     printResult(computerInputNumbers, userInputNumbers);
   };
   
+  const resetOutput = () => {
+    $("#result").innerHTML = '';
+    $("#user-input").value = '';
+  }
+
   const isVaildNum = () => {
     const userInput = $("#user-input").value.split('').map(num => Number(num));
     if(userInput.includes(0) || userInput.includes(NaN) || userInput.length !== 3 ||  [...new Set(userInput)].length !== 3) {
@@ -28,8 +33,7 @@ export default function BaseballGame() {
     } else if(userInput.length !== 3) {
       alert("잘못 입력하였습니다❗️ 3개의 숫자를 입력하세요.");
     }
-    $("#user-input").value = '';
-    $("#result").innerHTML = '';
+    resetOutput();
   }
 
   const countAnswer = (computerInputNumbers, userInputNumbers) => {
@@ -70,11 +74,9 @@ export default function BaseballGame() {
     $("#result").innerText = `${ball? ball + '볼' : ''} ${strike? strike + '스트라이크' : ''}`;
   }
 
-
   const restartGame = () => {
     computerNumber = createAnswer();
-    $("#result").innerHTML = '';
-    $("#user-input").value = '';
+    resetOutput();
   };
 
   $("#input-form").addEventListener("submit", e => {
