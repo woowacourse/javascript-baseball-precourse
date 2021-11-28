@@ -84,7 +84,45 @@ export default class BaseballGame {
     }
 
     play(computerInputNumbers, userInputNumbers) {
-        return "결과 값 String";
+        const [ cntBall, cntStrike ] = this.determineResult(computerInputNumbers, userInputNumbers);
+        
+        const result = this.processResult(cntBall, cntStrike);
+        
+        return result;
+    }
+
+    determineResult(computerInputNumbers, userInputNumbers) {
+        const computerNumArr = computerInputNumbers.split('');
+        let cntBall = 0;
+        let cntStrike = 0;
+
+        userInputNumbers.split('').forEach((value, index) => {
+            const pos = computerNumArr.indexOf(value);
+            if (pos === index) {
+                cntStrike += 1
+            } else if (pos !== -1) {
+                cntBall += 1
+            }
+        });
+
+        return [ cntBall, cntStrike ];
+    }
+
+    processResult(cntBall, cntStrike) {
+        let result = '';
+
+        if (cntStrike === 3) {
+            result = '정답';
+        } else if (cntBall === 0 && cntStrike === 0) {
+            result = '낫싱';
+        } else if (cntBall > 0 && cntStrike > 0) {
+            result = `${cntBall}볼 ${cntStrike}스트라이크`;
+        }  else if (cntBall > 0) {
+            result = `${cntBall}볼`;
+        } else if (cntStrike > 0) {
+            result = `${cntStrike}스트라이크`;
+        }
+        return result;
     }
 }
 
