@@ -1,0 +1,5 @@
+export const INPUT_RULES = {
+  MIN_OF_RANGE: 1,
+  MAX_OF_RANGE: 9,
+  NUMBER_OF_DIGITS: 3,
+};
