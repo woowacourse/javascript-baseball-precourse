@@ -35,7 +35,8 @@ export default class BaseballGame {
    * @summary 확인 버튼, 재시작 버튼 Listener 추가
    */
   #addOnClickListeners(){
-    this.$submitButton.addEventListener('click', this.#onClickSubmitHandler.bind(this))
+    this.$submitButton.addEventListener('click', this.#onClickSubmitHandler.bind(this));
+    this.$restartButton.addEventListener('click', this.#onClickRestartHandler.bind(this));
   }
 
   /**
@@ -50,6 +51,36 @@ export default class BaseballGame {
     }else{
       alert(errorMsg);
     }
+  }
+
+  /**
+   * @summary 재시작 버튼 누를 시 실행되는 함수. 컴퓨터 숫자를 다시 생성. 텍스트 박스 초기화
+   */
+  #onClickRestartHandler(){
+    this.#setNewComputerAnswer();
+    this.#emptyTextInput();
+    this.#removeResult();
+  }
+
+  /**
+   * @summary 컴퓨터 숫자 다시 덤 생성.
+   */
+  #setNewComputerAnswer(){
+    this.computerNumber.generateNewAnswer();
+  }
+
+  /**
+   * @summary 텍스트 박스 입력값 초기화
+   */
+  #emptyTextInput(){
+    this.$inputText.value = '';
+  }
+
+  /**
+   * @summary 결과 초기화
+   */
+  #removeResult(){
+    this.$resultDiv.innerHTML = "";
   }
 
   /**
@@ -133,9 +164,6 @@ export default class BaseballGame {
   #addTextHTML(message){
     this.$resultDiv.innerHTML = message;
   }
-
-
-
 }
 
 new BaseballGame();
