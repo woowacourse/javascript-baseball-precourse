@@ -62,7 +62,7 @@ export default class BaseballGame {
         return;
       }
 
-      this.play('123', userInput.value);
+      this.play(123, userInput.value);
 
       return userInput.value;
     };
@@ -84,6 +84,21 @@ export default class BaseballGame {
         }
         if (computerNums.includes(userNums[i])) balls++;
       }
+
+      if (strikes === 3) {
+        $('#result').innerHTML = `
+        <h4>👍 정답을 맞추셨습니다. 게임을 새로 시작하시겠습니까?</h4>
+        <button id="game-restart-button">재시작</button>
+        `;
+      }
+
+      const restartButton = $('#game-restart-button');
+
+      restartButton.addEventListener('click', () => {
+        $('#user-input').value = '';
+        $('#result').innerHTML = '';
+        this.generateAnswer();
+      });
     };
 
     compareAnswer(computerInputNumbers, userInputNumbers);
