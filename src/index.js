@@ -1,6 +1,7 @@
 import { generateComputerNumber } from "./components/generateNumber.js";
 import UserInput from "./components/userInput.js";
 import { countStrikeAndBall, getResult } from "./components/playGame.js";
+import { RESULT_MESSAGE } from "./constants/constants.js";
 
 export default class BaseballGame {
   constructor() {
@@ -19,6 +20,23 @@ export default class BaseballGame {
 
   printResult(result) {
     this.resultDiv.innerHTML = result;
+
+    if (result === RESULT_MESSAGE.CORRECT) {
+      const restartButton = this.createRestartButton();
+      this.resultDiv.appendChild(restartButton);
+    }
+  }
+
+  createRestartButton() {
+    const restartButton = document.createElement("button");
+    restartButton.id = "game-restart-button";
+    restartButton.innerText = `${RESULT_MESSAGE.RESTART}`;
+    restartButton.addEventListener(
+      "click",
+      this.onClickRestartButton.bind(this)
+    );
+
+    return restartButton;
   }
 
   onClickRestartButton() {
