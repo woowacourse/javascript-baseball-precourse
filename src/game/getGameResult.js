@@ -1,5 +1,8 @@
 import { INPUT_DIGIT } from "../input/getComputerInput.js";
 
+const ANSWER = "정답";
+const NOTHING = "낫싱";
+
 function isRightAnswer(computerInput, userInput) {
   return computerInput === userInput;
 }
@@ -30,8 +33,11 @@ export default function getGameResult(computerInput, userInput) {
   let ballCount = "";
   let strikeCount = "";
 
-  if (isRightAnswer(computerInput, userInput)) return "정답";
+  if (isRightAnswer(computerInput, userInput)) return ANSWER;
   ballCount = countBall(computerInput.split(""), userInput.split(""));
   strikeCount = countStrike(computerInput.split(""), userInput.split(""));
-  return "출력할 결과물";
+  if (ballCount === "" && strikeCount === "") return NOTHING;
+  if (ballCount === "" && strikeCount !== "") return strikeCount;
+  if (ballCount !== "" && strikeCount === "") return ballCount;
+  return `${ballCount} ${strikeCount}`;
 }
