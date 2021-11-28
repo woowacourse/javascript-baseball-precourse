@@ -37,8 +37,11 @@ export default class BaseballGame {
       return;
     }
     const hint = this.play(this.computerInputNumbers, parseInt(userInputString, 10));
-    if (hint === undefined) this.gameClear();
-    else this.printHint(hint);
+    if (hint === undefined) {
+      this.gameClear();
+    } else { 
+      this.printHint(hint);
+    }
   }
 
   gameClear() {
@@ -89,18 +92,26 @@ export default class BaseballGame {
   getHint(strikes, balls) {
     const { NOTHING, BALL, STRIKE } = HINTS;
     let hint = NOTHING;
-    if (balls > 0 && strikes > 0) hint = `${balls}${BALL} ${strikes}${STRIKE}`;
-    else if (balls > 0) hint = `${balls}${BALL}`;
-    else if (strikes > 0) hint = `${strikes}${STRIKE}`;
+    if (balls > 0 && strikes > 0) { 
+      hint = `${balls}${BALL} ${strikes}${STRIKE}`;
+    } else if (balls > 0) {
+      hint = `${balls}${BALL}`;
+    } else if (strikes > 0) { 
+      hint = `${strikes}${STRIKE}`;
+    }
+
     return hint;
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    if (computerInputNumbers === userInputNumbers) return;
+    if (computerInputNumbers === userInputNumbers) {
+      return;
+    }
     const [computerNumArr, userNumArr] = [numToNumArr(computerInputNumbers), numToNumArr(userInputNumbers)];
     const strikes = this.countStrikes(computerNumArr, userNumArr);
     const balls = this.countBalls(computerNumArr, userNumArr);
     const hint = this.getHint(strikes, balls);
+    
     return hint;
   }
 }

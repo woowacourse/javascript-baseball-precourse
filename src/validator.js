@@ -5,11 +5,15 @@ export default class Validator {
     const result = this.isThreeDigit(userInputString) 
                     && this.isNumberRangeMatched(userInputString)
                     && this.isUnique(userInputString);
+
     return { result, message: INPUT_ERROR_MESSAGE };
   }
 
   static isThreeDigit(userInputString) {
-    if (userInputString.length !== ANSWER_LENGTH) return false;
+    if (userInputString.length !== ANSWER_LENGTH) { 
+      return false;
+    }
+    
     return !(new RegExp('[^0-9]+').test(userInputString));
   }
 
