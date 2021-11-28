@@ -4,6 +4,10 @@ export const numArrToNum = (numArr) => {
   }, 0);
 }
 
+export const numToNumArr = (num) => {
+  return Array.from(String(num), (num) => Number(num));
+}
+
 export const pickUniqueNumbersInRange = (startInclusive, endInclusive, count) => {
   const numSet = new Set([MissionUtils.Random.pickNumberInRange(startInclusive, endInclusive)]);
   while(numSet.size < count) {

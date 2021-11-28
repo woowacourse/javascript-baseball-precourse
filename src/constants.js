@@ -13,3 +13,9 @@ export const GAME_CLEAR_VIEW_HTML = `
   <div>🎉정답을 맞추셨습니다!🎉</div>
   <div>게임을 새로 시작하시겠습니까?  <button type="button" id="${ELEMENT_IDS.RESTART}">게임 재시작</button></div>
 `;
+
+export const HINTS = {
+  NOTHING: '낫싱',
+  STRIKE: '스트라이크',
+  BALL: '볼'
+};

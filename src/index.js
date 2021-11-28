@@ -1,8 +1,13 @@
-import { numArrToNum, pickUniqueNumbersInRange } from "./utils.js";
+import {
+  numArrToNum,
+  pickUniqueNumbersInRange,
+  numToNumArr
+} from "./utils.js";
 import {
   ANSWER_LENGTH,
   ELEMENT_IDS,
-  GAME_CLEAR_VIEW_HTML
+  GAME_CLEAR_VIEW_HTML,
+  HINTS
 } from "./constants.js";
 import Validator from "./validator.js";
 
@@ -13,7 +18,6 @@ export default class BaseballGame {
     this.$userInput = document.querySelector(`#${USER_INPUT}`);
     this.$submitBtn = document.querySelector(`#${SUBMIT}`);
     this.$result = document.querySelector(`#${RESULT}`);
-    console.log(this.computerInputNumbers);
     this.registerSubmitEventListener();
   }
 
@@ -28,21 +32,49 @@ export default class BaseballGame {
       alert(message);
       return;
     }
-    const playResult = this.play(this.computerInputNumbers, parseInt(userInputString, 10));
-    if (playResult === undefined) this.printGameClearView();
+    const hint = this.play(this.computerInputNumbers, parseInt(userInputString, 10));
+    if (hint === undefined) this.printGameClearView();
+    else this.printHint(hint);
   }
 
   printGameClearView() {
     this.$result.innerHTML = GAME_CLEAR_VIEW_HTML;
   }
 
+  printHint(hint) {
+    this.$result.innerHTML = hint;
+  }
+
   generateComputerInputNumbers() {
     return numArrToNum(pickUniqueNumbersInRange(1, 9, ANSWER_LENGTH));
   }
 
+  countStrikes(computerNumArr, userNumArr) {
+    return (userNumArr.filter((n, i) => computerNumArr[i] === n)).length;
+  }
+
+  countBalls(computerNumArr, userNumArr) {
+    return (userNumArr.filter((n, i) => {
+      return computerNumArr.some((cn, j) => ((i !== j) && (n === cn)) ? true : false );
+    })).length;
+  }
+
+  getHint(strikes, balls) {
+    const { NOTHING, BALL, STRIKE } = HINTS;
+    let hint = NOTHING;
+    if (balls > 0 && strikes > 0) hint = `${balls}${BALL} ${strikes}${STRIKE}`;
+    else if (balls > 0) hint = `${balls}${BALL}`;
+    else if (strikes > 0) hint = `${strikes}${STRIKE}`;
+    return hint;
+  }
+
   play(computerInputNumbers, userInputNumbers) {
     if (computerInputNumbers === userInputNumbers) return;
-    return "결과 값 String";
+    const [computerNumArr, userNumArr] = [numToNumArr(computerInputNumbers), numToNumArr(userInputNumbers)];
+    const strikes = this.countStrikes(computerNumArr, userNumArr);
+    const balls = this.countBalls(computerNumArr, userNumArr);
+    const hint = this.getHint(strikes, balls);
+    return hint;
   }
 }
 
