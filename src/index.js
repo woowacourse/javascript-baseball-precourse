@@ -22,6 +22,17 @@ export default class BaseballGame {
     this.userInput.focus();
   }
 
+  play(computerInputNumbers, userInputNumbers) {
+    const count = countStrikeAndBall(computerInputNumbers, userInputNumbers);
+    const result = getResult(count);
+
+    return result;
+  }
+
+  printResult(result) {
+    this.resultDiv.innerHTML = result;
+  }
+
   onClickSubmitButton(event) {
     event.preventDefault();
     const userInputNumbers = this.getUserInputNumbers();
@@ -30,6 +41,9 @@ export default class BaseballGame {
       this.alertErrorMessage(userInputNumbers);
       return;
     }
+
+    const result = this.play(this.computerInputNumbers, userInputNumbers);
+    this.printResult(result);
   }
 
   init() {
