@@ -25,6 +25,10 @@ export default class BaseballGame {
     this.$submitBtn.addEventListener('click', () => this.handleSubmit());
   }
 
+  registerRestartEventListener() {
+    document.querySelector(`#${ELEMENT_IDS.RESTART}`).addEventListener('click', () => this.restart());
+  }
+
   handleSubmit() {
     const userInputString = this.$userInput.value;
     const { result, message } = Validator.isValid(userInputString);
@@ -33,8 +37,19 @@ export default class BaseballGame {
       return;
     }
     const hint = this.play(this.computerInputNumbers, parseInt(userInputString, 10));
-    if (hint === undefined) this.printGameClearView();
+    if (hint === undefined) this.gameClear();
     else this.printHint(hint);
+  }
+
+  gameClear() {
+    this.printGameClearView();
+    this.registerRestartEventListener();
+  }
+
+  restart() {
+    this.computerInputNumbers = this.generateComputerInputNumbers();
+    this.$result.innerHTML = '';
+    this.$userInput.value = '';
   }
 
   printGameClearView() {
