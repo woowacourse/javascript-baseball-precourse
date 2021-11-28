@@ -106,19 +106,35 @@ export default function BaseballGame() {
     return strike;
   };
 
+  // return ball, strike result
+  const getResultText = (strike, ball) => {
+    let result = '';
+    if (strike === 3) {
+      return BASEBALL.ANSWER;
+    }
+    if (strike === 0 && ball === 0) {
+      return BASEBALL.NOTHING;
+    }
+    if (ball !== 0) {
+      result += `${ball}${BASEBALL.BALL} `;
+    }
+    if (strike !== 0) {
+      result += `${strike}${BASEBALL.STRIKE}`;
+    }
+    return result;
+  }
+
   // play 함수
   this.play = (computerInputNumbers, userInputNumbers) => {
-    let result = '';
+    let resultText = "";
+
     const ballCount = getBallCount(computerInputNumbers, userInputNumbers);
     const strikeCount = getStrikeCount(computerInputNumbers, userInputNumbers);
-
-    if (strikeCount === 3) return BASEBALL.ANSWER;
-    if (strikeCount === 0 && ballCount === 0) return BASEBALL.NOTHING;
-    if (ballCount !== 0) result += `${ballCount}${BASEBALL.BALL} `;
-    if (strikeCount !== 0) result += `${strikeCount}${BASEBALL.STRIKE}`;
-
-    return result;
+    
+    resultText = getResultText(strikeCount, ballCount);
+    return resultText;
   };
+
 
   // 게임 결과 렌더링 함수
   const showResult = result => {
