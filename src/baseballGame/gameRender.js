@@ -58,17 +58,17 @@ class GameRender {
 
     gameRetry(callback) {
         const $correctText = createElement("H4", RESULT_TEXT.GAME_OVER_HEADER);
-        const $retryWrap = createElement("DIV", RESULT_TEXT.GAME_OVER_CONTENT);
+        const $restartWrap = createElement("DIV", RESULT_TEXT.GAME_OVER_CONTENT);
 
-        const $retryButton = createElement("BUTTON", RESULT_TEXT.GAME_OVER_BUTTON);
-        $retryButton.id = "game-restart-button";
-        $retryWrap.append($retryButton);
+        const $restartButton = createElement("BUTTON", RESULT_TEXT.GAME_OVER_BUTTON);
+        $restartButton.id = "game-restart-button";
+        $restartWrap.append($restartButton);
 
-        const $fragment = combineElement([$correctText, $retryWrap]);
+        const $fragment = combineElement([$correctText, $restartWrap]);
         this.setContent($fragment);
         this.setFormDisable(true);
 
-        if (typeof callback === "function") callback($retryButton);
+        if (typeof callback === "function") callback($restartButton);
     }
 }
 

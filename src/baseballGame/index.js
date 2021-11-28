@@ -43,8 +43,8 @@ class BaseballGame {
             return false;
         }
 
-        gameRender.gameRetry(($retryButton) => {
-            $retryButton.addEventListener("click", this.init.bind(this));
+        gameRender.gameRetry(($restartButton) => {
+            $restartButton.addEventListener("click", this.init.bind(this));
         });
     }
 }
