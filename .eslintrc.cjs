@@ -15,5 +15,6 @@ module.exports = {
     'no-tabs': 'off',
     'no-new': 'off',
     'import/extensions': 'off',
+    'linebreak-style': ['error', 'windows'],
   },
 };
