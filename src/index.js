@@ -15,7 +15,9 @@ export default function BaseballGame() {
   $("#submit").addEventListener("click", () => {
     const userInputNumbers = getUserNumber();
 
-    gameResult(computerInputNumbers, userInputNumbers);
+    if (userInputNumbers) {
+      const game_result = gameResult(computerInputNumbers, userInputNumbers);
+    }
   });
 }
 

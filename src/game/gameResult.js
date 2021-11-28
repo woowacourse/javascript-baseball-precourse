@@ -23,6 +23,15 @@ const numberToArray = (number) =>
     .split("")
     .map((value) => parseInt(value, 10));
 
+const getGameResultText = (strikeCount, ballCount) => {
+  if (ballCount === 0 && strikeCount === 0) return "낫싱";
+  if (ballCount === 0 && strikeCount === 3) return "정답";
+  if (ballCount === 0) return `${strikeCount}스트라이크`;
+  if (strikeCount === 0) return `${ballCount}볼`;
+
+  return `${ballCount}볼 ${strikeCount}스트라이크`;
+};
+
 const gameResult = (computerInputNumbers, userInputNumbers) => {
   computerInputNumbers = numberToArray(computerInputNumbers);
   userInputNumbers = numberToArray(userInputNumbers);
@@ -30,7 +39,7 @@ const gameResult = (computerInputNumbers, userInputNumbers) => {
   const strikeCount = checkStrikeCount(computerInputNumbers, userInputNumbers);
   const ballCount = checkBallCount(computerInputNumbers, userInputNumbers);
 
-  console.log(strikeCount, ballCount);
+  return getGameResultText(strikeCount, ballCount);
 };
 
 export default gameResult;
