@@ -4,9 +4,8 @@
 
 ### 🛠 초기화
 
-1. `input` 값 초기화
+1. `input`, `answer`, `isExit` 등의 필요 변수 초기화
 2. EventListener 등록 (클릭 이벤트, 입력 이벤트)
-3.
 
 ### 🛠 랜덤 정답 생성
 
