@@ -1,9 +1,5 @@
-import {
-  generateRandomNumber,
-  parseInput,
-  isNotValidInput,
-  getStrikeAndBall,
-} from './utils.js';
+import { parseInput, isNotValidInput } from './utils/input';
+import { generateRandomNumber, getStrikeAndBall } from './utils/game.js';
 import { BASEBALL_RULE, GAME_RESULT, MESSAGE } from './constants.js';
 import { $, createElement, removeFirstChild, replaceChild } from './dom.js';
 
