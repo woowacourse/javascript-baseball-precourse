@@ -11,9 +11,12 @@ import {
 } from './constants.js';
 
 function BaseballGame () {
-  this.computerInputNumberArray = pickUniqueThreeNumbers();
+  this.computerInputNumberArray = [];
 
   this.init = () => {
+    this.computerInputNumberArray = pickUniqueThreeNumbers();
+    $(SELECTOR.RESULT).innerHTML = '';
+    $(SELECTOR.INPUT).value = '';
     initEventListeners();
   };
 
@@ -33,9 +36,7 @@ function BaseballGame () {
 
   const onClickRestartButton = (event) => {
     if (event.target.id === SELECTOR.RESTART_BUTTON) {
-      $(SELECTOR.RESULT).innerHTML = '';
-      $(SELECTOR.INPUT).value = '';
-      this.computerInputNumberArray = pickUniqueThreeNumbers();
+      this.init();
     }
   };
 
