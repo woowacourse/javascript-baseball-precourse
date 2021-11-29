@@ -1,15 +1,3 @@
-export const ramdomAnswer = () => {
-  let randomNum = getRandomNum();
-
-  while (
-    isDuplicated(randomNum.firstNum, randomNum.secondNum, randomNum.thirdNum)
-  ) {
-    randomNum = getRandomNum();
-  }
-
-  return '' + randomNum.firstNum + randomNum.secondNum + randomNum.thirdNum;
-};
-
 const getRandomNum = () => {
   const randomNum = {
     firstNum: MissionUtils.Random.pickNumberInRange(1, 9),
@@ -26,4 +14,16 @@ const isDuplicated = (firstNum, secondNum, thirdNum) => {
   }
 
   return false;
+};
+
+export const ramdomAnswer = () => {
+  let randomNum = getRandomNum();
+
+  while (
+    isDuplicated(randomNum.firstNum, randomNum.secondNum, randomNum.thirdNum)
+  ) {
+    randomNum = getRandomNum();
+  }
+
+  return '' + randomNum.firstNum + randomNum.secondNum + randomNum.thirdNum;
 };

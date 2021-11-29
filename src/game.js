@@ -7,22 +7,6 @@ import {
   RESTART_TEXT,
 } from './constants.js';
 
-export const compareInputWithAnswer = (
-  computerInputNumbers,
-  userInputNumbers
-) => {
-  let result = {
-    strike: 0,
-    ball: 0,
-  };
-
-  result.ball = getBallCount(computerInputNumbers, userInputNumbers);
-  result.strike = getStrikeCount(computerInputNumbers, userInputNumbers);
-  result.ball -= result.strike;
-
-  return result;
-};
-
 const getBallCount = (computerInputNumbers, userInputNumbers) => {
   let ballCount = 0;
 
@@ -47,21 +31,32 @@ const getStrikeCount = (computerInputNumbers, userInputNumbers) => {
   return strikeCount;
 };
 
-export const getHintString = (result) => {
-  const { strike, ball } = result;
+export const compareInputWithAnswer = (
+  computerInputNumbers,
+  userInputNumbers
+) => {
+  let result = {
+    strike: 0,
+    ball: 0,
+  };
 
-  if (strike == 0 && ball > 0) {
-    return ball + BALL;
-  } else if (ball === 0 && strike > 0 && strike < 3) {
-    return strike + STRIKE;
-  } else if (ball > 0 && strike > 0 && strike < 3) {
-    return ball + BALL + ' ' + strike + STRIKE;
-  } else if (ball === 0 && strike === 0) {
-    return NOTHING;
-  } else {
-    createRestart();
-    return WIN;
-  }
+  result.ball = getBallCount(computerInputNumbers, userInputNumbers);
+  result.strike = getStrikeCount(computerInputNumbers, userInputNumbers);
+  result.ball -= result.strike;
+
+  return result;
+};
+
+const createRestartButton = () => {
+  const restartButton = document.createElement('button');
+
+  restartButton.setAttribute('id', 'game-restart-button');
+  restartButton.textContent = RESTART_BUTTON_TEXT;
+  restartButton.addEventListener('click', (e) => {
+    window.location.reload();
+  });
+
+  return restartButton;
 };
 
 const createRestart = () => {
@@ -77,14 +72,19 @@ const createRestart = () => {
   app.appendChild(restartDiv);
 };
 
-const createRestartButton = () => {
-  const restartButton = document.createElement('button');
+export const getHintString = (result) => {
+  const { strike, ball } = result;
 
-  restartButton.setAttribute('id', 'game-restart-button');
-  restartButton.textContent = RESTART_BUTTON_TEXT;
-  restartButton.addEventListener('click', (e) => {
-    window.location.reload();
-  });
-
-  return restartButton;
+  if (strike == 0 && ball > 0) {
+    return ball + BALL;
+  } else if (ball === 0 && strike > 0 && strike < 3) {
+    return strike + STRIKE;
+  } else if (ball > 0 && strike > 0 && strike < 3) {
+    return ball + BALL + ' ' + strike + STRIKE;
+  } else if (ball === 0 && strike === 0) {
+    return NOTHING;
+  } else {
+    createRestart();
+    return WIN;
+  }
 };
