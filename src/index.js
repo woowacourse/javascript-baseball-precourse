@@ -36,11 +36,8 @@ export default class BaseballGame {
 
   handleSubmit(event) {
     event.preventDefault();
-    const [isSuccess, failText] = this.play(
-      this.computerInput,
-      this.getUserInput()
-    );
-    renderResult(isSuccess, failText);
+    const playResult = this.play(this.computerInput, this.getUserInput());
+    renderResult(playResult);
     const $restartButton = $("#game-restart-button");
     $restartButton.addEventListener("click", this.restartGame);
   }

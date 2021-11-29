@@ -16,10 +16,10 @@ const renderSuccessMessage = () => {
   `;
 };
 
-export const renderResult = (isSuccess, message = "") => {
+export const renderResult = ({ isSuccess, failMessage }) => {
   const result = isSuccess
     ? renderSuccessMessage()
-    : renderFailMessage(message);
+    : renderFailMessage(failMessage);
   return result;
 };
 

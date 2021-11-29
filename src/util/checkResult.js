@@ -16,7 +16,7 @@ const checkBall = (computerInputNumbers, userInputNumbers, strikeCount) => {
   return totalBallCount - strikeCount;
 };
 
-const getResultText = (strikeCount, ballCount) => {
+const getFailMessage = (strikeCount, ballCount) => {
   if (strikeCount && ballCount)
     return `${ballCount}볼 ${strikeCount}스트라이크`;
   if (strikeCount) return `${strikeCount}스트라이크`;
@@ -25,13 +25,18 @@ const getResultText = (strikeCount, ballCount) => {
 };
 
 export const checkResult = (computerInputNumbers, userInputNumbers) => {
+  const result = {
+    isSuccess: true,
+    failMessage: "",
+  };
   const strikeCount = checkStrike(computerInputNumbers, userInputNumbers);
+  if (strikeCount === 3) return result;
   const ballCount = checkBall(
     computerInputNumbers,
     userInputNumbers,
     strikeCount
   );
-  const failText = getResultText(strikeCount, ballCount);
-  const isSuccess = strikeCount === 3 ? true : false;
-  return [isSuccess, failText];
+  result.failMessage = getFailMessage(strikeCount, ballCount);
+  result.isSuccess = false;
+  return result;
 };
