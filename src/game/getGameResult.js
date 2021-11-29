@@ -1,6 +1,6 @@
 import { INPUT_DIGIT } from "../input/getComputerInput.js";
 
-const ANSWER = "정답";
+export const ANSWER = "정답";
 const NOTHING = "낫싱";
 
 function isRightAnswer(computerInput, userInput) {
@@ -33,6 +33,7 @@ export default function getGameResult(computerInput, userInput) {
   let ballCount = "";
   let strikeCount = "";
 
+  console.log(computerInput, userInput);
   if (isRightAnswer(computerInput, userInput)) return ANSWER;
   ballCount = countBall(String(computerInput).split(""), String(userInput).split(""));
   strikeCount = countStrike(String(computerInput).split(""), String(userInput).split(""));
