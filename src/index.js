@@ -9,6 +9,7 @@ export default class BaseballGame {
   constructor() {
     this.configureElementProperties();
     this.configureAnswerElementProperties();
+    this.answerNumbers = this.generateAnswerNumbers();
   }
   
   /**
@@ -36,6 +37,22 @@ export default class BaseballGame {
     this.$resetButton.innerText = "게임 재시작";
   }
 
+  /**
+   * 1~9까지의 숫자를 중복없이 3자리 생성하는 메소드
+   * @return {String} 3자리 숫자
+   */
+  generateAnswerNumbers() {
+    const listSize = 3;
+    const minNumber = 1;
+    const maxNumber = 9;
+    let numbers = new Set();
+
+    while (numbers.size < listSize) {
+      numbers.add(MissionUtils.Random.pickNumberInRange(minNumber, maxNumber));
+    }
+
+    return Array.from(numbers).join("");
+  }
 
   play(computerInputNumbers, userInputNumbers) {
     return "결과 값 String";
