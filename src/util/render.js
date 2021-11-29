@@ -22,3 +22,7 @@ export const renderResult = (isSuccess, message = "") => {
     : renderFailMessage(message);
   return result;
 };
+
+export const renderInit = () => {
+  $result.innerText = "";
+};

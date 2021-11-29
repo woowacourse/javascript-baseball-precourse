@@ -4,18 +4,21 @@ import {
   isLengthThree,
 } from "./util/validator.js";
 import { $ } from "./util/selector.js";
-import { renderResult } from "./util/render.js";
+import { renderResult, renderInit } from "./util/render.js";
 import { checkResult } from "./util/checkResult.js";
 
 export default class BaseballGame {
   constructor() {
     this.computerInput = 0;
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.restartGame = this.restartGame.bind(this);
+    this.init = this.init.bind(this);
   }
   init() {
     this.generateComputerInput();
     const $form = $("form");
     $form.addEventListener("submit", this.handleSubmit);
+    console.log(this.computerInput);
   }
 
   generateComputerInput() {
@@ -38,6 +41,8 @@ export default class BaseballGame {
       this.getUserInput()
     );
     renderResult(isSuccess, failText);
+    const $restartButton = $("#game-restart-button");
+    $restartButton.addEventListener("click", this.restartGame);
   }
 
   play(computerInputNumbers, userInputNumbers) {
@@ -61,6 +66,12 @@ export default class BaseballGame {
   getUserInput() {
     const $input = $("#user-input");
     return $input.value;
+  }
+
+  restartGame() {
+    renderInit();
+    this.init();
+    this.resetInput();
   }
 }
 
