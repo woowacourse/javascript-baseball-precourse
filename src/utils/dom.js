@@ -1,4 +1,5 @@
-export const $ = (id, target = document) => target.getElementById(id);
+export const $ = (selector, target = document) =>
+  target.querySelector(selector);
 
 export const createElement = (innerHTML, type = 'div') => {
   const element = document.createElement(type);
