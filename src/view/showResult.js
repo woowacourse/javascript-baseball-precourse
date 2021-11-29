@@ -1,6 +1,6 @@
 import { ANSWER } from "../game/getGameResult.js";
 
-function renderAskRegame() {
+function renderAskRestartView() {
   const $resultDivElement = document.getElementById("result");
   $resultDivElement.innerHTML = `
     <div>🎉<strong>정답을 맞추셨습니다!</strong>🎉</div>
@@ -11,6 +11,6 @@ function renderAskRegame() {
 
 export default function showResult(resultString) {
   if (resultString === ANSWER) {
-    renderAskRegame();
+    renderAskRestartView();
   }
 }
