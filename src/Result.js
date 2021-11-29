@@ -32,7 +32,7 @@ export function getGameOver() {
   let result;
   result = '<p>🎉 <strong>정답을 맞추셨습니다!</strong> 🎉</p>';
   result += '게임을 새로 시작하시겠습니까?  ';
-  result += '<button id="restart">게임 재시작</button>';
+  result += '<button id="game-restart-button">게임 재시작</button>';
 
   return result;
 }

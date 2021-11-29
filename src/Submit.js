@@ -21,7 +21,7 @@ function onValidInputSubmit(userInputNumbers) {
   const result = window.play(window.computerInputNumbers, userInputNumbers);
   document.getElementById('result').innerHTML = result;
 
-  const restart = document.getElementById('restart');
+  const restart = document.getElementById('game-restart-button');
   if (restart) restart.addEventListener('click', onRestartClick);
 }
 
