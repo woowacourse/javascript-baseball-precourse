@@ -45,7 +45,9 @@
 
 <b>validation.js</b>
 
-- [ ] input 값이 비어있지 않은지 (011) - `isNotnull`
+- [ ] input을 모든 조건에 맞도록 check - `checkInput` 
+
+- [X] input 값이 비어있지 않은지 (011) - `isNotnull`
 
 - [ ] 3자리 수가 맞는지 (012) - `isThreeNum`
 
