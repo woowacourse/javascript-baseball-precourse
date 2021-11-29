@@ -6,7 +6,7 @@ import getStrikeAndBallResult from "./getStrikeAndBallResult.js";
 export default class BaseballGame {
   /**
    * 클래스 초기화시 index.html element와 정답시 로드할 element를 
-    property로 저장 및 정답 숫자를 생성
+    property로 저장 및 정답 숫자를 생성하는 메소드 실행
    */
   constructor() {
     this.configureElementProperties();
@@ -16,7 +16,7 @@ export default class BaseballGame {
   
   /**
    * index.html의 element reference들을 property로 저장하는 메소드
-   * submit 이벤트 발생시 onClickSubmitButton 동작
+   * submit 이벤트 발생시 onClickSubmitButton 실행
    */
   configureElementProperties() {
     this.$input = document.querySelector('#user-input');
@@ -27,6 +27,7 @@ export default class BaseballGame {
     
   /**
    * 정답 시 로드, 재시작 시 삭제되는 element를 property로 저장하는 메소드
+   * resetButton 이벤트 발생시 onClickResetButton 실행
    */
   configureAnswerElementProperties() {
     this.$answerResultComment = document.createElement('h4');
