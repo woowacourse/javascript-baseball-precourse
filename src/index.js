@@ -58,7 +58,7 @@ const result = document.querySelector('#result');
 form.addEventListener("submit", function(e) {
     e.preventDefault();
     if(isCorrectInput(userInput.value)){
-        result.textContent = userInput.value;
+        result.textContent = play(answer, userInput.value);
     }
     else {
         userInput.value = '';
