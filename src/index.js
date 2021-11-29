@@ -64,10 +64,13 @@ const baseBallGame = new BaseballGame();
 baseBallGame.init();
 
 // 테스트용 콘솔 로그
-// console.log(checkResult("123", "123"), "3strike");
+// console.log(checkResult("123", "123"), "3스트라이크");
 // console.log(checkResult("123", "345"), "1볼");
 // console.log(checkResult("123", "456"), "낫싱");
 // console.log(checkResult("123", "134"), "1볼 1스트라이크");
+// console.log(checkResult("987", "879"), "3볼");
+// console.log(checkResult("917", "279"), "2볼");
+// console.log(checkResult("234", "239"), "2스트라이크");
 // console.log(baseBallGame.play(123, 456), "통과");
 // console.log(baseBallGame.play(123, "---"), "숫자아님-실패");
 // console.log(baseBallGame.play(123, 111), "중복있음-실패");

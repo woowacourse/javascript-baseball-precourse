@@ -16,6 +16,14 @@ const checkBall = (computerInputNumbers, userInputNumbers, strikeCount) => {
   return totalBallCount - strikeCount;
 };
 
+const getResultText = (strikeCount, ballCount) => {
+  if (strikeCount && ballCount)
+    return `${ballCount}볼 ${strikeCount}스트라이크`;
+  if (strikeCount) return `${strikeCount}스트라이크`;
+  if (ballCount) return `${ballCount}볼`;
+  return "낫싱";
+};
+
 export const checkResult = (computerInputNumbers, userInputNumbers) => {
   const strikeCount = checkStrike(computerInputNumbers, userInputNumbers);
   const ballCount = checkBall(
@@ -23,5 +31,6 @@ export const checkResult = (computerInputNumbers, userInputNumbers) => {
     userInputNumbers,
     strikeCount
   );
-  return [ballCount, strikeCount];
+  const res = getResultText(strikeCount, ballCount);
+  return res;
 };
