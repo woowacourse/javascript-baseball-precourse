@@ -9,6 +9,7 @@ import {
   BASEBALL_NUMBER_LENGTH,
   CORRECT_MESSAGE_TEMPLETE,
 } from "../constant/index.js";
+import { DOMS } from "../constant/index.js";
 
 export const generateAlertMessage = (userInputNumbers) => {
   if (isInvalidNumber(userInputNumbers)) {
@@ -26,6 +27,7 @@ export const generateAlertMessage = (userInputNumbers) => {
 
 export const generateResultMessage = (strike, ball) => {
   if (strike === BASEBALL_NUMBER_LENGTH) {
+    endGame();
     return generateCorrectMessage();
   }
 
@@ -49,4 +51,8 @@ const generateHintMessage = (strike, ball) => {
   if (strike > 0 && ball > 0) {
     return `${ball}볼 ${strike}스트라이크`;
   }
+};
+
+const endGame = () => {
+  DOMS.$userInput.disabled = true;
 };
