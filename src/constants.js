@@ -11,5 +11,5 @@ export const GAME_RESULT_STATE = {
 };
 
 export const ERROR_MESSAGE = {
-  INPUT_ERROR: '1~9까지의 수를 중복없이 3개 입력해주세요.',
+  INPUT_ERROR: `${GAME_CONFIG.MIN_NUMBER}~${GAME_CONFIG.MAX_NUMBER}까지의 수를 중복없이 3개 입력해주세요.`,
 };
