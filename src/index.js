@@ -99,6 +99,26 @@ export default class BaseballGame{
       answer = `${score[1]}볼 ${score[0]}스트라이크`;
     }
     return answer;
+  }//정답 여부 확인(3스트라이크)
+  checkCorrectness(result) {
+    if (result === "3스트라이크") {
+      return true;
+    }
+    return false;
+  }
+  printResult(answer) {
+    //정답여부에 따라 판정 결과 문자열 변경
+    const correctness = this.checkCorrectness(answer);
+    if (correctness) {
+      answer = "🎉정답을 맞추셨습니다!🎉";
+      return answer;
+    } 
+    return answer;
+  }
+  paintResult(result) {
+    //결과문을 html로 출력
+    const resultContainer = document.querySelector('#result');
+    resultContainer.innerHTML = this.printResult(result);
   }
   gameStart() {
     const input = document.querySelector("#user-input");
@@ -110,7 +130,8 @@ export default class BaseballGame{
       if (!this.checkUserInput(input.value)) {
         return alert("1~9사이의 서로 다른 세자리 숫자를 입력해주세요.");
       }
-      console.log(this.play(computerRandomNumber, input.value));
+      const result = this.play(computerRandomNumber, input.value);
+      this.paintResult(result);
     })
   }
 }
