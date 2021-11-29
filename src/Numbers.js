@@ -1,4 +1,4 @@
-export default function createComputerInputNumbers() {
+export function createComputerInputNumbers() {
   const numbers = [];
 
   while (numbers.length < 3) {
@@ -6,6 +6,17 @@ export default function createComputerInputNumbers() {
 
     if (!numbers.includes(random)) numbers.push(random);
   }
+
+  return numbers;
+}
+
+function parseStringToInt(string) {
+  return parseInt(string, 10);
+}
+
+export function createUserInputNumbers() {
+  const userInput = document.getElementById('user-input').value;
+  const numbers = userInput.toString().split('').map(parseStringToInt);
 
   return numbers;
 }
