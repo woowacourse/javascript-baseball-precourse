@@ -11,7 +11,7 @@ const submitButton = document.querySelector('#submit');
 const userInputNumbers = document.querySelector('#user-input');
 const gameResult = document.querySelector('#result');
 
-userInputNumbers.addEventListener('keyup', event => {
+userInputNumbers.addEventListener('keyup', (event) => {
   if (event.key === 'Enter') {
     submitButton.click();
   }
@@ -28,7 +28,7 @@ const bindGameRestartEvent = () => {
   });
 };
 
-submitButton.addEventListener('click', event => {
+submitButton.addEventListener('click', (event) => {
   event.preventDefault();
   const { MIN_NUMBER, MAX_NUMBER, LENGTH } = GAME_CONFIG;
 

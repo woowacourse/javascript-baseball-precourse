@@ -6,7 +6,7 @@ export default class BaseballGame {
     this.template = new Template();
   }
 
-  play = userInputNumbers => {
+  play = (userInputNumbers) => {
     const checkResults = this.checkResult(
       this.computerInputNumbers,
       userInputNumbers,
@@ -47,7 +47,7 @@ export default class BaseballGame {
     this.computerInputNumbers = this.createComputerNumbers();
   };
 
-  getResult = gameResult => {
+  getResult = (gameResult) => {
     const { strike, ball } = gameResult;
 
     const result = {
