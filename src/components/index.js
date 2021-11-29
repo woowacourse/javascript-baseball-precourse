@@ -7,8 +7,8 @@ const { pickNumberInRange } = MissionUtils.Random;
 export default class BaseballGame {
   /**
    * BaseballGame 설정을 진행합니다.
-   * 
-   * @param {HTMLElement} element 
+   *
+   * @param {HTMLElement} element
    * @param {Object} state : {
    *                            digit: 자리수,
    *                            exclude: 예외,
@@ -38,7 +38,7 @@ export default class BaseballGame {
 
   /**
    * 컴퓨터의 랜덤 타겟 넘버를 반환합니다.
-   * 
+   *
    * @returns String(Number(any))
    */
   getRandomNumbers() {
@@ -52,9 +52,9 @@ export default class BaseballGame {
 
   /**
    * 입력 받은 값과 컴퓨터의 타겟 넘버를 비교합니다.
-   * 
-   * @param {String} userInputNumbers 
-   * @returns 
+   *
+   * @param {String} userInputNumbers
+   * @returns
    */
   checkCorrectNumber(userInputNumbers) {
     const targetNumbers = this.computerInputNumbers.split(EMPTY);
@@ -73,8 +73,8 @@ export default class BaseballGame {
 
   /**
    * 게임을 진행합니다.
-   * 
-   * @param {String} userInputNumbers 
+   *
+   * @param {String} userInputNumbers
    */
   play(userInputNumbers) {
     let result = EMPTY;
@@ -90,8 +90,8 @@ export default class BaseballGame {
 
   /**
    * play의 결과를 받아 해당 컴포넌트에 선언된 엘리먼트에 렌더링합니다.
-   * 
-   * @param {String} sentence 
+   *
+   * @param {String} sentence
    */
   render(sentence) {
     let resultText = `<p>${sentence}</p>`;
