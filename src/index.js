@@ -1,6 +1,10 @@
 const $ = selector => document.querySelector(selector);
 
 export default class BaseballGame {
+  constructor() {
+    this.answer = this.generateAnswer();
+  }
+
   generateAnswer() {
     const answer = [];
 
@@ -62,8 +66,7 @@ export default class BaseballGame {
         return;
       }
 
-      this.play(123, userInput.value);
-
+      this.play(this.answer, userInput.value);
       return userInput.value;
     };
     button.addEventListener('click', handleSubmitUserInput);
@@ -96,7 +99,7 @@ export default class BaseballGame {
         restartButton.addEventListener('click', () => {
           $('#user-input').value = '';
           $('#result').innerHTML = '';
-          this.generateAnswer();
+          this.answer = this.generateAnswer();
         });
         return;
       }
