@@ -16,6 +16,7 @@ export default function BaseballGame() {
             Hint(Strike_Ball);
             result_game_text = Hint(Strike_Ball);
         };
+        console.log(result_game_text);
         return result_game_text;
     };
 
@@ -44,7 +45,7 @@ export default function BaseballGame() {
             $input.value = '';
             $result.removeChild(Result_Txt);
             $result.removeChild(EndGame_Txt);
-            setAnswer();
+            computerInputNumbers = setAnswer();
         };
     };
 
