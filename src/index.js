@@ -1,11 +1,13 @@
 import component from './core/component.js';
-import { parseInput, isNotValidInput } from './utils/input.js';
+import { isNotValidInput } from './utils/input.js';
 import {
   calculateBaseBall,
   getGameResult,
   generateRandomNumber,
 } from './utils/game.js';
 import { GAME_STATUS, MESSAGE } from './constants.js';
+import { $ } from './utils/dom.js';
+import UserForm from './components/UserForm.js';
 
 export default class BaseballGame extends component {
   init() {
@@ -14,6 +16,12 @@ export default class BaseballGame extends component {
       gameStatus: GAME_STATUS.READY,
       answer: generateRandomNumber(),
     };
+    this.childrens = [
+      new UserForm($('form'), {
+        gameStatus: this.state.gameStatus,
+        onSubmit: userInput => this._onSubmitUserInput(userInput),
+      }),
+    ];
   }
 
   _play(computerInputNumbers, userInputNumbers) {
@@ -24,14 +32,11 @@ export default class BaseballGame extends component {
     return getGameResult(strike, ball);
   }
 
-  _onSubmitUserInput() {
-    const userInput = parseInput(this._inputElem.value);
+  _onSubmitUserInput(userInput) {
     if (isNotValidInput(userInput)) {
       return alert(MESSAGE.NOT_VALID_INPUT);
     }
-    const result = this._play(this._answer, userInput);
-
-    this._renderResult(result);
+    const result = this._play(this.state.answer, userInput);
     this.setState({
       hint: result,
       gameStatus:
@@ -39,7 +44,7 @@ export default class BaseballGame extends component {
     });
   }
 
-  _onClickRestartButton() {
+  onClickRestartButton() {
     this.setState({
       hint: '',
       gameStatus: GAME_STATUS.READY,

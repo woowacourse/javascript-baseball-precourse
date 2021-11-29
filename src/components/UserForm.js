@@ -1,15 +1,18 @@
 import component from '../core/component.js';
 import { $ } from '../utils/dom.js';
+import { parseInput } from '../utils/input.js';
 import { GAME_STATUS } from '../constants.js';
 
 export default class UserForm extends component {
-  constructor() {
-    super();
+  initDoms() {
     this._inputElement = $('#user-input', this.container);
   }
 
   bindEvent() {
-    this.appendRootEvent('submit', this.props.onSubmit);
+    this.appendRootEvent('submit', event => {
+      event.preventDefault();
+      this.props.onSubmit(parseInput(this._inputElement.value));
+    });
   }
 
   render() {

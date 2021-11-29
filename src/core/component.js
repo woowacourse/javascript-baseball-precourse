@@ -5,6 +5,7 @@ export default class Component {
     this.state = {};
     this.childrens = [];
     this.init();
+    this.initDoms();
     this.bindEvent();
   }
 
@@ -13,6 +14,8 @@ export default class Component {
    * state 와 childrens를 초기화한다.
    */
   init() {}
+
+  initDoms() {}
 
   /**
    * 컴포넌트 내 이벤트 생성 함수
