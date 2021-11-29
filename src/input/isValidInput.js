@@ -1,6 +1,7 @@
 export const THREE_DIGIT_ERR = 1;
 export const ONE_TO_NINE_ERR = 2;
 export const DUPLICATE_ERR = 3;
+const NO_ERROR = 0;
 
 function isThreeDigitInput(input) {
   return input.length === 3;
@@ -31,5 +32,5 @@ export default function isValidInput(input) {
   if (!isNoDuplicatedNumber(input)) {
     return DUPLICATE_ERR;
   }
-  return false;
+  return NO_ERROR;
 }
