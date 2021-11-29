@@ -36,6 +36,7 @@ export default class BaseballGame {
     this.$resetButton = document.createElement('button');
     this.$resetButton.id = "game-restart-button";
     this.$resetButton.innerText = "게임 재시작";
+    this.$resetButton.addEventListener('click', this.onClickResetButton);
   }
 
   /**
@@ -63,6 +64,19 @@ export default class BaseballGame {
     event.preventDefault();
     console.log(this.answerNumbers)
     this.play(Number(this.answerNumbers), Number(this.$input.value));
+  }
+
+  /**
+   * reset버튼 클릭시 answer element들 삭제, 정답 재생성하는 메소드
+   * @param {*} event 
+   */
+  onClickResetButton = (event) => {
+    this.$input.value = '';
+    this.$input.focus();
+    this.$answerResultComment.remove();
+    this.$resetComment.remove();
+    this.$resetButton.remove();
+    this.answerNumbers = this.generateAnswerNumbers();
   }
 
   play(computerInputNumbers, userInputNumbers) {
