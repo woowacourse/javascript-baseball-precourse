@@ -36,7 +36,7 @@ export default class BaseballGame {
   handleSubmit(event) {
     event.preventDefault();
     const playResult = this.play(this.computerInput, this.getUserInput());
-    renderResult(playResult);
+    playResult && renderResult(playResult);
     if (playResult.isSuccess) this.addEventlistenerToRestartButton();
   }
 
@@ -51,6 +51,7 @@ export default class BaseballGame {
     }
     alert("입력값을 다시 확인해주세요");
     this.resetInput();
+    return false;
   }
 
   resetInput() {
