@@ -2,6 +2,7 @@ export const TEXT = {
     BALL: "볼",
     STRIKE: "스트라이크",
     NOTHING: '낫싱',
+    ALERT_IS_NULL: "값을 입력해주세요.",
     ALERT_IS_NUM: "숫자만 입력할 수 있습니다.",
     ALERT_IS_THREE: "숫자를 3개 입력해주세요.",
     ALERT_IS_ANOTHER: "숫자는 중복이 불가합니다.",  

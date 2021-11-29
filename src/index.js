@@ -13,7 +13,6 @@ export default function BaseballGame() {
     const userInput = ($userInput.value).split("");
     const checkResult = checkInput(userInput);
 
-    console.log(checkResult);
   });
 
   this.play = function (computerInputNumbers, userInputNumbers) {
