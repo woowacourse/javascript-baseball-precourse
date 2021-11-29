@@ -22,7 +22,7 @@ const checkInputFunctions = [
     },
     // 길이 체크
     (val) => {
-        if (val.length != ANSWER_LENGTH) {
+        if (val.length !== ANSWER_LENGTH) {
             alert(USER_INPUT_ERROR_MSG.length);
             return false;
         }
