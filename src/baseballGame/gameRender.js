@@ -1,21 +1,14 @@
 import { $, createElement, combineElement } from "../utils.js";
-import { RESULT_CODE, RESULT_TEXT, ALERT_MESSAGE } from "../data/constants.js";
+import { RESULT_CODE, RESULT_TEXT } from "../data/constants.js";
 import { $result, $userInput, $submit } from "../data/elements.js";
 
-export function errorMessage(resultCode) {
-    switch (resultCode) {
-        case RESULT_CODE.ERROR_USERINPUT_LENGTH:
-            alert(ALERT_MESSAGE.USERINPUT_LENGTH);
-            break;
-        case RESULT_CODE.ERROR_USERINPUT_UNIQUE_WORD:
-            alert(ALERT_MESSAGE.USERINPUT_UNIQUE_WORD);
-            break;
-        case RESULT_CODE.ERROR_USERINPUT_NUMBER_RANGE:
-            alert(ALERT_MESSAGE.USERINPUT_NUMBER_RANGE);
-            break;
-    }
+export function checkErrorMessage(resultCode) {
+    if (resultCode === RESULT_CODE.DONE_USERINPUT_VALID) return false;
 
+    alert(resultCode.description);
     $userInput.focus();
+
+    return true;
 }
 
 class GameRender {

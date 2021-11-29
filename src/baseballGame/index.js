@@ -2,7 +2,7 @@ import { RESULT_CODE } from "../data/constants.js";
 import { $userInput } from "../data/elements.js";
 import { gameRules } from "./gameRules.js";
 import { checkUserInputVaild, getNumberArray } from "./userInputCheck.js";
-import { errorMessage, gameRender } from "./gameRender.js";
+import { checkErrorMessage, gameRender } from "./gameRender.js";
 
 class BaseballGame {
     constructor() {
@@ -18,8 +18,7 @@ class BaseballGame {
 
     start() {
         const checkVaildCode = checkUserInputVaild($userInput.value);
-        if (checkVaildCode !== RESULT_CODE.DONE_USERINPUT_VALID) {
-            errorMessage(checkVaildCode);
+        if (checkErrorMessage(checkVaildCode) === true) {
             return false;
         }
 
