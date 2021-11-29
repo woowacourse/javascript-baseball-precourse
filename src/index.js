@@ -19,6 +19,7 @@ export default class BaseballGame {
   configureElementProperties() {
     this.$input = document.querySelector('#user-input');
     this.$submit = document.querySelector('#submit');
+    this.$submit.addEventListener('click', this.onClickSubmitButton);
     this.$result = document.querySelector('#result');
   }
     
@@ -52,6 +53,16 @@ export default class BaseballGame {
     }
 
     return Array.from(numbers).join("");
+  }
+
+  /**
+   * submit버튼 클릭시 play메소드를 정답 숫자, 입력 숫자로 실행 시키는 메소드
+   * @param {*} event 
+   */
+  onClickSubmitButton = (event) => {
+    event.preventDefault();
+    console.log(this.answerNumbers)
+    this.play(Number(this.answerNumbers), Number(this.$input.value));
   }
 
   play(computerInputNumbers, userInputNumbers) {
