@@ -174,13 +174,19 @@
 
 **추가 사항**
 - [x] 재시작의 경우 이벤트 위임을 통해 단 1회만 이벤트를 등록하도록 기능을 구현합니다.
-- [ ] 리팩토링을 진행합니다.
-- [ ] Baseball 클래스의 play 메서드 책임을 분리합니다.
+- [x] 리팩토링을 진행합니다.
+- [x] Baseball 클래스의 play 메서드 책임을 분리합니다.
 
 <br>
 
 > 기본
 > - [커밋 링크](https://github.com/InSeong-So/javascript-baseball-precourse/commit/7279b9bfcbb4c5d67e31c60d832e991c7edd7e1d)
+
+<br>
+
+> 리팩토링
+> - [커밋 링크 1](https://github.com/InSeong-So/javascript-baseball-precourse/commit/24123b51e57aa31a9ef6142568524a390f7cf39a)
+> - [커밋 링크 2](https://github.com/InSeong-So/javascript-baseball-precourse/commit/ba12abb35d1d18d9ffcedced2c4ded6ea4e5b50b) : 한 줄이 누락되어 커밋이 분리되었습니다.
 
 <br>
 
