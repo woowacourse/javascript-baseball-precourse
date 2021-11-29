@@ -30,7 +30,8 @@ export default class BaseballGame {
         return input.length === 3 && Number(input) && this.isDuplicated(input);
     }
     
-    getCountStrikeAndBall(computerNumbers, userNumbers) {
+    getCountStrikeAndBall(userNumbers) {
+        const computerNumbers = this.answer.split('');
         const strike = userNumbers.filter((number, index) => number === computerNumbers[index]);
         const ball = userNumbers
             .filter((number, index) => (number !== computerNumbers[index]) && computerNumbers.includes(number));
@@ -47,10 +48,8 @@ export default class BaseballGame {
     play(computerInputNumbers, userInputNumbers) {
         if(computerInputNumbers === userInputNumbers) return gameResults.CORRECT;
     
-        const computerNumArray = computerInputNumbers.split('');
         const userNumArray = userInputNumbers.split('');
-    
-        const [strike, ball] = this.getCountStrikeAndBall(computerNumArray, userNumArray);
+        const [strike, ball] = this.getCountStrikeAndBall(userNumArray);
         return this.getPlayResult(strike, ball);
     }
 };
