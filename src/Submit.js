@@ -7,10 +7,19 @@ function onInvalidInputSubmit() {
   document.getElementById('user-input').value = '';
 }
 
+function onValidInputSubmit(userInputNumbers) {
+  const result = window.play(window.computerInputNumbers, userInputNumbers);
+  document.getElementById('result').innerText = result;
+}
+
 export default function onInputSubmit(e) {
   e.preventDefault();
   const userInputNumbers = createUserInputNumbers();
   const validation = checkInputValidation(userInputNumbers);
 
-  if (!validation) onInvalidInputSubmit();
+  if (!validation) {
+    onInvalidInputSubmit();
+  } else {
+    onValidInputSubmit(userInputNumbers);
+  }
 }
