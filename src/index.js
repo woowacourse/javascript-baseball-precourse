@@ -11,16 +11,34 @@ const resultArea = document.querySelector("#result");
 const correctDiv = document.querySelector("#correct");
 const restartButton = document.querySelector("#game-restart-button");
 
-// user submit button event listener
-inputButton.addEventListener("click", handleUserInput);
+// handle user input
+const handleUserInput = function handleUserInputOnSubmitButtonClick() {
+  // get user input value
+  const inputValue = inputArea.value;
 
-// restart button event listener
+  // play game and get result
+  const result = game.play(game.answer, inputValue);
+
+  // show correct div on answer
+  if (result === "3스트라이크") correctDiv.style.display = "block";
+
+  // set hint
+  setHint(result, resultArea);
+};
+
+// handle reset button
+const handleResetButton = function handleResetOnResetGameButtonClick() {
+  game.reset();
+};
+
+// add event listeners for submit button and reset button
+inputButton.addEventListener("click", handleUserInput);
 restartButton.addEventListener("click", handleResetButton);
 
 // define game class
 export default class BaseballGame {
   constructor() {
-    // generate answer on class initiation
+    // generate answer on class initialization
     this.answer = generateAnswer();
   }
 
@@ -30,7 +48,7 @@ export default class BaseballGame {
     if (!validateInput(userInputNumbers)) return;
 
     // compare answer and input
-    const [ball, strike] = compareValues(
+    const { ball, strike } = compareValues(
       computerInputNumbers,
       userInputNumbers
     );
@@ -50,25 +68,6 @@ export default class BaseballGame {
     // hide correct div
     correctDiv.style.display = "none";
   }
-}
-
-// handle user input
-function handleUserInput() {
-  // get user input value
-  const inputValue = inputArea.value;
-
-  // play game and get result
-  const result = game.play(game.answer, inputValue);
-
-  // show correct div on answer
-  if (result === "3스트라이크") correctDiv.style.display = "block";
-
-  // set hint
-  setHint(result, resultArea);
-}
-
-function handleResetButton() {
-  game.reset();
 }
 
 // initiate game

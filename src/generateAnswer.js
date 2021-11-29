@@ -1,10 +1,10 @@
 // generate three digit number, with each digits unique
-export default function generateAnswer() {
+const generateAnswer = function generateThreeDigitUniqueAnswer() {
   let numberString = "";
   let digit;
 
   // loop three times
-  for (let i = 0; i < 3; i++) {
+  while (numberString.length < 3) {
     // get random unique int and concat to string
     digit = generateUniqueNumber(numberString);
     numberString += digit;
@@ -12,10 +12,10 @@ export default function generateAnswer() {
 
   // return generated as int
   return numberString;
-}
+};
 
 // helper function: generate single digit unique integer
-function generateUniqueNumber(str) {
+const generateUniqueNumber = function generateSingleUniqueNumber(str) {
   // generate random number
   let num = MissionUtils.Random.pickNumberInRange(1, 9);
 
@@ -25,4 +25,6 @@ function generateUniqueNumber(str) {
   }
 
   return num;
-}
+};
+
+export default generateAnswer;

@@ -1,10 +1,12 @@
-export default function formatResult(ball, strike) {
+const formatResult = function formatResultToString(ball, strike) {
   // no match
-  if (!ball && !strike) return "낫싱";
+  if (ball === 0 && strike === 0) return "낫싱";
   // both ball and strike
-  else if (ball && strike) return `${ball}볼 ${strike}스트라이크`;
+  else if (ball !== 0 && strike !== 0) return `${ball}볼 ${strike}스트라이크`;
   // only ball
-  else if (ball) return `${ball}볼`;
+  else if (ball !== 0) return `${ball}볼`;
   // only strike
   else return `${strike}스트라이크`;
-}
+};
+
+export default formatResult;

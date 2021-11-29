@@ -1,16 +1,21 @@
 // compare input with answer
-export default function compareValues(answer, input) {
-  let ball = 0,
-    strike = 0;
+const compareValues = function compareAnswerWithUserInput(answer, input) {
+  const { ball, strike } = input.split("").reduce(
+    (acc, num, i) => {
+      // check strike and ball by comparing index at input and at answer
+      checkStrikeBall(answer.indexOf(num), i, acc);
 
-  // compare each digit by comparing through index of method
-  for (let i = 0; i < input.length; i++) {
-    const index = answer.indexOf(input[i]);
+      return acc;
+    },
+    { ball: 0, strike: 0 }
+  );
 
-    // increment strike or ball
-    if (index === i) strike++;
-    else if (index >= 0) ball++;
-  }
+  return { ball, strike };
+};
 
-  return [ball, strike];
-}
+const checkStrikeBall = function checkInputStrikeBallScore(index, i, acc) {
+  if (index === i) acc.strike += 1;
+  else if (index >= 0) acc.ball += 1;
+};
+
+export default compareValues;
