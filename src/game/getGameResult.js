@@ -1,4 +1,4 @@
-import { INPUT_DIGIT } from "../input/getComputerInput.js";
+import { INPUT_LENGTH } from "../input/getComputerInput.js";
 
 export const ANSWER = "정답";
 const NOTHING = "낫싱";
@@ -10,7 +10,7 @@ function isRightAnswer(computerInput, userInput) {
 function countBall(computerInput, userInput) {
   let ballCount = 0;
 
-  for (let i = 0; i < INPUT_DIGIT; i += 1) {
+  for (let i = 0; i < INPUT_LENGTH; i += 1) {
     if (userInput.find((elem, idx) => idx !== i && elem === computerInput[i])) {
       ballCount += 1;
     }
@@ -21,7 +21,7 @@ function countBall(computerInput, userInput) {
 function countStrike(computerInput, userInput) {
   let strikeCount = 0;
 
-  for (let i = 0; i < INPUT_DIGIT; i += 1) {
+  for (let i = 0; i < INPUT_LENGTH; i += 1) {
     if (userInput.find((elem, idx) => idx === i && elem === computerInput[i])) {
       strikeCount += 1;
     }
