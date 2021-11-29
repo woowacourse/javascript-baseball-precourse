@@ -7,7 +7,8 @@ import {
   MESSAGE_RESTART_GAME,
 } from "./config.js";
 
-export default function EventManager() {
+export default function EventManager(baseballGame) {
+  this.baseballGame = baseballGame;
   this.form = $("form");
   this.$userInput = $("#user-input");
   this.$submitButton = $("#submit");
@@ -16,11 +17,11 @@ export default function EventManager() {
   this.$gameRestartButton.setAttribute("id", "game-restart-button");
   this.$gameRestartButton.innerText = "재시작";
 
-  const handleSubmitForm = function (e) {
+  this.handleSubmitForm = function (e) {
     e.preventDefault();
   };
 
-  const handleClickSubmitButton = function (baseballGame) {
+  this.handleClickSubmitButton = function () {
     const userInputNumbers = this.$userInput.value.trim();
     const validationResult = validateInput(userInputNumbers);
 
@@ -31,8 +32,13 @@ export default function EventManager() {
       return;
     }
 
-    const resultString = baseballGame.playWithGeneratedNumber(userInputNumbers);
+    const resultString =
+      this.baseballGame.playWithGeneratedNumber(userInputNumbers);
 
+    this.render(resultString);
+  };
+
+  this.render = function (resultString) {
     if (resultString === RESULT_CORRECT) {
       const correctMessageTemplate = `
         <h4>${MESSAGE_CORRECT_ANSWER}</h4>
@@ -43,7 +49,7 @@ export default function EventManager() {
       this.$resultDiv.appendChild(this.$gameRestartButton);
 
       $on(this.$gameRestartButton, "click", () => {
-        baseballGame.initAnswer();
+        this.baseballGame.initAnswer();
         this.$resultDiv.innerHTML = "";
         this.$userInput.value = "";
       });
@@ -52,8 +58,8 @@ export default function EventManager() {
     }
   };
 
-  this.initEventListeners = (arg) => {
-    $on(this.form, "submit", handleSubmitForm);
-    $on(this.$submitButton, "click", handleClickSubmitButton.bind(this, arg));
+  this.initEventListeners = () => {
+    $on(this.form, "submit", this.handleSubmitForm);
+    $on(this.$submitButton, "click", this.handleClickSubmitButton.bind(this));
   };
 }
