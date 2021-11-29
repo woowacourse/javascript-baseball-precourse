@@ -1,19 +1,22 @@
 export default class Component {
-  constructor(container, props) {
+  constructor(container, props, handlers) {
     this.container = container;
     this.props = props;
+    this.handlers = handlers;
     this.state = {};
     this.childrens = [];
     this.init();
+    this.initChildrens();
     this.initDoms();
     this.bindEvent();
   }
 
   /**
-   * 컴포넌트 초기화 함수
-   * state 와 childrens를 초기화한다.
+   *  컴포넌트 state 초기화 함수
    */
   init() {}
+
+  initChildrens() {}
 
   initDoms() {}
 
@@ -28,13 +31,18 @@ export default class Component {
   render() {}
 
   setState(nextState) {
-    this.state = { ...this.state, nextState };
+    this.state = { ...this.state, ...nextState };
     this.updateComponent();
   }
 
-  updateComponent() {
-    this.childrens.forEach(component => component.updateComponent());
+  setProps(nextProps) {
+    this.props = nextProps;
     this.render();
+  }
+
+  updateComponent() {
+    this.render();
+    this.childrens.forEach(component => component.setProps(this.state));
   }
 
   appendRootEvent(eventType, eventHandler) {
