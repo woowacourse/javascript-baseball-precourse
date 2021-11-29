@@ -111,6 +111,7 @@ export default class BaseballGame {
     );
     const restartButton = createMyElement("button", "게임 재시작");
     const restartContainer = document.createElement("div");
+    restartButton.id = ID.GAME_RESTART_BUTTON;
     restartButton.addEventListener("click", this.init.bind(this));
     restartContainer.append(restartText, restartButton);
     this.$result.append(guideText, restartContainer);
