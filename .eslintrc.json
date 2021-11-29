@@ -11,6 +11,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "operator-linebreak": ["error", "before"],
     "prettier/prettier": "error",
     "no-unused-vars": "warn"
   }

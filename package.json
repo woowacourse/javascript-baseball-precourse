@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "우아한테크코스 프리코스 숫자 야구 게임 미션",
   "devDependencies": {
-    "cypress": "8.7.0",
     "eslint": "^8.3.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.3.0",
@@ -29,5 +28,8 @@
   "engines": {
     "npm": ">=6.0.0",
     "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "cypress": "^9.1.0"
   }
 }
