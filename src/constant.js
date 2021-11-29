@@ -1,0 +1,1 @@
+export const inputErrorMessage ='1~9까지 겹치지 않는 숫자 3개를 입력해야 합니다';
