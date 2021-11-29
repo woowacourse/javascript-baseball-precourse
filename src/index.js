@@ -6,12 +6,16 @@ export default function BaseballGame() {
   
   this.play = (computerInputNumbers, userInputNumbers) => {
     if(!Array.isArray(computerInputNumbers) && !Array.isArray(userInputNumbers)) {
-      computerInputNumbers = computerInputNumbers.toString().split('').map(v => Number(v));
-      userInputNumbers = userInputNumbers.toString().split('').map(v => Number(v));
+      computerInputNumbers = getNumArr(computerInputNumbers);
+      userInputNumbers = getNumArr(userInputNumbers);
     }
 
     return getResult(computerInputNumbers, userInputNumbers);
   };
+  
+  const getNumArr = (notNumArr) => {
+    return notNumArr.toString().split('').map(num => Number(num));
+  }
   
   const resetOutput = () => {
     $("#result").innerHTML = '';
@@ -19,7 +23,7 @@ export default function BaseballGame() {
   }
 
   const isVaildNum = () => {
-    const userInputNumbers = $("#user-input").value.split('').map(num => Number(num));
+    const userInputNumbers = getNumArr($("#user-input").value);
     if(userInputNumbers.includes(0) || userInputNumbers.includes(NaN) || userInputNumbers.length !== 3 ||  [...new Set(userInputNumbers)].length !== 3) {
       printError(userInputNumbers);
       return;
@@ -42,7 +46,6 @@ export default function BaseballGame() {
   }
 
   const countAnswer = (computerInputNumbers, userInputNumbers) => {
-    // strike 수 
     const strike = computerInputNumbers.reduce((acc, num, i) => {
       if(num === userInputNumbers[i]) {
         acc += 1;
@@ -50,7 +53,6 @@ export default function BaseballGame() {
       return acc;
     }, 0);
 
-    // ball 수 
     const ball = computerInputNumbers.reduce((acc, num, i) => {
       if((userInputNumbers.indexOf(num) !== i) && (userInputNumbers.indexOf(num) !== -1)) {
         acc += 1;
