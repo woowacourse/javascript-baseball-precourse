@@ -12,7 +12,7 @@
 
 ## 구현할 기능 목록
 
-- 프로퍼티 설정
+- Document elements 프로퍼티 설정
 - 서로 다른 수로 이루어진 3개의 수 생성
   - MissionUtils의 Random.pickNumberInRange 사용
 - 확인 버튼 클릭시 실행 함수
