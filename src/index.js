@@ -1,6 +1,7 @@
 import { NOTHING_ANSWER, CORRECT_ANSWER } from './result-const.js';
 import { $form, $input, $result } from './html-const.js';
 import { setAnswer } from './setAnswer.js';
+import { checkInput } from './checkInput.js';
 
 export default function BaseballGame() {
     let computerInputNumbers = setAnswer();
@@ -17,22 +18,6 @@ export default function BaseballGame() {
             result_game_text = Hint(Strike_Ball);
         };
         return result_game_text;
-    };
-
-    const checkInput = userInputNumbers => {
-        if (userInputNumbers.length !== 3) {
-            return alert('3자리 숫자를 입력하세요');
-        };
-        if (userInputNumbers[0] == 0 || userInputNumbers[1] == 0 || userInputNumbers[2] == 0) {
-            return alert('0이 아닌 숫자를 입력하세요');
-        };
-        if (isNaN(userInputNumbers)) {
-            return alert('숫자를 입력하세요');
-        };
-        if (new Set(userInputNumbers).size !== 3) {
-            return alert('중복되지 않은 값을 입력하세요.\n 예) 123(o), 122(x)');
-        };
-        return true;
     };
 
     const CountStrikeAndBall = (computerInputNumbers, userInputNumbers) => {
