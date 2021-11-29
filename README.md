@@ -21,8 +21,6 @@
 
 <b>index.js</b>
 
-\- [ ] Random 값 생성 (001) - `createRadomNum`
-
 \- [ ] String Result 생성 (002) - `createResult`
 
 \- [ ] Set Result in DOM (003) -`setResult`
@@ -43,7 +41,7 @@
 
 \- [ ]  Button을 숨기기 (009) - `clearButton`
 
-\- [ ]  New Random Number 세팅하기 (010) - `setNewNum`
+\- [ ] Random 값 생성 (001) - `createRadomNum`
 
 <b>validation.js</b>
 
