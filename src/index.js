@@ -69,6 +69,37 @@ export default class BaseballGame{
     }
     return false;
   }
+  //볼, 스트라이크 판정
+  checkingScore(computerInputNumbers, userInputNumbers) {
+    let score = [0, 0];
+    for (let i = 0; i < 3; i++){
+      if (computerInputNumbers[i] === userInputNumbers[i]) {
+        score[0] += 1;
+      }
+      else if (computerInputNumbers.includes(userInputNumbers[i])) {
+        score[1] += 1;
+      }
+    }
+    return score;
+  }
+  //판정 결과를 문자열로 변경
+  play(computerInputNumbers, userInputNumbers) {
+    const score = this.checkingScore(computerInputNumbers, userInputNumbers);
+    let answer = "";
+    if (score[0] === 0 && score[1] === 0) {
+      answer = "낫싱";
+    }
+    else if (score[0] === 0 && score[1] > 0) {
+      answer = `${score[1]}볼`;
+    }
+    else if (score[0] > 0 && score[1] === 0) {
+      answer = `${score[0]}스트라이크`;
+    }
+    else {
+      answer = `${score[1]}볼 ${score[0]}스트라이크`;
+    }
+    return answer;
+  }
   gameStart() {
     const input = document.querySelector("#user-input");
     const submitBtn = document.querySelector("#submit");
@@ -79,6 +110,7 @@ export default class BaseballGame{
       if (!this.checkUserInput(input.value)) {
         return alert("1~9사이의 서로 다른 세자리 숫자를 입력해주세요.");
       }
+      console.log(this.play(computerRandomNumber, input.value));
     })
   }
 }
