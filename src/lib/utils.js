@@ -1,24 +1,27 @@
-function isNumeric(str) {
+function checkNumeric(str) {
   return !isNaN(+str);
 }
-function isLengthThree(str) {
+function checkLengthThree(str) {
   return str.length === 3;
 }
-function isNotDuplicate(str) {
+function checkNotDuplicate(str) {
   return str.length === new Set(str.split("")).size;
 }
-function hasZero(str) {
-  return str.includes("0");
+function checkExcludeZero(str) {
+  return !str.includes("0");
 }
-export function isValidate(str) {
+export function checkValidate(str) {
   return (
-    isNumeric(str) && isLengthThree(str) && isNotDuplicate(str) && !hasZero(str)
+    checkNumeric(str) &&
+    checkLengthThree(str) &&
+    checkNotDuplicate(str) &&
+    checkExcludeZero(str)
   );
 }
 export function getComputerInput() {
   while (true) {
     const random = MissionUtils.Random.pickNumberInRange(100, 999).toString();
-    if (isNotDuplicate(random) && !hasZero(random)) {
+    if (checkNotDuplicate(random) && checkExcludeZero(random)) {
       return random;
     }
   }
