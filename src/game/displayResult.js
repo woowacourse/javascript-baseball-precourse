@@ -1,6 +1,6 @@
 import { Messages, HTML } from "../constants/constants.js";
 
-export default function displayResult(resultString) {
+function displayResult(resultString) {
     const resultDiv = document.getElementById("result");
     let state = true; // { true: playing, false :end }
 
@@ -18,3 +18,4 @@ export default function displayResult(resultString) {
     return state;
 }
 
+export default displayResult;

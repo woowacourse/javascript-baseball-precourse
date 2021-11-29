@@ -14,7 +14,7 @@ function generateNumber(computerNumber) {
     }
 }
 
-export default class BaseballGame {
+class BaseballGame {
     constructor() {
         this.computerNumber = [];
     }
@@ -33,3 +33,5 @@ export default class BaseballGame {
         this.setComputerNumber();
     }
 }
+
+export default BaseballGame;

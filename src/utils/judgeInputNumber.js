@@ -6,7 +6,7 @@ function isBall(computerInputNumbers, userInputNumbers, index) {
     return computerInputNumbers.includes(Number(userInputNumbers.charAt(index)));
 }
 
-export default function judgeInputNumber(computerInputNumbers, userInputNumbers) {
+function judgeInputNumber(computerInputNumbers, userInputNumbers) {
     let strikes = 0, balls = 0;
     console.log(computerInputNumbers, userInputNumbers);
     for(let i = 0; i < 3; i++) {
@@ -19,3 +19,5 @@ export default function judgeInputNumber(computerInputNumbers, userInputNumbers)
 
     return [strikes, balls];
 }
+
+export default judgeInputNumber;

@@ -1,6 +1,6 @@
 import { Messages } from "../constants/constants.js";
 
-export default function resultMessages(strikes, balls) {
+function resultMessages(strikes, balls) {
     let msg;
 
     if(strikes === 0 && balls === 0) {
@@ -17,3 +17,5 @@ export default function resultMessages(strikes, balls) {
 
     return msg;
 }
+
+export default resultMessages;
