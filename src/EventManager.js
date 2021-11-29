@@ -13,9 +13,16 @@ export default function EventManager(baseballGame) {
   this.$userInput = $("#user-input");
   this.$submitButton = $("#submit");
   this.$resultDiv = $("#result");
-  this.$gameRestartButton = document.createElement("button");
-  this.$gameRestartButton.setAttribute("id", "game-restart-button");
-  this.$gameRestartButton.innerText = "재시작";
+
+  this.initEventListeners = () => {
+    $on(this.form, "submit", this.handleSubmitForm);
+    $on(this.$submitButton, "click", this.handleClickSubmitButton.bind(this));
+    $on(this.$resultDiv, "click", (e) => {
+      if (e.target.id === "game-restart-button") {
+        this.handleClickGameRestartButton.call(this);
+      }
+    });
+  };
 
   this.handleSubmitForm = function (e) {
     e.preventDefault();
@@ -38,28 +45,20 @@ export default function EventManager(baseballGame) {
     this.render(resultString);
   };
 
-  this.render = function (resultString) {
-    if (resultString === RESULT_CORRECT) {
-      const correctMessageTemplate = `
-        <h4>${MESSAGE_CORRECT_ANSWER}</h4>
-        ${MESSAGE_RESTART_GAME}
-      `;
-
-      this.$resultDiv.innerHTML = correctMessageTemplate;
-      this.$resultDiv.appendChild(this.$gameRestartButton);
-
-      $on(this.$gameRestartButton, "click", () => {
-        this.baseballGame.initAnswer();
-        this.$resultDiv.innerHTML = "";
-        this.$userInput.value = "";
-      });
-    } else {
-      this.$resultDiv.innerHTML = resultString;
-    }
+  this.handleClickGameRestartButton = function () {
+    this.baseballGame.initAnswer();
+    this.$resultDiv.innerHTML = "";
+    this.$userInput.value = "";
   };
 
-  this.initEventListeners = () => {
-    $on(this.form, "submit", this.handleSubmitForm);
-    $on(this.$submitButton, "click", this.handleClickSubmitButton.bind(this));
+  this.render = function (resultString) {
+    const correctResultTemplate = `
+        <h4>${MESSAGE_CORRECT_ANSWER}</h4>
+        ${MESSAGE_RESTART_GAME}
+        <button id="game-restart-button">재시작</button>
+      `;
+
+    this.$resultDiv.innerHTML =
+      resultString === RESULT_CORRECT ? correctResultTemplate : resultString;
   };
 }
