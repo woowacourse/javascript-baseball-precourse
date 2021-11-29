@@ -97,9 +97,16 @@ export default class BaseballGame {
       "게임 재시작"
     );
     reStartButton.id = "game-restart-button";
+    reStartButton.addEventListener("click", e => this.reStart(e));
 
     reStartArea.append(reStartMessage, reStartButton);
     this.computer.resultArea.append(congratsMessage, reStartArea);
+  }
+
+  reStart(event) {
+    event.preventDefault();
+    this.computerInputNumbers = this.computer.makeNumbers();
+    this.start();
   }
 }
 
