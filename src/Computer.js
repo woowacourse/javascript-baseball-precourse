@@ -1,34 +1,37 @@
-import { 
-    MIN_NUMBER_IN_RANGE,
-    MAX_NUMBER_IN_RANGE,
-    LENGTH_NUMBERS
+import {
+  MIN_NUMBER_IN_RANGE,
+  MAX_NUMBER_IN_RANGE,
+  LENGTH_NUMBERS,
 } from './constant/index.js';
 
 export default class Computer {
-    constructor() {
-        this.computerNumbers = this.generateComputerNumber();
+  constructor() {
+    this.computerNumbers = Computer.generateComputerNumber();
+  }
+
+  static generateComputerNumber() {
+    const numberList = [];
+    let generatedNumber = null;
+
+    while (numberList.length < LENGTH_NUMBERS) {
+      generatedNumber = MissionUtils.Random.pickNumberInRange(
+        MIN_NUMBER_IN_RANGE,
+        MAX_NUMBER_IN_RANGE,
+      );
+
+      if (!Computer.checkIncludedNumber(numberList, generatedNumber)) {
+        numberList.push(generatedNumber);
+      }
     }
 
-    generateComputerNumber() {
-        const numberList = []
-        let generatedNumber = null;
+    return numberList.join('');
+  }
 
-        while (numberList.length < LENGTH_NUMBERS) {
-            generatedNumber = MissionUtils.Random.pickNumberInRange(MIN_NUMBER_IN_RANGE, MAX_NUMBER_IN_RANGE);
+  static checkIncludedNumber(numberList, generatedNumber) {
+    return numberList.includes(generatedNumber);
+  }
 
-            if (!this.checkIncludedNumber(numberList, generatedNumber)) {
-                numberList.push(generatedNumber);
-            } 
-        }
-
-        return numberList.join('');
-    }
-
-    checkIncludedNumber(numberList, generatedNumber) {
-        return numberList.includes(generatedNumber);
-    }
-
-    getComputerNumbers() {
-        return this.computerNumbers;
-    }
+  getComputerNumbers() {
+    return this.computerNumbers;
+  }
 }

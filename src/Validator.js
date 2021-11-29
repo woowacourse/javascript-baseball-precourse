@@ -1,47 +1,49 @@
 import {
-    MIN_NUMBER_IN_RANGE,
-    MAX_NUMBER_IN_RANGE,
-    LENGTH_NUMBERS,
+  MIN_NUMBER_IN_RANGE,
+  MAX_NUMBER_IN_RANGE,
+  LENGTH_NUMBERS,
 } from './constant/index.js';
 
 export default class Validator {
-    constructor() {
+  constructor() {
+    this.userInputValue = null;
+  }
 
+  checkIsValidInput(userInputValue) {
+    let isValid = false;
+    this.userInputValue = userInputValue;
+
+    if (
+      this.checkLength()
+      && this.checkIsAllValidNumber()
+      && this.checkDuplicatedNumber()
+    ) {
+      isValid = true;
     }
 
-    checkIsValidInput(userInputValue) {
-        let isValid = false;
+    return isValid;
+  }
 
-        if (
-            this.checkLength(userInputValue)
-            && this.checkIsAllValidNumber(userInputValue)
-            && this.checkDuplicatedNumber(userInputValue)
-        ) {
-            isValid = true;
-        }
+  checkLength() {
+    return this.userInputValue.length === LENGTH_NUMBERS;
+  }
 
-        return isValid;
-    }
+  checkIsAllValidNumber() {
+    const isAllNaturalNumber = this.userInputValue.split('').every((e) => {
+      let isValidNumber = false;
+      if (!Number.isNaN(e) && MIN_NUMBER_IN_RANGE <= e && MAX_NUMBER_IN_RANGE >= e) {
+        isValidNumber = true;
+      }
 
-    checkLength(userInputValue) {
-        return userInputValue.length === LENGTH_NUMBERS;
-    }
+      return isValidNumber;
+    });
 
-    checkIsAllValidNumber(userInputValue) {
-        const isAllNaturalNumber = userInputValue.split('').every((e)=>{
-            if (!isNaN(e) && MIN_NUMBER_IN_RANGE <= e && MAX_NUMBER_IN_RANGE >= e) {
-                return true;
-            } else {
-                return false;
-            }
-        });
+    return isAllNaturalNumber;
+  }
 
-        return isAllNaturalNumber;
-    }
+  checkDuplicatedNumber() {
+    const { size } = new Set(this.userInputValue.split(''));
 
-    checkDuplicatedNumber(userInputNumbers) {
-        const { size } = new Set(userInputNumbers.split(''));
-
-        return size === LENGTH_NUMBERS
-    }
+    return size === LENGTH_NUMBERS;
+  }
 }
