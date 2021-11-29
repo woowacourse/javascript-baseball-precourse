@@ -8,6 +8,12 @@ export default function getResult(answer, userInput) {
   if(strike === LENGTH){
     return RESTART;
   }
+  if(ball === 0 && strike !== 0){
+    return `${strike}스트라이크`;
+  }
+  if(ball !== 0 && strike === 0){
+    return `${ball}볼`;
+  }
   if(ball === 0 && strike === 0){
     return "낫싱";
   }
