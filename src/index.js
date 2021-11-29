@@ -1,8 +1,9 @@
 import { NOTHING_ANSWER, CORRECT_ANSWER } from './result-const.js';
 import { $form, $input, $result } from './html-const.js';
+import { setAnswer } from './setAnswer.js';
 
 export default function BaseballGame() {
-    let computerInputNumbers = [];
+    let computerInputNumbers = setAnswer();
     let StrikeCnt = 0;
     let BallCnt = 0;
 
@@ -17,14 +18,6 @@ export default function BaseballGame() {
         };
         return result_game_text;
     };
-
-    const setAnswer = () => {
-        let generateRandNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-        computerInputNumbers = generateRandNumbers;
-        console.log(computerInputNumbers);
-        return computerInputNumbers;
-    };
-    setAnswer();
 
     const checkInput = userInputNumbers => {
         if (userInputNumbers.length !== 3) {
