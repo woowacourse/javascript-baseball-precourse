@@ -4,6 +4,7 @@ import {
   isLengthThree,
 } from "./util/validator.js";
 import { $ } from "./util/selector.js";
+import { renderFailMessage } from "./render/renderFailMessage.js";
 import { checkResult } from "./util/checkResult.js";
 
 export default class BaseballGame {
@@ -32,8 +33,8 @@ export default class BaseballGame {
 
   handleSubmit(event) {
     event.preventDefault();
-    const result = this.play(this.computerInput, this.getUserInput());
-    // console.log(result);
+    const resultText = this.play(this.computerInput, this.getUserInput());
+    renderFailMessage(resultText);
   }
 
   play(computerInputNumbers, userInputNumbers) {
@@ -42,8 +43,8 @@ export default class BaseballGame {
       isNumber(userInputNumbers) &&
       isNotDuplicateExist(userInputNumbers)
     ) {
-      // console.log("play내부");
-      return "결과 값 String";
+      const resultText = checkResult(computerInputNumbers, userInputNumbers);
+      return resultText;
     }
     alert("입력값을 다시 확인해주세요");
     this.resetInput();
