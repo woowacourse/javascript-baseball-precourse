@@ -2,7 +2,7 @@ import { $ } from "./utils/dom.js"
 import { createAnswer } from "./createAnswer.js"
 
 export default function BaseballGame() {
-  let computerNumber = createAnswer(); 
+  let computerInputNumbers = createAnswer(); 
   
   this.play = (computerInputNumbers, userInputNumbers) => {
     if(!Array.isArray(computerInputNumbers) && !Array.isArray(userInputNumbers)) {
@@ -19,23 +19,23 @@ export default function BaseballGame() {
   }
 
   const isVaildNum = () => {
-    const userInput = $("#user-input").value.split('').map(num => Number(num));
-    if(userInput.includes(0) || userInput.includes(NaN) || userInput.length !== 3 ||  [...new Set(userInput)].length !== 3) {
-      printError(userInput);
+    const userInputNumbers = $("#user-input").value.split('').map(num => Number(num));
+    if(userInputNumbers.includes(0) || userInputNumbers.includes(NaN) || userInputNumbers.length !== 3 ||  [...new Set(userInputNumbers)].length !== 3) {
+      printError(userInputNumbers);
       return;
     }
 
-    printResult(this.play(computerNumber, userInput));
+    printResult(this.play(computerInputNumbers, userInputNumbers));
   };
 
-  const printError = (userInput) => {
-    if(userInput.includes(NaN)) {
+  const printError = (userInputNumbers) => {
+    if(userInputNumbers.includes(NaN)) {
       alert("잘못 입력하였습니다❗️ 숫자를 입력하세요.");
-    } else if(([...new Set(userInput)].length !== 3) && ($("#user-input").value.length === 3)) {
+    } else if(([...new Set(userInputNumbers)].length !== 3) && ($("#user-input").value.length === 3)) {
       alert("잘못 입력하였습니다❗️ 중복되지 않는 숫자를 입력하세요.");
-    } else if(userInput.includes(0)) {
+    } else if(userInputNumbers.includes(0)) {
       alert("잘못 입력하였습니다❗️ 0을 제외한 1~9까지의 수만 입력하세요.");
-    } else if(userInput.length !== 3) {
+    } else if(userInputNumbers.length !== 3) {
       alert("잘못 입력하였습니다❗️ 3개의 숫자를 입력하세요.");
     }
     resetOutput();
@@ -88,7 +88,7 @@ export default function BaseballGame() {
 
 
   const restartGame = () => {
-    computerNumber = createAnswer();
+    computerInputNumbers = createAnswer();
     resetOutput();
   };
 
