@@ -9,9 +9,7 @@ const userInput = document.querySelector('#user-input');
 const gameResult = document.querySelector('#result');
 
 // rendering functions
-function renderGameResult(computerNumbers, userNumbers){
-    const result = newGame.play(computerNumbers, userNumbers);
-    
+function renderGameResult(result){
     if(result === gameResults.CORRECT) return NEW_GAME_HTML;
     else return result;
 }
@@ -19,7 +17,7 @@ function renderGameResult(computerNumbers, userNumbers){
 // button functions
 function onSubmitButtonClick() {
     if(newGame.isCorrectInput(userInput.value)){
-        gameResult.innerHTML = renderGameResult(newGame.answer, userInput.value);
+        gameResult.innerHTML = renderGameResult(newGame.play(newGame.answer, userInput.value));
     }
     else {
         userInput.value = '';
