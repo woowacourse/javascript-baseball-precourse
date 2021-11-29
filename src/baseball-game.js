@@ -6,7 +6,7 @@ export default class BaseballGame {
     }
     
     isCorrectAnswerNumber(num) {
-        const numArray = num.toString().split('');
+        const numArray = num.split('');
         const duplicatedNumbers = numArray
             .filter((num, index, self) => self.indexOf(num) !== index || num === '0');
         return !duplicatedNumbers.length;
@@ -25,7 +25,7 @@ export default class BaseballGame {
     }
     
     isCorrectInput(input) {
-        return input.length === 3 && Number(input) && this.isCorrectAnswerNumber(Number(input));
+        return input.length === 3 && Number(input) && this.isCorrectAnswerNumber(input);
     }
     
     getCountStrikeAndBall(computerNumbers, userNumbers) {
