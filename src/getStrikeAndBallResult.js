@@ -38,3 +38,14 @@ function checkStrikeAndBall(answerNumbers, inputNumbers) {
   
   return result;
 }
+
+/**
+ * 숫자를 받아, 한 자리씩 분리한 리스트를 반환하는 메소드
+ * @param {Number} number 
+ * @returns {Number Array} number list
+ */
+function changeNumberToNumList(number) {
+  const numberString = String(number);
+  const numberList = numberString.split("").map(numChar => Number(numChar));
+  return numberList;
+}
