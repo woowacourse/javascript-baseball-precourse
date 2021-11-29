@@ -2,11 +2,10 @@ import { NOTHING_ANSWER, CORRECT_ANSWER } from './result-const.js';
 import { $form, $input, $result } from './html-const.js';
 import { setAnswer } from './setAnswer.js';
 import { checkInput } from './checkInput.js';
+import { CountStrikeAndBall } from './CountStrikeAndBall.js';
 
 export default function BaseballGame() {
     let computerInputNumbers = setAnswer();
-    let StrikeCnt = 0;
-    let BallCnt = 0;
 
     const play = (computerInputNumbers, userInputNumbers) => {
         let result_game_text = '';
@@ -18,21 +17,6 @@ export default function BaseballGame() {
             result_game_text = Hint(Strike_Ball);
         };
         return result_game_text;
-    };
-
-    const CountStrikeAndBall = (computerInputNumbers, userInputNumbers) => {
-        StrikeCnt = 0;
-        BallCnt = 0;
-        for (let i = 0; i < userInputNumbers.length; i++) {
-            if (userInputNumbers[i] == computerInputNumbers[i]) StrikeCnt++;
-            else if (userInputNumbers[i] == computerInputNumbers[(i + 1) % 3] || userInputNumbers[i] == computerInputNumbers[(i + 2) % 3]) BallCnt++;
-        };
-        let Strike = StrikeCnt;
-        let Ball = BallCnt;
-        return {
-            Strike: Strike,
-            Ball: Ball
-        };
     };
 
     const Hint = Strike_Ball => {
