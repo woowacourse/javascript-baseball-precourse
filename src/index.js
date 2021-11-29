@@ -10,9 +10,10 @@ export default function BaseballGame() {
   $submit.addEventListener("click", (e) => {
     e.preventDefault();
 
-    const userInput = $userInput.value;
+    const userInput = ($userInput.value).split("");
     const checkResult = checkInput(userInput);
-    
+
+    console.log(checkResult);
   });
 
   this.play = function (computerInputNumbers, userInputNumbers) {

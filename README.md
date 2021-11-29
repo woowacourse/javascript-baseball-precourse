@@ -49,7 +49,7 @@
 
 - [X] input 값이 비어있지 않은지 (011) - `isNotnull`
 
-- [ ] 3자리 수가 맞는지 (012) - `isThreeNum`
+- [X] 3자리 수가 맞는지 (012) - `isThreeNum`
 
 - [ ] 서로 다른 수인지 (013) - `isAnother`
 
