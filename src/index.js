@@ -16,9 +16,6 @@ export default class BaseballGame {
   }
 
   gameStart() {
-    const userInput = $('#user-input');
-    const button = $('#submit');
-
     const userInputValidation = value => {
       const validation = {
         isError: false,
@@ -57,6 +54,8 @@ export default class BaseballGame {
 
     const handleSubmitUserInput = e => {
       e.preventDefault();
+      const userInput = $('#user-input');
+
       let val = userInput.value.trim();
       const { isError, inValidText } = userInputValidation(val);
 
@@ -70,11 +69,12 @@ export default class BaseballGame {
       console.log('this.answer: ', this.answer);
       return userInput.value;
     };
+    const button = $('#submit');
     button.addEventListener('click', handleSubmitUserInput);
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    const compareAnswer = (computerInputNumbers, userInputNumbers) => {
+    const countBallsAndStrikes = (computerInputNumbers, userInputNumbers) => {
       const computerNums = String(computerInputNumbers).split('');
       const userNums = String(userInputNumbers).split('');
 
@@ -88,6 +88,13 @@ export default class BaseballGame {
         }
         if (computerNums.includes(userNums[i])) balls++;
       }
+      return [balls, strikes];
+    };
+    const showBallsAndStrikes = () => {
+      const [balls, strikes] = countBallsAndStrikes(
+        computerInputNumbers,
+        userInputNumbers,
+      );
 
       if (strikes === 3) {
         $('#result').innerHTML = `
@@ -110,8 +117,7 @@ export default class BaseballGame {
       else if (!balls) $('#result').innerText = `${strikes}스트라이크`;
       else $('#result').innerText = `${balls}볼 ${strikes}스트라이크`;
     };
-
-    compareAnswer(computerInputNumbers, userInputNumbers);
+    showBallsAndStrikes();
   }
 }
 
