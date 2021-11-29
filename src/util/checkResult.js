@@ -31,6 +31,7 @@ export const checkResult = (computerInputNumbers, userInputNumbers) => {
     userInputNumbers,
     strikeCount
   );
-  const res = getResultText(strikeCount, ballCount);
-  return res;
+  const failText = getResultText(strikeCount, ballCount);
+  const isSuccess = strikeCount === 3 ? true : false;
+  return [isSuccess, failText];
 };
