@@ -34,8 +34,8 @@ export default class UserInput {
     return false;
   }
 
-  alertErrorMessage(userInputNumbers) {
-    const errorMessage = this.checkValidInput(userInputNumbers);
+  alertErrorMessage(userInput) {
+    const errorMessage = this.checkValidInput(userInput);
 
     alert(errorMessage);
     this.resetUserInput();
