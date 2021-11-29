@@ -1,5 +1,5 @@
 export default class Component {
-  constructor(container, props, handlers) {
+  constructor(container = null, props = {}, handlers = {}) {
     this.container = container;
     this.props = props;
     this.handlers = handlers;
