@@ -19,6 +19,12 @@ export default class UserInput {
     if (userInput.length !== new Set(userInput).size) {
       return ERROR_MESSAGE.DUPLICATION;
     }
+    if (this.checkDigit(userInput)) {
+      return this.checkDigit(userInput);
+    }
+  }
+
+  checkDigit(userInput) {
     for (let digit of userInput) {
       if (digit === "0") {
         return ERROR_MESSAGE.ZERO_INCLUDED;
@@ -30,8 +36,6 @@ export default class UserInput {
         return ERROR_MESSAGE.SPACE_INCLUDED;
       }
     }
-
-    return false;
   }
 
   alertErrorMessage(userInput) {
