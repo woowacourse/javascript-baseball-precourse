@@ -7,4 +7,8 @@ export default class User {
   getInputValue() {
     return this.input.value;
   }
+
+  setInputValue(value) {
+    this.input.value = value;
+  }
 }

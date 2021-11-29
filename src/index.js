@@ -12,7 +12,7 @@ export default class BaseballGame {
   start() {
     console.log(this.computerInputNumbers);
     this.computer.clearResultArea();
-    this.user.input.value = "";
+    this.user.setInputValue("");
     this.user.button.addEventListener("click", e => this.checkValidValue(e));
   }
 
