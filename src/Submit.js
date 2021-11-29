@@ -1,4 +1,7 @@
-import { createUserInputNumbers } from './Numbers.js';
+import {
+  createUserInputNumbers,
+  createComputerInputNumbers,
+} from './Numbers.js';
 import checkInputValidation from './Check.js';
 
 function onInvalidInputSubmit() {
@@ -7,9 +10,19 @@ function onInvalidInputSubmit() {
   document.getElementById('user-input').value = '';
 }
 
+function onRestartClick(e) {
+  e.preventDefault();
+  window.computerInputNumbers = createComputerInputNumbers();
+  document.getElementById('result').innerHTML = '';
+  document.getElementById('user-input').value = '';
+}
+
 function onValidInputSubmit(userInputNumbers) {
   const result = window.play(window.computerInputNumbers, userInputNumbers);
   document.getElementById('result').innerHTML = result;
+
+  const restart = document.getElementById('restart');
+  if (restart) restart.addEventListener('click', onRestartClick);
 }
 
 export default function onInputSubmit(e) {
