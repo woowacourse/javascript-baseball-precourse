@@ -1,19 +1,21 @@
 import CheckValid from "./CheckValid.js";
 import Computer from "./Computer.js";
 import User from "./User.js";
+import Dom from "./Dom.js";
 
 export default class BaseballGame {
   constructor() {
     this.NUMBER_LENGTH = 3;
+    this.user = new User();
+    this.dom = new Dom();
     this.computer = new Computer(this.NUMBER_LENGTH);
     this.checkValid = new CheckValid(this.NUMBER_LENGTH);
-    this.user = new User();
     this.computerInputNumbers = this.computer.makeNumbers();
   }
 
   start() {
     console.log(this.computerInputNumbers);
-    this.computer.clearResultArea();
+    this.dom.clearResultArea();
     this.user.setInputValue("");
     this.user.button.addEventListener("click", e => this.handleUserClick(e));
   }
@@ -78,31 +80,31 @@ export default class BaseballGame {
 
   printGameMessage(gameMessage) {
     if (`${this.NUMBER_LENGTH}볼` === gameMessage) {
-      this.computer.clearResultArea();
+      this.dom.clearResultArea();
       return this.renderAnswerMessage();
     }
-    this.computer.resultArea.innerText = gameMessage;
+    this.dom.renderResultText(gameMessage);
   }
 
   renderAnswerMessage() {
-    const congratsMessage = this.computer.createNodeParentChild(
+    const congratsMessage = this.dom.createNodeParentChild(
       "p",
       "strong",
       "🎉 정답을 맞추셨습니다! 🎉"
     );
-    const reStartMessage = this.computer.createNodeParentChild(
+    const reStartMessage = this.dom.createNodeParentChild(
       "div",
       "span",
       "게임을 새로 시작하시겠습니까? "
     );
-    const reStartButton = this.computer.createButton(
+    const reStartButton = this.dom.createButton(
       "게임 재시작",
       "game-restart-button"
     );
     reStartButton.addEventListener("click", e => this.reStart(e));
 
     reStartMessage.append(reStartButton);
-    this.computer.resultArea.append(congratsMessage, reStartMessage);
+    this.dom.resultArea.append(congratsMessage, reStartMessage);
   }
 
   reStart(event) {
