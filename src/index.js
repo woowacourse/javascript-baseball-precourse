@@ -1,6 +1,7 @@
-import { createAnswer, setButton, clearButton} from './restart.js';
-import { TEXT, $userInput, $result, $submit } from './constants.js';
-import { checkInput } from './validation.js';
+import { createAnswer } from './restart.js';
+import { TEXT, $userInput, $submit } from './constants.js';
+import { checkWarning } from './validation.js';
+import { checkAnswer } from './compare.js';
 
 //Start Game function
 export default function BaseballGame() {
@@ -11,22 +12,22 @@ export default function BaseballGame() {
     e.preventDefault();
 
     const userInput = ($userInput.value).split("");
-    const checkResult = checkInput(userInput);
+    const warning = checkWarning(userInput);
 
+    if(warning) {
+      this.play(answer, userInput);
+    }
   });
 
+  //check and make result
   this.play = function (computerInputNumbers, userInputNumbers) {
+    const result = checkAnswer(computerInputNumbers, userInputNumbers);
+
+    console.log(result);
+
     return "결과 값 String";
   };
 }
 
-
-function createResult() {
-  
-}
-
-function setResult() {
-
-}
 
 new BaseballGame();

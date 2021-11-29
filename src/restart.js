@@ -7,11 +7,11 @@ export function createAnswer() {
   while(answer.length !== 3) {
     const random = MissionUtils.Random.pickNumberInRange(1, 9);
 
-    if(!answer.includes(random)) {
-      answer.push(random);
+    if(!answer.includes(String(random))) {
+      answer.push(String(random));
     }
   }
-
+  
   return answer;
 }
 

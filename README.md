@@ -27,7 +27,7 @@
 
 <b>compare.js</b>
 
-- [ ] Strike 개수 세기 (004) - `countStrike`
+- [X] Strike 개수 세기 (004) - `countStrike`
 
 - [ ] Ball 개수 세기 (005) - `countBall`
 
@@ -45,7 +45,7 @@
 
 <b>validation.js</b>
 
-- [ ] input을 모든 조건에 맞도록 check - `checkInput` 
+- [X] input을 모든 조건에 맞도록 check - `checkInput` 
 
 - [X] input 값이 비어있지 않은지 (011) - `isNotnull`
 
@@ -53,5 +53,7 @@
 
 - [X] 서로 다른 수인지 (013) - `isAnother`
 
-- [ ]  숫자인지 검사 (014) - `isNumber`
+- [X]  숫자인지 검사 (014) - `isNumber`
+
+- [X]  0이 포함되었는지 범위 검사 (015) - `isZero`
 

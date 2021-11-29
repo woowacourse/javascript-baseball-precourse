@@ -1,0 +1,7 @@
+function createResult() {
+  
+}
+
+function setResult() {
+
+}
