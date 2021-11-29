@@ -20,10 +20,19 @@ export default class Computer {
     return [...string].map(value => Number(value));
   }
 
-  createTextElement(tagName, text) {
-    const element = document.createElement(tagName);
-    element.innerText = text;
-    return element;
+  createNodeParentChild(parentTag, childTag, childText) {
+    const parent = document.createElement(parentTag);
+    const element = document.createElement(childTag);
+    element.innerText = childText;
+    parent.append(element);
+    return parent;
+  }
+
+  createButton(text, id) {
+    const button = document.createElement("button");
+    button.innerText = text;
+    button.id = id;
+    return button;
   }
 
   checkValidValue(targetValue) {

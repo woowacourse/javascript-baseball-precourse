@@ -83,24 +83,24 @@ export default class BaseballGame {
   }
 
   renderAnswerMessage() {
-    const congratsMessage = this.computer.createTextElement(
+    const congratsMessage = this.computer.createNodeParentChild(
       "p",
+      "strong",
       "🎉 정답을 맞추셨습니다! 🎉"
     );
-    const reStartArea = document.createElement("div");
-    const reStartMessage = this.computer.createTextElement(
+    const reStartMessage = this.computer.createNodeParentChild(
+      "div",
       "span",
       "게임을 새로 시작하시겠습니까? "
     );
-    const reStartButton = this.computer.createTextElement(
-      "button",
-      "게임 재시작"
+    const reStartButton = this.computer.createButton(
+      "게임 재시작",
+      "game-restart-button"
     );
-    reStartButton.id = "game-restart-button";
     reStartButton.addEventListener("click", e => this.reStart(e));
 
-    reStartArea.append(reStartMessage, reStartButton);
-    this.computer.resultArea.append(congratsMessage, reStartArea);
+    reStartMessage.append(reStartButton);
+    this.computer.resultArea.append(congratsMessage, reStartMessage);
   }
 
   reStart(event) {
