@@ -2,7 +2,7 @@ export default class BaseballGame {
     answer = this.generateThreeDigitsNumber();
     
     generateRandomNumber() {
-        return MissionUtils.Random.pickNumberInRange(123, 987);
+        return MissionUtils.Random.pickNumberInRange(1, 9);
     }
     
     isCorrectAnswerNumber(num) {
@@ -13,11 +13,15 @@ export default class BaseballGame {
     }
     
     generateThreeDigitsNumber() {
-        let result = this.generateRandomNumber();
-        while(!this.isCorrectAnswerNumber(result)){
-            result = this.generateRandomNumber();
-        }
-        return result.toString();
+        const firstNumber = this.generateRandomNumber();
+
+        let secondNumber = this.generateRandomNumber();
+        while(secondNumber === firstNumber) secondNumber = this.generateRandomNumber();
+
+        let thirdNumber = this.generateRandomNumber();
+        while(thirdNumber === secondNumber || thirdNumber === firstNumber) thirdNumber = this.generateRandomNumber();
+
+        return `${firstNumber}${secondNumber}${thirdNumber}`;
     }
     
     isCorrectInput(input) {
