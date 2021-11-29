@@ -11,14 +11,12 @@ const gameResult = document.querySelector('#result');
 // rendering functions
 function renderGameResult(computerNumbers, userNumbers){
     const result = newGame.play(computerNumbers, userNumbers);
-    if(result === gameResults.CORRECT) return renderNewGameResult();
+    
+    if(result === gameResults.CORRECT) return NEW_GAME_HTML;
     else return result;
 }
 
-function renderNewGameResult() {
-    return NEW_GAME_HTML;
-}
-
+// button functions
 function onSubmitButtonClick() {
     if(newGame.isCorrectInput(userInput.value)){
         gameResult.innerHTML = renderGameResult(newGame.answer, userInput.value);
