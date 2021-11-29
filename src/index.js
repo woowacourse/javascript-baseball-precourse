@@ -6,6 +6,9 @@ import {
 import { $ } from "./util/selector.js";
 
 export default class BaseballGame {
+  constructor() {
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   play(computerInputNumbers, userInputNumbers) {
     if (
       isLengthThree(userInputNumbers) &&
@@ -22,10 +25,25 @@ export default class BaseballGame {
     const $input = $("#user-input");
     $input.value = "";
   }
+
+  getUserInput() {
+    const $input = $("#user-input");
+    return $input.value;
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.play(123, this.getUserInput());
+  }
+
+  init() {
+    const $form = $("form");
+    $form.addEventListener("submit", this.handleSubmit);
+  }
 }
 
 const baseBallGame = new BaseballGame();
-
+baseBallGame.init();
 // 테스트용 콘솔 로그
 // console.log(baseBallGame.play(123, 456), "통과");
 // console.log(baseBallGame.play(123, "---"), "숫자아님-실패");
