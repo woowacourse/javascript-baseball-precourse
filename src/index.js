@@ -12,7 +12,6 @@ export default class BaseballGame {
     this.computerInput = 0;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.restartGame = this.restartGame.bind(this);
-    this.init = this.init.bind(this);
   }
   init() {
     this.generateComputerInput();
@@ -38,8 +37,7 @@ export default class BaseballGame {
     event.preventDefault();
     const playResult = this.play(this.computerInput, this.getUserInput());
     renderResult(playResult);
-    const $restartButton = $("#game-restart-button");
-    $restartButton.addEventListener("click", this.restartGame);
+    if (playResult.isSuccess) this.addEventlistenerToRestartButton();
   }
 
   play(computerInputNumbers, userInputNumbers) {
@@ -69,6 +67,11 @@ export default class BaseballGame {
     renderInit();
     this.init();
     this.resetInput();
+  }
+
+  addEventlistenerToRestartButton() {
+    const $restartButton = $("#game-restart-button");
+    $restartButton.addEventListener("click", this.restartGame);
   }
 }
 
