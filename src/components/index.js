@@ -70,7 +70,6 @@ export default class BaseballGame {
    * @returns {Number} BallCount
    */
   getBallCount(digit, similar, mismatch) {
-    // 3 - 1 + 2
     return digit - similar + mismatch;
   }
 
