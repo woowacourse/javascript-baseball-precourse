@@ -10,9 +10,13 @@ import { printResultMessage } from "./game/print-result.js";
 
 export default class BaseballGame {
   constructor() {
-    this.answerNumber = generateAnswerNumber();
-    this.setEvent();
+    this.answerNumber = "";
   }
+
+  init = () => {
+    this.setEvent();
+    this.setAnswerNumber();
+  };
 
   setEvent = () => {
     DOMS.$userInputForm.addEventListener("submit", this.setUserInputEvent);
@@ -61,4 +65,6 @@ export default class BaseballGame {
   };
 }
 
-new BaseballGame();
+const baseballGame = new BaseballGame();
+
+baseballGame.init();
