@@ -65,7 +65,6 @@ export default class BaseballGame {
    */
   onClickSubmitButton = (event) => {
     event.preventDefault();
-    console.log(this.answerNumbers)
     this.play(Number(this.answerNumbers), Number(this.$input.value));
   }
 
