@@ -1,4 +1,4 @@
-import { NUM } from "./constants.js";
+import { ID, NUM } from "./constants.js";
 import { isValidUserInput } from "./valid.js";
 import { createMyElement } from "./utils.js";
 
