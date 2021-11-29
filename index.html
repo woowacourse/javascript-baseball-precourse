@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>숫자 야구 게임</title>
   </head>
+ 
   <body>
     <div id="app">
       <h1>⚾ 숫자 야구 게임</h1>
@@ -14,13 +15,26 @@
         틀린 예) 122
       </p>
       <form>
-        <input type="number" id="user-input" max="999"/>
+        <input type="text" id="user-input" onchange="getInputVal(this.value)"/>
         <button id="submit">확인</button>
       </form>
       <h3>📄 결과</h3>
       <div id="result"></div>
+      <div id = 'success' style="display: none;">
+        <h5>🎉정답을 맞추셨습니다!🎉</h5>
+        <span>게임을 새로 시작하시겠습니까? <button id="game-restart-button" onclick = 'console.log("게임 재시작(숫자 초기화)")'>게임 재시작</button></span>
+      </div>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@woowacourse/mission-utils@1.0.1/dist/mission-utils.min.js"></script>
-    <script type="module" src="src/index.js"></script>
+    <script type="module" src="/src/index.js"></script>
+    <script>
+        const getInputVal = function (value) {
+            // sessionStorage['inputVal'] = value; 
+            // 기존에 저장된 값들 때문에, 다음에 실행에 영향을 미침... 
+            // 
+        };
+    </script>
+    <script type="module" src="/src/index2.js"></script>
   </body>
 </html>
