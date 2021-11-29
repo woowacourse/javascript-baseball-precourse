@@ -10,8 +10,8 @@ export default function BaseballGame() {
 
   //유저가 입력한 수 가져오기
   const getUserNumber=()=>{
-    let usernumber=userInput.value.split('').map(Number);
-    return usernumber;
+    let userNumber=userInput.value.split('').map(Number);
+    return userNumber;
   }
   
   //결과 화면에 출력
