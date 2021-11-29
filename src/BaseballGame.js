@@ -16,31 +16,31 @@ export default class BaseballGame {
 
   createComputerNumbers = () => {
     const uniqueNumberSet = new Set();
+    const { MIN_NUMBER, MAX_NUMBER } = GAME_CONFIG;
+
     while (uniqueNumberSet.size < GAME_CONFIG.LENGTH) {
       uniqueNumberSet.add(
-        MissionUtils.Random.pickNumberInRange(
-          GAME_CONFIG.MIN_NUMBER,
-          GAME_CONFIG.MAX_NUMBER,
-        ),
+        MissionUtils.Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER),
       );
     }
     return Array.from(uniqueNumberSet).join('');
   };
 
   checkResult = (computerInputNumbers, userInputNumbers) => {
-    let result = {
-      strike: 0,
-      ball: 0,
-    };
-    computerInputNumbers.split('').forEach((comValue, comIndex) => {
-      userInputNumbers.split('').forEach((userValue, userIndex) => {
-        if (comValue === userValue) {
-          if (comIndex === userIndex) result.strike += 1;
-          else result.ball += 1;
-        }
-      });
-    });
-    return result;
+    const computerInputNumberArr = computerInputNumbers.split('');
+    const userInputNumberArr = userInputNumbers.split('');
+
+    const strike = userInputNumberArr.filter(
+      (value, index) => computerInputNumberArr.indexOf(value) === index
+    ).length;
+
+    const ball = userInputNumberArr.filter(
+      (value, index) =>
+        computerInputNumberArr.indexOf(value) !== index &&
+        computerInputNumberArr.indexOf(value) > -1
+    ).length;
+
+    return { strike, ball };
   };
 
   restartGame = () => {
@@ -49,6 +49,7 @@ export default class BaseballGame {
 
   getResult = (gameResult) => {
     const { strike, ball } = gameResult;
+    const { CORRECT, NOTHING, PARTIAL_CORRECT } = GAME_RESULT_STATE;
 
     const result = {
       template: ``,
@@ -57,13 +58,13 @@ export default class BaseballGame {
 
     if (strike === GAME_CONFIG.LENGTH) {
       result.template = this.template.getCorrectMessage();
-      result.status = GAME_RESULT_STATE.CORRECT;
+      result.status = CORRECT;
     } else if (!strike && !ball) {
       result.template = this.template.getNothingMessage();
-      result.status = GAME_RESULT_STATE.NOTHING;
+      result.status = NOTHING;
     } else {
       result.template = this.template.getPartialCorrectMessage(strike, ball);
-      result.status = GAME_RESULT_STATE.PARTIAL_CORRECT;
+      result.status = PARTIAL_CORRECT;
     }
 
     return result;
