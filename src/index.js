@@ -7,6 +7,7 @@ import { $ } from "./util/selector.js";
 
 export default class BaseballGame {
   constructor() {
+    this.computerInput = 0;
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   play(computerInputNumbers, userInputNumbers) {
@@ -31,12 +32,26 @@ export default class BaseballGame {
     return $input.value;
   }
 
+  generateComputerInput() {
+    let randomNum = MissionUtils.Random.pickNumberInRange(1, 9).toString();
+    while (randomNum.length !== 3) {
+      const newRandomNum = MissionUtils.Random.pickNumberInRange(
+        1,
+        9
+      ).toString();
+      if (isNotDuplicateExist(randomNum + newRandomNum))
+        randomNum += newRandomNum;
+    }
+    this.computerInput = randomNum;
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    this.play(123, this.getUserInput());
+    this.play(this.computerInput, this.getUserInput());
   }
 
   init() {
+    this.generateComputerInput();
     const $form = $("form");
     $form.addEventListener("submit", this.handleSubmit);
   }
