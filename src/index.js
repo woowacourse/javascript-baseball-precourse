@@ -110,7 +110,9 @@ export default class BaseballGame{
     //정답여부에 따라 판정 결과 문자열 변경
     const correctness = this.checkCorrectness(answer);
     if (correctness) {
-      answer = "🎉정답을 맞추셨습니다!🎉";
+      answer = "🎉정답을 맞추셨습니다!🎉"+ this.restartPart();
+      const submitBtn = document.querySelector("#submit");
+      submitBtn.disabled = true;
       return answer;
     } 
     return answer;
@@ -119,6 +121,27 @@ export default class BaseballGame{
     //결과문을 html로 출력
     const resultContainer = document.querySelector('#result');
     resultContainer.innerHTML = this.printResult(result);
+  }
+  //재시작 준비
+  restartPart() {
+    //재시작 부분 출력
+    const restartButton = `<button id="game-restart-button">재시작</button>`;
+    return `<div>게임을 다시 시작하시겠습니까? ${restartButton}</div>`
+  }
+  restartButtonFunction() {
+    //재시작 버튼 기능 부여
+    const restartBtn = document.getElementById('game-restart-button');
+    restartBtn.addEventListener("click", this.restart);
+  }
+  restart() {
+    //재시작 버튼 눌렀을때 모든 화면 초기화 & 새 게임 시작
+    const input = document.querySelector("#user-input");
+    const submitBtn= document.querySelector("#submit");
+    const result = document.querySelector('#result');
+    input.value = null;
+    submitBtn.disabled = false;
+    result.innerHTML = "";
+    return new BaseballGame();
   }
   gameStart() {
     const input = document.querySelector("#user-input");
@@ -132,6 +155,9 @@ export default class BaseballGame{
       }
       const result = this.play(computerRandomNumber, input.value);
       this.paintResult(result);
+      if (this.checkCorrectness(result)) {
+        this.restartButtonFunction();
+      }
     })
   }
 }
