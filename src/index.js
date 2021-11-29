@@ -1,31 +1,19 @@
+import component from './core/component.js';
 import { parseInput, isNotValidInput } from './utils/input.js';
 import {
   calculateBaseBall,
   getGameResult,
   generateRandomNumber,
 } from './utils/game.js';
-import {
-  $,
-  createElement,
-  removeFirstChild,
-  replaceChild,
-} from './utils/dom.js';
-import { GAME_RESULT, MESSAGE } from './constants.js';
+import { GAME_STATUS, MESSAGE } from './constants.js';
 
-export default class BaseballGame {
-  constructor() {
-    this._inputElem = $('user-input');
-    this._submitBtn = $('submit');
-    this._resultElem = $('result');
-    this._answer = generateRandomNumber();
-    this._init();
-  }
-
-  _init() {
-    this._submitBtn.addEventListener('click', event => {
-      event.preventDefault();
-      this._onSubmitUserInput();
-    });
+export default class BaseballGame extends component {
+  init() {
+    this.state = {
+      hint: '',
+      gameStatus: GAME_STATUS.READY,
+      answer: generateRandomNumber(),
+    };
   }
 
   _play(computerInputNumbers, userInputNumbers) {
@@ -42,22 +30,21 @@ export default class BaseballGame {
       return alert(MESSAGE.NOT_VALID_INPUT);
     }
     const result = this._play(this._answer, userInput);
+
     this._renderResult(result);
+    this.setState({
+      hint: result,
+      gameStatus:
+        result === GAME_STATUS.END ? GAME_STATUS.END : GAME_STATUS.PLAYING,
+    });
   }
 
   _onClickRestartButton() {
-    this._inputElem.value = '';
-    removeFirstChild(this._resultElem);
-    this._answer = generateRandomNumber();
-  }
-
-  _renderResult(result) {
-    replaceChild(this._resultElem, createElement(result));
-    if (result === GAME_RESULT.END) {
-      $('game-restart-button').addEventListener('click', () => {
-        this._onClickRestartButton();
-      });
-    }
+    this.setState({
+      hint: '',
+      gameStatus: GAME_STATUS.READY,
+      answer: generateRandomNumber(),
+    });
   }
 }
 

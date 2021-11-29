@@ -4,6 +4,7 @@ export default class Component {
     this.props = props;
     this.state = {};
     this.childrens = [];
+    this.init();
   }
 
   /**
@@ -23,7 +24,7 @@ export default class Component {
   render() {}
 
   setState(nextState) {
-    this.state = nextState;
+    this.state = { ...this.state, nextState };
     this.updateComponent();
   }
 
