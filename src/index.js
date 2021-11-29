@@ -1,3 +1,4 @@
+import CheckValid from "./CheckValid.js";
 import Computer from "./Computer.js";
 import User from "./User.js";
 
@@ -5,6 +6,7 @@ export default class BaseballGame {
   constructor() {
     this.NUMBER_LENGTH = 3;
     this.computer = new Computer(this.NUMBER_LENGTH);
+    this.checkValid = new CheckValid(this.NUMBER_LENGTH);
     this.user = new User();
     this.computerInputNumbers = this.computer.makeNumbers();
   }
@@ -13,13 +15,13 @@ export default class BaseballGame {
     console.log(this.computerInputNumbers);
     this.computer.clearResultArea();
     this.user.setInputValue("");
-    this.user.button.addEventListener("click", e => this.checkValidValue(e));
+    this.user.button.addEventListener("click", e => this.handleUserClick(e));
   }
 
-  checkValidValue(event) {
+  handleUserClick(event) {
     event.preventDefault();
     const userInputNumbers = this.user.getInputValue();
-    const isValid = this.computer.checkValidValue(userInputNumbers);
+    const isValid = this.checkValid.baseballGameInput(userInputNumbers);
     if (isValid) {
       const gameMessage = this.play(
         this.computerInputNumbers,
