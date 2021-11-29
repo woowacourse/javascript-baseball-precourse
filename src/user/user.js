@@ -59,7 +59,9 @@ export default class User {
      * @returns {bool} 유저 입력값이 올바른지 여부
      */
     checkInputValid(val) {
-        return checkInputFunctions.every((checkInputFunction) => checkInputFunction(val));
+        return checkInputFunctions.every((checkInputFunction) =>
+            checkInputFunction(val)
+        );
     }
 
     getUserInputValue() {

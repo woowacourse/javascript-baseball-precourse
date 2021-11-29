@@ -48,7 +48,10 @@ export default class BaseballGame {
      * @return {string} ex) '낫싱', '1스트라이크', '2볼 1스트라이크'
      */
     play(computerInputNumbers, userInputNumbers) {
-        const { strikeCnt, ballCnt } = this.computer.getStrikeBallCnt(computerInputNumbers, userInputNumbers);
+        const { strikeCnt, ballCnt } = this.computer.getStrikeBallCnt(
+            computerInputNumbers,
+            userInputNumbers,
+        );
 
         if (strikeCnt === ANSWER_LENGTH) return CORRECT_SIGNAL;
 

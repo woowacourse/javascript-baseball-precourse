@@ -12,15 +12,18 @@ export default class Computer {
      * @returns {object}
      */
     getStrikeBallCnt(computerVal, userInput) {
-        return [...computerVal].reduce((m, val, index) => {
-            if (val === userInput[index]) {
-                m.strikeCnt++;
-            } else if (computerVal.includes(userInput[index])) {
-                m.ballCnt++;
-            }
+        return [...computerVal].reduce(
+            (m, val, index) => {
+                if (val === userInput[index]) {
+                    m.strikeCnt++;
+                } else if (computerVal.includes(userInput[index])) {
+                    m.ballCnt++;
+                }
 
-            return m;
-        }, { ballCnt: 0, strikeCnt: 0 });
+                return m;
+            },
+            { ballCnt: 0, strikeCnt: 0 }
+        );
     }
 
     /**
@@ -40,7 +43,7 @@ export default class Computer {
         } else {
             ret = HINT.nothing;
         }
-        
+
         return ret;
     }
 
@@ -49,7 +52,12 @@ export default class Computer {
         const ret = new Set();
 
         while (ret.size < ANSWER_LENGTH) {
-            ret.add(MissionUtils.Random.pickNumberInRange(ANSWER_RANGE.min, ANSWER_RANGE.max));
+            ret.add(
+                MissionUtils.Random.pickNumberInRange(
+                    ANSWER_RANGE.min,
+                    ANSWER_RANGE.max,
+                ),
+            );
         }
 
         return [...ret].join('');
