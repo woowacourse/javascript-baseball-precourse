@@ -1,4 +1,4 @@
-import { ANSWER } from './constant.js';
+import { ANSWER, ANSWER_TEMPLATE } from './constant.js';
 
 function getStrikeCount(computerInputNumbers, userInputNumbers) {
   let strikeCount = 0;
@@ -44,11 +44,7 @@ export function makeResultString(comparedResult) {
 
 export function showResultString(resultString, $resultDiv) {
   if (resultString === ANSWER) {
-    $resultDiv.innerHTML = `
-        🎉 <b>정답을 맞추셨습니다!</b> 🎉
-        <br>
-        게임을 새로 시작하시겠습니까?
-      `;
+    $resultDiv.innerHTML = ANSWER_TEMPLATE;
     return true;
   }
   $resultDiv.innerHTML = resultString;
