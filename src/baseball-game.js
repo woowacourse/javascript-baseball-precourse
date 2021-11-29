@@ -1,3 +1,5 @@
+import { gameResults } from './constants.js';
+
 export default class BaseballGame {
     answer = this.generateThreeDigitsNumber();
     
@@ -36,14 +38,14 @@ export default class BaseballGame {
     }
     
     getPlayResult(numStrike, numBall) {
-        if(numStrike && numBall) return `${numBall}볼 ${numStrike}스트라이크`;
-        else if(numStrike) return `${numStrike}스트라이크`;
-        else if(numBall) return `${numBall}볼`;
-        else return "낫싱";
+        if(numStrike && numBall) return `${numBall}${gameResults.BALL} ${numStrike}${gameResults.STRIKE}`;
+        else if(numStrike) return `${numStrike}${gameResults.STRIKE}`;
+        else if(numBall) return `${numBall}${gameResults.BALL}`;
+        else return gameResults.NOTHING;
     }
     
     play(computerInputNumbers, userInputNumbers) {
-        if(computerInputNumbers === userInputNumbers) return "정답";
+        if(computerInputNumbers === userInputNumbers) return gameResults.CORRECT;
     
         const computerNumArray = computerInputNumbers.split('');
         const userNumArray = userInputNumbers.split('');

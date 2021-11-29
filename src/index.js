@@ -1,6 +1,7 @@
 'use strict';
 
 import BaseballGame from './baseball-game.js';
+import { gameResults, NEW_GAME_HTML, ALERT_MESSAGE } from './constants.js';
 
 // DOM
 const app = document.querySelector('#app');
@@ -10,13 +11,12 @@ const gameResult = document.querySelector('#result');
 // rendering functions
 function renderGameResult(computerNumbers, userNumbers){
     const result = newGame.play(computerNumbers, userNumbers);
-    if(result === "정답") return renderNewGameResult();
+    if(result === gameResults.CORRECT) return renderNewGameResult();
     else return result;
 }
 
 function renderNewGameResult() {
-    return '<p><strong>정답을 맞추셨습니다!</strong></p>'
-    + '<p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">게임 재시작</button></p>';
+    return NEW_GAME_HTML;
 }
 
 function onSubmitButtonClick() {
@@ -25,7 +25,7 @@ function onSubmitButtonClick() {
     }
     else {
         userInput.value = '';
-        alert('1 ~ 9까지 수를 중복없이 3개 입력해주세요:D');
+        alert(ALERT_MESSAGE);
     }
 }
 
