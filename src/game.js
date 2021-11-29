@@ -22,7 +22,8 @@ const getBallCount = (computerInputNumbers, userInputNumbers) => {
 const getStrikeCount = (computerInputNumbers, userInputNumbers) => {
   let strikeCount = 0;
 
-  for (let index = 0; index < computerInputNumbers.length; index++) {
+  let index = 0;
+  for (index = 0; index < computerInputNumbers.length; index++) {
     if (computerInputNumbers[index] === userInputNumbers[index]) {
       strikeCount += 1;
     }
