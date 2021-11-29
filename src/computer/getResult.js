@@ -1,20 +1,19 @@
 import { RESTART, LENGTH } from "../constatns/constants.js";
 
 export default function getResult(answer, userInput) {
-  console.log(answer, userInput);
+  console.log(answer)
   const strike = countStrike(answer, userInput);
   const ball = countBall(answer, userInput);
-  
-  if(strike === LENGTH){
+  if(strike === LENGTH) {
     return RESTART;
   }
-  if(ball === 0 && strike !== 0){
+  if(ball === 0 && strike !== 0) {
     return `${strike}스트라이크`;
   }
-  if(ball !== 0 && strike === 0){
+  if(ball !== 0 && strike === 0) {
     return `${ball}볼`;
   }
-  if(ball === 0 && strike === 0){
+  if(ball === 0 && strike === 0) {
     return "낫싱";
   }
   return `${ball}볼 ${strike}스트라이크`;
@@ -41,3 +40,4 @@ const countStrike = (answer, userInput) => {
 
   return strike;
 }
+
