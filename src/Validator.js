@@ -29,7 +29,7 @@ export default class Validator {
   }
 
   checkIsAllValidNumber() {
-    const isAllNaturalNumber = this.userInputValue.split('').every((e) => {
+    const isAllValidNumber = this.userInputValue.split('').every((e) => {
       let isValidNumber = false;
       if (!Number.isNaN(e) && MIN_NUMBER_IN_RANGE <= e && MAX_NUMBER_IN_RANGE >= e) {
         isValidNumber = true;
@@ -38,7 +38,7 @@ export default class Validator {
       return isValidNumber;
     });
 
-    return isAllNaturalNumber;
+    return isAllValidNumber;
   }
 
   checkDuplicatedNumber() {
