@@ -1,4 +1,5 @@
-/* eslint-disable func-names */
+/* global MissionUtils */
+
 import {
   NUMBER_RANGE_MIN,
   NUMBER_RANGE_MAX,
@@ -6,11 +7,10 @@ import {
 } from "./config.js";
 
 export default function BaseballGame() {
-  this.generateRandomNumbers = function () {
+  this.generateRandomNumbers = function generateRandomNumbers() {
     const numberSet = new Set();
 
     while (numberSet.size < 3) {
-      // eslint-disable-next-line no-undef
       const newNumber = MissionUtils.Random.pickNumberInRange(
         NUMBER_RANGE_MIN,
         NUMBER_RANGE_MAX
@@ -26,11 +26,11 @@ export default function BaseballGame() {
 
   this.answer = this.generateRandomNumbers();
 
-  this.initAnswer = function () {
+  this.initAnswer = function initAnswer() {
     this.answer = this.generateRandomNumbers();
-  }
+  };
 
-  this.play = function (computerInputNumbers, userInputNumbers) {
+  this.play = function play(computerInputNumbers, userInputNumbers) {
     const result = this.compareNumbers(computerInputNumbers, userInputNumbers);
     const resultString = this.generateResultString(result);
 
@@ -38,11 +38,16 @@ export default function BaseballGame() {
   };
 
   // play wrapper
-  this.playWithGeneratedNumber = function (userInputNumbers) {
+  this.playWithGeneratedNumber = function playWithGeneratedNumber(
+    userInputNumbers
+  ) {
     return this.play(this.answer, userInputNumbers);
   };
 
-  this.compareNumbers = function (computerInputNumbers, userInputNumbers) {
+  this.compareNumbers = function compareNumbers(
+    computerInputNumbers,
+    userInputNumbers
+  ) {
     const answerSet = new Set(computerInputNumbers);
     let ballCount = 0;
     let strikeCount = 0;
@@ -59,7 +64,10 @@ export default function BaseballGame() {
     return { ballCount, strikeCount };
   };
 
-  this.generateResultString = function ({ ballCount, strikeCount }) {
+  this.generateResultString = function generateResultString({
+    ballCount,
+    strikeCount,
+  }) {
     const resultString = [];
 
     if (ballCount) {

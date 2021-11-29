@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import {
   ERROR_WRONG_DIGIT,
   ERROR_OUT_OF_RANGE,
@@ -15,7 +14,7 @@ const isNumber = (input) => {
 
 const isUnique = (input) => input.length === new Set(input).size;
 
-export const validateInput = (input) => {
+const validateInput = (input) => {
   let result = true;
   const message = [];
 
@@ -39,3 +38,5 @@ export const validateInput = (input) => {
     message: message.join(" "),
   };
 };
+
+export default validateInput;

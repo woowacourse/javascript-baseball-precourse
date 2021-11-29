@@ -1,5 +1,4 @@
-/* eslint-disable func-names */
-import { validateInput } from "./validation.js";
+import validateInput from "./validation.js";
 import { $, $on } from "./helpers.js";
 import {
   RESULT_CORRECT,
@@ -14,7 +13,7 @@ export default function EventManager(baseballGame) {
   this.$submitButton = $("#submit");
   this.$resultDiv = $("#result");
 
-  this.initEventListeners = () => {
+  this.initEventListeners = function initEventListeners() {
     $on(this.form, "submit", this.handleSubmitForm);
     $on(this.$submitButton, "click", this.handleClickSubmitButton.bind(this));
     $on(this.$resultDiv, "click", (e) => {
@@ -24,11 +23,11 @@ export default function EventManager(baseballGame) {
     });
   };
 
-  this.handleSubmitForm = function (e) {
+  this.handleSubmitForm = function handleSubmitForm(e) {
     e.preventDefault();
   };
 
-  this.handleClickSubmitButton = function () {
+  this.handleClickSubmitButton = function handleClickSubmitButton() {
     const userInputNumbers = this.$userInput.value.trim();
     const validationResult = validateInput(userInputNumbers);
 
@@ -45,13 +44,13 @@ export default function EventManager(baseballGame) {
     this.render(resultString);
   };
 
-  this.handleClickGameRestartButton = function () {
+  this.handleClickGameRestartButton = function handleClickGameRestartButton() {
     this.baseballGame.initAnswer();
     this.$resultDiv.innerHTML = "";
     this.$userInput.value = "";
   };
 
-  this.render = function (resultString) {
+  this.render = function render(resultString) {
     const correctResultTemplate = `
         <h4>${MESSAGE_CORRECT_ANSWER}</h4>
         ${MESSAGE_RESTART_GAME}
