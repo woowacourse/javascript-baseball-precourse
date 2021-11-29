@@ -79,6 +79,52 @@ export default class BaseballGame {
     this.answerNumbers = this.generateAnswerNumbers();
   }
 
+  /**
+   * 스트라이크, 볼의 결과를 담은 result객체를 받아서 화면에 로드 또는
+    로드하는 함수를 실행
+   * @param {Object} result {strike, ball}
+   * @returns {String} 결과, 정답, 낫싱 텍스트 
+   */
+  displayResult(result) {
+    if (result.strike === this.answerNumbers.length){
+      this.displayCorrectAnswerResult();
+      return "정답";
+    }
+    
+    if (!result.strike && !result.ball){
+      this.$result.textContent = "낫싱";
+      return "낫싱";
+    }
+  
+    return this.displayStrikeAndBallHint(result);
+  }
+  
+  /**
+   * 정답일 경우 answer element들을 화면에 로드하는 메소드
+   * 정답 텍스트, 재시작을 물어보는 텍스트, 재시작 버튼을
+    result element에 추가
+   */
+  displayCorrectAnswerResult() {
+    this.$result.textContent = "";
+    this.$resetComment.appendChild(this.$resetButton);
+    this.$result.appendChild(this.$answerResultComment);
+    this.$result.appendChild(this.$resetComment);
+  }
+  
+  /**
+   * 정답과 낫싱이 아닐경우 스트라이크와 볼을 화면에 로드하는 메소드
+   * @param {Object} result {strike, ball}
+   * @returns {String} 스트라이크, 볼 텍스트
+   */
+  displayStrikeAndBallHint(result) {
+    const resultText = `${result.ball ? result.ball+"볼" : ""}` +
+      `${result.strike && result.ball ? " " : ""}`+
+      `${result.strike ? result.strike+"스트라이크" : ""}`;
+      
+    this.$result.textContent = resultText;
+    return resultText;
+  }
+
   play(computerInputNumbers, userInputNumbers) {
     return "결과 값 String";
   }
