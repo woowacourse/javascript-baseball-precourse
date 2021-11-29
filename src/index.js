@@ -1,4 +1,9 @@
-import { setComputerNumber, getUserInput, countStrikeAndBall, getGameResultText } from './utils/game.js';
+import {
+  setComputerNumber,
+  getUserInput,
+  countStrikeAndBall,
+  getGameResultText,
+} from './utils/game.js';
 import { RETRY_ITEM } from './utils/constant.js';
 
 export default class BaseballGame {
@@ -21,7 +26,10 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    const {strikeCount, ballCount} = countStrikeAndBall(computerInputNumbers, userInputNumbers);
+    const { strikeCount, ballCount } = countStrikeAndBall(
+      computerInputNumbers,
+      userInputNumbers
+    );
     const gameResult = getGameResultText(strikeCount, ballCount);
     return gameResult;
   }
@@ -43,7 +51,7 @@ export default class BaseballGame {
   restartGame() {
     this.computerInputNumbers = setComputerNumber();
     this.$gameResultContainer.innerHTML = ``;
-  }  
+  }
 }
 
 new BaseballGame();

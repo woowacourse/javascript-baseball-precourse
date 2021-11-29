@@ -11,9 +11,9 @@ export const setComputerNumber = () => {
     }
   }
   return computerInputNumbers.join('');
-}
+};
 
-export const getUserInput = (userInputText) => {
+export const getUserInput = userInputText => {
   const inputValue = userInputText.value;
   setUserInputClean(userInputText);
   if (isNotValidInput(inputValue)) {
@@ -21,11 +21,11 @@ export const getUserInput = (userInputText) => {
     return '';
   }
   return inputValue;
-}
+};
 
-const setUserInputClean = (userInputText) => {
+const setUserInputClean = userInputText => {
   userInputText.value = '';
-}
+};
 
 export const countStrikeAndBall = (computerInputNumbers, userInputNumbers) => {
   let strikeCount = 0;
@@ -38,8 +38,8 @@ export const countStrikeAndBall = (computerInputNumbers, userInputNumbers) => {
       ballCount++;
     }
   }
-  return {strikeCount, ballCount};
-}
+  return { strikeCount, ballCount };
+};
 
 export const getGameResultText = (strikeCount, ballCount) => {
   let gameResult = [];
@@ -53,7 +53,7 @@ export const getGameResultText = (strikeCount, ballCount) => {
     gameResult.push(`낫싱`);
   }
   return gameResult.join(' ');
-}
+};
 
 const isStrike = (computerInputNumbers, target, idx) => {
   if (computerInputNumbers.includes(target)) {
@@ -62,7 +62,7 @@ const isStrike = (computerInputNumbers, target, idx) => {
     }
   }
   return false;
-}
+};
 
 const isBall = (computerInputNumbers, target, idx) => {
   if (computerInputNumbers.includes(target)) {
@@ -71,5 +71,4 @@ const isBall = (computerInputNumbers, target, idx) => {
     }
   }
   return false;
-}
-
+};
