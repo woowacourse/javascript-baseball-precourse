@@ -4,6 +4,7 @@ import {
   RESULT_CORRECT,
   MESSAGE_CORRECT_ANSWER,
   MESSAGE_RESTART_GAME,
+  ERROR_MESSAGE,
 } from "./config.js";
 
 export default function EventManager(baseballGame) {
@@ -29,10 +30,9 @@ export default function EventManager(baseballGame) {
 
   this.handleClickSubmitButton = function handleClickSubmitButton() {
     const userInputNumbers = this.$userInput.value.trim();
-    const validationResult = validateInput(userInputNumbers);
 
-    if (!validationResult.result) {
-      alert(validationResult.message);
+    if (!validateInput(userInputNumbers)) {
+      alert(ERROR_MESSAGE);
       this.$userInput.value = "";
 
       return;
