@@ -11,7 +11,7 @@ export default class UserForm extends component {
   bindEvent() {
     this.appendRootEvent('submit', event => {
       event.preventDefault();
-      this.props.onSubmit(parseInput(this._inputElement.value));
+      this.handlers.onSubmit(parseInput(this._inputElement.value));
     });
   }
 

@@ -8,6 +8,7 @@ import {
 import { GAME_STATUS, MESSAGE } from './constants.js';
 import { $ } from './utils/dom.js';
 import UserForm from './components/UserForm.js';
+import GameResult from './components/GameResult.js';
 
 export default class BaseballGame extends component {
   init() {
@@ -16,11 +17,23 @@ export default class BaseballGame extends component {
       gameStatus: GAME_STATUS.READY,
       answer: generateRandomNumber(),
     };
+  }
+
+  initChildrens() {
     this.childrens = [
-      new UserForm($('form'), {
-        gameStatus: this.state.gameStatus,
-        onSubmit: userInput => this._onSubmitUserInput(userInput),
-      }),
+      new UserForm(
+        $('form'),
+        { gameStatus: this.state.gameStatus },
+        { onSubmit: userInput => this._onSubmitUserInput(userInput) }
+      ),
+      new GameResult(
+        $('#result'),
+        {
+          gameStatus: this.state.gameStatus,
+          hint: this.state.hint,
+        },
+        { onClickRestart: () => this._onClickRestart() }
+      ),
     ];
   }
 
@@ -44,7 +57,7 @@ export default class BaseballGame extends component {
     });
   }
 
-  onClickRestartButton() {
+  _onClickRestart() {
     this.setState({
       hint: '',
       gameStatus: GAME_STATUS.READY,
