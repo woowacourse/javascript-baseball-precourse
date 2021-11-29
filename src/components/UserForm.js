@@ -1,9 +1,9 @@
-import component from '../core/component.js';
+import Component from '../core/component.js';
 import { $ } from '../utils/dom.js';
 import { parseInput } from '../utils/input.js';
 import { GAME_STATUS } from '../constants.js';
 
-export default class UserForm extends component {
+export default class UserForm extends Component {
   initDoms() {
     this._inputElement = $('#user-input', this.container);
   }

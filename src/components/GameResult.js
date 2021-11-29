@@ -1,8 +1,8 @@
-import component from '../core/component.js';
+import Component from '../core/component.js';
 import { replaceChild, createElement } from '../utils/dom.js';
 import { GAME_STATUS } from '../constants.js';
 
-export default class GameResult extends component {
+export default class GameResult extends Component {
   bindEvent() {
     this.appendRootEvent('click', ({ target }) => {
       if (target.id !== 'game-restart-button') return;
