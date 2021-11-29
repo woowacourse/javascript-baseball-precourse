@@ -1,4 +1,4 @@
-import { createAnswer } from './restart.js';
+import { createAnswer, setButton, clearButton} from './restart.js';
 import { TEXT, $userInput, $result, $submit } from './constants.js';
 
 export default function BaseballGame() {

@@ -1,3 +1,6 @@
+import { $restart } from './constants.js';
+
+//Radom Number Setting
 export function createAnswer() {
   const answer = [];
   
@@ -8,13 +11,16 @@ export function createAnswer() {
       answer.push(random);
     }
   }
-  console.log(answer);
+
   return answer;
 }
 
-function setButtom() {
+//Show Restart Button
+export function setButton() {
+  $restart.style.display = "display";
 }
 
-function clearButton() {
-
+//Hide Restart Button
+export function clearButton() {
+  $restart.style.display = "none";
 }

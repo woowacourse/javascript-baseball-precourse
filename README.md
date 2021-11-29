@@ -37,11 +37,11 @@
 
 <b>restart.js</b>
 
-- [ ] Button을 보이기 (008) - `setButton`
+- [X] Button을 보이기 (008) - `setButton`
 
-- [ ]  Button을 숨기기 (009) - `clearButton`
+- [X] Button을 숨기기 (009) - `clearButton`
 
-- [ ] Random 값 생성 (001) - `createAnswer`
+- [X] Random 값 생성 (001) - `createAnswer`
 
 <b>validation.js</b>
 
