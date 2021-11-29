@@ -15,7 +15,7 @@
         틀린 예) 122
       </p>
       <form>
-        <input type="text" id="user-input" onchange="getInputVal(this.value)"/>
+        <input type="text" id="user-input"/>
         <button id="submit">확인</button>
       </form>
       <h3>📄 결과</h3>
@@ -28,13 +28,5 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@woowacourse/mission-utils@1.0.1/dist/mission-utils.min.js"></script>
     <script type="module" src="/src/index.js"></script>
-    <script>
-        const getInputVal = function (value) {
-            // sessionStorage['inputVal'] = value; 
-            // 기존에 저장된 값들 때문에, 다음에 실행에 영향을 미침... 
-            // 
-        };
-    </script>
-    <script type="module" src="/src/index2.js"></script>
   </body>
 </html>

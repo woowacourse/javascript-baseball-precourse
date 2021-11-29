@@ -1,4 +1,19 @@
 export default function BaseballGame() {
+    if (!new.target) return new BaseballGame();
+    this.comNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    this.userNums = document.getElementById("user-input");
+    this.result = document.getElementById("result");
+    this.submit = document.getElementById("submit");
+
+    this.submit.addEventListener("click", function () {
+        result.textContent = renderResult();
+    });
+    this.submit.addEventListener("keyup", function (e) {
+        if (e.key === "Enter") result.textContent = renderResult();
+    });
+    const renderResult = () => {
+        return this.play(this.comNums.value, this.userNums);
+    };
     this.play = function (computerInputNumbers, userInputNumbers) {
         const comNums = (computerInputNumbers + "").split(",");
         const userNums = (userInputNumbers + "").split(",");
@@ -11,6 +26,7 @@ export default function BaseballGame() {
             const result = document.getElementById("result");
             if (strCnt === 3) result.style.display = "block";
             else result.style.display = "none";
+            console.log(getResult(comNums, strCnt, ballCnt));
             return getResult(strCnt, ballCnt);
         }
     };
@@ -68,3 +84,5 @@ export default function BaseballGame() {
         return isPass;
     }
 }
+
+new BaseballGame();
