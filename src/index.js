@@ -28,10 +28,10 @@ export default class BaseballGame {
       const userInputNumbers = this.$input.value.split('').map(Number);
       const count = this.play(this.targetNumber,userInputNumbers);
       if(count===COUNT.SUCCESS){
-        this.render(successElement())
+        this.render(successElement());
         return this.activateResetButtton();
       }
-      this.render(resultElement(count))
+      this.render(resultElement(count));
     }
 
     play(computerInputNumbers, userInputNumbers) {
