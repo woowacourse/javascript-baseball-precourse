@@ -1,4 +1,4 @@
-import { MIN, MAX, LENGTH } from "../constatns/constants";
+import { MIN, MAX, LENGTH } from "../constatns/constants.js";
 
 export default function makeAnswer() {
   let answer = new Set();
