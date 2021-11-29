@@ -5,7 +5,6 @@ export default function validateInput (userInput) {
     alert(INPUT_ERROR);
     $input.value = "";
     $input.focus();
-
     return false;
   }
 

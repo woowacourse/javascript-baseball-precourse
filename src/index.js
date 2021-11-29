@@ -22,11 +22,12 @@ export default class Baseball {
   }
   
   onPressRestart() {
-    const $restart = document.getElementById('game-restart-button') 
+    const $restart = document.getElementById('game-restart-button');
     $restart.addEventListener('click', (e) => {
       e.preventDefault();
       $input.value = "";
       this.answer = makeAnswer();
+      $result.innerHTML = "";
     })
   }
   
