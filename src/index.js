@@ -15,7 +15,7 @@ export default class BaseballGame {
     return answer.join('');
   }
 
-  generateUserInput() {
+  gameStart() {
     const userInput = $('#user-input');
     const button = $('#submit');
 
@@ -67,6 +67,7 @@ export default class BaseballGame {
       }
 
       this.play(this.answer, userInput.value);
+      console.log('this.answer: ', this.answer);
       return userInput.value;
     };
     button.addEventListener('click', handleSubmitUserInput);
@@ -115,5 +116,4 @@ export default class BaseballGame {
 }
 
 const baseballGame = new BaseballGame();
-baseballGame.generateAnswer();
-baseballGame.generateUserInput();
+baseballGame.gameStart();
