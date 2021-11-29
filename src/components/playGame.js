@@ -21,12 +21,10 @@ export function getResult(count) {
   let result = "";
 
   if (count.strike === 3) {
-    result = RESULT_MESSAGE.CORRECT;
-    return result;
+    return RESULT_MESSAGE.CORRECT;
   }
   if (count.strike === 0 && count.ball === 0) {
-    result = RESULT_MESSAGE.NOTHING;
-    return result;
+    return RESULT_MESSAGE.NOTHING;
   }
   if (count.ball > 0) {
     result += `${count.ball}${RESULT_MESSAGE.BALL} `;
