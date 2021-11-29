@@ -106,6 +106,7 @@ export default class BaseballGame {
   getGameResult(strike, ball) {
     if (strike === this.digit) return BASEBALL.WIN;
     if (strike + ball === BASEBALL.ZERO) return BASEBALL.NOTING;
+    return `${ball ? `${ball}볼` : EMPTY} ${strike ? `${strike}스트라이크` : EMPTY}`.trim();
   }
 
   /**
