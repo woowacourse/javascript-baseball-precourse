@@ -19,6 +19,7 @@
 - 공용으로 사용 될 Component Core 를 만든다.
 - baseBallGame 컴포넌트를 컴포넌트 형태로 재작성한다.
     - hint, gameStatus 와 같은 상태를 관리한다.
-    - UserInput 컴포넌트와 GameResult 컴포넌트를 children 으로 등록한다.
     - 자식 컴포넌트에 넘겨줄 이벤트 핸들러 함수를 작성한다. 
-- 컴포넌트를 UserInput, gameResult 로 나누어 구현한다.
+- UserForm 컴포넌트를 작성한다.
+    - UserForm 컴포넌트를 baseBallGame 컴포넌트의 자식으로 등록한다.
+- 컴포넌트를 UserForm, gameResult 로 나누어 구현한다.
