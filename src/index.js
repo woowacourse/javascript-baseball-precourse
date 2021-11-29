@@ -2,7 +2,8 @@ import BaseballGame from './BaseballGame.js';
 import { ERROR_MESSAGE, GAME_CONFIG, GAME_RESULT_STATE } from './constants.js';
 import {
   checkDuplicationNumbers,
-  checkOnlyNumberOfDigitsInRange,
+  checkDigits,
+  checkNumbersInRange,
 } from './utils.js';
 
 const BaseballGameStarter = new BaseballGame();
@@ -12,9 +13,7 @@ const userInputNumbers = document.querySelector('#user-input');
 const gameResult = document.querySelector('#result');
 
 userInputNumbers.addEventListener('keyup', (event) => {
-  if (event.key === 'Enter') {
-    submitButton.click();
-  }
+  if (event.key === 'Enter') submitButton.click();
 });
 
 const bindGameRestartEvent = () => {
@@ -32,15 +31,15 @@ submitButton.addEventListener('click', (event) => {
   event.preventDefault();
   const { MIN_NUMBER, MAX_NUMBER, LENGTH } = GAME_CONFIG;
 
-  const isThreeDigitsNumbers = !checkOnlyNumberOfDigitsInRange(
+  const isThreeDigitsNumbers = !checkDigits(LENGTH, userInputNumbers.value);
+  const isDuplicationNumbers = checkDuplicationNumbers(userInputNumbers.value);
+  const isRangedNumbers = checkNumbersInRange(
     MIN_NUMBER,
     MAX_NUMBER,
-    LENGTH,
     userInputNumbers.value,
   );
-  const isDuplicationNumbers = checkDuplicationNumbers(userInputNumbers.value);
 
-  if (isThreeDigitsNumbers || isDuplicationNumbers) {
+  if (isThreeDigitsNumbers || isDuplicationNumbers || !isRangedNumbers) {
     alert(ERROR_MESSAGE.INPUT_ERROR);
     userInputNumbers.value = '';
     userInputNumbers.focus();

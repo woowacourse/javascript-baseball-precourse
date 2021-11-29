@@ -1,13 +1,13 @@
-export function checkOnlyNumberOfDigitsInRange(
-  minNumber,
-  maxNumber,
-  length,
-  number,
-) {
-  const regex = new RegExp(
-    String.raw`^[${minNumber}-${maxNumber}]{${length}}$`,
-  );
-  return regex.test(number);
+export function checkDigits(length, number) {
+  return String(number).length === length;
+}
+
+export function checkNumbersInRange(minNumber, maxNumber, number) {
+  const numberArr = Array.from(number);
+  const result = numberArr.filter(
+    (value) => value >= minNumber && value <= maxNumber,
+  ).length;
+  return result === numberArr.length;
 }
 
 export function checkDuplicationNumbers(number) {
