@@ -21,35 +21,35 @@
 
 <b>index.js</b>
 
-\- [ ] String Result 생성 (002) - `createResult`
+- [ ] String Result 생성 (002) - `createResult`
 
-\- [ ] Set Result in DOM (003) -`setResult`
+- [ ] Set Result in DOM (003) -`setResult`
 
 <b>compare.js</b>
 
-\- [ ] Strike 개수 세기 (004) - `countStrike`
+- [ ] Strike 개수 세기 (004) - `countStrike`
 
-\- [ ] Ball 개수 세기 (005) - `countBall`
+- [ ] Ball 개수 세기 (005) - `countBall`
 
-\- [ ] 낫싱인지 판단 (006) - `isNothing`
+- [ ] 낫싱인지 판단 (006) - `isNothing`
 
-\- [ ] 모두 정답인지 판단 (007) - `isCorrectAll`
+- [ ] 모두 정답인지 판단 (007) - `isCorrectAll`
 
 <b>restart.js</b>
 
-\- [ ] Button을 보이기 (008) - `setButton`
+- [ ] Button을 보이기 (008) - `setButton`
 
-\- [ ]  Button을 숨기기 (009) - `clearButton`
+- [ ]  Button을 숨기기 (009) - `clearButton`
 
-\- [ ] Random 값 생성 (001) - `createRadomNum`
+- [ ] Random 값 생성 (001) - `createAnswer`
 
 <b>validation.js</b>
 
-\- [ ] input 값이 비어있지 않은지 (011) - `isNotnull`
+- [ ] input 값이 비어있지 않은지 (011) - `isNotnull`
 
-\- [ ] 3자리 수가 맞는지 (012) - `isThreeNum`
+- [ ] 3자리 수가 맞는지 (012) - `isThreeNum`
 
-\- [ ] 서로 다른 수인지 (013) - `isAnother`
+- [ ] 서로 다른 수인지 (013) - `isAnother`
 
-\- [ ]  숫자인지 검사 (014) - `isNumber`
+- [ ]  숫자인지 검사 (014) - `isNumber`
 

@@ -1,4 +1,4 @@
-export function getAnswer() {
+export function createAnswer() {
 
 }
 

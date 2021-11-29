@@ -1,5 +1,6 @@
+
+
 export default function BaseballGame() {
-    
 
     this.play = function (computerInputNumbers, userInputNumbers) {
       return "결과 값 String";
@@ -7,9 +8,11 @@ export default function BaseballGame() {
 }
 
 function createResult() {
-
+   
 }
 
 function setResult() {
 
 }
+
+createResult();
