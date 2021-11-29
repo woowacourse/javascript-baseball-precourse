@@ -1,3 +1,2 @@
-export const getUserInput = () => {
-  return document.getElementById('user-input').value.toString();
-};
+export const getUserInput = () =>
+  document.getElementById('user-input').value.toString();
