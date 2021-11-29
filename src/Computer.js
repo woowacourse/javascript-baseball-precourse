@@ -20,6 +20,12 @@ export default class Computer {
     return [...string].map(value => Number(value));
   }
 
+  createTextElement(tagName, text) {
+    const element = document.createElement(tagName);
+    element.innerText = text;
+    return element;
+  }
+
   checkValidValue(targetValue) {
     return (
       this.checkNumberLength(targetValue) &&

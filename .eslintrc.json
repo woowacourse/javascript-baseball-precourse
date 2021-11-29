@@ -18,6 +18,7 @@
     "import/extensions": ["off"],
     "no-restricted-globals": "off",
     "class-methods-use-this": "off",
-    "no-alert": "off"
+    "no-alert": "off",
+    "consistent-return": "off"
   }
 }

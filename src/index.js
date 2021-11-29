@@ -10,7 +10,9 @@ export default class BaseballGame {
   }
 
   start() {
+    console.log(this.computerInputNumbers);
     this.computer.clearResultArea();
+    this.user.input.value = "";
     this.user.button.addEventListener("click", e => this.checkValidValue(e));
   }
 
@@ -73,7 +75,31 @@ export default class BaseballGame {
   }
 
   printGameMessage(gameMessage) {
+    if (`${this.NUMBER_LENGTH}볼` === gameMessage) {
+      this.computer.clearResultArea();
+      return this.renderAnswerMessage();
+    }
     this.computer.resultArea.innerText = gameMessage;
+  }
+
+  renderAnswerMessage() {
+    const congratsMessage = this.computer.createTextElement(
+      "p",
+      "🎉 정답을 맞추셨습니다! 🎉"
+    );
+    const reStartArea = document.createElement("div");
+    const reStartMessage = this.computer.createTextElement(
+      "span",
+      "게임을 새로 시작하시겠습니까? "
+    );
+    const reStartButton = this.computer.createTextElement(
+      "button",
+      "게임 재시작"
+    );
+    reStartButton.id = "game-restart-button";
+
+    reStartArea.append(reStartMessage, reStartButton);
+    this.computer.resultArea.append(congratsMessage, reStartArea);
   }
 }
 
