@@ -5,7 +5,12 @@ export default function BaseballGame() {
   let computerNumber = createAnswer(); 
   
   this.play = (computerInputNumbers, userInputNumbers) => {
-    printResult(computerInputNumbers, userInputNumbers);
+    if(!Array.isArray(computerInputNumbers) && !Array.isArray(userInputNumbers)) {
+      computerInputNumbers = computerInputNumbers.toString().split('').map(v => Number(v));
+      userInputNumbers = userInputNumbers.toString().split('').map(v => Number(v));
+    }
+
+    return getResult(computerInputNumbers, userInputNumbers);
   };
   
   const resetOutput = () => {
@@ -20,7 +25,7 @@ export default function BaseballGame() {
       return;
     }
 
-    this.play(computerNumber, userInput);
+    printResult(this.play(computerNumber, userInput));
   };
 
   const printError = (userInput) => {
@@ -56,9 +61,19 @@ export default function BaseballGame() {
     return [strike, ball];
   }
 
-  const printResult = (computerInputNumbers, userInputNumbers) => {
+  const getResult = (computerInputNumbers, userInputNumbers) => {
     const [strike, ball] = countAnswer(computerInputNumbers, userInputNumbers);
     if(strike === 3) {
+      return "정답";
+    }
+    if(!strike && !ball) {
+      return "낫싱";
+    }
+    return `${ball? ball + '볼 ' : ''}${strike? strike + '스트라이크' : ''}`;
+  }
+
+  const printResult = (result) => {
+    if(result === '정답') {
       $("#result").innerHTML = 
       `<strong>🎉 정답을 맞추셨습니다! 🎉</strong>
       <p id="restart">
@@ -67,12 +82,10 @@ export default function BaseballGame() {
       </p>` 
       return;
     }
-    if(!strike && !ball) {
-      $("#result").innerText = "낫싱";
-      return;
-    }
-    $("#result").innerText = `${ball? ball + '볼' : ''} ${strike? strike + '스트라이크' : ''}`;
-  }
+    $("#result").innerText = result;
+  };
+
+
 
   const restartGame = () => {
     computerNumber = createAnswer();
