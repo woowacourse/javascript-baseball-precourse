@@ -148,7 +148,7 @@ export default class BaseballGame{
     const submitBtn = document.querySelector("#submit");
     
     let computerRandomNumber = this.makeRandomNumbers();
-    console.log(computerRandomNumber);
+
     submitBtn.addEventListener('click', () => {
       if (!this.checkUserInput(input.value)) {
         return alert("1~9사이의 서로 다른 세자리 숫자를 입력해주세요.");
