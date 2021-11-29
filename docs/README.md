@@ -22,4 +22,6 @@
     - 자식 컴포넌트에 넘겨줄 이벤트 핸들러 함수를 작성한다. 
 - UserForm 컴포넌트를 작성한다.
     - UserForm 컴포넌트를 baseBallGame 컴포넌트의 자식으로 등록한다.
+- GameResult 컴포넌트를 작성한다.
+    - GameResult 컴포넌트를 baseBallGame 컴포넌트의 자식으로 등록한다.
 - 컴포넌트를 UserForm, gameResult 로 나누어 구현한다.
