@@ -1,7 +1,6 @@
 import { RESTART, LENGTH } from "../constatns/constants.js";
 
 export default function getResult(answer, userInput) {
-  console.log(answer)
   const strike = countStrike(answer, userInput);
   const ball = countBall(answer, userInput);
   if(strike === LENGTH) {
@@ -22,7 +21,7 @@ export default function getResult(answer, userInput) {
 const countBall = (answer, userInput) => {
   let ball = 0;
   answer.split("").forEach((el, idx) => {
-    if(userInput.includes(el) && userInput[idx] !== el){
+    if(userInput.includes(el) && userInput[idx] !== el) {
       ball++;
     }
   })
@@ -33,7 +32,7 @@ const countBall = (answer, userInput) => {
 const countStrike = (answer, userInput) => {
   let strike = 0;
   answer.split("").forEach((el, idx) => {
-    if(el === userInput[idx]){
+    if(el === userInput[idx]) {
       strike++;
     }
   })
