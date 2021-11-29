@@ -49,3 +49,19 @@ function changeNumberToNumList(number) {
   const numberList = numberString.split("").map(numChar => Number(numChar));
   return numberList;
 }
+
+/**
+ * 정답과 입력값을 검증, 리스트로 변환, 결과를 계산하는 메소드들을 실행하는 메소드
+ * @param {Number} answerNumbers 
+ * @param {Number} inputNumbers 
+ * @returns {Object} result {strike, ball}
+ */
+export default function getStrikeAndBallResult(answerNumbers, inputNumbers) {
+  if (validateInputNumber(String(inputNumbers))) {
+    answerNumbers = changeNumberToNumList(answerNumbers);
+    inputNumbers = changeNumberToNumList(inputNumbers);
+  
+    const result = checkStrikeAndBall(answerNumbers, inputNumbers);
+    return result;
+  }
+}
