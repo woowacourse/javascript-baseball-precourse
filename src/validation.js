@@ -9,6 +9,7 @@ const isThreeDigits = (input) => input.length === 3;
 
 const isNumber = (input) => {
   const inputArray = input.split("");
+
   return !inputArray.some((number) => number < "1" || number > "9");
 };
 

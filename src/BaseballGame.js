@@ -24,7 +24,11 @@ export default function BaseballGame() {
     return [...numberSet].join("");
   };
 
-  this.computerNumbers = this.generateRandomNumbers();
+  this.answer = this.generateRandomNumbers();
+
+  this.initAnswer = function () {
+    this.answer = this.generateRandomNumbers();
+  }
 
   this.play = function (computerInputNumbers, userInputNumbers) {
     const result = this.compareNumbers(computerInputNumbers, userInputNumbers);
@@ -35,7 +39,7 @@ export default function BaseballGame() {
 
   // play wrapper
   this.playWithGeneratedNumber = function (userInputNumbers) {
-    return this.play(this.computerNumbers, userInputNumbers);
+    return this.play(this.answer, userInputNumbers);
   };
 
   this.compareNumbers = function (computerInputNumbers, userInputNumbers) {
@@ -72,8 +76,4 @@ export default function BaseballGame() {
 
     return resultString.join(" ");
   };
-
-  this.restart = function() {
-    this.computerNumbers = this.generateRandomNumbers();
-  }
 }
