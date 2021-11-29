@@ -1,8 +1,8 @@
 import $ from './utils/dom.js';
-import createAnswer from './createAnswer.js';
+import getComputerInput from './getComputerInput.js';
 
 export default function BaseballGame() {
-  let computerInput = createAnswer();
+  let computerInput = getComputerInput();
 
   this.play = (computerInputNumbers, userInputNumbers) => {
     // eslint-disable-next-line prettier/prettier
@@ -98,7 +98,7 @@ export default function BaseballGame() {
   };
 
   const restartGame = () => {
-    computerInput = createAnswer();
+    computerInput = getComputerInput();
     resetOutput();
   };
 

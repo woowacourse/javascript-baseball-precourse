@@ -1,4 +1,4 @@
-const createAnswer = () => {
+const getComputerInput = () => {
   const computerInputNumbers = new Set();
   while (computerInputNumbers.size < 3) {
     computerInputNumbers.add(MissionUtils.Random.pickNumberInRange(1, 9));
@@ -6,4 +6,4 @@ const createAnswer = () => {
   return [...computerInputNumbers];
 };
 
-export default createAnswer;
+export default getComputerInput;
