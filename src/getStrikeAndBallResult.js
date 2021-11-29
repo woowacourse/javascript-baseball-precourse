@@ -18,3 +18,23 @@ function validateInputNumber(numberText) {
   
   return true;
 }
+
+/**
+ * 정답과 입력값을 비교하여 스트라이크, 볼의 수를 담은 객체 반환 메소드
+ * @param {Number Array} answerNumbers 
+ * @param {Number Array} inputNumbers 
+ * @returns {Object} result {strike, ball}
+ */
+function checkStrikeAndBall(answerNumbers, inputNumbers) {
+  let result = { "strike": 0, "ball": 0 };
+  
+  inputNumbers.forEach((item, index) => {
+    if (answerNumbers[index] === item) {
+      result.strike += 1;
+    } else if (answerNumbers.includes(item)) {
+      result.ball += 1;
+    }
+  });
+  
+  return result;
+}
