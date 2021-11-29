@@ -19,14 +19,18 @@ export default class BaseballGame {
     if (!checkCorrectInput(this.userInputNumbers)) {
       alert('올바르지 않은 입력입니다. 다시 입력해주세요');
     } else {
-      document.getElementById('result').innerHTML = this.play(
-        this.computerInputNumbers,
-        this.userInputNumbers
-      );
-      if (document.getElementById('game-restart-button')) {
-        document.getElementById('game-restart-button').onclick =
-          this.gameRestart.bind(this);
-      }
+      this.startGame();
+    }
+  }
+
+  startGame() {
+    document.getElementById('result').innerHTML = this.play(
+      this.computerInputNumbers,
+      this.userInputNumbers
+    );
+    if (document.getElementById('game-restart-button') != null) {
+      const restartButton = document.getElementById('game-restart-button');
+      restartButton.onclick = this.gameRestart.bind(this);
     }
   }
 
@@ -34,23 +38,36 @@ export default class BaseballGame {
     let strike = 0;
     let ball = 0;
     computerInputNumbers.forEach((number, index) => {
-      const currentNumIdx = userInputNumbers.findIndex(
-        (item) => item === number
-      );
-      if (currentNumIdx !== -1) {
-        if (index === currentNumIdx) strike += 1;
-        else ball += 1;
+      const playResult = this.checkPlayResult(userInputNumbers, number, index);
+      if (playResult === 'strike') {
+        strike += 1;
+      }
+      if (playResult === 'ball') {
+        ball += 1;
       }
     });
-    return this.playResult(strike, ball);
+    return this.printResult(strike, ball);
   }
 
-  playResult(strike, ball) {
-    if (strike === 0 && ball === 0) return '낫싱';
-    if (strike === 3) return this.correctAnswer();
-    if (strike === 0) return `${ball}볼`;
-    if (ball === 0) return `${strike}스트라이크`;
-    return `${ball}볼 ${strike}스트라이크`;
+  checkPlayResult(userInputNumbers, number, index) {
+    const currentNumIdx = userInputNumbers.findIndex((item) => item === number);
+    if (currentNumIdx !== -1) {
+      if (index === currentNumIdx) return 'strike';
+      return 'ball';
+    }
+    return '';
+  }
+
+  printResult(strike, ball) {
+    let printResultString = '';
+    if (ball !== 0) {
+      printResultString += `${ball}볼`;
+      if (strike !== 0) printResultString += ' ';
+    }
+    if (strike !== 0) printResultString += `${strike}스트라이크`;
+    if (printResultString === '') return '낫싱';
+    if (printResultString === '3스트라이크') return this.correctAnswer();
+    return printResultString;
   }
 
   correctAnswer() {
@@ -64,4 +81,4 @@ export default class BaseballGame {
   }
 }
 
-new BaseballGame();
+const player = new BaseballGame();
