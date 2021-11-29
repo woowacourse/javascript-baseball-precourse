@@ -1,4 +1,5 @@
 import component from './core/component.js';
+import { $ } from './utils/dom.js';
 import { isNotValidInput } from './utils/input.js';
 import {
   calculateBaseBall,
@@ -6,9 +7,7 @@ import {
   generateRandomNumber,
 } from './utils/game.js';
 import { GAME_STATUS, MESSAGE } from './constants.js';
-import { $ } from './utils/dom.js';
-import UserForm from './components/UserForm.js';
-import GameResult from './components/GameResult.js';
+import { UserForm, GameResult } from './components/index.js';
 
 export default class BaseballGame extends component {
   init() {
