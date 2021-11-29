@@ -3,6 +3,7 @@ import { $form, $input, $result } from './html-const.js';
 import { setAnswer } from './setAnswer.js';
 import { checkInput } from './checkInput.js';
 import { CountStrikeAndBall } from './CountStrikeAndBall.js';
+import { endGame } from './endGame.js';
 
 export default function BaseballGame() {
     let computerInputNumbers = setAnswer();
@@ -24,6 +25,7 @@ export default function BaseballGame() {
         if (Strike_Ball.Strike === 3) {
             $result.innerHTML = CORRECT_ANSWER;
             endGame();
+            computerInputNumbers = setAnswer();
         }
         else if (Strike_Ball.Strike === 0 && Strike_Ball.Ball === 0) {
             $result.innerText = NOTHING_ANSWER;
@@ -36,25 +38,11 @@ export default function BaseballGame() {
         return $result.innerText;
     };
 
-    const endGame = () => {
-        $result.innerHTML += `<p id="endGame_txt">게임을 새로 시작하시겠습니까?<button id="game-restart-button">재시작</button></p>`;
-        let Game_Restart_Button = document.querySelector('#game-restart-button');
-        let Result_Txt = document.querySelector('#result_txt');
-        let EndGame_Txt = document.querySelector('#endGame_txt');
-        Game_Restart_Button.onclick = () => {
-            $input.value = '';
-            $result.removeChild(Result_Txt);
-            $result.removeChild(EndGame_Txt);
-            computerInputNumbers = setAnswer();
-        };
-    };
-
     $form.addEventListener('submit', (event) => {
         event.preventDefault(); // 제출 시 초기화 되는 것 방지
         const userInputNumbers = $input.value;
         play(computerInputNumbers, userInputNumbers);
     });
-
 
 }
 BaseballGame();
