@@ -22,6 +22,7 @@ export default function printGameResult(result) {
   const $result = document.querySelector('#result');
 
   if (result === '정답') {
+    document.getElementById('user-input').readOnly = true;
     return printCorrect($result);
   }
   return printInCorrect($result, result);
