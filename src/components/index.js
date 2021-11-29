@@ -7,8 +7,8 @@ const { pickNumberInRange } = MissionUtils.Random;
 export default class BaseballGame {
   /**
    * BaseballGame 설정을 진행합니다.
-   * 
-   * @param {HTMLElement} element 
+   *
+   * @param {HTMLElement} element
    * @param {Object} state : {
    *                            digit: 자리수,
    *                            exclude: 예외,
@@ -38,23 +38,47 @@ export default class BaseballGame {
 
   /**
    * 컴퓨터의 랜덤 타겟 넘버를 반환합니다.
-   * 
+   *
    * @returns String(Number(any))
    */
   getRandomNumbers() {
     const result = new Set();
     /* eslint-disable no-constant-condition */
-    while (true) {
+    while (result.size < this.digit) {
       result.add(pickNumberInRange(this.start, this.end));
-      if (result.size === this.digit) return [...result].join(EMPTY);
     }
+    return [...result].join(EMPTY);
+  }
+
+  /**
+   * 스트라이크 개수(자리수 - 불일치 개수)를 반환합니다.
+   *
+   * @param {Number} digit
+   * @param {Number} mismatch
+   * @returns {Number} StrikeCount
+   */
+  getStrikeCount(digit, mismatch) {
+    return digit - mismatch;
+  }
+
+  /**
+   * 볼 개수(자리수 - 비슷한 개수 + 불일치 개수)를 반환합니다.
+   *
+   * @param {Number} digit
+   * @param {Number} similar
+   * @param {Number} mismatch
+   * @returns {Number} BallCount
+   */
+  getBallCount(digit, similar, mismatch) {
+    // 3 - 1 + 2
+    return digit - similar + mismatch;
   }
 
   /**
    * 입력 받은 값과 컴퓨터의 타겟 넘버를 비교합니다.
-   * 
-   * @param {String} userInputNumbers 
-   * @returns 
+   *
+   * @param {String} userInputNumbers
+   * @returns {Number[]}
    */
   checkCorrectNumber(userInputNumbers) {
     const targetNumbers = this.computerInputNumbers.split(EMPTY);
@@ -63,35 +87,43 @@ export default class BaseballGame {
       return numbers;
     }, []);
 
-    const { length: MISMATCH } = restNumbers;
-    const SIMILAR = new Set([...restNumbers, ...targetNumbers]).size;
-    const STRIKE = this.digit - MISMATCH;
-    const BALL = this.digit - SIMILAR + MISMATCH;
+    const { length: mismatch } = restNumbers;
+    const { size: similar } = new Set([...restNumbers, ...targetNumbers]);
 
-    return [STRIKE, BALL];
+    const strike = this.getStrikeCount(this.digit, mismatch);
+    const ball = this.getBallCount(this.digit, similar, mismatch);
+
+    return [strike, ball];
+  }
+
+  /**
+   * 게임 결과를 반환합니다.
+   *
+   * @param {Number} strike
+   * @param {Number} ball
+   * @returns {String}
+   */
+  getGameResult(strike, ball) {
+    if (strike === this.digit) return BASEBALL.WIN;
+    if (strike + ball === BASEBALL.ZERO) return BASEBALL.NOTING;
+    return `${ball ? `${ball}볼` : EMPTY} ${strike ? `${strike}스트라이크` : EMPTY}`.trim();
   }
 
   /**
    * 게임을 진행합니다.
-   * 
-   * @param {String} userInputNumbers 
+   *
+   * @param {String} userInputNumbers
    */
   play(userInputNumbers) {
-    let result = EMPTY;
-
-    const [STRIKE, BALL] = this.checkCorrectNumber(userInputNumbers);
-
-    if (STRIKE === this.digit) result = BASEBALL.WIN;
-    else if (STRIKE + BALL === this.exclude) result = BASEBALL.NOTING;
-    else result = `${BALL ? `${BALL}볼` : EMPTY} ${STRIKE ? `${STRIKE}스트라이크` : EMPTY}`.trim();
-
-    this.render(result);
+    const [strike, ball] = this.checkCorrectNumber(userInputNumbers);
+    const gameResult = this.getGameResult(strike, ball);
+    this.render(gameResult);
   }
 
   /**
    * play의 결과를 받아 해당 컴포넌트에 선언된 엘리먼트에 렌더링합니다.
-   * 
-   * @param {String} sentence 
+   *
+   * @param {String} sentence
    */
   render(sentence) {
     let resultText = `<p>${sentence}</p>`;
