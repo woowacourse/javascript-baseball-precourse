@@ -3,7 +3,7 @@ import getInputValid from './getInputValid.js';
 function getInputValue() {
   const $userInput = document.querySelector('#user-input');
 
-  const numbers = $userInput.value.split('').map(number => Number(number));
+  const numbers = $userInput.value;
 
   if (!getInputValid(numbers)) {
     return false;
