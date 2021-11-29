@@ -1,18 +1,20 @@
 export default function BaseballGame() {
     if (!new.target) return new BaseballGame();
     this.comNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    this.userNums = document.getElementById("user-input");
-    this.result = document.getElementById("result");
-    this.submit = document.getElementById("submit");
+    this.$userNums = document.getElementById("user-input");
+    this.$result = document.getElementById("result");
+    this.$submit = document.getElementById("submit");
+    this.$success = document.getElementById("success");
 
-    this.submit.addEventListener("click", function () {
+    this.$submit.addEventListener("click", function () {
         result.textContent = renderResult();
     });
-    this.submit.addEventListener("keyup", function (e) {
+    this.$submit.addEventListener("keyup", function (e) {
         if (e.key === "Enter") result.textContent = renderResult();
     });
+
     const renderResult = () => {
-        return this.play(this.comNums.value, this.userNums);
+        return this.play(this.comNums, this.$userNums.value);
     };
     this.play = function (computerInputNumbers, userInputNumbers) {
         const comNums = (computerInputNumbers + "").split(",");
@@ -23,25 +25,33 @@ export default function BaseballGame() {
             const strCnt = checkStrike(comNums, userNums);
             const ballCnt = checkBall(comNums, userNums);
 
-            const result = document.getElementById("result");
-            if (strCnt === 3) result.style.display = "block";
-            else result.style.display = "none";
-            console.log(getResult(comNums, strCnt, ballCnt));
+            if (strCnt === 3) setCorAnswer();
+            else setWrongAnswer();
             return getResult(strCnt, ballCnt);
         }
     };
 
+    const setCorAnswer = function () {
+        document
+            .getElementById("game-restart-button")
+            .addEventListener("click", function () {
+                comNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+                $userNums.value = "";
+            });
+        $success.style.display = "block";
+        $result.style.display = "none";
+    };
+
+    const setWrongAnswer = function () {
+        $success.style.display = "none";
+        $result.style.display = "block";
+    };
+
     const getResult = function (strCnt, ballCnt) {
-        if (strCnt < 3) {
-            if (strCnt === 0 && ballCnt === 0) return "낫싱";
-            else if (strCnt !== 0 && ballCnt !== 0)
-                return `${ballCnt}볼 ${strCnt}스트라이크`;
-            else if (strCnt === 0 && ballCnt !== 0) return `${ballCnt}볼`;
-            else if (strCnt !== 0 && ballCnt === 0)
-                return `${strCnt}스트라이크`;
-        } else {
-            return "";
-        }
+        if (strCnt === 0 && ballCnt === 0) return "낫싱";
+        else if (strCnt === 0) return `${ballCnt}볼`;
+        else if (ballCnt === 0) return `${strCnt}스트라이크`;
+        else return `${ballCnt}볼 ${strCnt}스트라이크`;
     };
     const checkStrike = function (comNums, userNums) {
         // 스트라이크를 확인하는 함수
