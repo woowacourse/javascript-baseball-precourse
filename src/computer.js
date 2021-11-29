@@ -25,5 +25,5 @@ export const ramdomAnswer = () => {
     randomNum = getRandomNum();
   }
 
-  return '' + randomNum.firstNum + randomNum.secondNum + randomNum.thirdNum;
+  return `${randomNum.firstNum}${randomNum.secondNum}${randomNum.thirdNum}`;
 };

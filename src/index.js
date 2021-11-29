@@ -26,10 +26,10 @@ const submitButton = document.getElementById('submit');
 
 const setResultTextToHint = () => {
   const result = document.getElementById('result');
-  result.innerHTML =
-    '<h4>' +
-    baseballGame.play(baseballGame.computerAnswer, getUserInput()) +
-    '</h4>';
+  result.innerHTML = `<h4>${baseballGame.play(
+    baseballGame.computerAnswer,
+    getUserInput()
+  )}</h4>`;
 };
 
 submitButton.addEventListener('click', (e) => {

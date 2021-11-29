@@ -76,11 +76,11 @@ export const getHintString = (result) => {
   const { strike, ball } = result;
 
   if (strike == 0 && ball > 0) {
-    return ball + BALL;
+    return `${ball}${BALL}`;
   } else if (ball === 0 && strike > 0 && strike < 3) {
-    return strike + STRIKE;
+    return `${strike}${STRIKE}`;
   } else if (ball > 0 && strike > 0 && strike < 3) {
-    return ball + BALL + ' ' + strike + STRIKE;
+    return `${ball}${BALL} ${strike}${STRIKE}`;
   } else if (ball === 0 && strike === 0) {
     return NOTHING;
   } else {
