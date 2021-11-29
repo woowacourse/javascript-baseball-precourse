@@ -1,4 +1,4 @@
-import { ANSWER_RANGE, ANSWER_LENGTH } from '../asset/constant.js';
+import { ANSWER_RANGE, ANSWER_LENGTH, HINT } from '../asset/constant.js';
 
 export default class Computer {
     constructor() {
@@ -32,13 +32,13 @@ export default class Computer {
         let ret;
 
         if (strikeCnt > 0 && ballCnt > 0) {
-            ret = `${ballCnt}볼 ${strikeCnt}스트라이크`;
+            ret = `${ballCnt}${HINT.ball} ${strikeCnt}${HINT.strike}`;
         } else if (ballCnt > 0) {
-            ret = `${ballCnt}볼`;
+            ret = `${ballCnt}${HINT.ball}`;
         } else if (strikeCnt > 0) {
-            ret = `${strikeCnt}스트라이크`;
+            ret = `${strikeCnt}${HINT.strike}`;
         } else {
-            ret = '낫싱';
+            ret = HINT.nothing;
         }
         
         return ret;

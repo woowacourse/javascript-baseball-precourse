@@ -14,3 +14,9 @@ export const USER_INPUT_ERROR_MSG = {
     range: '1 ~ 9사이의 숫자로 입력해주세요.',
     overlap: '서로 다른 임의의 수 3개를 입력해주세요.',
 };
+
+export const HINT = {
+    strike: '스트라이크',
+    ball: '볼',
+    nothing: '낫싱',
+};
