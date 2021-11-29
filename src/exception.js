@@ -29,20 +29,40 @@ const isDuplicated = (userInputNumbers) => {
   return true;
 };
 
-const alertToUser = (userInputNumbers) => {
-  if (!userInputNumbers || isNaN(Number(userInputNumbers))) alert(NAN_ALERT);
-  else if (userInputNumbers.includes(' ')) alert(BLANK_SPACE_ALERT);
-  else if (userInputNumbers.includes('-')) alert(NEGATIVE_NUMBER_ALERT);
-  else if (userInputNumbers.length !== 3) alert(WRONG_LENGTH_ALERT);
-  else if (!checkDigitsRangeCorrect(userInputNumbers)) alert(OUT_RANGE_ALERT);
-  else if (isDuplicated(userInputNumbers)) alert(DUPLICATED_NUMBER_ALERT);
-  else return false;
+const alertToUserAboutNAN = (userInputNumbers) => {
+  if (!userInputNumbers || isNaN(Number(userInputNumbers))) {
+    alert(NAN_ALERT);
+  } else if (userInputNumbers.includes(' ')) {
+    alert(BLANK_SPACE_ALERT);
+  } else {
+    return false;
+  }
+
+  return true;
+};
+
+const alertToUserAboutInvalidNumber = (userInputNumbers) => {
+  if (userInputNumbers.includes('-')) {
+    alert(NEGATIVE_NUMBER_ALERT);
+  } else if (userInputNumbers.length !== 3) {
+    alert(WRONG_LENGTH_ALERT);
+  } else if (!checkDigitsRangeCorrect(userInputNumbers)) {
+    alert(OUT_RANGE_ALERT);
+  } else if (isDuplicated(userInputNumbers)) {
+    alert(DUPLICATED_NUMBER_ALERT);
+  } else {
+    return false;
+  }
 
   return true;
 };
 
 export const userInputException = (userInputNumbers) => {
-  let isException = alertToUser(userInputNumbers);
+  let isException = alertToUserAboutNAN(userInputNumbers);
+
+  if (!isException) {
+    isException = alertToUserAboutInvalidNumber(userInputNumbers);
+  }
 
   return isException;
 };
