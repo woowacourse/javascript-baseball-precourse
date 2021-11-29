@@ -1,11 +1,11 @@
-import { RESTART } from "../constatns/constants.js";
+import { RESTART, LENGTH } from "../constatns/constants.js";
 
 export default function getResult(answer, userInput) {
   console.log(answer, userInput);
   const strike = countStrike(answer, userInput);
   const ball = countBall(answer, userInput);
   
-  if(strike === 3){
+  if(strike === LENGTH){
     return RESTART;
   }
   if(ball === 0 && strike === 0){
