@@ -9,7 +9,7 @@ function onInvalidInputSubmit() {
 
 function onValidInputSubmit(userInputNumbers) {
   const result = window.play(window.computerInputNumbers, userInputNumbers);
-  document.getElementById('result').innerText = result;
+  document.getElementById('result').innerHTML = result;
 }
 
 export default function onInputSubmit(e) {

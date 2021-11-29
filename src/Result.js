@@ -20,14 +20,19 @@ export function getBallHint(computerInputNumbers, userInputNumbers) {
   return hint;
 }
 
-export function getStrikeHint(computerInputNumbers, userInputNumbers, result) {
-  const strike = countStrike(computerInputNumbers, userInputNumbers);
+export function getStrikeHint(strike, result) {
   let hint = result;
-
-  if (strike) {
-    hint += hint ? ' ' : '';
-    hint += `${strike}스트라이크`;
-  }
+  hint += hint ? ' ' : '';
+  hint += `${strike}스트라이크`;
 
   return hint;
+}
+
+export function getGameOver() {
+  let result;
+  result = '<p>🎉 <strong>정답을 맞추셨습니다!</strong> 🎉</p>';
+  result += '게임을 새로 시작하시겠습니까?  ';
+  result += '<button id="restart">게임 재시작</button>';
+
+  return result;
 }

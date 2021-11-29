@@ -1,6 +1,12 @@
 import { createComputerInputNumbers } from './Numbers.js';
 import onInputSubmit from './Submit.js';
-import { getNothingHint, getBallHint, getStrikeHint } from './Result.js';
+import {
+  getNothingHint,
+  getBallHint,
+  getStrikeHint,
+  getGameOver,
+} from './Result.js';
+import { countStrike } from './Count.js';
 
 window.computerInputNumbers = createComputerInputNumbers();
 document.getElementById('submit').addEventListener('click', onInputSubmit);
@@ -11,7 +17,9 @@ export default function BaseballGame() {
     if (nothing) return nothing;
 
     let result = getBallHint(computerInputNumbers, userInputNumbers);
-    result = getStrikeHint(computerInputNumbers, userInputNumbers, result);
+    const strike = countStrike(computerInputNumbers, userInputNumbers);
+    if (strike === 3) result = getGameOver();
+    else if (strike) result = getStrikeHint(strike, result);
 
     return result;
   };
