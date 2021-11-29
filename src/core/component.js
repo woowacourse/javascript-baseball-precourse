@@ -5,6 +5,7 @@ export default class Component {
     this.state = {};
     this.childrens = [];
     this.init();
+    this.bindEvent();
   }
 
   /**
