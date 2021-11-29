@@ -1,3 +1,5 @@
+import getStrikeAndBallResult from "./getStrikeAndBallResult.js";
+
 /**
  * 무작위로 선택된 숫자를 힌트를 통해 맞춰가는 베이스볼 게임 클래스
  */
@@ -125,7 +127,21 @@ export default class BaseballGame {
     return resultText;
   }
 
+  /**
+   * 정답과 입력값으로 결과를 반환하는 메소드, 화면에 로드하는 메소드 실행
+   * @param {Number} computerInputNumbers 
+   * @param {Number} userInputNumbers 
+   * @returns {String} 정답, 낫싱, 스트라이크 볼 결과 텍스트
+   */
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    const result = getStrikeAndBallResult(computerInputNumbers, userInputNumbers);
+    if (!result) {
+      this.$input.val = '';
+      return;
+    }
+    const resultText = this.displayResult(result);
+    return resultText;
   }
 }
+
+new BaseballGame();
