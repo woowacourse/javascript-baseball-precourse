@@ -1,13 +1,25 @@
-import { zip } from "./utils.js";
+import {
+  $getUserInputValue,
+  $setResultText,
+  $addSubmitButtonOnClick,
+  $hideResultElement,
+  $hideGameEndElement,
+  $showGameEndElement,
+} from "./client.js";
+import { INVALID_INPUT_MESSAGE } from "./constants.js";
+import Player from "./player.js";
+import { alertErrorMessage, zip } from "./utils.js";
 
 export default class BaseballGame {
   static validNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   #isGameEnded; // 게임이 종료되었는지를 나타내는 플래그
   #size; // 추리해야 하는 숫자 개수
+  #computerPlayer; // 랜덤으로 정답을 선택하는 컴퓨터 플레이어
 
   constructor(size) {
     this.#isGameEnded = false;
     this.#size = size;
+    this.#computerPlayer = new Player(size);
   }
 
   get size() {
@@ -16,6 +28,10 @@ export default class BaseballGame {
 
   get isGameEnded() {
     return this.#isGameEnded;
+  }
+
+  get computerAnswer() {
+    return this.#computerPlayer.answer;
   }
 
   static inValidRange(num) {
@@ -74,3 +90,32 @@ export default class BaseballGame {
     return this.getResultString(balls, strikes);
   }
 }
+
+const game = new BaseballGame(3);
+
+/* 게임 진행용 이벤트 핸들러 */
+const submitButtonOnClick = () => {
+  const userInputString = $getUserInputValue();
+
+  if (!game.isValidInputString(userInputString)) {
+    alertErrorMessage(INVALID_INPUT_MESSAGE);
+    return;
+  }
+
+  const userInputNumbers = game.parseInputString(userInputString);
+  const resultMessage = game.play(game.computerAnswer, userInputNumbers);
+  $setResultText(resultMessage);
+
+  if (game.isGameEnded) {
+    $hideResultElement();
+    $showGameEndElement();
+  }
+};
+
+/* HTML View에 게임 진행용 이벤트 등록 */
+const initHTML = () => {
+  $hideGameEndElement();
+  $addSubmitButtonOnClick(submitButtonOnClick);
+};
+
+initHTML();
