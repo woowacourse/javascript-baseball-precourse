@@ -79,6 +79,7 @@ export default class BaseballGame {
 
   renderGameMessage(gameMessage) {
     if (`${this.NUMBER_LENGTH}스트라이크` === gameMessage) {
+      this.computer.disableButton();
       this.dom.clearResultArea();
       return this.renderAnswerMessage();
     }
@@ -108,6 +109,7 @@ export default class BaseballGame {
 
   reStart(event) {
     event.preventDefault();
+    this.computer.activeButton();
     this.computerInputNumbers = this.computer.makeNumbers();
     this.start();
   }
