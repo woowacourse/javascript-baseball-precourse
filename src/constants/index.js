@@ -5,10 +5,10 @@ export const GAME_RULE = {
 };
 
 export const ALERT_MESSAGE = {
-  lengthNotMatch: `길이가 ${GAME_RULE.numberLength}인 수를 입력해주세요.`, // 입력이 3글자가 아닐 때 메시지
-  notNumeric: '숫자가 아닌 문자를 제거해주세요.', // 입력에 숫자가 아닌 문자가 포함될 때 메시지
-  alreadyExist: '중복된 수가 존재합니다. 다시 입력해주세요.', // 입력에 중복된 수가 들어가있을 때 메시지
-  outOfRange: '각각 1~9 사이의 수를 입력해주세요.',
+  isMatchLength: `길이가 ${GAME_RULE.numberLength}인 수를 입력해주세요.`, // 입력이 3글자가 아닐 때 메시지
+  isNumeric: '숫자가 아닌 문자를 제거해주세요.', // 입력에 숫자가 아닌 문자가 포함될 때 메시지
+  isDuplicated: '중복된 수가 존재합니다. 다시 입력해주세요.', // 입력에 중복된 수가 들어가있을 때 메시지
+  isOutOfRange: '각각 1~9 사이의 수를 입력해주세요.',
 };
 
 export const RESULT_MESSAGE = {

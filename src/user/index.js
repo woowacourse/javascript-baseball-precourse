@@ -31,7 +31,7 @@ export default class User {
 
     return isValid;
   }
-  isInLength(userInput) {
+  isMatchLength(userInput) {
     return userInput.length === GAME_RULE.numberLength;
   }
   isOutOfRange(userInput) {
@@ -48,8 +48,8 @@ export default class User {
     let isValid = false;
     if (!this.isNumeric(userInput)) {
       alert(ALERT_MESSAGE.isNumeric);
-    } else if (!this.isInLength(userInput)) {
-      alert(ALERT_MESSAGE.isInRange);
+    } else if (!this.isMatchLength(userInput)) {
+      alert(ALERT_MESSAGE.isMatchLength);
     } else if (this.isOutOfRange(userInput)) {
       alert(ALERT_MESSAGE.isOutOfRange);
     } else if (this.isDuplicated(userInput)) {
