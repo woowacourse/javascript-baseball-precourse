@@ -4,6 +4,9 @@ export const isValueDuplicate = value => {
 }
 
 export const isValid = value => {
+    if (isNaN(value)) {
+        return !alert('숫자만 입력해주세요.');
+    }
     if (isValueDuplicate(value)) {
         return !alert('숫자를 중복없이 입력해주세요.');
     }
