@@ -14,12 +14,16 @@ export default class BaseballGame {
   }
 
   generateRandomNumbers() {
-    const randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
-      INPUT_RULES.MIN_OF_RANGE,
-      INPUT_RULES.MAX_OF_RANGE,
-      INPUT_RULES.NUMBER_OF_DIGITS
-    );
-    return randomNumbers;
+    const randomNumbersSet = new Set();
+    while (randomNumbersSet.size < INPUT_RULES.NUMBER_OF_DIGITS) {
+      randomNumbersSet.add(
+        MissionUtils.Random.pickNumberInRange(
+          INPUT_RULES.MIN_OF_RANGE,
+          INPUT_RULES.MAX_OF_RANGE
+        )
+      );
+    }
+    return Array.from(randomNumbersSet);
   }
 
   attachSubmitHandler() {
