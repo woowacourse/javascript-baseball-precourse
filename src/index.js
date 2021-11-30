@@ -9,7 +9,6 @@ export default class BaseballGame {
     constructor() {
         this.computerInputNumbers = pickRandomNumbers(3);
         this.userInputNumbers = '';
-
         this.bindSubmitEvent();
     }
 
@@ -24,7 +23,13 @@ export default class BaseballGame {
             }
 
             this.userInputNumbers = inputValue;
+            this.play(this.computerInputNumbers, this.userInputNumbers);
         });
+    }
+
+    play(computerInputNumbers, userInputNumbers) {
+        console.log(computerInputNumbers);
+        console.log(userInputNumbers);
     }
 }
 

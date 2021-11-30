@@ -9,5 +9,5 @@ export const pickRandomNumbers = count => {
         }
     }
 
-    return pickedNumbers;
+    return pickedNumbers.join('');
 }
