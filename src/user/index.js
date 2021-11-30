@@ -60,6 +60,8 @@ export default class User {
 
     return isValid;
   }
+
+  // 컴퓨터 난수와 사용자 입력을 비교하여 볼과 스트라이크 개수를 세팅하는 함수
   setBallStrike(computerInputNumbers, userInputNumbers) {
     let i;
     for (i = 0; i < userInputNumbers.length; i += 1) {
@@ -73,6 +75,8 @@ export default class User {
       }
     }
   }
+
+  // 볼과 스트라이크 개수에 따라 힌트를 생성하는 함수
   makeHint() {
     let resultMessage = '';
     if (this.ballNum > 0) {

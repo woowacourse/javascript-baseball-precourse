@@ -13,7 +13,7 @@ const myCreateElement = (tag, text) => {
   return htmlTag;
 };
 
-const initGame = (computer, user) => {
+const initGame = (computer) => {
   $('result').innerHTML = '';
   $('submit').disabled = false;
   $('user-input').value = '';
@@ -23,9 +23,10 @@ const initGame = (computer, user) => {
 const onRestartClick = (event, user, computer) => {
   event.preventDefault();
   user.initUser();
-  initGame(computer, user);
+  initGame(computer);
 };
 
+// div 태그에 게임 재시작 문구와 버튼을 세팅하는 함수
 const setRestartDiv = ($result, user, computer) => {
   const divTag = myCreateElement('div', '');
   const restartButton = myCreateElement('button', '게임 재시작');
