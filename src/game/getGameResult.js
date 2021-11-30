@@ -1,36 +1,44 @@
 import { INPUT_LENGTH, ANSWER, NOTHING } from "../constant/constant.js";
 
-function countBall(computerInput, userInput) {
-  let ballCount = 0;
-
-  for (let i = 0; i < INPUT_LENGTH; i += 1) {
-    if (userInput.find((elem, idx) => idx !== i && elem === computerInput[i])) {
-      ballCount += 1;
-    }
-  }
-  return ballCount !== 0 ? `${ballCount}볼` : "";
+function isBall(computerInput, userInput, computerIndex) {
+  return userInput.find(
+    (element, inputIndex) =>
+      inputIndex !== computerIndex && element === computerInput[computerIndex]
+  );
 }
 
-function countStrike(computerInput, userInput) {
-  let strikeCount = 0;
+function isStrike(computerInput, userInput, computerIndex) {
+  return userInput.find(
+    (element, inputIndex) =>
+      inputIndex === computerIndex && element === computerInput[computerIndex]
+  );
+}
 
-  for (let i = 0; i < INPUT_LENGTH; i += 1) {
-    if (userInput.find((elem, idx) => idx === i && elem === computerInput[i])) {
-      strikeCount += 1;
+function countBallStrike(computerInput, userInput) {
+  const result = {
+    ballCount: 0,
+    strikeCount: 0,
+  };
+
+  for (let computerIndex = 0; computerIndex < INPUT_LENGTH; computerIndex += 1) {
+    if (isBall(computerInput, userInput, computerIndex)) {
+      result.ballCount += 1;
+    }
+    if (isStrike(computerInput, userInput, computerIndex)) {
+      result.strikeCount += 1;
     }
   }
-  return strikeCount !== 0 ? `${strikeCount}스트라이크` : "";
+  return result;
 }
 
 export default function getGameResult(computerInput, userInput) {
-  let ballCount = "";
-  let strikeCount = "";
-
   if (computerInput === userInput) return ANSWER;
-  ballCount = countBall(String(computerInput).split(""), String(userInput).split(""));
-  strikeCount = countStrike(String(computerInput).split(""), String(userInput).split(""));
-  if (ballCount === "" && strikeCount === "") return NOTHING;
-  if (ballCount === "" && strikeCount !== "") return strikeCount;
-  if (ballCount !== "" && strikeCount === "") return ballCount;
-  return `${ballCount} ${strikeCount}`;
+  const { ballCount, strikeCount } = countBallStrike(
+    String(computerInput).split(""),
+    String(userInput).split("")
+  );
+  if (ballCount === 0 && strikeCount === 0) return NOTHING;
+  if (ballCount === 0 && strikeCount !== 0) return `${strikeCount}스트라이크`;
+  if (ballCount !== 0 && strikeCount === 0) return `${ballCount}볼`;
+  return `${ballCount}볼 ${strikeCount}스트라이크`;
 }
