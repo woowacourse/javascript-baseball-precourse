@@ -9,6 +9,12 @@ const isLengthThree = (value) => {
   return value.toString().length === 3;
 };
 
+const isInOneToNine = (value) => {
+  return [...value].every((num) => {
+    return 1 <= num && num <= 9;
+  });
+};
+
 const isNotDuplicateExist = (value) => {
   const numsExist = new Set();
   const valueArray = Array.from(String(value));
@@ -22,7 +28,10 @@ const isNotDuplicateExist = (value) => {
 
 const validateUserInput = (value) => {
   const result =
-    isLengthThree(value) && isNumber(value) && isNotDuplicateExist(value);
+    isLengthThree(value) &&
+    isNumber(value) &&
+    isInOneToNine(value) &&
+    isNotDuplicateExist(value);
   if (!result) {
     showError();
     resetInput();
