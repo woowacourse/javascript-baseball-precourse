@@ -1,3 +1,5 @@
+import { zip } from "./utils.js";
+
 export default class BaseballGame {
   static validNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   #size; // 추리해야 하는 숫자 개수
@@ -30,7 +32,31 @@ export default class BaseballGame {
     return inputString.split("").map(Number);
   }
 
+  getStrikes(answerNumbers, inputNumbers) {
+    return zip(answerNumbers, inputNumbers).filter(
+      ([num1, num2]) => num1 === num2
+    ).length;
+  }
+
+  getBalls(answerNumbers, inputNumbers) {
+    const total = inputNumbers.filter((num) =>
+      answerNumbers.includes(num)
+    ).length;
+    const strikes = this.getStrikes(answerNumbers, inputNumbers);
+    return total - strikes;
+  }
+
   play(computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
+    const balls = this.getBalls(computerInputNumbers, userInputNumbers);
+    const strikes = this.getStrikes(computerInputNumbers, userInputNumbers);
+
+    if (balls === 0 && strikes === 0) {
+      return "낫싱";
+    }
+
+    const spaceString = balls === 0 ? "" : " ";
+    const ballString = balls === 0 ? "" : `${balls}볼`;
+    const strikeString = strikes === 0 ? "" : `${strikes}스트라이크`;
+    return `${ballString}${spaceString}${strikeString}`;
   }
 }
