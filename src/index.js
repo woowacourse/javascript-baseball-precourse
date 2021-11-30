@@ -14,7 +14,6 @@ export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
     let comNumbersMap = this.arrayToMap(computerInputNumbers);
     let userNumbersMap = this.arrayToMap(userInputNumbers);
-
     let strike = this.getStrike(comNumbersMap, userNumbersMap);
     let ball = this.getBall(comNumbersMap, userNumbersMap);
 
@@ -71,6 +70,7 @@ export default class BaseballGame {
     let strike = 0;
 
     for (let num of userNumbersMap.keys()) {
+
       if (
         comNumbersMap.has(num) &&
         comNumbersMap.get(num) === userNumbersMap.get(num)
@@ -84,7 +84,9 @@ export default class BaseballGame {
 
   getBall(comNumbersMap, userNumbersMap) {
     let ball = 0;
+
     for (let num of userNumbersMap.keys()) {
+
       if (
         comNumbersMap.has(num) &&
         comNumbersMap.get(num) !== userNumbersMap.get(num)
@@ -92,11 +94,13 @@ export default class BaseballGame {
         ball++;
       }
     }
+    
     return ball;
   }
 
   isNothing(comNumbersMap, userNumbersMap) {
     for (let num of userNumbersMap.keys()) {
+
       if (comNumbersMap.has(num)) {
         return false;
       }
@@ -124,6 +128,7 @@ export default class BaseballGame {
     if (countStrike !== 3) {
       return false;
     }
+
     return true;
   }
 
