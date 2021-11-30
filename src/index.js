@@ -10,7 +10,6 @@ export default class BaseballGame {
     this.$userInput = $("#user-input");
     this.$submit = $("#submit");
     this.$result = $("#result");
-    this.$correctResult = $("#correct-result");
     this.computerInputNumbers = this.computer.generateRandomNumbers();
   }
   init() {
@@ -22,7 +21,7 @@ export default class BaseballGame {
   }
   onAnswerSubmit(e) {
     e.preventDefault();
-    $result.innerHTML = this.play(
+    this.$result.innerHTML = this.play(
       this.computerInputNumbers,
       this.$userInput.value
     );
@@ -33,7 +32,7 @@ export default class BaseballGame {
   onRestart(e) {
     e.preventDefault();
     this.$userInput.value = "";
-    this.makeVisible("$result");
+    this.computer.makeVisible("$result");
     this.computerInputNumbers = this.computer.generateRandomNumbers();
   }
   play(computerInputNumbers, userInputNumbers) {
@@ -41,51 +40,19 @@ export default class BaseballGame {
       return;
     }
     if (computerInputNumbers === userInputNumbers) {
-      this.makeVisible("$correctResult");
+      this.computer.makeVisible("$correctResult");
       return;
     }
 
-    const ball = this.calcBall(computerInputNumbers, userInputNumbers);
-    const strike = this.calcStrike(computerInputNumbers, userInputNumbers);
+    const ball = this.computer.calcBall(computerInputNumbers, userInputNumbers);
+    const strike = this.computer.calcStrike(
+      computerInputNumbers,
+      userInputNumbers
+    );
     if (ball || strike) {
       return `${ball} ${strike}`;
     }
     return "낫싱";
-  }
-  calcBall(computerInputNumbers, userInputNumbers) {
-    let ball = 0;
-    for (let i = 0; i < computerInputNumbers.length; i++) {
-      // indent를 1로 만드는 법?
-      if (
-        computerInputNumbers.includes(userInputNumbers[i]) &&
-        computerInputNumbers[i] !== userInputNumbers[i]
-      ) {
-        ball++;
-      }
-    }
-    return ball > 0 ? `${ball}볼` : "";
-  }
-  calcStrike(computerInputNumbers, userInputNumbers) {
-    let strike = 0;
-    for (let i = 0; i < computerInputNumbers.length; i++) {
-      if (computerInputNumbers[i] === userInputNumbers[i]) {
-        strike++;
-      }
-    }
-    return strike > 0 ? `${strike}스트라이크` : "";
-  }
-  // 독립적인 기능으로 생각되는데, 어떻게 빼면 좋을까?
-  makeVisible($) {
-    if ($ === "$result") {
-      $result.innerText = "";
-      $result.style.display = "block";
-      $correctResult.style.display = "none";
-      return;
-    }
-    if ($ === "$correctResult") {
-      $result.style.display = "none";
-      $correctResult.style.display = "block";
-    }
   }
 }
 

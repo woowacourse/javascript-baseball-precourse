@@ -1,4 +1,4 @@
-import { NUMBER_LENGTH } from "../libs/constant.js";
+import { NUMBER_LENGTH, USER_INPUT_ALERT } from "../libs/constant.js";
 
 const InputCheckMethods = [
   (value) => {
