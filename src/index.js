@@ -1,6 +1,27 @@
-import { getComputerInput, checkValidation } from "./lib/utils.js";
-import { BALL, FINISH, NOTHING, PLAIN_TEXT, STRIKE } from "./lib/constants.js";
+import { checkValidation } from "./lib/utils.js";
+import {
+  BALL,
+  FINISH,
+  FULL_COUNT,
+  LENGTH,
+  MAX_RANGE,
+  MIN_RANGE,
+  NOTHING,
+  PLAIN_TEXT,
+  STRIKE,
+  ZERO_COUNT,
+} from "./lib/constants.js";
 class BaseballGameLogic {
+  static getComputerInput() {
+    const num = new Set();
+    while (true) {
+      if (num.size === LENGTH) {
+        break;
+      }
+      num.add(MissionUtils.Random.pickNumberInRange(MIN_RANGE, MAX_RANGE));
+    }
+    return [...num].join("");
+  }
   static getKey(com, char, position) {
     const idx = com.indexOf(char);
 
@@ -18,22 +39,22 @@ class BaseballGameLogic {
   }
 
   static convertResultToString(result) {
-    if (result[STRIKE] === 3) {
+    if (result[STRIKE] === FULL_COUNT) {
       return FINISH;
     }
-    if (result[STRIKE] === 0 && result[BALL] === 0) {
+    if (result[STRIKE] === ZERO_COUNT && result[BALL] === ZERO_COUNT) {
       return NOTHING;
     }
 
-    if (result[STRIKE] !== 0 && result[BALL] !== 0) {
+    if (result[STRIKE] !== ZERO_COUNT && result[BALL] !== ZERO_COUNT) {
       return `${result[BALL]}${BALL} ${result[STRIKE]}${STRIKE}`;
     }
 
-    if (result[STRIKE] === 0) {
+    if (result[STRIKE] === ZERO_COUNT) {
       return `${result[BALL]}${BALL}`;
     }
 
-    if (result[BALL] === 0) {
+    if (result[BALL] === ZERO_COUNT) {
       return `${result[STRIKE]}${STRIKE}`;
     }
   }
@@ -51,11 +72,9 @@ class BaseballGameLogic {
     return BaseballGameLogic.convertResultToString(result);
   }
 }
-export default class BaseballGame extends BaseballGameLogic {
+export default class BaseballGame {
   constructor() {
-    super();
-
-    this.computer = getComputerInput().join("");
+    this.computer = BaseballGameLogic.getComputerInput();
 
     this.init();
   }
@@ -99,7 +118,10 @@ export default class BaseballGame extends BaseballGameLogic {
     };
   }
   play(computerInputNumbers, userInputNumbers) {
-    if (checkValidation(userInputNumbers)) {
+    if (
+      checkValidation(computerInputNumbers) &&
+      checkValidation(userInputNumbers)
+    ) {
       return BaseballGameLogic.getResult(
         `${computerInputNumbers}`,
         `${userInputNumbers}`
