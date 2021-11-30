@@ -1,7 +1,7 @@
 import { isNotDuplicateExist } from "./utils/validator.js";
 import { $ } from "./utils/selector.js";
 import { renderResult, renderInit } from "./utils/render.js";
-import { checkResult } from "./utils/checkResult.js";
+import { checkResult } from "./modules/checkResult.js";
 import { resetInput } from "./utils/resetInput.js";
 
 export default class BaseballGame {

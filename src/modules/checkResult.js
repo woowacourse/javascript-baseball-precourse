@@ -1,21 +1,21 @@
-import { validateUserInput } from "./validator.js";
+import { validateUserInput } from "../utils/validator.js";
 
 const checkStrike = (computerInputNumbers, userInputNumbers) => {
-  let result = 0;
-  for (let i = 0; i < 3; i++) {
-    if (computerInputNumbers[i] === userInputNumbers[i]) result += 1;
-  }
-  return result;
+  return [...userInputNumbers].reduce((acc, userNum, idx) => {
+    acc += userNum === [...computerInputNumbers][idx];
+    return acc;
+  }, 0);
 };
 
-const checkBall = (computerInputNumbers, userInputNumbers, strikeCount) => {
-  const computerInputSet = new Set(computerInputNumbers);
-  const userInputSet = new Set(userInputNumbers);
-  const totalBallCount = [...computerInputSet].reduce((res, num) => {
-    res += userInputSet.has(num) && 1;
-    return res;
+const checkBall = (computerInputNumbers, userInputNumbers) => {
+  const computerInputArray = [...computerInputNumbers];
+  return [...userInputNumbers].reduce((acc, userNum, idx) => {
+    acc +=
+      userNum !== computerInputArray[idx] &&
+      computerInputArray.includes(userNum) &&
+      1;
+    return acc;
   }, 0);
-  return totalBallCount - strikeCount;
 };
 
 const getResultHtml = (strikeCount, ballCount) => {
@@ -39,11 +39,7 @@ export const checkResult = (computerInputNumbers, userInputNumbers) => {
   const isInputValidated = validateUserInput(userInputNumbers);
   if (isInputValidated) {
     const strikeCount = checkStrike(computerInputNumbers, userInputNumbers);
-    const ballCount = checkBall(
-      computerInputNumbers,
-      userInputNumbers,
-      strikeCount
-    );
+    const ballCount = checkBall(computerInputNumbers, userInputNumbers);
     const result = getResultHtml(strikeCount, ballCount);
     return result;
   }
