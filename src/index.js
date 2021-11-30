@@ -18,15 +18,16 @@ export default class BaseballGame extends component {
   }
 
   initChildrens() {
+    const { gameStatus, hint } = this.state;
     this.childrens = [
       new UserForm(
-        { gameStatus: this.state.gameStatus },
+        { gameStatus },
         { onSubmit: userInput => this._onSubmitUserInput(userInput) }
       ),
       new GameResult(
         {
-          gameStatus: this.state.gameStatus,
-          hint: this.state.hint,
+          gameStatus,
+          hint,
         },
         { onClickRestart: () => this._onClickRestart() }
       ),
