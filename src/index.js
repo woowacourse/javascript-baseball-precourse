@@ -1,6 +1,7 @@
 import Computer from './computer/index.js';
 import User from './user/index.js';
-import { showResult, $ } from './utils/index.js';
+import { $ } from './utils/index.js';
+import { showResult } from './gameResult.js';
 
 export default class BaseballGame {
   constructor() {
