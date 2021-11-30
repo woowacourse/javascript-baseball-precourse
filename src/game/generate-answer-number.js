@@ -1,6 +1,6 @@
 import { ANSWER_RANGE, BASEBALL_NUMBER_LENGTH } from "../constant/index.js";
 
-export const generateAnswerNumber = () => {
+export const generateComputerInput = () => {
   const randomNumberSet = new Set();
   while (randomNumberSet.size < BASEBALL_NUMBER_LENGTH) {
     randomNumberSet.add(

@@ -4,7 +4,7 @@ import {
   generateAlertMessage,
   generateResultMessage,
 } from "./util/generate-message.js";
-import { generateAnswerNumber } from "./game/generate-answer-number.js";
+import { generateComputerInput } from "./game/generate-answer-number.js";
 import { resetResult, resetUserInput } from "./game/reset-game.js";
 import { printResultMessage } from "./game/print-result.js";
 
@@ -52,7 +52,7 @@ export default class BaseballGame {
   };
 
   setAnswerNumber = () => {
-    this.answerNumber = generateAnswerNumber();
+    this.answerNumber = generateComputerInput();
   };
 
   play = (computerInputNumbers, userInputNumbers) => {
