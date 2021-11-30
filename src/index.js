@@ -22,6 +22,7 @@ export default class BaseballGameView {
   init() {
     this.triggerRestartEvent();
     this.triggerSubmitEvent();
+    console.log(this.computerInputNumbers);
   }
 
   triggerSubmitEvent() {
@@ -30,8 +31,13 @@ export default class BaseballGameView {
 
   onAnswerSubmit(e) {
     e.preventDefault();
+    if (!this.user.isInputValid(this.user.getUserInputValue())) return;
+    if (this.computerInputNumbers === this.user.getUserInputValue()) {
+      this.makeVisible('$correctResult');
+      return;
+    }
     const count = this.baseballgame.play(this.computerInputNumbers, this.user.getUserInputValue());
-    this.$result.innerHTML = count || '';
+    this.$result.innerHTML = count;
   }
 
   triggerRestartEvent() {
@@ -42,7 +48,7 @@ export default class BaseballGameView {
     e.preventDefault();
     this.user.setUserInputValue('');
     this.makeVisible('$result');
-    this.computerInputNumbers = this.computer.generateRandomNumbers();
+    this.computerInputNumbers = generateComputerValue();
   }
 
   makeVisible($element) {

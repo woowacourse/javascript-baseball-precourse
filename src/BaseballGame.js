@@ -1,12 +1,5 @@
 export class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
-    if (!this.user.isInputValid(userInputNumbers)) return undefined;
-    // return 문을 함수로 뺄 때에, 어떻게 해야할지 모르겠다.
-    if (computerInputNumbers === userInputNumbers) {
-      this.makeVisible('$correctResult');
-      return undefined;
-    }
-
     const ball = this.calcBall(computerInputNumbers, userInputNumbers);
     const strike = this.calcStrike(computerInputNumbers, userInputNumbers);
 

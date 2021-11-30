@@ -11,10 +11,8 @@ function addRandomNum(answer) {
 
 export function generateComputerValue() {
   const answer = [];
-
   while (answer.length < NUMBER_LENGTH) {
     addRandomNum(answer);
   }
-
   return answer.join('');
 }
