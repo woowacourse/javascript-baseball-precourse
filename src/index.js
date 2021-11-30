@@ -21,6 +21,7 @@ export default class BaseballGame {
         answer.push(num);
       }
     }
+
     return answer.join('');
   }
 
@@ -29,6 +30,7 @@ export default class BaseballGame {
     if (userInputSet.size !== userInputNumbers.length) {
       return false;
     }
+
     return true;
   }
 
@@ -41,6 +43,7 @@ export default class BaseballGame {
         return false;
       }
     }
+
     return true;
   }
 
@@ -48,6 +51,7 @@ export default class BaseballGame {
     if (userInputNumbers.length === NumberRules.length) {
       return true;
     }
+
     return false;
   }
 
@@ -73,6 +77,7 @@ export default class BaseballGame {
         ballCount += 1;
       }
     });
+
     return [strikeCount, ballCount];
   }
 
@@ -101,6 +106,7 @@ export default class BaseballGame {
     if (ballCount === 0 && strikeCount === 0) {
       printText += '낫싱';
     }
+
     return printText;
   }
 
@@ -111,6 +117,7 @@ export default class BaseballGame {
       this.submitButtonEl.removeEventListener('click', this.submitButtonHandle);
       return Message.success;
     }
+
     return this.strikeBallText(strikeCount, ballCount);
   }
 
@@ -145,6 +152,7 @@ export default class BaseballGame {
       );
     }
     alert(Message.error);
+
     return Message.error;
   }
 }
