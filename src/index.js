@@ -23,6 +23,9 @@ export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     const result = checkAnswer(computerInputNumbers, userInputNumbers);
 
+    console.log("답 " , computerInputNumbers);
+    console.log("입력 ", userInputNumbers);
+    
     $result.innerHTML = result;
 
     return result;

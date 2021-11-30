@@ -8,9 +8,7 @@ function countStrike(answer, userInput) {
     if (value === userInput[index]) result.push(value);
   });
 
-  const string = result.length === 3 ? isCorrectAll() : `${result.length}${TEXT.STRIKE}`;
-
-  return string;
+  return result.length;
 }
 
 //count ball function
@@ -19,8 +17,8 @@ function countBall(answer, userInput) {
 }
 
 //is it nothing
-function isNothing(answer, userInput) {
-
+function isNothing() {
+  return TEXT.NOTHING;
 }
 
 //is it all correct
@@ -29,5 +27,6 @@ function isCorrectAll() {
 }
 
 export function checkAnswer(answer, userInput) {
-  return countStrike(['1', '3', '3'], ['1', '2', '3']);
+  return countStrike(answer, userInput);
+  
 }
