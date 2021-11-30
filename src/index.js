@@ -1,4 +1,4 @@
-import { NOTHING_ANSWER, CORRECT_ANSWER, Strike, Ball } from './result-const.js';
+import { CORRECT_ANSWER, Strike } from './result-const.js';
 import { $form, $input, $result } from './html-const.js';
 import { setAnswer } from './setAnswer.js';
 import { checkInput } from './checkInput.js';
