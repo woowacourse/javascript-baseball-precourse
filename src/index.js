@@ -1,33 +1,79 @@
-export class BaseballGame {
-  play(computerInputNumbers, userInputNumbers) {
-    const ball = this.calcBall(computerInputNumbers, userInputNumbers);
-    const strike = this.calcStrike(computerInputNumbers, userInputNumbers);
-    if (ball || strike) {
-      return `${ball} ${strike}`;
-    }
-    return '낫싱';
+import { $ } from './utils/index.js';
+import { generateRandomNumber } from './computer/computer.js';
+import User from './user/user.js';
+import { BaseballGame } from './BaseballGameView.js';
+
+export default class BaseballGameView {
+  constructor({ $restartButton, $submit, $result, $correctResult }) {
+    this.user = new User();
+    this.baseballgame = new BaseballGame();
+    this.$restartButton = $restartButton;
+    this.$submit = $submit;
+    this.$result = $result;
+    this.$correctResult = $correctResult;
+    this.computerInputNumbers = generateRandomNumber();
   }
 
-  calcBall(computerInputNumbers, userInputNumbers) {
-    let ball = 0;
-    for (let i = 0; i < computerInputNumbers.length; i++) {
-      if (
-        computerInputNumbers.includes(userInputNumbers[i]) &&
-        computerInputNumbers[i] !== userInputNumbers[i]
-      ) {
-        ball++;
-      }
-    }
-    return ball > 0 ? `${ball}볼` : '';
+  init() {
+    this.triggerRestartEvent();
+    this.triggerSubmitEvent();
+    console.log(this.computerInputNumbers);
   }
 
-  calcStrike(computerInputNumbers, userInputNumbers) {
-    let strike = 0;
-    for (let i = 0; i < computerInputNumbers.length; i++) {
-      if (computerInputNumbers[i] === userInputNumbers[i]) {
-        strike++;
-      }
+  triggerSubmitEvent() {
+    this.$submit.addEventListener('click', (e) => this.onAnswerSubmit(e));
+  }
+
+  onAnswerSubmit(e) {
+    e.preventDefault();
+    const inputValue = this.user.getUserInputValue();
+    if (!this.user.isInputValid(inputValue)) {
+      return;
     }
-    return strike > 0 ? `${strike}스트라이크` : '';
+    if (this.computerInputNumbers === inputValue) {
+      this.makeVisible('$correctResult');
+      return;
+    }
+    const count = this.baseballgame.play(this.computerInputNumbers, inputValue);
+    this.$result.innerHTML = count;
+  }
+
+  triggerRestartEvent() {
+    this.$restartButton.addEventListener('click', (e) => this.onRestart(e));
+  }
+
+  onRestart(e) {
+    e.preventDefault();
+    this.user.setUserInputValue('');
+    this.makeVisible('$result');
+    this.computerInputNumbers = generateRandomNumber();
+  }
+
+  makeVisible($element) {
+    if ($element === '$result') {
+      this.showResult();
+    } else if ($element === '$correctResult') {
+      this.showCorrectResult();
+    }
+  }
+
+  showResult() {
+    this.$result.innerText = '';
+    this.$result.style.display = 'block';
+    this.$correctResult.style.display = 'none';
+  }
+
+  showCorrectResult() {
+    this.$result.style.display = 'none';
+    this.$correctResult.style.display = 'block';
   }
 }
+
+const game = new BaseballGameView({
+  $restartButton: $('#game-restart-button'),
+  $correctResult: $('#correct-result'),
+  $result: $('#result'),
+  $submit: $('#submit'),
+});
+console.log('game', game);
+game.init();
