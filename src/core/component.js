@@ -12,7 +12,7 @@ export default class Component {
     this.initState();
     this.initChildrens();
     this.initDoms();
-    this.bindEvent();
+    this.bindEvents();
   }
 
   // 컴포넌트 내부의 state를 초기화 한다.
@@ -25,7 +25,7 @@ export default class Component {
   initDoms() {}
 
   // 컴포넌트내의 이벤트를 초기화 한다.
-  bindEvent() {}
+  bindEvents() {}
 
   // 컴포넌트 상태 및 props 에 따라서 뷰를 렌더링 해주는 함수
   render() {}

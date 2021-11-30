@@ -9,7 +9,7 @@ export default class UserForm extends Component {
     this._inputElement = $('#user-input', this.container);
   }
 
-  bindEvent() {
+  bindEvents() {
     this.appendRootEvent('submit', event => {
       event.preventDefault();
       this.handlers.onSubmit(parseInput(this._inputElement.value));

@@ -7,7 +7,7 @@ export default class GameResult extends Component {
     this.container = $('#result');
   }
 
-  bindEvent() {
+  bindEvents() {
     this.appendRootEvent('click', ({ target }) => {
       if (target.id !== 'game-restart-button') return;
       this.handlers.onClickRestart();
