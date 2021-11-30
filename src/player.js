@@ -16,10 +16,15 @@ export default class Player {
   }
 
   setRandomAnswer() {
-    this.#answer = MissionUtils.Random.pickUniqueNumbersInRange(
-      1,
-      9,
-      this.#size
-    );
+    let answer = [];
+
+    while (answer.length < this.#size) {
+      const candidateNum = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!answer.includes(candidateNum)) {
+        answer.push(candidateNum);
+      }
+    }
+
+    this.#answer = [...answer];
   }
 }
