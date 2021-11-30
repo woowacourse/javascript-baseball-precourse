@@ -1,4 +1,4 @@
-import { validateUserInput } from "./input.js";
+import { validateUserInput } from './input.js';
 
 const checkStrike = (computerInputNumbers, userInputNumbers) => {
   return [...userInputNumbers].reduce((acc, userNum, idx) => {
@@ -32,7 +32,7 @@ const getResultHtml = (strikeCount, ballCount) => {
     return `${ballCount}볼 ${strikeCount}스트라이크`;
   if (strikeCount) return `${strikeCount}스트라이크`;
   if (ballCount) return `${ballCount}볼`;
-  return "낫싱";
+  return '낫싱';
 };
 
 export const checkResult = (computerInputNumbers, userInputNumbers) => {

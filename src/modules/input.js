@@ -1,5 +1,5 @@
-import { showError } from "./error.js";
-import { $ } from "./util.js";
+import { showError } from './error.js';
+import { $ } from './util.js';
 
 const isNumber = (value) => {
   return !isNaN(value);
@@ -40,8 +40,8 @@ const validateUserInput = (value) => {
 };
 
 const resetInput = () => {
-  const $input = $("#user-input");
-  $input.value = "";
+  const $input = $('#user-input');
+  $input.value = '';
 };
 
 export { isNotDuplicateExist, validateUserInput, resetInput };

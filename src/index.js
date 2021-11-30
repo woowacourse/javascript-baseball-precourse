@@ -1,17 +1,17 @@
-import { isNotDuplicateExist, resetInput } from "./modules/input.js";
-import { $ } from "./modules/util.js";
-import { renderResult, renderInit } from "./modules/render.js";
-import { checkResult } from "./modules/result.js";
+import { isNotDuplicateExist, resetInput } from './modules/input.js';
+import { $ } from './modules/util.js';
+import { renderResult, renderInit } from './modules/render.js';
+import { checkResult } from './modules/result.js';
 
 export default class BaseballGame {
   constructor() {
-    this.computerInput = "";
+    this.computerInput = '';
     this.handleSubmit = this.handleSubmit.bind(this);
     this.restartGame = this.restartGame.bind(this);
   }
   init() {
-    const $form = $("form");
-    $form.addEventListener("submit", this.handleSubmit);
+    const $form = $('form');
+    $form.addEventListener('submit', this.handleSubmit);
     this.generateComputerInput();
   }
 
@@ -33,7 +33,7 @@ export default class BaseballGame {
     const playResult = this.play(this.computerInput, this.getUserInput());
     if (playResult) {
       renderResult(playResult);
-      $("#game-restart-button") && this.addEventlistenerToRestartButton();
+      $('#game-restart-button') && this.addEventlistenerToRestartButton();
     }
   }
 
@@ -42,7 +42,7 @@ export default class BaseballGame {
   }
 
   getUserInput() {
-    const $input = $("#user-input");
+    const $input = $('#user-input');
     return $input.value;
   }
 
@@ -53,8 +53,8 @@ export default class BaseballGame {
   }
 
   addEventlistenerToRestartButton() {
-    const $restartButton = $("#game-restart-button");
-    $restartButton.addEventListener("click", this.restartGame);
+    const $restartButton = $('#game-restart-button');
+    $restartButton.addEventListener('click', this.restartGame);
   }
 }
 
