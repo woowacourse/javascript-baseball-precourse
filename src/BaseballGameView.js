@@ -1,5 +1,5 @@
 import { $ } from './utils/index.js';
-import { generateComputerValue } from './computer/computer.js';
+import { generateRandomNumber } from './computer/computer.js';
 import User from './user/user.js';
 import { BaseballGame } from './index.js';
 
@@ -11,7 +11,7 @@ export default class BaseballGameView {
     this.$submit = $submit;
     this.$result = $result;
     this.$correctResult = $correctResult;
-    this.computerInputNumbers = generateComputerValue();
+    this.computerInputNumbers = generateRandomNumber();
   }
 
   init() {
@@ -45,7 +45,7 @@ export default class BaseballGameView {
     e.preventDefault();
     this.user.setUserInputValue('');
     this.makeVisible('$result');
-    this.computerInputNumbers = generateComputerValue();
+    this.computerInputNumbers = generateRandomNumber();
   }
 
   makeVisible($element) {

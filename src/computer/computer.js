@@ -8,7 +8,7 @@ function addRandomNum(answer) {
   }
 }
 
-export function generateComputerValue() {
+export function generateRandomNumber() {
   const answer = [];
   while (answer.length < NUMBER_LENGTH) {
     addRandomNum(answer);
