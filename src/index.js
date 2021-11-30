@@ -17,7 +17,6 @@ export default class BaseballGameView {
   init() {
     this.triggerRestartEvent();
     this.triggerSubmitEvent();
-    console.log(this.computerInputNumbers);
   }
 
   triggerSubmitEvent() {
@@ -75,5 +74,4 @@ const game = new BaseballGameView({
   $result: $('#result'),
   $submit: $('#submit'),
 });
-console.log('game', game);
 game.init();
