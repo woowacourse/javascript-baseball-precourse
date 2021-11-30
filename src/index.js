@@ -1,12 +1,21 @@
 import utils from "./utils.js";
+import { $input, $result, $submit } from "./constant.js";
 
 export default class BaseballGame {
   constructor() {
     this.answer = utils();
+    this.onPressSubmit();
   }
   // play(computerInputNumbers, userInputNumbers) {
   //   return "결과 값 String";
   // }
+
+  onPressSubmit() {
+    $submit.addEventListener("click", (e) => {
+      e.preventDefault();
+      console.log($input.value);
+    });
+  }
 }
 
 let baseballGame = new BaseballGame();
