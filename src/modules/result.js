@@ -1,4 +1,5 @@
 import { validateUserInput } from './input.js';
+import NUMBER from '../constants/number.js';
 
 const checkStrike = (computerInputNumbers, userInputNumbers) => {
   return [...userInputNumbers].reduce((acc, userNum, idx) => {
@@ -19,10 +20,9 @@ const checkBall = (computerInputNumbers, userInputNumbers) => {
 };
 
 const getResultHtml = (strikeCount, ballCount) => {
-  if (strikeCount === 3)
+  if (strikeCount === NUMBER.OUT_COUNT)
     return `
     <div>🎉 정답을 맞추셨습니다! 🎉</div>
-    <br />
     <div>
       게임을 새로 시작하시겠습니까?
       <button id="game-restart-button">재시작</button>

@@ -2,6 +2,7 @@ import { isNotDuplicateExist, resetInput } from './modules/input.js';
 import { $ } from './modules/util.js';
 import { renderResult, renderInit } from './modules/render.js';
 import { checkResult } from './modules/result.js';
+import NUMBER from './constants/number.js';
 
 export default class BaseballGame {
   constructor() {
@@ -16,11 +17,14 @@ export default class BaseballGame {
   }
 
   generateComputerInput() {
-    let randomNum = MissionUtils.Random.pickNumberInRange(1, 9).toString();
-    while (randomNum.length !== 3) {
+    let randomNum = MissionUtils.Random.pickNumberInRange(
+      NUMBER.MIN,
+      NUMBER.MAX
+    ).toString();
+    while (randomNum.length !== NUMBER.LENGTH) {
       const newRandomNum = MissionUtils.Random.pickNumberInRange(
-        1,
-        9
+        NUMBER.MIN,
+        NUMBER.MAX
       ).toString();
       if (isNotDuplicateExist(randomNum + newRandomNum))
         randomNum += newRandomNum;

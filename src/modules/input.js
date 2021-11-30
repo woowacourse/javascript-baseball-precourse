@@ -1,17 +1,18 @@
 import { showError } from './error.js';
 import { $ } from './util.js';
+import NUMBER from '../constants/number.js';
 
 const isNumber = (value) => {
   return !isNaN(value);
 };
 
 const isLengthThree = (value) => {
-  return value.toString().length === 3;
+  return value.length === NUMBER.LENGTH;
 };
 
 const isInOneToNine = (value) => {
   return [...value].every((num) => {
-    return 1 <= num && num <= 9;
+    return NUMBER.MIN <= num && num <= NUMBER.MAX;
   });
 };
 
