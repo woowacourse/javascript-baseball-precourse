@@ -73,7 +73,7 @@ export default class User {
       }
     }
   }
-  makeText() {
+  makeHint() {
     let resultMessage = '';
     if (this.ballNum > 0) {
       resultMessage += `${this.ballNum}볼 `;

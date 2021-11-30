@@ -16,8 +16,8 @@ const myCreateElement = (tag, text) => {
 const initGame = (computer, user) => {
   $('result').innerHTML = '';
   $('submit').disabled = false;
+  $('user-input').value = '';
   computer.setRandomNumber();
-  user.$userInput.value = '';
 };
 
 const onRestartClick = (event, user, computer) => {

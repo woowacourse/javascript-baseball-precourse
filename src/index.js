@@ -12,7 +12,7 @@ export default class BaseballGame {
   }
   play(computerInputNumbers, userInputNumbers) {
     this.user.setBallStrike(computerInputNumbers, userInputNumbers);
-    const resultMessage = this.user.makeText();
+    const resultMessage = this.user.makeHint();
 
     return resultMessage;
   }
