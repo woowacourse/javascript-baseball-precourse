@@ -1,5 +1,5 @@
 import { pickRandomNumbers } from './utils/number-picker.js';
-import { isValid } from './utils/input-validator.js'
+import { removeSpace, isInvalid } from './utils/input-validator.js'
 
 const $userInput = document.getElementById('user-input');
 const $submitBtn = document.getElementById('submit');
@@ -16,7 +16,14 @@ export default class BaseballGame {
     bindSubmitEvent() {
         $submitBtn.addEventListener('click', event => {
             event.preventDefault();
-            console.log(!isValid($userInput.value));
+            const inputValue = removeSpace($userInput.value);
+            
+            if (isInvalid(inputValue, 3)) {
+                $userInput.value = '';
+                return;
+            }
+
+            this.userInputNumbers = inputValue;
         });
     }
 }
