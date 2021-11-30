@@ -17,7 +17,6 @@ export default class BaseballGame {
     const $form = $('form');
     $form.addEventListener('submit', this.handleSubmit);
     this.computerInput = generateComputerInput();
-    console.log(this.computerInput);
   }
 
   handleSubmit(event) {
@@ -37,7 +36,6 @@ export default class BaseballGame {
     resetInput();
     renderInit();
     this.computerInput = generateComputerInput();
-    console.log(this.computerInput);
   }
 
   addEventlistenerToRestartButton() {
