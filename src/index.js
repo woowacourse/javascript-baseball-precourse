@@ -1,8 +1,14 @@
-import { INPUT_RULES, ERROR_MESSAGE, RESULT_MESSAGE } from './constants.js';
+import {
+  INPUT_RULES,
+  ERROR_MESSAGE,
+  RESULT_MESSAGE,
+  RESTART_BUTTON_TEXT,
+} from './constants.js';
 import { $ } from './utils.js';
 
 export default class BaseballGame {
   constructor() {
+    this.endGame = false;
     this.computerInputNumbers = this.generateRandomNumbers();
     this.attachSubmitHandler();
   }
@@ -91,6 +97,19 @@ export default class BaseballGame {
   paintResultMessage(resultString) {
     const $resultText = $('#result');
     $resultText.innerHTML = resultString;
+  }
+
+  askRestartGame() {
+    const ELEMENT_ID = 'game-restart-button';
+    const $appArea = $('#app');
+    const $restartQuestion = document.createElement('p');
+    const $restartBtn = document.createElement('button');
+
+    $restartQuestion.innerHTML = RESULT_MESSAGE.ASK_RESTART;
+    $restartBtn.innerHTML = RESTART_BUTTON_TEXT;
+    $restartBtn.id = ELEMENT_ID;
+    $appArea.appendChild($restartQuestion);
+    $appArea.appendChild($restartBtn);
   }
 }
 
