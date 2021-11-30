@@ -6,15 +6,14 @@ import { resetInput } from "./utils/resetInput.js";
 
 export default class BaseballGame {
   constructor() {
-    this.computerInput = this.generateComputerInput();
+    this.computerInput = "";
     this.handleSubmit = this.handleSubmit.bind(this);
     this.restartGame = this.restartGame.bind(this);
   }
   init() {
     const $form = $("form");
     $form.addEventListener("submit", this.handleSubmit);
-    // this.computerInput = this.generateComputerInput();
-    // console.log(this.computerInput);
+    this.generateComputerInput();
   }
 
   generateComputerInput() {
@@ -27,7 +26,7 @@ export default class BaseballGame {
       if (isNotDuplicateExist(randomNum + newRandomNum))
         randomNum += newRandomNum;
     }
-    return randomNum;
+    this.computerInput = randomNum;
   }
 
   handleSubmit(event) {
@@ -51,7 +50,7 @@ export default class BaseballGame {
   restartGame() {
     resetInput();
     renderInit();
-    this.init();
+    this.generateComputerInput();
   }
 
   addEventlistenerToRestartButton() {
