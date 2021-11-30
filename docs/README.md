@@ -57,4 +57,46 @@
 - [x] 함수(또는 메소드)의 길이가 15라인을 넘어가지 않도록 구현한다.(함수(또는 메소드)가 한 가지 일만 잘 하도록 구현한다.)
 - [x] 테스트에서 all pass를 한다. 
 
-
+## 🗂 디렉터리 구조 
+```
+.
+├── LICENSE
+├── README.md
+├── cypress.json
+├── docs
+│   └── README.md
+├── images
+│   ├── baseball_icon.png
+│   ├── result.gif
+│   └── test_result.png
+├── index.html
+├── package-lock.json
+├── package.json
+├── src
+│   ├── getCoumputerInput.js
+│   ├── getResult.js
+│   ├── index.js
+│   ├── printError.js
+│   └── utils
+│       └── utils.js
+└── test
+    └── app.spec.js
+```
+- **src** 내부에 js파일들을 모았습니다. 
+- **src/utils/utils.js** 
+  <br>자주사용하는 함수를 모아놓은 파일입니다. 
+  - `$` : dom 요소 선택자 함수 
+  - `getNumArr` : 숫자 배열이 아닌 것을, 숫자 배열로 만들어주는 함수 
+  - `resetOutput` : 결과창과 input창을 공백으로 만들어주는 함수 
+- **src/getCoumputerInput.js**
+  - `getCoumputerInput` : 랜덤으로 생성한 컴퓨터 정답을 숫자 배열 형태로 리턴해주는 함수
+- **src/getResult.js**
+  - `getResult` : 사용자가 입력한 숫자에 대한 결과를 string형태로 리턴해주는 함수 (ex. 1볼 1스트라이크)
+- **src/printError.js**
+  - `printError` : 사용자가 input창에 값을 잘못 입력했을 때 alert창으로 에러메시지를 보여주는 함수 (이때, 잘못 입력한 경우에 따라 다른 에러메시지를 보여줍니다)
+- **src/index.js**
+  게임을 실행 및 진행할 수 있는 BaseballGame() 생성자가 있습니다. 
+  - `this.play` : 사용자가 입력한 숫자에 대한 결과를 string형태로 리턴하는 메소드 (getResult 함수를 활용합니다.)
+  - `printResult` : 결과를 브라우저창에 출력하는 메소드
+  - `isValidNum` : 사용자가 입력한 값이 유효하면 true를, 유효하지 않으면 false를 리턴해주는 메소드 
+  - `restartGame` : 정답값을 새로 할당하고, input 및 결과창을 공백으로 만들어줌으로써 게임을 새롭게 시작할 수 있게 해주는 메소드
