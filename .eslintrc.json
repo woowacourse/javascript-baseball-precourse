@@ -9,7 +9,6 @@
     "plugin:import/warnings",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["prettier"],
   "rules": {
     "class-methods-use-this": "off",
     "no-alert": "off",

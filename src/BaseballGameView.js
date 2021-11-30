@@ -4,13 +4,13 @@ import User from './user/user.js';
 import { BaseballGame } from './index.js';
 
 export default class BaseballGameView {
-  constructor() {
+  constructor({ $restartButton, $submit, $result, $correctResult }) {
     this.user = new User();
     this.baseballgame = new BaseballGame();
-    this.$restartButton = $('#game-restart-button');
-    this.$submit = $('#submit');
-    this.$result = $('#result');
-    this.$correctResult = $('#correct-result');
+    this.$restartButton = $restartButton;
+    this.$submit = $submit;
+    this.$result = $result;
+    this.$correctResult = $correctResult;
     this.computerInputNumbers = generateComputerValue();
   }
 
@@ -68,6 +68,11 @@ export default class BaseballGameView {
   }
 }
 
-const game = new BaseballGameView();
+const game = new BaseballGameView({
+  $restartButton: $('#game-restart-button'),
+  $correctResult: $('#submit'),
+  $result: $('#result'),
+  $submit: $('#correct-result'),
+});
 
 game.init();
