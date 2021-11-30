@@ -1,5 +1,3 @@
-import { INPUT_ERROR_MESSAGE } from './constant.js';
-
 export function showError(message){
     alert(message);
 }
@@ -11,16 +9,7 @@ export function checkRepeat(input){
 }
 
 export function checkinputValid(input){
-    if(isNaN(input)){
-      showError(INPUT_ERROR_MESSAGE);
-      return false;
-    }
-    if(input.length!==3){
-      showError(INPUT_ERROR_MESSAGE);
-      return false;
-    }
-    if(checkRepeat(input)){
-        showError(INPUT_ERROR_MESSAGE);
+    if(isNaN(input)||input.length!==3||checkRepeat(input)){
       return false;
     }
     return true;

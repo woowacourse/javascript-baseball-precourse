@@ -1,5 +1,6 @@
-import { GAME_WIN_MESSAGE } from './constant.js';
-import { checkinputValid } from './check.js';
+import { $input, $resultItem, GAME_WIN_MESSAGE ,INPUT_ERROR_MESSAGE} from './constant.js';
+import { checkinputValid,
+    showError } from './check.js';
 
 export function getGameWin(){
     let result='';
@@ -31,6 +32,8 @@ export function getStrikeBallNum(computerInputNumbers,userInputNumbers){
     let ballCount=0;
 
     const userNumberArr= getUserInput().split('').map(Number);
+    if(userNumberArr===[]) return [];
+    console.log(userNumberArr);
     ballCount=userNumberArr.filter(it=>computerInputNumbers.includes(it)).length;
     
     for(let i=0;i<3;i++){
@@ -57,7 +60,9 @@ export function getComputerNumber(){
 export function getUserInput(){  
     let userInputNum=document.getElementById("user-input").value;
     if(!checkinputValid(userInputNum)){
-        console.log("새창");
+        showError(INPUT_ERROR_MESSAGE);
+        $input.value='';
+        return '';
     }
     return userInputNum;
 }

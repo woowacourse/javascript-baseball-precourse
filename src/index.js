@@ -1,4 +1,4 @@
-import { $input, $button,$resultItem,GAME_WIN_MESSAGE} from './constant.js';
+import { $input, $button, $resultItem, GAME_WIN_MESSAGE} from './constant.js';
 import { 
     getComputerNumber,
     getUserInput,
@@ -26,7 +26,6 @@ export default class BaseballGame {
         $button.addEventListener('click',(e)=>{
             e.preventDefault();
             const userInputNumbers=getUserInput();
-            console.log(this.computerInputNumbers);
             $resultItem.innerHTML=this.play(this.computerInputNumbers,userInputNumbers);
             if($resultItem.innerHTML==GAME_WIN_MESSAGE) this.restart();
         })           
@@ -35,8 +34,8 @@ export default class BaseballGame {
 
     play(computerInputNumbers, userInputNumbers) {
           const [ ballCount,strikeCount ]= getStrikeBallNum(computerInputNumbers,userInputNumbers);
+          if([ ballCount,strikeCount ]===[]) return ' ';
           const result = makeResult(ballCount,strikeCount);
-          console.log(result);
           return result;
     }
 }
