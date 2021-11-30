@@ -3,6 +3,7 @@ const getComputerInput = () => {
   while (computerInputNumbers.size < 3) {
     computerInputNumbers.add(MissionUtils.Random.pickNumberInRange(1, 9));
   }
+
   return [...computerInputNumbers];
 };
 

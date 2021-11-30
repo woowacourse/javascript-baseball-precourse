@@ -7,7 +7,6 @@ export default function BaseballGame() {
   let computerInput = getComputerInput();
 
   this.play = (computerInputNumbers, userInputNumbers) => {
-    // eslint-disable-next-line prettier/prettier
     if (!Array.isArray(computerInputNumbers) && !Array.isArray(userInputNumbers)) {
       computerInputNumbers = getNumArr(computerInputNumbers);
       userInputNumbers = getNumArr(userInputNumbers);
@@ -29,7 +28,6 @@ export default function BaseballGame() {
   };
 
   const isVaildNum = userInputNumbers => {
-    // eslint-disable-next-line prettier/prettier
     if (userInputNumbers.includes(0) || userInputNumbers.includes(NaN) || userInputNumbers.length !== 3 || [...new Set(userInputNumbers)].length !== 3) {
       return false;
     }
@@ -43,7 +41,6 @@ export default function BaseballGame() {
 
   $('#input-form').addEventListener('submit', e => {
     e.preventDefault();
-
     const userInputNumbers = getNumArr($('#user-input').value);
     if (isVaildNum(userInputNumbers)) {
       printResult(this.play(computerInput, userInputNumbers));
@@ -60,5 +57,4 @@ export default function BaseballGame() {
   });
 }
 
-const tmp = new BaseballGame();
-console.log(tmp.play(123, 123));
+new BaseballGame();
