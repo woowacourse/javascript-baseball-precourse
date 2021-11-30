@@ -1,5 +1,9 @@
 import { ANSWER, NOTHING } from '../constant/constant.js';
 
+function isComputerUserInputSame(computerInput, userInput) {
+  return computerInput === userInput;
+}
+
 function isBall(computerInputElement, userInputArray, computerIndex) {
   return userInputArray.find(
     (element, inputIndex) =>
@@ -31,7 +35,7 @@ function countBallStrike(computerInput, userInput) {
 }
 
 export default function getGameResult(computerInput, userInput) {
-  if (computerInput === userInput) return ANSWER;
+  if (isComputerUserInputSame(computerInput, userInput)) return ANSWER;
   const { ballCount, strikeCount } = countBallStrike(
     String(computerInput).split(''),
     String(userInput).split('')
