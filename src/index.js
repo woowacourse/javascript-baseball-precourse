@@ -37,7 +37,8 @@ export default class BaseballGame {
           alert(ERROR_MESSAGE);
         } else {
           const parsedUserInput = this.parseStringtoIntArray(currentUserInput);
-          this.play(this.computerInputNumbers, parsedUserInput);
+          const resultString = this.play(this.computerInputNumbers, parsedUserInput);
+          this.paintResultMessage(resultString);
         }
         $userInput.value = '';
       }
@@ -79,7 +80,7 @@ export default class BaseballGame {
       }
     }
     const resultString = this.createResultMessage(ballCount, strikeCount);
-    this.paintResultMessage(resultString);
+    return resultString;
   }
 
   createResultMessage(ballCount, strikeCount) {
@@ -114,13 +115,13 @@ export default class BaseballGame {
     $restartQuestion.innerHTML = RESTART_MESSAGE.QUESTION;
     $restartBtn.innerHTML = RESTART_MESSAGE.BUTTON_TEXT;
     $restartBtn.id = ELEMENT_ID;
+
+    $restartQuestion.appendChild($restartBtn);
     $appArea.appendChild($restartQuestion);
-    $appArea.appendChild($restartBtn);
 
     $restartBtn.addEventListener('click', () => {
       this.handleRestart();
       $appArea.removeChild($restartQuestion);
-      $appArea.removeChild($restartBtn);
     });
   }
 
