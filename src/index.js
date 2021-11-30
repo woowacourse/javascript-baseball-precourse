@@ -84,6 +84,12 @@ export default class BaseballGame {
       }
     });
   }
+
+  init() {
+    this.onUserInputSubmit();
+    this.onRestartBtnClick();
+  }
 }
 
 const game = new BaseballGame();
+game.init();
