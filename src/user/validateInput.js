@@ -1,7 +1,7 @@
 import { LENGTH, INPUT_ERROR, $input } from "../constatns/constants.js";
 
 export default function validateInput (userInput) {
-  if(!isThreeDigit(userInput) || !isNumber(userInput) || !isUnique(userInput)){
+  if(!isThreeDigit(userInput) || !isNumber(userInput) || !isUnique(userInput)) {
     alert(INPUT_ERROR);
     $input.value = "";
     $input.focus();
