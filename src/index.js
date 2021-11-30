@@ -1,5 +1,5 @@
 import utils from "./utils.js";
-import { $input, $result, $submit } from "./constant.js";
+import { $input, $result, $submit, RESTART } from "./constant.js";
 import validate from "./validate.js";
 import getResult from "./result.js";
 
@@ -13,11 +13,24 @@ export default class BaseballGame {
   }
 
   onPressSubmit() {
-    $submit.addEventListener("click", (e) => {
-      e.preventDefault();
+    $submit.addEventListener("click", (event) => {
+      event.preventDefault();
       if (validate($input.value)) {
         $result.innerHTML = this.play(this.answer, $input.value); // innerHTML과 다른 것들과의 차이
       }
+      if (this.play(this.answer, $input.value) === RESTART) {
+        this.onPressRestart();
+      }
+    });
+  }
+
+  onPressRestart() {
+    const $restart = document.getElementById("game-restart-button");
+    $restart.addEventListener("click", (event) => {
+      event.preventDefault();
+      $input.value = "";
+      this.answer = utils();
+      $result.innerHTML = "";
     });
   }
 }
