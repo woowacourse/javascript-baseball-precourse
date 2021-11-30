@@ -5,7 +5,7 @@ import {
   THREE_DIGIT_ERR_MSG,
   ONE_TO_NINE_ERR_MSG,
   DUPLICATE_ERR_MSG,
-} from "../constant/constant.js";
+} from '../constant/constant.js';
 
 export default function alertErrorMessage(error) {
   if (error === THREE_DIGIT_ERR) {

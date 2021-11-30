@@ -3,7 +3,7 @@ import {
   ONE_TO_NINE_ERR,
   DUPLICATE_ERR,
   NO_ERROR,
-} from "../constant/constant.js";
+} from '../constant/constant.js';
 
 function isThreeDigitInput(input) {
   return input.length === 3;

@@ -1,7 +1,7 @@
-import getComputerInput from "../input/getComputerInput.js";
-import getUserInput from "../input/getUserInput.js";
-import showResult from "../view/showResult.js";
-import resetView from "../view/resetView.js";
+import getComputerInput from '../input/getComputerInput.js';
+import getUserInput from '../input/getUserInput.js';
+import showResult from '../view/showResult.js';
+import resetView from '../view/resetView.js';
 
 function onUserSubmit(event, play, computerInput) {
   event.preventDefault();
@@ -12,14 +12,14 @@ function onUserSubmit(event, play, computerInput) {
 }
 
 export default function gameEventHandler(play) {
-  const $userSubmitButton = document.getElementById("submit");
-  const $resultDiv = document.getElementById("result");
+  const $userSubmitButton = document.getElementById('submit');
+  const $resultDiv = document.getElementById('result');
   let computerInput = getComputerInput();
-  $userSubmitButton.addEventListener("click", (event) =>
+  $userSubmitButton.addEventListener('click', (event) =>
     onUserSubmit(event, play, computerInput)
   );
-  $resultDiv.addEventListener("click", (event) => {
-    if (event.target.id === "game-restart-button") {
+  $resultDiv.addEventListener('click', (event) => {
+    if (event.target.id === 'game-restart-button') {
       computerInput = getComputerInput();
       resetView();
     }

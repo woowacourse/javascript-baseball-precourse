@@ -1,4 +1,4 @@
-import { ANSWER, NOTHING } from "../constant/constant.js";
+import { ANSWER, NOTHING } from '../constant/constant.js';
 
 function isBall(computerInputElement, userInputArray, computerIndex) {
   return userInputArray.find(
@@ -33,8 +33,8 @@ function countBallStrike(computerInput, userInput) {
 export default function getGameResult(computerInput, userInput) {
   if (computerInput === userInput) return ANSWER;
   const { ballCount, strikeCount } = countBallStrike(
-    String(computerInput).split(""),
-    String(userInput).split("")
+    String(computerInput).split(''),
+    String(userInput).split('')
   );
   if (ballCount === 0 && strikeCount === 0) return NOTHING;
   if (ballCount === 0 && strikeCount !== 0) return `${strikeCount}스트라이크`;
