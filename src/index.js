@@ -1,5 +1,8 @@
+import { $result, $userInputBtn, $userInput } from './domElement.js';
 import { CONSTRAIN, COUNT } from './utils/constant.js';
 import { generateRandomNumArr } from './utils/generateRandomNumArr.js';
+import { getUserInput } from './getUserInput.js';
+import { renderGameResult } from './renderGameResult.js';
 
 export default class BaseballGame {
   constructor() {
@@ -57,6 +60,19 @@ export default class BaseballGame {
     const resultTxt = this.calculateResult();
     this.resetBallCount();
     return resultTxt;
+  }
+
+  onUserInputSubmit() {
+    $userInputBtn.addEventListener('click', e => {
+      e.preventDefault();
+      const userInputNumbers = getUserInput($userInput.value);
+      const computerInputNumbers = this.randomNums;
+
+      if (userInputNumbers !== null) {
+        const gameResult = this.play(computerInputNumbers, userInputNumbers);
+        renderGameResult($result, gameResult);
+      }
+    });
   }
 }
 
