@@ -1,9 +1,5 @@
 import { INPUT_LENGTH, ANSWER, NOTHING } from "../constant/constant.js";
 
-function isRightAnswer(computerInput, userInput) {
-  return computerInput === userInput;
-}
-
 function countBall(computerInput, userInput) {
   let ballCount = 0;
 
@@ -30,7 +26,7 @@ export default function getGameResult(computerInput, userInput) {
   let ballCount = "";
   let strikeCount = "";
 
-  if (isRightAnswer(computerInput, userInput)) return ANSWER;
+  if (computerInput === userInput) return ANSWER;
   ballCount = countBall(String(computerInput).split(""), String(userInput).split(""));
   strikeCount = countStrike(String(computerInput).split(""), String(userInput).split(""));
   if (ballCount === "" && strikeCount === "") return NOTHING;
