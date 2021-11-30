@@ -13,7 +13,7 @@ const myCreateElement = (tag, text) => {
   return htmlTag;
 };
 
-const initGame = (computer) => {
+const initGame = computer => {
   $('result').innerHTML = '';
   $('submit').disabled = false;
   $('user-input').value = '';
