@@ -10,6 +10,7 @@ export default class BaseballGame {
     this.$userInput = $("#user-input");
     this.$submit = $("#submit");
     this.$result = $("#result");
+    this.$correctResult = $("#correct-result");
     this.computerInputNumbers = this.computer.generateRandomNumbers();
   }
   init() {
@@ -32,7 +33,7 @@ export default class BaseballGame {
   onRestart(e) {
     e.preventDefault();
     this.$userInput.value = "";
-    this.computer.makeVisible("$result");
+    this.makeVisible("$result");
     this.computerInputNumbers = this.computer.generateRandomNumbers();
   }
   play(computerInputNumbers, userInputNumbers) {
@@ -40,7 +41,7 @@ export default class BaseballGame {
       return;
     }
     if (computerInputNumbers === userInputNumbers) {
-      this.computer.makeVisible("$correctResult");
+      this.makeVisible("$correctResult");
       return;
     }
 
@@ -53,6 +54,18 @@ export default class BaseballGame {
       return `${ball} ${strike}`;
     }
     return "낫싱";
+  }
+  makeVisible($) {
+    if ($ === "$result") {
+      this.$result.innerText = "";
+      this.$result.style.display = "block";
+      this.$correctResult.style.display = "none";
+      return;
+    }
+    if ($ === "$correctResult") {
+      this.$result.style.display = "none";
+      this.$correctResult.style.display = "block";
+    }
   }
 }
 

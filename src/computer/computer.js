@@ -1,11 +1,6 @@
 import { NUMBER_LENGTH } from "../libs/constant.js";
-import { $ } from "../utils/index.js";
 
 export default class Computer {
-  constructor() {
-    this.$result = $("#result");
-    this.$correctResult = $("#correct-result");
-  }
   generateRandomNumbers() {
     let answer = [];
     while (answer.length < NUMBER_LENGTH) {
@@ -40,17 +35,5 @@ export default class Computer {
       }
     }
     return strike > 0 ? `${strike}스트라이크` : "";
-  }
-  makeVisible($) {
-    if ($ === "$result") {
-      this.$result.innerText = "";
-      this.$result.style.display = "block";
-      this.$correctResult.style.display = "none";
-      return;
-    }
-    if ($ === "$correctResult") {
-      this.$result.style.display = "none";
-      this.$correctResult.style.display = "block";
-    }
   }
 }
