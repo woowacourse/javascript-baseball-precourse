@@ -27,7 +27,7 @@ export default function BaseballGame() {
     $('#result').innerText = result;
   };
 
-  const isVaildNum = userInputNumbers => {
+  const isValidNum = userInputNumbers => {
     if (userInputNumbers.includes(0) || userInputNumbers.includes(NaN) || userInputNumbers.length !== 3 || [...new Set(userInputNumbers)].length !== 3) {
       return false;
     }
@@ -42,7 +42,7 @@ export default function BaseballGame() {
   $('#input-form').addEventListener('submit', e => {
     e.preventDefault();
     const userInputNumbers = getNumArr($('#user-input').value);
-    if (isVaildNum(userInputNumbers)) {
+    if (isValidNum(userInputNumbers)) {
       printResult(this.play(computerInput, userInputNumbers));
       return;
     }
