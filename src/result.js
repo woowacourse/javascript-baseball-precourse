@@ -1,4 +1,4 @@
-import { $userInput, $submit, $result } from './constants.js';
+import { $userInput, $submit, $result, TEXT } from './constants.js';
 
 //create result String
 export function createResult() {
