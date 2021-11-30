@@ -6,14 +6,14 @@ import {
   STRIKE,
 } from "../constants/index.js";
 
-const checkStrikeCount = (computerInputNumbers, userInputNumbers) => {
+const getStrikeCount = (computerInputNumbers, userInputNumbers) => {
   return userInputNumbers.reduce((count, cur, index) => {
     if (cur === computerInputNumbers[index]) count += 1;
     return count;
   }, 0);
 };
 
-const checkBallCount = (computerInputNumbers, userInputNumbers) => {
+const getBallCount = (computerInputNumbers, userInputNumbers) => {
   return userInputNumbers.reduce((count, cur, index) => {
     if (
       cur !== computerInputNumbers[index] &&
@@ -52,8 +52,8 @@ const getGameResult = (computerInputNumbers, userInputNumbers) => {
   const computerInputArray = numberToArray(computerInputNumbers);
   const userInputArray = numberToArray(userInputNumbers);
 
-  const strikeCount = checkStrikeCount(computerInputArray, userInputArray);
-  const ballCount = checkBallCount(computerInputArray, userInputArray);
+  const strikeCount = getStrikeCount(computerInputArray, userInputArray);
+  const ballCount = getBallCount(computerInputArray, userInputArray);
 
   return getGameResultText(strikeCount, ballCount);
 };

@@ -14,6 +14,7 @@ const DUPLICATE_ERROR_MESSAGE =
 const SCOPE_ERROR_MESSAGE =
   "1~9 사이의 숫자를 입력해주세요. (올바른 예시 :139)";
 const LENGTH_ERROR_MESSAGE = "3자리의 수를 입력해주세요. (올바른 예시 :139)";
+const TYPE_ERROR_MESSAGE = "숫자 형식을 입력해주세요. (올바른 예시 :139)";
 
 const MIN_NUMBER = 1;
 const MAX_NUMBER = 9;
@@ -28,6 +29,7 @@ export {
   DUPLICATE_ERROR_MESSAGE,
   SCOPE_ERROR_MESSAGE,
   LENGTH_ERROR_MESSAGE,
+  TYPE_ERROR_MESSAGE,
   MIN_NUMBER,
   MAX_NUMBER,
   GAME_NUMBER_LENGTH,

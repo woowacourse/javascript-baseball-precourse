@@ -1,5 +1,5 @@
 import { $ } from "../util/index.js";
-import checkValidation from "./checkValidation.js";
+import isValid from "./isValid.js";
 
 const getUserNumber = () => {
   const $userInput = $("#user-input").value;
@@ -7,7 +7,8 @@ const getUserNumber = () => {
     .split("")
     .map((number) => parseInt(number, 10));
 
-  if (checkValidation(userInputNumbers)) {
+  console.log(userInputNumbers);
+  if (isValid(userInputNumbers)) {
     return parseInt(userInputNumbers.join(""), 10);
   }
 };
