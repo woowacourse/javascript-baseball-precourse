@@ -35,7 +35,7 @@ export default class BaseballGame {
   }
 }
 
-let baseballGame = new BaseballGame();
+new BaseballGame();
 
 // 예시
 // play(123, 456); // '낫싱'

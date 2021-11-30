@@ -22,7 +22,7 @@ export default function getResult(answer, userNum) {
 
 function countStrike(answer, userNum) {
   let strike = 0;
-  answer.forEach((elm, idx) => {
+  answer.split("").forEach((elm, idx) => {
     if (elm == userNum[idx]) {
       strike++;
     }
@@ -33,7 +33,7 @@ function countStrike(answer, userNum) {
 
 function countBall(answer, userNum) {
   let ball = 0;
-  answer.forEach((elm, idx) => {
+  answer.split("").forEach((elm, idx) => {
     if (userNum.includes(elm) && userNum[idx] != elm) {
       ball++;
     }

@@ -1,6 +1,10 @@
 import { MIN, MAX, LENGTH } from "./constant.js";
 
 export default function makeAnswer() {
-  const answer = MissionUtils.Random.pickUniqueNumbersInRange(MIN, MAX, LENGTH);
-  return answer;
+  let answer = new Set();
+  while (answer.size < LENGTH) {
+    answer.add(MissionUtils.Random.pickNumberInRange(MIN, MAX));
+  }
+
+  return [...answer].join("");
 }
