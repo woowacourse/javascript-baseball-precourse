@@ -9,7 +9,7 @@ export default class BaseballGame {
         return MissionUtils.Random.pickNumberInRange(1, 9);
     }
     
-    isDuplicated(num) {
+    isUnique(num) {
         const numArray = num.split('');
         const duplicatedNumbers = numArray
             .filter((num, index, self) => self.indexOf(num) !== index || num === '0');
@@ -29,7 +29,7 @@ export default class BaseballGame {
     }
     
     isCorrectInput(input) {
-        return input.length === 3 && Number(input) && this.isDuplicated(input);
+        return input.length === 3 && Number(input) && this.isUnique(input);
     }
     
     getCountStrikeAndBall(userNumbers) {
