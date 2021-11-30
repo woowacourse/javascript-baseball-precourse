@@ -1,8 +1,11 @@
 import {
   $getUserInputValue,
+  $setUserInputValue,
   $setResultText,
   $addSubmitButtonOnClick,
+  $addGameRestartButtonOnClick,
   $hideResultElement,
+  $showResultElement,
   $hideGameEndElement,
   $showGameEndElement,
 } from "./client.js";
@@ -89,6 +92,11 @@ export default class BaseballGame {
 
     return this.getResultString(balls, strikes);
   }
+
+  restart() {
+    this.#computerPlayer.setRandomAnswer();
+    this.#isGameEnded = false;
+  }
 }
 
 const game = new BaseballGame(3);
@@ -112,10 +120,19 @@ const submitButtonOnClick = () => {
   }
 };
 
+const gameRestartButtonOnClick = () => {
+  game.restart();
+  $setUserInputValue("");
+  $setResultText("");
+  $hideGameEndElement();
+  $showResultElement();
+};
+
 /* HTML View에 게임 진행용 이벤트 등록 */
 const initHTML = () => {
   $hideGameEndElement();
   $addSubmitButtonOnClick(submitButtonOnClick);
+  $addGameRestartButtonOnClick(gameRestartButtonOnClick);
 };
 
 initHTML();
