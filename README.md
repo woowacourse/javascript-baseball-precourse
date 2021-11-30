@@ -31,7 +31,8 @@
 
 ## 💻 실행 결과
 
-![baseball_result_gif](https://github.com/woowacourse/javascript-baseball-precourse/blob/main/images/result.gif?raw=true)
+- 링크: https://nan-noo.github.io/javascript-baseball-precourse/
+![화면 기록 2021-11-30 오후 12 49 38](https://user-images.githubusercontent.com/54002105/143982950-5f45e598-daa5-4695-be9a-f463c3be7a19.gif)
 
 ---
 
