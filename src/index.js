@@ -28,16 +28,12 @@ export default function BaseballGame() {
     $('#result').innerText = result;
   };
 
-  const isVaildNum = () => {
-    const userInputNumbers = getNumArr($('#user-input').value);
+  const isVaildNum = userInputNumbers => {
     // eslint-disable-next-line prettier/prettier
     if (userInputNumbers.includes(0) || userInputNumbers.includes(NaN) || userInputNumbers.length !== 3 || [...new Set(userInputNumbers)].length !== 3) {
-      printError(userInputNumbers);
-      resetOutput();
-      return;
+      return false;
     }
-
-    printResult(this.play(computerInput, userInputNumbers));
+    return true;
   };
 
   const restartGame = () => {
@@ -47,7 +43,14 @@ export default function BaseballGame() {
 
   $('#input-form').addEventListener('submit', e => {
     e.preventDefault();
-    isVaildNum();
+
+    const userInputNumbers = getNumArr($('#user-input').value);
+    if (isVaildNum(userInputNumbers)) {
+      printResult(this.play(computerInput, userInputNumbers));
+      return;
+    }
+    printError(userInputNumbers);
+    resetOutput();
   });
 
   $('#result').addEventListener('click', e => {
