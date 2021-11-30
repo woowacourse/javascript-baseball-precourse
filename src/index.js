@@ -1,21 +1,22 @@
 import utils from "./utils.js";
 import { $input, $result, $submit } from "./constant.js";
 import validate from "./validate.js";
+import getResult from "./result.js";
 
 export default class BaseballGame {
   constructor() {
     this.answer = utils();
     this.onPressSubmit();
   }
-  // play(computerInputNumbers, userInputNumbers) {
-  //   return "결과 값 String";
-  // }
+  play(computerInputNumbers, userInputNumbers) {
+    return getResult(computerInputNumbers, userInputNumbers);
+  }
 
   onPressSubmit() {
     $submit.addEventListener("click", (e) => {
       e.preventDefault();
       if (validate($input.value)) {
-        console.log($input.value);
+        $result.innerHTML = this.play(this.answer, $input.value); // innerHTML과 다른 것들과의 차이
       }
     });
   }
