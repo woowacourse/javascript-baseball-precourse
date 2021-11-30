@@ -1,5 +1,4 @@
 import component from './core/component.js';
-import { $ } from './utils/dom.js';
 import { isNotValidInput } from './utils/input.js';
 import {
   calculateBaseBall,
@@ -21,12 +20,10 @@ export default class BaseballGame extends component {
   initChildrens() {
     this.childrens = [
       new UserForm(
-        $('form'),
         { gameStatus: this.state.gameStatus },
         { onSubmit: userInput => this._onSubmitUserInput(userInput) }
       ),
       new GameResult(
-        $('#result'),
         {
           gameStatus: this.state.gameStatus,
           hint: this.state.hint,

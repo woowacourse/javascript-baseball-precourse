@@ -1,8 +1,12 @@
 import Component from '../core/component.js';
-import { replaceChild, createElement } from '../utils/dom.js';
+import { $, replaceChild, createElement } from '../utils/dom.js';
 import { GAME_STATUS } from '../constants.js';
 
 export default class GameResult extends Component {
+  initDoms() {
+    this.container = $('#result');
+  }
+
   bindEvent() {
     this.appendRootEvent('click', ({ target }) => {
       if (target.id !== 'game-restart-button') return;

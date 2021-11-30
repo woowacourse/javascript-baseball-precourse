@@ -5,6 +5,7 @@ import { GAME_STATUS } from '../constants.js';
 
 export default class UserForm extends Component {
   initDoms() {
+    this.container = $('form');
     this._inputElement = $('#user-input', this.container);
   }
 

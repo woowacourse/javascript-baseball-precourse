@@ -1,6 +1,6 @@
 export default class Component {
-  constructor(container = null, props = {}, handlers = {}) {
-    this.container = container;
+  constructor(props = {}, handlers = {}) {
+    this.container = null;
     this.props = props;
     this.handlers = handlers;
     this.state = {};
