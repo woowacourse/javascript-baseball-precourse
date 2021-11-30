@@ -22,10 +22,8 @@ export default class BaseballGame {
   }
   onAnswerSubmit(e) {
     e.preventDefault();
-    this.$result.innerHTML = this.play(
-      this.computerInputNumbers,
-      this.$userInput.value
-    );
+    const count = this.play(this.computerInputNumbers, this.$userInput.value);
+    this.$result.innerHTML = count || "";
   }
   triggerRestartEvent() {
     this.$restartButton.addEventListener("click", (e) => this.onRestart(e));
