@@ -2,7 +2,7 @@ import {
   INPUT_RULES,
   ERROR_MESSAGE,
   RESULT_MESSAGE,
-  RESTART_BUTTON_TEXT,
+  RESTART_MESSAGE,
 } from './constants.js';
 import { $ } from './utils.js';
 
@@ -111,20 +111,23 @@ export default class BaseballGame {
     const $restartQuestion = document.createElement('p');
     const $restartBtn = document.createElement('button');
 
-    $restartQuestion.innerHTML = RESULT_MESSAGE.ASK_RESTART;
-    $restartBtn.innerHTML = RESTART_BUTTON_TEXT;
+    $restartQuestion.innerHTML = RESTART_MESSAGE.QUESTION;
+    $restartBtn.innerHTML = RESTART_MESSAGE.BUTTON_TEXT;
     $restartBtn.id = ELEMENT_ID;
     $appArea.appendChild($restartQuestion);
     $appArea.appendChild($restartBtn);
 
     $restartBtn.addEventListener('click', () => {
-      const $resultText = $('#result');
-      this.endGame = false;
-      $resultText.innerHTML = '';
+      this.handleRestart();
       $appArea.removeChild($restartQuestion);
       $appArea.removeChild($restartBtn);
-      this.computerInputNumbers = this.generateRandomNumbers();
     });
+  }
+
+  handleRestart() {
+    this.endGame = false;
+    $('#result').innerHTML = '';
+    this.computerInputNumbers = this.generateRandomNumbers();
   }
 }
 

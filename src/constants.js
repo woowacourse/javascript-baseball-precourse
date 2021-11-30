@@ -11,7 +11,9 @@ export const RESULT_MESSAGE = {
   CORRECT: '🎉 정답을 맞추셨습니다! 🎉',
   BALL: '볼',
   STRIKE: '스트라이크',
-  ASK_RESTART: '게임을 새로 시작하시겠습니까?',
 };
 
-export const RESTART_BUTTON_TEXT = '재시작';
+export const RESTART_MESSAGE = {
+  QUESTION: '게임을 새로 시작하시겠습니까?',
+  BUTTON_TEXT: '재시작',
+};
