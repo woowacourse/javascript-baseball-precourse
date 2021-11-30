@@ -1,11 +1,17 @@
 import { CONSTRAIN, COUNT } from './utils/constant.js';
+import { generateRandomNumArr } from './utils/generateRandomNumArr.js';
 
 export default class BaseballGame {
   constructor() {
+    this.setRandomNums();
     this.ballCount = {
       strike: 0,
       ball: 0,
     };
+  }
+
+  setRandomNums() {
+    this.randomNums = generateRandomNumArr(CONSTRAIN.INPUT_LENGTH, CONSTRAIN.MIN_OF_RANGE, CONSTRAIN.MAX_OF_RANGE);
   }
 
   compareNums(computerInputNumbers, userInputNumbers) {
