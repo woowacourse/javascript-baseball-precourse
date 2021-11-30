@@ -6,13 +6,17 @@ export default class Component {
     this.state = {};
     this.childrens = [];
     this.init();
+  }
+
+  init() {
+    this.initState();
     this.initChildrens();
     this.initDoms();
     this.bindEvent();
   }
 
   // 컴포넌트 내부의 state를 초기화 한다.
-  init() {}
+  initState() {}
 
   // 컴포넌트의 자식 컴포넌트 배열을 초기화한다.
   initChildrens() {}

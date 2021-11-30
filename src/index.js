@@ -9,7 +9,7 @@ import { GAME_STATUS, MESSAGE } from './constants.js';
 import { UserForm, GameResult } from './components/index.js';
 
 export default class BaseballGame extends component {
-  init() {
+  initState() {
     this.state = {
       hint: '',
       gameStatus: GAME_STATUS.READY,
