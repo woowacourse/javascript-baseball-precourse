@@ -4,6 +4,10 @@ import getResultMessage from './getResultMessage.js';
 import validateInput from './validateInput.js';
 
 export default function BaseballGame() {
+  if (!new.target) {
+    return new BaseballGame();
+  }
+
   const $result = document.getElementById('result');
   const $submit = document.getElementById('submit');
   const $userInput = document.getElementById('user-input');
