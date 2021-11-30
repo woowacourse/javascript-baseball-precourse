@@ -2,14 +2,20 @@ import { zip } from "./utils.js";
 
 export default class BaseballGame {
   static validNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  #isGameEnded; // 게임이 종료되었는지를 나타내는 플래그
   #size; // 추리해야 하는 숫자 개수
 
   constructor(size) {
+    this.#isGameEnded = false;
     this.#size = size;
   }
 
   get size() {
     return this.#size;
+  }
+
+  get isGameEnded() {
+    return this.#isGameEnded;
   }
 
   static inValidRange(num) {
@@ -60,6 +66,11 @@ export default class BaseballGame {
   play(computerInputNumbers, userInputNumbers) {
     const balls = this.getBalls(computerInputNumbers, userInputNumbers);
     const strikes = this.getStrikes(computerInputNumbers, userInputNumbers);
+
+    if (strikes === this.#size) {
+      this.#isGameEnded = true;
+    }
+
     return this.getResultString(balls, strikes);
   }
 }
