@@ -69,18 +69,16 @@ input을 초기화
 │   └── README.md
 └── src
     ├── index.js 
+    ├── gameResult.js // 게임 결과를 핸들링하는 함수 모음
     │
     ├── computer
     │   └── index.js // computer 클래스 
-    │
     ├── constants
     │   └── index.js // 상수 게임규칙, alert message, result message 모음
-    │
     ├── user
     │   └── index.js // user 클래스
-    │
     └── utils
-        └── index.js // 게임 결과 도출에 사용되는 함수 모음
+        └── index.js // 유용한 기능 모음
 ```
 
 <details>
