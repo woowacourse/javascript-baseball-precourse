@@ -4,7 +4,7 @@ import {
   NUMBER_RANGE_MIN,
   NUMBER_RANGE_MAX,
   RESULT_NOTHING,
-} from "./config.js";
+} from "../config/config.js";
 
 export function generateRandomNumbers() {
   const numberSet = new Set();

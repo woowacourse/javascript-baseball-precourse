@@ -2,7 +2,7 @@ import {
   generateRandomNumbers,
   compareNumbers,
   generateResultString,
-} from "./utils.js";
+} from "./BaseballGameUtils.js";
 
 export default function BaseballGame() {
   this.answer = generateRandomNumbers();

@@ -1,11 +1,11 @@
 import validateInput from "./validation.js";
-import { $, $on } from "./helpers.js";
+import { $, $on } from "./domHelpers.js";
 import {
   RESULT_CORRECT,
   MESSAGE_CORRECT_ANSWER,
   MESSAGE_RESTART_GAME,
   ERROR_MESSAGE,
-} from "./config.js";
+} from "../config/config.js";
 
 export default function EventManager(baseballGame) {
   this.baseballGame = baseballGame;
@@ -52,11 +52,11 @@ export default function EventManager(baseballGame) {
 
   this.render = function render(resultString) {
     const correctResultTemplate = `
-        <h4>${MESSAGE_CORRECT_ANSWER}</h4>
-        ${MESSAGE_RESTART_GAME}
-        <button id="game-restart-button">재시작</button>
-      `;
-
+      <h4>${MESSAGE_CORRECT_ANSWER}</h4>
+      ${MESSAGE_RESTART_GAME}
+      <button id="game-restart-button">재시작</button>
+    `;
+    
     this.$resultDiv.innerHTML =
       resultString === RESULT_CORRECT ? correctResultTemplate : resultString;
   };
