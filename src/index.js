@@ -4,6 +4,7 @@ import {
   checkDuplicationNumbers,
   checkDigits,
   checkNumbersInRange,
+  clearInputWithFocus,
 } from './utils.js';
 
 const BaseballGameStarter = new BaseballGame();
@@ -22,8 +23,7 @@ const bindGameRestartEvent = () => {
   gameRestartButton.addEventListener('click', () => {
     BaseballGameStarter.restartGame();
     gameResult.innerHTML = '';
-    userInputNumbers.value = '';
-    userInputNumbers.focus();
+    clearInputWithFocus(userInputNumbers);
   });
 };
 
@@ -41,8 +41,7 @@ submitButton.addEventListener('click', (event) => {
 
   if (isThreeDigitsNumbers || isDuplicationNumbers || !isRangedNumbers) {
     alert(ERROR_MESSAGE.INPUT_ERROR);
-    userInputNumbers.value = '';
-    userInputNumbers.focus();
+    clearInputWithFocus(userInputNumbers);
     return;
   }
 

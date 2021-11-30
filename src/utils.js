@@ -17,3 +17,8 @@ export function checkDuplicationNumbers(number) {
   );
   return duplicatedNumberArr.length > 0;
 }
+
+export function clearInputWithFocus(element) {
+  element.value = '';
+  element.focus();
+}
