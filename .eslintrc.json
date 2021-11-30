@@ -1,0 +1,35 @@
+{
+  "env": {
+    "browser": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["prettier"],
+  "rules": {
+    "class-methods-use-this": "off",
+    "no-alert": "off",
+    "no-plusplus": "off",
+    "import/extensions": "off",
+    "import/prefer-default-export": "off",
+    "comma-dangle": ["error", "always-multiline"],
+    "max-depth": ["error", 2],
+    "max-lines-per-function": ["error", 15],
+    "prettier/prettier": "error",
+    "import/no-anonymous-default-export": 0,
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "eol-last": ["error", "always"],
+    "object-curly-spacing": ["error", "always"],
+    "space-in-parens": ["error", "never"],
+    "computed-property-spacing": ["error", "never"],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "quotes": ["error", "single"],
+    "no-tabs": ["error", { "allowIndentationTabs": true }],
+    "semi": ["error", "always"],
+    "object-shorthand": "error"
+  }
+}
