@@ -27,14 +27,16 @@ export default class BaseballGame {
     const $userInput = $('#user-input');
     $submitBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const currentUserInput = $userInput.value;
-      if (!this.isValid(currentUserInput)) {
-        alert(ERROR_MESSAGE);
-      } else {
-        const parsedUserInput = this.parseStringtoIntArray(currentUserInput);
-        this.play(this.computerInputNumbers, parsedUserInput);
+      if (!this.endGame) {
+        const currentUserInput = $userInput.value;
+        if (!this.isValid(currentUserInput)) {
+          alert(ERROR_MESSAGE);
+        } else {
+          const parsedUserInput = this.parseStringtoIntArray(currentUserInput);
+          this.play(this.computerInputNumbers, parsedUserInput);
+        }
+        $userInput.value = '';
       }
-      $userInput.value = '';
     });
   }
 
@@ -110,6 +112,15 @@ export default class BaseballGame {
     $restartBtn.id = ELEMENT_ID;
     $appArea.appendChild($restartQuestion);
     $appArea.appendChild($restartBtn);
+
+    $restartBtn.addEventListener('click', () => {
+      const $resultText = $('#result');
+      this.endGame = false;
+      $resultText.innerHTML = '';
+      $appArea.removeChild($restartQuestion);
+      $appArea.removeChild($restartBtn);
+      this.computerInputNumbers = this.generateRandomNumbers();
+    });
   }
 }
 
