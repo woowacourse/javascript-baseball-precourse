@@ -1,16 +1,22 @@
 import { $ } from './utils/index.js';
-import Computer from './computer/computer.js';
+import { generateComputerValue } from './computer/computer.js';
 import User from './user/user.js';
+import { BaseballGame } from './BaseballGame.js';
 
-export default class BaseballGame {
+// const $restartButton = $('#game-restart-button');
+// const $submit = $('#submit');
+// const $result = $('#result');
+// const $correctResult = $('#correct-result');
+
+export default class BaseballGameView {
   constructor() {
-    this.computer = new Computer();
     this.user = new User();
+    this.baseballgame = new BaseballGame();
     this.$restartButton = $('#game-restart-button');
     this.$submit = $('#submit');
     this.$result = $('#result');
     this.$correctResult = $('#correct-result');
-    this.computerInputNumbers = this.computer.generateRandomNumbers();
+    this.computerInputNumbers = generateComputerValue();
   }
 
   init() {
@@ -24,8 +30,7 @@ export default class BaseballGame {
 
   onAnswerSubmit(e) {
     e.preventDefault();
-    const count = this.play(this.computerInputNumbers, this.user.getUserInputValue());
-
+    const count = this.baseballgame.play(this.computerInputNumbers, this.user.getUserInputValue());
     this.$result.innerHTML = count || '';
   }
 
@@ -40,37 +45,26 @@ export default class BaseballGame {
     this.computerInputNumbers = this.computer.generateRandomNumbers();
   }
 
-  play(computerInputNumbers, userInputNumbers) {
-    if (!this.user.isInputValid(userInputNumbers)) return undefined;
-    // return 문을 함수로 뺄 때에, 어떻게 해야할지 모르겠다.
-    if (computerInputNumbers === userInputNumbers) {
-      this.makeVisible('$correctResult');
-      return undefined;
-    }
-
-    const ball = this.computer.calcBall(computerInputNumbers, userInputNumbers);
-    const strike = this.computer.calcStrike(computerInputNumbers, userInputNumbers);
-
-    if (ball || strike) return `${ball} ${strike}`;
-
-    return '낫싱';
-  }
-
   makeVisible($element) {
     if ($element === '$result') {
-      this.$result.innerText = '';
-      this.$result.style.display = 'block';
-      this.$correctResult.style.display = 'none';
+      this.showResult();
+    } else if ($element === '$correctResult') {
+      this.showCorrectResult();
+    }
+  }
 
-      return;
-    }
-    if ($element === '$correctResult') {
-      this.$result.style.display = 'none';
-      this.$correctResult.style.display = 'block';
-    }
+  showResult() {
+    this.$result.innerText = '';
+    this.$result.style.display = 'block';
+    this.$correctResult.style.display = 'none';
+  }
+
+  showCorrectResult() {
+    this.$result.style.display = 'none';
+    this.$correctResult.style.display = 'block';
   }
 }
 
-const game = new BaseballGame();
+const game = new BaseballGameView();
 
 game.init();
