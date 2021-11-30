@@ -1,4 +1,4 @@
-import { $ } from "../utils/selector.js";
+import { $ } from "./util.js";
 const $result = $("#result");
 
 export const renderResult = (resultHtml) => {

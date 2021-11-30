@@ -1,5 +1,5 @@
-import { setErrorMessage, showError } from "./error.js";
-import { resetInput } from "./resetInput.js";
+import { showError, setErrorMessage } from "./error.js";
+import { $ } from "./util.js";
 
 const isNumber = (value) => {
   const res = !isNaN(value);
@@ -13,7 +13,7 @@ const isLengthThree = (value) => {
   return res;
 };
 
-export const isNotDuplicateExist = (value) => {
+const isNotDuplicateExist = (value) => {
   const numsExist = new Set();
   const valueArray = Array.from(String(value));
   for (const [idx, char] of valueArray.entries()) {
@@ -27,7 +27,7 @@ export const isNotDuplicateExist = (value) => {
   return true;
 };
 
-export const validateUserInput = (value) => {
+const validateUserInput = (value) => {
   const res =
     isLengthThree(value) && isNumber(value) && isNotDuplicateExist(value);
   if (!res) {
@@ -36,3 +36,10 @@ export const validateUserInput = (value) => {
   }
   return res;
 };
+
+const resetInput = () => {
+  const $input = $("#user-input");
+  $input.value = "";
+};
+
+export { isNotDuplicateExist, validateUserInput, resetInput };

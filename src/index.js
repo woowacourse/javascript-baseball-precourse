@@ -1,8 +1,7 @@
-import { isNotDuplicateExist } from "./utils/validator.js";
-import { $ } from "./utils/selector.js";
-import { renderResult, renderInit } from "./utils/render.js";
-import { checkResult } from "./modules/checkResult.js";
-import { resetInput } from "./utils/resetInput.js";
+import { isNotDuplicateExist, resetInput } from "./modules/input.js";
+import { $ } from "./modules/util.js";
+import { renderResult, renderInit } from "./modules/render.js";
+import { checkResult } from "./modules/result.js";
 
 export default class BaseballGame {
   constructor() {

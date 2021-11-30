@@ -1,4 +1,4 @@
-import { validateUserInput } from "../utils/validator.js";
+import { validateUserInput } from "./input.js";
 
 const checkStrike = (computerInputNumbers, userInputNumbers) => {
   return [...userInputNumbers].reduce((acc, userNum, idx) => {
