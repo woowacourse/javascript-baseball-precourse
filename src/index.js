@@ -1,5 +1,5 @@
-import { $userInput, $submit } from './constants.js';
-import { setResult, createResult } from './result.js';
+import { $userInput, $submit, $result } from './constants.js';
+import { setResult } from './result.js';
 import { checkWarning } from './validation.js';
 import { checkAnswer } from './compare.js';
 
@@ -21,6 +21,9 @@ export function createAnswer() {
 //Start Game function
 export default function BaseballGame() {
   const answer = createAnswer();
+  
+  $userInput.value = "";
+  $result.innerHTML = "";
   
   //submit button function
   $submit.addEventListener("click", (e) => {

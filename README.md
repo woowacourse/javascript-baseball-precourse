@@ -41,9 +41,11 @@
 
 <b>restart.js</b>
 
-- [X] Button을 보이기 (008) - `setButton`
+- [X] 재시작 버튼 동작 (008) - `setButton`
 
 - [X] Button을 숨기기 (009) - `clearButton`
+
+- [X] Button을 숨기기 (009) - `showButton`
 
 
 <b>validation.js</b>
