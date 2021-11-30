@@ -22,7 +22,7 @@ export function createAnswer() {
 export default function BaseballGame() {
   const answer = createAnswer();
   
-  //submit button function -> check answers
+  //submit button function
   $submit.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -38,6 +38,10 @@ export default function BaseballGame() {
   //check and make result
   this.play = function (computerInputNumbers, userInputNumbers) {
     const result = checkAnswer(computerInputNumbers, userInputNumbers);
+    
+    console.log("답 ", answer);
+    console.log("입력 ", userInputNumbers);
+
     return result;
   };
 }

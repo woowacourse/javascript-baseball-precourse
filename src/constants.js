@@ -17,3 +17,5 @@ export const $submit = document.querySelector("#submit");
 export const $result = document.querySelector("#result");
 
 export const $restart = document.querySelector("#game-restart-button");
+
+export const $restartArea = document.querySelector("#restart-area");

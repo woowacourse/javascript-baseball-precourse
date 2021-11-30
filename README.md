@@ -21,9 +21,11 @@
 
 <b>index.js</b>
 
-- [ ] String Result 생성 (002) - `createResult`
+- [X] Random 값 생성 (001) - `createAnswer`
 
-- [ ] Set Result in DOM (003) -`setResult`
+- [X] String Result 생성 (002) - `createResult`
+
+- [X] Set Result in DOM (003) -`setResult`
 
 <b>compare.js</b>
 
@@ -43,7 +45,6 @@
 
 - [X] Button을 숨기기 (009) - `clearButton`
 
-- [X] Random 값 생성 (001) - `createAnswer`
 
 <b>validation.js</b>
 
