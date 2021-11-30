@@ -5,10 +5,8 @@ export default function BaseballGame() {
     if (!new.target) return new BaseballGame();
     this.comNums = comNums();
     this.userNums = userInput();
-    this.$submit = document.getElementById("submit");
-
+    this.$submit = document.querySelector("#submit");
     this.init = () => {
-        console.log(this.comNums, this.userNums);
         this.$submit.addEventListener("click", function (e) {
             e.preventDefault();
             result.textContent = renderResult();
@@ -25,7 +23,6 @@ export default function BaseballGame() {
         const comNum = (computerInputNumbers + "").split(",");
         const userNum = userInputNumbers;
 
-        console.log(!checkUserNums(userNum), userNum);
         if (!checkUserNums(userNum)) {
             alert("올바른 숫자를 입력해주세요");
         } else {

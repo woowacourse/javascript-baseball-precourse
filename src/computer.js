@@ -14,7 +14,6 @@ export function checkStrike(comNums, userNums) {
 
 export function checkBall(comNums, userNums) {
     let cnt = 0;
-    console.log(userNums, "w2");
     comNums.forEach((element) => {
         if (userNums.includes(element)) cnt++;
     });
@@ -27,7 +26,8 @@ export function getResult(strCnt, ballCnt) {
     if (strCnt === 3) {
         document
             .getElementById("game-restart-button")
-            .addEventListener("click", function () {
+            .addEventListener("click", function (e) {
+                e.preventDefault();
                 comNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
                 $userNums.value = "";
             });
