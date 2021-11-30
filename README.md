@@ -5,33 +5,32 @@
 
 ## 📃 구현 기능 목록 정리
 
-### 1. Create random number generation function
+### 1. 조건에 부합하는 임의의 세자리 수를 생성 - _Create random number generation function_
 
-- generate random number for answer on page load
-- number requirements: three unique integers from range 1 to 9
+- 페이지 로딩 시 임의의 숫자 생성
+- 조건: 각 자릿 수가 고유한 1에서 9 사이의 정수
 
-### 2. Create input validate function
+### 2. 사용자 입력값 유효성 검증 - _Create input validate function_
 
-- validate number from html input
-- alert user if input is not valid
+- HTML에서 입력된 사용자 입력값의 유효성 검증
+- 유효하지 않은 값의 경우 alert로 사용자에게 알림
 
-### 3. Create compare function for input and answer
+### 3. 입력값과 자동 생성된 값을 비교 - _Create compare function for input and answer_
 
-- compare each digit
-- return balls or strikes if present
-- return "nothing" if nothing matches
+- 각 자릿수를 비교
+- 일치하는 값이 존재할 경우 위치에 따라 스트라이크/볼 갯수 반환
+- 일치하는 값이 없을 경우 '낫싱' 반환
 
-### 4. Create print result function
+### 4. 결과를 문자열로 반환 - _Create print result function_
 
-- format result from previous function
-- show hint when input is not answer
-- show congrats message and restart button when input is answer
-- show game restart button when input is answer
+- 비교 함수에서 반환된 값을 문자열로 변환
+- 정답이 아닌 경우 힌트 문자열 표시
+- 정답인 경우 축하 문자열과 게임 재시작 버튼 표시
 
-### 5. Create game restart button function
+### 5. 게임 재시작 - _Create game restart button function_
 
-- reset text at result div
-- generate new random number for answer
+- 기존 결과 창을 초기화
+- 새 정답 값으로 사용될 세자리 수 생성
 
 ---
 
