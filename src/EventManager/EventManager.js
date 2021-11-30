@@ -13,6 +13,11 @@ export default function EventManager(baseballGame) {
   this.$userInput = $("#user-input");
   this.$submitButton = $("#submit");
   this.$resultDiv = $("#result");
+  this.correctResultTemplate = `
+    <h4>${MESSAGE_CORRECT_ANSWER}</h4>
+    ${MESSAGE_RESTART_GAME}
+    <button id="game-restart-button">재시작</button>
+  `;
 
   this.initEventListeners = function initEventListeners() {
     $on(this.form, "submit", this.handleSubmitForm);
@@ -51,13 +56,9 @@ export default function EventManager(baseballGame) {
   };
 
   this.render = function render(resultString) {
-    const correctResultTemplate = `
-      <h4>${MESSAGE_CORRECT_ANSWER}</h4>
-      ${MESSAGE_RESTART_GAME}
-      <button id="game-restart-button">재시작</button>
-    `;
-    
     this.$resultDiv.innerHTML =
-      resultString === RESULT_CORRECT ? correctResultTemplate : resultString;
+      resultString === RESULT_CORRECT
+        ? this.correctResultTemplate
+        : resultString;
   };
 }
