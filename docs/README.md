@@ -41,7 +41,8 @@
 
 ### 컴퓨터의 랜덤 값 생성하기
 
-[완료 커밋](https://github.com/leegwae/javascript-baseball-precourse/commit/72698bcd8cbcf89e6d568de592a212a07aa748d3)
+~~[완료 커밋](https://github.com/leegwae/javascript-baseball-precourse/commit/72698bcd8cbcf89e6d568de592a212a07aa748d3)~~
+[완료 커밋](https://github.com/leegwae/javascript-baseball-precourse/commit/db8de44639da9c6975f78c6dc285aa963d00ad04)
 
 - [x] 컴퓨터의 랜덤 값을 생성한다.
   - [x] ~~dependency 추가: [`mission-utils`](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)~~
