@@ -82,7 +82,7 @@
 └── test
     └── app.spec.js
 ```
-- **src** 내부에 js파일들을 모았습니다. 
+- **src** 내부에 .js파일들을 모았습니다. 
 - **src/utils/utils.js** 
   <br>자주사용하는 함수를 모아놓은 파일입니다. 
   - `$` : dom 요소 선택자 함수 
@@ -95,7 +95,7 @@
 - **src/printError.js**
   - `printError` : 사용자가 input창에 값을 잘못 입력했을 때 alert창으로 에러메시지를 보여주는 함수 (이때, 잘못 입력한 경우에 따라 다른 에러메시지를 보여줍니다)
 - **src/index.js**
-  게임을 실행 및 진행할 수 있는 BaseballGame() 생성자가 있습니다. 
+  <br>게임을 실행 및 진행할 수 있는 BaseballGame() 생성자가 있습니다. 
   - `this.play` : 사용자가 입력한 숫자에 대한 결과를 string형태로 리턴하는 메소드 (getResult 함수를 활용합니다.)
   - `printResult` : 결과를 브라우저창에 출력하는 메소드
   - `isValidNum` : 사용자가 입력한 값이 유효하면 true를, 유효하지 않으면 false를 리턴해주는 메소드 
