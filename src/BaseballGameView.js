@@ -1,0 +1,73 @@
+import { $ } from './utils/index.js';
+import { generateComputerValue } from './computer/computer.js';
+import User from './user/user.js';
+import { BaseballGame } from './index.js';
+
+export default class BaseballGameView {
+  constructor() {
+    this.user = new User();
+    this.baseballgame = new BaseballGame();
+    this.$restartButton = $('#game-restart-button');
+    this.$submit = $('#submit');
+    this.$result = $('#result');
+    this.$correctResult = $('#correct-result');
+    this.computerInputNumbers = generateComputerValue();
+  }
+
+  init() {
+    this.triggerRestartEvent();
+    this.triggerSubmitEvent();
+    console.log(this.computerInputNumbers);
+  }
+
+  triggerSubmitEvent() {
+    this.$submit.addEventListener('click', (e) => this.onAnswerSubmit(e));
+  }
+
+  onAnswerSubmit(e) {
+    e.preventDefault();
+    if (!this.user.isInputValid(this.user.getUserInputValue())) {
+      return;
+    }
+    if (this.computerInputNumbers === this.user.getUserInputValue()) {
+      this.makeVisible('$correctResult');
+      return;
+    }
+    const count = this.baseballgame.play(this.computerInputNumbers, this.user.getUserInputValue());
+    this.$result.innerHTML = count;
+  }
+
+  triggerRestartEvent() {
+    this.$restartButton.addEventListener('click', (e) => this.onRestart(e));
+  }
+
+  onRestart(e) {
+    e.preventDefault();
+    this.user.setUserInputValue('');
+    this.makeVisible('$result');
+    this.computerInputNumbers = generateComputerValue();
+  }
+
+  makeVisible($element) {
+    if ($element === '$result') {
+      this.showResult();
+    } else if ($element === '$correctResult') {
+      this.showCorrectResult();
+    }
+  }
+
+  showResult() {
+    this.$result.innerText = '';
+    this.$result.style.display = 'block';
+    this.$correctResult.style.display = 'none';
+  }
+
+  showCorrectResult() {
+    this.$result.style.display = 'none';
+    this.$correctResult.style.display = 'block';
+  }
+}
+
+const game = new BaseballGameView();
+
+game.init();

@@ -1,76 +1,33 @@
-import { $ } from './utils/index.js';
-import { generateComputerValue } from './computer/computer.js';
-import User from './user/user.js';
-import { BaseballGame } from './BaseballGame.js';
-
-// const $restartButton = $('#game-restart-button');
-// const $submit = $('#submit');
-// const $result = $('#result');
-// const $correctResult = $('#correct-result');
-
-export default class BaseballGameView {
-  constructor() {
-    this.user = new User();
-    this.baseballgame = new BaseballGame();
-    this.$restartButton = $('#game-restart-button');
-    this.$submit = $('#submit');
-    this.$result = $('#result');
-    this.$correctResult = $('#correct-result');
-    this.computerInputNumbers = generateComputerValue();
-  }
-
-  init() {
-    this.triggerRestartEvent();
-    this.triggerSubmitEvent();
-    console.log(this.computerInputNumbers);
-  }
-
-  triggerSubmitEvent() {
-    this.$submit.addEventListener('click', (e) => this.onAnswerSubmit(e));
-  }
-
-  onAnswerSubmit(e) {
-    e.preventDefault();
-    if (!this.user.isInputValid(this.user.getUserInputValue())) return;
-    if (this.computerInputNumbers === this.user.getUserInputValue()) {
-      this.makeVisible('$correctResult');
-      return;
+export class BaseballGame {
+  play(computerInputNumbers, userInputNumbers) {
+    const ball = this.calcBall(computerInputNumbers, userInputNumbers);
+    const strike = this.calcStrike(computerInputNumbers, userInputNumbers);
+    if (ball || strike) {
+      return `${ball} ${strike}`;
     }
-    const count = this.baseballgame.play(this.computerInputNumbers, this.user.getUserInputValue());
-    this.$result.innerHTML = count;
+    return '낫싱';
   }
 
-  triggerRestartEvent() {
-    this.$restartButton.addEventListener('click', (e) => this.onRestart(e));
-  }
-
-  onRestart(e) {
-    e.preventDefault();
-    this.user.setUserInputValue('');
-    this.makeVisible('$result');
-    this.computerInputNumbers = generateComputerValue();
-  }
-
-  makeVisible($element) {
-    if ($element === '$result') {
-      this.showResult();
-    } else if ($element === '$correctResult') {
-      this.showCorrectResult();
+  calcBall(computerInputNumbers, userInputNumbers) {
+    let ball = 0;
+    for (let i = 0; i < computerInputNumbers.length; i++) {
+      if (
+        computerInputNumbers.includes(userInputNumbers[i]) &&
+        computerInputNumbers[i] !== userInputNumbers[i]
+      ) {
+        ball++;
+      }
     }
+    return ball > 0 ? `${ball}볼` : '';
   }
 
-  showResult() {
-    this.$result.innerText = '';
-    this.$result.style.display = 'block';
-    this.$correctResult.style.display = 'none';
-  }
-
-  showCorrectResult() {
-    this.$result.style.display = 'none';
-    this.$correctResult.style.display = 'block';
+  calcStrike(computerInputNumbers, userInputNumbers) {
+    let strike = 0;
+    for (let i = 0; i < computerInputNumbers.length; i++) {
+      if (computerInputNumbers[i] === userInputNumbers[i]) {
+        strike++;
+      }
+    }
+    return strike > 0 ? `${strike}스트라이크` : '';
   }
 }
-
-const game = new BaseballGameView();
-
-game.init();
