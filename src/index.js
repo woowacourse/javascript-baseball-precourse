@@ -34,20 +34,20 @@ export default class BaseballGame {
   }
 
   countBall(computerInputNumbers, userInputNumbers) {
-    const ball = computerInputNumbers.filter(
-      (number, position) => userInputNumbers[position] === number
-    );
+    const ball = computerInputNumbers.filter((number, position) => {
+      const isBall = userInputNumbers.filter(
+        (userNumber, userPosition) =>
+          userPosition !== position && userNumber === number
+      );
+      return isBall.length > 0;
+    });
     return ball.length;
   }
 
   countStrike(computerInputNumbers, userInputNumbers) {
-    const strike = computerInputNumbers.filter((number, position) => {
-      const isStrike = userInputNumbers.filter(
-        (userNumber, userPosition) =>
-          userPosition !== position && userNumber === number
-      );
-      return isStrike.length > 0;
-    });
+    const strike = computerInputNumbers.filter(
+      (number, position) => userInputNumbers[position] === number
+    );
     return strike.length;
   }
 
@@ -79,7 +79,7 @@ export default class BaseballGame {
   }
 
   renderGameMessage(gameMessage) {
-    if (`${this.NUMBER_LENGTH}볼` === gameMessage) {
+    if (`${this.NUMBER_LENGTH}스트라이크` === gameMessage) {
       this.dom.clearResultArea();
       return this.renderAnswerMessage();
     }
