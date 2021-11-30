@@ -6,13 +6,14 @@ export default function BaseballGame() {
     this.$submit = document.getElementById("submit");
     this.$success = document.getElementById("success");
 
-    this.$submit.addEventListener("click", function () {
-        result.textContent = renderResult();
-    });
-    this.$submit.addEventListener("keyup", function (e) {
-        if (e.key === "Enter") result.textContent = renderResult();
-    });
-
+    this.init = () => {
+        this.$submit.addEventListener("click", function () {
+            result.textContent = renderResult();
+        });
+        this.$submit.addEventListener("keyup", function (e) {
+            if (e.key === "Enter") result.textContent = renderResult();
+        });
+    };
     const renderResult = () => {
         return this.play(this.comNums, this.$userNums.value);
     };
@@ -83,6 +84,9 @@ export default function BaseballGame() {
         if (userNums.length !== 3) isPass = false;
         userNums.forEach((element, index) => {
             isPass = checkRepe(userNums, element, index, isPass);
+        });
+        userNums.forEach((element) => {
+            if (Number.isNaN(Number(element))) isPass = true;
         });
 
         return isPass;
