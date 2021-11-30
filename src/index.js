@@ -59,6 +59,7 @@ export default class BaseballGame {
     this.compareNums(computerInputNumbers, userInputNumbers);
     const resultTxt = this.calculateResult();
     this.resetBallCount();
+    
     return resultTxt;
   }
 
