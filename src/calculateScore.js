@@ -8,11 +8,11 @@ export function calculateDuplicatedNum(Number1, Number2) {
 }
 
 export function calStrike(computerNumber, userNumber) {
-  const a = String(computerNumber).split('');
-  const b = String(userNumber).split('');
+  const computerNumStr = String(computerNumber).split('');
+  const userNumStr = String(userNumber).split('');
   let count = 0;
   for (let i = 0; i < NUMBER_LENGTH; i++) {
-    if (a[i] === b[i]) {
+    if (computerNumStr[i] === userNumStr[i]) {
       count++;
     }
   }
