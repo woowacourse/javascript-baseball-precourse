@@ -1,3 +1,5 @@
+import { validateUserInput } from "./validator.js";
+
 const checkStrike = (computerInputNumbers, userInputNumbers) => {
   let result = 0;
   for (let i = 0; i < 3; i++) {
@@ -34,12 +36,16 @@ const getResultHtml = (strikeCount, ballCount) => {
 };
 
 export const checkResult = (computerInputNumbers, userInputNumbers) => {
-  const strikeCount = checkStrike(computerInputNumbers, userInputNumbers);
-  const ballCount = checkBall(
-    computerInputNumbers,
-    userInputNumbers,
-    strikeCount
-  );
-  const result = getResultHtml(strikeCount, ballCount);
-  return result;
+  const isInputValidated = validateUserInput(userInputNumbers);
+  if (isInputValidated) {
+    const strikeCount = checkStrike(computerInputNumbers, userInputNumbers);
+    const ballCount = checkBall(
+      computerInputNumbers,
+      userInputNumbers,
+      strikeCount
+    );
+    const result = getResultHtml(strikeCount, ballCount);
+    return result;
+  }
+  return false;
 };

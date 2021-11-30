@@ -1,8 +1,8 @@
-import { isNotDuplicateExist, validateUserInput } from "./utils/validator.js";
+import { isNotDuplicateExist } from "./utils/validator.js";
 import { $ } from "./utils/selector.js";
 import { renderResult, renderInit } from "./utils/render.js";
 import { checkResult } from "./utils/checkResult.js";
-import { showError } from "./utils/error.js";
+import { resetInput } from "./utils/resetInput.js";
 
 export default class BaseballGame {
   constructor() {
@@ -13,6 +13,8 @@ export default class BaseballGame {
   init() {
     const $form = $("form");
     $form.addEventListener("submit", this.handleSubmit);
+    // this.computerInput = this.generateComputerInput();
+    // console.log(this.computerInput);
   }
 
   generateComputerInput() {
@@ -31,24 +33,14 @@ export default class BaseballGame {
   handleSubmit(event) {
     event.preventDefault();
     const playResult = this.play(this.computerInput, this.getUserInput());
-    playResult && renderResult(playResult);
-    $("#game-restart-button") && this.addEventlistenerToRestartButton();
+    if (playResult) {
+      renderResult(playResult);
+      $("#game-restart-button") && this.addEventlistenerToRestartButton();
+    }
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    const isInputValidated = validateUserInput(userInputNumbers);
-    if (isInputValidated) {
-      const resultHtml = checkResult(computerInputNumbers, userInputNumbers);
-      return resultHtml;
-    }
-    showError();
-    this.resetInput();
-    return false;
-  }
-
-  resetInput() {
-    const $input = $("#user-input");
-    $input.value = "";
+    return checkResult(computerInputNumbers, userInputNumbers);
   }
 
   getUserInput() {
@@ -57,9 +49,9 @@ export default class BaseballGame {
   }
 
   restartGame() {
+    resetInput();
     renderInit();
     this.init();
-    this.resetInput();
   }
 
   addEventlistenerToRestartButton() {

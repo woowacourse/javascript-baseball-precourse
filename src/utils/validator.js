@@ -1,14 +1,15 @@
-import { setErrorMessage } from "./error.js";
+import { setErrorMessage, showError } from "./error.js";
+import { resetInput } from "./resetInput.js";
 
 const isNumber = (value) => {
   const res = !isNaN(value);
-  if (!res) setErrorMessage("IS_NOT_NUMBER_ERROR");
+  !res && setErrorMessage("IS_NOT_NUMBER_ERROR");
   return res;
 };
 
 const isLengthThree = (value) => {
   const res = value.toString().length === 3;
-  if (!res) setErrorMessage("IS_NOT_LENGTH_THREE_ERROR");
+  !res && setErrorMessage("IS_NOT_LENGTH_THREE_ERROR");
   return res;
 };
 
@@ -29,5 +30,9 @@ export const isNotDuplicateExist = (value) => {
 export const validateUserInput = (value) => {
   const res =
     isLengthThree(value) && isNumber(value) && isNotDuplicateExist(value);
+  if (!res) {
+    showError();
+    resetInput();
+  }
   return res;
 };
