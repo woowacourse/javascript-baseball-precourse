@@ -25,6 +25,21 @@ export default class BaseballGame {
       }
     });
   }
+
+  calculateResult() {
+    const { ball, strike } = this.ballCount;
+    let resultTxt = `${ball}${COUNT.BALL} ${strike}${COUNT.STRIKE}`;
+
+    if (ball === 0 && strike === 0) {
+      resultTxt = `${COUNT.NOTHING}`;
+    } else if (ball === 0) {
+      resultTxt = `${strike}${COUNT.STRIKE}`;
+    } else if (strike === 0) {
+      resultTxt = `${ball}${COUNT.BALL}`;
+    }
+
+    return resultTxt;
+  }
 }
 
 const game = new BaseballGame();
