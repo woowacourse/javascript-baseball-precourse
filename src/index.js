@@ -41,20 +41,17 @@ export default class BaseballGame {
     return BaseballGame.validNumbers.includes(num);
   }
 
+  parseInputString(inputString) {
+    return inputString.split("").map(Number);
+  }
+
   isValidInputString(inputString) {
-    const inputNumbers = inputString.split("").map(Number);
+    const inputNumbers = this.parseInputString(inputString);
     const hasNoNaN = !inputNumbers.some(Number.isNaN);
     const isValidSize = inputNumbers.length === this.#size;
     const isValidValue = inputNumbers.every(BaseballGame.inValidRange);
     const isUnique = inputNumbers.length === new Set(inputNumbers).size;
     return hasNoNaN && isValidSize && isValidValue && isUnique;
-  }
-
-  parseInputString(inputString) {
-    if (!this.isValidInputString(inputString)) {
-      return null;
-    }
-    return inputString.split("").map(Number);
   }
 
   getStrikes(answerNumbers, inputNumbers) {
