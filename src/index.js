@@ -1,11 +1,11 @@
 import Computer from './computer/index.js';
 import User from './user/index.js';
-import { showResult } from './utils/index.js';
+import { showResult, $ } from './utils/index.js';
 
 export default class BaseballGame {
   constructor() {
-    this.$userInput = document.getElementById('user-input');
-    this.$submit = document.getElementById('submit');
+    this.$userInput = $('user-input');
+    this.$submit = $('submit');
     this.addSubmitEvent();
     this.computer = new Computer();
     this.user = new User();
