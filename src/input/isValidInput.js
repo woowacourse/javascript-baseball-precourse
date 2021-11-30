@@ -6,11 +6,11 @@ import {
 } from '../constant/constant.js';
 
 function isThreeDigitInput(input) {
-  return input.length === 3;
+  return input.length !== 3;
 }
 
 function isOneToNineNumber(input) {
-  return !input.some((element) => {
+  return input.some((element) => {
     return Number.isNaN(element) || element < 1 || element > 9;
   });
 }
@@ -20,17 +20,17 @@ function isNoDuplicatedNumber(input) {
   for (let idx = 0; idx < input.length; idx += 1) {
     nonDuplicatedSet.add(input[idx]);
   }
-  return nonDuplicatedSet.size === 3;
+  return nonDuplicatedSet.size !== 3;
 }
 
 export default function isValidInput(input) {
-  if (!isThreeDigitInput(input)) {
+  if (isThreeDigitInput(input)) {
     return THREE_DIGIT_ERR;
   }
-  if (!isOneToNineNumber(input.map((element) => +element))) {
+  if (isOneToNineNumber(input.map((element) => +element))) {
     return ONE_TO_NINE_ERR;
   }
-  if (!isNoDuplicatedNumber(input)) {
+  if (isNoDuplicatedNumber(input)) {
     return DUPLICATE_ERR;
   }
   return NO_ERROR;
