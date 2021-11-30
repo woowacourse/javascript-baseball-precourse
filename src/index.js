@@ -1,8 +1,11 @@
-import { isNotDuplicateExist, resetInput } from './modules/input.js';
+import {
+  resetInput,
+  getUserInput,
+  generateComputerInput,
+} from './modules/input.js';
 import { $ } from './modules/util.js';
 import { renderResult, renderInit } from './modules/render.js';
 import { checkResult } from './modules/result.js';
-import NUMBER from './constants/number.js';
 
 export default class BaseballGame {
   constructor() {
@@ -13,28 +16,13 @@ export default class BaseballGame {
   init() {
     const $form = $('form');
     $form.addEventListener('submit', this.handleSubmit);
-    this.generateComputerInput();
-  }
-
-  generateComputerInput() {
-    let randomNum = MissionUtils.Random.pickNumberInRange(
-      NUMBER.MIN,
-      NUMBER.MAX
-    ).toString();
-    while (randomNum.length !== NUMBER.LENGTH) {
-      const newRandomNum = MissionUtils.Random.pickNumberInRange(
-        NUMBER.MIN,
-        NUMBER.MAX
-      ).toString();
-      if (isNotDuplicateExist(randomNum + newRandomNum))
-        randomNum += newRandomNum;
-    }
-    this.computerInput = randomNum;
+    this.computerInput = generateComputerInput();
+    console.log(this.computerInput);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const playResult = this.play(this.computerInput, this.getUserInput());
+    const playResult = this.play(this.computerInput, getUserInput());
     if (playResult) {
       renderResult(playResult);
       $('#game-restart-button') && this.addEventlistenerToRestartButton();
@@ -45,15 +33,11 @@ export default class BaseballGame {
     return checkResult(computerInputNumbers, userInputNumbers);
   }
 
-  getUserInput() {
-    const $input = $('#user-input');
-    return $input.value;
-  }
-
   restartGame() {
     resetInput();
     renderInit();
-    this.generateComputerInput();
+    this.computerInput = generateComputerInput();
+    console.log(this.computerInput);
   }
 
   addEventlistenerToRestartButton() {
@@ -62,5 +46,4 @@ export default class BaseballGame {
   }
 }
 
-const baseBallGame = new BaseballGame();
-baseBallGame.init();
+new BaseballGame().init();

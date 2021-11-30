@@ -45,4 +45,31 @@ const resetInput = () => {
   $input.value = '';
 };
 
-export { isNotDuplicateExist, validateUserInput, resetInput };
+const getUserInput = () => {
+  const $input = $('#user-input');
+  return $input.value;
+};
+
+const generateComputerInput = () => {
+  let randomNum = MissionUtils.Random.pickNumberInRange(
+    NUMBER.MIN,
+    NUMBER.MAX
+  ).toString();
+  while (randomNum.length !== NUMBER.LENGTH) {
+    const newRandomNum = MissionUtils.Random.pickNumberInRange(
+      NUMBER.MIN,
+      NUMBER.MAX
+    ).toString();
+    if (isNotDuplicateExist(randomNum + newRandomNum))
+      randomNum += newRandomNum;
+  }
+  return randomNum;
+};
+
+export {
+  isNotDuplicateExist,
+  validateUserInput,
+  resetInput,
+  getUserInput,
+  generateComputerInput,
+};
