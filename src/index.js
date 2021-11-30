@@ -5,12 +5,23 @@ import { getBallStrikeCount } from './utils/ball-counter.js';
 const $userInput = document.getElementById('user-input');
 const $submitBtn = document.getElementById('submit');
 const $resultDiv = document.getElementById('result');
+let $resetButton = null;
 
 export default class BaseballGame {
     constructor() {
-        this.computerInputNumbers = pickRandomNumbers(3);
-        this.userInputNumbers = '';
+        this.init();
         this.bindSubmitEvent();
+    }
+
+    init() {
+        this.computerInputNumbers = pickRandomNumbers(3);
+        this.resetInputs();
+    }
+
+    resetInputs() {
+        $userInput.value = '';
+        this.userInputNumbers = '';
+        this.render('');
     }
 
     bindSubmitEvent() {
@@ -20,13 +31,21 @@ export default class BaseballGame {
             const error = isInvalid(inputValue, 3);
             
             if (error) {
-                $userInput.value = '';
+                this.resetInputs();
                 return alert(error);
             }
     
             this.userInputNumbers = inputValue;
+            
             const gameResult = this.play(this.computerInputNumbers, this.userInputNumbers);
             this.render(gameResult);
+        });
+    }
+
+    bindRestartEvent() {
+        $resetButton = document.getElementById('game-restart-button');
+        $resetButton.addEventListener('click', event => {
+            this.init();
         });
     }
 
@@ -53,13 +72,19 @@ export default class BaseballGame {
 
     render(text) {
         let resultText = `<p>${text}</p>`;
+        let isStrike = false;
 
         if (text === `${3}스트라이크`) {
+            isStrike = true;
             resultText = `<p>🎉<strong>정답을 맞추셨습니다</strong>🎉</p>
-            <p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">재시작</button></p>`
+            <p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">재시작</button></p>`;
         }
 
         $resultDiv.innerHTML = resultText;
+        
+        if (isStrike) {
+            this.bindRestartEvent();
+        }
     }
 }
 
