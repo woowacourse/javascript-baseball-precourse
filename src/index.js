@@ -2,14 +2,15 @@ import {
   isNumber,
   isNotDuplicateExist,
   isLengthThree,
-} from "./util/validator.js";
-import { $ } from "./util/selector.js";
-import { renderResult, renderInit } from "./util/render.js";
-import { checkResult } from "./util/checkResult.js";
+} from "./utils/validator.js";
+import { $ } from "./utils/selector.js";
+import { renderResult, renderInit } from "./utils/render.js";
+import { checkResult } from "./utils/checkResult.js";
+import { showError } from "./utils/error.js";
 
 export default class BaseballGame {
   constructor() {
-    this.computerInput = generateComputerInput();
+    this.computerInput = this.generateComputerInput();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.restartGame = this.restartGame.bind(this);
   }
@@ -47,7 +48,7 @@ export default class BaseballGame {
       const result = checkResult(computerInputNumbers, userInputNumbers);
       return result;
     }
-    alert("입력값을 다시 확인해주세요");
+    showError();
     this.resetInput();
     return false;
   }

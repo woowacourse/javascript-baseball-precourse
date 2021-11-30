@@ -1,4 +1,4 @@
-import { $ } from "../util/selector.js";
+import { $ } from "../utils/selector.js";
 const $result = $("#result");
 
 const renderFailMessage = (message) => {
