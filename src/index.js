@@ -57,9 +57,9 @@ export default class BaseballGame {
       return "낫싱";
     }
 
-    const spaceString = balls === 0 ? "" : " ";
     const ballString = balls === 0 ? "" : `${balls}볼`;
     const strikeString = strikes === 0 ? "" : `${strikes}스트라이크`;
+    const spaceString = balls === 0 || strikes === 0 ? "" : " ";
     return `${ballString}${spaceString}${strikeString}`;
   }
 
