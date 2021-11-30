@@ -6,3 +6,6 @@ export const FINISH =
 export const PLAIN_TEXT = "";
 export const MIN_RANGE = 1;
 export const MAX_RANGE = 9;
+export const LENGTH = 3;
+export const FULL_COUNT = 3;
+export const ZERO_COUNT = 0;
