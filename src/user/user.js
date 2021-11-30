@@ -24,6 +24,13 @@ const InputCheckMethods = [
     return true;
   },
   (value) => {
+    if (value.length !== NUMBER_LENGTH) {
+      alert(USER_INPUT_ALERT.notProperNumber);
+      return false;
+    }
+    return true;
+  },
+  (value) => {
     if (new Set(value).size !== NUMBER_LENGTH) {
       alert(USER_INPUT_ALERT.overlap);
       return false;
