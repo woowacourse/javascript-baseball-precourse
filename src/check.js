@@ -13,17 +13,14 @@ export function checkRepeat(input){
 export function checkinputValid(input){
     if(isNaN(input)){
       showError(INPUT_ERROR_MESSAGE);
-      console.log('1');
       return false;
     }
     if(input.length!==3){
       showError(INPUT_ERROR_MESSAGE);
-      console.log('2');
       return false;
     }
     if(checkRepeat(input)){
         showError(INPUT_ERROR_MESSAGE);
-        console.log('3');
       return false;
     }
     return true;

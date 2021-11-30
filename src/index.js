@@ -1,29 +1,46 @@
-import { getComputerNumber,
+import { $input, $button,$resultItem } from './constant.js';
+import { 
+    getComputerNumber,
     getUserInput,
-    getStrikeBallNum} from './game.js';
-
+    getStrikeBallNum,
+    makeResult} from './game.js';
 
 export default class BaseballGame {
+   
     constructor(){
         this.computerInputNumbers=getComputerNumber();
-        this.userInputNumbers=getUserInput();
-        this.button =document.querySelector("button");
-        this.result=document.getElementById("result");
-        this.button.addEventListener('click',start);
+        this.start();
     }
 
-    start(e){
-        e.preventDefault();
+    restart(){
+        const $restart=document.getElementById("game-restart-button");
+        $restart.addEventListener("click",(e)=>{
+            e.preventDefault();
+            
+        })
     }
+
+    start(){          
+        $button.addEventListener('click',(e)=>{
+            e.preventDefault();
+            const userInputNumbers=getUserInput();
+            console.log(this.computerInputNumbers);
+            $resultItem.innerHTML=this.play(this.computerInputNumbers,userInputNumbers);
+        })      
+    }
+
 
     play(computerInputNumbers, userInputNumbers) {
-          return "결과 값 String";
+          const [ ballCount,strikeCount ]=  getStrikeBallNum(computerInputNumbers,userInputNumbers);
+          const result = makeResult(ballCount,strikeCount);
+          console.log(result);
+          return result;
     }
 }
 
 
 
-
+new BaseballGame();
 
   
 

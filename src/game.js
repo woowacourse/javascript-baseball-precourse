@@ -1,14 +1,14 @@
 import { GAME_WIN_MESSAGE } from './constant.js';
+import { checkinputValid } from './check.js';
 
 export function getGameWin(){
     let result='';
     result += GAME_WIN_MESSAGE;
-  
     return result;
 }
 
 export function makeResult(ballCount,strikeCount){
-    
+
     let resultMessage='';
     if(strikeCount===3){      
         return getGameWin();      
@@ -26,7 +26,7 @@ export function makeResult(ballCount,strikeCount){
     return resultMessage;
 }
 
-export function getStrikeBallNum(){
+export function getStrikeBallNum(computerInputNumbers,userInputNumbers){
     let strikeCount=0;
     let ballCount=0;
 
