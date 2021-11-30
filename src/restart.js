@@ -1,22 +1,14 @@
 import { $restart } from './constants.js';
-
-//Radom Number Setting
-export function createAnswer() {
-  const answer = [];
-  
-  while(answer.length !== 3) {
-    const random = MissionUtils.Random.pickNumberInRange(1, 9);
-
-    if(!answer.includes(String(random))) {
-      answer.push(String(random));
-    }
-  }
-  
-  return answer;
-}
+import { BaseballGame } from './index.js';
 
 //Show Restart Button
 export function setButton() {
+  $restart.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    clearButton();
+    new BaseballGame();
+  })
   $restart.style.display = "display";
 }
 
