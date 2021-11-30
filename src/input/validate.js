@@ -12,11 +12,30 @@ function printAlert(state) {
     case "duplicate":
       alert("중복되지 않게 입력하시오.");
       break;
+    case "range":
+      alert("숫자가 범위에서 벗어났습니다.");
+
     default:
       break;
   }
 
   return false;
+}
+
+function checkEachRange(el) {
+  let number = Number(el);
+  if (1 <= number && number <= 9) {
+    return true;
+  }
+  return false;
+}
+
+function checkRange(userInput) {
+  const userInputArray = String(userInput).split("");
+  if (!userInputArray.every(checkEachRange)) {
+    return false;
+  }
+  return true;
 }
 
 function checkType(userInputs) {
@@ -50,6 +69,8 @@ export default function validate(userInputs) {
   if (!checkDuplicate(userInputs)) {
     return printAlert("duplicate");
   }
-
+  if (!checkRange(userInputs)) {
+    return printAlert("range");
+  }
   return true;
 }

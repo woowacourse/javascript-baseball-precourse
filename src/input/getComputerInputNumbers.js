@@ -1,3 +1,4 @@
 export default function () {
-  return Number(MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join(""));
+  let answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  return Number(answer.join(""));
 }

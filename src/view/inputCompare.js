@@ -10,8 +10,7 @@ function getGameResultText(strikeCount, ballCount) {
   }
   if (strikeCount && ballCount) {
     return `${ballCount}볼 ${strikeCount}스트라이크`;
-  }
-  if (strikeCount === 0 && ballCount === 0) {
+  } else {
     return "낫싱";
   }
 }

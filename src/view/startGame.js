@@ -13,7 +13,6 @@ function initForm() {
 
 export default function startGame(computerInputNumbers, callbackPlay) {
   submitButton.addEventListener("click", () => {
-    console.log("버튼 실행", computerInputNumbers);
     event.preventDefault();
 
     const userInputNumbers = getUserInputNumbers();
