@@ -1,12 +1,21 @@
+import {
+  DUPLICATE_ERROR_MESSAGE,
+  GAME_NUMBER_LENGTH,
+  LENGTH_ERROR_MESSAGE,
+  MAX_NUMBER,
+  MIN_NUMBER,
+  SCOPE_ERROR_MESSAGE,
+} from "../constants/index.js";
+
 const checkScopeValidation = (userInputNumbers) => {
   const result = userInputNumbers.every((number) =>
-    number >= 1 && number <= 9 ? true : false
+    number >= MIN_NUMBER && number <= MAX_NUMBER ? true : false
   );
   return result;
 };
 
 const checkLengthValidation = (userInputNumbers) => {
-  return userInputNumbers.length === 3 ? true : false;
+  return userInputNumbers.length === GAME_NUMBER_LENGTH;
 };
 
 const checkDuplicateValidation = (userInputNumbers) => {
@@ -17,17 +26,17 @@ const checkDuplicateValidation = (userInputNumbers) => {
 
 const checkValidation = (userInputNumbers) => {
   if (!checkScopeValidation(userInputNumbers)) {
-    alert("1~9 사이의 숫자를 입력해주세요");
+    alert(SCOPE_ERROR_MESSAGE);
     return false;
   }
 
   if (!checkLengthValidation(userInputNumbers)) {
-    alert("3자리의 수를 입력해주세요");
+    alert(LENGTH_ERROR_MESSAGE);
     return false;
   }
 
   if (!checkDuplicateValidation(userInputNumbers)) {
-    alert("중복이 없는 서로 다른 숫자를 입력해주세요");
+    alert(DUPLICATE_ERROR_MESSAGE);
     return false;
   }
   return true;

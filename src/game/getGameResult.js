@@ -1,3 +1,11 @@
+import {
+  ANSWER,
+  BALL,
+  GAME_NUMBER_LENGTH,
+  NOTHING,
+  STRIKE,
+} from "../constants/index.js";
+
 const checkStrikeCount = (computerInputNumbers, userInputNumbers) => {
   return userInputNumbers.reduce((count, cur, index) => {
     if (cur === computerInputNumbers[index]) count += 1;
@@ -24,12 +32,14 @@ const numberToArray = (number) =>
     .map((value) => parseInt(value, 10));
 
 const getGameResultText = (strikeCount, ballCount) => {
-  if (ballCount === 0 && strikeCount === 0) return "낫싱";
-  if (ballCount === 0 && strikeCount === 3) return "정답";
-  if (ballCount === 0) return `${strikeCount}스트라이크`;
-  if (strikeCount === 0) return `${ballCount}볼`;
+  if (ballCount === 0 && strikeCount === 0) {
+    return NOTHING;
+  }
+  if (ballCount === 0 && strikeCount === GAME_NUMBER_LENGTH) return ANSWER;
+  if (ballCount === 0) return `${strikeCount}${STRIKE}`;
+  if (strikeCount === 0) return `${ballCount}${BALL}`;
 
-  return `${ballCount}볼 ${strikeCount}스트라이크`;
+  return `${ballCount}${BALL} ${strikeCount}${STRIKE}`;
 };
 
 const getGameResult = (computerInputNumbers, userInputNumbers) => {
