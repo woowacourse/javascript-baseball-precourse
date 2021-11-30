@@ -35,19 +35,25 @@ const getGameResultText = (strikeCount, ballCount) => {
   if (ballCount === 0 && strikeCount === 0) {
     return NOTHING;
   }
-  if (ballCount === 0 && strikeCount === GAME_NUMBER_LENGTH) return ANSWER;
-  if (ballCount === 0) return `${strikeCount}${STRIKE}`;
-  if (strikeCount === 0) return `${ballCount}${BALL}`;
+  if (ballCount === 0 && strikeCount === GAME_NUMBER_LENGTH) {
+    return ANSWER;
+  }
+  if (ballCount === 0) {
+    return `${strikeCount}${STRIKE}`;
+  }
+  if (strikeCount === 0) {
+    return `${ballCount}${BALL}`;
+  }
 
   return `${ballCount}${BALL} ${strikeCount}${STRIKE}`;
 };
 
 const getGameResult = (computerInputNumbers, userInputNumbers) => {
-  computerInputNumbers = numberToArray(computerInputNumbers);
-  userInputNumbers = numberToArray(userInputNumbers);
+  const computerInputArray = numberToArray(computerInputNumbers);
+  const userInputArray = numberToArray(userInputNumbers);
 
-  const strikeCount = checkStrikeCount(computerInputNumbers, userInputNumbers);
-  const ballCount = checkBallCount(computerInputNumbers, userInputNumbers);
+  const strikeCount = checkStrikeCount(computerInputArray, userInputArray);
+  const ballCount = checkBallCount(computerInputArray, userInputArray);
 
   return getGameResultText(strikeCount, ballCount);
 };
