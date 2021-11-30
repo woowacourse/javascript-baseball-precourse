@@ -1,0 +1,26 @@
+## Commit Log
+
+- style(*): 포맷팅으로 인한 세미콜론 추가, 줄바꿈 변경
+- refactor(EventManager): EventManager.js의 DOM 관련 변수 분리
+- refactor(EventManager): correctResultTemplate 분리
+- style(*): 파일명, 디렉토리 구조 수정
+- refactor(validation): 사용자 입력값 유효성 검증 분기를 단축 평가로 수정
+- refactor(BaseballGame): BaseballGame의 유틸 메소드 분리
+- fix(*): eslint 에러 수정
+- refactor(EventManager): 게임 재시작 버튼 클릭 이벤트 위임, 핸들러 등록 분리
+- refactor(EventManager): result div 렌더링 메소드 분리
+- style(BaseballGame): 변수, 메소드 이름 수정
+- feat(*): 게임 재시작 기능 구현
+- feat(EventManager): 결과 출력 기능 구현
+- refactor(index.js): 가독성을 높이기 위해 함수 모듈화
+- feat(BaseballGame): 결과 문자열 생성 기능 구현
+- feat(BaseballGame): 사용자와 상대바의 수 비교 기능 구현
+- docs(docs/README.md): 구현할 기능 목록 수정
+- feat(*): 상대방(컴퓨터)의 수 생성 기능 구현
+- feat(*): 입력값 유효성 검증 기능 구현
+- chore(.eslintrc.js): eslint console, alert, import 에러 off 설정
+- feat(*): 사용자 숫자 입력 기능 구현
+- docs(docs/README.md): 구현할 기능 목록 작성
+- chore: eslint, prettier, gitignore 설정
+- feat(*): setup baseball game project
+- Initial commit
