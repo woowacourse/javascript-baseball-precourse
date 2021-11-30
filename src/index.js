@@ -1,76 +1,58 @@
 import countBallsAndStrikes from './utils/countBallsAndStrikes.js';
-import generateAnswer from './utils/generateAnswer.js';
-import userInputValidation from './utils/userInputValidation.js';
+import { generateComputerAnswer } from './utils/generateComputerAnswer.js';
+import { generateUserInput } from './utils/generateUserInput.js';
+import { renderResult, showResultString } from './utils/result.js';
+import { $ } from './utils/selector.js';
 
-const $ = selector => document.querySelector(selector);
+export default function BaseballGame() {
+  let computerAnswer;
+  let userInputNumbers;
 
-export default class BaseballGame {
-  constructor() {
-    this.answer = generateAnswer();
-  }
-
-  gameStart() {
-    const handleSubmitUserInput = e => {
-      e.preventDefault();
-      const userInput = $('#user-input');
-      let val = userInput.value.trim();
-      const { isError, inValidText } = userInputValidation(val);
-
-      if (isError) {
-        alert(inValidText);
-        userInput.value = '';
-        return;
-      }
-
-      const result = this.play(this.answer, userInput.value);
-      console.log('this.answer: ', this.answer);
-      console.log('result: ', result);
-    };
-    const button = $('#submit');
-    button.addEventListener('click', handleSubmitUserInput);
-  }
-
-  showBallsAndStrikes(computerInputNumbers, userInputNumbers) {
+  this.play = (computerInputNumbers, userInputNumbers) => {
     const [balls, strikes] = countBallsAndStrikes(
       computerInputNumbers,
       userInputNumbers,
     );
+    return showResultString(balls, strikes);
+  };
 
-    if (strikes === 3) {
-      $('#result').innerHTML = `
-        <h4>👍 정답을 맞추셨습니다. 게임을 새로 시작하시겠습니까?</h4>
-        <button id="game-restart-button">재시작</button>
-        `;
-
-      const restartButton = $('#game-restart-button');
-
-      restartButton.addEventListener('click', () => {
-        $('#user-input').value = '';
-        $('#result').innerHTML = '';
-        this.answer = generateAnswer();
-      });
-      return '3스트라이크';
+  this.init = () => {
+    computerAnswer = generateComputerAnswer();
+    $('#user-input').value = '';
+    $('#result').innerHTML = '';
+    if ($('#game-restart-button')) {
+      $('#game-restart-button').remove();
+      baseballGame = new BaseballGame();
     }
+  };
 
-    if (!strikes && !balls) {
-      $('#result').innerText = '낫싱';
-      return '낫싱';
-    } else if (!strikes) {
-      $('#result').innerText = `${balls}볼`;
-      return `${balls}볼`;
-    } else if (!balls) {
-      $('#result').innerText = `${strikes}스트라이크`;
-      return `${strikes}스트라이크`;
-    } else {
-      $('#result').innerText = `${balls}볼 ${strikes}스트라이크`;
-      return `${balls}볼 ${strikes}스트라이크`;
+  $('#submit').addEventListener('click', e => {
+    e.preventDefault();
+    userInputNumbers = generateUserInput();
+    console.log('computerAnswer: ', computerAnswer);
+    console.log('userInputNumbers: ', userInputNumbers);
+    if (userInputNumbers) {
+      const result = baseballGame.play(computerAnswer, userInputNumbers);
+      renderResult(result);
     }
-  }
+  });
 
-  play(computerInputNumbers, userInputNumbers) {
-    return this.showBallsAndStrikes(computerInputNumbers, userInputNumbers);
-  }
+  $('#app').addEventListener('click', e => {
+    if (e.target.classList.contains('button')) {
+      baseballGame.init();
+    }
+  });
 }
 
 const baseballGame = new BaseballGame();
-baseballGame.gameStart();
+baseballGame.init();
+
+// 예시
+console.log(baseballGame.play(123, 456)); // '낫싱'
+console.log(baseballGame.play(123, 345)); // '1볼'
+console.log(baseballGame.play(123, 432)); // '2볼'
+console.log(baseballGame.play(123, 312)); // '3볼'
+console.log(baseballGame.play(123, 145)); // '1스트라이크'
+console.log(baseballGame.play(123, 134)); // '1볼 1스트라이크'
+console.log(baseballGame.play(123, 132)); // '2볼 1스트라이크'
+console.log(baseballGame.play(123, 124)); // '2스트라이크'

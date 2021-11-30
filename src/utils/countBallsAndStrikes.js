@@ -1,6 +1,6 @@
-const countBallsAndStrikes = (computerInputNumbers, userInputNumbers) => {
-  const computerNums = String(computerInputNumbers).split('');
-  const userNums = String(userInputNumbers).split('');
+const countBallsAndStrikes = (computerInput, userInput) => {
+  const computerNums = String(computerInput).split('');
+  const userNums = String(userInput).split('');
 
   let balls = 0;
   let strikes = 0;
