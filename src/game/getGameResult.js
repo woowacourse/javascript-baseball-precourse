@@ -1,7 +1,8 @@
-import { INPUT_LENGTH } from "../input/getComputerInput.js";
-
-export const ANSWER = "정답";
-const NOTHING = "낫싱";
+import {
+  INPUT_LENGTH,
+  ANSWER,
+  NOTHING,
+} from "../constant/constant.js";
 
 function isRightAnswer(computerInput, userInput) {
   return computerInput === userInput;

@@ -1,7 +1,9 @@
-export const THREE_DIGIT_ERR = 1;
-export const ONE_TO_NINE_ERR = 2;
-export const DUPLICATE_ERR = 3;
-const NO_ERROR = 0;
+import {
+  THREE_DIGIT_ERR,
+  ONE_TO_NINE_ERR,
+  DUPLICATE_ERR,
+  NO_ERROR,
+} from "../constant/constant.js";
 
 function isThreeDigitInput(input) {
   return input.length === 3;

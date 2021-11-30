@@ -1,4 +1,4 @@
-import { ANSWER } from "../game/getGameResult.js";
+import { ANSWER } from "../constant/constant.js";
 
 function renderAskRestartView() {
   const $resultDiv = document.getElementById("result");

@@ -1,4 +1,4 @@
-export const INPUT_LENGTH = 3;
+import { INPUT_LENGTH } from "../constant/constant.js";
 
 export default function getComputerInput() {
   const computerInput = new Set();
