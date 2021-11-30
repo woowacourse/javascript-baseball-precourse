@@ -45,7 +45,7 @@ input을 초기화
 ### 6. 3스트라이크인 경우 DOM 생성
 - `게임을 새로 시작하시겠습니까?` 텍스트 생성
 - `게임 재시작` 버튼 생성
-- `확인` 버튼 활성화 해제
+- `확인` 버튼 비활성화
 
 ### 7. 게임 재시작 버튼의 submit 이벤트
 - 유저 입력 초기화
@@ -68,20 +68,19 @@ input을 초기화
 ├── docs
 │   └── README.md
 └── src
-    ├── index.js // 게임 시작에 필요한 세팅
+    ├── index.js 
+    │
+    ├── computer
+    │   └── index.js // computer 클래스 
     │
     ├── constants
-    │   ├── index.js // alert, result 상수 메시지 모음
-    │   └── html-doms.js // html dom 모음
+    │   └── index.js // 상수 게임규칙, alert message, result message 모음
     │
-    ├── functions
-    │   ├── user-input.js // 유저 입력이 올바른지 판별, 판별하기 위해 필요한 기능 모음
-    │   ├── add-submit-event.js // 확인 버튼의 클릭 이벤트 함수
-    │   ├── util.js // 난수 생성, 볼 스트라이크 관리 함수 모음
-    │   └── game-result.js // 입력에 따른 출력메시지, DOM 생성, 재시작에 필요한 기능 모음
+    ├── user
+    │   └── index.js // user 클래스
     │
-    └── state
-        └── index.js // 유저 입력, 컴퓨터 난수, 볼 개수, 스트라이크 개수의 state
+    └── utils
+        └── index.js // 게임 결과 도출에 사용되는 함수 모음
 ```
 
 <details>
@@ -116,6 +115,7 @@ input을 초기화
 5. 변수, 함수 네이밍시 좀 더 직관적이도록 선언할 것
   
 #### 기능별로 그룹화를 잘 하자
-> 기능마다 파일을 만들어서 사용하니 `import`라인이 너무 많아진다.  
-> 같은 변수를 관리하거나, 비슷한 목적을 가진 것 끼리 파일을 그룹화하여 사용하자.
+1. 기능마다 파일을 만들어서 사용하니 `import`라인이 너무 많아진다.  
+2. 같은 변수를 관리하거나, 비슷한 목적을 가진 것 끼리 파일을 그룹화하여 사용하자.
+3. 클래스를 활용하자 
 </details>
