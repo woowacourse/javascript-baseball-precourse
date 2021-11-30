@@ -1,8 +1,8 @@
-export default function checkCorrectInput(userInputNumbers) {
-  const nonOverlapping = new Set(userInputNumbers);
-  if (userInputNumbers.length !== 3) return false;
-  if (userInputNumbers.length !== nonOverlapping.size) return false;
-  const realNum = userInputNumbers.filter((number) => {
+export default function checkCorrectInput(userInputNumbersArray) {
+  const nonOverlapping = new Set(userInputNumbersArray);
+  if (userInputNumbersArray.length !== 3) return false;
+  if (userInputNumbersArray.length !== nonOverlapping.size) return false;
+  const realNum = userInputNumbersArray.filter((number) => {
     if (number >= 1 && number <= 9) return true;
     return false;
   });

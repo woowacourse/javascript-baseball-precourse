@@ -1,3 +1,7 @@
 export default function createComputerInputNumber() {
-  return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  const computerInputNumber = new Set();
+  while (computerInputNumber.size !== 3) {
+    computerInputNumber.add(MissionUtils.Random.pickNumberInRange(1, 9));
+  }
+  return Number(Array.from(computerInputNumber).join(''));
 }
