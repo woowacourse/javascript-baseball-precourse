@@ -1,8 +1,4 @@
-import {
-  isNumber,
-  isNotDuplicateExist,
-  isLengthThree,
-} from "./utils/validator.js";
+import { isNotDuplicateExist, validateUserInput } from "./utils/validator.js";
 import { $ } from "./utils/selector.js";
 import { renderResult, renderInit } from "./utils/render.js";
 import { checkResult } from "./utils/checkResult.js";
@@ -40,11 +36,8 @@ export default class BaseballGame {
   }
 
   play(computerInputNumbers, userInputNumbers) {
-    if (
-      isLengthThree(userInputNumbers) &&
-      isNumber(userInputNumbers) &&
-      isNotDuplicateExist(userInputNumbers)
-    ) {
+    const isInputValidated = validateUserInput(userInputNumbers);
+    if (isInputValidated) {
       const resultHtml = checkResult(computerInputNumbers, userInputNumbers);
       return resultHtml;
     }
