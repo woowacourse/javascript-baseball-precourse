@@ -1,7 +1,9 @@
 import { gameResults } from './constants.js';
 
 export default class BaseballGame {
-    answer = this.generateThreeDigitsNumber();
+    constructor() {
+        this.answer = this.generateThreeDigitsNumber();
+    }
     
     generateRandomNumber() {
         return MissionUtils.Random.pickNumberInRange(1, 9);
