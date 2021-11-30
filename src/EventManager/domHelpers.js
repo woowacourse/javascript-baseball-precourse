@@ -15,7 +15,7 @@ export const correctResultTemplate = `
 <h4>${MESSAGE_CORRECT_ANSWER}</h4>
 ${MESSAGE_RESTART_GAME}
 <button id=${DOM.gameRestartButtonId}>재시작</button>
-`
+`;
 
 // querySelector wrapper
 export function $(selector) {

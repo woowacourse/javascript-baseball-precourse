@@ -41,8 +41,6 @@ export default function EventManager(baseballGame) {
 
   this.render = function render(resultString) {
     $(DOM.resultDiv).innerHTML =
-      resultString === RESULT_CORRECT
-        ? correctResultTemplate
-        : resultString;
+      resultString === RESULT_CORRECT ? correctResultTemplate : resultString;
   };
 }
