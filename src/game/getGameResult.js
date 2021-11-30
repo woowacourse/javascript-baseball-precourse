@@ -29,7 +29,7 @@ const numberToArray = (number) =>
   number
     .toString()
     .split("")
-    .map((value) => parseInt(value, 10));
+    .map((num) => parseInt(num, 10));
 
 const getGameResultText = (strikeCount, ballCount) => {
   if (ballCount === 0 && strikeCount === 0) {

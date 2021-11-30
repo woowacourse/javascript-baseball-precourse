@@ -9,10 +9,12 @@ import {
 } from "../constants/index.js";
 
 const isScopeInValid = (userInputNumbers) => {
-  const result = userInputNumbers.every((number) =>
-    number < MIN_NUMBER || number > MAX_NUMBER ? true : false
-  );
-  return result;
+  for (let number of userInputNumbers) {
+    if (number < MIN_NUMBER || number > MAX_NUMBER) {
+      return true;
+    }
+  }
+  return false;
 };
 
 const isLengthInValid = (userInputNumbers) => {

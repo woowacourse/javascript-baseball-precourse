@@ -7,7 +7,6 @@ const getUserNumber = () => {
     .split("")
     .map((number) => parseInt(number, 10));
 
-  console.log(userInputNumbers);
   if (isValid(userInputNumbers)) {
     return parseInt(userInputNumbers.join(""), 10);
   }
