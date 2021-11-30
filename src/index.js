@@ -14,7 +14,6 @@ export default class BaseballGame {
   }
 
   start() {
-    console.log(this.computerInputNumbers);
     this.dom.clearResultArea();
     this.user.setInputValue("");
     this.user.button.addEventListener("click", e => this.handleUserClick(e));
