@@ -1,3 +1,5 @@
+import { MAX_RANGE, MIN_RANGE } from "./constants.js";
+
 function checkNumeric(str) {
   return !isNaN(+str);
 }
@@ -10,7 +12,7 @@ function checkNotDuplicate(str) {
 function checkExcludeZero(str) {
   return !str.includes("0");
 }
-export function checkValidate(str) {
+export function checkValidation(str) {
   return (
     checkNumeric(str) &&
     checkLengthThree(str) &&
@@ -18,11 +20,14 @@ export function checkValidate(str) {
     checkExcludeZero(str)
   );
 }
+
 export function getComputerInput() {
+  const num = new Set();
   while (true) {
-    const random = MissionUtils.Random.pickNumberInRange(100, 999).toString();
-    if (checkNotDuplicate(random) && checkExcludeZero(random)) {
-      return random;
+    if (num.size === 3) {
+      break;
     }
+    num.add(MissionUtils.Random.pickNumberInRange(MIN_RANGE, MAX_RANGE));
   }
+  return [...num];
 }
