@@ -22,7 +22,10 @@ export default class BaseballGame {
   }
   onAnswerSubmit(e) {
     e.preventDefault();
-    this.play(this.computerInputNumbers, this.$userInput.value);
+    $result.innerHTML = this.play(
+      this.computerInputNumbers,
+      this.$userInput.value
+    );
   }
   triggerRestartEvent() {
     this.$restartButton.addEventListener("click", (e) => this.onRestart(e));
@@ -41,11 +44,9 @@ export default class BaseballGame {
       this.makeVisible("$correctResult");
       return;
     }
+
     const ball = this.calcBall(computerInputNumbers, userInputNumbers);
     const strike = this.calcStrike(computerInputNumbers, userInputNumbers);
-    $result.innerHTML = this.printCountMessage(ball, strike);
-  }
-  printCountMessage(ball, strike) {
     if (ball || strike) {
       return `${ball} ${strike}`;
     }
