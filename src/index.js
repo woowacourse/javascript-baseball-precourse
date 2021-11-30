@@ -1,4 +1,4 @@
-import { getComputerInput, isValidate } from "./lib/utils.js";
+import { getComputerInput, checkValidation } from "./lib/utils.js";
 import { BALL, FINISH, NOTHING, PLAIN_TEXT, STRIKE } from "./lib/constants.js";
 class BaseballGameLogic {
   static getKey(com, char, position) {
@@ -25,17 +25,17 @@ class BaseballGameLogic {
       return NOTHING;
     }
 
-    let template = PLAIN_TEXT;
+    if (result[STRIKE] !== 0 && result[BALL] !== 0) {
+      return `${result[BALL]}${BALL} ${result[STRIKE]}${STRIKE}`;
+    }
 
-    template += `${
-      result[STRIKE] === 0 ? PLAIN_TEXT : `${result[STRIKE]} ${STRIKE}`
-    }`;
+    if (result[STRIKE] === 0) {
+      return `${result[BALL]}${BALL}`;
+    }
 
-    template += `${
-      result[BALL] === 0 ? PLAIN_TEXT : `${result[BALL]} ${BALL}`
-    }`;
-
-    return template;
+    if (result[BALL] === 0) {
+      return `${result[STRIKE]}${STRIKE}`;
+    }
   }
   static getResult(com, user) {
     const result = {
@@ -43,10 +43,11 @@ class BaseballGameLogic {
       [`${BALL}`]: 0,
       [`${NOTHING}`]: 0,
     };
-    for (let i = 0; i < com.length; i++) {
+    for (let i = 0; i < user.length; i++) {
       const KEY = BaseballGameLogic.getKey(com, user[i], i);
       result[KEY]++;
     }
+
     return BaseballGameLogic.convertResultToString(result);
   }
 }
@@ -54,7 +55,7 @@ export default class BaseballGame extends BaseballGameLogic {
   constructor() {
     super();
 
-    this.computer = getComputerInput().toString();
+    this.computer = getComputerInput().join("");
 
     this.init();
   }
@@ -98,10 +99,10 @@ export default class BaseballGame extends BaseballGameLogic {
     };
   }
   play(computerInputNumbers, userInputNumbers) {
-    if (isValidate(userInputNumbers)) {
+    if (checkValidation(userInputNumbers)) {
       return BaseballGameLogic.getResult(
-        computerInputNumbers,
-        userInputNumbers
+        `${computerInputNumbers}`,
+        `${userInputNumbers}`
       );
     }
     alert("1~9 까지의 수를 중복없이 3개 입력해주세요.");
@@ -118,5 +119,4 @@ export default class BaseballGame extends BaseballGameLogic {
     this.restart.removeEventListener("click", this.onRestart);
   }
 }
-
 new BaseballGame();
