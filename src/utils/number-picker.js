@@ -1,4 +1,4 @@
-export const pickRandomNumbers = (count) => {
+export const pickRandomNumbers = count => {
     const pickedNumbers = [];
     
     while (pickedNumbers.length < count) {

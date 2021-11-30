@@ -1,13 +1,14 @@
 import { pickRandomNumbers } from './utils/number-picker.js';
+import { isValid } from './utils/input-validator.js'
 
-const $userInput = document.getElementById("user-input");
-const $submitBtn = document.getElementById("submit");
-const $resultDiv = document.getElementById("result");
+const $userInput = document.getElementById('user-input');
+const $submitBtn = document.getElementById('submit');
+const $resultDiv = document.getElementById('result');
 
 export default class BaseballGame {
     constructor() {
         this.computerInputNumbers = pickRandomNumbers(3);
-        this.userInputNumbers = null;
+        this.userInputNumbers = '';
 
         this.bindSubmitEvent();
     }
@@ -15,8 +16,7 @@ export default class BaseballGame {
     bindSubmitEvent() {
         $submitBtn.addEventListener('click', event => {
             event.preventDefault();
-            this.userInputNumbers = $userInput.value;
-            console.log(this.userInputNumbers);
+            console.log(!isValid($userInput.value));
         });
     }
 }
