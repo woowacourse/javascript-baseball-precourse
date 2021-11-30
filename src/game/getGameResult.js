@@ -46,7 +46,6 @@ const getGameResultText = (strikeCount, ballCount) => {
   if (strikeCount === 0) {
     return `${ballCount}${BALL}`;
   }
-
   return `${ballCount}${BALL} ${strikeCount}${STRIKE}`;
 };
 

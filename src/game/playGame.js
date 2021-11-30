@@ -13,7 +13,6 @@ const playGame = (computerInputNumbers, play) => {
 
   $("#submit").addEventListener("click", () => {
     const userInputNumbers = getUserNumber();
-    console.log(computerInputNumbers, userInputNumbers);
 
     if (userInputNumbers) {
       const game_result = play(computerInputNumbers, userInputNumbers);
