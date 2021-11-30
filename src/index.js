@@ -2,16 +2,36 @@ import { $ } from "./utils/index.js";
 import Computer from "./computer/computer.js";
 import User from "./user/user.js";
 
-const $userInput = $("#user-input");
-const $submit = $("#submit");
-const $result = $("#result");
-const $correctResult = $("#correct-result");
-const $restartButton = $("#game-restart-button");
-
 export default class BaseballGame {
   constructor() {
     this.computer = new Computer();
     this.user = new User();
+    this.$restartButton = $("#game-restart-button");
+    this.$userInput = $("#user-input");
+    this.$submit = $("#submit");
+    this.$result = $("#result");
+    this.$correctResult = $("#correct-result");
+    this.computerInputNumbers = this.computer.generateRandomNumbers();
+  }
+  init() {
+    this.triggerRestartEvent();
+    this.triggerSubmitEvent();
+  }
+  triggerSubmitEvent() {
+    this.$submit.addEventListener("click", (e) => this.onAnswerSubmit(e));
+  }
+  onAnswerSubmit(e) {
+    e.preventDefault();
+    this.play(this.computerInputNumbers, this.$userInput.value);
+  }
+  triggerRestartEvent() {
+    this.$restartButton.addEventListener("click", (e) => this.onRestart(e));
+  }
+  onRestart(e) {
+    e.preventDefault();
+    this.$userInput.value = "";
+    this.makeVisible("$result");
+    this.computerInputNumbers = this.computer.generateRandomNumbers();
   }
   play(computerInputNumbers, userInputNumbers) {
     if (!this.user.isInputValid(userInputNumbers)) {
@@ -53,6 +73,7 @@ export default class BaseballGame {
     }
     return strike > 0 ? `${strike}스트라이크` : "";
   }
+  // 독립적인 기능으로 생각되는데, 어떻게 빼면 좋을까?
   makeVisible($) {
     if ($ === "$result") {
       $result.innerText = "";
@@ -68,21 +89,4 @@ export default class BaseballGame {
 }
 
 const game = new BaseballGame();
-
-let computerInputNumbers = game.computer.generateRandomNumbers();
-console.log(`computerInputNumbers`, computerInputNumbers);
-$submit.addEventListener("click", onAnswerSubmit);
-
-function onAnswerSubmit(e) {
-  e.preventDefault();
-  game.play(computerInputNumbers, $userInput.value);
-}
-
-$restartButton.addEventListener("click", onRestart);
-
-function onRestart(e) {
-  e.preventDefault();
-  $userInput.value = "";
-  game.makeVisible("$result");
-  computerInputNumbers = game.computer.generateRandomNumbers();
-}
+game.init();
