@@ -10,12 +10,12 @@ export default class BaseballGame {
     this.dom = new Dom();
     this.computer = new Computer(this.NUMBER_LENGTH);
     this.checkValid = new CheckValid(this.NUMBER_LENGTH);
-    this.computerInputNumbers = this.computer.makeNumbers();
   }
 
   start() {
     this.dom.clearResultArea();
     this.user.setInputValue("");
+    this.computerInputNumbers = this.computer.makeNumbers();
     this.user.button.addEventListener("click", e => this.handleUserClick(e));
   }
 
@@ -110,7 +110,6 @@ export default class BaseballGame {
   reStart(event) {
     event.preventDefault();
     this.computer.activeButton();
-    this.computerInputNumbers = this.computer.makeNumbers();
     this.start();
   }
 }
