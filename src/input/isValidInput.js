@@ -17,7 +17,6 @@ function isOneToNineNumber(input) {
 
 function isNoDuplicatedNumber(input) {
   const nonDuplicatedSet = new Set();
-
   for (let idx = 0; idx < input.length; idx += 1) {
     nonDuplicatedSet.add(input[idx]);
   }

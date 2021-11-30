@@ -6,7 +6,6 @@ import resetView from "../view/resetView.js";
 function onUserSubmit(event, play, computerInput) {
   event.preventDefault();
   const userInput = getUserInput();
-
   if (userInput) {
     showResult(play(computerInput, userInput));
   }
@@ -16,7 +15,6 @@ export default function gameEventHandler(play) {
   const $userSubmitButton = document.getElementById("submit");
   const $resultDiv = document.getElementById("result");
   let computerInput = getComputerInput();
-
   $userSubmitButton.addEventListener("click", (event) =>
     onUserSubmit(event, play, computerInput)
   );
