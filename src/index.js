@@ -7,7 +7,6 @@ export default class BaseballGame {
     this.computer = new Computer();
     this.user = new User();
     this.$restartButton = $('#game-restart-button');
-    this.$userInput = $('#user-input');
     this.$submit = $('#submit');
     this.$result = $('#result');
     this.$correctResult = $('#correct-result');
@@ -22,7 +21,7 @@ export default class BaseballGame {
   }
   onAnswerSubmit(e) {
     e.preventDefault();
-    const count = this.play(this.computerInputNumbers, this.$userInput.value);
+    const count = this.play(this.computerInputNumbers, this.user.getUserInputValue());
     this.$result.innerHTML = count || '';
   }
   triggerRestartEvent() {
@@ -30,14 +29,13 @@ export default class BaseballGame {
   }
   onRestart(e) {
     e.preventDefault();
-    this.$userInput.value = '';
+    this.user.setUserInputValue('');
     this.makeVisible('$result');
     this.computerInputNumbers = this.computer.generateRandomNumbers();
   }
   play(computerInputNumbers, userInputNumbers) {
-    if (!this.user.isInputValid(userInputNumbers)) {
-      return;
-    }
+    if (!this.user.isInputValid(userInputNumbers)) return;
+    // return 문을 함수로 뺄 때에, 어떻게 해야할지 모르겠다.
     if (computerInputNumbers === userInputNumbers) {
       this.makeVisible('$correctResult');
       return;
@@ -45,19 +43,17 @@ export default class BaseballGame {
 
     const ball = this.computer.calcBall(computerInputNumbers, userInputNumbers);
     const strike = this.computer.calcStrike(computerInputNumbers, userInputNumbers);
-    if (ball || strike) {
-      return `${ball} ${strike}`;
-    }
+    if (ball || strike) return `${ball} ${strike}`;
     return '낫싱';
   }
-  makeVisible($) {
-    if ($ === '$result') {
+  makeVisible($element) {
+    if ($element === '$result') {
       this.$result.innerText = '';
       this.$result.style.display = 'block';
       this.$correctResult.style.display = 'none';
       return;
     }
-    if ($ === '$correctResult') {
+    if ($element === '$correctResult') {
       this.$result.style.display = 'none';
       this.$correctResult.style.display = 'block';
     }

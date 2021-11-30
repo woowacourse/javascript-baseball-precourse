@@ -32,7 +32,19 @@ const InputCheckMethods = [
 ];
 
 export default class User {
+  constructor() {
+    this.$userInput = $('#user-input');
+  }
+
   isInputValid(userInputNumbers) {
     return InputCheckMethods.every((InputCheckMethod) => InputCheckMethod(userInputNumbers));
+  }
+
+  getUserInputValue() {
+    return this.$userInput.value;
+  }
+
+  setUserInputValue(value) {
+    this.$userInput.value = value;
   }
 }
