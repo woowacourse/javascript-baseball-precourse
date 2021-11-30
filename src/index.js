@@ -74,6 +74,16 @@ export default class BaseballGame {
       }
     });
   }
+
+  onRestartBtnClick() {
+    $result.addEventListener('click', e => {
+      if (e.target.id === 'game-restart-button') {
+        this.setRandomNums();
+        $result.innerHTML = '';
+        $userInput.value = '';
+      }
+    });
+  }
 }
 
 const game = new BaseballGame();
