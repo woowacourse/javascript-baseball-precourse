@@ -36,7 +36,7 @@ export default class BaseballGame {
     event.preventDefault();
     const playResult = this.play(this.computerInput, this.getUserInput());
     playResult && renderResult(playResult);
-    if (playResult.isSuccess) this.addEventlistenerToRestartButton();
+    $("#game-restart-button") && this.addEventlistenerToRestartButton();
   }
 
   play(computerInputNumbers, userInputNumbers) {
@@ -45,8 +45,8 @@ export default class BaseballGame {
       isNumber(userInputNumbers) &&
       isNotDuplicateExist(userInputNumbers)
     ) {
-      const result = checkResult(computerInputNumbers, userInputNumbers);
-      return result;
+      const resultHtml = checkResult(computerInputNumbers, userInputNumbers);
+      return resultHtml;
     }
     showError();
     this.resetInput();

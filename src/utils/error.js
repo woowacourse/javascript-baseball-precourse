@@ -1,4 +1,4 @@
-import { MESSAGE } from "../constants/message.js";
+import MESSAGE from "../constants/message.js";
 
 const error = {
   message: "",

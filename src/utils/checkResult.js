@@ -16,7 +16,16 @@ const checkBall = (computerInputNumbers, userInputNumbers, strikeCount) => {
   return totalBallCount - strikeCount;
 };
 
-const getFailMessage = (strikeCount, ballCount) => {
+const getResultHtml = (strikeCount, ballCount) => {
+  if (strikeCount === 3)
+    return `
+    <div>🎉 정답을 맞추셨습니다! 🎉</div>
+    <br />
+    <div>
+      게임을 새로 시작하시겠습니까?
+      <button id="game-restart-button">재시작</button>
+    </div>
+  `;
   if (strikeCount && ballCount)
     return `${ballCount}볼 ${strikeCount}스트라이크`;
   if (strikeCount) return `${strikeCount}스트라이크`;
@@ -25,18 +34,12 @@ const getFailMessage = (strikeCount, ballCount) => {
 };
 
 export const checkResult = (computerInputNumbers, userInputNumbers) => {
-  const result = {
-    isSuccess: true,
-    failMessage: "",
-  };
   const strikeCount = checkStrike(computerInputNumbers, userInputNumbers);
-  if (strikeCount === 3) return result;
   const ballCount = checkBall(
     computerInputNumbers,
     userInputNumbers,
     strikeCount
   );
-  result.failMessage = getFailMessage(strikeCount, ballCount);
-  result.isSuccess = false;
+  const result = getResultHtml(strikeCount, ballCount);
   return result;
 };
