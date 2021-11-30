@@ -46,10 +46,7 @@ export default class BaseballGame {
     return total - strikes;
   }
 
-  play(computerInputNumbers, userInputNumbers) {
-    const balls = this.getBalls(computerInputNumbers, userInputNumbers);
-    const strikes = this.getStrikes(computerInputNumbers, userInputNumbers);
-
+  getResultString(balls, strikes) {
     if (balls === 0 && strikes === 0) {
       return "낫싱";
     }
@@ -58,5 +55,11 @@ export default class BaseballGame {
     const ballString = balls === 0 ? "" : `${balls}볼`;
     const strikeString = strikes === 0 ? "" : `${strikes}스트라이크`;
     return `${ballString}${spaceString}${strikeString}`;
+  }
+
+  play(computerInputNumbers, userInputNumbers) {
+    const balls = this.getBalls(computerInputNumbers, userInputNumbers);
+    const strikes = this.getStrikes(computerInputNumbers, userInputNumbers);
+    return this.getResultString(balls, strikes);
   }
 }
