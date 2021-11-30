@@ -1,5 +1,21 @@
-import { inputErrorMessage } from './constant.js';
+import { INPUT_ERROR_MESSAGE, GAME_WIN_MESSAGE } from './constant.js';
 
+const computerInputNumbers=getComputerNumber();
+
+function getStrikeBallNum(){
+    let strikeCount=0;
+    let ballCount=0;
+
+    const userNumberArr= getUserInput().split('').map(Number);
+    ballCount=userNumberArr.filter(it=>computerInputNumbers.includes(it)).length;
+    
+    for(let i=0;i<3;i++){
+        if(userInputNumbers[i]==computerInputNumbers[i]) strikeCount++;
+    }
+    ballCount=ballCount-strikeCount;
+
+    return [ballCount,strikeCount];
+}
 
 function showError(message){
     alert(message);
@@ -13,25 +29,26 @@ function checkRepeat(input){
 
 function checkinputValid(input){
     if(isNaN(input)){
-      showError(inputErrorMessage);
+      showError(INPUT_ERROR_MESSAGE);
       console.log('1');
       return false;
     }
     if(input.length!==3){
-      showError(inputErrorMessage);
+      showError(INPUT_ERROR_MESSAGE);
       console.log('2');
       return false;
     }
     if(checkRepeat(input)){
-        showError(inputErrorMessage);
+        showError(INPUT_ERROR_MESSAGE);
         console.log('3');
       return false;
     }
     return true;
 }
 
+
 function getUserInput(){  
-    const userInputNum=document.getElementById("user-input").value;
+    let userInputNum=document.getElementById("user-input").value;
     if(!checkinputValid(userInputNum)){
         console.log("새창");
     }
