@@ -40,6 +40,18 @@ export default class BaseballGame {
 
     return resultTxt;
   }
+
+  resetBallCount() {
+    this.ballCount.strike = 0;
+    this.ballCount.ball = 0;
+  }
+
+  play(computerInputNumbers, userInputNumbers) {
+    this.compareNums(computerInputNumbers, userInputNumbers);
+    const resultTxt = this.calculateResult();
+    this.resetBallCount();
+    return resultTxt;
+  }
 }
 
 const game = new BaseballGame();
