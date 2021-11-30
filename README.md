@@ -27,13 +27,15 @@
 
 <b>compare.js</b>
 
+- [ ] 전체적인 판단 결과 (016) - `checkAnswer`
+
 - [X] Strike 개수 세기 (004) - `countStrike`
 
-- [ ] Ball 개수 세기 (005) - `countBall`
+- [X] Ball 개수 세기 (005) - `countBall`
 
-- [ ] 낫싱인지 판단 (006) - `isNothing`
+- [X] 낫싱인지 판단 (006) - `isNothing`
 
-- [ ] 모두 정답인지 판단 (007) - `isCorrectAll`
+- [X] 모두 정답인지 판단 (007) - `isCorrectAll`
 
 <b>restart.js</b>
 

@@ -2,18 +2,26 @@ import { TEXT } from './constants.js';
 
 //count strike function
 function countStrike(answer, userInput) {
-  const result = [];
+  const strike = [];
   
-  answer.map((value, index) => {
-    if (value === userInput[index]) result.push(value);
+  userInput.map((value, index) => {
+    if (value === answer[index]) strike.push(value);
   });
 
-  return result.length;
+  return strike;
 }
 
 //count ball function
-function countBall(answer, userInput) {
+function countBall(strike, answer, userInput) {
+  const ball = [];
 
+  userInput.map((value) => {
+    if (!strike.includes(value) && answer.includes(value)) {
+      ball.push(value);
+    } 
+  });
+
+  return ball;
 }
 
 //is it nothing
@@ -26,7 +34,10 @@ function isCorrectAll() {
   return TEXT.CORRECT;
 }
 
+//return total result
 export function checkAnswer(answer, userInput) {
-  return countStrike(answer, userInput);
-  
+  const strike = countStrike(answer, userInput);
+  const ball = countBall(strike, answer, userInput);
+
+  return `${strike.length} ${ball.length}`;
 }
