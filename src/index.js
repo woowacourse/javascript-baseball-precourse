@@ -4,6 +4,7 @@ import { setAnswer } from './setAnswer.js';
 import { checkInput } from './checkInput.js';
 import { CountStrikeAndBall } from './CountStrikeAndBall.js';
 import { endGame } from './endGame.js';
+import { StrikeAndBall } from './ResultText.js';
 export default function BaseballGame() {
     let computerInputNumbers = setAnswer();
 
@@ -19,22 +20,24 @@ export default function BaseballGame() {
         console.log(result_game_text);
         return result_game_text;
     };
-
     const Hint = Strike_Ball => {
+        /*if (Strike_Ball.Strike === 3) {
+            $result.innerHTML = CORRECT_ANSWER;
+            computerInputNumbers = setAnswer();
+            endGame();
+            return `${Strike_Ball.Strike}${Strike}`;
+        }
+        else if (Strike_Ball.Strike === 0 && Strike_Ball.Ball === 0) return $result.innerText = NOTHING_ANSWER;
+        else if (Strike_Ball.Strike === 0) return $result.innerText = `${Strike_Ball.Ball}${Ball}`;
+        else if (Strike_Ball.Ball === 0) return $result.innerText = `${Strike_Ball.Strike}${Strike}`;
+        return $result.innerText = `${Strike_Ball.Ball}${Ball} ${Strike_Ball.Strike}${Strike}`;*/
         if (Strike_Ball.Strike === 3) {
             $result.innerHTML = CORRECT_ANSWER;
             computerInputNumbers = setAnswer();
             endGame();
             return `${Strike_Ball.Strike}${Strike}`;
         }
-        else if (Strike_Ball.Strike === 0 && Strike_Ball.Ball === 0) {
-            return $result.innerText = NOTHING_ANSWER;
-        }
-        else {
-            if (Strike_Ball.Strike === 0) return $result.innerText = `${Strike_Ball.Ball}${Ball}`;
-            else if (Strike_Ball.Ball === 0) return $result.innerText = `${Strike_Ball.Strike}${Strike}`;
-            else return $result.innerText = `${Strike_Ball.Ball}${Ball} ${Strike_Ball.Strike}${Strike}`;
-        };
+        return $result.innerText = `${StrikeAndBall[Strike_Ball.Strike][Strike_Ball.Ball]}`;
     };
 
     $form.addEventListener('submit', (event) => {
