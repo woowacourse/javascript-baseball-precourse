@@ -29,12 +29,10 @@ function onRestartButtonClick() {
     userInput.value = '';
     gameResult.innerHTML = '';
     newGame = new BaseballGame();
-    console.log(newGame.answer);
 }
 
 // main
 let newGame = new BaseballGame();
-console.log(newGame.answer);
 
 app.addEventListener("click", function(e) {
     e.preventDefault();
