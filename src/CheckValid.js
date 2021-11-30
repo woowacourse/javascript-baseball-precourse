@@ -5,14 +5,14 @@ export default class CheckValid {
 
   baseballGameInput(targetValue) {
     return (
-      this.checkNumberLength(targetValue) &&
-      this.checkTypeNumber(targetValue) &&
-      this.checkInRange(targetValue) &&
-      this.checkDuplicate(targetValue)
+      this.numberLength(targetValue) &&
+      this.typeNumber(targetValue) &&
+      this.inRange(targetValue) &&
+      this.duplicate(targetValue)
     );
   }
 
-  checkNumberLength(value) {
+  numberLength(value) {
     const isThreeLength = value.length === this.NUMBER_LENGTH;
     if (!isThreeLength) {
       alert(`3개만 입력해주세요.`);
@@ -20,7 +20,7 @@ export default class CheckValid {
     return isThreeLength;
   }
 
-  checkTypeNumber(value) {
+  typeNumber(value) {
     const isNumber = !isNaN(Number(value));
     if (!isNumber) {
       alert(`숫자만 입력해주세요.`);
@@ -28,7 +28,7 @@ export default class CheckValid {
     return isNumber;
   }
 
-  checkInRange(value) {
+  inRange(value) {
     const isContainZero = [...value].includes("0");
     if (isContainZero) {
       alert(`1에서 9까지의 수만 입력해주세요.`);
@@ -36,7 +36,7 @@ export default class CheckValid {
     return !isContainZero;
   }
 
-  checkDuplicate(value) {
+  duplicate(value) {
     const isDuplicate = new Set([...value]).size !== this.NUMBER_LENGTH;
     if (isDuplicate) {
       alert(`중복된 수를 제거해주세요.`);

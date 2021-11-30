@@ -29,7 +29,7 @@ export default class BaseballGame {
         this.computerInputNumbers,
         userInputNumbers
       );
-      this.printGameMessage(gameMessage);
+      this.renderGameMessage(gameMessage);
     }
   }
 
@@ -78,12 +78,12 @@ export default class BaseballGame {
     return `낫싱`;
   }
 
-  printGameMessage(gameMessage) {
+  renderGameMessage(gameMessage) {
     if (`${this.NUMBER_LENGTH}볼` === gameMessage) {
       this.dom.clearResultArea();
       return this.renderAnswerMessage();
     }
-    this.dom.renderResultText(gameMessage);
+    this.dom.renderResultMessage(gameMessage);
   }
 
   renderAnswerMessage() {

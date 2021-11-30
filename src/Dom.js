@@ -22,7 +22,7 @@ export default class Dom {
     return button;
   }
 
-  renderResultText(text) {
+  renderResultMessage(text) {
     this.resultArea.innerText = text;
   }
 }
