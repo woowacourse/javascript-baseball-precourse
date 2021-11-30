@@ -1,5 +1,6 @@
 import utils from "./utils.js";
 import { $input, $result, $submit } from "./constant.js";
+import validate from "./validate.js";
 
 export default class BaseballGame {
   constructor() {
@@ -13,7 +14,9 @@ export default class BaseballGame {
   onPressSubmit() {
     $submit.addEventListener("click", (e) => {
       e.preventDefault();
-      console.log($input.value);
+      if (validate($input.value)) {
+        console.log($input.value);
+      }
     });
   }
 }
