@@ -1,4 +1,5 @@
-import { $userInput, $submit, $result } from './constants.js';
+import { $userInput, $submit } from './constants.js';
+import { setResult, createResult } from './result.js';
 import { checkWarning } from './validation.js';
 import { checkAnswer } from './compare.js';
 import { createAnswer } from './restart.js';
@@ -25,8 +26,7 @@ export default function BaseballGame() {
 
     console.log("답 " , computerInputNumbers);
     console.log("입력 ", userInputNumbers);
-
-    $result.innerHTML = result;
+    console.log("판단 ", result);
 
     return result;
   };

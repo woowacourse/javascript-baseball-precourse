@@ -27,7 +27,7 @@
 
 <b>compare.js</b>
 
-- [ ] 전체적인 판단 결과 (016) - `checkAnswer`
+- [X] 전체적인 판단 결과 (016) - `checkAnswer`
 
 - [X] Strike 개수 세기 (004) - `countStrike`
 
