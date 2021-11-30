@@ -62,3 +62,12 @@
 
 - [X]  0이 포함되었는지 범위 검사 (015) - `isZero`
 
+
+<br/>
+## ✔️ 테스트 실행 결과
+<br/>
+마지막으로 `npm run test`로 테스트를 진행해 본 결과는 아래와 같았다. 조건을 모두 충족하는 것을 확인할 수 있었다. 
+<br/>
+
+![image](https://user-images.githubusercontent.com/44183221/144033021-b69d8d37-7b34-4599-a0d2-9c3e87ced2e6.png)
+
