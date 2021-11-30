@@ -17,11 +17,9 @@ export function checkUserNums(userNums) {
         .map((element) => Number(element));
 
     if (userNums.length !== 3) isPass = false;
-    userNums.forEach((element, index) => {
-        isPass = checkRepe(userNums, element, index, isPass);
-    });
-    if (userNums.includes(0)) isPass = false;
-    if (userNums.some(isNaN)) isPass = false;
+    else if (new Set(userNums).size !== 3) isPass = false;
+    else if (userNums.includes(0)) isPass = false;
+    else if (userNums.some(isNaN)) isPass = false;
 
     return isPass;
 }
