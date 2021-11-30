@@ -1,8 +1,8 @@
-import { NUMBER_LENGTH, USER_INPUT_ALERT } from "../libs/constant.js";
+import { NUMBER_LENGTH, USER_INPUT_ALERT } from '../libs/constant.js';
 
 const InputCheckMethods = [
   (value) => {
-    if (value == "") {
+    if (value == '') {
       alert(USER_INPUT_ALERT.blank);
       return false;
     }
@@ -16,7 +16,7 @@ const InputCheckMethods = [
     return true;
   },
   (value) => {
-    if (value.includes("0")) {
+    if (value.includes('0')) {
       alert(USER_INPUT_ALERT.removeZero);
       return false;
     }
@@ -33,8 +33,6 @@ const InputCheckMethods = [
 
 export default class User {
   isInputValid(userInputNumbers) {
-    return InputCheckMethods.every((InputCheckMethod) =>
-      InputCheckMethod(userInputNumbers)
-    );
+    return InputCheckMethods.every((InputCheckMethod) => InputCheckMethod(userInputNumbers));
   }
 }

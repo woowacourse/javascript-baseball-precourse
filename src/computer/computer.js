@@ -1,4 +1,4 @@
-import { NUMBER_LENGTH } from "../libs/constant.js";
+import { NUMBER_LENGTH } from '../libs/constant.js';
 
 export default class Computer {
   generateRandomNumbers() {
@@ -6,7 +6,7 @@ export default class Computer {
     while (answer.length < NUMBER_LENGTH) {
       this.addRandomNum(answer);
     }
-    return answer.join("");
+    return answer.join('');
   }
   addRandomNum(answer) {
     const randomNum = String(MissionUtils.Random.pickNumberInRange(1, 9));
@@ -25,7 +25,7 @@ export default class Computer {
         ball++;
       }
     }
-    return ball > 0 ? `${ball}볼` : "";
+    return ball > 0 ? `${ball}볼` : '';
   }
   calcStrike(computerInputNumbers, userInputNumbers) {
     let strike = 0;
@@ -34,6 +34,6 @@ export default class Computer {
         strike++;
       }
     }
-    return strike > 0 ? `${strike}스트라이크` : "";
+    return strike > 0 ? `${strike}스트라이크` : '';
   }
 }
