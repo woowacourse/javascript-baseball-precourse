@@ -1,5 +1,5 @@
 import { createAnswer } from './restart.js';
-import { TEXT, $userInput, $submit } from './constants.js';
+import { $userInput, $submit, $result } from './constants.js';
 import { checkWarning } from './validation.js';
 import { checkAnswer } from './compare.js';
 
@@ -23,9 +23,9 @@ export default function BaseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     const result = checkAnswer(computerInputNumbers, userInputNumbers);
 
-    console.log(result);
+    $result.innerHTML = result;
 
-    return "결과 값 String";
+    return result;
   };
 }
 
