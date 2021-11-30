@@ -1,11 +1,11 @@
 import { GAME_RULE, RESULT_MESSAGE, ALERT_MESSAGE } from '../constants/index.js';
+import { $ } from '../utils/index.js';
 
 export default class User {
   constructor() {
     this.number = 0;
     this.strikeNum = 0;
     this.ballNum = 0;
-    this.$userInput = document.getElementById('user-input');
   }
   getNumber() {
     return this.number;
@@ -44,7 +44,7 @@ export default class User {
     return !(userInputArray.length === userInputSet.length);
   }
   isUserInputValid() {
-    const userInput = this.$userInput.value;
+    const userInput = $('user-input').value;
     let isValid = false;
     if (!this.isNumeric(userInput)) {
       alert(ALERT_MESSAGE.isNumeric);
