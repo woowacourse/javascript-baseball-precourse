@@ -1,44 +1,28 @@
 import validateInput from "./validation.js";
-import { $, $on } from "./domHelpers.js";
-import {
-  RESULT_CORRECT,
-  MESSAGE_CORRECT_ANSWER,
-  MESSAGE_RESTART_GAME,
-  ERROR_MESSAGE,
-} from "../config/config.js";
+import { DOM, correctResultTemplate, $, $on } from "./domHelpers.js";
+import { RESULT_CORRECT, ERROR_MESSAGE } from "../config/config.js";
 
 export default function EventManager(baseballGame) {
   this.baseballGame = baseballGame;
-  this.form = $("form");
-  this.$userInput = $("#user-input");
-  this.$submitButton = $("#submit");
-  this.$resultDiv = $("#result");
-  this.correctResultTemplate = `
-    <h4>${MESSAGE_CORRECT_ANSWER}</h4>
-    ${MESSAGE_RESTART_GAME}
-    <button id="game-restart-button">재시작</button>
-  `;
 
   this.initEventListeners = function initEventListeners() {
-    $on(this.form, "submit", this.handleSubmitForm);
-    $on(this.$submitButton, "click", this.handleClickSubmitButton.bind(this));
-    $on(this.$resultDiv, "click", (e) => {
-      if (e.target.id === "game-restart-button") {
+    $on($(DOM.form), "submit", (e) => {
+      e.preventDefault();
+    });
+    $on($(DOM.submitButton), "click", this.handleClickSubmitButton.bind(this));
+    $on($(DOM.resultDiv), "click", (e) => {
+      if (e.target.id === DOM.gameRestartButtonId) {
         this.handleClickGameRestartButton.call(this);
       }
     });
   };
 
-  this.handleSubmitForm = function handleSubmitForm(e) {
-    e.preventDefault();
-  };
-
   this.handleClickSubmitButton = function handleClickSubmitButton() {
-    const userInputNumbers = this.$userInput.value.trim();
+    const userInputNumbers = $(DOM.userInput).value.trim();
 
     if (!validateInput(userInputNumbers)) {
       alert(ERROR_MESSAGE);
-      this.$userInput.value = "";
+      $(DOM.userInput).value = "";
 
       return;
     }
@@ -51,14 +35,14 @@ export default function EventManager(baseballGame) {
 
   this.handleClickGameRestartButton = function handleClickGameRestartButton() {
     this.baseballGame.initAnswer();
-    this.$resultDiv.innerHTML = "";
-    this.$userInput.value = "";
+    $(DOM.resultDiv).innerHTML = "";
+    $(DOM.userInput).value = "";
   };
 
   this.render = function render(resultString) {
-    this.$resultDiv.innerHTML =
+    $(DOM.resultDiv).innerHTML =
       resultString === RESULT_CORRECT
-        ? this.correctResultTemplate
+        ? correctResultTemplate
         : resultString;
   };
 }
