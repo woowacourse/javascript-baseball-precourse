@@ -1,8 +1,10 @@
-export const pickRandomNumbers = count => {
+const { pickNumberInRange } = MissionUtils.Random;
+
+export const pickRandomNumbers = (count, min, max) => {
     const pickedNumbers = [];
     
     while (pickedNumbers.length < count) {
-        const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+        const randomNumber = pickNumberInRange(min, max);
         
         if (!pickedNumbers.includes(randomNumber)) {
             pickedNumbers.push(randomNumber);

@@ -1,6 +1,7 @@
 import { pickRandomNumbers } from './utils/number-picker.js';
 import { removeSpace, isInvalid } from './utils/input-validator.js';
 import { getBallStrikeCount } from './utils/ball-counter.js';
+import { GAME_SETTING, RESULT_MESSAGE } from './constant.js';
 
 const $userInput = document.getElementById('user-input');
 const $submitBtn = document.getElementById('submit');
@@ -14,7 +15,7 @@ export default class BaseballGame {
     }
 
     init() {
-        this.computerInputNumbers = pickRandomNumbers(3);
+        this.computerInputNumbers = pickRandomNumbers(GAME_SETTING.SIZE, GAME_SETTING.MIN, GAME_SETTING.MAX);
         this.resetInputs();
     }
 
@@ -28,7 +29,7 @@ export default class BaseballGame {
         $submitBtn.addEventListener('click', event => {
             event.preventDefault();
             const inputValue = removeSpace($userInput.value);
-            const error = isInvalid(inputValue, 3);
+            const error = isInvalid(inputValue, GAME_SETTING.SIZE);
             
             if (error) {
                 this.resetInputs();
@@ -60,7 +61,7 @@ export default class BaseballGame {
     }
 
     getGameResult(ballCount, strikeCount) {
-        if (strikeCount === 3) {
+        if (strikeCount === GAME_SETTING.SIZE) {
             return `${strikeCount}스트라이크`;
         }
         else if (strikeCount + ballCount === 0) {
@@ -74,10 +75,10 @@ export default class BaseballGame {
         let resultText = `<p>${text}</p>`;
         let isStrike = false;
 
-        if (text === `${3}스트라이크`) {
+        if (text === `${GAME_SETTING.SIZE}스트라이크`) {
             isStrike = true;
-            resultText = `<p>🎉<strong>정답을 맞추셨습니다</strong>🎉</p>
-            <p>게임을 새로 시작하시겠습니까? <button id="game-restart-button">재시작</button></p>`;
+            resultText = `<p><strong>${RESULT_MESSAGE.WIN}</strong></p>
+            <p>${RESULT_MESSAGE.RESTART} <button id="game-restart-button">재시작</button></p>`;
         }
 
         $resultDiv.innerHTML = resultText;

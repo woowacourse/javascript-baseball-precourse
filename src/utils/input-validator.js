@@ -1,3 +1,5 @@
+import { ALERT_MESSAGE } from '../constant.js';
+
 export const isValidLength = (value, size) => {
     return value.length === size;
 }
@@ -14,13 +16,13 @@ export const removeSpace = text => {
 
 export const isInvalid = (value, size) => {
     if (!isValidLength(value, size)) {
-        return `숫자 ${size}개를 입력해주세요.`;
+        return ALERT_MESSAGE['SIZE_ERROR'];
     }
     if (isNaN(value)) {
-        return '숫자만 입력해주세요.';
+        return ALERT_MESSAGE['TYPE_ERROR'];
     }
     if (isValueDuplicate(value)) {
-        return '숫자를 중복없이 입력해주세요.';
+        return ALERT_MESSAGE['DUPLICATE_ERROR'];
     }
 
     return false;
