@@ -1,16 +1,16 @@
-import { INPUT_LENGTH, ANSWER, NOTHING } from "../constant/constant.js";
+import { ANSWER, NOTHING } from "../constant/constant.js";
 
-function isBall(computerInput, userInput, computerIndex) {
-  return userInput.find(
+function isBall(computerInputElement, userInputArray, computerIndex) {
+  return userInputArray.find(
     (element, inputIndex) =>
-      inputIndex !== computerIndex && element === computerInput[computerIndex]
+      inputIndex !== computerIndex && element === computerInputElement
   );
 }
 
-function isStrike(computerInput, userInput, computerIndex) {
-  return userInput.find(
+function isStrike(computerInputElement, userInputArray, computerIndex) {
+  return userInputArray.find(
     (element, inputIndex) =>
-      inputIndex === computerIndex && element === computerInput[computerIndex]
+      inputIndex === computerIndex && element === computerInputElement
   );
 }
 
@@ -19,15 +19,14 @@ function countBallStrike(computerInput, userInput) {
     ballCount: 0,
     strikeCount: 0,
   };
-
-  for (let computerIndex = 0; computerIndex < INPUT_LENGTH; computerIndex += 1) {
-    if (isBall(computerInput, userInput, computerIndex)) {
+  computerInput.forEach((element, index) => {
+    if (isBall(element, userInput, index)) {
       result.ballCount += 1;
     }
-    if (isStrike(computerInput, userInput, computerIndex)) {
+    if (isStrike(element, userInput, index)) {
       result.strikeCount += 1;
     }
-  }
+  });
   return result;
 }
 
