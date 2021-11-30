@@ -14,20 +14,20 @@ export default class BaseballGame {
     }
 
     bindSubmitEvent() {
-        $submitBtn.addEventListener('click', this.submitEvent.bind(this));
-    }
-
-    submitEvent(event) {
-        event.preventDefault();
-        const inputValue = removeSpace($userInput.value);
-        
-        if (isInvalid(inputValue, 3)) {
-            $userInput.value = '';
-            return;
-        }
-
-        this.userInputNumbers = inputValue;
-        this.play(this.computerInputNumbers, this.userInputNumbers);
+        $submitBtn.addEventListener('click', event => {
+            event.preventDefault();
+            const inputValue = removeSpace($userInput.value);
+            const error = isInvalid(inputValue, 3);
+            
+            if (error) {
+                $userInput.value = '';
+                return alert(error);
+            }
+    
+            this.userInputNumbers = inputValue;
+            const gameResult = this.play(this.computerInputNumbers, this.userInputNumbers);
+            this.render(gameResult);
+        });
     }
 
     play(computerInputNumbers, userInputNumbers) {
@@ -35,7 +35,25 @@ export default class BaseballGame {
         console.log(userInputNumbers);
         
         const [ball, strike] = getBallStrikeCount(computerInputNumbers, userInputNumbers);
-        console.log(`${ball}볼 ${strike}스트라이크`);
+        const gameResult = this.getGameResult(ball, strike);
+        console.log(gameResult);
+        return gameResult;
+    }
+
+    getGameResult(ballCount, strikeCount) {
+        if (strikeCount === 3) {
+            return `${strikeCount}스트라이크`;
+        }
+        else if (strikeCount + ballCount === 0) {
+            return '낫싱';
+        }
+        
+        return `${ballCount}볼 ${strikeCount}스트라이크`;
+    }
+
+    render(text) {
+        let resultText = `<p>${text}</p>`;
+        $resultDiv.innerHTML = resultText;
     }
 }
 

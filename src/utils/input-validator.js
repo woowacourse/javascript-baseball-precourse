@@ -14,13 +14,13 @@ export const removeSpace = text => {
 
 export const isInvalid = (value, size) => {
     if (!isValidLength(value, size)) {
-        return !alert(`숫자 ${size}개를 입력해주세요.`);
+        return `숫자 ${size}개를 입력해주세요.`;
     }
     if (isNaN(value)) {
-        return !alert('숫자만 입력해주세요.');
+        return '숫자만 입력해주세요.';
     }
     if (isValueDuplicate(value)) {
-        return !alert('숫자를 중복없이 입력해주세요.');
+        return '숫자를 중복없이 입력해주세요.';
     }
 
     return false;
