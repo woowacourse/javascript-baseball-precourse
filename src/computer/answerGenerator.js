@@ -4,14 +4,24 @@ const COMPUTER_NUMBER = {
   PICK: 3,
 };
 
+function pickRandomNumbers() {
+  const numbers = [];
+  while (numbers.length !== COMPUTER_NUMBER.PICK) {
+    const number = pickRandomNumber();
+    if (numbers.indexOf(number) === -1) {
+      numbers.push(number);
+    }
+  }
+  return numbers;
+}
+
 function pickRandomNumber() {
-  return MissionUtils.Random.pickUniqueNumbersInRange(
+  return MissionUtils.Random.pickNumberInRange(
     COMPUTER_NUMBER.MIN_NUMBER,
     COMPUTER_NUMBER.MAX_NUMBER,
-    COMPUTER_NUMBER.PICK,
   );
 }
 
 export default function getComputerInput() {
-  return pickRandomNumber().join('');
+  return pickRandomNumbers().join('');
 }
