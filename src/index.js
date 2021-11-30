@@ -1,4 +1,4 @@
-import { NOTHING_ANSWER, CORRECT_ANSWER } from './result-const.js';
+import { NOTHING_ANSWER, CORRECT_ANSWER, Strike, Ball } from './result-const.js';
 import { $form, $input, $result } from './html-const.js';
 import { setAnswer } from './setAnswer.js';
 import { checkInput } from './checkInput.js';
@@ -25,15 +25,15 @@ export default function BaseballGame() {
             $result.innerHTML = CORRECT_ANSWER;
             computerInputNumbers = setAnswer();
             endGame();
-            return `${Strike_Ball.Strike}스트라이크`;
+            return `${Strike_Ball.Strike}${Strike}`;
         }
         else if (Strike_Ball.Strike === 0 && Strike_Ball.Ball === 0) {
             return $result.innerText = NOTHING_ANSWER;
         }
         else {
-            if (Strike_Ball.Strike === 0) return $result.innerText = `${Strike_Ball.Ball}볼`;
-            else if (Strike_Ball.Ball === 0) return $result.innerText = `${Strike_Ball.Strike}스트라이크`;
-            else return $result.innerText = `${Strike_Ball.Ball}볼 ${Strike_Ball.Strike}스트라이크`;
+            if (Strike_Ball.Strike === 0) return $result.innerText = `${Strike_Ball.Ball}${Ball}`;
+            else if (Strike_Ball.Ball === 0) return $result.innerText = `${Strike_Ball.Strike}${Strike}`;
+            else return $result.innerText = `${Strike_Ball.Ball}${Ball} ${Strike_Ball.Strike}${Strike}`;
         };
     };
 
