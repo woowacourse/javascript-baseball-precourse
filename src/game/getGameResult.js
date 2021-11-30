@@ -8,7 +8,9 @@ import {
 
 const getStrikeCount = (computerInputNumbers, userInputNumbers) => {
   return userInputNumbers.reduce((count, cur, index) => {
-    if (cur === computerInputNumbers[index]) count += 1;
+    if (cur === computerInputNumbers[index]) {
+      count += 1;
+    }
     return count;
   }, 0);
 };
@@ -18,9 +20,9 @@ const getBallCount = (computerInputNumbers, userInputNumbers) => {
     if (
       cur !== computerInputNumbers[index] &&
       computerInputNumbers.includes(cur)
-    )
+    ) {
       count += 1;
-
+    }
     return count;
   }, 0);
 };

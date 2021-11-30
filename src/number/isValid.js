@@ -22,9 +22,7 @@ const isLengthInValid = (userInputNumbers) => {
 };
 
 const isDuplicated = (userInputNumbers) => {
-  return userInputNumbers.length !== new Set(userInputNumbers).size
-    ? true
-    : false;
+  return userInputNumbers.length !== new Set(userInputNumbers).size;
 };
 
 const isTypeInValid = (userInputNumbers) => {
@@ -36,22 +34,23 @@ const isTypeInValid = (userInputNumbers) => {
   return false;
 };
 
+const showAlertScreen = (error_message) => {
+  alert(error_message);
+  return false;
+};
+
 const isValid = (userInputNumbers) => {
   if (isTypeInValid(userInputNumbers)) {
-    alert(TYPE_ERROR_MESSAGE);
-    return false;
+    return showAlertScreen(TYPE_ERROR_MESSAGE);
   }
   if (isScopeInValid(userInputNumbers)) {
-    alert(SCOPE_ERROR_MESSAGE);
-    return false;
+    return showAlertScreen(SCOPE_ERROR_MESSAGE);
   }
   if (isLengthInValid(userInputNumbers)) {
-    alert(LENGTH_ERROR_MESSAGE);
-    return false;
+    return showAlertScreen(LENGTH_ERROR_MESSAGE);
   }
   if (isDuplicated(userInputNumbers)) {
-    alert(DUPLICATE_ERROR_MESSAGE);
-    return false;
+    return showAlertScreen(DUPLICATE_ERROR_MESSAGE);
   }
   return true;
 };

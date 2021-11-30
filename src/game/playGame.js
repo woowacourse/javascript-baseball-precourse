@@ -20,10 +20,11 @@ const playGame = (computerInputNumbers, play) => {
       renderGameResult(game_result);
     }
   });
+
   $("#result").addEventListener("click", (e) => {
     if (e.target.id === "game-restart-button") {
-      computerInputNumbers = getComputerNumber();
       resetGame();
+      computerInputNumbers = getComputerNumber();
     }
   });
 };
