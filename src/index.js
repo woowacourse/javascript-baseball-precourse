@@ -1,8 +1,6 @@
-import { INPUT_ERROR_MESSAGE, GAME_WIN_MESSAGE } from './constant.js';
 import { getComputerNumber,
     getUserInput,
     getStrikeBallNum} from './game.js';
-
 
 
 export default class BaseballGame {
@@ -10,8 +8,14 @@ export default class BaseballGame {
         this.computerInputNumbers=getComputerNumber();
         this.userInputNumbers=getUserInput();
         this.button =document.querySelector("button");
-        this.button.addEventListener('click',playGame);
+        this.result=document.getElementById("result");
+        this.button.addEventListener('click',start);
     }
+
+    start(e){
+        e.preventDefault();
+    }
+
     play(computerInputNumbers, userInputNumbers) {
           return "결과 값 String";
     }

@@ -1,3 +1,5 @@
+import { INPUT_ERROR_MESSAGE } from './constant.js';
+
 export function showError(message){
     alert(message);
 }

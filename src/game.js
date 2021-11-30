@@ -1,3 +1,31 @@
+import { GAME_WIN_MESSAGE } from './constant.js';
+
+export function getGameWin(){
+    let result='';
+    result += GAME_WIN_MESSAGE;
+  
+    return result;
+}
+
+export function makeResult(ballCount,strikeCount){
+    
+    let resultMessage='';
+    if(strikeCount===3){      
+        return getGameWin();      
+    }
+    if(ballCount){
+        resultMessage +=`${ballCount}볼 `;
+    }
+    if(strikeCount){
+        resultMessage +=`${strikeCount}스트라이크`;
+    }
+    if(!ballCount&&!strikeCount){
+        resultMessage='낫싱';
+    }
+
+    return resultMessage;
+}
+
 export function getStrikeBallNum(){
     let strikeCount=0;
     let ballCount=0;
