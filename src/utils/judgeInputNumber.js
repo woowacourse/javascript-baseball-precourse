@@ -6,18 +6,18 @@ function isBall(computerInputNumbers, userInputNumbers, index) {
     return computerInputNumbers.includes(Number(userInputNumbers.charAt(index)));
 }
 
-function judgeInputNumber(computerInputNumbers, userInputNumbers) {
-    let strikes = 0, balls = 0;
-    console.log(computerInputNumbers, userInputNumbers);
+function judgeInputNumber(state, userInputNumbers) {
+    state.strikes = 0;
+    state.balls = 0;
+    console.log(state.computerNumber, userInputNumbers);
+
     for(let i = 0; i < 3; i++) {
-        if(isStrike(computerInputNumbers, userInputNumbers, i)) {
-            strikes++;
-        }else if(isBall(computerInputNumbers, userInputNumbers, i)) {
-            balls++;
+        if(isStrike(state.computerNumber, userInputNumbers, i)) {
+            state.strikes++;
+        }else if(isBall(state.computerNumber, userInputNumbers, i)) {
+            state.balls++;
         }
     }
-
-    return [strikes, balls];
 }
 
 export default judgeInputNumber;

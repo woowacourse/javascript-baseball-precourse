@@ -15,21 +15,28 @@ function generateNumber(computerNumber) {
 }
 
 class BaseballGame {
+    state = {};
+
     constructor() {
-        this.computerNumber = [];
+        this.state.computerNumber = [];
     }
 
     setComputerNumber() {
-        generateNumber(this.computerNumber);
+        generateNumber(this.state.computerNumber);
     }
 
+    getState() {
+        return this.state;
+    }
+
+
     play(userInputNumber) {
-        let [strikes, balls] = judgeInputNumber(this.computerNumber, userInputNumber);
-        return resultMessages(strikes, balls);
+        judgeInputNumber(this.state, userInputNumber);
+        return this.state;
     }
 
     replay() {
-        this.computerNumber = [];
+        this.state.computerNumber = [];
         this.setComputerNumber();
     }
 }
