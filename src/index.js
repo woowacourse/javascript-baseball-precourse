@@ -1,18 +1,17 @@
 import BaseballGame from "./game/baseballGame.js";
 import validateInputNumber from "./utils/validateInputNumber.js";
-import displayResult from "./game/displayResult.js";
+import GameResult from "./view/GameResult.js";
 
 const baseballGame = new BaseballGame();
+const gameResult = new GameResult("#result");
 const submitButton = document.getElementById("submit");
 const userInput = document.getElementById("user-input");
 
 function playGame() {
-    let resultString = "", state = true;
-
     if(validateInputNumber(userInput.value)) {
-        resultString = baseballGame.play(userInput.value);
-        state = displayResult(resultString);
-        addReplayEvent(state);
+        baseballGame.play(userInput.value);
+        gameResult.render(baseballGame.getState());
+        addReplayEvent(baseballGame.getState().gameState);
     }else{
         alert("잘못된 값을 입력하였습니다!");
         clearUserInput();
@@ -22,9 +21,9 @@ function playGame() {
 function replayGame() {
     const replayButton = document.getElementById("game-restart-button");
 
-    baseballGame.replay();
     replayButton.removeEventListener("click", replayGame);
-    displayResult("초기화");
+    baseballGame.replay();
+    gameResult.render("reset");
     clearUserInput();
 }
 
