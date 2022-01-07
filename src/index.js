@@ -5,7 +5,7 @@ import { gameCount } from './utils/gameCount.js';
 import { gameResult } from './gameResult.js';
 import { restartGame } from './utils/restartGame.js';
 
-export default function BaseballGame() {
+export default function baseballGame() {
   this.play = function (computerInputNumbers, userInputNumbers) {
     const button = document.querySelector('#submit');
     const result = document.querySelector('#result');
@@ -26,4 +26,4 @@ export default function BaseballGame() {
   this.play();
 }
 
-new BaseballGame();
+new baseballGame();
