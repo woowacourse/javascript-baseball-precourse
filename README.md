@@ -3,7 +3,10 @@
 </p>
 <h1 align="middle">숫자 야구 게임</h1>
 
-##기능 목록
+### 배포주소
+https://skdms3030.github.io/javascript-baseball-precourse/
+
+## 기능 목록
 
 1. 정답 생성
 - 1~9 사이의 임의의 정수 3개
