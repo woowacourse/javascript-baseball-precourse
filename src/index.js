@@ -16,6 +16,18 @@ export default function BaseballGame() {
     }
 }
     
+    
+function ball(computerInputNumber, userInputNumbers, i, score){
+    if (computerInputNumber == userInputNumbers[i] && i == j){
+    }
+    for (let j = 0; j < 3; j++){
+        if (computerInputNumber == userInputNumbers[i] && i != j){
+            score['ball']++;
+            return score;
+        }
+    }
+    return score;
+}
 
 
 
