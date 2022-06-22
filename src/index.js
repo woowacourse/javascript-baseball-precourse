@@ -1,9 +1,9 @@
 export default function BaseballGame() {
     this.play = function (computerInputNumbers, userInputNumbers) {;
         let score = {
-            'strike': 0, 
-            'ball': 0,
-            'nothing': 0
+            "strike": 0, 
+            "ball": 0,
+            "nothing": 0
         };
 
         for (let i = 0; i < 3; i++){
@@ -20,10 +20,8 @@ export default function BaseballGame() {
     
     
 function ball(computerInputNumber, userInputNumbers, i, score){
-    if (computerInputNumber == userInputNumbers[i] && i == j){
-    }
     for (let j = 0; j < 3; j++){
-        if (computerInputNumber == userInputNumbers[i] && i != j){
+        if (i != j && computerInputNumber == userInputNumbers[j]){
             score['ball']++;
             return score;
         }
@@ -32,14 +30,13 @@ function ball(computerInputNumber, userInputNumbers, i, score){
 }
 
 
-
 let game = new BaseballGame();
-// console.log(game.play(123, 456));
-// console.log(game.play(123, 345));
-// console.log(game.play(123, 432));
-// console.log(game.play(123, 312));
-// console.log(game.play(123, 145));
+console.log(game.play(123, 456));
+console.log(game.play(123, 345));
+console.log(game.play(123, 432));
+console.log(game.play(123, 312));
+console.log(game.play(123, 145));
 console.log(game.play(123, 134));
-// console.log(game.play(123, 132));
-// console.log(game.play(123, 124));
+console.log(game.play(123, 132));
+console.log(game.play(123, 124));
 
