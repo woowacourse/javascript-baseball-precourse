@@ -13,6 +13,8 @@ export default function BaseballGame() {
                 score = ball(String(computerInputNumbers)[i], String(userInputNumbers), i, score);
             }
         }
+        score['nothing'] = (score['strike'] == 0 && score['ball'] == 0) ? 1 : 0;
+        return score;
     }
 }
     
