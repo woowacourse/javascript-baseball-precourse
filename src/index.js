@@ -1,21 +1,31 @@
 export default function BaseballGame() {
-    this.play = function (computerInputNumbers, userInputNumbers) {
-        return "결과 값 String";
-    };
-}
+    this.play = function (computerInputNumbers, userInputNumbers) {;
+        let score = {
+            'strike': 0, 
+            'ball': 0,
+            'nothing': 0
+        };
 
-export default class BaseballGame {
-    play(computerInputNumbers, userInputNumbers) {
-        return "결과 값 String";
+        for (let i = 0; i < 3; i++){
+            if (String(computerInputNumbers)[i] == String(userInputNumbers)[i]){
+                score['strike']++;
+            } else{
+                score = ball(String(computerInputNumbers)[i], String(userInputNumbers), i, score);
+            }
+        }
     }
 }
+    
 
-// 예시
-play(123, 456); // '낫싱'
-play(123, 345); // '1볼'
-play(123, 432); // '2볼'
-play(123, 312); // '3볼'
-play(123, 145); // '1스트라이크'
-play(123, 134); // '1볼 1스트라이크'
-play(123, 132); // '2볼 1스트라이크'
-play(123, 124); // '2스트라이크'
+
+
+let game = new BaseballGame();
+// console.log(game.play(123, 456));
+// console.log(game.play(123, 345));
+// console.log(game.play(123, 432));
+// console.log(game.play(123, 312));
+// console.log(game.play(123, 145));
+console.log(game.play(123, 134));
+// console.log(game.play(123, 132));
+// console.log(game.play(123, 124));
+
