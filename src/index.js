@@ -40,12 +40,14 @@ function print_result(score){
 }
 
 let game = new BaseballGame();
-console.log(game.play(123, 456));
-console.log(game.play(123, 345));
-console.log(game.play(123, 432));
-console.log(game.play(123, 312));
-console.log(game.play(123, 145));
-console.log(game.play(123, 134));
-console.log(game.play(123, 132));
-console.log(game.play(123, 124));
+document.getElementById("result").innerHTML = game.play(123, 312);
+
+// game.play(123, 456);
+// game.play(123, 345);
+// game.play(123, 432);
+// game.play(123, 312);
+// game.play(123, 145);
+// game.play(123, 134);
+// game.play(123, 132);
+// game.play(123, 124);
 
