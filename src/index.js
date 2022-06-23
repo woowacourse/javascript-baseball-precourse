@@ -1,20 +1,20 @@
 export default function BaseballGame() {
     this.play = function (computerInputNumbers, userInputNumbers) {;
         let score = {
-            "strike": 0, 
-            "ball": 0,
-            "nothing": 0
+            "ball": ["볼", 0],
+            "strike": ["스트라이크", 0],
+            "nothing": ["낫싱", " "]
         };
 
         for (let i = 0; i < 3; i++){
             if (String(computerInputNumbers)[i] == String(userInputNumbers)[i]){
-                score['strike']++;
+                score['strike'][1]++;
             } else{
                 score = ball(String(computerInputNumbers)[i], String(userInputNumbers), i, score);
             }
         }
-        score['nothing'] = (score['strike'] == 0 && score['ball'] == 0) ? 1 : 0;
-        return score;
+        score['nothing'][0] = (score['strike'][1] == 0 && score['ball'][1] == 0) ? "낫싱" : "";
+        return print_result(score);
     }
 }
     
@@ -22,13 +22,22 @@ export default function BaseballGame() {
 function ball(computerInputNumber, userInputNumbers, i, score){
     for (let j = 0; j < 3; j++){
         if (i != j && computerInputNumber == userInputNumbers[j]){
-            score['ball']++;
+            score['ball'][1]++;
             return score;
         }
     }
     return score;
 }
 
+function print_result(score){
+    let result = ''
+    for (let key in score){
+        if (score[key][1]){
+            result += score[key][0] + String(score[key][1]) + ' ';
+        }
+    }
+    return result;
+}
 
 let game = new BaseballGame();
 console.log(game.play(123, 456));
