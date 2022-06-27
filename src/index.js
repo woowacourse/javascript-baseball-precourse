@@ -1,19 +1,31 @@
 export default function BaseballGame() {
     this.play = function (computerInputNumbers, userInputNumbers) {;
         let score = {
-            "ball": ["볼", 0],
-            "strike": ["스트라이크", 0],
-            "nothing": ["낫싱", " "]
+            ball: {
+                string: '볼', 
+                count: 0
+            },
+            strike: {
+                string: '스트라이크', 
+                count: 0
+            },
+            nothing: {
+                string: '낫싱', 
+                count: ' '
+            }
         };
 
         for (let i = 0; i < 3; i++){
-            if (String(computerInputNumbers)[i] == String(userInputNumbers)[i]){
-                score['strike'][1]++;
-            } else{
-                score = ball(String(computerInputNumbers)[i], String(userInputNumbers), i, score);
+            const computerInputNumber = String(computerInputNumbers)[i];
+
+            if (computerInputNumber == String(userInputNumbers)[i]){
+                score['strike']['count']++;
+            } 
+            else{
+                score = ball(computerInputNumber, String(userInputNumbers), i, score);
             }
         }
-        score['nothing'][0] = (score['strike'][1] == 0 && score['ball'][1] == 0) ? "낫싱" : "";
+        score['nothing']['string'] = (score['strike']['count'] == 0 && score['ball']['count'] == 0) ? '낫싱' : '';
         return print_result(score);
     }
 }
@@ -22,7 +34,7 @@ export default function BaseballGame() {
 function ball(computerInputNumber, userInputNumbers, i, score){
     for (let j = 0; j < 3; j++){
         if (i != j && computerInputNumber == userInputNumbers[j]){
-            score['ball'][1]++;
+            score['ball']['count']++;
             return score;
         }
     }
@@ -30,17 +42,27 @@ function ball(computerInputNumber, userInputNumbers, i, score){
 }
 
 function print_result(score){
-    let result = ''
-    for (let key in score){
-        if (score[key][1]){
-            result += score[key][0] + String(score[key][1]) + ' ';
-        }
+    let result = '';
+    if (score['strike']['count'] == 3) {
+        result = '🎉<b>정답을 맞추셨습니다.</b>🎉 <br/><br/> 게임을 새로 시작하시겠습니까?' 
+        
+        let button = document.getElementById('game-restart-button');
+        button.style.display = 'block';
+    }
+    else{
+        Object.keys(score).map((key) => {
+            if(score[key]['count']){
+                result += `${score[key]['string']}${score[key]['count']} `;
+            }
+        });
+    
     }
     return result;
 }
 
-let game = new BaseballGame();
-document.getElementById("result").innerHTML = game.play(123, 312);
+
+const game = new BaseballGame();
+document.getElementById('result').innerHTML = game.play(123, 123);
 
 // game.play(123, 456);
 // game.play(123, 345);
