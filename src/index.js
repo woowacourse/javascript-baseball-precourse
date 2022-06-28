@@ -8,10 +8,11 @@ function generateRandomNumber() {
       computerNumber.push(randomNumber.toString());
     }
   }
+  //console.log(computerNumber);
   return computerNumber;
 }
 
-const computerInputNumbers = generateRandomNumber();
+let computerInputNumbers = generateRandomNumber();
 console.log(computerInputNumbers);
 
 //2. 입력한 숫자 확인
@@ -31,6 +32,8 @@ function isValid(input) {
         const inputArray = [...new Set(input)];
         if (inputArray.length !== 3) {
           console.log("중복 없이 입력해 주세요");
+        } else {
+          return true;
         }
       }
     }
@@ -39,11 +42,11 @@ function isValid(input) {
 
 button.addEventListener("click", (e) => {
   e.preventDefault();
-  isValid(playerInput.value);
-
-  const userInputNumbers = [...playerInput.value.toString()];
-  compareNumber(computerInputNumbers, userInputNumbers);
-  console.log(userInputNumbers);
+  if (isValid(playerInput.value) === true) {
+    const userInputNumbers = [...playerInput.value.toString()];
+    compareNumber(computerInputNumbers, userInputNumbers);
+    //console.log(userInputNumbers);
+  }
 });
 
 //3. 입력한 숫자와 생성한 숫자 비교
@@ -53,24 +56,25 @@ function compareNumber(targetArray, comparisonArray) {
   let strike = 0;
   let ball = 0;
 
-  if (targetArray == comparisonArray) {
-    console.log("정답!");
-  } else {
-    for (let i = 0; i < 3; i++) {
-      if (targetArray[i] === comparisonArray[i]) {
-        strike++;
-      } else if (targetArray.includes(comparisonArray[i])) {
-        ball++;
-      }
-    }
-    if (strike !== 0 || ball !== 0) {
-      console.log(`${ball}볼 ${strike}스크라이크`);
-    } else {
-      console.log("낫싱");
+  for (let i = 0; i < 3; i++) {
+    if (targetArray[i] === comparisonArray[i]) {
+      strike++;
+    } else if (targetArray.includes(comparisonArray[i])) {
+      ball++;
     }
   }
-  console.log(targetArray);
-  console.log(comparisonArray);
+  if (strike !== 0 || ball !== 0) {
+    if (strike === 3) {
+      console.log("정답!");
+    } else {
+      console.log(`${ball}볼 ${strike}스크라이크`);
+    }
+  } else {
+    console.log("낫싱");
+  }
+
+  //console.log(targetArray);
+  //console.log(comparisonArray);
   // console.log(strike);
   // console.log(ball);
 }
