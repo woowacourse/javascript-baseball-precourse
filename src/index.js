@@ -4,7 +4,7 @@ function generateRandomNumber() {
 
   while (computerNumber.length < 3) {
     const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (computerNumber.indexOf(randomNumber) === -1) {
+    if (computerNumber.indexOf(randomNumber.toString()) === -1) {
       computerNumber.push(randomNumber.toString());
     }
   }
