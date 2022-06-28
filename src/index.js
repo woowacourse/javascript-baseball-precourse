@@ -81,3 +81,14 @@ function compareNumber(targetArray, comparisonArray) {
 
 //compareNumber("123", "567");
 //compareNumber(computerInputNumbers, ["1", "2", "3"]);
+
+//4.정답을 맞추면 재시작하기
+const resetButton = document.getElementById("game-restart-button");
+
+resetButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  //let copy = [...computerInputNumbers];
+  //copy = generateRandomNumber();
+  computerInputNumbers = generateRandomNumber();
+  console.log(computerInputNumbers);
+});
