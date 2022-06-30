@@ -30,7 +30,6 @@ export default function BaseballGame() {
     }
 }
     
-    
 function ball(computerInputNumber, userInputNumbers, i, score){
     for (let j = 0; j < 3; j++){
         if (i != j && computerInputNumber == userInputNumbers[j]){
@@ -60,9 +59,31 @@ function print_result(score){
     return result;
 }
 
+function make_computer_num(){
+    let  tmp_num = MissionUtils.Random.pickNumberInRange(1, 10);
+    let computer_num = [];
+
+    if (computer_num.length < 3 && !(tmp_num in computer_num)){
+            computer_num.push(tmp_num);
+    }
+    return computer_num.join('');
+}
+
+function input_user_num(){
+    document.getElementById('user-input').value;
+
+    # 중복
+    if 
+
+    # 길이
+
+    # 숫자 아님
+}
 
 const game = new BaseballGame();
-document.getElementById('result').innerHTML = game.play(123, 123);
+const computer_num = make_computer_num();
+
+document.getElementById('result').innerHTML = game.play(computer_num, 123);
 
 // game.play(123, 456);
 // game.play(123, 345);
