@@ -63,27 +63,25 @@ function make_computer_num(){
     let  tmp_num = MissionUtils.Random.pickNumberInRange(1, 10);
     let computer_num = [];
 
-    if (computer_num.length < 3 && !(tmp_num in computer_num)){
+    while(computer_num.length < 3 && !(tmp_num in computer_num)){
+            let  tmp_num = MissionUtils.Random.pickNumberInRange(1, 10);
             computer_num.push(tmp_num);
     }
     return computer_num.join('');
 }
 
 function input_user_num(){
-    document.getElementById('user-input').value;
-
-    # 중복
-    if 
-
-    # 길이
-
-    # 숫자 아님
+    return document.getElementById('user-input').value;
 }
 
-const game = new BaseballGame();
-const computer_num = make_computer_num();
+function press_button(){
+    const game = new BaseballGame();
+    
+    const computer_num = make_computer_num();
+    const user_num = input_user_num();
 
-document.getElementById('result').innerHTML = game.play(computer_num, 123);
+    document.getElementById('result').innerHTML = game.play(computer_num, user_num);
+}
 
 // game.play(123, 456);
 // game.play(123, 345);
