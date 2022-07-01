@@ -51,7 +51,7 @@ function print_result(score){
     else{
         Object.keys(score).map((key) => {
             if(score[key]['count']){
-                result += `${score[key]['string']}${score[key]['count']} `;
+                result += `${score[key]['count']}${score[key]['string']} `;
             }
         });
     
@@ -60,18 +60,29 @@ function print_result(score){
 }
 
 function make_computer_num(){
-    let  tmp_num = MissionUtils.Random.pickNumberInRange(1, 10);
-    let computer_num = [];
+    let tmp_num = MissionUtils.Random.pickNumberInRange(1, 9);
+    let set = new Set([tmp_num]);
 
-    while(computer_num.length < 3 && !(tmp_num in computer_num)){
-            let  tmp_num = MissionUtils.Random.pickNumberInRange(1, 10);
-            computer_num.push(tmp_num);
+    while(set.size < 3){
+        tmp_num = MissionUtils.Random.pickNumberInRange(1, 9);
+        set.add(tmp_num);
     }
-    return computer_num.join('');
+    const computer_nums = [... set]
+    return computer_nums.join('');
 }
 
 function input_user_num(){
-    return document.getElementById('user-input').value;
+    let user_input = document.getElementById('user-input').value;
+    let set = new Set([... user_input]);
+    let user_nums = [... set];
+
+    if ((user_nums.length == 3 && user_nums.filter(e => '0' == e).length < 1)){
+        return user_nums.join('');
+    }
+    else{
+        alert("입력을 다시 해주세요.");
+        location.reload();
+    }
 }
 
 function press_button(){
@@ -80,15 +91,15 @@ function press_button(){
     const computer_num = make_computer_num();
     const user_num = input_user_num();
 
-    document.getElementById('result').innerHTML = game.play(computer_num, user_num);
+    document.getElementById('result').innerHTML = game.play('123', user_num);
 }
 
-// game.play(123, 456);
-// game.play(123, 345);
-// game.play(123, 432);
-// game.play(123, 312);
-// game.play(123, 145);
-// game.play(123, 134);
-// game.play(123, 132);
-// game.play(123, 124);
+function restart_button(){
+    location.reload();
+}
+
+window.onload = ()=>{
+    document.getElementById('submit').addEventListener("click", press_button);
+    document.getElementById('game-restart-button').addEventListener("click", restart_button);
+}
 
