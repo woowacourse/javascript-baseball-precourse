@@ -1,14 +1,16 @@
 import {
   checkLength, checkOverlap, checkSign, checkZero,
 } from './inputCheck.js';
-import { convertToArray } from './utils.js';
+import {
+  checkNothing, checkStrike, convertToArray, showResult,
+} from './utils.js';
 import { createRandomNumber } from './computeNumbers.js';
 
 const submit = document.querySelector('#submit');
 const userInput = document.querySelector('#user-input');
 
 let userInputNumbers;
-let computerInputNumbers;
+const computerInputNumbers = createRandomNumber();
 
 submit.onclick = (e) => {
   e.preventDefault();
@@ -31,6 +33,15 @@ submit.onclick = (e) => {
     return;
   }
   userInputNumbers = USER_INPUT_ARRAY;
-  console.log(userInputValue);
-  computerInputNumbers = createRandomNumber();
+  console.log(USER_INPUT_ARRAY);
+  console.log(computerInputNumbers);
+  const BALL_STRIKE_COUNT = checkNothing(userInputNumbers, computerInputNumbers);
+  console.log(BALL_STRIKE_COUNT);
+  if (BALL_STRIKE_COUNT === 0) {
+    showResult('낫싱');
+    return;
+  }
+  const STRIKE_COUNT = checkStrike(userInputNumbers, computerInputNumbers);
+  const BALL_COUNT = BALL_STRIKE_COUNT - STRIKE_COUNT;
+  console.log(`${BALL_COUNT}볼 ${STRIKE_COUNT}스트라이크`);
 };
