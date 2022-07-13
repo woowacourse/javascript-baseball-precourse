@@ -1,66 +1,98 @@
-import {
-  checkLength, checkOverlap, checkSign, checkZero,
-} from './inputCheck.js';
-import {
-  checkNothing, checkStrike, convertToArray, showResult,
-} from './utils.js';
 import { createRandomNumber } from './computeNumbers.js';
+import { checkInputs } from './inputCheck.js';
 
-const submit = document.querySelector('#submit');
-const userInput = document.querySelector('#user-input');
-const restartBtn = document.querySelector('#game-restart-button');
-const GAME_RESTART_SECTION = document.querySelector('#game-restart-section');
+export default class BaseballGame {
+  constructor() {
+    this.submitButton = document.querySelector('#submit');
+    this.userInput = document.querySelector('#user-input');
+    this.result = document.querySelector('#result');
+    this.init();
+  }
 
-let userInputNumbers;
-let computerInputNumbers = createRandomNumber();
+  init() {
+    this.result = '';
+    this.pressSubmitButton();
+    this.computerInputNumbers = this.getRandomNumber();
+  }
 
-submit.onclick = (e) => {
-  e.preventDefault();
-  const userInputValue = userInput.value;
-  if (!checkSign(userInputValue)) {
-    alert('양의 정수를 입력해주세요');
-    return;
+  getRandomNumber() {
+    return createRandomNumber();
   }
-  if (!checkLength(userInputValue)) {
-    alert('숫자 3개를 입력해주세요 ex) 123');
-    return;
-  }
-  const USER_INPUT_ARRAY = convertToArray(userInputValue);
-  if (!checkZero(USER_INPUT_ARRAY)) {
-    alert('0은 입력할 수 없습니다');
-    return;
-  }
-  if (!checkOverlap(USER_INPUT_ARRAY)) {
-    alert('중복되지않는 숫자를 입력해주세요');
-    return;
-  }
-  userInputNumbers = USER_INPUT_ARRAY;
-  console.log(USER_INPUT_ARRAY);
-  console.log(computerInputNumbers);
-  const BALL_STRIKE_COUNT = checkNothing(userInputNumbers, computerInputNumbers);
-  console.log(BALL_STRIKE_COUNT);
-  if (BALL_STRIKE_COUNT === 0) {
-    showResult('낫싱');
-    return;
-  }
-  const STRIKE_COUNT = checkStrike(userInputNumbers, computerInputNumbers);
-  const BALL_COUNT = BALL_STRIKE_COUNT - STRIKE_COUNT;
 
-  if (STRIKE_COUNT === 0) {
-    showResult(`${BALL_COUNT}볼`);
-    return;
+  play(computerInputNumbers, userInputNumbers) {
+    return '결과 값 String';
   }
-  if (STRIKE_COUNT === 3) {
-    showResult('');
-    GAME_RESTART_SECTION.style.display = 'block';
-    return;
-  }
-  showResult(`${BALL_COUNT}볼 ${STRIKE_COUNT}스트라이크`);
-};
 
-restartBtn.onclick = () => {
-  computerInputNumbers = createRandomNumber();
-  userInput.value = '';
-  showResult('');
-  GAME_RESTART_SECTION.style.display = 'none';
-};
+  pressSubmitButton() {
+    this.submitButton.onclick = (e) => {
+      e.preventDefault();
+      const userInputValue = this.userInput.value;
+      if (!checkInputs(userInputValue)) {
+        alert('값을 확인해주세요!');
+        return;
+      }
+      console.log(12);
+    };
+  }
+}
+//
+// const submit = document.querySelector('#submit');
+// const userInput = document.querySelector('#user-input');
+// const restartBtn = document.querySelector('#game-restart-button');
+// const GAME_RESTART_ARTICLE = document.querySelector('#game-restart-article');
+//
+// let userInputNumbers;
+// const computerInputNumbers = createRandomNumber();
+//
+// submit.onclick = (e) => {
+//   e.preventDefault();
+//   const userInputValue = userInput.value;
+//   if (!checkSign(userInputValue)) {
+//     alert('양의 정수를 입력해주세요');
+//     return;
+//   }
+//   if (!checkLength(userInputValue)) {
+//     alert('숫자 3개를 입력해주세요 ex) 123');
+//     return;
+//   }
+//   const USER_INPUT_ARRAY = convertToArray(userInputValue);
+//   if (!checkZero(USER_INPUT_ARRAY)) {
+//     alert('0은 입력할 수 없습니다');
+//     return;
+//   }
+//   if (!checkOverlap(USER_INPUT_ARRAY)) {
+//     alert('중복되지않는 숫자를 입력해주세요');
+//     return;
+//   }
+//   userInputNumbers = USER_INPUT_ARRAY;
+//   console.log(USER_INPUT_ARRAY);
+//   console.log(computerInputNumbers);
+//   const BALL_STRIKE_COUNT = checkNothing(userInputNumbers, computerInputNumbers);
+//   console.log(BALL_STRIKE_COUNT);
+//   if (BALL_STRIKE_COUNT === 0) {
+//     showResult('낫싱');
+//     return;
+//   }
+//   const STRIKE_COUNT = checkStrike(userInputNumbers, computerInputNumbers);
+//   const BALL_COUNT = BALL_STRIKE_COUNT - STRIKE_COUNT;
+//
+//   if (STRIKE_COUNT === 0) {
+//     showResult(`${BALL_COUNT}볼`);
+//     return;
+//   }
+//   if (STRIKE_COUNT === 3) {
+//     showResult('');
+//     GAME_RESTART_ARTICLE.style.display = 'block';
+//     return;
+//   }
+//   showResult(`${BALL_COUNT}볼 ${STRIKE_COUNT}스트라이크`);
+// };
+
+// restartBtn.onclick = () => {
+//   computerInputNumbers = createRandomNumber();
+//   userInput.value = '';
+//   showResult('');
+//   GAME_RESTART_ARTICLE.style.display = 'none';
+// };
+
+(() => new BaseballGame())();

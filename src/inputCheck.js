@@ -1,3 +1,5 @@
+import { convertToArray } from './utils.js';
+
 export const checkSign = (data) => Number(data);
 
 export const checkLength = (data) => data.length === 3;
@@ -10,3 +12,12 @@ export const checkOverlap = (dataArr) => {
 };
 
 export const checkZero = (dataArr) => !(dataArr.includes('0'));
+
+export const checkInputs = (data) => {
+  const dataArray = convertToArray(data);
+  return !(
+    !checkSign(data)
+      || !checkLength(data)
+      || !checkZero(dataArray)
+      || !checkOverlap(dataArray));
+};

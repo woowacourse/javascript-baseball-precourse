@@ -8,5 +8,5 @@ export const createRandomNumber = () => {
     randomNum = String(MissionUtils.Random.pickNumberInRange(123, 987));
     randomNumArray = convertToArray(randomNum);
   } while (!(checkOverlap(randomNumArray) && checkZero(randomNum)));
-  return randomNumArray;
+  return randomNum;
 };
