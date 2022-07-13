@@ -8,9 +8,11 @@ import { createRandomNumber } from './computeNumbers.js';
 
 const submit = document.querySelector('#submit');
 const userInput = document.querySelector('#user-input');
+const restartBtn = document.querySelector('#game-restart-button');
+const GAME_RESTART_SECTION = document.querySelector('#game-restart-section');
 
 let userInputNumbers;
-const computerInputNumbers = createRandomNumber();
+let computerInputNumbers = createRandomNumber();
 
 submit.onclick = (e) => {
   e.preventDefault();
@@ -43,5 +45,22 @@ submit.onclick = (e) => {
   }
   const STRIKE_COUNT = checkStrike(userInputNumbers, computerInputNumbers);
   const BALL_COUNT = BALL_STRIKE_COUNT - STRIKE_COUNT;
-  console.log(`${BALL_COUNT}볼 ${STRIKE_COUNT}스트라이크`);
+
+  if (STRIKE_COUNT === 0) {
+    showResult(`${BALL_COUNT}볼`);
+    return;
+  }
+  if (STRIKE_COUNT === 3) {
+    showResult('');
+    GAME_RESTART_SECTION.style.display = 'block';
+    return;
+  }
+  showResult(`${BALL_COUNT}볼 ${STRIKE_COUNT}스트라이크`);
+};
+
+restartBtn.onclick = () => {
+  computerInputNumbers = createRandomNumber();
+  userInput.value = '';
+  showResult('');
+  GAME_RESTART_SECTION.style.display = 'none';
 };

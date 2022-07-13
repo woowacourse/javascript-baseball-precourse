@@ -28,11 +28,11 @@ export const checkStrike = (userArray, computerArray) => {
   return strikeCount;
 };
 
-export const checkBall = () => {
-  const ballCount = 0;
-};
-
 export const showResult = (message) => {
   const RESULT = document.querySelector('#result');
   RESULT.innerHTML = message;
+};
+
+export const play = () => {
+
 };
