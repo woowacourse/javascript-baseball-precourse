@@ -1,6 +1,12 @@
-import { convertToArray } from './utils';
+import { checkOverlap, checkZero } from './inputCheck.js';
+import { convertToArray } from './utils.js';
 
 export const createRandomNumber = () => {
-  let randomNum = MissionUtils.Random.pickNumberInRange(123, 987);
-  randomNum = convertToArray(randomNum);
+  let randomNum;
+  let randomNumArray;
+  do {
+    randomNum = String(MissionUtils.Random.pickNumberInRange(123, 987));
+    randomNumArray = convertToArray(randomNum);
+  } while (!(checkOverlap(randomNumArray) && checkZero(randomNum)));
+  return randomNumArray;
 };

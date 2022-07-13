@@ -1,4 +1,4 @@
-export const checkSign = (data) => Number.isInteger(data);
+export const checkSign = (data) => Number(data);
 
 export const checkLength = (data) => data.length === 3;
 
