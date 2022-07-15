@@ -1,5 +1,6 @@
-function printResult(score){
+export function printResult(score){
     let result = '';
+    
     if (score['strike']['count'] == 3) {
         result = '🎉<b>정답을 맞추셨습니다.</b>🎉 <br/><br/> 게임을 새로 시작하시겠습니까?' 
         
@@ -12,10 +13,7 @@ function printResult(score){
                 result += `${score[key]['count']}${score[key]['string']} `;
             }
         });
-    
     }
     return result;
 }
-
-export default printResult;
 

@@ -1,4 +1,4 @@
-function inputUserNum(){
+export function createUserNumbers(){
     let user_input = document.getElementById('user-input').value;
     let set = new Set([... user_input]);
     let user_nums = [... set];
@@ -11,5 +11,3 @@ function inputUserNum(){
         location.reload();
     }
 }
-
-export default inputUserNum;
