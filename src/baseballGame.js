@@ -2,6 +2,7 @@ export default class BaseballGame {
   constructor(computerInputNumbers, userInputNumbes) {
     this.computerInputNumbers = computerInputNumbers;
     this.userInputNumbes = userInputNumbes;
+    this.restartBtn = document.querySelector("#game-restart-button");
 
     console.log(
       `Computer Input Value : ${this.computerInputNumbers}, User Input Value: ${this.userInputNumbes}`
@@ -24,6 +25,7 @@ export default class BaseballGame {
     let userInputNumbes = this.userInputNumbes.split("");
 
     if (this.isCorrect()) {
+      this.restartBtn.classList.remove("dn");
       return "정답입니다~!!";
     }
 

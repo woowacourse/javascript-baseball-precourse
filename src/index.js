@@ -7,9 +7,7 @@ class Index {
   constructor() {
     this.input = document.querySelector("#user-input");
     this.submitBtn = document.querySelector("#submit");
-    this.restartBtn = document
-      .querySelector("#game-restart-button")
-      .classList.add("dn"); // 게임 시작 시 재시작 버튼 없어지게 -> 게임이 끝나면 나타나야함
+    this.resultTag = document.querySelector("#result");
 
     // 목표값 설정
     this.targetNumber = this.setTargetNumber();
@@ -21,7 +19,8 @@ class Index {
       }
 
       const bg = new BaseballGame(this.targetNumber, this.input.value);
-      console.log(bg.play());
+      //   console.log(bg.play());
+      this.resultTag.innerHTML = bg.play();
     });
   }
 
