@@ -8,9 +8,10 @@ class Index {
     this.input = document.querySelector("#user-input");
     this.submitBtn = document.querySelector("#submit");
     this.resultTag = document.querySelector("#result");
-
+    this.restartBtn = document.querySelector("#game-restart-button");
     // 목표값 설정
     this.targetNumber = this.setTargetNumber();
+    // Play!
     this.submitBtn.addEventListener("click", (e) => {
       e.preventDefault();
 
@@ -21,6 +22,13 @@ class Index {
       const bg = new BaseballGame(this.targetNumber, this.input.value);
       //   console.log(bg.play());
       this.resultTag.innerHTML = bg.play();
+    });
+    // 재시작
+    this.restartBtn.addEventListener("click", () => {
+      this.restartBtn.classList.add("dn");
+      this.input.value = "";
+      document.querySelector("#result").innerHTML = "";
+      new Index();
     });
   }
 
