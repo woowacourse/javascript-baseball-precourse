@@ -1,4 +1,6 @@
 "use strict";
+import BaseballGame from "./baseballGame.js";
+
 const DIGIT = 3;
 
 class Index {
@@ -17,6 +19,9 @@ class Index {
       if (!this.inputValidation()) {
         return;
       }
+
+      const bg = new BaseballGame(this.targetNumber, this.input.value);
+      console.log(bg.play());
     });
   }
 
