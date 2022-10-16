@@ -7,10 +7,17 @@ class Index {
     this.submitBtn = document.querySelector("#submit");
     this.restartBtn = document
       .querySelector("#game-restart-button")
-      .classList.add("dn");
+      .classList.add("dn"); // 게임 시작 시 재시작 버튼 없어지게 -> 게임이 끝나면 나타나야함
 
-    // 게임 시작 시 재시작 버튼 없어지게 -> 게임이 끝나면 나타나야함
-    this.submitBtn.addEventListener("click", this.inputValidation.bind(this));
+    // 목표값 설정
+    this.targetNumber = this.setTargetNumber();
+    this.submitBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      if (!this.inputValidation()) {
+        return;
+      }
+    });
   }
 
   isDuplicate(number) {
@@ -20,19 +27,36 @@ class Index {
 
   inputValidation(e) {
     // 숫자 유효성 검사
-    e.preventDefault();
     const inputed = this.input.value;
     const regex = /[0-9]/g;
 
     if (!regex.test(inputed)) {
       alert("숫자만 입력해주세요!");
       this.input.value = "";
-      return;
+      return false;
     } else if (this.isDuplicate(inputed)) {
       alert("중복된 숫자가 포함되어 있습니다!");
       this.input.value = "";
-      return;
+      return false;
     }
+    return true;
+  }
+
+  setTargetNumber() {
+    let numString = "";
+    let randomIndexArray = [];
+
+    while (numString.length < DIGIT) {
+      let rnd = MissionUtils.Random.pickNumberInList([
+        1, 2, 3, 4, 5, 6, 7, 8, 9,
+      ]);
+      if (randomIndexArray.indexOf(rnd) === -1) {
+        randomIndexArray.push(rnd);
+        numString += rnd;
+      }
+    }
+
+    return numString;
   }
 }
 
