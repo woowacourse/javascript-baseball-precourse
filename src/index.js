@@ -5,7 +5,11 @@ class Index {
   constructor() {
     this.input = document.querySelector("#user-input");
     this.submitBtn = document.querySelector("#submit");
+    this.restartBtn = document
+      .querySelector("#game-restart-button")
+      .classList.add("dn");
 
+    // 게임 시작 시 재시작 버튼 없어지게 -> 게임이 끝나면 나타나야함
     this.submitBtn.addEventListener("click", this.inputValidation.bind(this));
   }
 
