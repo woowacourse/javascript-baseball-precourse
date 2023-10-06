@@ -1,3 +1,5 @@
+import { ANSWER_HTML } from '../constants/constant.js';
+
 export const showResult = (ballCount, strikeCount) => {
   if (strikeCount === 3) {
     return renderCorrectResult();
@@ -28,10 +30,5 @@ const renderHintResult = (resultMessage) => {
 
 const renderCorrectResult = () => {
   const result = document.querySelector('#result');
-  result.innerHTML = `
-    <div>
-    <p> 🎉 정답을 맞추셨습니다! 🎉</p>
-    <button id="game-restart-button">재시작</button>
-    </div>
-  `;
+  result.innerHTML = ANSWER_HTML;
 };

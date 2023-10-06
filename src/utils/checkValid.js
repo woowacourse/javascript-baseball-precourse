@@ -1,3 +1,5 @@
+import { INVALID_MESSAGE, MAX_INPUT_LENGTH } from '../constants/constant.js';
+
 export const isEmptyValue = (userInput) => {
   return userInput === '';
 };
@@ -6,8 +8,8 @@ export const isNotNumber = (userInput) => {
   return userInput.match(/\D/);
 };
 
-export const isNotThreeDigit = (userInput) => {
-  return userInput.length !== 3;
+export const isOverMaxLength = (userInput) => {
+  return userInput.length !== MAX_INPUT_LENGTH;
 };
 
 export const isWithZero = (userInput) => {
@@ -20,5 +22,17 @@ export const isNotValidNumberRange = (userInput) => {
 
 export const isDuplicatedNumber = (userInput) => {
   const userInputNumberSet = new Set(userInput);
-  return userInputNumberSet.size !== userInput.length
+  return userInputNumberSet.size !== userInput.length;
+};
+
+export const validateUserInput = (userInput) => {
+  if (isEmptyValue(userInput)) {
+    return INVALID_MESSAGE.EMPTY_VALUE;
+  } else if (isOverMaxLength(userInput)) {
+    return INVALID_MESSAGE.NOT_THREE_DEGIT;
+  } else if (isNotValidNumberRange(userInput)) {
+    return INVALID_MESSAGE.NOT_VALID;
+  } else if (isDuplicatedNumber(userInput)) {
+    return INVALID_MESSAGE.DUPLICATED_VALUE;
+  }
 };
