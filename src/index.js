@@ -42,7 +42,10 @@ export default class BaseballGame {
     if (alertMessage) {
       return alert(alertMessage);
     }
-    calculateResult(this.computerInputNumbers, userInputNumbers);
+    const { ballCount, strikeCount } = calculateResult(
+      this.computerInputNumbers,
+      userInputNumbers
+    );
   };
 }
 

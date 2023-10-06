@@ -1,16 +1,26 @@
-const ballCounter = (computerInputNumbers, userInputNumbers) => {
+const ballCounter = (
+  splittedComputerInputNumbers,
+  splittedUserInputNumbers
+) => {
   let ballCount = 0;
-  computerInputNumbers.split('').forEach((computerInputNumber, index) => {
-    if (computerInputNumber !== userInputNumbers.split('')[index]) {
+  splittedComputerInputNumbers.forEach((computerInputNumber, index) => {
+    if (
+      computerInputNumber !== splittedUserInputNumbers[index] &&
+      splittedUserInputNumbers.includes(computerInputNumber)
+    ) {
       ballCount += 1;
     }
   });
   return ballCount;
 };
-const strikeCounter = (computerInputNumbers, userInputNumbers) => {
+
+const strikeCounter = (
+  splittedComputerInputNumbers,
+  splittedUserInputNumbers
+) => {
   let strikeCount = 0;
-  computerInputNumbers.split('').forEach((computerInputNumber, index) => {
-    if (computerInputNumber === userInputNumbers.split('')[index]) {
+  splittedComputerInputNumbers.forEach((computerInputNumber, index) => {
+    if (computerInputNumber === splittedUserInputNumbers[index]) {
       strikeCount += 1;
     }
   });
@@ -18,8 +28,16 @@ const strikeCounter = (computerInputNumbers, userInputNumbers) => {
 };
 
 export const calculateResult = (computerInputNumbers, userInputNumbers) => {
-  const ballCount = ballCounter(computerInputNumbers, userInputNumbers);
-  const strikeCount = strikeCounter(computerInputNumbers, userInputNumbers);
+  const splittedComputerInputNumbers = computerInputNumbers.split('');
+  const splittedUserInputNumbers = userInputNumbers.split('');
+  const ballCount = ballCounter(
+    splittedComputerInputNumbers,
+    splittedUserInputNumbers
+  );
+  const strikeCount = strikeCounter(
+    splittedComputerInputNumbers,
+    splittedUserInputNumbers
+  );
 
   return { ballCount, strikeCount };
 };
