@@ -6,6 +6,7 @@ import {
   isNotValidNumberRange,
 } from './utils/checkValid.js';
 import { generateComputerNumber } from './utils/generateComputerNumber.js';
+import { showResult } from './utils/showResult.js';
 
 const validateUserInput = (userInput) => {
   if (isEmptyValue(userInput)) {
@@ -46,6 +47,7 @@ export default class BaseballGame {
       this.computerInputNumbers,
       userInputNumbers
     );
+    showResult(ballCount,strikeCount)
   };
 }
 
