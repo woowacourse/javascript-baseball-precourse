@@ -1,5 +1,4 @@
 export const showResult = (ballCount, strikeCount) => {
-  console.log(ballCount, strikeCount);
   if (strikeCount === 3) {
     return renderCorrectResult();
   }
