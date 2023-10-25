@@ -66,9 +66,8 @@ if (!userInputField || !resultDisplay || !gameRestartButton || !congratsMessage)
       gameRestartButton.style.display = 'none';
     }
   }
-
+  
   gameRestartButton.addEventListener('click', () => {
     location.reload();
   });
-  
 }
