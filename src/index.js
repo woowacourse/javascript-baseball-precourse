@@ -69,5 +69,5 @@ if (!userInputField || !resultDisplay || !gameRestartButton || !congratsMessage)
   
   gameRestartButton.addEventListener('click', () => {
     location.reload();
-  });
+  })
 }
