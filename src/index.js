@@ -55,6 +55,20 @@ if (!userInputField || !resultDisplay || !gameRestartButton || !congratsMessage)
   function isValidInput(input) {
     return input && input.length === 3 && new Set(input).size === 3 && /^[0-9]+$/.test(input);
   }
+  function displayResult(result) {
+    resultDisplay.textContent = result;
 
+    if (result === '3스트라이크!') {
+      congratsMessage.style.display = 'block';
+      gameRestartButton.style.display = 'block';
+    } else {
+      congratsMessage.style.display = 'none';
+      gameRestartButton.style.display = 'none';
+    }
+  }
+
+  gameRestartButton.addEventListener('click', () => {
+    location.reload();
+  });
   
 }
